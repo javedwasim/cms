@@ -49,6 +49,11 @@
                                             <input type="text" name="" class="form-control">
                                         </div>
                                     </div>
+                                    <div class="col-md-1">
+                                        <button type="button" id="toggleresize1" class="btn btn-default btn-xs">
+                                            <i class="fas fa-arrow-left arro"></i>
+                                        </button>
+                                    </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Registration</label>
@@ -67,7 +72,7 @@
                                             <input type="text" name="" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <div class="form-group m-t-15" style="display: inline-flex;">
                                             <button class="btn btn-info btn-sm">Reset</button>
                                         </div>
@@ -79,8 +84,8 @@
                             <table class="table table-bordered nowrap responsive profiletable" cellspacing="0" id="" width="100%" >
                                <thead>
                                 <tr>
-                                    <th></th>
-                                    <th></th>
+                                    <th style="width: 20px"></th>
+                                    <th style="width: 20px"></th>
                                     <th>Patient ID</th>
                                     <th>Patient Name</th>
                                     <th>Father/Husband Name</th>
@@ -93,8 +98,8 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -105,8 +110,8 @@
                                         <td>abc</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -117,8 +122,8 @@
                                         <td>abc</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -129,8 +134,8 @@
                                         <td>abc</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -141,8 +146,8 @@
                                         <td>abc</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -153,8 +158,8 @@
                                         <td>abc</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -165,8 +170,8 @@
                                         <td>abc</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -177,8 +182,8 @@
                                         <td>abc</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -189,8 +194,8 @@
                                         <td>abc</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -201,8 +206,8 @@
                                         <td>abc</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="fa fa-trash"></i></td>
-                                        <td><i class="fa fa-edit"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                         <td>abc</td>
                                         <td>abc</td>
                                         <td>abc</td>
@@ -225,7 +230,12 @@
                     <div class="card" style="margin-bottom: 0px !important;">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12 col-lg-12 pt-info">
+                                <div class="col-md-1">
+                                    <button type="button" id="toggleresize2" class="btn btn-default btn-xs">
+                                        <i class="fas fa-arrow-left arro"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-11 col-lg-11 pt-info">
                                     <strong>ID:</strong>
                                     <label>1233</label>
                                     <strong>Name:</strong>

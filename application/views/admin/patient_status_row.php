@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-1">
                             <button type="button" id="sidebarCollapse" class=" round round-sm round-theme m-b-5">
-                                <i class="fas fa-arrow-left"></i>
+                                <i class="fas fa-arrow-left arro"></i>
                             </button>
                         <?php if($this->session->userdata('is_admin') == 1){?>
                             <div class="round round-sm align-self-center green m-b-10" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
@@ -114,11 +114,14 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <?php if($booking_flag == 'vip'){?>
-                                        <h2>Time by Consultant</h2>
+                                        <strong>Time by Consultant</strong>
+                                        <button type="button" name="book_appointment pull-right" id="time_consultant" class="btn btn-primary btn-sm">Refresh</button>
                                     <?php }else if($booking_flag == 'on_walk'){?>
-                                        <h2>Time on walk</h2>
+                                        <strong>Time on walk</strong>
+                                        <button type="button" name="book_appointment pull-right" id="time_on_walk" class="btn btn-primary btn-sm">Refresh</button>
                                     <?php }else{?>
-                                        <h2>Time on call</h2>
+                                        <strong>Time on call</strong>
+                                        <button type="button" name="book_appointment pull-right" id="time_on_call" class="btn btn-primary btn-sm">Refresh</button>
                                     <?php }?>
                                 </div>
                             </div>

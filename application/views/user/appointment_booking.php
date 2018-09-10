@@ -13,7 +13,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="pull-left">New Appointment</h4>
-                            <button type="button" name="book_appointment pull-right" id="time_consultant" class="btn btn-primary">Refresh</button>
                         </div>
                         <div class="card-body">
                             <div class="container">       
