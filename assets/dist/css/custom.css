@@ -1,0 +1,822 @@
+/* Main tabs */
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+body {
+    font-family: 'Roboto Condensed', san-serif;
+    background: #16A085;
+}
+
+.board {
+    width: 100%;
+    height: auto;
+    margin: 30px auto;
+    background: none;
+}
+
+.board .nav-tabs {
+    position: relative;
+    margin: 40px auto;
+    margin-bottom: 0;
+    box-sizing: border-box;
+}
+
+/* Begin Business Info */
+
+.single_counter {
+    background: rgba(236, 72, 72, 0.5);
+}
+
+.single_counter h2, .single_counter h6 {
+    color: #fff;
+}
+.m-b-1 {
+    margin-bottom: 18px;
+    color: #fff;
+    font-size: 30px;
+}
+.booking_tables td, .booking_tables th{
+    color: #000 !important;
+}
+
+.round-green{
+    background: #006400;
+}
+.round-green td,.round-green td input{
+    color: #fff !important;
+    opacity: 1 !important;
+}
+.round-green td input:focus, .round-blue td input:focus, .round-red td input:focus{
+    color: #000 !important;
+}
+.round-blue{
+    background: #000080;
+    color: #fff !important;
+    opacity: 1 !important;
+}
+.round-blue td, .round-blue td input{
+    color: #fff !important;
+    opacity: 1 !important;
+}
+.round-red{
+    background: #ff99a8;
+    opacity: 1 !important;
+}
+.round-red td{
+    background: #ff99a8;
+    opacity: 1 !important;
+}
+.round-yellow{
+    background: #FFE4B5;
+
+}
+.round-yellow td,.round-yellow td input{
+    color: #000;
+    opacity: 1 !important;
+}
+.round-orange{
+    background: #ff8533;
+    opacity: 1 !important;
+}
+.round-orange td{
+    background: #ff8533;
+    opacity: 1 !important;
+}
+.round-lightGray{
+    background: #cc6666;
+    opacity: 1 !important;
+}
+.round-lightGray td{
+    background: #cc6666;
+    opacity: 1 !important;
+}
+.round-white{
+    background: #fff;
+    opacity: 1 !important;
+}
+.round-white td{
+    background: #fff;
+    opacity: 1 !important;
+}
+.colorchnage td{
+    opacity: 0.5;
+}
+
+.dataTables_filter input[type="search"] {
+    width: 100px !important;
+}
+
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    position: relative;
+    font-family: FontAwesome;
+    content: "\f077";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\f078";    /* adjust as needed, taken from bootstrap.css */
+}
+
+.op-box {
+    width: 14%;
+}
+.tb-bg{
+    background: #F5F5F5 !important;
+    color: #000 !important; 
+}
+.op-hide{
+    display: none;
+}
+
+.navbar .nav-item .nav-link {
+    display: block;
+    color: #fff;
+}
+.active_nav{
+    background:#26c6da;
+    border-radius: 5px;
+    color: #fff;
+}
+.page-wrapper{
+    padding-top:0px; 
+}
+
+.nav-tabs li a span {
+    color: #000;
+}
+.tab-pane {
+    background: #eef5f9;
+}
+.nav-tabs .nav-item .nav-link.active {
+    background: #eef5f9;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #009efb;
+    border-color: #009efb;
+    color: #fff;
+}
+li.paginate_button.page-item.active {
+    background: #009efb;
+}
+.sticky-bar {
+    position: -webkit-sticky;
+    position: sticky;
+    top:7.7%;
+    z-index: 99;
+}
+.dataTables_scrollHeadInner{
+    width: 100% !important;
+}
+
+.table td {
+    padding-bottom: 0px !important;
+    padding-top: 5px !important;
+}
+
+.profile_radio .custom-radio .custom-control-label{
+    font-size: 15px;
+}
+#assign-dosage tr td,#assign-dosage tr th,#dosage tr th,#dosage tr td,.right-table tr th,.right-table tr td{
+    text-align: right !important;
+}
+
+#re1{
+    width: 40%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#re2{
+    width: 60%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.show-inline{
+    display: inline-flex;
+}
+.pro-div{
+    height: 600px;
+    overflow-y: auto;
+}
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    perspective: 1500px;
+}
+
+
+#sidebar {
+    min-width: 25%;
+    max-width: 25%;
+    color: #000;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+#sidebar.active {
+    margin-left: -25%;
+    transform: rotateY(100deg);
+}
+
+#content{
+    width: 75%;
+    padding: 2px 2px;
+    transition: all 0.3s;
+}
+#content.actv{
+    width: 100%;
+    padding: 2px 14px;
+}
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #fff;
+}
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown .dropdown-toggle::after {
+    display: none;
+}
+
+.badge-circle {
+    height: 15px;
+    width: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.badge:empty{
+    display: block;
+}
+
+#operations_panel b {
+    font-size: 12px;
+}
+#operations_panel p {
+    font-size: 12px;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+#app-content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#sidebarCollapse {
+    cursor: pointer;
+}
+
+
+#sidebarCollapse.active span {
+    transform: none;
+    opacity: 1;
+    margin: 5px auto;
+}
+
+#divCollapse{
+    background: #f5f5f5;
+    cursor: pointer;
+}
+
+
+.pt-info strong{
+    margin-left: 5px;
+}
+
+
+/* ---------------------------------------------------
+            Dashboard SIDEBAR STYLE
+----------------------------------------------------- */
+.dashboard-wrapper{
+    display: flex;
+    align-items: stretch;
+}
+
+#dashboar-sidebar {
+    min-width: 200px;
+    max-width: 200px;
+    background: #1e88e5;
+    color: #fff;
+    transition: all 0.3s;
+}
+#dashboar-sidebar li a.active{
+    background:#26c6da;
+    color: #fff;
+}
+
+#dashboar-sidebar.active {
+    min-width: 100px;
+    max-width: 100px;
+    text-align: center;
+}
+
+#dashboar-sidebar.active .sidebar-header h3,
+#dashboar-sidebar.active .CTAs {
+    display: none;
+}
+
+#dashboar-sidebar.active .sidebar-header strong {
+    display: block;
+}
+
+#dashboar-sidebar ul li a {
+    text-align: left;
+    color: #fff;
+    border-bottom:1px solid  #26c6da;
+}
+
+#dashboar-sidebar.active ul li a {
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 0.65em;
+    color: #fff;
+}
+
+#dashboar-sidebar.active ul li a i {
+    margin-right: 0;
+    display: block;
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+#dashboar-sidebar.active ul ul a {
+    padding: 10px !important;
+}
+
+#dashboar-sidebar.active .dropdown-toggle::after {
+    top: auto;
+    bottom: 10px;
+    right: 50%;
+    -webkit-transform: translateX(50%);
+    -ms-transform: translateX(50%);
+    transform: translateX(50%);
+}
+
+#dashboar-sidebar .sidebar-header {
+    padding: 20px;
+    background: #ffff;  
+}
+
+#dashboar-sidebar .sidebar-header strong {
+    display: none;
+    font-size: 1.8em;
+}
+
+#dashboar-sidebar ul li a {
+    padding: 10px;
+    font-size: .9em;
+    display: block;
+}
+
+#dashboar-sidebar ul li a:hover {
+    color:#fff ;
+    background:#26c6da;
+}
+
+#dashboar-sidebar ul li a i {
+    margin-right: 10px;
+}
+
+#dashboar-sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff !important;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+#dashboar-sidebar ul li ul li a {
+    padding: 10px 25px;
+}
+.resize{
+    resize: both;
+    overflow: auto;
+}
+.pro-filter label{
+    margin-bottom: 0px !important;
+}
+.resize1{
+    width: 50%;
+}
+.resize2{
+    width: 50%;
+}
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#dashboard-content {
+    width: 100%;
+    min-height: 80vh;
+    transition: all 0.3s;
+}
+
+/* ///////////////// datatables///////////////// */
+
+
+    .dt-input{
+            width: 70px;
+            background: transparent;
+            border: none;
+    }
+    .dt-input:focus{
+        background: #fff;
+        color:#000 !important;
+    }
+
+    div.dataTables_sort_wrapper{white-space:nowrap !important;}
+    th{white-space:nowrap !important;}
+
+/* ---------------------------------------------------
+    theme style override
+----------------------------------------------------- */
+.form-control{
+    padding: .2rem .75rem !important;
+    min-height: 20px !important;
+}
+.card{
+    padding: 0px;
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+}
+.card-body{
+        padding: 5px 10px;
+}
+select.form-control:not([size]):not([multiple]) {
+    height: calc(1.9rem + 2px);
+}
+.profile_radio .custom-radio .custom-control-label {
+    font-size: 12px !important;
+}
+.btn.btn-sm {
+    padding: .5rem 1rem;
+    font-size: .64rem;
+}
+
+.m-t-25{
+        margin-top: 25px;
+    }
+
+.ribbon{
+    position: initial;
+}
+.card{
+    margin-bottom: 10px !important;
+}
+.form-group {
+    margin-bottom: 10px;
+}
+
+[type=radio]:checked, [type=radio]:not(:checked){
+    margin-right: 5px;
+}
+
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .sticky-bar {
+        position: initial;
+    }
+    .navbar-brand h2 {
+        font-size: 15px;
+    }
+    .wrapper {
+        display: block;
+    }
+
+    #sidebar {
+        min-width: 100%;
+        max-width: 100%;
+        font-size: 12px;
+    }
+    #content{
+        width: 100%;
+    }
+    #sidebarCollapse{
+        display: none;
+    }
+}
+
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .sticky-bar {
+        position: initial;
+    }
+    .navbar-brand h2 {
+        font-size: 15px;
+    }
+    .wrapper {
+        display: block;
+    }
+    #sidebar {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        font-size: 12px;
+        margin-left: 0px !important;
+    }
+    #content{
+        width: 100% !important;
+    }
+    #sidebarCollapse{
+        display: none;
+    }
+    .m-r-20{
+        margin-right: 0px !important;
+    }
+    .m-l-5{
+        margin-left:0px !important; 
+    }
+    .m-r-5{
+        margin-right: 0px !important;
+    }
+}
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .sticky-bar {
+        position: initial;
+    }
+    .navbar-brand h2 {
+        font-size: 15px;
+    }
+    .wrapper {
+        display: block;
+    }
+    #sidebar {
+        min-width: 100%;
+        max-width: 100%;
+        font-size: 12px;
+    }
+    #content{
+        width: 100%;
+    }
+    #sidebarCollapse{
+        display: none;
+    }
+}
+
+
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+    .sticky-bar {
+        position: initial;
+    }
+    .navbar-brand h2 {
+        font-size: 15px;
+    }
+    .wrapper {
+        display: block;
+    }
+    #sidebar {
+        min-width: 100%;
+        max-width: 100%;
+        font-size: 12px;
+    }
+    #content{
+        width: 100%;
+    }
+    #sidebarCollapse{
+        display: none;
+    }
+}
+
+/* ----------- iPhone X ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+    .sticky-bar {
+        position: initial;
+    }
+    .navbar-brand h2 {
+        font-size: 15px;
+    }
+    .wrapper {
+        display: block;
+    }
+    #sidebar {
+        min-width: 100%;
+        max-width: 100%;
+        font-size: 12px;
+    }
+    #content{
+        width: 100%;
+    }
+    #sidebarCollapse{
+        display: none;
+    }
+}
+
+/* ----------- Galaxy S3 ----------- */
+
+/* Portrait and Landscape */
+@media screen 
+  and (device-width: 320px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 2) {
+    .sticky-bar {
+        position: initial;
+    }
+    .navbar-brand h2 {
+        font-size: 15px;
+    }
+    .wrapper {
+        display: block;
+    }
+    #sidebar {
+        min-width: 100%;
+        max-width: 100%;
+        font-size: 12px;
+    }
+    #content{
+        width: 100%;
+    }
+    #sidebarCollapse{
+        display: none;
+    }
+}
+
+/* ----------- Galaxy S6 ----------- */
+
+/* Portrait and Landscape */
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 4) {
+    .sticky-bar {
+        position: initial;
+    }
+    .navbar-brand h2 {
+        font-size: 15px;
+    }
+    .wrapper {
+        display: block;
+    }
+    #sidebar {
+        min-width: 100%;
+        max-width: 100%;
+        font-size: 12px;
+    }
+    #content{
+        width: 100%;
+    }
+    #sidebarCollapse{
+        display: none;
+    }
+    .m-r-20{
+        margin-right: 0px !important;
+    }
+    .m-l-5{
+        margin-left:0px !important; 
+    }
+    .m-r-5{
+        margin-right: 0px !important;
+    }
+}
+
+/* ----------- iPad 1, 2, Mini and Air ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    #sidebar {
+        min-width: 40%;
+        max-width: 40%;
+    }
+
+    #sidebar.active {
+        margin-left: -40%;
+        transform: rotateY(100deg);
+        transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    }
+    #content{
+        width: 60%;
+    }
+    #content.actv{
+        width: 100%;
+    }
+
+    #dashboar-sidebar {
+        min-width: 80px;
+        max-width: 80px;
+        text-align: center;
+    }
+    .dropdown-toggle::after {
+        top: auto;
+        bottom: 10px;
+        right: 50%;
+        -webkit-transform: translateX(50%);
+        -ms-transform: translateX(50%);
+        transform: translateX(50%);
+    }
+    #dashboar-sidebar.active {
+        margin-left: 0 !important;
+    }
+    #dashboar-sidebar .sidebar-header h3,
+    #dashboar-sidebar .CTAs {
+        display: none;
+    }
+    #dashboar-sidebar .sidebar-header strong {
+        display: block;
+    }
+    #dashboar-sidebar ul li a {
+        padding: 20px 10px;
+        text-align: center;
+        font-size: 0.65em;
+        color: #fff;
+    }
+    #dashboar-sidebar ul li a span {
+        font-size: 0.85em;
+    }
+    #dashboar-sidebar ul li a i {
+        margin-right: 0;
+        display: block;
+        font-size: 1em;
+        margin-bottom: 5px;
+        color: #fff;
+    }
+    #dashboar-sidebar ul ul a {
+        padding: 10px !important;
+    }
+    #dashboar-sidebar ul li a i {
+        font-size: 1.3em;
+    }
+    #dashboar-sidebar {
+        margin-left: 0;
+    }
+    #dashboardsidebarCollapse span {
+        display: none;
+    }
+    .m-t-25{
+        margin-top: 25px;
+    }
+    #dashboard-content {
+        width: 89%;
+        min-height: 100vh;
+        transition: all 0.3s;
+    }
+
+    #dashboar-sidebar.active ul ul a {
+        padding: 10px !important;
+    }
+    #dashboar-sidebar{
+        margin-left: 0 !important;
+    }
+    h2{
+        font-size: 18px;
+    }
+    
+}
+
+
+
