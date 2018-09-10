@@ -31,6 +31,35 @@
 				return false;
 			}
 		}
+
+        public function add_advice($data){
+		    if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('advice',array('name'=>$editval));
+                //echo $this->db->last_query(); die();
+                return $this->db->affected_rows();
+            }else{
+                $this->db->insert('advice', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
+        public function get_advices(){
+            $result = $this->db->select('*')->from('advice')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function delete_advice($id) {
+            $this->db->where('id', $id)->delete('advice');
+            return $this->db->affected_rows();
+        }
 	}
 
 ?>

@@ -19,44 +19,32 @@
 				    				<div class="row">
 				    					<div class="col-md-12">
 					    					<label>New Category</label>
-					    					<input type="text" class="form-control col-md-6" name="" >
-					    					<button class="btn btn-primary">Add</button>
+                                            <input type="text" class="form-control col-md-6" name="" id="advice_name" >
+                                            <button class="btn btn-primary add-advice">Add</button>
 				    					</div>
 				    				</div>
 				    			</div>
-				    			<div class="card-body">
-				    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                <div class="card-body" id="advice_table_div">
+				    				<table class="table table-bordered nowrap responsive tbl-qa" cellspacing="0" id="" width="100%" >
 				                       <thead>
 				                        <tr>
-				                            <th style="width: 10%">Delete</th>
-				                            <th>Category Name</th>
+				                            <th class="table-header" style="width: 10%">Delete</th>
+				                            <th class="table-header">Category Name</th>
 				                        </tr>
 					                    </thead>
 					                    <tbody>
-				                            <tr>
-				                                <td style="width: 10%"><i class="fa fa-trash"></i></td>
-				                                <td>Blood Test</td>
-				                            </tr>
-				                            <tr>
-				                                <td style="width: 10%"><i class="fa fa-trash"></i></td>
-				                                <td>Cardiac Test</td>
-				                            </tr>
-				                            <tr>
-				                                <td style="width: 10%"><i class="fa fa-trash"></i></td>
-				                                <td>Radiology Test</td>
-				                            </tr>
-				                            <tr>
-				                                <td style="width: 10%"><i class="fa fa-trash"></i></td>
-				                                <td>Hormonal Test</td>
-				                            </tr>
-				                            <tr>
-				                                <td style="width: 10%"><i class="fa fa-trash"></i></td>
-				                                <td>Special Test</td>
-				                            </tr>
-				                            <tr>
-				                                <td style="width: 10%"><i class="fa fa-trash"></i></td>
-				                                <td>ADV</td>
-				                            </tr>
+                                            <?php foreach ($advices as $advice): ?>
+                                                <tr class="table-row">
+                                                    <td>
+                                                        <a class="delete-advice btn btn-danger btn-xs" href="javascript:void(0)" title="delete"
+                                                           data-href="<?php echo site_url('setting/delete_advice/').$advice['id'] ?>">
+                                                           <i class="fa fa-trash" title="Delete"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td contenteditable="true" onBlur="saveToDatabase(this,'cate_name','<?php echo $advice['id']; ?>')" onClick="showEdit(this);">
+                                                        <?php echo $advice['name']; ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
 					                    </tbody>
 					                </table>
 				    			</div>
@@ -158,3 +146,33 @@
     </div>
     <!-- row -->
 </div>
+<style>
+    body{width:100%;}
+    .current-row{background-color:#B24926;color:#FFF;}
+    .current-col{background-color:#1b1b1b;color:#FFF;}
+    .tbl-qa{width: 100%;font-size:0.9em;background-color: #f5f5f5;}
+    .tbl-qa th.table-header {padding: 5px;text-align: left;padding:10px;}
+    .tbl-qa .table-row td {padding:10px;background-color: #FDFDFD;}
+</style>
+<script>
+    function showEdit(editableObj) {
+        $(editableObj).css("background","#FFF");
+    }
+    function saveToDatabase(editableObj,column,id) {
+        console.log('column='+column+'&editval='+editableObj.innerHTML+'&id='+id);
+        $(editableObj).css("background","#FFF url(ajax-loader.gif) no-repeat right");
+        $.ajax({
+            url: "<?php echo base_url().'setting/save_advice' ?>",
+            type: "POST",
+            data:'column='+column+'&editval='+editableObj.innerHTML+'&id='+id,
+            success: function(response){
+                $(editableObj).css("background","#FDFDFD");
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["success"](response.message);
+                }
+            }
+        });
+    }
+</script>
