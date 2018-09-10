@@ -74,6 +74,7 @@
     <!-- Custom js -->
     <script src="<?php echo base_url(); ?>assets/dist/js/custom.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/dist/js/custom.js"></script>
+    <script src="<?php echo base_url(); ?>assets/dist/js/script.js"></script>
     <!-- End custom js-->
 
 </body>

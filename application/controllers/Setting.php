@@ -69,12 +69,13 @@
             }
 		}
 
-		public function advice(){
-			$json['result_html'] = $this->load->view('pages/advice', "", true);
-            if ($this->input->is_ajax_request()) {
+        public function advice(){
+            $data['advices'] = $this->Setting_model->get_advices();
+            $json['result_html'] = $this->load->view('pages/advice',$data, true);
+            if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
-		}
+        }
 
 		public function research(){
 			$json['result_html'] = $this->load->view('pages/add_research', "", true);
@@ -160,5 +161,66 @@
                 set_content_type($json);
             }
 		}
+
+        public function add_advice(){
+            $this->load->library('form_validation');
+            $this->load->helper('security');
+            $this->form_validation->set_rules('name', 'Advice Name', 'required|xss_clean');
+
+            if ($this->form_validation->run() == FALSE) {
+                $json['error'] = true;
+                $json['message'] = validation_errors();
+            } else {
+                $data = $this->input->post();
+                $result = $this->Setting_model->add_advice($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "Advice created successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error while creating advice";
+                }
+            }
+            $data['advices'] = $this->Setting_model->get_advices();
+            $json['result_html'] = $this->load->view('pages/advice',$data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function save_advice(){
+            $data = $this->input->post();
+            $result = $this->Setting_model->add_advice($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Advice save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error while saving advice";
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function delete_advice($id){
+            $result = $this->Setting_model->delete_advice($id);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Advice successfully deleted.";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error in deleting advice record.";
+            }
+            $data['advices'] = $this->Setting_model->get_advices();
+            $json['result_html'] = $this->load->view('pages/advice',$data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+
+        }
 	}
 ?>
