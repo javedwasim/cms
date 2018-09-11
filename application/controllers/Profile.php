@@ -16,5 +16,12 @@
                 set_content_type($json);
             }
 		}
+
+		public function patient_special_instructions(){
+			$json['result_html'] = $this->load->view('pages/pat_sp_instructions', "", true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+		}
 	}
 ?>

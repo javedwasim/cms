@@ -111,8 +111,6 @@ $(document).ready(function() {
         }
     });
 
-
-
     /////////////////// initilize booking datatable///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -824,6 +822,7 @@ $(document).ready(function() {
             var consultantfee = $('#consultant_fee').val();
             var bookingflag = $('#booking_flag').val();
             var tabledate = $('.pat_search').val();
+            $(this).attr("disabled", true);
             $.ajax({
             url: $('#appointment_booking_form').attr('data-action'),
                     type: 'post',
@@ -836,6 +835,8 @@ $(document).ready(function() {
                         tabledate: tabledate
                     },
                     success: function(data) {
+                    $('#book_appointment').attr("disabled", false);
+                    document.getElementById('appointment_booking_form').reset();
                     if (data.booking_table != ''){
                         $('.table-responsive').remove();
                         $('#table-booking').append(data.booking_table);
@@ -891,6 +892,7 @@ $(document).ready(function() {
                         $('.app_date').datepicker({
                                 format: 'd-M-yyyy'
                         });
+
                         if(data.message == "Name and contact Number cannot be null."){
                             toastr["warning"](data.message);
                         }else if(data.message == "Limit reached for bookings."){
@@ -900,8 +902,7 @@ $(document).ready(function() {
                         }else{
                             toastr["success"](data.message);
                         }
-                        
-                        document.getElementById('appointment_booking_form').reset();
+
                         } else {
                             toastr["warning"]("Seems to an error while booking an appointment.");
                     }
@@ -1433,16 +1434,20 @@ $(document.body).on('click', '#pat_profile', function(){
                 $('#content-wrapper').append(response.result_html);
                 ///////////////// initilize datatable //////////////
                 $('.profiletable').DataTable({
-                    "scrollX": true
+                    // "scrollX": true,
+                    "initComplete": function (settings, json) {  
+                    $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                }
                 });
                 $("#toggleresize1").click(function(){
-                    $('.resize2').slideToggle("show");
-                    $('.resize1').toggleClass("active_resize");
+                    $('.resize1').toggleClass("active_resize1");
+                    $('.resize2').toggleClass("inactive_resize2");
 
                 });
                 $("#toggleresize2").click(function(){
-                    $('.resize1').slideToggle("show");
-                    $('.resize2').toggleClass("active_resize");
+                    $('.resize2').toggleClass("active_resize2");
+                    $('.resize1').toggleClass("inactive_resize1");
+                   
 
                 });
             }
@@ -1889,6 +1894,29 @@ $(document.body).on('click', '#ett-setting', function(){
 $(document.body).on('click', '#pat-exemination', function(){
     $.ajax({
         url: '/cms/setting/patient_exemination',
+        cache: false,
+        success: function(response) {
+            if (response.result_html != ''){
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                ///////////////// initilize datatable //////////////
+                $('#permissions-table').DataTable({
+                    "scrollX": true
+                });
+                $('.app_date').datepicker({
+                        format: 'd-M-yyyy'
+                });
+            }
+        }
+    });
+});
+
+/////////////////////////////////// load ett setting page ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+$(document.body).on('click', '#pat-spInstructions', function(){
+    $.ajax({
+        url: '/cms/profile/patient_special_instructions',
         cache: false,
         success: function(response) {
             if (response.result_html != ''){
