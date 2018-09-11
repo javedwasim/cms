@@ -420,9 +420,15 @@ a[data-toggle="collapse"] {
 }
 .resize1{
     width: 50%;
+    transition: width 1s linear;
 }
 .resize2{
     width: 50%;
+    transition: 2s linear;
+}
+.resize1.active_resize,.resize2.active_resize{
+    width: 100%;
+    transition: width 1s linear;
 }
 /* ---------------------------------------------------
     CONTENT STYLE

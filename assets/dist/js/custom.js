@@ -89,7 +89,7 @@ $(document).ready(function() {
 
     /////////////////////////////////////////////////
     $('#sidebarCollapse').on('click', function () {
-        var icon = $('.fas');
+        var icon = $('#sidebarCollapse > .fas');
         icon.toggleClass('fa-arrow-left fa-arrow-right');
         $("#full_name").focus();
         $('#sidebar').toggleClass('active');
@@ -110,6 +110,8 @@ $(document).ready(function() {
                 $(this).addClass('row_selected');
         }
     });
+
+
 
     /////////////////// initilize booking datatable///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
@@ -795,7 +797,7 @@ $(document).ready(function() {
                 
                 //// sidebar toggle code///////////////
                  $('#sidebarCollapse').on('click', function () {
-                    var icon = $('.fas');
+                    var icon = $('#sidebarCollapse > .fas');
                     icon.toggleClass('fa-arrow-left fa-arrow-right');
                     $("#full_name").focus();
                     $('#sidebar').toggleClass('active');
@@ -1127,7 +1129,7 @@ $(document).ready(function() {
                 
                 //// sidebar toggle code///////////////
                 $('#sidebarCollapse').on('click', function () {
-                    var icon = $('.fas');
+                    var icon = $('#sidebarCollapse > .fas');
                     icon.toggleClass('fa-arrow-left fa-arrow-right');
                     $("#full_name").focus();
                     $('#sidebar').toggleClass('active');
@@ -1218,7 +1220,7 @@ $(document).ready(function() {
                 
                 //// sidebar toggle code///////////////
                 $('#sidebarCollapse').on('click', function () {
-                    var icon = $('.fas');
+                    var icon = $('#sidebarCollapse > .fas');
                     icon.toggleClass('fa-arrow-left fa-arrow-right');
                     $("#full_name").focus();
                     $('#sidebar').toggleClass('active');
@@ -1308,7 +1310,7 @@ $(document).ready(function() {
                 
                 //// sidebar toggle code///////////////
                 $('#sidebarCollapse').on('click', function () {
-                    var icon = $('.fas');
+                    var icon = $('#sidebarCollapse > .fas');
                     icon.toggleClass('fa-arrow-left fa-arrow-right');
                     $("#full_name").focus();
                     $('#sidebar').toggleClass('active');
@@ -1432,6 +1434,16 @@ $(document.body).on('click', '#pat_profile', function(){
                 ///////////////// initilize datatable //////////////
                 $('.profiletable').DataTable({
                     "scrollX": true
+                });
+                $("#toggleresize1").click(function(){
+                    $('.resize2').slideToggle("show");
+                    $('.resize1').toggleClass("active_resize");
+
+                });
+                $("#toggleresize2").click(function(){
+                    $('.resize1').slideToggle("show");
+                    $('.resize2').toggleClass("active_resize");
+
                 });
             }
         }
