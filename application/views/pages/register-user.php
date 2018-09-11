@@ -22,18 +22,8 @@
                                     </div>
                                     <div class="col-md-9 m-t-10">
                                         <div class="btn-group profile_radio" data-toggle="buttons">
-                                            <label class="btn btn-primary active">
-                                                <div class="custom-control custom-radio p-l-0">
-                                                    <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" checked>
-                                                    <label class="custom-control-label" for="customRadio4">Male</label>
-                                                </div>
-                                            </label>
-                                            <label class="btn btn-primary">
-                                                <div class="custom-control custom-radio p-l-0">
-                                                    <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio5">Female</label>
-                                                </div>
-                                            </label>
+                                            <label class="radio-inline"><input type="radio" name="optradio" checked>Male</label>
+                                            <label class="radio-inline"><input type="radio" name="optradio">Female</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3 m-t-10">

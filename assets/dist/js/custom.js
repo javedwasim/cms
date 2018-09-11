@@ -1922,12 +1922,24 @@ $(document.body).on('click', '#pat-spInstructions', function(){
             if (response.result_html != ''){
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#permissions-table').DataTable({
-                    "scrollX": true
-                });
-                $('.app_date').datepicker({
-                        format: 'd-M-yyyy'
+            }
+        }
+    });
+});
+
+/////////////////////////////////// load ett setting page ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+$(document.body).on('click', '#pat-labtest', function(){
+    $.ajax({
+        url: '/cms/profile/patient_lab_test',
+        cache: false,
+        success: function(response) {
+            if (response.result_html != ''){
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.lab-date').datepicker({
+                    format: 'd-M-yyyy'
                 });
             }
         }
