@@ -30,5 +30,12 @@
                 set_content_type($json);
             }
 		}
+		
+		public function patient_echo_test(){
+			$json['result_html'] = $this->load->view('pages/patient_echo_test', "", true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+		}
 	}
 ?>

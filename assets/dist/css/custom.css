@@ -324,7 +324,10 @@ a[data-toggle="collapse"] {
 .pt-info strong{
     margin-left: 5px;
 }
-
+.list-group-item{
+    padding: 5px;
+    font-size: 12px;
+}
 
 /* ---------------------------------------------------
             Dashboard SIDEBAR STYLE
