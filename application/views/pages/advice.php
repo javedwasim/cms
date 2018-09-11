@@ -135,7 +135,7 @@
                                                         <a class="delete-advice-item btn btn-danger btn-xs"
                                                            href="javascript:void(0)" title="delete"
                                                            data-href="<?php echo site_url('setting/delete_advice_item/') . $item['id'] ?>">
-                                                            <i class="fa fa-trash" title="Delete"></i>
+                                                            <i class="fa fa-trash" title="Delete"></i></a>
                                                     </td>
                                                     <td contenteditable="true"
                                                         onBlur="saveAdviceItem(this,'item_name','<?php echo $item['id']; ?>')"

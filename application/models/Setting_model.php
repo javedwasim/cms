@@ -91,6 +91,47 @@
             return $this->db->affected_rows();
         }
 
+        public function add_research($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('research',array('name'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+                $this->db->insert('research', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
+        public function get_researches(){
+            $result = $this->db->select('*')->from('research')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function save_research_description($data){
+            $this->db->where('id',$data['research_id'])->update('research',array('description'=>$data['description']));
+            return $this->db->affected_rows();
+        }
+
+        public function get_research_description($id){
+            $result = $this->db->select('description')->from('research')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function delete_research($id) {
+            $this->db->where('id', $id)->delete('research');
+            return $this->db->affected_rows();
+        }
 
 	}
 
