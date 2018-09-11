@@ -125,6 +125,7 @@
 
 		public function laboratory_test(){
             $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['active_tab'] = 'category';
 			$json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
             if ($this->input->is_ajax_request()) {
@@ -418,8 +419,9 @@
                 }
             }
             $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_advice_items();
-            $data['active_tab'] = 'category';
+            $data['active_tab'] = 'tests';
             $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -478,13 +480,137 @@
                 $json['message'] = "Seems to an error in deleting  record.";
             }
             $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_advice_items();
-            $data['active_tab'] = 'category';
+            $data['active_tab'] = 'tests';
             $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
 
+        }
+
+        public function save_lab_category(){
+            $data = $this->input->post();
+            $result = $this->Setting_model->add_lab_category($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Advice save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error while saving advice";
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+
+        public function add_lab_test(){
+            $this->load->library('form_validation');
+            $this->load->helper('security');
+            $this->form_validation->set_rules('name', 'Advice Name', 'required|xss_clean');
+            $this->form_validation->set_rules('lab_category_id', 'Laboratory Category', 'required|xss_clean');
+
+            if ($this->form_validation->run() == FALSE) {
+                $json['error'] = true;
+                $json['message'] = validation_errors();
+            } else {
+                $data = $this->input->post();
+                $result = $this->Setting_model->add_lab_test($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "Lab test created successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error";
+                }
+            }
+            $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['tests'] = $this->Setting_model->get_lab_tests();
+            $data['items'] = $this->Setting_model->get_advice_items();
+            $data['active_tab'] = 'tests';
+            $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function save_lab_test(){
+            $data = $this->input->post();
+            $result = $this->Setting_model->add_lab_test($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Advice save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error while saving advice";
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function delete_lab_test($id){
+            $result = $this->Setting_model->delete_lab_test($id);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Laboratory test successfully deleted.";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error in deleting record.";
+            }
+            $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['tests'] = $this->Setting_model->get_lab_tests();
+            $data['items'] = $this->Setting_model->get_advice_items();
+            $data['active_tab'] = 'tests';
+            $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+
+        }
+
+        public function get_lab_test_description(){
+            $data = $this->input->post();
+            $id = $data['id'];
+            $result = $this->Setting_model->get_lab_test_description($id);
+
+            if ($result) {
+                $json['success'] = true;
+                $json['description'] = $result['description'];
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function save_lab_test_description(){
+            $this->load->library('form_validation');
+            $this->load->helper('security');
+            $this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+
+            if ($this->form_validation->run() == FALSE) {
+                $json['error'] = true;
+                $json['message'] = validation_errors();
+            } else {
+                $data = $this->input->post();
+                $result = $this->Setting_model->save_lab_test_description($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "Description added successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error while adding description";
+                }
+            }
+
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
         }
 	}
 ?>

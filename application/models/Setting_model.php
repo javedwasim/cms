@@ -176,6 +176,48 @@
             return $this->db->affected_rows();
         }
 
+        public function add_lab_test($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('lab_test',array('name'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+                $this->db->insert('lab_test', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
+        public function get_lab_tests(){
+            $result = $this->db->select('*')->from('lab_test')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function delete_lab_test($id) {
+            $this->db->where('id', $id)->delete('lab_test');
+            return $this->db->affected_rows();
+        }
+
+        public function get_lab_test_description($id){
+            $result = $this->db->select('description')->from('lab_test')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function save_lab_test_description($data){
+            $this->db->where('id',$data['lab_test_id'])->update('lab_test',array('description'=>$data['description']));
+            return $this->db->affected_rows();
+        }
+
 	}
 
 ?>

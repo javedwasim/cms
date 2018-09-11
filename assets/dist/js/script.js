@@ -252,3 +252,88 @@ $(document.body).on('click', '.delete-lab-category', function(){
     }
     return false;
 });
+
+$(document.body).on('click', '#lab_test_item', function(){
+    $.ajax({
+        url: $('#lab_test_form').attr('data-action'),
+        type: 'post',
+        data: $('#lab_test_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('.dashboard-content').empty();
+            $('.dashboard-content').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+
+    return false;
+});
+
+$(document.body).on('click', '.delete-lab-test', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+$(document.body).on('click', '.edit-lab-test-btn', function(){
+    $('#lab_test_form_modal')[0].reset();
+    var cat_id = $(this).attr('data-lab-test-id');
+    $('#lab_test_id').val($(this).attr('data-lab-test-id'));
+    $.ajax({
+        url: '/cms/setting/get_lab_test_description',
+        type: 'post',
+        data: {id:cat_id},
+        cache: false,
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                $('#description').val(response.description);
+                $('#lab_test_modal').modal('show');
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+
+    return false;
+
+});
+
+$(document.body).on('click', '#save_lab_test_description', function(){
+    $.ajax({
+        url: $('#lab_test_form_modal').attr('data-action'),
+        type: 'post',
+        data:  $('#lab_test_form_modal').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#lab_test_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
