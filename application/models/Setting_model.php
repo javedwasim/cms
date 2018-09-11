@@ -133,6 +133,49 @@
             return $this->db->affected_rows();
         }
 
+        public function add_lab_category($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('lab_category',array('name'=>$editval));
+                //echo $this->db->last_query(); die();
+                return $this->db->affected_rows();
+            }else{
+                $this->db->insert('lab_category', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
+        public function get_lab_categories(){
+            $result = $this->db->select('*')->from('lab_category')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function get_lab_category_description($id){
+            $result = $this->db->select('description')->from('lab_category')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function save_lab_category_description($data){
+            $this->db->where('id',$data['lab_category_id'])->update('lab_category',array('description'=>$data['description']));
+            return $this->db->affected_rows();
+        }
+
+        public function delete_lab_category($id) {
+            $this->db->where('id', $id)->delete('lab_category');
+            return $this->db->affected_rows();
+        }
+
 	}
 
 ?>

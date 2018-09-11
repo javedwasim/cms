@@ -168,3 +168,87 @@ $(document.body).on('click', '.delete-research', function(){
     return false;
 });
 
+$(document.body).on('click', '.add-lab-category', function(){
+    var name = $('#lab_category').val();
+    $.ajax({
+        url: '/cms/setting/add_lab_category',
+        type: 'post',
+        data: {name:name},
+        cache: false,
+        success: function(response) {
+            $('.dashboard-content').empty();
+            $('.dashboard-content').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.edit-lab-cat-btn', function(){
+    $('#lab_category_form')[0].reset();
+    var cat_id = $(this).attr('data-lab-category-id');
+    $('#lab_category_id').val($(this).attr('data-lab-category-id'));
+    $.ajax({
+        url: '/cms/setting/get_lab_category_description',
+        type: 'post',
+        data: {id:cat_id},
+        cache: false,
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                $('#description').val(response.description);
+                $('#lab_category_modal').modal('show');
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+
+    return false;
+
+});
+
+
+$(document.body).on('click', '#save_lab_category_description', function(){
+    $.ajax({
+        url: $('#lab_category_form').attr('data-action'),
+        type: 'post',
+        data:  $('#lab_category_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#lab_category_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-lab-category', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
