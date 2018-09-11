@@ -80,7 +80,8 @@
         }
 
 		public function research(){
-			$json['result_html'] = $this->load->view('pages/add_research', "", true);
+            $data['researches'] = $this->Setting_model->get_researches();
+            $json['result_html'] = $this->load->view('pages/add_research', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -272,9 +273,7 @@
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'advice_item';
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
-            if($this->input->is_ajax_request()) {
-                set_content_type($json);
-            }
+
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -294,6 +293,107 @@
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
+        }
+
+        public function add_research(){
+            $this->load->library('form_validation');
+            $this->load->helper('security');
+            $this->form_validation->set_rules('name', 'Research Name', 'required|xss_clean');
+
+            if ($this->form_validation->run() == FALSE) {
+                $json['error'] = true;
+                $json['message'] = validation_errors();
+            } else {
+                $data = $this->input->post();
+                $result = $this->Setting_model->add_research($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "Research name added successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error while creating research";
+                }
+            }
+            $data['researches'] = $this->Setting_model->get_researches();
+            $json['result_html'] = $this->load->view('pages/add_research', $data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function save_research(){
+            $data = $this->input->post();
+            $result = $this->Setting_model->add_research($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Research name save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error while saving research name";
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function save_research_description(){
+            $this->load->library('form_validation');
+            $this->load->helper('security');
+            $this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+
+            if ($this->form_validation->run() == FALSE) {
+                $json['error'] = true;
+                $json['message'] = validation_errors();
+            } else {
+                $data = $this->input->post();
+                $result = $this->Setting_model->save_research_description($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "Description added successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error while adding description";
+                }
+            }
+
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function get_research_description(){
+            $data = $this->input->post();
+            $id = $data['id'];
+            $result = $this->Setting_model->get_research_description($id);
+
+            if ($result) {
+                $json['success'] = true;
+                $json['description'] = $result['description'];
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+
+        public function delete_research($id){
+            $result = $this->Setting_model->delete_research($id);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Research successfully deleted.";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error in deleting research record.";
+            }
+            $data['researches'] = $this->Setting_model->get_researches();
+            $json['result_html'] = $this->load->view('pages/add_research', $data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+
         }
 	}
 ?>
