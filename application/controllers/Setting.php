@@ -124,7 +124,9 @@
 		}
 
 		public function laboratory_test(){
-			$json['result_html'] = $this->load->view('pages/laboratory_test', "", true);
+            $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['active_tab'] = 'category';
+			$json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -390,6 +392,95 @@
             }
             $data['researches'] = $this->Setting_model->get_researches();
             $json['result_html'] = $this->load->view('pages/add_research', $data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+
+        }
+
+        public function add_lab_category(){
+            $this->load->library('form_validation');
+            $this->load->helper('security');
+            $this->form_validation->set_rules('name', 'Laboratory Category', 'required|xss_clean');
+
+            if ($this->form_validation->run() == FALSE) {
+                $json['error'] = true;
+                $json['message'] = validation_errors();
+            } else {
+                $data = $this->input->post();
+                $result = $this->Setting_model->add_lab_category($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "Category created successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error while creating category";
+                }
+            }
+            $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['items'] = $this->Setting_model->get_advice_items();
+            $data['active_tab'] = 'category';
+            $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function get_lab_category_description(){
+            $data = $this->input->post();
+            $id = $data['id'];
+            $result = $this->Setting_model->get_lab_category_description($id);
+
+            if ($result) {
+                $json['success'] = true;
+                $json['description'] = $result['description'];
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function save_lab_category_description(){
+            $this->load->library('form_validation');
+            $this->load->helper('security');
+            $this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+
+            if ($this->form_validation->run() == FALSE) {
+                $json['error'] = true;
+                $json['message'] = validation_errors();
+            } else {
+                $data = $this->input->post();
+                $result = $this->Setting_model->save_lab_category_description($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "Description added successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error while adding description";
+                }
+            }
+
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function delete_lab_category($id){
+            $result = $this->Setting_model->delete_lab_category($id);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Laboratory category successfully deleted.";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error in deleting  record.";
+            }
+            $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['items'] = $this->Setting_model->get_advice_items();
+            $data['active_tab'] = 'category';
+            $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
