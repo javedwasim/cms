@@ -71,6 +71,8 @@
 
         public function advice(){
             $data['advices'] = $this->Setting_model->get_advices();
+            $data['items'] = $this->Setting_model->get_advice_items();
+            $data['active_tab'] = 'advice';
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -182,6 +184,8 @@
                 }
             }
             $data['advices'] = $this->Setting_model->get_advices();
+            $data['items'] = $this->Setting_model->get_advice_items();
+            $data['active_tab'] = 'advice';
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -213,6 +217,8 @@
                 $json['message'] = "Seems to an error in deleting advice record.";
             }
             $data['advices'] = $this->Setting_model->get_advices();
+            $data['items'] = $this->Setting_model->get_advice_items();
+            $data['active_tab'] = 'advice';
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -221,6 +227,73 @@
                 set_content_type($json);
             }
 
+        }
+
+        public function add_advice_item(){
+            $this->load->library('form_validation');
+            $this->load->helper('security');
+            $this->form_validation->set_rules('name', 'Advice Name', 'required|xss_clean');
+            $this->form_validation->set_rules('advice_id', 'Category', 'required|xss_clean');
+
+            if ($this->form_validation->run() == FALSE) {
+                $json['error'] = true;
+                $json['message'] = validation_errors();
+            } else {
+                $data = $this->input->post();
+                $result = $this->Setting_model->add_advice_item($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "Advice item created successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error while creating advice item";
+                }
+            }
+            $data['advices'] = $this->Setting_model->get_advices();
+            $data['items'] = $this->Setting_model->get_advice_items();
+            $data['active_tab'] = 'advice_item';
+            $json['result_html'] = $this->load->view('pages/advice',$data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+
+        public function delete_advice_item($id){
+            $result = $this->Setting_model->delete_advice_item($id);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Advice successfully deleted.";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error in deleting advice record.";
+            }
+            $data['advices'] = $this->Setting_model->get_advices();
+            $data['items'] = $this->Setting_model->get_advice_items();
+            $data['active_tab'] = 'advice_item';
+            $json['result_html'] = $this->load->view('pages/advice',$data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+
+        }
+
+        public function save_advice_item(){
+            $data = $this->input->post();
+            $result = $this->Setting_model->add_advice_item($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Advice Item save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error while saving advice item";
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
         }
 	}
 ?>

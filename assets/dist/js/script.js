@@ -6,14 +6,12 @@ $(document.body).on('click', '.add-advice', function(){
         data: {name:name},
         cache: false,
         success: function(response) {
-
-            $('#advice_table_div').empty();
-            $('#advice_table_div').append(response.result_html);
-
+            $('.dashboard-content').empty();
+            $('.dashboard-content').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
             } else {
-                toastr["success"](response.message);
+                toastr["error"](response.message);
             }
         }
     });
@@ -26,12 +24,56 @@ $(document.body).on('click', '.delete-advice', function(){
             url: $(this).attr('data-href'),
             cache: false,
             success: function(response) {
-                $('#advice_table_div').empty();
-                $('#advice_table_div').append(response.result_html);
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
                 if (response.success) {
                     toastr["success"](response.message);
                 } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+
+$(document.body).on('click', '#advice_item_btn', function(){
+    $.ajax({
+        url: $('#advice_item_form').attr('data-action'),
+        type: 'post',
+        data: $('#advice_item_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('.dashboard-content').empty();
+            $('.dashboard-content').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+
+    return false;
+});
+
+
+$(document.body).on('click', '.delete-advice-item', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
+                if (response.success) {
                     toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
                 }
             }
         });
