@@ -1,6 +1,6 @@
 <div class="content-wrapper" style="margin: 0% 0.5%;">
     <div class="row p-t-10 m-0">
-    	<div class="card">
+    	<div class="card" style="margin-bottom:0px !important; ">
     		<div class="card-body">
     			<div class="row">
     				<div class="col-md-12 col-lg-12 pt-info">
@@ -40,7 +40,7 @@
     		<div class="card">
                 <div class="card-body">
                    <div class="row">
-                   		<div class="col-md-6">
+                   		<div class="col-md-6 p-r-0">
                    			<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 		                       <thead>
 		                        <tr>
@@ -72,7 +72,7 @@
 			                    </tbody>
 			                </table>
                    		</div>
-                   		<div class="col-md-6">
+                   		<div class="col-md-6 p-l-0">
                    			<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 		                       <thead>
 		                        <tr>
@@ -111,7 +111,7 @@
     	<div class="col-md-3 col-lg-3 p-0">
     		<div class="row">
                 <div class="col-md-12">
-                    <div class="card">
+                    <div class="card" style="height:80vh;">
                     	<div class="card-header">
                     		<div class="row">
                     			<div class="col-md-8">
@@ -123,20 +123,16 @@
                     			</div>
                     		</div>
                     	</div>
-                        <div class="card-body" style="height:70vh;">
+                        <div class="card-body" >
                             <div class="row">
                             	<div class="col-md-12">
                             		<div class="form-group">
-                            			<textarea class="form-control" rows="5">
-                            				
-                            			</textarea>
+                            			<textarea class="form-control" rows="10"></textarea>
                             		</div>
                             	</div>
                             	<div class="col-md-12">
                             		<div class="form-group">
-                            			<textarea class="form-control" rows="5">
-                            				
-                            			</textarea>
+                            			<textarea class="form-control" rows="10"></textarea>
                             		</div>
                             	</div>
                             </div>
@@ -147,10 +143,46 @@
     	</div>
     	<div class="col-md-5 col-lg-5 p-0">
     		<div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body" style="height:70vh;">
-                            
+                <div class="col-md-12" >
+                    <div class="card" style="height:80vh;">
+                    	<div class="card-header">
+                    		Previous Instructions<br/>
+                    		Print size:<label class="radio-inline"><input type="radio" name="optradio" checked>A4</label>
+                                            <label class="radio-inline m-r-30"><input type="radio" name="optradio">Half A4</label>
+                            <label class="m-r-20">Click to View</label>
+                            <label>Double Click to Edit</label>
+                    	</div>
+                        <div class="card-body" >
+                            <div class="row">
+                            	<div class="col-md-4 p-r-0">
+                            		<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%">
+                            			<thead>
+                            				<th style="width: 20px"></th>
+                            				<th>Dates</th>
+                            			</thead>
+                            			<tbody>
+                            				<tr>
+                            					<td><i class="fa fa-print" ></i></td>
+                            					<td>6/11/2018</td>
+                            				</tr>
+                            			</tbody>
+                            		</table>
+                            	</div>
+                            	<div class="col-md-8 p-l-0">
+                            		<div class="row">
+		                            	<div class="col-md-12">
+		                            		<div class="form-group">
+		                            			<textarea class="form-control" rows="10" readonly="readonly"></textarea>
+		                            		</div>
+		                            	</div>
+		                            	<div class="col-md-12">
+		                            		<div class="form-group">
+		                            			<textarea class="form-control" rows="10" readonly="readonly"></textarea>
+		                            		</div>
+		                            	</div>
+		                            </div>
+                            	</div>
+                            </div>
                         </div>
                     </div>
                 </div>    
