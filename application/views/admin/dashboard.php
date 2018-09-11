@@ -94,7 +94,7 @@
                                 <a href="javascript:void(0)" id="booking-limiter" >Limiter</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" id="lab_test" >Laboratory</a>
+                                <a href="javascript:void(0)" id="lab_test" >Laboratory Test</a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" id="special_instruction" >Special Instructions</a>

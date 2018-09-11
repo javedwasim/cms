@@ -3,7 +3,7 @@
         <div class="col-lg-4 col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Delete patient
+                    Limiter
                 </div>
                 <div class="card-body">
                   

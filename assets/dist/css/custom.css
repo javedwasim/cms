@@ -199,6 +199,34 @@ li.paginate_button.page-item.active {
     height: 600px;
     overflow-y: auto;
 }
+.resize{
+    resize: both;
+    overflow: auto;
+}
+.pro-filter label{
+    margin-bottom: 0px !important;
+}
+.resize1.active_resize1{
+    width: 100%;
+}
+.resize2.inactive_resize2{
+    margin-right: -50%;
+}
+.resize2.active_resize2{
+    width: 100%;
+}
+.resize1.inactive_resize1{
+    margin-left: -50%;
+}
+.resize1{
+    width: 50%;
+    transition: all 0.6s;
+}
+.resize2{
+    width: 50%;
+    transition: all 0.6s;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -411,25 +439,7 @@ a[data-toggle="collapse"] {
 #dashboar-sidebar ul li ul li a {
     padding: 10px 25px;
 }
-.resize{
-    resize: both;
-    overflow: auto;
-}
-.pro-filter label{
-    margin-bottom: 0px !important;
-}
-.resize1{
-    width: 50%;
-    transition: width 1s linear;
-}
-.resize2{
-    width: 50%;
-    transition: 2s linear;
-}
-.resize1.active_resize,.resize2.active_resize{
-    width: 100%;
-    transition: width 1s linear;
-}
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -499,7 +509,10 @@ select.form-control:not([size]):not([multiple]) {
 [type=radio]:checked, [type=radio]:not(:checked){
     margin-right: 5px;
 }
-
+table.table th {
+    padding: 5px 5px;
+    font-weight: bold;
+}
 
 /* ---------------------------------------------------
     MEDIAQUERIES

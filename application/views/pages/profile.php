@@ -81,11 +81,11 @@
                             </form>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered nowrap responsive profiletable" cellspacing="0" id="" width="100%" >
+                            <table class="table table-bordered profiletable" cellspacing="0" id="" width="100%" >
                                <thead>
                                 <tr>
-                                    <th style="width: 20px"></th>
-                                    <th style="width: 20px"></th>
+                                    <th style="width: 20px">Delete</th>
+                                    <th style="width: 20px">Edit</th>
                                     <th>Patient ID</th>
                                     <th>Patient Name</th>
                                     <th>Father/Husband Name</th>
@@ -273,7 +273,7 @@
                             <div class="row">
                                 <div class="col-md-12 p-0">
                                     <button class="btn btn-primary btn-md waves-effect waves-light" id="pat-exemination" style="padding: 10px 15px;" type="button">Examintation</button>
-                                    <button class="btn btn-info btn-md waves-effect waves-light" style="padding: 10px 10px;" type="button">Sp. Instructions</button>
+                                    <button class="btn btn-info btn-md waves-effect waves-light" id="pat-spInstructions" style="padding: 10px 10px;" type="button">Sp. Instructions</button>
                                     <button class="btn btn-primary btn-md waves-effect waves-light" style="padding: 10px 15px;" type="button">Lab. Test</button>
                                     <button class="btn btn-danger waves-effect waves-light" style="padding: 7px 15px;" type="button">Echo</button>
                                     <button class="btn btn-danger waves-effect waves-light" style="padding: 7px 15px;" type="button">ETT</button>
@@ -308,23 +308,23 @@
                                         <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
                                            <thead>
                                             <tr>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
+                                                <th style="width: 20px"></th>
+                                                <th style="width: 20px"></th>
+                                                <th style="width: 20px"></th>
                                                 <th>ETT Date</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><i class="fa fa-trash"></i></td>
-                                                    <td><i class="fa fa-edit"></i></td>
-                                                    <td><i class="fa fa-print"></i></td>
+                                                    <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                                    <td style="width: 20px"><i class="fa fa-edit"></i></td>
+                                                    <td style="width: 20px"><i class="fa fa-print"></i></td>
                                                     <td>30/08/2018</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><i class="fa fa-trash"></i></td>
-                                                    <td><i class="fa fa-edit"></i></td>
-                                                    <td><i class="fa fa-print"></i></td>
+                                                    <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                                                    <td style="width: 20px"><i class="fa fa-edit"></i></td>
+                                                    <td style="width: 20px"><i class="fa fa-print"></i></td>
                                                     <td>30/08/2018</td>
                                                 </tr>
                                             </tbody>

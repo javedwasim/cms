@@ -256,7 +256,7 @@
                         }
                         ?>
                     </td>
-                    <td>
+                    <td class="hide">
                         <?php echo $details['fee_collected_by'] ?>
                     </td>
 
@@ -269,7 +269,7 @@
                         }
                         ?>
                     </td>
-                    <td>
+                    <td class="hide">
                         <?php echo $details['ett_fee_collected_by'] ?>
                     </td>
 
@@ -282,7 +282,7 @@
                         }
                         ?>
                     </td>
-                    <td>
+                    <td class="hide">
                         <?php echo $details['echo_fee_collected_by'] ?>
                     </td>
                     <td>
@@ -341,7 +341,7 @@
                         }
                         ?>
                     </td>
-                    <td>
+                    <td class="hide">
                         <?php echo $details['fee_collected_by'] ?>
                     </td>
 
@@ -354,7 +354,7 @@
                         }
                         ?>
                     </td>
-                    <td>
+                    <td class="hide">
                         <?php echo $details['ett_fee_collected_by'] ?>
                     </td>
 
@@ -367,7 +367,7 @@
                         }
                         ?>
                     </td>
-                    <td>
+                    <td class="hide">
                         <?php echo $details['echo_fee_collected_by'] ?>
                     </td>
                     <td>
