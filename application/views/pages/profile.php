@@ -276,7 +276,7 @@
                                     <button class="btn btn-info btn-md waves-effect waves-light" id="pat-spInstructions" style="padding: 10px 10px;" type="button">Sp. Instructions</button>
                                     <button class="btn btn-primary btn-md waves-effect waves-light" id="pat-labtest" style="padding: 10px 15px;" type="button">Lab. Test</button>
                                     <button class="btn btn-danger waves-effect waves-light" id="pat-echo-test" style="padding: 7px 15px;" type="button">Echo</button>
-                                    <button class="btn btn-danger waves-effect waves-light" style="padding: 7px 15px;" type="button">ETT</button>
+                                    <button class="btn btn-danger waves-effect waves-light" id="pat-ett-test" style="padding: 7px 15px;" type="button">ETT</button>
                                     <button class="btn btn-success btn-md waves-effect waves-light" style="padding: 10px 15px;" type="button">Upload Files</button>
                                 </div>
                             </div>

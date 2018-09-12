@@ -279,9 +279,9 @@
     				</div>
     			</div>
     		</div>
-    		<div class="col-md-12" style="display: inline-flex;">
-    			<label class="checkbox-inline"><input type="checkbox" value="">Change Signature ?</label>
-    			<select class="form-control col-md-3">
+    		<div class="col-lg-4 col-md-6 pull-right" style="display: inline-flex;">
+    			<label class="checkbox-inline m-r-10 m-t-15"><input type="checkbox" value="">Change Signature ?</label>
+    			<select class="form-control col-md-6 m-t-10">
     				<option>Select</option>
     				<option></option>
     			</select>
