@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
+            <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id=""
                    width="100%">
                 <thead>
                 <tr>
