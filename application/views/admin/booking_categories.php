@@ -51,7 +51,7 @@
                     <tr>
                         <td><?php echo $i?></td>
                         <td class="hide"><?php echo $i?></td>
-                        <td>
+                        <td style="width:150px;">
                             <?php 
                                 if(isset($bkarray[$i]['full_name'])){
                                     echo $bkarray[$i]['full_name'];
@@ -121,7 +121,7 @@
                                 <td class="hide">
                                     <?php echo $details['order_number'];?>
                                 </td>
-                                <td>
+                                <td style="width:150px;">
                                     <?php echo $details['full_name'] ?>
                                 </td>
                                 <td>
@@ -184,7 +184,7 @@
                             <td>
                                 <?php echo $details['order_number'];?>
                             </td>
-                            <td>
+                            <td style="width:150px;">
                                 <?php echo $details['full_name'] ?>
                             </td>
                             <td>
@@ -228,7 +228,7 @@
                     <tr>
                         <th>Sr</th>
                         <th>Order</th>
-                        <th>Name</th>
+                        <th style="width:150px;">Name</th>
                         <th>Contact</th>
                         <th>Appointment Taken</th>
                         <th>Shift</th>
@@ -247,7 +247,7 @@
                             <td>
                                 <?php echo $details['order_number'];?>
                             </td>
-                            <td>
+                            <td style="width:150px;">
                                 <?php echo $details['full_name'] ?>
                             </td>
                             <td>
@@ -296,7 +296,7 @@
                         <tr>
                             <th>Sr</th>
                             <th class="hide">Order</th>
-                            <th>Name</th>
+                            <th style="width:150px;">Name</th>
                             <th>Contact</th>
                             <th>Appointment Taken</th>
                             <th class="hide">Shift</th>
@@ -315,7 +315,7 @@
                                 <td class="hide">
                                     <?php echo $details['order_number'];?>
                                 </td>
-                                <td>
+                                <td style="width:150px;">
                                     <?php echo $details['full_name'] ?>
                                 </td>
                                 <td>
@@ -358,7 +358,7 @@
                     <tr>
                         <th>Sr</th>
                         <th>Order</th>
-                        <th>Name</th>
+                        <th style="width:150px;">Name</th>
                         <th>Contact</th>
                         <th>Appointment Taken</th>
                         <th class="hide">Shift</th>
@@ -377,7 +377,7 @@
                             <td>
                                 <?php echo $details['order_number'];?>
                             </td>
-                            <td>
+                            <td style="width:150px;">
                                 <?php echo $details['full_name'] ?>
                             </td>
                             <td>
@@ -419,7 +419,7 @@
                     <tr>
                         <th>Sr</th>
                         <th>Order</th>
-                        <th>Name</th>
+                        <th style="width:150px;">Name</th>
                         <th>Contact</th>
                         <th>Appointment Taken</th>
                         <th class="hide">Shift</th>
@@ -438,7 +438,7 @@
                             <td>
                                 <?php echo $details['order_number'];?>
                             </td>
-                            <td>
+                            <td style="width:150px;">
                                 <?php echo $details['full_name'] ?>
                             </td>
                             <td>

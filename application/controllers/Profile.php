@@ -7,11 +7,14 @@
 		function __construct()
 		{
 			parent:: __construct();
+			$this->load->model('Setting_model');
 			$this->load->helper('content-type');
 		}
 
 		public function index(){
-            $json['result_html'] = $this->load->view('pages/profile', "", true);
+			$data['professions'] = $this->Setting_model->get_professions();
+			$data['districts'] = $this->Setting_model->get_districts();
+            $json['result_html'] = $this->load->view('pages/profile', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }

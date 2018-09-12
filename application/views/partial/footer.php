@@ -22,8 +22,6 @@
     <!-- ============================================================== -->
     <!-- plugins:js -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="<?php echo base_url(); ?>assets/plugins/popper/popper.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- daterangepicker -->
     <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
@@ -37,7 +35,8 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
-    
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="<?php echo base_url(); ?>assets/plugins/popper/popper.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="<?php echo base_url(); ?>assets/dist/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
@@ -77,7 +76,7 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/custom.js"></script>
     <script src="<?php echo base_url(); ?>assets/dist/js/script.js"></script>
     <!-- End custom js-->
-
+    
 </body>
 
 </html>

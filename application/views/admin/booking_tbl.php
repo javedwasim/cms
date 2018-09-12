@@ -86,7 +86,7 @@
                         ?>
                     </td>
 
-                    <td data-toggle="tooltip" data-placement="top" 
+                    <td data-toggle="tooltip" data-placement="top" data-trigger="hover" 
                         title="<?php 
                         if(isset($bkarray[$i]['fee_collected_by'])){
                             echo $bkarray[$i]['fee_collected_by'];
@@ -230,7 +230,7 @@
                         <?php echo $details['order_number']; ?>
                     </td>
                     <td>
-                        <input type="text" name="full_name" style="text-transform: capitalize;" id="input-name" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>">
+                        <input type="text" name="full_name" style="text-transform: capitalize;width:150px;" id="input-name" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>">
                     </td>
                     <td>
                         <?php echo $details['contact_number'] ?>
@@ -315,7 +315,7 @@
                         <?php echo $details['order_number']; ?>
                     </td>
                     <td>
-                        <input type="text" name="full_name" style="text-transform: capitalize;" id="input-name" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>">
+                        <input type="text" name="full_name" style="text-transform: capitalize;width:150px;" id="input-name" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>">
                     </td>
                     <td>
                         <?php echo $details['contact_number'] ?>

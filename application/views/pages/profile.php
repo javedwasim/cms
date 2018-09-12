@@ -40,13 +40,27 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Profession</label>
-                                            <input type="text" name="" class="form-control">
+                                            <select class="form-control" style="text-transform: capitalize;">
+                                                <option>Select...</option>
+                                                <?php 
+                                                foreach ($professions as $key) {
+                                            ?>
+                                                <option value="<?php $key['profession_name'] ?>" style="text-transform: capitalize;"><?php echo $key['profession_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>District</label>
-                                            <input type="text" name="" class="form-control">
+                                            <select class="form-control" style="text-transform: capitalize;">
+                                                <option>Select...</option>
+                                                <?php 
+                                                foreach ($districts as $key) {
+                                            ?>
+                                                <option value="<?php $key['district_name'] ?>" style="text-transform: capitalize;"><?php echo $key['district_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-1">

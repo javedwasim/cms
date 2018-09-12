@@ -20,6 +20,17 @@ class User_model extends CI_Model {
         }
     }
 
+    public function get_pat_names() {
+        $result = $this->db->select('full_name')
+                ->from('appointment_booking')
+                ->get();
+        if ($result) {
+            return $result->result_array();
+        } else {
+            return array();
+        }
+    }
+
     public function appointment_book($data) {
         $result = $this->db->insert('appointment_booking', $data);
         if ($result) {
@@ -132,6 +143,15 @@ class User_model extends CI_Model {
         if ($result) {
             return true;
         } else {
+            return false;
+        }
+    }
+
+    public function count_all_fee_status(){
+        $result=$this->db->query("SELECT fee_paid_status, COUNT(*) AS feepaidstatus, COUNT(IF(fee_paid_status=1,1,null)),COUNT(IF(fee_paid_status=2,1,null)),COUNT(IF(fee_paid_status=3,1,null)),COUNT(IF(fee_paid_status=4,1,null)),COUNT(IF(fee_paid_status=5,1,null)) FROM appointment_booking");
+        if ($result) {
+            return $result->result();
+        }else{
             return false;
         }
     }

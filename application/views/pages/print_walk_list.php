@@ -206,7 +206,7 @@
                 <?php foreach ($booking_list as $list) {?>
                 <tr>
                    <td class="tg-yw4l"><?php echo $list['order_number']; ?></td>
-                   <td class="tg-yw4l"><?php echo $list['full_name']; ?></td>
+                   <td class="tg-yw4l" style="text-transform: capitalize;"><?php echo $list['full_name']; ?></td>
                    <td class="tg-yw4l"><?php echo $list['contact_number']; ?></td>
                    <td class="tg-yw4l"><?php echo date('d-M-Y h:i a',strtotime($list['appointment_date'])); ?></td>
                 </tr>
