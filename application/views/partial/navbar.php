@@ -27,7 +27,7 @@
                     <a class="nav-link" href="javascript:void(0)" id="pat_profile" aria-expanded="false"><i class="fas fa-portrait"></i> Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)" aria-expanded="false"><i class="ti-book"></i> Diary</a>
+                    <a class="nav-link" href="javascript:void(0)" id="diary" aria-expanded="false"><i class="ti-book"></i> Diary</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)"  aria-expanded="false"><i class="ti-info-alt"></i> About us</a>

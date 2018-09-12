@@ -167,6 +167,13 @@ class Dashboard extends CI_Controller {
           }
   }
 
+  public function diary(){
+      $json['result_html'] = $this->load->view('pages/diary', "", true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+    }
+
 
 
 

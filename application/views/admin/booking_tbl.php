@@ -85,14 +85,15 @@
                             }
                         ?>
                     </td>
-                    <td>
-                        <input type="text" name="consultant_fee" data-toggle="tooltip" data-placement="top" 
+
+                    <td data-toggle="tooltip" data-placement="top" 
                         title="<?php 
                         if(isset($bkarray[$i]['fee_collected_by'])){
                             echo $bkarray[$i]['fee_collected_by'];
                         }else{
                             echo "";
-                        }?>" onchange="consultant_booking(this)" autocomplete="off" class="dt-input" value="<?php 
+                        }?>">
+                        <input type="text" name="consultant_fee" onchange="consultant_booking(this)" autocomplete="off" class="dt-input" value="<?php 
                         if(isset($bkarray[$i]['consultant_fee'])){
                             echo $bkarray[$i]['consultant_fee'];
                         }else{

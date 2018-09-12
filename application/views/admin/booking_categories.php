@@ -91,8 +91,24 @@
                                 </select>
                             </div>
                         </td>
-                        <td class="hide"></td>
-                        <td class="hide"></td>
+                        <td class="hide">
+                            <?php 
+                                if(isset($bkarray[$i]['appointment_booking_id'])){
+                                    echo $bkarray[$i]['appointment_booking_id'];
+                                }else{
+                                    echo "";
+                                }
+                            ?>
+                        </td>
+                        <td class="hide">
+                            <?php 
+                                if(isset($bkarray[$i]['fee_paid_status'])){
+                                    echo $bkarray[$i]['fee_paid_status'];
+                                }else{
+                                    echo "";
+                                }
+                            ?>
+                        </td>
                     </tr>
                         <?php
                     }
