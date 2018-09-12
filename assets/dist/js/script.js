@@ -425,3 +425,142 @@ $(document.body).on('click', '.edit-lab-test-item-btn', function(){
     });
     return false;
 });
+
+
+$(document.body).on('click', '.add-instruction-category', function(){
+    var name = $('#instruction_name').val();
+    $.ajax({
+        url: '/cms/instruction/add_instruction_category',
+        type: 'post',
+        data: {name:name},
+        cache: false,
+        success: function(response) {
+            $('.ins_category_container').empty();
+            $('.ins_category_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-inst', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.ins_category_container').empty();
+                $('.ins_category_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+function filter_inst_item_category(inst_id) {
+    $.ajax({
+        url: '/cms/instruction/get_inst_item/'+inst_id,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.ins_item_container').empty();
+            $('.ins_item_container').append(response.result_html);
+            $('.datatables').DataTable();
+        }
+    });
+    return false;
+}
+
+$(document.body).on('click', '#inst_item_btn', function(){
+    $.ajax({
+        url: $('#lab_test_item_form').attr('data-action'),
+        type: 'post',
+        data: $('#lab_test_item_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('.ins_item_container').empty();
+            $('.ins_item_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.edit-inst-item-btn', function(){
+    $('#inst_item_form_modal')[0].reset();
+    var item_id = $(this).attr('data-inst-item-id');
+    $('#inst_item_id').val($(this).attr('data-inst-item-id'));
+    $.ajax({
+        url: '/cms/instruction/get_inst_item_description',
+        type: 'post',
+        data: {id:item_id},
+        cache: false,
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                $('#inst_item_description').val(response.description);
+                $('#inst_item_modal').modal('show');
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+
+$(document.body).on('click', '#save_inst_item_description', function(){
+    $.ajax({
+        url: $('#inst_item_form_modal').attr('data-action'),
+        type: 'post',
+        data:  $('#inst_item_form_modal').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#inst_item_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-inst-item', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.ins_item_container').empty();
+                $('.ins_item_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
