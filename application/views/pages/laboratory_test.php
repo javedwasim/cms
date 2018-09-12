@@ -108,10 +108,13 @@
                                         <div class="col-lg-3 col-md-4">
                                             <div class="form-group ">
                                                 <label>Select Category:</label>
-                                                <select class="form-control">
-                                                    <option>Select</option>
-                                                    <option>GIT Problem</option>
-                                                    <option>Co-Resp</option>
+                                                <select class="form-control " name="filter_category_id" onchange="filter_tests(this.value)">
+                                                    <option value="">Select</option>
+                                                    <?php foreach ($categories as $category): ?>
+                                                        <option value="<?php echo $category['id']; ?>"
+                                                            <?php echo isset($selected_category)&&($selected_category==$category['id'])?'selected':'' ?>>
+                                                            <?php echo $category['name']; ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -290,7 +293,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Risk Factor and Cardiac Problems</label>
-                            <textarea class="form-control" rows="3" name="description" id="description"></textarea>
+                            <textarea class="form-control" rows="3" name="description" id="test_description"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -344,5 +347,7 @@
                 }
             });
         }
+
+
 
     </script>
