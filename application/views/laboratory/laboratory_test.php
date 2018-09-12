@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
+            <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id=""
                    width="100%">
                 <thead>
                 <tr>
@@ -113,22 +113,7 @@
     function showEdit(editableObj) {
         $(editableObj).css("background", "#FFF");
     }
-    function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
-        $.ajax({
-            url: "<?php echo base_url() . 'setting/save_lab_category' ?>",
-            type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
-            success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
-                if (response.success) {
-                    toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
-                }
-            }
-        });
-    }
+
     function saveTestDescription(editableObj, column, id) {
         $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({

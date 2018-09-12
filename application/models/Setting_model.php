@@ -215,11 +215,66 @@
 
         public function save_lab_test_description($data){
             $this->db->where('id',$data['lab_test_id'])->update('lab_test',array('description'=>$data['description']));
+            //echo $this->db->last_query(); die();
             return $this->db->affected_rows();
         }
 
         public function get_lab_tests_by_category($cate_id){
             $result = $this->db->select('*')->from('lab_test')->where('lab_category_id',$cate_id)->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function add_lab_test_item($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                if(isset($data['column'])&&($data['column'] == 'name')){
+                    $editval = trim($data['editval']);
+                    $editval = preg_replace('/(<br>)+$/', '', $editval);
+                    $this->db->where('id',$id)->update('lab_test_item',array('name'=>$editval));
+                    return $this->db->affected_rows();
+                }else{
+                    $editval = trim($data['editval']);
+                    $editval = preg_replace('/(<br>)+$/', '', $editval);
+                    $this->db->where('id',$id)->update('lab_test_item',array('units'=>$editval));
+                    return $this->db->affected_rows();
+                }
+
+            }else{
+                $this->db->insert('lab_test_item', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
+        public function get_lab_test_items(){
+            $result = $this->db->select('*')->from('lab_test_item')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function get_lab_test_item_description($id){
+            $result = $this->db->select('description')->from('lab_test_item')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function save_lab_test_item_description($data){
+            $this->db->where('id',$data['lab_test_item_id'])->update('lab_test_item',array('description'=>$data['description']));
+            return $this->db->affected_rows();
+        }
+
+        public function get_lab_item_by_test_id($cate_id){
+            $result = $this->db->select('*')->from('lab_test_item')->where('lab_test_id',$cate_id)->get();
             if ($result) {
                 return $result->result_array();
             }else{
