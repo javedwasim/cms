@@ -1888,7 +1888,7 @@ $(document.body).on('click', '#ett-setting', function(){
     });
 });
 
-/////////////////////////////////// load ett setting page ///////////////////////////////////
+/////////////////////////////////// load patient exemination page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#pat-exemination', function(){
@@ -1911,7 +1911,7 @@ $(document.body).on('click', '#pat-exemination', function(){
     });
 });
 
-/////////////////////////////////// load ett setting page ///////////////////////////////////
+/////////////////////////////////// load patient special instructions page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#pat-spInstructions', function(){
@@ -1927,12 +1927,31 @@ $(document.body).on('click', '#pat-spInstructions', function(){
     });
 });
 
-/////////////////////////////////// load ett setting page ///////////////////////////////////
+/////////////////////////////////// load patient lab test page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#pat-labtest', function(){
     $.ajax({
         url: '/cms/profile/patient_lab_test',
+        cache: false,
+        success: function(response) {
+            if (response.result_html != ''){
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.lab-date').datepicker({
+                    format: 'd-M-yyyy'
+                });
+            }
+        }
+    });
+});
+
+/////////////////////////////////// load patient echo test page ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+$(document.body).on('click', '#pat-echo-test', function(){
+    $.ajax({
+        url: '/cms/profile/patient_echo_test',
         cache: false,
         success: function(response) {
             if (response.result_html != ''){
