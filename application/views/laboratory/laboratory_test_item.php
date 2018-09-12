@@ -42,11 +42,11 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="form-group ">
                         <label>Select Category:</label>
-                        <select class="form-control" name="filter_test_id" onchange="filter_test_item(this.value)">
+                        <select class="form-control" name="filter_test_id" onchange="filter_tests_item(this.value)">
                             <option value="">Select</option>
                             <?php foreach ($tests as $test): ?>
                                 <option value="<?php echo $test['id']; ?>"
-                                    <?php echo isset($selected_category)&&($selected_category==$test['id'])?'selected':'' ?>>
+                                    <?php echo isset($selected_test_id)&&($selected_test_id==$test['id'])?'selected':'' ?>>
                                     <?php echo $test['name']; ?></option>
                             <?php endforeach; ?>
                         </select>

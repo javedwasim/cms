@@ -351,9 +351,9 @@ function filter_tests(cat_id) {
     return false;
 }
 
-function filter_tests_item(cat_id) {
+function filter_tests_item(test_id) {
     $.ajax({
-        url: '/cms/setting/get_lab_test_by_category/'+cat_id,
+        url: '/cms/setting/get_lab_item_by_test_id/'+test_id,
         type: 'get',
         cache: false,
         success: function(response) {

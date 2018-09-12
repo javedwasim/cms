@@ -617,6 +617,7 @@
         public function get_lab_test_by_category($cat_id){
             $data['categories'] = $this->Setting_model->get_lab_categories();
             $data['tests'] = $this->Setting_model->get_lab_tests_by_category($cat_id);
+            $data['items'] = $this->Setting_model->get_lab_test_items();
             $data['active_tab'] = 'tests';
             $data['selected_category'] = $cat_id;
             $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
@@ -708,6 +709,18 @@
                 $json['error'] = true;
                 $json['message'] = "Seems to an error while saving advice";
             }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function get_lab_item_by_test_id($test_id){
+            $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['tests'] = $this->Setting_model->get_lab_tests();
+            $data['items'] = $this->Setting_model->get_lab_item_by_test_id($test_id);
+            $data['active_tab'] = 'items';
+            $data['selected_test_id'] = $test_id;
+            $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }

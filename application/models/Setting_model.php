@@ -273,6 +273,15 @@
             return $this->db->affected_rows();
         }
 
+        public function get_lab_item_by_test_id($cate_id){
+            $result = $this->db->select('*')->from('lab_test_item')->where('lab_test_id',$cate_id)->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
 	}
 
 ?>
