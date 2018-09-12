@@ -1407,6 +1407,24 @@ $(document.body).on('click', '#delete_single_patient', function(){
                                    { "type": "html-input", "targets": [3, 6, 7, 8] }
                                 ]
                 });
+                //// sidebar toggle code///////////////
+                $('#sidebarCollapse').on('click', function () {
+                    var icon = $('#sidebarCollapse > .fas');
+                    icon.toggleClass('fa-arrow-left fa-arrow-right');
+                    $("#full_name").focus();
+                    $('#sidebar').toggleClass('active');
+                    $('#content').toggleClass('actv');
+                        
+                });
+                $("#editable-datatable tbody tr").click(function(e) {
+                        if ($(this).hasClass('row_selected')) {
+                        $(this).removeClass('row_selected');
+                        }
+                        else {
+                        oTable.$('tr.row_selected').removeClass('row_selected');
+                                $(this).addClass('row_selected');
+                        }
+                });
                 if(response.message=="Deleted successfully"){
                     toastr["success"](response.message);
                 }else{
