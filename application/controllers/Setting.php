@@ -127,7 +127,7 @@
             $data['categories'] = $this->Setting_model->get_lab_categories();
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['active_tab'] = 'category';
-			$json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
+			$json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -422,7 +422,7 @@
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'tests';
-            $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
+            $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -483,7 +483,7 @@
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'tests';
-            $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
+            $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -530,7 +530,7 @@
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'tests';
-            $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
+            $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -564,7 +564,7 @@
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'tests';
-            $json['result_html'] = $this->load->view('pages/laboratory_test', $data, true);
+            $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -609,6 +609,17 @@
             }
 
             if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function get_lab_test_by_category($cat_id){
+            $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['tests'] = $this->Setting_model->get_lab_tests_by_category($cat_id);
+            $data['active_tab'] = 'tests';
+            $data['selected_category'] = $cat_id;
+            $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
+            if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
         }

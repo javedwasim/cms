@@ -307,7 +307,7 @@ $(document.body).on('click', '.edit-lab-test-btn', function(){
         success: function(response) {
             console.log(response);
             if (response.success) {
-                $('#description').val(response.description);
+                $('#test_description').val(response.description);
                 $('#lab_test_modal').modal('show');
             } else {
                 toastr["error"](response.message);
@@ -337,3 +337,17 @@ $(document.body).on('click', '#save_lab_test_description', function(){
     });
     return false;
 });
+
+
+function filter_tests(cat_id) {
+    $.ajax({
+        url: '/cms/setting/get_lab_test_by_category/'+cat_id,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.dashboard-content').empty();
+            $('.dashboard-content').append(response.result_html);
+        }
+    });
+    return false;
+}

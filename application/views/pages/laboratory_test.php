@@ -26,220 +26,9 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content tabcontent-border">
-                        <div class="tab-pane <?php echo isset($active_tab) && ($active_tab == 'category') ? 'active' : ''; ?>"
-                             id="category" role="tabpanel">
-                            <div class="card">
-                                <div class="card-header" style="display: inline-flex;">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>New Category</label>
-                                            <input type="text" class="form-control col-md-6" name="" id="lab_category">
-                                            <button class="btn btn-primary add-lab-category">Add</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
-                                           width="100%">
-                                        <thead>
-                                        <tr>
-                                            <th style="width: 10%"></th>
-                                            <th>Category Name</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach ($categories as $category): ?>
-                                            <tr>
-                                                <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
-                                                    <a class="delete-lab-category btn btn-danger btn-xs"
-                                                       href="javascript:void(0)" title="delete"
-                                                       data-href="<?php echo site_url('setting/delete_lab_category/') . $category['id'] ?>">
-                                                        <i class="fa fa-trash" title="Delete"></i></a>
-                                                    <a class="edit-lab-cat-btn btn btn-info btn-xs"
-                                                       href="javascript:void(0)"
-                                                       data-lab-category-id="<?php echo $category['id']; ?>"><i
-                                                       class="far fa-question-circle"></i></a>
-
-                                                </td>
-                                                <td contenteditable="true"
-                                                    onBlur="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')"
-                                                    onClick="showEdit(this);">
-                                                    <?php echo $category['name']; ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane <?php echo isset($active_tab) && ($active_tab == 'tests') ? 'active' : ''; ?>"
-                             id="tests" role="tabpanel">
-                            <div class="card">
-                                <div class="card-header">
-                                    <form id="lab_test_form" method="post" role="form"
-                                          data-action="<?php echo site_url('setting/add_lab_test') ?>"
-                                          enctype="multipart/form-data">
-                                        <div class="row">
-                                            <div class="col-lg-2 col-md-3">
-                                                <div class="form-group">
-                                                    <label>Test Name:</label>
-                                                    <input type="text" class="form-control" name="name">
-                                                </div>
-                                            </div>
-                                            <div class=" col-lg-3 col-md-4">
-                                                <div class="form-group">
-                                                    <label>Category:</label>
-                                                    <select class="form-control" name="lab_category_id">
-                                                        <option value="">Select</option>
-                                                        <?php foreach ($categories as $category): ?>
-                                                            <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2 col-md-4 p-0">
-                                                <div class="form-group m-t-25" style="display: inline-flex;">
-                                                    <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item">Add</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4">
-                                            <div class="form-group ">
-                                                <label>Select Category:</label>
-                                                <select class="form-control">
-                                                    <option>Select</option>
-                                                    <option>GIT Problem</option>
-                                                    <option>Co-Resp</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
-                                           width="100%">
-                                        <thead>
-                                        <tr>
-                                            <th style="width: 10%"></th>
-                                            <th>Item Name</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach ($tests as $test): ?>
-                                            <tr>
-                                                <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
-                                                    <a class="delete-lab-test btn btn-danger btn-xs"
-                                                       href="javascript:void(0)" title="delete"
-                                                       data-href="<?php echo site_url('setting/delete_lab_test/') . $test['id'] ?>">
-                                                        <i class="fa fa-trash" title="Delete"></i></a>
-                                                    <a class="edit-lab-test-btn btn btn-info btn-xs"
-                                                       href="javascript:void(0)"
-                                                       data-lab-test-id="<?php echo $test['id']; ?>"><i
-                                                       class="far fa-question-circle"></i></a>
-
-                                                </td>
-                                                <td contenteditable="true"
-                                                    onBlur="saveTestDescription(this,'test_name','<?php echo $test['id']; ?>')"
-                                                    onClick="showEdit(this);">
-                                                    <?php echo $test['name']; ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane <?php echo isset($active_tab) && ($active_tab == 'items') ? 'active' : ''; ?>"
-                             id="tests-items" role="tabpanel">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row">
-                                        <div class="col-lg-2 col-md-3">
-                                            <div class="form-group">
-                                                <label>Item Name:</label>
-                                                <input type="text" class="form-control" name="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 col-md-3">
-                                            <div class="form-group">
-                                                <label>Units:</label>
-                                                <input type="text" class="form-control" name="">
-                                            </div>
-                                        </div>
-                                        <div class=" col-lg-3 col-md-4">
-                                            <div class="form-group">
-                                                <label>Test:</label>
-                                                <select class="form-control">
-                                                    <option>Select</option>
-                                                    <option>GIT Problem</option>
-                                                    <option>Co-Resp</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 col-md-4 p-0">
-                                            <div class="form-group m-t-25">
-                                                <button class="btn btn-sm btn-primary">Add</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4">
-                                            <div class="form-group ">
-                                                <label>Select Category:</label>
-                                                <select class="form-control">
-                                                    <option>Select</option>
-                                                    <option>GIT Problem</option>
-                                                    <option>Co-Resp</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
-                                           width="100%">
-                                        <thead>
-                                        <tr>
-                                            <th style="width: 10%">Delete</th>
-                                            <th style="width: 10%">Discription</th>
-                                            <th>Item Name</th>
-                                            <th>Units</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                            <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i
-                                                        class="far fa-question-circle"></i></td>
-                                            <td>PT/Control</td>
-                                            <td>Sec</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                            <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i
-                                                        class="far fa-question-circle"></i></td>
-                                            <td>INR</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                            <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i
-                                                        class="far fa-question-circle"></i></td>
-                                            <td>Bleeding time</td>
-                                            <td>3-5 min</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                            <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i
-                                                        class="far fa-question-circle"></i></td>
-                                            <td>Co-GIT</td>
-                                            <td></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        <?php $this->load->view('laboratory/laboratory_category'); ?>
+                        <?php $this->load->view('laboratory/laboratory_test'); ?>
+                        <?php $this->load->view('laboratory/laboratory_test_item'); ?>
                     </div>
                 </div>
             </div>
@@ -290,7 +79,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Risk Factor and Cardiac Problems</label>
-                            <textarea class="form-control" rows="3" name="description" id="description"></textarea>
+                            <textarea class="form-control" rows="3" name="description" id="test_description"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -344,5 +133,7 @@
                 }
             });
         }
+
+
 
     </script>
