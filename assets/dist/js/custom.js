@@ -1669,7 +1669,7 @@ $(document.body).on('click', '#register-user', function(){
 
 $(document.body).on('click', '#special_instruction', function(){
     $.ajax({
-        url: '/cms/setting/special_instruction',
+        url: '/cms/instruction/special_instruction',
         cache: false,
         success: function(response) {
             if (response.result_html != ''){
