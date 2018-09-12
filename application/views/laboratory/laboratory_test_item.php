@@ -79,11 +79,11 @@
 
                             </td>
                             <td contenteditable="true"
-                                onBlur="saveTestDescription(this,'test_name','<?php echo $item['id']; ?>')"
+                                onBlur="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')"
                                 onClick="showEdit(this);">
                                 <?php echo $item['name']; ?></td>
                             <td contenteditable="true"
-                                onBlur="saveTestItemDescription(this,'test_name','<?php echo $item['id']; ?>')"
+                                onBlur="saveTestItemDescription(this,'unit','<?php echo $item['id']; ?>')"
                                 onClick="showEdit(this);">
                                 <?php echo $item['units']; ?></td>
                         </tr>
@@ -128,7 +128,7 @@
     function saveTestItemDescription(editableObj, column, id) {
         $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
-            url: "<?php echo base_url() . 'setting/save_lab_test' ?>",
+            url: "<?php echo base_url() . 'setting/save_lab_test_item' ?>",
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {

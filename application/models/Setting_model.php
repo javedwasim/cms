@@ -231,10 +231,18 @@
         public function add_lab_test_item($data){
             if(isset($data['id'])){
                 $id = $data['id'];
-                $editval = trim($data['editval']);
-                $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('lab_test_item',array('name'=>$editval));
-                return $this->db->affected_rows();
+                if(isset($data['column'])&&($data['column'] == 'name')){
+                    $editval = trim($data['editval']);
+                    $editval = preg_replace('/(<br>)+$/', '', $editval);
+                    $this->db->where('id',$id)->update('lab_test_item',array('name'=>$editval));
+                    return $this->db->affected_rows();
+                }else{
+                    $editval = trim($data['editval']);
+                    $editval = preg_replace('/(<br>)+$/', '', $editval);
+                    $this->db->where('id',$id)->update('lab_test_item',array('units'=>$editval));
+                    return $this->db->affected_rows();
+                }
+
             }else{
                 $this->db->insert('lab_test_item', $data);
                 return $this->db->insert_id();

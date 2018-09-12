@@ -697,5 +697,20 @@
                 set_content_type($json);
             }
         }
+
+        public function save_lab_test_item(){
+            $data = $this->input->post();
+            $result = $this->Setting_model->add_lab_test_item($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Advice save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error while saving advice";
+            }
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
 	}
 ?>
