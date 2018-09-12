@@ -37,5 +37,12 @@
                 set_content_type($json);
             }
 		}
+
+		public function patient_ett_test(){
+			$json['result_html'] = $this->load->view('pages/pat_ett_test', "", true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+		}
 	}
 ?>

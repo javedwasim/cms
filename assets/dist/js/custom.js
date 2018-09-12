@@ -1965,6 +1965,25 @@ $(document.body).on('click', '#pat-echo-test', function(){
     });
 });
 
+/////////////////////////////////// load patient ett test page ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+$(document.body).on('click', '#pat-ett-test', function(){
+    $.ajax({
+        url: '/cms/profile/patient_ett_test',
+        cache: false,
+        success: function(response) {
+            if (response.result_html != ''){
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.lab-date').datepicker({
+                    format: 'd-M-yyyy'
+                });
+            }
+        }
+    });
+});
+
 ///////////////////////////////// consultant booking //////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 
