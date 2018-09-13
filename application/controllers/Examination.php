@@ -55,7 +55,7 @@ class Examination extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'Laboratory Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Examination Name', 'required|xss_clean');
         $this->form_validation->set_rules('examination_id', 'examination Category', 'required|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
@@ -66,7 +66,7 @@ class Examination extends MY_Controller
             $result = $this->Examination_model->add_examination_item($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Laboratory Item created successfully!";
+                $json['message'] = "Examination Item created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
