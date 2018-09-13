@@ -564,3 +564,44 @@ $(document.body).on('click', '.delete-inst-item', function(){
     }
     return false;
 });
+
+$(document.body).on('click', '.add-examination-category', function(){
+    var name = $('#instruction_name').val();
+    $.ajax({
+        url: '/cms/examination/add_examination_category',
+        type: 'post',
+        data: {name:name},
+        cache: false,
+        success: function(response) {
+            $('.ins_category_container').empty();
+            $('.ins_category_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-examination', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.ins_category_container').empty();
+                $('.ins_category_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});

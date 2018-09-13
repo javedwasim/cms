@@ -9,9 +9,9 @@
     <?php foreach ($categories as $category): ?>
         <tr class="table-row">
             <td>
-                <a class="delete-inst btn btn-danger btn-xs"
+                <a class="delete-examination btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
-                   data-href="<?php echo site_url('instruction/delete_instruction_category/') . $category['id'] ?>">
+                   data-href="<?php echo site_url('examination/delete_examination_category/') . $category['id'] ?>">
                    <i class="fa fa-trash" title="Delete"></i></a>
             </td>
             <td contenteditable="true"
@@ -29,7 +29,7 @@
     function saveToDatabase(editableObj, column, id) {
         $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
-            url: "<?php echo base_url() . 'instruction/save_inst_category' ?>",
+            url: "<?php echo base_url() . 'examination/save_examination_category' ?>",
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {

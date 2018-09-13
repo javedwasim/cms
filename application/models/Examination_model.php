@@ -10,8 +10,8 @@
 			parent::__construct();
 
 		}
-		public function get_instruction_categories(){
-            $result = $this->db->select('*')->from('instruction')->get();
+		public function get_examination_categories(){
+            $result = $this->db->select('*')->from('examination')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -19,42 +19,42 @@
             }
         }
 
-        public function add_instruction_category($data){
+        public function add_examination_category($data){
 		    if(isset($data['id'])){
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('instruction',array('name'=>$editval));
+                $this->db->where('id',$id)->update('examination',array('name'=>$editval));
                 return $this->db->affected_rows();
             }else{
-                $this->db->insert('instruction', $data);
+                $this->db->insert('examination', $data);
                 return $this->db->insert_id();
             }
 
         }
 
-        public function add_instruction_item($data){
+        public function add_examination_item($data){
             if(isset($data['id'])){
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('instruction_item',array('name'=>$editval));
+                $this->db->where('id',$id)->update('examination_item',array('name'=>$editval));
                 return $this->db->affected_rows();
             }else{
-                $this->db->insert('instruction_item', $data);
+                $this->db->insert('examination_item', $data);
                 return $this->db->insert_id();
             }
 
         }
 
-        public function delete_instruction_category($id) {
-            $this->db->where('instruction_id', $id)->delete('instruction_item');
-            $this->db->where('id', $id)->delete('instruction');
+        public function delete_examination_category($id) {
+            $this->db->where('examination_id', $id)->delete('examination_item');
+            $this->db->where('id', $id)->delete('examination');
             return $this->db->affected_rows();
         }
 
-        public function get_inst_items(){
-            $result = $this->db->select('*')->from('instruction_item')->get();
+        public function get_examination_items(){
+            $result = $this->db->select('*')->from('examination_item')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -62,13 +62,13 @@
             }
         }
 
-        public function delete_inst_item($id) {
-            $this->db->where('id', $id)->delete('instruction_item');
+        public function delete_examination_item($id) {
+            $this->db->where('id', $id)->delete('examination_item');
             return $this->db->affected_rows();
         }
 
-        public function get_inst_item_description($id){
-            $result = $this->db->select('description')->from('instruction_item')->where('id',$id)->limit(1)->get();
+        public function get_examination_item_description($id){
+            $result = $this->db->select('description')->from('examination_item')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{
@@ -76,16 +76,16 @@
             }
         }
 
-        public function save_inst_item_description($data){
-            $this->db->where('id',$data['inst_item_id'])->update('instruction_item',array('description'=>$data['description']));
+        public function save_examination_item_description($data){
+            $this->db->where('id',$data['examination_item_id'])->update('examination_item',array('description'=>$data['description']));
             return $this->db->affected_rows();
         }
 
-        public function get_inst_items_by_category($cate_id){
+        public function get_examination_items_by_category($cate_id){
             if($cate_id>0){
-                $result = $this->db->select('*')->from('instruction_item')->where('instruction_id',$cate_id)->get();
+                $result = $this->db->select('*')->from('examination_item')->where('examination_id',$cate_id)->get();
             }else{
-                $result = $this->db->select('*')->from('instruction_item')->get();
+                $result = $this->db->select('*')->from('examination_item')->get();
             }
             if ($result) {
                 return $result->result_array();

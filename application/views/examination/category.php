@@ -5,12 +5,12 @@
                 <div class="col-md-12">
                     <label>New Category</label>
                     <input type="text" class="form-control col-md-6" name="instruction_name" id="instruction_name">
-                    <button class="btn btn-primary add-instruction-category">Add</button>
+                    <button class="btn btn-primary add-examination-category">Add</button>
                 </div>
             </div>
         </div>
         <div class="card-body ins_category_container">
-            <?php $this->load->view('instruction/category_table'); ?>
+            <?php $this->load->view('examination/category_table'); ?>
         </div>
     </div>
 </div>

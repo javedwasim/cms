@@ -9,61 +9,61 @@ class Examination extends MY_Controller
         parent:: __construct();
         $this->load->helper('content-type');
         $this->load->model('Dashboard_model');
-        $this->load->model('Instruction_model');
+        $this->load->model('Examination_model');
 
     }
 
-    public function special_instruction()
+    public function examination()
     {
-        $data['categories'] = $this->Instruction_model->get_instruction_categories();
-        $data['items'] = $this->Instruction_model->get_inst_items();
-        $json['result_html'] = $this->load->view('instruction/instruction', $data, true);
+        $data['categories'] = $this->Examination_model->get_examination_categories();
+        $data['items'] = $this->Examination_model->get_examination_items();
+        $json['result_html'] = $this->load->view('examination/examination', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
     }
 
-    public function add_instruction_category()
+    public function add_examination_category()
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'Instruction Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Examination Name', 'required|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
-            $result = $this->Instruction_model->add_instruction_category($data);
+            $result = $this->Examination_model->add_examination_category($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Instruction created successfully!";
+                $json['message'] = "Examination created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
             }
         }
-        $data['categories'] = $this->Instruction_model->get_instruction_categories();
+        $data['categories'] = $this->Examination_model->get_examination_categories();
         $data['active_tab'] = 'category';
-        $json['result_html'] = $this->load->view('instruction/category_table', $data, true);
+        $json['result_html'] = $this->load->view('examination/category_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
     }
 
-    public function add_instruction_item()
+    public function add_examination_item()
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
         $this->form_validation->set_rules('name', 'Laboratory Name', 'required|xss_clean');
-        $this->form_validation->set_rules('instruction_id', 'Instruction Category', 'required|xss_clean');
+        $this->form_validation->set_rules('examination_id', 'examination Category', 'required|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
-            $result = $this->Instruction_model->add_instruction_item($data);
+            $result = $this->Examination_model->add_examination_item($data);
             if ($result) {
                 $json['success'] = true;
                 $json['message'] = "Laboratory Item created successfully!";
@@ -72,21 +72,21 @@ class Examination extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
-        $data['items'] = $this->Instruction_model->get_inst_items();
+        $data['items'] = $this->Examination_model->get_examination_items();
         $data['active_tab'] = 'items';
-        $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
+        $json['result_html'] = $this->load->view('examination/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
     }
 
-    public function save_inst_category()
+    public function save_examination_category()
     {
         $data = $this->input->post();
-        $result = $this->Instruction_model->add_instruction_category($data);
+        $result = $this->Examination_model->add_examination_category($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Instruction  save successfully!";
+            $json['message'] = "examination  save successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -96,19 +96,19 @@ class Examination extends MY_Controller
         }
     }
 
-    public function delete_instruction_category($id)
+    public function delete_examination_category($id)
     {
-        $result = $this->Instruction_model->delete_instruction_category($id);
+        $result = $this->Examination_model->delete_examination_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Instruction Category successfully deleted.";
+            $json['message'] = "examination Category successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
-        $data['categories'] = $this->Instruction_model->get_instruction_categories();
+        $data['categories'] = $this->Examination_model->get_examination_categories();
         $data['active_tab'] = 'category';
-        $json['result_html'] = $this->load->view('instruction/category_table', $data, true);
+        $json['result_html'] = $this->load->view('examination/category_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -118,22 +118,22 @@ class Examination extends MY_Controller
 
     }
 
-    public function get_inst_item($cat_id)
+    public function get_examination_item($cat_id)
     {
-        $data['items'] = $this->Instruction_model->get_inst_items_by_category($cat_id);
+        $data['items'] = $this->Examination_model->get_examination_items_by_category($cat_id);
         $data['selected_category'] = $cat_id;
         $data['active_tab'] = 'tests';
-        $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
+        $json['result_html'] = $this->load->view('examination/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
     }
 
-    public function get_inst_item_description()
+    public function get_examination_item_description()
     {
         $data = $this->input->post();
         $id = $data['id'];
-        $result = $this->Instruction_model->get_inst_item_description($id);
+        $result = $this->Examination_model->get_examination_item_description($id);
 
         if ($result) {
             $json['success'] = true;
@@ -147,7 +147,7 @@ class Examination extends MY_Controller
         }
     }
 
-    public function save_inst_item_description()
+    public function save_examination_item_description()
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
@@ -158,7 +158,7 @@ class Examination extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
-            $result = $this->Instruction_model->save_inst_item_description($data);
+            $result = $this->Examination_model->save_examination_item_description($data);
             if ($result) {
                 $json['success'] = true;
                 $json['message'] = "Description added successfully!";
@@ -173,13 +173,13 @@ class Examination extends MY_Controller
         }
     }
 
-    public function save_inst_item()
+    public function save_examination_item()
     {
         $data = $this->input->post();
-        $result = $this->Instruction_model->add_instruction_item($data);
+        $result = $this->Examination_model->add_examination_item($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Instruction item save successfully!";
+            $json['message'] = "examination item save successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -189,31 +189,23 @@ class Examination extends MY_Controller
         }
     }
 
-    public function delete_inst_item($id)
+    public function delete_examination_item($id)
     {
-        $result = $this->Instruction_model->delete_inst_item($id);
+        $result = $this->Examination_model->delete_examination_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Instruction item successfully deleted.";
+            $json['message'] = "examination item successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
-        $data['items'] = $this->Instruction_model->get_inst_items();
+        $data['items'] = $this->Examination_model->get_examination_items();
         $data['active_tab'] = 'items';
-        $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
+        $json['result_html'] = $this->load->view('examination/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
 
-    }
-
-    public function instruction()
-    {
-        $json['result_html'] = $this->load->view('pages/instruction', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
     }
 }
 
