@@ -122,5 +122,71 @@
 		            set_content_type($json);
 		    }
 		}
+
+		public function update_modal(){
+			$id = $this->input->post('id');
+			$data['professions'] = $this->Setting_model->get_professions();
+			$data['districts'] = $this->Setting_model->get_districts();
+			$data['profile_data'] = $this->Profile_model->get_profile_by_id($id);
+			$json['edit_modal'] = $this->load->view('profile/edit_profile', $data, true);
+            if ($this->input->is_ajax_request()) {
+		            set_content_type($json);
+		    }
+		}
+
+		// public function update_profile_data(){
+		// 	$this->load->library('form_validation');
+	 //        $this->load->helper('security');
+		// 	$name = $this->input->post('name');
+		// 	$relatename = $this->input->post('relatename');
+		// 	$agedigit = $this->input->post('agedigit');
+		// 	$ageyears = $this->input->post('age');
+		// 	$profession = $this->input->post('profession');
+		// 	$sex = $this->input->post('sex');
+		// 	$contact = $this->input->post('contact');
+		// 	$height = $this->input->post('height');
+		// 	$bmi = $this->input->post('bmi');
+		// 	$weight = $this->input->post('weight');
+		// 	$bsa = $this->input->post('bsa');
+		// 	$email = $this->input->post('email');
+		// 	$district = $this->input->post('district');
+		// 	$address = $this->input->post('address');
+		// 	$age = $agedigit.''.$ageyears;
+	 //        $this->form_validation->set_rules('name', 'Patient Name', 'required|xss_clean');
+	 //        $this->form_validation->set_rules('relatename', 'Relative Name', 'required|xss_clean');
+	 //        if ($this->form_validation->run() == FALSE) {
+	 //        	$json['error'] = true;
+  //           	$json['message'] = validation_errors();
+	 //        }else{
+	 //        	$data = array(
+  //                           'pat_name' => $name,
+  //                           'pat_relative' => $relatename,
+  //                           'pat_age' => $age,
+  //                           'pat_profession' => $profession,
+  //                           'pat_sex' => $sex,
+  //                           'pat_contact' => $contact,
+  //                           'pat_height' => $height,
+  //                           'pat_bmi' => $bmi,
+  //                           'pat_weight' => $weight,
+  //                           'pat_bsa' => $bsa,
+  //                           'pat_email' => $email,
+  //                           'pat_district' => $district,
+  //                           'pat_address' => $address
+  //                       );
+	 //        	$result = $this->Profile_model->update_profile($data);
+	 //        	if ($result) {
+	 //        		$json['success'] = true;
+  //               	$json['message'] = "Profile Added Successfully.";
+	 //        	}else{
+	 //        		$json['error'] = true;
+  //               	$json['message'] = "Seems to an error";
+	 //        	}
+	 //        	$data['profiles'] = $this->Profile_model->get_profiles();
+  //           	$json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+		//         if ($this->input->is_ajax_request()) {
+		//             set_content_type($json);
+		//         }
+	 //        }
+		// }
 	}
 ?>

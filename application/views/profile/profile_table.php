@@ -18,7 +18,7 @@
             <?php foreach($profiles as $key){ ?>
             <tr>
                 <td style="width: 20px"><button class="btn btn-danger btn-xs" id="delete_profile"><i class="fa fa-trash"></i></button></td>
-                <td style="width: 20px"><i class="fa fa-edit"></i></td>
+                <td style="width: 20px"><button class="btn btn-info btn-xs" id="profile_modal_edit"><i class="fa fa-edit"></button></i></td>
                 <td class="profile_id"><?php echo $key['id']; ?></td>
                 <td><?php echo $key['pat_name']; ?></td>
                 <td><?php echo $key['pat_relative']; ?></td>

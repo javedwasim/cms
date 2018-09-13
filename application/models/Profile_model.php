@@ -34,6 +34,27 @@
 			}
 
 		}
+		public function get_profile_by_id($id){
+			$result = $this->db
+						->where('id',$id)
+						->limit(1)
+						->get('patient_profile');
+			if($result){
+				return $result->row();
+			}else{
+				return false;
+			}
+		}
+
+		// public function insert_profile($data){
+		// 	$result = $this->db->where('id', $id);
+		// 				->update('patient_profile', $data);
+		// 	if ($result) {
+		// 		return true;
+		// 	}else{
+		// 		return false;
+		// 	}
+		// }
 
 	}
 
