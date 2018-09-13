@@ -605,3 +605,216 @@ $(document.body).on('click', '.delete-examination', function(){
     }
     return false;
 });
+
+$(document.body).on('click', '#examination_item_btn', function(){
+    $.ajax({
+        url: $('#examination_item_form').attr('data-action'),
+        type: 'post',
+        data: $('#examination_item_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('.examination_item_container').empty();
+            $('.examination_item_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-examination-item', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.examination_item_container').empty();
+                $('.examination_item_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+function filter_examination_item_category(inst_id) {
+    $.ajax({
+        url: '/cms/examination/get_examination_item/'+inst_id,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.examination_item_container').empty();
+            $('.examination_item_container').append(response.result_html);
+            $('.datatables').DataTable();
+        }
+    });
+    return false;
+}
+
+$(document.body).on('click', '.edit-examination-item-btn', function(){
+    $('#examination_item_form_modal')[0].reset();
+    var item_id = $(this).attr('data-examination-item-id');
+    $('#examination_item_id').val($(this).attr('data-examination-item-id'));
+    $.ajax({
+        url: '/cms/examination/get_examination_item_description',
+        type: 'post',
+        data: {id:item_id},
+        cache: false,
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                $('#examination_item_description').val(response.description);
+                $('#examination_item_modal').modal('show');
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '#save_examination_item_description', function(){
+    $.ajax({
+        url: $('#examination_item_form_modal').attr('data-action'),
+        type: 'post',
+        data:  $('#examination_item_form_modal').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#examination_item_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
+
+
+$(document.body).on('click', '.add-investigation-category', function(){
+    var name = $('#instruction_name').val();
+    $.ajax({
+        url: '/cms/investigation/add_investigation_category',
+        type: 'post',
+        data: {name:name},
+        cache: false,
+        success: function(response) {
+            $('.investigation_category_container').empty();
+            $('.investigation_category_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-investigation', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.investigation_category_container').empty();
+                $('.investigation_category_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+$(document.body).on('click', '#investigation_item_btn', function(){
+    $.ajax({
+        url: $('#investigation_item_form').attr('data-action'),
+        type: 'post',
+        data: $('#investigation_item_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('.investigation_item_container').empty();
+            $('.investigation_item_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
+
+
+$(document.body).on('click', '.edit-investigation-item-btn', function(){
+    $('#investigation_item_form_modal')[0].reset();
+    var item_id = $(this).attr('data-investigation-item-id');
+    $('#investigation_item_id').val($(this).attr('data-investigation-item-id'));
+    $.ajax({
+        url: '/cms/investigation/get_investigation_item_description',
+        type: 'post',
+        data: {id:item_id},
+        cache: false,
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                $('#investigation_item_description').val(response.description);
+                $('#investigation_item_modal').modal('show');
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '#save_investigation_item_description', function(){
+    $.ajax({
+        url: $('#investigation_item_form_modal').attr('data-action'),
+        type: 'post',
+        data:  $('#investigation_item_form_modal').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#investigation_item_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
+
+function filter_investigation_item_category(inst_id) {
+    $.ajax({
+        url: '/cms/investigation/get_investigation_item/'+inst_id,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.investigation_item_container').empty();
+            $('.investigation_item_container').append(response.result_html);
+        }
+    });
+    return false;
+}
