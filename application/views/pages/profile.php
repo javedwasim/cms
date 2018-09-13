@@ -238,13 +238,13 @@
                     		<div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Name</label>
-		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" value="" maxlength="40" required="required">
+		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" value="" style="text-transform: capitalize;" maxlength="40" required="required">
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Father/Wife Name:</label>
-		                            <input type="text" class="form-control" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" value="" maxlength="40" required="required">
+		                            <input type="text" class="form-control" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" value="" style="text-transform: capitalize;" maxlength="40" required="required">
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
@@ -343,6 +343,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="edit_modal">
+        
     </div>
 </div>
 <script type="text/javascript">
