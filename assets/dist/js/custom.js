@@ -1498,7 +1498,7 @@ $(document.body).on('click', '#pat_history', function(){
 
 $(document.body).on('click', '#pat_examination', function(){
     $.ajax({
-        url: '/cms/setting/examination',
+        url: '/cms/examination/examination',
         cache: false,
         success: function(response) {
             if (response.result_html != ''){
