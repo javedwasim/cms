@@ -1538,7 +1538,7 @@ $(document.body).on('click', '#pat_investigation', function(){
 
 $(document.body).on('click', '#angio_recommendation', function(){
     $.ajax({
-        url: '/cms/setting/angio_recommendation',
+        url: '/cms/angio_recommendation/angio_recommendation',
         cache: false,
         success: function(response) {
             if (response.result_html != ''){
