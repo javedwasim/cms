@@ -429,10 +429,11 @@ $(document.body).on('click', '.edit-lab-test-item-btn', function(){
 
 $(document.body).on('click', '.add-instruction-category', function(){
     var name = $('#instruction_name').val();
+    var category = $('#instruction_category').val();
     $.ajax({
         url: '/cms/instruction/add_instruction_category',
         type: 'post',
-        data: {name:name},
+        data: {name:name,category:category},
         cache: false,
         success: function(response) {
             $('.ins_category_container').empty();
@@ -449,8 +450,12 @@ $(document.body).on('click', '.add-instruction-category', function(){
 
 $(document.body).on('click', '.delete-inst', function(){
     if (confirm('Are you sure to delete this record?')) {
+        var category = $(this).attr('data-category');
+        var id = $(this).attr('data-category-id');
         $.ajax({
             url: $(this).attr('data-href'),
+            type: 'post',
+            data: {category:category,id:id},
             cache: false,
             success: function(response) {
                 $('.ins_category_container').empty();
@@ -468,10 +473,12 @@ $(document.body).on('click', '.delete-inst', function(){
     return false;
 });
 
-function filter_inst_item_category(inst_id) {
+function filter_inst_item_category(inst_id,category) {
+
     $.ajax({
-        url: '/cms/instruction/get_inst_item/'+inst_id,
-        type: 'get',
+        url: '/cms/instruction/get_inst_item',
+        type: 'post',
+        data: {inst_id:inst_id,category:category},
         cache: false,
         success: function(response) {
             $('.ins_item_container').empty();
