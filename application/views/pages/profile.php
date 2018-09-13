@@ -373,20 +373,20 @@
                     		<div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Name</label>
-		                            <input type="text" class="form-control" placeholder="Enter Name" autocomplete="off" value="" maxlength="20">
+		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" value="" maxlength="20">
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Father/Wife Name:</label>
-		                            <input type="text" class="form-control" placeholder="Enter Name" autocomplete="off" value="" maxlength="20">
+		                            <input type="text" class="form-control" id="pat_profile_father_name" placeholder="Enter Name" autocomplete="off" value="" maxlength="20">
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 	                        	<label>Age</label>
 	                        	<div style="display: inline-flex;">
 		                        	<input type="text" name="" class="form-control">
-		                        	<select class="form-control">
+		                        	<select class="form-control" id="pat_profile_age">
 	                        			<option>Years</option>
 	                        			<option>Months</option>
 	                        			<option>Days</option>
@@ -396,19 +396,20 @@
 	                        <div class="col-md-4">
                         		<div class="form-group">
                         			<label>Profession</label>
-                        			<select class="form-control">
+                        			<select class="form-control" id="pat_profile_profession">
                         				<option>Select</option>
-                        				<option>Accountant</option>
-                        				<option>Banker</option>
-                        				<option>Contractor</option>
-                        				<option>Driver</option>
+                        				<?php 
+                                            foreach ($professions as $key) {
+                                        ?>
+                                        <option value="<?php $key['profession_name'] ?>" style="text-transform: capitalize;"><?php echo $key['profession_name'] ?></option>
+                                        <?php } ?>
                         			</select>
                         		</div>
                         	</div>
                         	<div class="col-md-4 m-b-20">
 	                        	<label>Sex</label>
                                 <div class="form-group">
-                                    <label class="radio-inline"><input type="radio" name="as" checked="checked">Male</label>
+                                    <label class="radio-inline"><input type="radio" name="as" class="pat_profile_sex" checked="checked">Male</label>
                                     <label class="radio-inline"><input type="radio" name="as">Female</label>
                                     <label class="radio-inline"><input type="radio" name="as">Other</label>   
                                 </div>
@@ -416,43 +417,43 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Contact</label>
-                                    <input type="text" name="" class="form-control" />
+                                    <input type="text" name="" id="pat_profile_contact" class="form-control" />
                                 </div>
                             </div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Height:</label>
-	                        		<input type="text" class="form-control" name="" placeholder="cm">
+	                        		<input type="text" class="form-control" id="pat_profile_height" name="" placeholder="cm">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BMI:</label>
-	                        		<input type="text" name="" readonly="readonly" class="form-control">
+	                        		<input type="text" name="" readonly="readonly" id="pat_profile_bmi" class="form-control">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Weight:</label>
-	                        		<input type="text" class="form-control" name="" placeholder="Kg">
+	                        		<input type="text" class="form-control" name="" id="pat_profile_weight" placeholder="Kg">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BSA:</label>
-	                        		<input type="text" name="" readonly="readonly" class="form-control">
+	                        		<input type="text" name="" readonly="readonly" id="pat_profile_bsa" class="form-control">
                         		</div>
                         	</div>
                         	<div class="col-md-4">
                         		<div class="form-group">
                         			<label>Email</label>
-                        			<input type="text" name="" class="form-control" />
+                        			<input type="text" name="" id="pat_profile_email" class="form-control" />
                         		</div>
                         	</div>
                         	<div class="col-md-4">
                         		<div class="form-group">
                         			<label>District</label>
-                        			<select class="form-control">
+                        			<select class="form-control" id="pat_profile_district">
                         				<option>Select</option>
                         				<option>Attock</option>
                         				<option>Bahawalpur</option>
@@ -463,7 +464,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <textarea class="form-control" rows="2"></textarea>
+                                    <textarea class="form-control" id="pat_profile_address" rows="2"></textarea>
                                 </div>
                             </div>
                         </div>

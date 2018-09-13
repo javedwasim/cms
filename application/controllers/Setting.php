@@ -37,17 +37,19 @@
 		}
 
 		public function examination(){
-			$json['result_html'] = $this->load->view('pages/examination', "", true);
+			$json['result_html'] = $this->load->view('examination/examination', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
 		}
+        
 		public function investigation(){
-			$json['result_html'] = $this->load->view('pages/investigation', "", true);
+			$json['result_html'] = $this->load->view('investigation/investigation', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
 		}
+
 		public function angio_recommendation(){
 			$json['result_html'] = $this->load->view('pages/angio-recommendation', "", true);
             if ($this->input->is_ajax_request()) {
