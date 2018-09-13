@@ -818,3 +818,44 @@ function filter_investigation_item_category(inst_id) {
     });
     return false;
 }
+
+$(document.body).on('click', '#add_recommendation', function(){
+    var description = $('#add_description').val();
+    $.ajax({
+        url: '/cms/angio_recommendation/add_recommendation',
+        type: 'post',
+        data: {description:description},
+        cache: false,
+        success: function(response) {
+            $('.recommendation_container').empty();
+            $('.recommendation_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-recommendation', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.recommendation_container').empty();
+                $('.recommendation_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
