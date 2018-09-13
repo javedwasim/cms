@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-md-1">
                                         <button type="button" id="toggleresize1" class="btn btn-default btn-xs">
-                                            <i class="fas fa-arrow-left arro"></i>
+                                            <i class="fas fa-arrow-right arro"></i>
                                         </button>
                                     </div>
                                     <div class="col-md-3">
@@ -483,24 +483,6 @@
 	    $('.profile_filter').datepicker({
 	            format: 'd-M-yyyy'
 	    });
-
-        $('#delete_single_patient').on('click', function () {
-            $.confirm({
-                title: 'Confirm!',
-                content: 'Simple confirm!',
-                buttons: {
-                    confirm: function () {
-                        var bookingid = $.trim($(this).closest('tr').find('.appointment_booking_id').text());
-                        var bookingflag = $('#booking_flag').val();
-                        var tabledate = $('.pat_search').val();
-                        delete_single_patient(bookingid,bookingflag,tabledate);
-                    },
-                    cancel: function () {
-                        $.alert('Canceled!');
-                    }
-                }
-            });
-        });
 
         $('.resize1').resizable({
           handles: 'e',

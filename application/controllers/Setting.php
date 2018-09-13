@@ -30,7 +30,7 @@
 		}
 
 		public function history(){
-			$json['result_html'] = $this->load->view('pages/patient_history', "", true);
+			$json['result_html'] = $this->load->view('history/history', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
