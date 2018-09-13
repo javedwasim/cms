@@ -48,6 +48,10 @@
 </style>
 <script>
     $(document).ready(function () {
-        $('.datatables').DataTable();
+        $('.datatables').DataTable({
+            "info": true,
+            "paging": false,
+            "searching": false
+        });
     });
 </script>
