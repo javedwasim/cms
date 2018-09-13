@@ -1518,7 +1518,7 @@ $(document.body).on('click', '#pat_examination', function(){
 
 $(document.body).on('click', '#pat_investigation', function(){
     $.ajax({
-        url: '/cms/setting/investigation',
+        url: '/cms/investigation/investigation',
         cache: false,
         success: function(response) {
             if (response.result_html != ''){
