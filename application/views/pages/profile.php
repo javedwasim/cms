@@ -95,144 +95,9 @@
                             </form>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered profiletable" cellspacing="0" id="" width="100%" >
-                               <thead>
-                                <tr>
-                                    <th style="width: 20px">Delete</th>
-                                    <th style="width: 20px">Edit</th>
-                                    <th>Patient ID</th>
-                                    <th>Patient Name</th>
-                                    <th>Father/Husband Name</th>
-                                    <th>Contact</th>
-                                    <th>Profession</th>
-                                    <th>District</th>
-                                    <th>Last Visit</th>
-                                    <th>Registered Since</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                        <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                        <td>abc</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div id="profile_table">
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -368,24 +233,24 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="profile_form">
                     	<div class="row">
                     		<div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Name</label>
-		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" value="" maxlength="20">
+		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" value="" maxlength="40" required="required">
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Father/Wife Name:</label>
-		                            <input type="text" class="form-control" id="pat_profile_father_name" placeholder="Enter Name" autocomplete="off" value="" maxlength="20">
+		                            <input type="text" class="form-control" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" value="" maxlength="40" required="required">
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 	                        	<label>Age</label>
 	                        	<div style="display: inline-flex;">
-		                        	<input type="text" name="" class="form-control">
+		                        	<input type="text" name="" class="form-control" id="pat_profile_age_digit" required="required">
 		                        	<select class="form-control" id="pat_profile_age">
 	                        			<option>Years</option>
 	                        			<option>Months</option>
@@ -396,7 +261,7 @@
 	                        <div class="col-md-4">
                         		<div class="form-group">
                         			<label>Profession</label>
-                        			<select class="form-control" id="pat_profile_profession">
+                        			<select class="form-control" id="pat_profile_profession" required="required" style="text-transform: capitalize;" >
                         				<option>Select</option>
                         				<?php 
                                             foreach ($professions as $key) {
@@ -409,62 +274,64 @@
                         	<div class="col-md-4 m-b-20">
 	                        	<label>Sex</label>
                                 <div class="form-group">
-                                    <label class="radio-inline"><input type="radio" name="as" class="pat_profile_sex" checked="checked">Male</label>
-                                    <label class="radio-inline"><input type="radio" name="as">Female</label>
-                                    <label class="radio-inline"><input type="radio" name="as">Other</label>   
+                                    <label class="radio-inline"><input type="radio" name="pat_sex"  value="male" class="pat_profile_sex" checked="checked">Male</label>
+                                    <label class="radio-inline"><input type="radio" name="pat_sex"  value="female" class="pat_profile_sex">Female</label>
+                                    <label class="radio-inline"><input type="radio" name="pat_sex"  value="other" class="pat_profile_sex">Other</label>   
                                 </div>
 	                        </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Contact</label>
-                                    <input type="text" name="" id="pat_profile_contact" class="form-control" />
+                                    <input type="number" name="" id="pat_profile_contact" required="required" maxlength="11" class="form-control" />
                                 </div>
                             </div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Height:</label>
-	                        		<input type="text" class="form-control" id="pat_profile_height" name="" placeholder="cm">
+	                        		<input type="number" class="form-control" id="pat_profile_height" name="" placeholder="cm" required="required" maxlength="5">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BMI:</label>
-	                        		<input type="text" name="" readonly="readonly" id="pat_profile_bmi" class="form-control">
+	                        		<input type="text" name=""  id="pat_profile_bmi" class="form-control">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Weight:</label>
-	                        		<input type="text" class="form-control" name="" id="pat_profile_weight" placeholder="Kg">
+	                        		<input type="text" class="form-control" name="" id="pat_profile_weight" placeholder="Kg" required="required" maxlength="5">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BSA:</label>
-	                        		<input type="text" name="" readonly="readonly" id="pat_profile_bsa" class="form-control">
+	                        		<input type="text" name="" id="pat_profile_bsa" class="form-control">
                         		</div>
                         	</div>
                         	<div class="col-md-4">
                         		<div class="form-group">
-                        			<label>Email</label>
-                        			<input type="text" name="" id="pat_profile_email" class="form-control" />
+                        			<label for="pat_profile_email" >Email</label>
+                        			<input type="email" name="" id="pat_profile_email" class="form-control" required="required" />
                         		</div>
                         	</div>
                         	<div class="col-md-4">
                         		<div class="form-group">
                         			<label>District</label>
-                        			<select class="form-control" id="pat_profile_district">
+                        			<select class="form-control" id="pat_profile_district" style="text-transform: capitalize;">
                         				<option>Select</option>
-                        				<option>Attock</option>
-                        				<option>Bahawalpur</option>
-                        				<option>Chagai</option>
+                        				<?php 
+                                            foreach ($districts as $key) {
+                                        ?>
+                                        <option value="<?php $key['district_name'] ?>" style="text-transform: capitalize;"><?php echo $key['district_name'] ?></option>
+                                        <?php } ?>
                         			</select>
                         		</div>
                         	</div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <textarea class="form-control" id="pat_profile_address" rows="2"></textarea>
+                                    <textarea class="form-control" id="pat_profile_address" required="required" rows="2"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -472,7 +339,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger waves-effect waves-light">Save</button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light" id="save_new_profile">Save</button>
                 </div>
             </div>
         </div>
