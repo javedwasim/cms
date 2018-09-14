@@ -1515,6 +1515,10 @@ $(document.body).on('click', '#pat_examination', function(){
     });
 });
 
+
+
+
+
 /////////////////////////////////// load investigation page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1888,26 +1892,69 @@ $(document.body).on('click', '#echo-setting', function(){
     });
 });
 
-/////////////////////////////////// load ett setting page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////ett setting page ///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-$(document.body).on('click', '#ett-setting', function(){
-    $.ajax({
-        url: '/cms/setting/ett_setting',
-        cache: false,
-        success: function(response) {
-            if (response.result_html != ''){
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#permissions-table').DataTable({
-                    "scrollX": true
-                });
+    $(document.body).on('click', '#ett-setting', function(){
+        $.ajax({
+            url: '/cms/ett/ett_setting',
+            cache: false,
+            success: function(response) {
+                if (response.result_html != ''){
+                    $('.dashboard-content').remove();
+                    $('#dashboard-content').append(response.result_html);
+                    ///////////////// initilize datatable //////////////
+                    $('#permissions-table').DataTable({
+                        "scrollX": true
+                    });
+                }
             }
-        }
+        });
     });
-});
 
+
+    $(document.body).on('click', '.add_ett_test_reason', function(){
+        var testreason = $('#ett_test_reason').val();
+        $.ajax({
+            url: '/cms/ett/add_ett_testreason',
+            type: 'post',
+            data: {testreason:testreason},
+            cache: false,
+            success: function(response) {
+                $('#ett_test_reason').val('');
+                $('.ins_category_container').empty();
+                $('.ins_category_container').append(response.result_html);
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+        return false;
+    });
+
+
+    $(document.body).on('click', '.delete-test-reason', function(){
+        if (confirm('Are you sure to delete this record?')) {
+            $.ajax({
+                url: $(this).attr('data-href'),
+                cache: false,
+                success: function(response) {
+                    $('.ins_category_container').empty();
+                    $('.ins_category_container').append(response.result_html);
+                    if (response.success) {
+                        toastr["success"](response.message);
+                    } else {
+                        toastr["error"](response.message);
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
+        return false;
+    });
 /////////////////////////////////// load patient exemination page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
