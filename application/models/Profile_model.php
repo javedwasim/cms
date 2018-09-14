@@ -46,15 +46,15 @@
 			}
 		}
 
-		// public function insert_profile($data){
-		// 	$result = $this->db->where('id', $id);
-		// 				->update('patient_profile', $data);
-		// 	if ($result) {
-		// 		return true;
-		// 	}else{
-		// 		return false;
-		// 	}
-		// }
+		public function update_profile($data,$id){
+			$result = $this->db->where('id', $id)
+						->update('patient_profile', $data);
+			if ($result) {
+				return true;
+			}else{
+				return false;
+			}
+		}
 
 	}
 
