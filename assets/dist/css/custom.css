@@ -178,7 +178,7 @@ li.paginate_button.page-item.active {
     font-size: 15px;
 }
 #assign-dosage tr td,#assign-dosage tr th,#dosage tr th,#dosage tr td,.right-table tr th,.right-table tr td{
-    text-align: right !important;
+    text-align: left !important;
 }
 
 #re1{
