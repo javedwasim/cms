@@ -1560,7 +1560,7 @@ $(document.body).on('click', '#angio_recommendation', function(){
 
 $(document.body).on('click', '#pat_instruction', function(){
     $.ajax({
-        url: '/cms/setting/instruction',
+        url: '/cms/Instruction/instruction',
         cache: false,
         success: function(response) {
             if (response.result_html != ''){

@@ -2,7 +2,7 @@
 	
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
-	class Instruction_model extends CI_Model
+	class Clinical_instruction_model extends CI_Model
 	{
 		
 		function __construct()
@@ -10,8 +10,8 @@
 			parent::__construct();
 
 		}
-		public function get_instruction_categories($data){
-            $result = $this->db->select('*')->from('instruction')->where('category',$data['category'])->get();
+		public function get_instruction_categories(){
+            $result = $this->db->select('*')->from('instruction')->where()->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -53,8 +53,8 @@
             return $this->db->affected_rows();
         }
 
-        public function get_inst_items($data){
-            $result = $this->db->select('*')->from('instruction_item')->where('category',$data['category'])->get();
+        public function get_instruction_items(){
+            $result = $this->db->select('*')->from('instruction_item')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -62,12 +62,12 @@
             }
         }
 
-        public function delete_inst_item($id) {
+        public function delete_instruction_item($id) {
             $this->db->where('id', $id)->delete('instruction_item');
             return $this->db->affected_rows();
         }
 
-        public function get_inst_item_description($id){
+        public function get_instruction_item_description($id){
             $result = $this->db->select('description')->from('instruction_item')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
@@ -76,20 +76,16 @@
             }
         }
 
-        public function save_inst_item_description($data){
-            $this->db->where('id',$data['inst_item_id'])->update('instruction_item',array('description'=>$data['description']));
+        public function save_instruction_item_description($data){
+            $this->db->where('id',$data['instruction_item_id'])->update('instruction_item',array('description'=>$data['description']));
             return $this->db->affected_rows();
         }
 
-        public function get_inst_items_by_category($data){
-            $cate_id = $data['inst_id'];
-            $category = $data['category'];
+        public function get_instruction_items_by_category($cate_id){
             if($cate_id>0){
-                $result = $this->db->select('*')->from('instruction_item')
-                            ->where('instruction_id',$cate_id)
-                            ->where('category',$category)->get();
+                $result = $this->db->select('*')->from('instruction_item')->where('instruction_id',$cate_id)->get();
             }else{
-                $result = $this->db->select('*')->from('instruction_item')->where('category',$category)->get();
+                $result = $this->db->select('*')->from('instruction_item')->get();
             }
             if ($result) {
                 return $result->result_array();
