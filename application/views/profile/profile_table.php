@@ -20,13 +20,14 @@
                 <td style="width: 20px"><button class="btn btn-danger btn-xs" id="delete_profile"><i class="fa fa-trash"></i></button></td>
                 <td style="width: 20px"><button class="btn btn-info btn-xs" id="profile_modal_edit"><i class="fa fa-edit"></button></i></td>
                 <td class="profile_id"><?php echo $key['id']; ?></td>
-                <td><?php echo $key['pat_name']; ?></td>
-                <td><?php echo $key['pat_relative']; ?></td>
+                <td style="text-transform: capitalize;"><?php echo $key['pat_name']; ?></td>
+                <td style="text-transform: capitalize;"><?php echo $key['pat_relative']; ?></td>
                 <td><?php echo $key['pat_contact']; ?></td>
-                <td><?php echo $key['pat_profession']; ?></td>
+                <td style="text-transform: capitalize;"><?php echo $key['pat_profession']; ?></td>
                 <td><?php echo $key['pat_district']; ?></td>
-                <td><?php echo $key['creation_date']; ?></td>
-                <td><?php echo $key['creation_date']; ?></td>
+                <?php $datetime = date(' d-m-Y h:i a', strtotime($key['creation_date'])); ?>
+                <td><?php echo $datetime; ?></td>
+                <td><?php echo $datetime; ?></td>
             </tr>
         <?php }?>
         </tbody>

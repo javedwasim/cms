@@ -2281,56 +2281,58 @@ function consultant_booking(val){
 /////////////////////////////////////// update profile ////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-    // $(document.body).on('click','#update_profile', function(){
-    //     var profilename = $('#updat_pat_profile_name').val();
-    //     var profilerelative = $('#updat_pat_profile_relative_name').val();
-    //     var profileagedigit = $('#updat_pat_profile_age_digit').val();
-    //     var profileage = $('#updat_pat_profile_age').val();
-    //     var profileprofession = $('#updat_pat_profile_profession option:selected').text()
-    //     var profilesex = $('input[name="pat_sex"]:checked').val();
-    //     var profilecontact = $('#updat_pat_profile_contact').val();
-    //     var profileheight = $('#updat_pat_profile_height').val();
-    //     var profilebmi = $('#updat_pat_profile_bmi').val();
-    //     var profileweight = $('#updat_pat_profile_weight').val();
-    //     var profilebsa = $('#updat_pat_profile_bsa').val();
-    //     var profileemail = $('#updat_pat_profile_email').val();
-    //     var profiledistrict = $('#updat_pat_profile_district option:selected').text();
-    //     var profileaddress = $('#updat_pat_profile_address').val();
-    //     $.ajax({
-    //         url: '/cms/profile/update_profile_data',
-    //         type: 'post',
-    //         data: {
-    //             name: profilename,
-    //             relatename: profilerelative,
-    //             agedigit: profileagedigit,
-    //             age: profileage,
-    //             profession: profileprofession,
-    //             sex: profilesex,
-    //             contact: profilecontact,
-    //             height: profileheight,
-    //             bmi: profilebmi,
-    //             weight: profileweight,
-    //             bsa: profilebsa,
-    //             email: profileemail,
-    //             district: profiledistrict,
-    //             address: profileaddress
-    //         },success: function(response){
-    //             if (response.success) {
-    //                 $('#add-new-patient').modal('hide');
-    //                 document.getElementById('profile_form').reset();
-    //                 $('.profile-table').remove();
-    //                 $('#profile_table').append(response.profile_table);
-    //                 ///////////////// initilize datatable //////////////
-    //                 $('.profiletable').DataTable({
-    //                     // "scrollX": true,
-    //                     "initComplete": function (settings, json) {  
-    //                     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-    //                 }
-    //                 });
-    //                 toastr["success"](response.message);
-    //             } else {
-    //                 toastr["error"](response.message);
-    //             }
-    //         }
-    //     });
-    // });
+    $(document.body).on('click','#update_profile', function(){
+        var profileid = $('.update_profile_id').val();
+        var profilename = $('#updat_pat_profile_name').val();
+        var profilerelative = $('#updat_pat_profile_relative_name').val();
+        var profileagedigit = $('#updat_pat_profile_age_digit').val();
+        var profileage = $('#updat_pat_profile_age').val();
+        var profileprofession = $('#updat_pat_profile_profession option:selected').text()
+        var profilesex = $('input[name="pat_sex"]:checked').val();
+        var profilecontact = $('#updat_pat_profile_contact').val();
+        var profileheight = $('#updat_pat_profile_height').val();
+        var profilebmi = $('#updat_pat_profile_bmi').val();
+        var profileweight = $('#updat_pat_profile_weight').val();
+        var profilebsa = $('#updat_pat_profile_bsa').val();
+        var profileemail = $('#updat_pat_profile_email').val();
+        var profiledistrict = $('#updat_pat_profile_district option:selected').text();
+        var profileaddress = $('#updat_pat_profile_address').val();
+        $.ajax({
+            url: '/cms/profile/update_profile_data',
+            type: 'post',
+            data: {
+                id: profileid,
+                name: profilename,
+                relatename: profilerelative,
+                agedigit: profileagedigit,
+                age: profileage,
+                profession: profileprofession,
+                sex: profilesex,
+                contact: profilecontact,
+                height: profileheight,
+                bmi: profilebmi,
+                weight: profileweight,
+                bsa: profilebsa,
+                email: profileemail,
+                district: profiledistrict,
+                address: profileaddress
+            },success: function(response){
+                if (response.success) {
+                    $('#update_modal').modal('hide');
+                    document.getElementById('profile_update_form').reset();
+                    $('.profile-table').remove();
+                    $('#profile_table').append(response.profile_table);
+                    ///////////////// initilize datatable //////////////
+                    $('.profiletable').DataTable({
+                        // "scrollX": true,
+                        "initComplete": function (settings, json) {  
+                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    }
+                    });
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    });
