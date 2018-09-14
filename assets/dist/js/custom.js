@@ -1584,7 +1584,7 @@ $(document.body).on('click', '#pat_instruction', function(){
 
 $(document.body).on('click', '#pat_medicine', function(){
     $.ajax({
-        url: '/cms/setting/medicine',
+        url: '/cms/medicine/medicine',
         cache: false,
         success: function(response) {
             if (response.result_html != ''){

@@ -553,8 +553,12 @@ $(document.body).on('click', '#save_inst_item_description', function(){
 
 $(document.body).on('click', '.delete-inst-item', function(){
     if (confirm('Are you sure to delete this record?')) {
+        var category = $(this).attr('data-category');
+        var id = $(this).attr('data-category-id');
         $.ajax({
             url: $(this).attr('data-href'),
+            type: 'post',
+            data: {category:category,id:id},
             cache: false,
             success: function(response) {
                 $('.ins_item_container').empty();
@@ -813,6 +817,27 @@ $(document.body).on('click', '#save_investigation_item_description', function(){
     return false;
 });
 
+$(document.body).on('click', '.delete-investigation-item', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.investigation_item_container').empty();
+                $('.investigation_item_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
 function filter_investigation_item_category(inst_id) {
     $.ajax({
         url: '/cms/investigation/get_investigation_item/'+inst_id,
@@ -864,5 +889,213 @@ $(document.body).on('click', '.delete-recommendation', function(){
     } else {
         return false;
     }
+    return false;
+});
+
+$(document.body).on('click', '.add-medicine-category', function(){
+    var name = $('#medicine_name').val();
+    $.ajax({
+        url: '/cms/medicine/add_medicine_category',
+        type: 'post',
+        data: {name:name},
+        cache: false,
+        success: function(response) {
+            $('.medicine_category_container').empty();
+            $('.medicine_category_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+
+$(document.body).on('click', '.delete-medicine', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.medicine_category_container').empty();
+                $('.medicine_category_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+$(document.body).on('click', '#medicine_item_btn', function(){
+    $.ajax({
+        url: $('#medicine_item_form').attr('data-action'),
+        type: 'post',
+        data: $('#medicine_item_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('.medicine_item_container').empty();
+            $('.medicine_item_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-medicine-item', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.medicine_item_container').empty();
+                $('.medicine_item_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+$(document.body).on('click', '.edit-medicine-item-btn', function(){
+    $('#medicine_item_form_modal')[0].reset();
+    var item_id = $(this).attr('data-medicine-item-id');
+    $('#medicine_item_id').val($(this).attr('data-medicine-item-id'));
+    $.ajax({
+        url: '/cms/medicine/get_medicine_item_description',
+        type: 'post',
+        data: {id:item_id},
+        cache: false,
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                $('#medicine_item_description').val(response.description);
+                $('#medicine_item_modal').modal('show');
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '#save_medicine_item_description', function(){
+    $.ajax({
+        url: $('#medicine_item_form_modal').attr('data-action'),
+        type: 'post',
+        data:  $('#medicine_item_form_modal').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#medicine_item_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.add-dosage-category', function(){
+    var name = $('#dosage_name').val();
+    $.ajax({
+        url: '/cms/medicine/add_dosage_category',
+        type: 'post',
+        data: {name:name},
+        cache: false,
+        success: function(response) {
+            $('.dosage_category_container').empty();
+            $('.dosage_category_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-dosage', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.dosage_category_container').empty();
+                $('.dosage_category_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+function filter_medicine_item_category(inst_id) {
+    $.ajax({
+        url: '/cms/medicine/get_medicine_item/'+inst_id,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.medicine_item_container').empty();
+            $('.medicine_item_container').append(response.result_html);
+        }
+    });
+    return false;
+}
+
+function assign_medicine_category(medicine_category_id) {
+    $('#medicine_category').val(medicine_category_id);
+    $.ajax({
+        url: '/cms/medicine/get_dosage_medicine_category/'+medicine_category_id,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.dosage_medicine_table').empty();
+            $('.dosage_medicine_table').append(response.result_html);
+        }
+    });
+    return false;
+}
+
+$(document.body).on('click', '#update_dosage_medicine_btn', function(){
+    $.ajax({
+        url: $('#update_dosage_medicine_form').attr('data-action'),
+        type: 'post',
+        data: $('#update_dosage_medicine_form').serialize(),
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
     return false;
 });

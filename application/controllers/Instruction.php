@@ -206,8 +206,12 @@ class Instruction extends MY_Controller
         }
     }
 
-    public function delete_inst_item($id)
+    public function delete_inst_item()
     {
+        $data = $this->input->post();
+        $id = $data['id'];
+        $category['category'] = $data['category'];
+
         $result = $this->Instruction_model->delete_inst_item($id);
         if ($result) {
             $json['success'] = true;
@@ -216,7 +220,7 @@ class Instruction extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
-        $data['items'] = $this->Instruction_model->get_inst_items();
+        $data['items'] = $this->Instruction_model->get_inst_items($category);
         $data['active_tab'] = 'items';
         $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
