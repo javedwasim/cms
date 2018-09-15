@@ -1873,7 +1873,7 @@ $(document.body).on('click', '#permissions', function(){
 
 $(document.body).on('click', '#echo-setting', function(){
     $.ajax({
-        url: '/cms/setting/echo_setting',
+        url: '/cms/echo_controller/disease',
         cache: false,
         success: function(response) {
             if (response.result_html != ''){

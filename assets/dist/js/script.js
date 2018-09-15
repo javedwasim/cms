@@ -1099,3 +1099,44 @@ $(document.body).on('click', '#update_dosage_medicine_btn', function(){
     });
     return false;
 });
+
+$(document.body).on('click', '.add-disease-category', function(){
+    var name = $('#disease').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/add_disease_category',
+        type: 'post',
+        data: {name:name},
+        cache: false,
+        success: function(response) {
+            $('.investigation_category_container').empty();
+            $('.investigation_category_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-disease', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.disease_category_container').empty();
+                $('.disease_category_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
