@@ -1228,3 +1228,50 @@ $(document.body).on('click', '.delete-finding', function(){
     return false;
 });
 
+$(document.body).on('click', '.add-structure-diagnosis', function(){
+    var diagnosis_name = $('#structure_diagnosis').val();
+    var structure_id = $('#structure_id').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/add_structure_diagnosis',
+        type: 'post',
+        data: {name:diagnosis_name,structure_id:structure_id},
+        cache: false,
+        success: function(response) {
+            $('.structure_diagnosis_container').empty();
+            $('.structure_diagnosis_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-diagnosis', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.structure_diagnosis_container').empty();
+                $('.structure_diagnosis_container').append(response.result_html);
+
+                //select parent structure
+                $(".structure_table td").css("background-color", "#FFF");
+                $(".structure_table td").css("color", "#1b1a1a");
+                var structure_id = $('#structure_id').val();
+                $('#'+structure_id).css("background", "#1e88e5");
+                $('#'+structure_id).css("color", "#FFF");
+
+                toastr["success"]('Finding deleted successfully!');
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+

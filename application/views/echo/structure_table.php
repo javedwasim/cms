@@ -56,6 +56,9 @@
             success: function (response) {
                 $('.structure_finding_container').empty();
                 $('.structure_finding_container').append(response.result_html);
+
+                $('.structure_diagnosis_container').empty();
+                $('.structure_diagnosis_container').append(response.diagnosis_html);
             }
         });
 

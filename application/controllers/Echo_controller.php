@@ -19,6 +19,7 @@ class Echo_controller extends MY_Controller
         $data['categories'] = $this->Echo_model->get_disease_categories();
         $data['structures'] = $this->Echo_model->get_Structure_categories();
         $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
+        $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
         $json['result_html'] = $this->load->view('echo/echo', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -344,11 +345,73 @@ class Echo_controller extends MY_Controller
             $json['message'] = "Seems to an error";
         }
         $data['findings'] = $this->Echo_model->get_structure_findings_by_id($id);
+        $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($id);
         $data['active_tab'] = 'structure';
         $json['result_html'] = $this->load->view('echo/finding_table', $data, true);
+        $json['diagnosis_html'] = $this->load->view('echo/diagnosis_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
+    }
+
+    public function get_structure_diagnosis_by_id($id,$result,$message){
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = $message;
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($id);
+        $data['active_tab'] = 'structure';
+        $json['result_html'] = $this->load->view('echo/diagnosis_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function add_structure_diagnosis()
+    {
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('name', 'Diagnosis Name', 'required|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            $json['error'] = true;
+            $json['message'] = validation_errors();
+        } else {
+            $data = $this->input->post();
+            $result = $this->Echo_model->add_structure_diagnose($data);
+            $message = "Structure diagnosis successfully created.";
+            $this->get_structure_diagnosis_by_id($data['structure_id'],$result,$message);
+        }
+
+    }
+
+
+    public function save_structure_diagnosis()
+    {
+        $data = $this->input->post();
+        $result = $this->Echo_model->add_structure_diagnose($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Diagnosis save successfully!";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_structure_diagnosis($id)
+    {
+        $structure = $this->Echo_model->get_diagnosis_structure_id($id);
+        $structure_id = $structure['structure_id'];
+        $result = $this->Echo_model->delete_structure_diagnosis($id);
+        $message = "Diagnosis successfully deleted";
+        $this->get_structure_diagnosis_by_id($structure_id,$result,$message);
     }
 
 }
