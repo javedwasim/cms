@@ -122,5 +122,42 @@
             return $this->db->affected_rows();
         }
 
+        public function insert_protocol($protocol,$stages,$recovery){
+            $data = array(
+                'protocol' => $protocol,
+                'stages' => $stages,
+                'recovery' => $recovery
+            );
+            $result = $this->db->insert('ett_protocols',$data);
+            return $this->db->insert_id();
+         
+        }
+
+        public function get_protocol(){
+            $result = $this->db->select('*')->from('ett_protocols')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function delete_protocol($id){
+            $this->db->where('id', $id)->delete('ett_protocols');
+            return $this->db->affected_rows();
+        }
+
+        public function update_protocol($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('ett_protocols',array('protocol'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+                return false;
+            }
+        }
+
 	}
 ?>

@@ -19,6 +19,7 @@ class ETT extends MY_Controller
     	$data['ending_reasons'] = $this->ETT_model->get_ending_reasons();
     	$data['descriptions'] = $this->ETT_model->get_descriptions();
     	$data['conclusions'] = $this->ETT_model->get_conclusions();
+        $data['protocols'] = $this->ETT_model->get_protocol();
 		$json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -257,6 +258,69 @@ class ETT extends MY_Controller
     {
         $data = $this->input->post();
         $result = $this->ETT_model->insert_conclusions($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Updated successfully!";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function protocol(){
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('protocol', 'Protocol', 'required|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            $json['error'] = true;
+            $json['message'] = validation_errors();
+        } else {
+            $protocol = $this->input->post('protocol');
+            $stages = $this->input->post('stages');
+            $recovery = $this->input->post('recovery');
+            $result = $this->ETT_model->insert_protocol($protocol,$stages,$recovery);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Added successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+        }
+        $data['protocols'] = $this->ETT_model->get_protocol();
+        $data['active_tab'] = 'category';
+        $json['result_html'] = $this->load->view('ett/protocol_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_protocol($id){
+        $result = $this->ETT_model->delete_protocol($id);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Deleted Successfully.";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        $data['protocols'] = $this->ETT_model->get_protocol();
+        $data['active_tab'] = 'category';
+        $json['result_html'] = $this->load->view('ett/protocol_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
+    public function update_protocol()
+    {
+        $data = $this->input->post();
+        $result = $this->ETT_model->update_protocol($data);
         if ($result) {
             $json['success'] = true;
             $json['message'] = "Updated successfully!";
