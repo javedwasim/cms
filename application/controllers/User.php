@@ -214,7 +214,7 @@ class User extends MY_Controller {
                     $result = $this->User_model->appointment_book($data);
                     if ($result) {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                         $data['fee_paid'] = $this->User_model->count_fee_paid();
                         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -239,7 +239,7 @@ class User extends MY_Controller {
                         $json['message'] = "Booked successfully";
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                         $data['fee_paid'] = $this->User_model->count_fee_paid();
                         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -266,7 +266,7 @@ class User extends MY_Controller {
             
                 } else {
                     $data['booking_flag'] = $bookingFlag;
-                    $data['consultant_booking'] = $this->User_model->get_first_five_rows($dateto);
+                    $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                     $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                     $data['fee_paid'] = $this->User_model->count_fee_paid();
                     $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -345,7 +345,7 @@ class User extends MY_Controller {
                     $result = $this->User_model->appointment_book($data);
                     if ($result) {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                         $data['fee_paid'] = $this->User_model->count_fee_paid();
                         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -370,7 +370,7 @@ class User extends MY_Controller {
                         $json['message'] = "Booked successfully";
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                         $data['fee_paid'] = $this->User_model->count_fee_paid();
                         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -396,7 +396,7 @@ class User extends MY_Controller {
                     }
                 } else {
                     $data['booking_flag'] = $bookingFlag;
-                    $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                    $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                     $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                     $data['fee_paid'] = $this->User_model->count_fee_paid();
                     $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -475,7 +475,7 @@ class User extends MY_Controller {
                     $result = $this->User_model->appointment_book($data);
                     if ($result) {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                         $data['fee_paid'] = $this->User_model->count_fee_paid();
                         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -500,7 +500,7 @@ class User extends MY_Controller {
                         $json['message'] = "Booked successfully";
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                         $data['fee_paid'] = $this->User_model->count_fee_paid();
                         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -526,7 +526,7 @@ class User extends MY_Controller {
                     }
                 } else {
                     $data['booking_flag'] = $bookingFlag;
-                    $data['consultant_booking'] = $this->User_model->get_first_five_rows($dateto);
+                    $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                     $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                     $data['fee_paid'] = $this->User_model->count_fee_paid();
                     $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -603,7 +603,7 @@ class User extends MY_Controller {
                     $result = $this->User_model->appointment_book($data);
                     if ($result) {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                         $data['fee_paid'] = $this->User_model->count_fee_paid();
                         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -628,7 +628,7 @@ class User extends MY_Controller {
                         $json['message'] = "Booked successfully";
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                         $data['fee_paid'] = $this->User_model->count_fee_paid();
                         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -654,7 +654,7 @@ class User extends MY_Controller {
                     }
                 } else {
                     $data['booking_flag'] = $bookingFlag;
-                    $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+                    $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                     $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
                     $data['fee_paid'] = $this->User_model->count_fee_paid();
                     $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -681,7 +681,7 @@ class User extends MY_Controller {
             }
         }else{
             $data['booking_flag'] = $bookingFlag;
-            $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
             $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
             $data['fee_paid'] = $this->User_model->count_fee_paid();
             $data['ecg_count'] = $this->User_model->count_ecg_waiting();
@@ -1242,7 +1242,21 @@ class User extends MY_Controller {
         $this->load->view('pages/print_all_list', $data);
     }
 
-
+    public function search_all_categories(){
+        $date = $this->input->post('searchdate');
+        $searchdate = date('Y-m-d', strtotime($date));
+        $vip='vip';
+        $oncall='on_call';
+        $onwalk='on_walk';
+        $data['booking_vip'] = $this->User_model->getbookings_by_date_flag($searchdate,$vip);
+        $data['booking_onwalk'] = $this->User_model->getbookings_by_date_flag($searchdate,$oncall);
+        $data['booking_oncall'] = $this->User_model->getbookings_by_date_flag($searchdate,$onwalk);
+        $data['consultant_booking'] = $this->User_model->get_first_five_rows($searchdate);
+        $json['result_html'] = $this->load->view('admin/booking_categories',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
 
 
 
