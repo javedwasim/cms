@@ -15,7 +15,10 @@
                    <i class="fa fa-trash" title="Delete"></i>
                 </a>
             </td>
-            <td><?php echo $reason['test_reason']; ?></td>
+            <td contenteditable="true"
+                onBlur="saveToDatabase(this,'test_reason','<?php echo $reason['id']; ?>')"
+                onClick="showEdit(this);"
+                ><?php echo $reason['test_reason']; ?></td>
         </tr>
     <?php }?>
     </tbody>
@@ -28,4 +31,23 @@
             "searching": false
         });
     });
+    function showEdit(editableObj) {
+        $(editableObj).css("background", "#FFF");
+    }
+    function saveToDatabase(editableObj, column, id) {
+        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
+        $.ajax({
+            url: "<?php echo base_url() . 'ett/update_ett_test_reason' ?>",
+            type: "POST",
+            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            success: function (response) {
+                $(editableObj).css("background", "#FDFDFD");
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["success"](response.message);
+                }
+            }
+        });
+    }
 </script>

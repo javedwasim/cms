@@ -12,9 +12,17 @@
 		}
 
 		public function insert_test_reason($data){
-			$this->db->set('test_reason', $data);
-			$this->db->insert('ett_test_reason');
-            return $this->db->insert_id();
+			if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('ett_test_reason',array('test_reason'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+				$this->db->set('test_reason', $data);
+				$this->db->insert('ett_test_reason');
+	            return $this->db->insert_id();
+        	}
 		}
 
 		public function get_test_reasons(){
@@ -26,7 +34,7 @@
             }
         }
 
-        public function delete_ett_test_reason($id) {
+        public function delete_test_reason($id) {
             $this->db->where('id', $id)->delete('ett_test_reason');
             return $this->db->affected_rows();
         }

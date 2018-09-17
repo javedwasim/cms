@@ -49,8 +49,8 @@ class ETT extends MY_Controller
         }
 	}
 
-	public function delete_test_reason($id){
-        $result = $this->ETT_model->delete_ett_test_reason($id);
+	public function delete_ett_test_reason($id){
+        $result = $this->ETT_model->delete_test_reason($id);
         if ($result) {
             $json['success'] = true;
             $json['message'] = "Deleted Successfully.";
@@ -60,14 +60,27 @@ class ETT extends MY_Controller
         }
         $data['test_reasons'] = $this->ETT_model->get_test_reasons();
         $data['active_tab'] = 'category';
-        $json['result_html'] = $this->load->view('examination/category_table', $data, true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
+        $json['result_html'] = $this->load->view('ett/test_reason_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
 
+    }
+
+    public function update_ett_test_reason()
+    {
+        $data = $this->input->post();
+        $result = $this->ETT_model->insert_test_reason($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Updated successfully!";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
     }
 
 
