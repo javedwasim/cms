@@ -18,7 +18,7 @@ class Echo_controller extends MY_Controller
     {
         $data['categories'] = $this->Echo_model->get_disease_categories();
         $data['structures'] = $this->Echo_model->get_Structure_categories();
-        $data['findings'] = $this->Echo_model->get_structure_findings();
+        $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
         $json['result_html'] = $this->load->view('echo/echo', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -282,7 +282,7 @@ class Echo_controller extends MY_Controller
             $data = $this->input->post();
             $result = $this->Echo_model->add_structure_finding($data);
             $message = "Structure finding successfully created.";
-            $this->structure_finding_load($result,$message);
+            $this->get_structure_finding_by_id($data['structure_id'],$result,$message);
         }
 
     }
@@ -312,8 +312,38 @@ class Echo_controller extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
-
         $data['findings'] = $this->Echo_model->get_structure_findings();
+        $data['active_tab'] = 'structure';
+        $json['result_html'] = $this->load->view('echo/finding_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_structure_finding($id)
+    {
+        $structure = $this->Echo_model->get_structure_id($id);
+        $structure_id = $structure['structure_id'];
+        $result = $this->Echo_model->delete_structure_finding($id);
+        $message = "Finding successfully deleted";
+        $this->get_structure_finding_by_id($structure_id,$result,$message);
+    }
+
+    public function get_findings_by_id($id){
+        $result = true;
+        $message = '';
+        $this->get_structure_finding_by_id($id,$result,$message);
+    }
+
+    public function get_structure_finding_by_id($id,$result,$message){
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = $message;
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        $data['findings'] = $this->Echo_model->get_structure_findings_by_id($id);
         $data['active_tab'] = 'structure';
         $json['result_html'] = $this->load->view('echo/finding_table', $data, true);
         if ($this->input->is_ajax_request()) {

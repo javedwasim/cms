@@ -144,6 +144,29 @@
             }
         }
 
+        public function delete_structure_finding($id) {
+            $this->db->where('id', $id)->delete('structure_finding');
+            return $this->db->affected_rows();
+        }
+
+        public function get_structure_findings_by_id($id){
+            $result = $this->db->select('*')->from('structure_finding')->where('structure_id',$id)->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function get_structure_id($id){
+            $result = $this->db->select('*')->from('structure_finding')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
 
 	}
 

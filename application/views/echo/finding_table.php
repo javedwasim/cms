@@ -11,12 +11,12 @@
             <td>
                 <a class="delete-finding btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
-                   data-href="<?php echo site_url('Echo_controller/delete_finding_category/') . $finding['id'] ?>">
+                   data-href="<?php echo site_url('Echo_controller/delete_structure_finding/') . $finding['id'] ?>">
                     <i class="fa fa-trash" title="Delete"></i></a>
             </td>
             <td contenteditable="true"
-                onBlur="saveToDatabase(this,'cate_name','<?php echo $finding['id']; ?>')"
-                onClick="showEdit(this);">
+                onBlur="saveFinding(this,'cate_name','<?php echo $finding['id']; ?>')"
+                onClick="findingEdit(this);">
                 <?php echo $finding['name']; ?></td>
         </tr>
     <?php endforeach; ?>
@@ -35,11 +35,17 @@
             fixedColumns: true,
         });
        });
-    function showEdit(editableObj) {
+    function findingEdit(editableObj) {
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+        //select parent structure
+        $(".structure_table td").css("background-color", "");
+        var structure_id = $('#structure_id').val();
+        $('#'+structure_id).css("background", "#1e88e5");
+        $('#'+structure_id).css("color", "#FFF");
+
     }
-    function saveToDatabase(editableObj, column, id) {
+    function saveFinding(editableObj, column, id) {
         $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $(editableObj).css("color", "#1b1a1a");
         $.ajax({
@@ -47,12 +53,10 @@
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                }else{
-                    toastr["success"](response.message);
                 }
+                $(editableObj).css('background-image', 'none');
             }
         });
     }

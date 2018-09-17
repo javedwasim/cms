@@ -15,8 +15,9 @@
                     <i class="fa fa-trash" title="Delete"></i></a>
             </td>
             <td contenteditable="true"
-                onBlur="saveToDatabase(this,'cate_name','<?php echo $structure['id']; ?>')"
-                onClick="showEdit(this,'<?php echo $structure['id']; ?>');">
+                onBlur="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
+                onClick="structureEdit(this,'<?php echo $structure['id']; ?>');"
+                id="<?php echo $structure['id']; ?>">
                 <?php echo $structure['name']; ?></td>
         </tr>
     <?php endforeach; ?>
@@ -40,15 +41,26 @@
         $(".structure_category_container table tbody tr:first td:nth-child(2)").trigger("click");
 
     });
-    function showEdit(editableObj,id) {
+    function structureEdit(editableObj,id) {
+        //remove background and color on all elements and remove color
+        $(".structure_table td").css("background-color", "#FFF");
+        $(".structure_table td").css("color", "#1b1a1a");
+
         $('#structure_id').val(id);
-        console.log(id);
-        $(".structure_category_container table tbody tr:first td:nth-child(2)").css("background", "#FFF");
-        $(".structure_category_container table tbody tr:first td:nth-child(2)").css("color", "#1b1a1a");
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+        //load structure findings
+        $.ajax({
+            url: "<?php echo base_url() . 'Echo_controller/get_findings_by_id/'?>"+id,
+            type: "get",
+            success: function (response) {
+                $('.structure_finding_container').empty();
+                $('.structure_finding_container').append(response.result_html);
+            }
+        });
+
     }
-    function saveToDatabase(editableObj, column, id) {
+    function saveStructure(editableObj, column, id) {
         $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $(editableObj).css("color", "#1b1a1a");
         $.ajax({
@@ -56,14 +68,23 @@
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                }else{
-                    toastr["success"](response.message);
                 }
+                $(editableObj).css('background-image', 'none');
             }
         });
     }
+
+    $(document.body).on('click', '#structure_finding', function(){
+        //remove background and color on all elements and remove color
+        $(".structure_table td").css("background-color", "#FFF");
+        $(".structure_table td").css("color", "#1b1a1a");
+
+        var structure_id = $('#structure_id').val();
+        $('#'+structure_id).css("background", "#1e88e5");
+        $('#'+structure_id).css("color", "#FFF");
+        return false;
+    });
 
 </script>
