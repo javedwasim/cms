@@ -144,6 +144,67 @@
             }
         }
 
+        public function delete_structure_finding($id) {
+            $this->db->where('id', $id)->delete('structure_finding');
+            return $this->db->affected_rows();
+        }
+
+        public function delete_structure_diagnosis($id) {
+            $this->db->where('id', $id)->delete('diagnosis');
+            return $this->db->affected_rows();
+        }
+
+        public function get_structure_findings_by_id($id){
+            $result = $this->db->select('*')->from('structure_finding')->where('structure_id',$id)->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function get_structure_id($id){
+            $result = $this->db->select('*')->from('structure_finding')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function get_diagnosis_structure_id($id){
+            $result = $this->db->select('*')->from('diagnosis')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function get_structure_diagnosis_by_id($id){
+            $result = $this->db->select('*')->from('diagnosis')->where('structure_id',$id)->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+
+        public function add_structure_diagnose($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('diagnosis',array('name'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+                $this->db->insert('diagnosis', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
 
 	}
 

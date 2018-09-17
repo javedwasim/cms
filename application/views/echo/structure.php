@@ -28,12 +28,12 @@
                 <div class="col-lg-2 col-md-3" >
                     <div class="form-group">
                         <label>New Diagnosis:</label>
-                        <input type="text" class="form-control" name="" >
+                        <input type="text" class="form-control" name="name" id="structure_diagnosis">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 p-0">
                     <div class="form-group m-t-25">
-                        <button class="btn btn-sm btn-primary">Add</button>
+                        <button class="btn btn-sm btn-primary add-structure-diagnosis">Add</button>
                     </div>
                 </div>
             </div>
@@ -63,45 +63,8 @@
                         <div class="card-header">
                             Diagnosis
                         </div>
-                        <div class="card-body">
-                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-                                <thead>
-                                <tr>
-                                    <th style="width: 10%">Delete</th>
-                                    <th>Diagnosis</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                    <td>Rist Factor</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                    <td>GIT Problem</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                    <td>Co-Resp</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                    <td>Co-GIT</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                    <td>Co-CNS</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                    <td>Co-CVS</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><i class="fa fa-trash"></i></td>
-                                    <td>Respitatory Problems</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="card-body structure_diagnosis_container">
+                            <?php $this->load->view('echo/diagnosis_table'); ?>
                         </div>
                     </div>
                 </div>
