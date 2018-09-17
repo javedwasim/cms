@@ -92,6 +92,59 @@
                 return array();
             }
         }
+
+        public function add_structure_category($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('structure',array('name'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+                $this->db->insert('structure', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
+        public function get_structure_categories(){
+            $result = $this->db->select('*')->from('structure')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function delete_structure_category($id) {
+            $this->db->where('id', $id)->delete('structure');
+            return $this->db->affected_rows();
+        }
+
+        public function add_structure_finding($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('structure_finding',array('name'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+                $this->db->insert('structure_finding', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
+        public function get_structure_findings(){
+            $result = $this->db->select('*')->from('structure_finding')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+
 	}
 
 ?>

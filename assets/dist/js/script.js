@@ -1140,3 +1140,65 @@ $(document.body).on('click', '.delete-disease', function(){
     }
     return false;
 });
+
+$(document.body).on('click', '.add-structure-category', function(){
+    var name = $('#structure').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/add_structure_category',
+        type: 'post',
+        data: {name:name},
+        cache: false,
+        success: function(response) {
+            $('.structure_category_container').empty();
+            $('.structure_category_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-structure', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.structure_category_container').empty();
+                $('.structure_category_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+$(document.body).on('click', '.add-structure-finding', function(){
+    var finding_name = $('#structure_finding').val();
+    var structure_id = $('#structure_id').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/add_structure_finding',
+        type: 'post',
+        data: {name:finding_name,structure_id:structure_id},
+        cache: false,
+        success: function(response) {
+            $('.structure_finding_container').empty();
+            $('.structure_finding_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
