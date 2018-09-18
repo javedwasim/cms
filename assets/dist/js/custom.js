@@ -1955,6 +1955,223 @@ $(document.body).on('click', '#echo-setting', function(){
         }
         return false;
     });
+
+    $(document.body).on('click', '#add_ending_reason', function(){
+        var endingreason = $('#ending_reason').val();
+        $.ajax({
+            url: '/cms/ett/add_ett_endingreason',
+            type: 'post',
+            data: {endingreason:endingreason},
+            cache: false,
+            success: function(response) {
+                $('#ett_test_reason').val('');
+                $('.ins_category_container').empty();
+                $('.ins_category_container').append(response.result_html);
+                $('.datatables').DataTable({
+                    "info": true,
+                    "paging": false,
+                    "searching": false
+                });
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+        return false;
+    });
+
+    $(document.body).on('click', '.delete-ending-reason', function(){
+        if (confirm('Are you sure to delete this record?')) {
+            $.ajax({
+                url: $(this).attr('data-href'),
+                cache: false,
+                success: function(response) {
+                    $('.ins_category_container').empty();
+                    $('.ins_category_container').append(response.result_html);
+                    $('.datatables').DataTable({
+                        "info": true,
+                        "paging": false,
+                        "searching": false
+                    });
+                    if (response.message=="Updated successfully!") {
+                        toastr["success"](response.message);
+                    } else {
+                        toastr["warning"](response.message);
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
+        return false;
+    });
+
+    $(document.body).on('click', '#add_ett_discription', function(){
+        var description = $('#ett_discription').val();
+        $.ajax({
+            url: '/cms/ett/add_ett_discription',
+            type: 'post',
+            data: {description:description},
+            cache: false,
+            success: function(response) {
+                $('#ett_discription').val('');
+                $('.ins_category_container').empty();
+                $('.ins_category_container').append(response.result_html);
+                $('.datatables').DataTable({
+                    "info": true,
+                    "paging": false,
+                    "searching": false
+                });
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+        return false;
+    });
+
+    $(document.body).on('click', '.delete-description', function(){
+        if (confirm('Are you sure to delete this record?')) {
+            $.ajax({
+                url: $(this).attr('data-href'),
+                cache: false,
+                success: function(response) {
+                    $('.ins_category_container').empty();
+                    $('.ins_category_container').append(response.result_html);
+                    $('.datatables').DataTable({
+                        "info": true,
+                        "paging": false,
+                        "searching": false
+                    });
+                    if (response.message=="Deleted Successfully.") {
+                        toastr["success"](response.message);
+                    } else {
+                        toastr["warning"](response.message);
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
+        return false;
+    });
+
+    $(document.body).on('click', '#add_conclusion', function(){
+        var conclusion = $('#ett_conclusion').val();
+        $.ajax({
+            url: '/cms/ett/add_conclusion',
+            type: 'post',
+            data: {conclusion:conclusion},
+            cache: false,
+            success: function(response) {
+                $('#ett_conclusion').val('');
+                $('.ins_category_container').empty();
+                $('.ins_category_container').append(response.result_html);
+                $('.datatables').DataTable({
+                    "info": true,
+                    "paging": false,
+                    "searching": false
+                });
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+        return false;
+    });
+
+    $(document.body).on('click', '.delete-conclusion', function(){
+        if (confirm('Are you sure to delete this record?')) {
+            $.ajax({
+                url: $(this).attr('data-href'),
+                cache: false,
+                success: function(response) {
+                    $('.ins_category_container').empty();
+                    $('.ins_category_container').append(response.result_html);
+                    $('.datatables').DataTable({
+                        "info": true,
+                        "paging": false,
+                        "searching": false
+                    });
+                    if (response.message=="Deleted Successfully.") {
+                        toastr["success"](response.message);
+                    } else {
+                        toastr["warning"](response.message);
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
+        return false;
+    });
+
+    $(document.body).on('click', '#add_protocol', function(){
+        var protocol = $('#new_protocol').val();
+        var stages = $('#protocol_stages').val();
+        var recovery = $('#protocol_recovery').val();
+        $.ajax({
+            url: '/cms/ett/protocol',
+            type: 'post',
+            data: {
+                protocol:protocol,
+                stages:stages,
+                recovery:recovery
+            },
+            cache: false,
+            success: function(response) {
+                $('#new_protocol').val('');
+                $('#protocol_stages').val('');
+                $('#protocol_recovery').val('');
+                $('.ins_category_container').empty();
+                $('.ins_category_container').append(response.result_html);
+                $('.datatables').DataTable({
+                    "info": true,
+                    "paging": false,
+                    "searching": false
+                });
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+        return false;
+    });
+
+    $(document.body).on('click', '.delete-protocol', function(){
+        if (confirm('Are you sure to delete this record?')) {
+            $.ajax({
+                url: $(this).attr('data-href'),
+                cache: false,
+                success: function(response) {
+                    $('.ins_category_container').empty();
+                    $('.ins_category_container').append(response.result_html);
+                    $('.datatables').DataTable({
+                        "info": true,
+                        "paging": false,
+                        "searching": false
+                    });
+                    if (response.message=="Deleted Successfully.") {
+                        toastr["success"](response.message);
+                    } else {
+                        toastr["warning"](response.message);
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
+        return false;
+    });
+
 /////////////////////////////////// load patient exemination page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1966,6 +2183,11 @@ $(document.body).on('click', '#pat-exemination', function(){
             if (response.result_html != ''){
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
+                $('.datatables').DataTable({
+                    "info": true,
+                    "paging": false,
+                    "searching": false
+                });
                 ///////////////// initilize datatable //////////////
                 $('#permissions-table').DataTable({
                     "scrollX": true
@@ -2383,3 +2605,5 @@ function consultant_booking(val){
             }
         });
     });
+
+

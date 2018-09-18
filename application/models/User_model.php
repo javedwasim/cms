@@ -618,6 +618,23 @@ class User_model extends CI_Model {
         
     }
 
+    public function get_first_five_rows_today(){
+        $date = date('Y-m-d');
+        $flag = 'vip';
+        $result = $this->db->select('*')
+                ->where('DATE(appointment_date)',$date)
+                ->where('booking_flag',$flag)
+                ->order_by('order_number', 'ASC')
+                ->limit(5,0)
+                ->get('appointment_booking');
+        if($result->num_rows()>0){
+            return $result->result_array();
+        } else {
+            return array();
+        }
+        
+    }
+
     public function get_all_vip($flag){
         $date = date('Y-m-d');
         $result = $this->db->select('*')
