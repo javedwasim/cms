@@ -226,6 +226,98 @@
             $this->db->where('id',$data['diagnose_id'])->update('diagnosis',array('disease_id'=>$data['disease_id']));
             return $this->db->affected_rows();
         }
+
+        public function add_main_category_item($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('echo_category',array('name'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+                $this->db->insert('echo_category', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
+        public function get_echo_main_categories(){
+            $result = $this->db->select('*')->from('echo_category')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function delete_main_category_item($id) {
+            $this->db->where('id', $id)->delete('echo_category');
+            return $this->db->affected_rows();
+        }
+
+        public function get_main_category_by_filter($category) {
+
+            if(($category=='dooplers') || ($category=='mmode')){
+                $result = $this->db->select('*')->from('echo_category')->where('main_category',"$category")->get();
+            }else{
+                $result = $this->db->select('*')->from('echo_category')->get();
+            }
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function add_category_measurement($data){
+            if(isset($data['id'])){
+                if($data['column'] == 'item'){
+                    $id = $data['id'];
+                    $editval = trim($data['editval']);
+                    $editval = preg_replace('/(<br>)+$/', '', $editval);
+                    $this->db->where('id',$id)->update('category_measurement',array('item'=>$editval));
+                    return $this->db->affected_rows();
+                }else{
+                    $id = $data['id'];
+                    $editval = trim($data['editval']);
+                    $editval = preg_replace('/(<br>)+$/', '', $editval);
+                    $this->db->where('id',$id)->update('category_measurement',array('value'=>$editval));
+                    return $this->db->affected_rows();
+                }
+
+            }else{
+                $this->db->insert('category_measurement', $data);
+                return $this->db->insert_id();
+            }
+
+        }
+
+        public function get_category_measurement(){
+            $result = $this->db->select('*')->from('category_measurement')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function delete_category_measurement($id) {
+            $this->db->where('id', $id)->delete('category_measurement');
+            return $this->db->affected_rows();
+        }
+
+        public function get_measurement_by_filter($category) {
+            if($category>0){
+                $result = $this->db->select('*')->from('category_measurement')->where('category_id',"$category")->get();
+            }else{
+                $result = $this->db->select('*')->from('category_measurement')->get();
+            }
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
 	}
 
 ?>

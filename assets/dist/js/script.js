@@ -1309,4 +1309,116 @@ $(document.body).on('click', '.diagnose_radio', function(){
     });
 });
 
+$(document.body).on('click', '#main_category_item_btn', function(){
+    var main_category_name = $('#main_category_name').val();
+    var main_category = $('#main_category').val();
 
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/add_main_category_item',
+        type: 'post',
+        data: {name:main_category_name,main_category:main_category},
+        cache: false,
+        success: function(response) {
+            $('.main_category_container').empty();
+            $('.main_category_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+
+$(document.body).on('click', '.delete-main-category-item', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.main_category_container').empty();
+                $('.main_category_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+function main_category_item_filter(category) {
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/get_main_category_by_filter/'+category,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.main_category_container').empty();
+            $('.main_category_container').append(response.result_html);
+        }
+    });
+    return false;
+}
+
+function category_measurement_filter(category) {
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/get_measurement_by_filter/'+category,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.category_measurement_container').empty();
+            $('.category_measurement_container').append(response.result_html);
+        }
+    });
+    return false;
+}
+
+$(document.body).on('click', '#main_category_measurement_btn', function(){
+    var item = $('#measurement_item').val();
+    var value = $('#normal_value').val();
+    var category_id = $('#category_id').val();
+
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/add_category_measurement',
+        type: 'post',
+        data: {item:item,value:value,category_id:category_id},
+        cache: false,
+        success: function(response) {
+            $('.category_measurement_container').empty();
+            $('.category_measurement_container').append(response.result_html);
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.delete-main-measurement', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.category_measurement_container').empty();
+                $('.category_measurement_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});

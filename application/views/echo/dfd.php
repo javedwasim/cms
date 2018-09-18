@@ -99,6 +99,17 @@
             ]
         });
 
+        $('.main-category-table').DataTable({
+            "info": true,
+            "paging": false,
+            "searching": false,
+            "sort": false,
+            autoWidth: false, //step 1
+            columnDefs: [
+                { width: '5%', targets: 0 }, //step 2, column 1 out of 4
+            ]
+        });
+
         $(".structure_category_container table tbody tr:first td:nth-child(2)").trigger("click");
         $("#dfd_structure table tbody tr:first td:nth-child(2)").trigger("click");
 

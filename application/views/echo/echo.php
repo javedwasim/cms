@@ -25,9 +25,9 @@
                                 <span class="hidden-sm-up"><i class="ti-user"></i></span>
                                 <span class="hidden-xs-down">2D Echo Category</span></a></li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo  isset($active_tab)&&($active_tab=='category')?'active':''; ?>" data-toggle="tab" href="#tb5" role="tab">
+                            <a class="nav-link <?php echo  isset($active_tab)&&($active_tab=='measurement')?'active':''; ?>" data-toggle="tab" href="#tb5" role="tab">
                                 <span class="hidden-sm-up"><i class="ti-user"></i></span>
-                                <span class="hidden-xs-down">2D Echo Category</span></a></li>
+                                <span class="hidden-xs-down">Measurement</span></a></li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content tabcontent-border">
