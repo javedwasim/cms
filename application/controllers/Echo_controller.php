@@ -20,6 +20,8 @@ class Echo_controller extends MY_Controller
         $data['structures'] = $this->Echo_model->get_Structure_categories();
         $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
         $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
+        $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
+        $data['measurements'] = $this->Echo_model->get_category_measurement();
         $json['result_html'] = $this->load->view('echo/echo', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -442,6 +444,142 @@ class Echo_controller extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function add_main_category_item(){
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('name', 'Echo Category', 'required|xss_clean');
+        $this->form_validation->set_rules('main_category', 'Main Category', 'required|xss_clean');
+
+        $data = $this->input->post();
+        if ($this->form_validation->run() == FALSE) {
+            $json['error'] = true;
+            $json['message'] = validation_errors();
+        } else {
+            $result = $this->Echo_model->add_main_category_item($data);
+            $message = "Category successfully created.";
+            $this->get_echo_main_categories($result,$message);
+        }
+
+    }
+
+    public function get_echo_main_categories($result,$message){
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = $message;
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
+        $data['active_tab'] = 'category';
+        $json['result_html'] = $this->load->view('echo/main_category_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_main_category_item($id)
+    {
+        $result = $this->Echo_model->delete_main_category_item($id);
+        $message = "Category successfully deleted.";
+        $this->get_echo_main_categories($result,$message);
+
+    }
+
+    public function save_main_category_item()
+    {
+        $data = $this->input->post();
+        $result = $this->Echo_model->add_main_category_item($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Categpru save successfully!";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_main_category_by_filter($category){
+        $data['main_categories'] = $this->Echo_model->get_main_category_by_filter($category);
+        $data['active_tab'] = 'category';
+        $json['result_html'] = $this->load->view('echo/main_category_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function add_category_measurement(){
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('item', 'Category Item', 'required|xss_clean');
+        $this->form_validation->set_rules('value', 'Measurement Value', 'required|xss_clean');
+        $this->form_validation->set_rules('category_id', 'Category', 'required|xss_clean');
+
+        $data = $this->input->post();
+        if ($this->form_validation->run() == FALSE) {
+            $json['error'] = true;
+            $json['message'] = validation_errors();
+        } else {
+            $result = $this->Echo_model->add_category_measurement($data);
+            $message = "Measurement successfully created.";
+            $this->get_category_measurement($result,$message);
+        }
+
+    }
+
+
+    public function get_category_measurement($result,$message){
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = $message;
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        $data['measurements'] = $this->Echo_model->get_category_measurement();
+        $data['active_tab'] = 'measurement';
+        $json['result_html'] = $this->load->view('echo/category_measurement_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function save_category_measurement()
+    {
+        $data = $this->input->post();
+        $result = $this->Echo_model->add_category_measurement($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Measurement save successfully!";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_category_measurement($id)
+    {
+        $result = $this->Echo_model->delete_category_measurement($id);
+        $message = "Measurement successfully deleted.";
+        $this->get_category_measurement($result,$message);
+
+    }
+
+    public function get_measurement_by_filter($category){
+        $data['measurements'] = $this->Echo_model->get_measurement_by_filter($category);
+        $data['active_tab'] = 'measurement';
+        $json['result_html'] = $this->load->view('echo/category_measurement_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
