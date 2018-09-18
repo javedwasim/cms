@@ -32,6 +32,7 @@
         $(".structure_table td").css("background-color", "#FFF");
         $(".structure_table td").css("color", "#1b1a1a");
 
+
         $('#structure_id').val(id);
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
