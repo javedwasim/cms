@@ -349,6 +349,9 @@ class Echo_controller extends MY_Controller
         $data['active_tab'] = 'structure';
         $json['result_html'] = $this->load->view('echo/finding_table', $data, true);
         $json['diagnosis_html'] = $this->load->view('echo/diagnosis_table', $data, true);
+        $json['dfinding_html'] = $this->load->view('echo/default_finding_table', $data, true);
+        $json['ddiagnose_html'] = $this->load->view('echo/default_diagnosis_table', $data, true);
+
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -412,6 +415,36 @@ class Echo_controller extends MY_Controller
         $result = $this->Echo_model->delete_structure_diagnosis($id);
         $message = "Diagnosis successfully deleted";
         $this->get_structure_diagnosis_by_id($structure_id,$result,$message);
+    }
+
+    public function assign_finding_to_disease(){
+        $data = $this->input->post();
+        $result = $this->Echo_model->assign_finding_to_disease($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Information save successfully!";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function assign_diagnose_to_disease(){
+        $data = $this->input->post();
+        $result = $this->Echo_model->assign_diagnose_to_disease($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Information save successfully!";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
     }
 
 }

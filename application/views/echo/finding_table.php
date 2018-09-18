@@ -12,29 +12,18 @@
                 <a class="delete-finding btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
                    data-href="<?php echo site_url('Echo_controller/delete_structure_finding/') . $finding['id'] ?>">
-                    <i class="fa fa-trash" title="Delete"></i></a>
+                   <i class="fa fa-trash" title="Delete"></i></a>
             </td>
             <td contenteditable="true"
                 onBlur="saveFinding(this,'cate_name','<?php echo $finding['id']; ?>')"
                 onClick="findingEdit(this);">
-                <?php echo $finding['name']; ?></td>
+                <?php echo $finding['name']; ?>
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <script>
-    $(document).ready(function () {
-        $('.finding_table').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false,
-            "sort": false,
-            autoWidth: false, //step 1
-            columnDefs: [
-                { width: '5%', targets: 0 }, //step 2, column 1 out of 4
-            ]
-        });
-       });
     function findingEdit(editableObj) {
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");

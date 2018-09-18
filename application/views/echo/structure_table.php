@@ -26,25 +26,12 @@
 
 <input type="hidden" name="structure_id" id="structure_id">
 <script>
-    $(document).ready(function () {
-        $('.structure_table').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false,
-            "sort": false,
-            columnDefs: [
-                { width: 1, targets: 0 }
-            ],
-            fixedColumns: true,
-        });
 
-        $(".structure_category_container table tbody tr:first td:nth-child(2)").trigger("click");
-
-    });
     function structureEdit(editableObj,id) {
         //remove background and color on all elements and remove color
         $(".structure_table td").css("background-color", "#FFF");
         $(".structure_table td").css("color", "#1b1a1a");
+
 
         $('#structure_id').val(id);
         $(editableObj).css("background", "#1e88e5");
@@ -59,6 +46,12 @@
 
                 $('.structure_diagnosis_container').empty();
                 $('.structure_diagnosis_container').append(response.diagnosis_html);
+
+                $('.default_finding_container').empty();
+                $('.default_finding_container').append(response.dfinding_html);
+
+                $('.default_diagnosis_container').empty();
+                $('.default_diagnosis_container').append(response.ddiagnose_html);
             }
         });
 
