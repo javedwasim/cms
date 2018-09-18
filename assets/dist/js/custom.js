@@ -1528,7 +1528,7 @@ $(document.body).on('click', '#pat_profile', function () {
 
 $(document.body).on('click', '#pat_history', function () {
     $.ajax({
-        url: '/cms/setting/history',
+        url: '/cms/Profile_history/history',
         cache: false,
         success: function (response) {
             if (response.result_html != '') {

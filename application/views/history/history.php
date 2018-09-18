@@ -1,57 +1,62 @@
-<div class="dashboard-content">
-    <div class="row p-t-10 m-0">
-        <div class="col-md-12">
-            <div class="card">
-            	<div class="card-header">
-            		Patient's History Settings
-            	</div>
-                <div class="card-body">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                        	<a class="nav-link active" data-toggle="tab" href="#category" role="tab"> 
-                        		<span class="hidden-xs-down">Category</span>
-                        	</a>
-                        </li>
-                        <li class="nav-item">
-                        	<a class="nav-link" data-toggle="tab" href="#items" role="tab">
-                        		<span class="hidden-xs-down">Items</span>
-                        	</a>
-                        </li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content tabcontent-border">
-                        <?php $this->load->view('history/history_category'); ?>
-                        <?php $this->load->view('history/history_items'); ?>
-                    </div>
+<div class="tab-pane active" id="category" role="tabpanel">
+    <div class="card">
+        <div class="card-header" style="display: inline-flex;">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>New Category</label>
+                    <input type="text" class="form-control col-md-6" name="profile_history" id="profile_history">
+                    <button class="btn btn-primary add-profile-history">Add</button>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- row -->
-    <!-- modal content -->
-    <div id="history-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Discription</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                        	<label>Risk Factor and Cardiac Problems</label>
-                            <textarea class="form-control" rows="3">
-                            	
-                            </textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger waves-effect waves-light">Update</button>
-                </div>
-            </div>
+        <div class="card-body history_category_container">
+            <?php $this->load->view('history/history_table'); ?>
         </div>
     </div>
 </div>
+<style>
+    body {
+        width: 100%;
+    }
+
+    .current-row {
+        background-color: #B24926;
+        color: #FFF;
+    }
+
+    .current-col {
+        background-color: #1b1b1b;
+        color: #FFF;
+    }
+
+    .tbl-qa {
+        width: 100%;
+        font-size: 0.9em;
+        background-color: #f5f5f5;
+    }
+
+    .tbl-qa th.table-header {
+        padding: 5px;
+        text-align: left;
+        padding: 10px;
+    }
+
+    .tbl-qa .table-row td {
+        padding: 10px;
+        background-color: #FDFDFD;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('.history_table').DataTable({
+            "info": true,
+            "paging": false,
+            "searching": false,
+            "sort": false,
+            columnDefs: [
+                { width: 1, targets: 0 }
+            ],
+            fixedColumns: true
+        });
+    });
+</script>
