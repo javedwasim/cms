@@ -129,8 +129,28 @@
                 'recovery' => $recovery
             );
             $result = $this->db->insert('ett_protocols',$data);
-            return $this->db->insert_id();
-         
+            $last_id =  $this->db->insert_id();
+            if($last_id){
+                $this->db->set('stage_name','Rest');
+                $this->db->set('protocol_id',$last_id);
+                $this->db->insert('ett_protocol_details');
+                for($i=1; $i<=$stages;$i++){
+                    $stage = 'Stage'.' '.$i;
+                    $this->db->set('stage_name',$stage);
+                    $this->db->set('protocol_id',$last_id);
+                    $this->db->insert('ett_protocol_details');
+                }
+                for($i=1; $i<=$recovery;$i++){
+                    $rec = 'Recovery'.' '.$i;
+                    $this->db->set('stage_name',$rec);
+                    $this->db->set('protocol_id',$last_id);
+                    $this->db->insert('ett_protocol_details');
+                }
+                return true;
+            }else{
+                return false;
+            }
+            
         }
 
         public function get_protocol(){
@@ -153,6 +173,32 @@
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
                 $this->db->where('id',$id)->update('ett_protocols',array('protocol'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+                return false;
+            }
+        }
+
+        public function get_protocol_details_by_id($p_id){
+            if($p_id>0){
+                $result = $this->db->select('*')->from('ett_protocol_details')->where('protocol_id',$p_id)->get();
+            }else{
+                $result = false;
+            }
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function update_protocol_details($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $column = $data['column'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('id',$id)->update('ett_protocol_details',array($column=>$editval));
                 return $this->db->affected_rows();
             }else{
                 return false;

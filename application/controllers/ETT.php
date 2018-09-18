@@ -15,11 +15,13 @@ class ETT extends MY_Controller
 
 
     public function ett_setting(){
+        $p_id = 0;
     	$data['test_reasons'] = $this->ETT_model->get_test_reasons();
     	$data['ending_reasons'] = $this->ETT_model->get_ending_reasons();
     	$data['descriptions'] = $this->ETT_model->get_descriptions();
     	$data['conclusions'] = $this->ETT_model->get_conclusions();
         $data['protocols'] = $this->ETT_model->get_protocol();
+        $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);
 		$json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -321,6 +323,32 @@ class ETT extends MY_Controller
     {
         $data = $this->input->post();
         $result = $this->ETT_model->update_protocol($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Updated successfully!";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_protocol_details($p_id)
+    {
+        $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);
+        $data['selected_category'] = $p_id;
+        $json['result_html'] = $this->load->view('ett/protocol_details_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function update_protocol_details()
+    {
+        $data = $this->input->post();
+        $result = $this->ETT_model->update_protocol_details($data);
         if ($result) {
             $json['success'] = true;
             $json['message'] = "Updated successfully!";
