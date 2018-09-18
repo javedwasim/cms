@@ -63,7 +63,7 @@
         <!-- Page Content Holder -->
         <div id="content">
             <div id="status_row" class="sticky-bar">
-                
+
             </div>
             <div class="card m-r-20">
                 <div class="card-body">
@@ -77,11 +77,11 @@
 </div>
 <div id="wallet-modal-box">
     <!-- modal content for wallet-->
-    
+
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        
+
         $('.pat_search').datepicker({
             format: 'd-M-yyyy'
         });
@@ -132,23 +132,22 @@
                             },
                             "scrollX": true,
                             columnDefs: [
-                                { "type": "html-input", "targets": [3, 6, 7, 8] },
-                                { "targets": 1, "orderable": false }
+                                {"type": "html-input", "targets": [3, 6, 7, 8]},
+                                {"targets": 1, "orderable": false}
                             ]
                         });
                         $("#full_name").focus();
-                        $("#editable-datatable tbody tr").click(function(e) {
+                        $("#editable-datatable tbody tr").click(function (e) {
                             if ($(this).hasClass('row_selected')) {
-                            $(this).removeClass('row_selected');
-                            }
-                            else {
-                            oTable.$('tr.row_selected').removeClass('row_selected');
-                                    $(this).addClass('row_selected');
+                                $(this).removeClass('row_selected');
+                            } else {
+                                oTable.$('tr.row_selected').removeClass('row_selected');
+                                $(this).addClass('row_selected');
                             }
                         });
-                       
+
                         $('.app_date').datepicker({
-                                format: 'd-M-yyyy'
+                            format: 'd-M-yyyy'
                         });
                     }
                 }

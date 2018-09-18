@@ -52,7 +52,7 @@
                                     	<div class="col-md-9 p-l-0">
                                     		<div class="card">
                                     			<div class="card-header">
-                                    				<button class="btn btn-default btn-block pull-right col-md-1" >Update</button>
+                                    				<button class="btn btn-default btn-block pull-right col-md-3" >Update</button>
                                     			</div>
                                     			<div class="card-body">
                                     				<div contenteditable="true" style="height: 71vh; width: 100%;">
@@ -78,7 +78,7 @@
 		                                					</select>
 	                                					</div>
 	                                					<div class="col-md-8"></div>
-	                                					<div class="col-md-1">
+	                                					<div class="col-md-3">
 	                                						<button class="btn btn-default btn-block pull-right" >Update</button>
 	                                					</div>
 	                                				</div>
