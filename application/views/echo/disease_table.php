@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th class="table-header" style="width: 10%">Delete</th>
-        <th class="table-header">Category Name</th>
+        <th class="table-header">Name</th>
     </tr>
     </thead>
     <tbody>
@@ -15,16 +15,19 @@
                     <i class="fa fa-trash" title="Delete"></i></a>
             </td>
             <td contenteditable="true"
+                data-disease-id = "<?php echo $category['id']; ?>"
                 onBlur="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')"
-                onClick="showEdit(this);">
+                onClick="showEdit(this,'<?php echo $category['id']; ?>');">
                 <?php echo $category['name']; ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
+
 <script>
-    function showEdit(editableObj) {
+    function showEdit(editableObj,id) {
         $(editableObj).css("background", "#FFF");
+        $('#assign_disease_id').val(id);
     }
     function saveToDatabase(editableObj, column, id) {
         $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
@@ -35,8 +38,6 @@
             success: function (response) {
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
-                    toastr["success"](response.message);
-                } else {
                     toastr["success"](response.message);
                 }
             }

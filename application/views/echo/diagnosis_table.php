@@ -23,18 +23,6 @@
     </tbody>
 </table>
 <script>
-    $(document).ready(function () {
-        $('.diagnosis_table').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false,
-            "sort": false,
-            autoWidth: false, //step 1
-            columnDefs: [
-                { width: '5%', targets: 0 }, //step 2, column 1 out of 4
-            ]
-        });
-       });
     function diagnosisEdit(editableObj) {
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");

@@ -1108,8 +1108,8 @@ $(document.body).on('click', '.add-disease-category', function(){
         data: {name:name},
         cache: false,
         success: function(response) {
-            $('.investigation_category_container').empty();
-            $('.investigation_category_container').append(response.result_html);
+            $('.disease_category_container').empty();
+            $('.disease_category_container').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
             } else {
@@ -1264,7 +1264,6 @@ $(document.body).on('click', '.delete-diagnosis', function(){
                 var structure_id = $('#structure_id').val();
                 $('#'+structure_id).css("background", "#1e88e5");
                 $('#'+structure_id).css("color", "#FFF");
-
                 toastr["success"]('Finding deleted successfully!');
             }
         });
@@ -1272,6 +1271,42 @@ $(document.body).on('click', '.delete-diagnosis', function(){
         return false;
     }
     return false;
+});
+
+$(document.body).on('click', '.finding_radio', function(){
+   var finding_id = $(this).attr('data-finding-id');
+   var disease_id = $('#assign_disease_id').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/assign_finding_to_disease',
+        type: 'post',
+        data: {finding_id:finding_id,disease_id:disease_id},
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+});
+
+$(document.body).on('click', '.diagnose_radio', function(){
+    var diagnose_id = $(this).attr('data-diagnose-id');
+    var disease_id = $('#assign_disease_id').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/assign_diagnose_to_disease',
+        type: 'post',
+        data: {disease_id:disease_id,diagnose_id:diagnose_id},
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
 });
 
 

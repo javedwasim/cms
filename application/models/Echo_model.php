@@ -155,7 +155,9 @@
         }
 
         public function get_structure_findings_by_id($id){
-            $result = $this->db->select('*')->from('structure_finding')->where('structure_id',$id)->get();
+            $result = $this->db->select('*')
+                        ->from('structure_finding')
+                        ->where('structure_id',$id)->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -205,7 +207,25 @@
 
         }
 
+        public function assign_finding_to_disease($data){
+            $result = $this->db->select('structure_id')->from('structure_finding')->where('id',$data['finding_id'])->limit(1)->get();
+            $row = $result->row_array();
+            $structure_id = $row['structure_id'];
 
+            $this->db->where('structure_id',$structure_id)->update('structure_finding',array('disease_id'=>0));
+            $this->db->where('id',$data['finding_id'])->update('structure_finding',array('disease_id'=>$data['disease_id']));
+            return $this->db->affected_rows();
+        }
+
+        public function assign_diagnose_to_disease($data){
+            $result = $this->db->select('structure_id')->from('diagnosis')->where('id',$data['diagnose_id'])->limit(1)->get();
+            $row = $result->row_array();
+            $structure_id = $row['structure_id'];
+
+            $this->db->where('structure_id',$structure_id)->update('diagnosis',array('disease_id'=>0));
+            $this->db->where('id',$data['diagnose_id'])->update('diagnosis',array('disease_id'=>$data['disease_id']));
+            return $this->db->affected_rows();
+        }
 	}
 
 ?>

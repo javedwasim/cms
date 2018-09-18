@@ -14,17 +14,3 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $('.datatables').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false,
-            "sort": false,
-            columnDefs: [
-                { width: 1, targets: 0 }
-            ],
-            fixedColumns: true
-        });
-    });
-</script>

@@ -2,169 +2,39 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-4 col-md-4">
                     <div class="card">
+                        <div class="card-header">Disease</div>
                         <div class="card-body">
-                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-                                <thead>
-                                <tr>
-                                    <th>Disease Name</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Rist Factor</td>
-                                </tr>
-                                <tr>
-                                    <td>GIT Problem</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-Resp</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-GIT</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-CNS</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-CVS</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-CVS</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <?php $this->load->view('echo/disease_table'); ?>
+                            <input type="hidden" id="assign_disease_id" value="" />
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-4 col-md-4">
+                    <div class="card-header ">Structure</div>
                     <div class="card">
-                        <div class="card-body">
-                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-                                <thead>
-                                <tr>
-                                    <th>Structure</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Rist Factor</td>
-                                </tr>
-                                <tr>
-                                    <td>GIT Problem</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-Resp</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-GIT</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-CNS</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-CVS</td>
-                                </tr>
-                                <tr>
-                                    <td>Co-CVS</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="card-body structure_category_container" id="dfd_structure">
+                            <?php $this->load->view('echo/structure_table'); ?>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-4 col-md-4">
                     <div class="card">
-                        <div class="card-body">
-                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-                                <thead>
-                                <tr>
-                                    <th style="width: 10%"></th>
-                                    <th>Findings</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Rist Factor</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>GIT Problem</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Co-Resp</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Co-GIT</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Co-CNS</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Co-CVS</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Respitatory Problems</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="card-header">Finding</div>
+                        <div class="card-body default_finding_container">
+                            <?php $this->load->view('echo/default_finding_table'); ?>
                         </div>
                     </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12 col-md-8">
                     <div class="card">
-                        <div class="card-body">
-                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-                                <thead>
-                                <tr>
-                                    <th style="width: 10%"></th>
-                                    <th>Diagnosis</th>
-                                    <th>sortOrder</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Rist Factor</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>GIT Problem</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Co-Resp</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Co-GIT</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Co-CNS</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Co-CVS</td>
-                                    <td>14</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%"><input type="checkbox" name=""></td>
-                                    <td>Respitatory Problems</td>
-                                    <td>14</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="card-body default_diagnosis_container">
+                            <?php $this->load->view('echo/default_diagnosis_table'); ?>
                         </div>
                     </div>
                 </div>
@@ -172,3 +42,65 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.structure_table').DataTable({
+            "info": true,
+            "paging": false,
+            "searching": false,
+            "sort": false,
+            columnDefs: [
+                { width: 1, targets: 0 }
+            ],
+            fixedColumns: true,
+        });
+
+        $('.datatables').DataTable({
+            "info": true,
+            "paging": false,
+            "searching": false,
+            "sort": false,
+            autoWidth: false, //step 1
+            columnDefs: [
+                { width: '5%', targets: 0 }, //step 2, column 1 out of 4
+            ]
+        });
+
+        $('.finding_table').DataTable({
+            "info": true,
+            "paging": false,
+            "searching": false,
+            "sort": false,
+            autoWidth: false, //step 1
+            columnDefs: [
+                { width: '5%', targets: 0 }, //step 2, column 1 out of 4
+            ]
+        });
+
+        $('.diagnosis_table').DataTable({
+            "info": true,
+            "paging": false,
+            "searching": false,
+            "sort": false,
+            autoWidth: false, //step 1
+            columnDefs: [
+                { width: '5%', targets: 0 }, //step 2, column 1 out of 4
+            ]
+        });
+
+        $('.default_structure_table').DataTable({
+            "info": true,
+            "paging": false,
+            "searching": false,
+            "sort": false,
+            autoWidth: false, //step 1
+            columnDefs: [
+                { width: '5%', targets: 0 }, //step 2, column 1 out of 4
+            ]
+        });
+
+        $(".structure_category_container table tbody tr:first td:nth-child(2)").trigger("click");
+        $("#dfd_structure table tbody tr:first td:nth-child(2)").trigger("click");
+
+    });
+</script>
