@@ -15,26 +15,79 @@
 
 		public function pat_profession(){
 			$data['professions'] = $this->Setting_model->get_professions();
+            $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
 			$json['result_html'] = $this->load->view('pages/profession', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
 		}
 
+        public function insert_profession(){
+            $profession = $this->input->post('profession');
+            $result = $this->Setting_model->insert_profession($profession);
+            if ($result) {
+                $data['professions'] = $this->Setting_model->get_professions();
+                $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+                $json['message']= "Added Successfully.";
+            }else{
+                $data['professions'] = $this->Setting_model->get_professions();
+                $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+                $json['message']= "Seems to be an error.";
+            }
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
 		public function pat_district(){
 			$data['districts'] = $this->Setting_model->get_districts();
+            $json['district_table'] = $this->load->view('pages/district_table', $data, true);
 			$json['result_html'] = $this->load->view('pages/district', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
 		}
 
+        public function insert_district(){
+            $district = $this->input->post('district');
+            $result = $this->Setting_model->insert_district($district);
+            if ($result) {
+                $data['districts'] = $this->Setting_model->get_districts();
+                $json['district_table'] = $this->load->view('pages/district_table', $data, true);
+                $json['message']= "Added Successfully.";
+            }else{
+                $data['districts'] = $this->Setting_model->get_districts();
+                $json['district_table'] = $this->load->view('pages/district_table', $data, true);
+                $json['message']= "Seems to be an error.";
+            }
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
 		public function history(){
-			$json['result_html'] = $this->load->view('history/history', "", true);
+            $data['history_categories'] = $this->Setting_model->get_history_categories();
+			$json['result_html'] = $this->load->view('history/history', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
 		}
+
+        public function add_history_category(){
+            $category = $this->input->post('category');
+            $result = $this->Setting_model->save_history_category($category);
+            if ($result) {
+                $data['history_categories'] = $this->Setting_model->get_history_categories();
+                $json['category_table'] = $this->load->view('pages/category_table', $data, true);
+                $json['message']= "Added Successfully.";
+            }else{
+                $data['history_categories'] = $this->Setting_model->get_history_categories();
+                $json['category_table'] = $this->load->view('pages/category_table', $data, true);
+                $json['message']= "Seems an error.";
+            }
+        }
+
+
 
 		public function examination(){
 			$json['result_html'] = $this->load->view('examination/examination', "", true);

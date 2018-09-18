@@ -1495,6 +1495,28 @@ $(document.body).on('click', '#pat_history', function(){
     });
 });
 
+$(document.body).on('click', '#add_history_category', function(){
+    var category = $('#history_category').val();
+    $.ajax({
+        url: '/cms/setting/add_history_category',
+        type: 'post',
+        data:{category:category},
+        cache: false,
+        success: function(response) {
+            if (response.category_table != ''){
+                $('.history_category_content').empty();
+                $('.history_category_content').append(response.category_table);
+                ///////////////// initilize datatable //////////////
+                $('.profiletable').DataTable({
+                    "scrollX": true
+                });
+            }
+        }
+    });
+});
+
+
+
 /////////////////////////////////// load examination page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1723,6 +1745,8 @@ $(document.body).on('click', '#pat_profession', function(){
             if (response.result_html != ''){
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('.profession_table').remove();
+                $('#profession_table').append(response.profession_table);
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,
@@ -1731,6 +1755,36 @@ $(document.body).on('click', '#pat_profession', function(){
                     paging: false,
                     info: false
                 });
+            }
+        }
+    });
+});
+
+$(document.body).on('click', '#profes_add', function(){
+    var profession = $('#profession_add').val();
+    $.ajax({
+        url: '/cms/setting/insert_profession',
+        type: 'post',
+        data: {profession:profession},
+        cache: false,
+        success: function(response) {
+            if (response.profession_table != ''){
+                $('.profession_table').remove();
+                $('#profession_table').append(response.profession_table);
+                $('#profession_add').val('');
+                ///////////////// initilize datatable //////////////
+                $('#research-table').DataTable({
+                    "scrollX": true,
+                    scrollY: '50vh',
+                    scrollCollapse: true,
+                    paging: false,
+                    info: false
+                });
+                if (response.message == "Added Successfully.") {
+                    toastr["success"](response.message);
+                }else{
+                    toastr["warning"](response.message);
+                }
             }
         }
     });
@@ -1747,6 +1801,8 @@ $(document.body).on('click', '#pat_district', function(){
             if (response.result_html != ''){
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('.district_content').remove();
+                $('#district_content').append(response.district_table);
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,
@@ -1759,6 +1815,36 @@ $(document.body).on('click', '#pat_district', function(){
         }
     });
 });
+
+    $(document.body).on('click', '#add_district', function(){
+        var district = $('#distrtict_add').val();
+        $.ajax({
+            url: '/cms/setting/insert_district',
+            type: 'post',
+            data: {district:district},
+            cache: false,
+            success: function(response) {
+                if (response.district_table != ''){
+                    $('.district_content').remove();
+                    $('#district_content').append(response.district_table);
+                    $('#distrtict_add').val('');
+                    ///////////////// initilize datatable //////////////
+                    $('#research-table').DataTable({
+                        "scrollX": true,
+                        scrollY: '50vh',
+                        scrollCollapse: true,
+                        paging: false,
+                        info: false
+                    });
+                    if (response.message == "Added Successfully.") {
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["warning"](response.message);
+                    }
+                }
+            }
+        });
+    });
 
 /////////////////////////////////// load delete page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////

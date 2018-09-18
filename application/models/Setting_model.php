@@ -282,6 +282,45 @@
             }
         }
 
+        public function insert_profession($data){
+            $result = $this->db->set('profession_name',$data)
+                        ->insert('profession_tbl');
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function insert_district($data){
+            $result = $this->db->set('district_name',$data)
+                        ->insert('districts_tbl');
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function save_history_category($data){
+            $result = $this->db->set()
+                        ->insert();
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function get_history_categories(){
+            $result = $this->db->select('*')->from('history_category')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
 	}
 
 ?>

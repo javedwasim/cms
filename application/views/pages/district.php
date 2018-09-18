@@ -7,31 +7,18 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>New District</label>
-                                <input type="text" class="form-control" name="">
+                                <input type="text" class="form-control" name="distrtict_add" id="distrtict_add">
                             </div>
                         </div>
                         <div class="col-md-2" style="margin-top: 26px;">
-                            <button class="btn btn-primary">Add</button>
+                            <button class="btn btn-primary" id="add_district">Add</button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body" style="overflow-y:auto; height:400px">
-                    <table class="table table-bordered nowrap responsive" cellspacing="0" width="100%" >
-                        <thead>
-                            <tr>
-                                <th>Districts</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                                foreach ($districts as $key) {
-                            ?>
-                            <tr>
-                                <td><?php echo $key['district_name']; ?></td>
-                            </tr>
-                        <?php } ?>
-                        </tbody>
-                    </table>
+                    <div id="district_content">
+                        
+                    </div>
                 </div>
             </div>
         </div>

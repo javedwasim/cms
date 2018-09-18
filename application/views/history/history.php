@@ -28,9 +28,8 @@
             </div>
         </div>
     </div>
-                <!-- row -->
-
-                <!-- modal content -->
+    <!-- row -->
+    <!-- modal content -->
     <div id="history-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
