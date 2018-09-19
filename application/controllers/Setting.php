@@ -15,6 +15,7 @@
 
 		public function pat_profession(){
 			$data['professions'] = $this->Setting_model->get_professions();
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
 			$json['result_html'] = $this->load->view('pages/profession', $data, true);
             if ($this->input->is_ajax_request()) {

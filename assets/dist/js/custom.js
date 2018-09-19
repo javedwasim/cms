@@ -2711,4 +2711,27 @@ $(document.body).on('click', '#wallet_search', function () {
         });
     });
 
+function get_students(func_call) {
+    $.ajax({
+        url: '/cms/setting/pat_profession',
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.dashboard-content').remove();
+                $('#dashboard-content').append(response.result_html);
+                $('.profession_table').remove();
+                $('#profession_table').append(response.profession_table);
+                ///////////////// initilize datatable //////////////
+                $('#research-table').DataTable({
+                    "scrollX": true,
+                    scrollY: '50vh',
+                    scrollCollapse: true,
+                    paging: false,
+                    info: false
+                });
+            }
+        }
+    });
+}
+///////////////// sohaib's script ////////////////
     

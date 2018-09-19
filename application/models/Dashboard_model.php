@@ -103,4 +103,29 @@ public function get_user($username)
         }
     }
 
+    public function get_other_rights_detail(){
+        $loggedin_user = $this->session->userdata('userdata');
+        $user_id = $loggedin_user['login_id'];
+        $sql = "Select login.*,lrg.other_rights_group_id,lrgd.rights
+                FROM login
+                LEFT JOIN login_rights_group lrg on lrg.login_rights_group_id = login.login_rights_group_id and lrg.other_rights_group_id > 0
+                LEFT JOIN(
+                    SELECT other_rights_group_detail.*, GROUP_CONCAT(other_rights.class) as other_rights,
+                    GROUP_CONCAT(other_rights.status) as astatus,
+                    GROUP_CONCAT(CONCAT(other_rights.class,'-',other_rights_group_detail.status)) as rights
+                    FROM other_rights_group_detail
+                    LEFT JOIN other_rights ON other_rights.other_rights_id = other_rights_group_detail.other_rights_id
+                    LEFT JOIN other_rights_group org  ON org.other_rights_group_id = other_rights_group_detail.other_rights_group_id
+                    WHERE org.status = 1
+                    Group BY other_rights_group_id
+                )lrgd ON lrgd.other_rights_group_id = lrg.other_rights_group_id
+                WHERE login_id = $user_id ";
+        $result = $query = $this->db->query($sql);
+        if ($result) {
+            return $result->result_array();
+        } else {
+            return array();
+        }
+    }
+
 }

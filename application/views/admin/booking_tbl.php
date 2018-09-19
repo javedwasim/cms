@@ -1,8 +1,15 @@
 <div class="table-responsive">
+    <?php
+        if(isset($rights[0]['rights']))://print_r($rights[0]['rights']);
+            $permissions = explode(',',$rights[0]['rights']);
+        endif;
+    ?>
     <table class="table table-bordered" cellspacing="0" id="editable-datatable" width="100%">
         <thead class="tb-bg white-text">
             <tr>
-                <th>Action</th>
+                <?php  if(!in_array("can_delete-0", $permissions)): ?>
+                    <th>Action</th>
+                <?php endif; ?>
                 <th>Sr</th>
                 <th>Order</th>
                 <th style="width:150px;">Name</th>
@@ -49,11 +56,14 @@
                 for($i=1; $i<=5; $i++){
                     ?>
                 <tr class="gradeX colorchnage">
-                    <td>
-                        <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
+                    <?php  if(!in_array("can_delete-0", $permissions)): ?>
+                        <td>
+                            <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    <?php endif; ?>
+
                     <td ><?php echo $i?></td>
                     <td class="order-number" ><?php echo $i?></td>
                     <td>
@@ -220,11 +230,13 @@
                 ?>
 
                 <tr class="gradeX colorchnage">
-                    <td>
-                        <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
+                    <?php  if(!in_array("can_delete-0", $permissions)): ?>
+                        <td>
+                            <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    <?php endif; ?>
                     <td ><?php echo $order; ?></td>
                     <td>
                         <?php echo $details['order_number']; ?>
@@ -248,7 +260,8 @@
                             echo "";
                         }?>"
                         >
-                        <input type="text" name="consultant_fee" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['consultant_fee'] ?>">
+                        <input type="text" name="consultant_fee" <?php  echo (in_array("edit_profile-0", $permissions))&&($details['consultant_fee']>0)?'readonly':''; ?>
+                               onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['consultant_fee'] ?>">
                     </td>
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover" 
@@ -259,7 +272,8 @@
                             echo "";
                         }?>"
                         >
-                        <input type="text" name="ett_fee" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['ett_fee'] ?>">
+                        <input type="text" name="ett_fee" onchange="valupdate(this)" <?php  echo (in_array("edit_profile-0", $permissions))&&($details['ett_fee']>0)?'readonly':''; ?>
+                               autocomplete="off" class="dt-input" value="<?php echo $details['ett_fee'] ?>">
                     </td>
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover" 
@@ -270,7 +284,8 @@
                             echo "";
                         }?>"
                         >
-                        <input type="text" name="echo_fee" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['echo_fee'] ?>">
+                        <input type="text" name="echo_fee" onchange="valupdate(this)" <?php  echo (in_array("edit_profile-0", $permissions))&&($details['echo_fee']>0)?'readonly':''; ?>
+                               autocomplete="off" class="dt-input" value="<?php echo $details['echo_fee'] ?>">
                     </td>
                     <td>
                         <?php
@@ -309,7 +324,8 @@
                         <?php echo $details['echo_fee_collected_by'] ?>
                     </td>
                     <td>
-                        <input type="text" name="refund" onchange="valupdate(this)"  autocomplete="off" class="dt-input" value="<?php echo $details['refund'] ?>">
+                        <input type="text" name="refund" onchange="valupdate(this)"  <?php  echo (in_array("edit_profile-0", $permissions))&&($details['refund']>0)?'readonly':''; ?>
+                               autocomplete="off" class="dt-input" value="<?php echo $details['refund'] ?>">
                     </td>
                     <td class="appointment_booking_id hide" >
                         <?php echo $details['appointment_booking_id'] ?>
@@ -326,11 +342,13 @@
                 ?>
 
                 <tr class="gradeX colorchnage">
-                    <td>
-                        <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
+                    <?php  if(!in_array("can_delete-0", $permissions)): ?>
+                        <td>
+                            <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    <?php endif; ?>
                     <td ><?php echo $order; ?></td>
                     <td>
                         <?php echo $details['order_number']; ?>
@@ -346,13 +364,16 @@
                         <?php echo $datetime ?>
                     </td>
                     <td>
-                        <input type="text" name="consultant_fee" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['consultant_fee'] ?>">
+                        <input type="text" name="consultant_fee" onchange="valupdate(this)"  <?php  echo (in_array("edit_profile-0", $permissions))&&($details['consultant_fee']>0)?'readonly':''; ?>
+                               autocomplete="off" class="dt-input" value="<?php echo $details['consultant_fee'] ?>">
                     </td>
                     <td>
-                        <input type="text" name="ett_fee" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['ett_fee'] ?>">
+                        <input type="text" name="ett_fee" onchange="valupdate(this)" <?php  echo (in_array("edit_profile-0", $permissions))&&($details['ett_fee']>0)?'readonly':''; ?>
+                               autocomplete="off" class="dt-input" value="<?php echo $details['ett_fee'] ?>">
                     </td>
                     <td>
-                        <input type="text" name="echo_fee" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['echo_fee'] ?>">
+                        <input type="text" name="echo_fee" onchange="valupdate(this)" <?php  echo (in_array("edit_profile-0", $permissions))&&($details['echo_fee']>0)?'readonly':''; ?>
+                               autocomplete="off" class="dt-input" value="<?php echo $details['echo_fee'] ?>">
                     </td>
                     <td>
                         <?php
@@ -393,7 +414,8 @@
                         <?php echo $details['echo_fee_collected_by'] ?>
                     </td>
                     <td>
-                        <input type="text" name="refund" onchange="valupdate(this)"  autocomplete="off" class="dt-input" value="<?php echo $details['refund'] ?>">
+                        <input type="text" name="refund" onchange="valupdate(this)"  <?php  echo (in_array("edit_profile-0", $permissions))&&($details['refund']>0)?'readonly':''; ?>
+                               autocomplete="off" class="dt-input" value="<?php echo $details['refund'] ?>">
                     </td>
                     
                     <td class="appointment_booking_id hide" >

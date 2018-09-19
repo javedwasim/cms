@@ -11,8 +11,8 @@
     });
 
    /////////////// Add student /////////////////////
-   $('li #list_itmes_add_student').click(function(){
-   	get_students($(this).attr('data-func-call'));
+   $('li #list_itmes_profession').click(function(){
+   	    get_students($(this).attr('data-func-call'));
    });
       /////////////// student fields  /////////////////////
    $('li #list_itmes_student_fields').click(function(){
