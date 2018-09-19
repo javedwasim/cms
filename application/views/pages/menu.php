@@ -10,40 +10,40 @@
     });
 
    /////////////// Add student /////////////////////
-   $('li #list_itmes_add_student').click(function(){
-   	get_students($(this).attr('data-func-call'));
+   $('li #list_itmes_profession').click(function(){
+   	    get_professions($(this).attr('data-func-call'));
    });
       /////////////// student fields  /////////////////////
-   $('li #list_itmes_student_fields').click(function(){
-   	profile_fields($(this).attr('data-func-call'));
+   $('li #list_itmes_diestrict').click(function(){
+       get_districts($(this).attr('data-func-call'));
    });
       /////////////// student categories  ////////////////
-   $('li #list_itmes_student_cat').click(function(){
-    student_categories($(this).attr('data-func-call'));
+   $('li #list_itmes_history').click(function(){
+        get_history($(this).attr('data-func-call'));
    });
     /////////////// Search Students /////////////////////
-   $('li #list_itmes_students').click(function(){
-    students_listing($(this).attr('data-func-call'));
+   $('li #list_itmes_examination').click(function(){
+       get_examinations($(this).attr('data-func-call'));
    });
     /////////////// Search Students /////////////////////
-   $('li #list_itmes_employee').click(function(){
-    employee_listing($(this).attr('data-func-call'));
+   $('li #list_itmes_investigation').click(function(){
+       get_investigations($(this).attr('data-func-call'));
    });
     /////////////// Add employee /////////////////////
-   $('li #list_itmes_employee_add').click(function(){
-    employee_add($(this).attr('data-func-call'));
+   $('li #list_itmes_recommendation').click(function(){
+        get_recommendations($(this).attr('data-func-call'));
    });
       /////////////// Search guardians /////////////////////
-   $('#list_itmes_guardians').click(function(){
-    guardian_listings($(this).attr('data-func-call'));
+   $('#list_itmes_instruction').click(function(){
+        get_instructions($(this).attr('data-func-call'));
    });
     /////////////// attendance register /////////////////////
-   $('#list_itmes_register').click(function(){
-    attendance_register($(this).attr('data-func-call'));
+   $('#list_itmes_ett').click(function(){
+        get_ett($(this).attr('data-func-call'));
    });
   /////////////// attendance register ///////////////////
-   $('#list_itmes_reports').click(function(){
-    attendance_reports($(this).attr('data-func-call'));
+   $('#list_itmes_echo_index').click(function(){
+        get_echo($(this).attr('data-func-call'));
    });
 
    /////////////// employee profile fields ///////////////////
@@ -61,24 +61,23 @@
    });
 
     /////////////// employee positions ///////////////////
-   $('#list_itmes_emp_positions').click(function(){
-      employee_position($(this).attr('data-func-call'));
+   $('#list_itmes_ett').click(function(){
+      get_ett($(this).attr('data-func-call'));
    });
 
    ///////////////// classes ////////////////////////////
-   $('#list_itmes_classes').click(function(){
-       get_classes($(this).attr('data-func-call'));
+   $('#list_itmes_advice').click(function(){
+       get_advice($(this).attr('data-func-call'));
    });
 
   /////////////// institution details ///////////////////
-   $('#list_itmes_institution_details').click(function(){
-      institue_details($(this).attr('data-func-call'));
-       $( "#list_itmes_institution_details" ).addClass( "active nav-link" );
+   $('#list_itmes_research').click(function(){
+      get_research($(this).attr('data-func-call'));
    });
 
   /////////////// subject names ///////////////////
-   $('#list_itmes_subject_name').click(function(){
-      subject_names($(this).attr('data-func-call'));
+   $('#list_itmes_manage_research').click(function(){
+      get_manage_reasearch($(this).attr('data-func-call'));
    });
 
   /////////////// academic session ///////////////////
@@ -87,38 +86,38 @@
    });
 
      /////////////// institution bank accounts ///////////////////
-   $('#list_itmes_institution_bank_accounts').click(function(){
-      institution_bank_acc($(this).attr('data-func-call'));
+   $('#list_itmes_register_user').click(function(){
+      get_register_user($(this).attr('data-func-call'));
    });
 
     /////////////// fee type ///////////////////
-   $('#list_itmes_fee_type').click(function(){
-      fee_types($(this).attr('data-func-call'));
+   $('#list_itmes_permission').click(function(){
+      get_list_permission($(this).attr('data-func-call'));
    });
 
    /////////////// custom payment method ///////////////////
-   $('#list_itmes_custom_payment_method').click(function(){
-      custom_payments($(this).attr('data-func-call'));
+   $('#list_itmes_delete_patient').click(function(){
+      get_delete_patients($(this).attr('data-func-call'));
    });
 
     /////////////// custom payment method ///////////////////
-   $('#list_itmes_transaction_categories').click(function(){
-      transaction_category($(this).attr('data-func-call'));
+   $('#list_itmes_limiter').click(function(){
+      get_item_limiter($(this).attr('data-func-call'));
    });
 
    /////////////// assessment categories ///////////////////
-   $('#list_itmes_assessments').click(function(){
-       assessment_category($(this).attr('data-func-call'));
+   $('#list_itmes_laboratory_test').click(function(){
+       get_laboratory_test($(this).attr('data-func-call'));
    });
 
    /////////////// assessment grade scales ///////////////////
-   $('#list_itmes_grade_scales').click(function(){
-       grade_scales($(this).attr('data-func-call'));
+   $('#list_itmes_special_instructions').click(function(){
+       grade_special_instruction($(this).attr('data-func-call'));
    });
 
    /////////////// assessment learning domain ///////////////////
-   $('#list_itmes_domains').click(function(){
-       domains($(this).attr('data-func-call'));
+   $('#list_itmes_signature').click(function(){
+       get_items_signature($(this).attr('data-func-call'));
    });
 
    $('#list_itmes_batches').click(function(){

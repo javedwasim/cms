@@ -13,7 +13,7 @@ class Angio_recommendation extends MY_Controller
 
     }
 
-    public function angio_recommendation(){
+    public function recommendation(){
         $data['recommendations'] = $this->Recommendation_model->get_recommendations();
         $json['result_html'] = $this->load->view('angio/recommendation', $data, true);
         if ($this->input->is_ajax_request()) {

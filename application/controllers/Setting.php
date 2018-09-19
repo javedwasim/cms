@@ -13,7 +13,7 @@
 
 		}
 
-		public function pat_profession(){
+		public function profession(){
 			$data['professions'] = $this->Setting_model->get_professions();
             $data['rights'] = $this->session->userdata('other_rights');
             $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
@@ -40,7 +40,7 @@
             }
         }
 
-		public function pat_district(){
+		public function diestrict(){
 			$data['districts'] = $this->Setting_model->get_districts();
             $json['district_table'] = $this->load->view('pages/district_table', $data, true);
 			$json['result_html'] = $this->load->view('pages/district', $data, true);
@@ -111,7 +111,7 @@
             }
 		}
 
-		public function instruction(){
+		public function special_instructions(){
 			$json['result_html'] = $this->load->view('pages/instruction', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -164,14 +164,14 @@
             }
 		}
 
-		public function pat_delete(){
+		public function delete_patient(){
 			$json['result_html'] = $this->load->view('pages/delete-patient', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
 		}
 
-		public function booking_limiter(){
+		public function limiter(){
 			$data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
 			$json['result_html'] = $this->load->view('pages/limiter', $data, true);
             if ($this->input->is_ajax_request()) {
@@ -190,14 +190,14 @@
             }
 		}
 
-		public function dr_signature(){
+		public function signature(){
 			$json['result_html'] = $this->load->view('pages/doctor_signature', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
 		}
 
-		public function change_permissions(){
+		public function permission(){
 			$json['result_html'] = $this->load->view('pages/change_permissions', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);

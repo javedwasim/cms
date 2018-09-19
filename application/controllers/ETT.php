@@ -14,7 +14,7 @@ class ETT extends MY_Controller
     }
 
 
-    public function ett_setting(){
+    public function ett(){
         $p_id = 0;
     	$data['test_reasons'] = $this->ETT_model->get_test_reasons();
     	$data['ending_reasons'] = $this->ETT_model->get_ending_reasons();

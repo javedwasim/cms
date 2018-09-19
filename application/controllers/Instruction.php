@@ -24,7 +24,7 @@ class Instruction extends MY_Controller
         }
     }
 
-    public function instruction()
+    public function special_instructions()
     {
         $data['category'] = 'clinical';
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);

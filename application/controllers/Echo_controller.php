@@ -14,7 +14,7 @@ class Echo_controller extends MY_Controller
     }
 
 
-    public function disease()
+    public function echo_index()
     {
         $data['categories'] = $this->Echo_model->get_disease_categories();
         $data['structures'] = $this->Echo_model->get_Structure_categories();
