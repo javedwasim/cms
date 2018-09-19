@@ -17,18 +17,18 @@
                    <i class="fa fa-trash" title="Delete"></i></a>
             </td>
             <td contenteditable="true"
-                onBlur="saveCategory(this,'<?php echo $category['category']; ?>','<?php echo $category['id']; ?>')"
-                onClick="showEdit(this);">
+                onBlur="saveInstructionCategory(this,'<?php echo $category['category']; ?>','<?php echo $category['id']; ?>')"
+                onClick="editInstructionCategory(this);">
                 <?php echo $category['name']; ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <script>
-    function showEdit(editableObj) {
+    function editInstructionCategory(editableObj) {
         $(editableObj).css("background", "#FFF");
     }
-    function saveCategory(editableObj, column, id) {
+    function saveInstructionCategory(editableObj, column, id) {
         $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'instruction/save_inst_category' ?>",
@@ -37,8 +37,6 @@
             success: function (response) {
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
-                    toastr["success"](response.message);
-                } else {
                     toastr["success"](response.message);
                 }
             }

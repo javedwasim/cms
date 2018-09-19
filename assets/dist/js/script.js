@@ -1565,3 +1565,10 @@ $(document.body).on('click', '#save_profile_history_description', function(){
     });
     return false;
 });
+
+$(document).ready(function () {
+    var base_url = $('#base').val();
+    $('.sidebar-menu').load(window.location.origin+window.location.pathname + "dashboard/get_menus", function () {
+        $('.sidebar-menu').fadeIn('fast');
+    });
+});

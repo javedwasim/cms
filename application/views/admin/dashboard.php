@@ -19,6 +19,11 @@
                 <button type="button" id="dashboardsidebarCollapse" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
                 </button>
+                <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu list" data-widget="treeview" role="menu" data-accordion="false">
+
+                </ul>
+
+
                 <ul class="list-unstyled components">
                     <li>
                         <a href="#profile" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">

@@ -15,18 +15,18 @@
                    <i class="fa fa-trash" title="Delete"></i></a>
             </td>
             <td contenteditable="true"
-                onBlur="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')"
-                onClick="showEdit(this);">
+                onBlur="saveInvestigationCateGOry(this,'cate_name','<?php echo $category['id']; ?>')"
+                onClick="editInvestigationCategory(this);">
                 <?php echo $category['name']; ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <script>
-    function showEdit(editableObj) {
+    function editInvestigationCategory(editableObj) {
         $(editableObj).css("background", "#FFF");
     }
-    function saveToDatabase(editableObj, column, id) {
+    function saveInvestigationCateGOry(editableObj, column, id) {
         $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'investigation/save_investigation_category' ?>",
