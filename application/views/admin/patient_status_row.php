@@ -1,4 +1,9 @@
 <div class="status_row">
+    <?php
+        if(isset($rights[0]['rights'])):
+            $permissions = explode(',',$rights[0]['rights']);
+        endif;
+    ?>
     <div class="row m-r-5">
         <div class="col-md-12" id="operations_panel">
             <div class="card" style="box-shadow: none; margin-bottom: 0px;">
@@ -99,17 +104,20 @@
                         </div>
                         <!-- Column -->
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5" style="max-width: 100%;">
-                            <a href="javascript:void(0)" class="complete" >
-                                <div class="round round-sm align-self-center m-b-10" style="border:1px solid #006400; background: none;"><i class="ti-thumb-up" style="color: #006400;"></i></div>
-                            </a>
-                            <a href="javascript:void(0)" class="complete">
-                                <div class="m-l-10 align-self-center">
-                                    <b class="m-b-0 font-lgiht">Complete</b>
-                                    <p class="m-b-0 text-muted ">(<?php echo $count_complete; ?>)</p>
-                                </div>
-                            </a>
-                        </div>
+
+                        <?php  if(!in_array("can_complete-0", $permissions)): ?>
+                            <div class="col-lg-1 col-md-3 text-center m-b-5" style="max-width: 100%;">
+                                <a href="javascript:void(0)" class="complete">
+                                    <div class="round round-sm align-self-center m-b-10" style="border:1px solid #006400; background: none;"><i class="ti-thumb-up" style="color: #006400;"></i></div>
+                                </a>
+                                <a href="javascript:void(0)" class="complete">
+                                    <div class="m-l-10 align-self-center">
+                                        <b class="m-b-0 font-lgiht">Complete</b>
+                                        <p class="m-b-0 text-muted ">(<?php echo $count_complete; ?>)</p>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                         <div class="col-lg-3 col-md-4 ">
                             <div class="row">
                                 <div class="col-md-12">

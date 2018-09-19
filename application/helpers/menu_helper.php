@@ -6,7 +6,7 @@ if (!function_exists('print_menu')) {
     function print_menu($root, $tree) {
         $result = '';
         if (!is_null($tree) && count($tree) > 0) {
-            $result .= '<ul class="">';
+            $result .= '<ul class="list-unstyled components">';
             foreach ($tree as $child => $parent) {
                 if ($parent->parent_id == $root) {
                     unset($tree[$child]);
@@ -23,5 +23,4 @@ if (!function_exists('print_menu')) {
     }
 
 } 
-
 

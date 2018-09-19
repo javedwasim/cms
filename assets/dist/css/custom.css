@@ -516,6 +516,55 @@ table.table th {
     padding: 5px 5px;
     font-weight: bold;
 }
+/* ---------------------------------------------------
+    sidebar style
+----------------------------------------------------- */
+.list-unstyled {
+    padding-left: 2px;
+    list-style: none;
+    cursor: pointer;
+}
+.sidebar-menu ul li ul {
+    display: none;
+    padding-left: 15px;
+}
+.sidebar-menu .components li ul li {
+    padding: 7px 5px;
+    border-bottom: 1px solid #26c6da;
+}
+.sidebar-menu .components li ul li:last-child{
+    border-bottom:none;   
+}
+.sidebar-menu .components li ul li {
+    border-bottom: 1px solid #26c6da;
+}
+.sidebar-menu .components li ul li:hover {
+    padding: 7px 5px;
+    border-bottom: 1px solid #26c6da;
+    background: #26c6da;
+    cursor: pointer;
+}
+.sidebar-menu>ul>li {
+    margin-bottom: 20px;
+    padding: 5px 0px;
+}
+
+.sidebar-menu ul li .fa,.sidebar-menu ul li .fas {
+    margin-right: 10px;
+    margin-left: 5px;
+}
+.sidebar-menu {
+    margin-top: 20px;
+}
+li#list_itmes_ {
+    border-bottom: 1px solid #26c6da;
+}
+li#list_itmes_clinical {
+    border-bottom: 1px solid #26c6da;
+}
+li#list_itmes_setting {
+    border-bottom: 1px solid #26c6da;
+}
 
 /* ---------------------------------------------------
     MEDIAQUERIES

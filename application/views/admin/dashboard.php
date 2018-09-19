@@ -24,7 +24,7 @@
                 </ul>
 
 
-                <ul class="list-unstyled components">
+               <!--  <ul class="list-unstyled components">
                     <li>
                         <a href="#profile" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
                             <i class="fas fa-user"></i>
@@ -109,7 +109,7 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
+                </ul> -->
             </nav>
 
             <!-- Page Content  -->

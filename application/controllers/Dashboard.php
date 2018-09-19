@@ -35,6 +35,7 @@ class Dashboard extends CI_Controller {
           $data['ett_fee'] = $this->User_model->get_todays_ett_fee_paid();
           $data['echo_fee'] = $this->User_model->get_todays_echo_fee_paid();
           $data['fee_refund'] = $this->User_model->get_todays_total_refund();
+          $data['rights'] = $this->session->userdata('other_rights');
           $this->load->view('partial/header');
           $this->load->view('partial/navbar');
          $this->load->view('admin/dashboard',$data);
@@ -52,6 +53,7 @@ class Dashboard extends CI_Controller {
           $data['investigation_count'] = $this->User_model->count_investigation_waiting();
           $data['checkup_count'] = $this->User_model->count_checkup_waiting();
           $data['count_complete'] = $this->User_model->count_complete();
+          $data['rights'] = $this->session->userdata('other_rights');
           $this->load->view('partial/header');
           $this->load->view('partial/navbar');
           $this->load->view('admin/dashboard',$data);
@@ -70,7 +72,9 @@ class Dashboard extends CI_Controller {
                 $result = $this->Dashboard_model->get_user($user_name);
                 if ($result) {
                     if (password_verify($this->input->post('password'), $result['password'])) {
-                        $this->session->set_userdata($result);
+                        $this->session->set_userdata('userdata', $result);
+                        $other_rights = $this->Dashboard_model->get_other_rights_detail();
+                        $this->session->set_userdata('other_rights', $other_rights);
                         $this->session->set_userdata('is_logged_in', '1');
                         redirect('/');
                     } else {

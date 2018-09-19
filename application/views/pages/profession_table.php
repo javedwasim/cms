@@ -7,7 +7,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php 
+            <?php
                 foreach ($professions as $key) {
             ?>
             <tr>
