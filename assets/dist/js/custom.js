@@ -149,8 +149,6 @@ $(document).ready(function () {
         return $(value).val();
     };
 
-
-
 });
 
 ///////////////////////////////* Add a click handler for the row *////////////////////
@@ -2037,10 +2035,6 @@ $(document.body).on('click', '#ett-setting', function () {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#permissions-table').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2099,13 +2093,8 @@ $(document.body).on('click', '#add_ending_reason', function () {
         cache: false,
         success: function (response) {
             $('#ett_test_reason').val('');
-            $('.ins_category_container').empty();
-            $('.ins_category_container').append(response.result_html);
-            $('.datatables').DataTable({
-                "info": true,
-                "paging": false,
-                "searching": false
-            });
+            $('.ending_reason_table').empty();
+            $('.ending_reason_table').append(response.result_html);
             if (response.message == "Added successfully!") {
                 toastr["success"](response.message);
             } else {
@@ -2122,13 +2111,8 @@ $(document.body).on('click', '.delete-ending-reason', function () {
             url: $(this).attr('data-href'),
             cache: false,
             success: function (response) {
-                $('.ins_category_container').empty();
-                $('.ins_category_container').append(response.result_html);
-                $('.datatables').DataTable({
-                    "info": true,
-                    "paging": false,
-                    "searching": false
-                });
+                $('.ending_reason_table').empty();
+                $('.ending_reason_table').append(response.result_html);
                 if (response.message == "Updated successfully!") {
                     toastr["success"](response.message);
                 } else {
@@ -2151,13 +2135,8 @@ $(document.body).on('click', '#add_ett_discription', function () {
         cache: false,
         success: function (response) {
             $('#ett_discription').val('');
-            $('.ins_category_container').empty();
-            $('.ins_category_container').append(response.result_html);
-            $('.datatables').DataTable({
-                "info": true,
-                "paging": false,
-                "searching": false
-            });
+            $('.discription-table').empty();
+            $('.discription-table').append(response.result_html);
             if (response.message == "Added successfully!") {
                 toastr["success"](response.message);
             } else {
@@ -2174,13 +2153,8 @@ $(document.body).on('click', '.delete-description', function () {
             url: $(this).attr('data-href'),
             cache: false,
             success: function (response) {
-                $('.ins_category_container').empty();
-                $('.ins_category_container').append(response.result_html);
-                $('.datatables').DataTable({
-                    "info": true,
-                    "paging": false,
-                    "searching": false
-                });
+                $('.discription-table').empty();
+                $('.discription-table').append(response.result_html);
                 if (response.message == "Deleted Successfully.") {
                     toastr["success"](response.message);
                 } else {
@@ -2203,13 +2177,8 @@ $(document.body).on('click', '#add_conclusion', function () {
         cache: false,
         success: function (response) {
             $('#ett_conclusion').val('');
-            $('.ins_category_container').empty();
-            $('.ins_category_container').append(response.result_html);
-            $('.datatables').DataTable({
-                "info": true,
-                "paging": false,
-                "searching": false
-            });
+            $('.conclusion_table_content').empty();
+            $('.conclusion_table_content').append(response.result_html);
             if (response.message == "Added successfully!") {
                 toastr["success"](response.message);
             } else {
@@ -2226,13 +2195,8 @@ $(document.body).on('click', '.delete-conclusion', function () {
             url: $(this).attr('data-href'),
             cache: false,
             success: function (response) {
-                $('.ins_category_container').empty();
-                $('.ins_category_container').append(response.result_html);
-                $('.datatables').DataTable({
-                    "info": true,
-                    "paging": false,
-                    "searching": false
-                });
+                $('.conclusion_table_content').empty();
+                $('.conclusion_table_content').append(response.result_html);
                 if (response.message == "Deleted Successfully.") {
                     toastr["success"](response.message);
                 } else {
@@ -2263,13 +2227,8 @@ $(document.body).on('click', '#add_protocol', function () {
             $('#new_protocol').val('');
             $('#protocol_stages').val('');
             $('#protocol_recovery').val('');
-            $('.ins_category_container').empty();
-            $('.ins_category_container').append(response.result_html);
-            $('.datatables').DataTable({
-                "info": true,
-                "paging": false,
-                "searching": false
-            });
+            $('.protocol_table_content').empty();
+            $('.protocol_table_content').append(response.result_html);
             if (response.message == "Added successfully!") {
                 toastr["success"](response.message);
             } else {
@@ -2286,13 +2245,8 @@ $(document.body).on('click', '.delete-protocol', function () {
             url: $(this).attr('data-href'),
             cache: false,
             success: function (response) {
-                $('.ins_category_container').empty();
-                $('.ins_category_container').append(response.result_html);
-                $('.datatables').DataTable({
-                    "info": true,
-                    "paging": false,
-                    "searching": false
-                });
+                $('.protocol_table_content').empty();
+                $('.protocol_table_content').append(response.result_html);
                 if (response.message == "Deleted Successfully.") {
                     toastr["success"](response.message);
                 } else {
@@ -2742,5 +2696,19 @@ $(document.body).on('click', '#update_profile', function () {
         }
     });
 });
+
+$(document.body).on('click', '#wallet_search', function () {
+        var walletsearch = $('#wallet_date').val();
+        $.ajax({
+            url: '/cms/user/search_wallet_status',
+            type: 'post',
+            data: {
+                walletsearch:walletsearch
+            },success:function(response){
+                $('.wallet-modal-box').remove();
+                $('#wallet-modal-box').append(response.wallet_count);
+            }
+        });
+    });
 
     

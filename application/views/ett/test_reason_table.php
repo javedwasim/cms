@@ -24,13 +24,6 @@
     </tbody>
 </table>
 <script type="text/javascript">
-     $(document).ready(function () {
-        $('.datatables').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false
-        });
-    });
     function showEdit(editableObj) {
         $(editableObj).css("background", "#FFF");
     }

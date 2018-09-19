@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body ins_category_container">
+        <div class="card-body protocol_table_content" style="height: 60vh; overflow-x: scroll;">
             <?php $this->load->view('ett/protocol_table'); ?>
         </div>
     </div>
