@@ -63,7 +63,7 @@
         <!-- Page Content Holder -->
         <div id="content">
             <div id="status_row" class="sticky-bar">
-                
+
             </div>
             <div class="card m-r-20">
                 <div class="card-body">
@@ -75,13 +75,35 @@
         </div>
     </div> 
 </div>
-<div id="wallet-modal-box">
-    <!-- modal content for wallet-->
-    
+
+<!-- modal content for wallet-->
+<div id="wallet-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <label>Wallet Status</label>
+                    <input type="text" name="wallet_status" id="wallet_date" class="form-control col-md-6" value="<?php echo date('d-M-Y') ?>" />
+                    <button class="btn btn-info btn-sm" id="wallet_search">Search</button> 
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div id="wallet-modal-box">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 <script type="text/javascript">
     $(document).ready(function () {
-        
+        $('#wallet_date').datepicker({
+            format: 'd-M-yyyy'
+        });
         $('.pat_search').datepicker({
             format: 'd-M-yyyy'
         });
@@ -132,23 +154,22 @@
                             },
                             "scrollX": true,
                             columnDefs: [
-                                { "type": "html-input", "targets": [3, 6, 7, 8] },
-                                { "targets": 1, "orderable": false }
+                                {"type": "html-input", "targets": [3, 6, 7, 8]},
+                                {"targets": 1, "orderable": false}
                             ]
                         });
                         $("#full_name").focus();
-                        $("#editable-datatable tbody tr").click(function(e) {
+                        $("#editable-datatable tbody tr").click(function (e) {
                             if ($(this).hasClass('row_selected')) {
-                            $(this).removeClass('row_selected');
-                            }
-                            else {
-                            oTable.$('tr.row_selected').removeClass('row_selected');
-                                    $(this).addClass('row_selected');
+                                $(this).removeClass('row_selected');
+                            } else {
+                                oTable.$('tr.row_selected').removeClass('row_selected');
+                                $(this).addClass('row_selected');
                             }
                         });
-                       
+
                         $('.app_date').datepicker({
-                                format: 'd-M-yyyy'
+                            format: 'd-M-yyyy'
                         });
                     }
                 }

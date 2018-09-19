@@ -9,7 +9,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="card-body ins_category_container">
+		<div class="card-body ending_reason_table" style="height: 60vh; overflow-x: scroll;">
 			<?php $this->load->view('ett/ending_reason_table'); ?>
 		</div>
 	</div>

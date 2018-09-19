@@ -360,8 +360,7 @@ class User_model extends CI_Model {
         }
     }
 
-    public function get_todays_fee_paid(){
-        $date = date('Y-m-d'); 
+    public function get_todays_fee_paid($date){ 
         $result = $this->db
                     ->select_sum('consultant_fee','Consultant')
                     ->where('DATE(appointment_date)',$date)
@@ -374,8 +373,7 @@ class User_model extends CI_Model {
         }
     }
 
-    public function get_todays_ett_fee_paid(){
-        $date = date('Y-m-d'); 
+    public function get_todays_ett_fee_paid($date){ 
         $result = $this->db
                     ->select_sum('ett_fee','ETT')
                     ->where('DATE(appointment_date)',$date)
@@ -388,8 +386,7 @@ class User_model extends CI_Model {
         }
     }
 
-    public function get_todays_echo_fee_paid(){
-        $date = date('Y-m-d'); 
+    public function get_todays_echo_fee_paid($date){
         $result = $this->db
                     ->select_sum('echo_fee','Echo')
                     ->where('DATE(appointment_date)',$date)
@@ -402,8 +399,7 @@ class User_model extends CI_Model {
         }
     }
 
-    public function get_todays_total_refund(){
-        $date = date('Y-m-d'); 
+    public function get_todays_total_refund($date){
         $result = $this->db
                     ->select_sum('refund','Refund')
                     ->where('DATE(appointment_date)',$date)
@@ -415,8 +411,7 @@ class User_model extends CI_Model {
             return false;
         }
     }
-    public function count_consultant_fee_paid_rows(){
-        $date = date('Y-m-d'); 
+    public function count_consultant_fee_paid_rows($date){
         $result = $this->db
                 ->where('DATE(appointment_date)',$date)
                 ->where('consultant_fee !=',0,FALSE)
@@ -427,8 +422,7 @@ class User_model extends CI_Model {
             return $result;
         }
     }
-    public function count_ett_fee_paid_rows(){
-        $date = date('Y-m-d'); 
+    public function count_ett_fee_paid_rows($date){
         $result = $this->db
                 ->where('DATE(appointment_date)',$date)
                 ->where('ett_fee !=',0,FALSE)
@@ -439,8 +433,7 @@ class User_model extends CI_Model {
             return $result;
         }
     }
-    public function count_echo_fee_paid_rows(){
-        $date = date('Y-m-d'); 
+    public function count_echo_fee_paid_rows($date){
         $result = $this->db
                 ->where('DATE(appointment_date)',$date)
                 ->where('echo_fee !=',0,FALSE)
@@ -451,8 +444,7 @@ class User_model extends CI_Model {
             return $result;
         }
     }
-    public function count_refund_rows(){
-        $date = date('Y-m-d'); 
+    public function count_refund_rows($date){
         $result = $this->db
                 ->where('DATE(appointment_date)',$date)
                 ->where('refund !=',0,FALSE)
@@ -686,8 +678,7 @@ class User_model extends CI_Model {
         }
     }
 
-    public function count_not_attendent(){
-        $date = date('Y-m-d'); 
+    public function count_not_attendent($date){
         $result = $this->db
                 ->where('DATE(appointment_date)',$date)
                 ->where('consultant_fee','0')
@@ -702,8 +693,7 @@ class User_model extends CI_Model {
         }
     }
 
-    public function count_total_attendent(){
-        $date = date('Y-m-d'); 
+    public function count_total_attendent($date){
         $result = $this->db
                 ->where('DATE(appointment_date)',$date)
                 ->where('consultant_fee !=','0')

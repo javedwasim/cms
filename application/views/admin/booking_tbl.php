@@ -239,13 +239,37 @@
                     <td class="center">
                         <?php echo $datetime ?>
                     </td>
-                    <td>
+                    <td
+                        data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                        title="<?php 
+                        if(isset($details['fee_collected_by'])){
+                            echo $details['fee_collected_by'];
+                        }else{
+                            echo "";
+                        }?>"
+                        >
                         <input type="text" name="consultant_fee" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['consultant_fee'] ?>">
                     </td>
-                    <td>
+                    <td
+                        data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                        title="<?php 
+                        if(isset($details['ett_fee_collected_by'])){
+                            echo $details['ett_fee_collected_by'];
+                        }else{
+                            echo "";
+                        }?>"
+                        >
                         <input type="text" name="ett_fee" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['ett_fee'] ?>">
                     </td>
-                    <td>
+                    <td
+                        data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                        title="<?php 
+                        if(isset($details['echo_fee_collected_by'])){
+                            echo $details['echo_fee_collected_by'];
+                        }else{
+                            echo "";
+                        }?>"
+                        >
                         <input type="text" name="echo_fee" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['echo_fee'] ?>">
                     </td>
                     <td>
@@ -260,7 +284,6 @@
                     <td class="hide">
                         <?php echo $details['fee_collected_by'] ?>
                     </td>
-
                     <td>
                         <?php
                         if ($details['ett_fee_paid_at'] == '0000-00-00 00:00:00') {
@@ -273,7 +296,6 @@
                     <td class="hide">
                         <?php echo $details['ett_fee_collected_by'] ?>
                     </td>
-
                     <td>
                         <?php
                         if ($details['echo_fee_paid_at'] == '0000-00-00 00:00:00') {
@@ -289,7 +311,6 @@
                     <td>
                         <input type="text" name="refund" onchange="valupdate(this)"  autocomplete="off" class="dt-input" value="<?php echo $details['refund'] ?>">
                     </td>
-                    
                     <td class="appointment_booking_id hide" >
                         <?php echo $details['appointment_booking_id'] ?>
                     </td>

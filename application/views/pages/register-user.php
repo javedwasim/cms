@@ -21,9 +21,9 @@
                                         <label>Sex:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <div class="btn-group profile_radio" data-toggle="buttons">
-                                            <label class="radio-inline"><input type="radio" name="optradio" checked>Male</label>
-                                            <label class="radio-inline"><input type="radio" name="optradio">Female</label>
+                                        <div class="form-group" >
+                                            <label class="radio-inline" style="color:#000 !important;margin-right: 15px;"><input type="radio" name="optradio" checked>Male</label>
+                                            <label class="radio-inline" style="color:#000 !important;"><input type="radio" name="optradio">Female</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3 m-t-10">

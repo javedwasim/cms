@@ -1,7 +1,7 @@
 <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:!important;1px">Action</th>
+        <th class="table-header" style="width:1px !important;">Action</th>
         <th class="table-header">Item Name</th>
     </tr>
     </thead>

@@ -151,151 +151,213 @@
                     </tbody>
                 </table>
             </div>      
-        </div>
-    </div>
-    <div class="col-lg-4 p-0">
-        <div class="card p-0">
-            <div class="card-header" style="display: inline-flex;">
-                <button class="btn btn-block btn-info col-md-6" id="time_on_walk">Time on walk in</button>
-                <button class="btn btn-block btn-info col-md-6" id="print_onwalk">Print List</button>
-            </div>
-            <div class="card-body p-t-0">
-                <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >
-                   <thead>
-                    <tr>
-                        <th>Sr</th>
-                        <th>Order</th>
-                        <th>Name</th>
-                        <th>Contact</th>
-                        <th>Appointment Taken</th>
-                        <th>Shift</th>
-                        <th class="hide"></th>
-                        <th class="hide"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $order = 0;
-                    foreach ($booking_onwalk as $details){
-                        $order+=1;
-                        ?>
-                        <tr class="gradeX colorchnage">
-                            <td><?php echo $order; ?></td>
-                            <td>
-                                <?php echo $details['order_number'];?>
-                            </td>
-                            <td style="width:150px;">
-                                <?php echo $details['full_name'] ?>
-                            </td>
-                            <td>
-                                <?php echo $details['contact_number'] ?>
-                            </td>
-                            <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
-                            <td class="center">
-                                <?php echo $datetime; ?>
-                            </td>
-                            <td>
-                                <div class="form-group" >
-                                    <select class="form-control transfer_patient">
-                                        <option>Select</option>
-                                        <option value="vip">By Consultant</option>
-                                        <option value="on_call">On Call</option>
-                                    </select>
-                                </div>
-                            </td>
-                            <td class="hide vip_trans">
-                                <?php echo $details['appointment_booking_id']?>
-                            </td>
-                            <td class="hide">
-                                <?php echo $details['fee_paid_status']?>
-                            </td>
-                        </tr>
-                        <?php } ?>
-                        </tbody>
-                    </table>
-                </div>      
             </div>
         </div>
-    <div class="col-lg-4 p-0">
-        <div class="card p-0">
-            <div class="card-header" style="display: inline-flex;">
-                <button class="btn btn-block btn-warning col-md-6" id="time_on_call">Time on call</button>
-                <button class="btn btn-block btn-info col-md-6" id="print_oncall">Print List</button>
-            </div>
-            <div class="card-body p-t-0">
-                <table class="table table-bordered responsive booking_tables" cellspacing="0" width="100%" >
-                   <thead>
-                    <tr>
-                        <th>Sr</th>
-                        <th>Order</th>
-                        <th style="width:150px;">Name</th>
-                        <th>Contact</th>
-                        <th>Appointment Taken</th>
-                        <th>Shift</th>
-                        <th class="hide"></th>
-                        <th class="hide"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $order = 0;
-                    foreach ($booking_oncall as $details) {
-                        $order+=1;
-                        ?>
-                        <tr class="gradeX colorchnage">
-                            <td><?php echo $order; ?></td>
-                            <td>
-                                <?php echo $details['order_number'];?>
-                            </td>
-                            <td style="width:150px;">
-                                <?php echo $details['full_name'] ?>
-                            </td>
-                            <td>
-                                <?php echo $details['contact_number'] ?>
-                            </td>
-                            <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
-                            <td class="center">
-                                <?php echo $datetime ?>
-                            </td>
-                            <td>
-                                <div class="form-group" >
-                                    <select class="form-control transfer_patient">
-                                        <option>Select</option>
-                                        <option value="on_walk">On Walk IN</option>
-                                        <option value="vip">By Consultant</option>
-                                    </select>
-                                </div>
-                            </td>
-                            <td class="hide vip_trans">
-                                <?php echo $details['appointment_booking_id']?>
-                            </td>
-                            <td class="hide">
-                                <?php echo $details['fee_paid_status']?>
-                            </td>
-                        </tr>
-                        <?php } ?>
-                        </tbody>
-                    </table>
-                </div>      
-            </div>
-        </div>
-    </div>
-</div>
-<?php }else{ ?>
-<div class="row">
-    <div class="booking_category_tables">
-    <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 p-0">
             <div class="card p-0">
-                <div class="card-header">
-                    <button class="btn btn-block btn-success">Time by Consultant</button>
+                <div class="card-header" style="display: inline-flex;">
+                    <button class="btn btn-block btn-info col-md-6" id="time_on_walk">Time on walk in</button>
+                    <button class="btn btn-block btn-info col-md-6" id="print_onwalk">Print List</button>
                 </div>
                 <div class="card-body p-t-0">
                     <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >
                        <thead>
                         <tr>
                             <th>Sr</th>
-                            <th class="hide">Order</th>
+                            <th>Order</th>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Appointment Taken</th>
+                            <th>Shift</th>
+                            <th class="hide"></th>
+                            <th class="hide"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $order = 0;
+                        foreach ($booking_onwalk as $details){
+                            $order+=1;
+                            ?>
+                            <tr class="gradeX colorchnage">
+                                <td><?php echo $order; ?></td>
+                                <td>
+                                    <?php echo $details['order_number'];?>
+                                </td>
+                                <td style="width:150px;">
+                                    <?php echo $details['full_name'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $details['contact_number'] ?>
+                                </td>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                <td class="center">
+                                    <?php echo $datetime; ?>
+                                </td>
+                                <td>
+                                    <div class="form-group" >
+                                        <select class="form-control transfer_patient">
+                                            <option>Select</option>
+                                            <option value="vip">By Consultant</option>
+                                            <option value="on_call">On Call</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="hide vip_trans">
+                                    <?php echo $details['appointment_booking_id']?>
+                                </td>
+                                <td class="hide">
+                                    <?php echo $details['fee_paid_status']?>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>      
+                </div>
+            </div>
+        <div class="col-lg-4 p-0">
+            <div class="card p-0">
+                <div class="card-header" style="display: inline-flex;">
+                    <button class="btn btn-block btn-warning col-md-6" id="time_on_call">Time on call</button>
+                    <button class="btn btn-block btn-info col-md-6" id="print_oncall">Print List</button>
+                </div>
+                <div class="card-body p-t-0">
+                    <table class="table table-bordered responsive booking_tables" cellspacing="0" width="100%" >
+                       <thead>
+                        <tr>
+                            <th>Sr</th>
+                            <th>Order</th>
+                            <th style="width:150px;">Name</th>
+                            <th>Contact</th>
+                            <th>Appointment Taken</th>
+                            <th>Shift</th>
+                            <th class="hide"></th>
+                            <th class="hide"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $order = 0;
+                        foreach ($booking_oncall as $details) {
+                            $order+=1;
+                            ?>
+                            <tr class="gradeX colorchnage">
+                                <td><?php echo $order; ?></td>
+                                <td>
+                                    <?php echo $details['order_number'];?>
+                                </td>
+                                <td style="width:150px;">
+                                    <?php echo $details['full_name'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $details['contact_number'] ?>
+                                </td>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                <td class="center">
+                                    <?php echo $datetime ?>
+                                </td>
+                                <td>
+                                    <div class="form-group" >
+                                        <select class="form-control transfer_patient">
+                                            <option>Select</option>
+                                            <option value="on_walk">On Walk IN</option>
+                                            <option value="vip">By Consultant</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="hide vip_trans">
+                                    <?php echo $details['appointment_booking_id']?>
+                                </td>
+                                <td class="hide">
+                                    <?php echo $details['fee_paid_status']?>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>      
+                </div>
+            </div>
+    </div>
+</div>
+<?php }else{ ?>
+<div class="row">
+    <div class="booking_category_tables">
+        <div class="row p-0 m-0">
+            <div class="col-lg-4 p-0">
+                <div class="card p-0">
+                    <div class="card-header">
+                        <button class="btn btn-block btn-success">Time by Consultant</button>
+                    </div>
+                    <div class="card-body p-t-0">
+                        <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >
+                           <thead>
+                            <tr>
+                                <th>Sr</th>
+                                <th class="hide">Order</th>
+                                <th style="width:150px;">Name</th>
+                                <th>Contact</th>
+                                <th>Appointment Taken</th>
+                                <th class="hide">Shift</th>
+                                <th class="hide"></th>
+                                <th class="hide"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $order = 0;
+                            foreach ($booking_vip as $details) {
+                                $order+=1;
+                                ?>
+                                <tr class="gradeX colorchnage">
+                                    <td><?php echo $order; ?></td>
+                                    <td class="hide">
+                                        <?php echo $details['order_number'];?>
+                                    </td>
+                                    <td style="width:150px;">
+                                        <?php echo $details['full_name'] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $details['contact_number'] ?>
+                                    </td>
+                                    <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                    <td class="center">
+                                        <?php echo $datetime ?>
+                                    </td>
+                                    <td class="hide">
+                                        <div class="form-group" >
+                                            <select class="form-control transfer_patient">
+                                                <option>Select</option>
+                                                <option value="on_walk">On Walk IN</option>
+                                                <option value="on_call">On Call</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="hide vip_trans">
+                                        <?php echo $details['appointment_booking_id']?>
+                                    </td>
+                                    <td class="hide">
+                                        <?php echo $details['fee_paid_status']?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>      
+            </div>
+        </div>
+        <div class="col-lg-4 p-0">
+            <div class="card p-0">
+                <div class="card-header">
+                    <button class="btn btn-block btn-info" id="time_on_walk">Time on walk in</button>
+                </div>
+                <div class="card-body p-t-0">
+                    <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >
+                       <thead>
+                        <tr>
+                            <th>Sr</th>
+                            <th>Order</th>
                             <th style="width:150px;">Name</th>
                             <th>Contact</th>
                             <th>Appointment Taken</th>
@@ -307,12 +369,73 @@
                     <tbody>
                         <?php
                         $order = 0;
-                        foreach ($booking_vip as $details) {
+                        foreach ($booking_onwalk as $details){
                             $order+=1;
                             ?>
                             <tr class="gradeX colorchnage">
                                 <td><?php echo $order; ?></td>
+                                <td>
+                                    <?php echo $details['order_number'];?>
+                                </td>
+                                <td style="width:150px;">
+                                    <?php echo $details['full_name'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $details['contact_number'] ?>
+                                </td>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                <td class="center">
+                                    <?php echo $datetime; ?>
+                                </td>
                                 <td class="hide">
+                                    <div class="form-group" >
+                                        <select class="form-control transfer_patient">
+                                            <option>Select</option>
+                                            <option value="on_call">On Call</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="hide vip_trans">
+                                    <?php echo $details['appointment_booking_id']?>
+                                </td>
+                                <td class="hide">
+                                    <?php echo $details['fee_paid_status']?>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>      
+                </div>
+            </div>
+        <div class="col-lg-4 p-0">
+            <div class="card p-0">
+                <div class="card-header">
+                    <button class="btn btn-block btn-warning" id="time_on_call">Time on call</button>
+                </div>
+                <div class="card-body p-t-0">
+                    <table class="table table-bordered responsive booking_tables" cellspacing="0" width="100%" >
+                       <thead>
+                        <tr>
+                            <th>Sr</th>
+                            <th>Order</th>
+                            <th style="width:150px;">Name</th>
+                            <th>Contact</th>
+                            <th>Appointment Taken</th>
+                            <th class="hide">Shift</th>
+                            <th class="hide"></th>
+                            <th class="hide"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $order = 0;
+                        foreach ($booking_oncall as $details) {
+                            $order+=1;
+                            ?>
+                            <tr class="gradeX colorchnage">
+                                <td><?php echo $order; ?></td>
+                                <td>
                                     <?php echo $details['order_number'];?>
                                 </td>
                                 <td style="width:150px;">
@@ -330,7 +453,6 @@
                                         <select class="form-control transfer_patient">
                                             <option>Select</option>
                                             <option value="on_walk">On Walk IN</option>
-                                            <option value="on_call">On Call</option>
                                         </select>
                                     </div>
                                 </td>
@@ -341,134 +463,12 @@
                                     <?php echo $details['fee_paid_status']?>
                                 </td>
                             </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>      
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="card p-0">
-            <div class="card-header">
-                <button class="btn btn-block btn-info" id="time_on_walk">Time on walk in</button>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>      
+                </div>
             </div>
-            <div class="card-body p-t-0">
-                <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >
-                   <thead>
-                    <tr>
-                        <th>Sr</th>
-                        <th>Order</th>
-                        <th style="width:150px;">Name</th>
-                        <th>Contact</th>
-                        <th>Appointment Taken</th>
-                        <th class="hide">Shift</th>
-                        <th class="hide"></th>
-                        <th class="hide"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $order = 0;
-                    foreach ($booking_onwalk as $details){
-                        $order+=1;
-                        ?>
-                        <tr class="gradeX colorchnage">
-                            <td><?php echo $order; ?></td>
-                            <td>
-                                <?php echo $details['order_number'];?>
-                            </td>
-                            <td style="width:150px;">
-                                <?php echo $details['full_name'] ?>
-                            </td>
-                            <td>
-                                <?php echo $details['contact_number'] ?>
-                            </td>
-                            <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
-                            <td class="center">
-                                <?php echo $datetime; ?>
-                            </td>
-                            <td class="hide">
-                                <div class="form-group" >
-                                    <select class="form-control transfer_patient">
-                                        <option>Select</option>
-                                        <option value="on_call">On Call</option>
-                                    </select>
-                                </div>
-                            </td>
-                            <td class="hide vip_trans">
-                                <?php echo $details['appointment_booking_id']?>
-                            </td>
-                            <td class="hide">
-                                <?php echo $details['fee_paid_status']?>
-                            </td>
-                        </tr>
-                        <?php } ?>
-                        </tbody>
-                    </table>
-                </div>      
-            </div>
-        </div>
-    <div class="col-lg-4">
-        <div class="card p-0">
-            <div class="card-header">
-                <button class="btn btn-block btn-warning" id="time_on_call">Time on call</button>
-            </div>
-            <div class="card-body p-t-0">
-                <table class="table table-bordered responsive booking_tables" cellspacing="0" width="100%" >
-                   <thead>
-                    <tr>
-                        <th>Sr</th>
-                        <th>Order</th>
-                        <th style="width:150px;">Name</th>
-                        <th>Contact</th>
-                        <th>Appointment Taken</th>
-                        <th class="hide">Shift</th>
-                        <th class="hide"></th>
-                        <th class="hide"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $order = 0;
-                    foreach ($booking_oncall as $details) {
-                        $order+=1;
-                        ?>
-                        <tr class="gradeX colorchnage">
-                            <td><?php echo $order; ?></td>
-                            <td>
-                                <?php echo $details['order_number'];?>
-                            </td>
-                            <td style="width:150px;">
-                                <?php echo $details['full_name'] ?>
-                            </td>
-                            <td>
-                                <?php echo $details['contact_number'] ?>
-                            </td>
-                            <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
-                            <td class="center">
-                                <?php echo $datetime ?>
-                            </td>
-                            <td class="hide">
-                                <div class="form-group" >
-                                    <select class="form-control transfer_patient">
-                                        <option>Select</option>
-                                        <option value="on_walk">On Walk IN</option>
-                                    </select>
-                                </div>
-                            </td>
-                            <td class="hide vip_trans">
-                                <?php echo $details['appointment_booking_id']?>
-                            </td>
-                            <td class="hide">
-                                <?php echo $details['fee_paid_status']?>
-                            </td>
-                        </tr>
-                        <?php } ?>
-                        </tbody>
-                    </table>
-                </div>      
-            </div>
-        </div>
     </div>
     <?php }?>
 <script type="text/javascript">
