@@ -7,6 +7,7 @@
       else{
         $(this).find("ul").slideDown();
     }
+
     });
 
    /////////////// Add student /////////////////////
