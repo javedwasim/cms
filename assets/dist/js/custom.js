@@ -3022,20 +3022,17 @@ function get_delete_patients(func_call) {
 }
 
 function get_item_limiter(func_call) {
-    var limiter = $('#limiter').val();
-    var limiterdate = $('#limiter_date').val();
-    var clinictime = $('#example-time-input').val();
     $.ajax({
-        url: '/cms/dashboard/'+func_call,
-        type: 'post',
-        data: {
-            limiter: limiter,
-            limiterDate: limiterdate,
-            clinicTime: clinictime
-        },
+        url: '/cms/setting/'+func_call,
         cache: false,
         success: function (response) {
-            toastr["success"]("Successfully updated.");
+            if (response.result_html != '') {
+                $('.dashboard-content').remove();
+                $('#dashboard-content').append(response.result_html);
+                $('#limiter_date').datepicker({
+                    format: 'd-M-yyyy'
+                });
+            }
         }
     });
 }

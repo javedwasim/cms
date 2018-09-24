@@ -110,28 +110,32 @@
                             echo "";
                         }?>">
                     </td>
-                    <td>
-                        <input type="text" name="ett_fee" onchange="consultant_booking(this)" data-toggle="tooltip" data-placement="top" 
-                        title="<?php 
-                        if(isset($bkarray[$i]['ett_fee_collected_by'])){
-                            echo $bkarray[$i]['ett_fee_collected_by'];
-                        }else{
-                            echo "";
-                        }?>" autocomplete="off" class="dt-input" value="<?php 
+                    <td
+                            data-toggle="tooltip" data-placement="top"
+                            title="<?php
+                            if(isset($bkarray[$i]['ett_fee_collected_by'])){
+                                echo $bkarray[$i]['ett_fee_collected_by'];
+                            }else{
+                                echo "";
+                            }?>"
+                    >
+                        <input type="text" name="ett_fee" onchange="consultant_booking(this)"  autocomplete="off" class="dt-input" value="<?php
                         if(isset($bkarray[$i]['ett_fee'])){
                             echo $bkarray[$i]['ett_fee'];
                         }else{
                             echo "";
                         }?>">
                     </td>
-                    <td>
-                        <input type="text" name="echo_fee" onchange="consultant_booking(this)" data-toggle="tooltip" data-placement="top" 
-                        title="<?php 
+                    <td
+                        data-toggle="tooltip" data-placement="top"
+                        title="<?php
                         if(isset($bkarray[$i]['echo_fee_collected_by'])){
                             echo $bkarray[$i]['echo_fee_collected_by'];
                         }else{
                             echo "";
-                        }?>" autocomplete="off" class="dt-input" value="<?php 
+                        }?>"
+                    >
+                        <input type="text" name="echo_fee" onchange="consultant_booking(this)" autocomplete="off" class="dt-input" value="<?php
                         if(isset($bkarray[$i]['echo_fee'])){
                             echo $bkarray[$i]['echo_fee'];
                         }else{
@@ -363,15 +367,37 @@
                     <td class="center">
                         <?php echo $datetime ?>
                     </td>
-                    <td>
+                    <td
+                    data-toggle="tooltip" data-placement="top" data-trigger="hover"
+                    title="<?php
+                    if(isset($details['fee_collected_by'])){
+                        echo $details['fee_collected_by'];
+                    }else{
+                        echo "";
+                    }?>"
+                    >
                         <input type="text" name="consultant_fee" onchange="valupdate(this)"  <?php  echo (in_array("edit_profile-0", $permissions))&&($details['consultant_fee']>0)?'readonly':''; ?>
                                autocomplete="off" class="dt-input" value="<?php echo $details['consultant_fee'] ?>">
                     </td>
-                    <td>
+                    <td data-toggle="tooltip" data-placement="top" data-trigger="hover"
+                        title="<?php
+                        if(isset($details['ett_fee_collected_by'])){
+                            echo $details['ett_fee_collected_by'];
+                        }else{
+                            echo "";
+                        }?>">
                         <input type="text" name="ett_fee" onchange="valupdate(this)" <?php  echo (in_array("edit_profile-0", $permissions))&&($details['ett_fee']>0)?'readonly':''; ?>
                                autocomplete="off" class="dt-input" value="<?php echo $details['ett_fee'] ?>">
                     </td>
-                    <td>
+                    <td
+                        data-toggle="tooltip" data-placement="top" data-trigger="hover"
+                        title="<?php
+                        if(isset($details['echo_fee_collected_by'])){
+                            echo $details['echo_fee_collected_by'];
+                        }else{
+                            echo "";
+                        }?>"
+                    >
                         <input type="text" name="echo_fee" onchange="valupdate(this)" <?php  echo (in_array("edit_profile-0", $permissions))&&($details['echo_fee']>0)?'readonly':''; ?>
                                autocomplete="off" class="dt-input" value="<?php echo $details['echo_fee'] ?>">
                     </td>

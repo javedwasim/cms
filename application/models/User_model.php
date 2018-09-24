@@ -98,7 +98,9 @@ class User_model extends CI_Model {
     public function update_value($value, $updateValue, $toupdate) {
         $result = '';
         $date = date('Y-m-d H:i:s');
-        $collectedby = $this->session->userdata('username');
+        //$collectedby = $this->session->userdata('username');
+        $collectedby = $this->session->userdata('user_data_logged_in');
+        $collectedby = $collectedby['username'];
         if ($updateValue == 'full_name') {
             $result = $this->db
                     ->set('full_name', $value)
@@ -458,7 +460,8 @@ class User_model extends CI_Model {
 
     public function insert_consultant($value,$wheretoinsert,$flag,$orderno){
         $date = date('Y-m-d H:i:s');
-        $collectedby = $this->session->userdata('username');
+        $collectedby = $this->session->userdata('user_data_logged_in');
+        $collectedby = $collectedby['username'];
         if($wheretoinsert == 'full_name'){
             $data = array(
                 'appointment_date' => $date,
@@ -539,7 +542,8 @@ class User_model extends CI_Model {
     public function update_consultant($value,$wheretoinsert,$orderno) {
         $result = '';
         $date = date('Y-m-d H:i:s');
-        $collectedby = $this->session->userdata('username');
+        $collectedby = $this->session->userdata('user_data_logged_in');
+        $collectedby = $collectedby['username'];
         if ($wheretoinsert == 'full_name') {
             $result = $this->db
                     ->set('full_name', $value)

@@ -1,5 +1,6 @@
 <?php
-    if($this->session->userdata('is_admin')==1){
+    $user_info = ($this->session->userdata('user_data_logged_in'));
+    if($user_info['is_admin']==1){
 ?>
 <div class="booking_category_tables">
     <div class="row p-0 m-0">

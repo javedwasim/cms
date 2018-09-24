@@ -75,6 +75,7 @@ class Dashboard extends CI_Controller {
                         $this->session->set_userdata('userdata', $result);
                         $other_rights = $this->Dashboard_model->get_other_rights_detail();
                         $this->session->set_userdata('other_rights', $other_rights);
+                        $this->session->set_userdata('user_data_logged_in', $result);
                         $this->session->set_userdata('is_logged_in', '1');
                         redirect('/');
                     } else {
@@ -146,6 +147,7 @@ class Dashboard extends CI_Controller {
             $data['booking_flag'] = $flag;
             $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
             $data['booking_details'] = $this->User_model->getbookings_by_date_flag($date, $flag);
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
             $json['message'] = "Deleted successfully";
         } else {

@@ -220,6 +220,7 @@ class User extends MY_Controller {
                         $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
                         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
                         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
+                        $data['rights'] = $this->session->userdata('other_rights');
                         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
                         $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
                         $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
@@ -245,6 +246,7 @@ class User extends MY_Controller {
                         $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
                         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
                         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
+                        $data['rights'] = $this->session->userdata('other_rights');
                         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
                         $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
                         $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
@@ -271,6 +273,7 @@ class User extends MY_Controller {
                     $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
                     $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
                     $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
+                    $data['rights'] = $this->session->userdata('other_rights');
                     $data['rights'] = $this->session->userdata('other_rights');
                     $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
                     $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
@@ -1146,6 +1149,7 @@ class User extends MY_Controller {
                 $data['refund_count'] = $this->User_model->count_refund_rows($searchdate);
                 $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($searchdate);
                 $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($searchdate);
+                $data['rights'] = $this->session->userdata('other_rights');
                 $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
                 $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
                 $json['message'] = 'Inserted successfully';
@@ -1170,6 +1174,7 @@ class User extends MY_Controller {
                 $data['refund_count'] = $this->User_model->count_refund_rows($searchdate);
                 $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($searchdate);
                 $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($searchdate);
+                $data['rights'] = $this->session->userdata('other_rights');
                 $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
                 $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
                 $json['message'] = 'Not inserted';
@@ -1197,6 +1202,7 @@ class User extends MY_Controller {
                 $data['refund_count'] = $this->User_model->count_refund_rows($searchdate);
                 $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($searchdate);
                 $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($searchdate);
+                $data['rights'] = $this->session->userdata('other_rights');
                 $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
                 $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
                 $json['message'] = 'Inserted successfully';

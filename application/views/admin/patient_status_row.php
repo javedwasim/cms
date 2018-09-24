@@ -13,7 +13,8 @@
                             <button type="button" id="sidebarCollapse" class=" round round-sm round-theme m-b-5">
                                 <i class="fas fa-arrow-left arro"></i>
                             </button>
-                        <?php if($this->session->userdata('is_admin') == 1){?>
+                        <?php $user_info = ($this->session->userdata('user_data_logged_in'));
+                        if($user_info['is_admin']==1){?>
                             <div class="round round-sm align-self-center green m-b-10" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
                                 <i class="fa fa-wallet"></i>
                             </div>
