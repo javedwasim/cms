@@ -10,6 +10,7 @@
 			$this->load->model('Setting_model');
 			$this->load->model('Profile_model');
 			$this->load->helper('content-type');
+			date_default_timezone_set("Asia/Karachi");
 		}
 
 		public function index(){
@@ -191,5 +192,44 @@
 		        }
 	        }
 		}
+
+		public function save_note(){
+			$usename = $this->input->post('username');
+			$note = $this->input->post('note');
+			$date = date('Y-m-d H:i:s');
+			$data_array = array(
+					'username' => $usename,
+					'note' => $note,
+					'updated_at' => $date
+				);
+			$result = $this->Profile_model->insert_notes($data_array);
+			if ($result) {
+				$json['success'] = true;
+            	$json['message'] = "Saved Successfully.";
+			}else{
+				$json['error'] = true;
+            	$json['message'] = "Seems to an error";
+			}
+			if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+		public function delete_note($id){
+			$result = $this->Profile_model->delete_notes($id);
+			if ($result) {
+				$json['success'] = true;
+            	$json['message'] = "Deleted Successfully.";
+			}else{
+				$json['error'] = true;
+            	$json['message'] = "Seems to an error.";
+			}
+			if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+
+
 	}
 ?>

@@ -143,12 +143,12 @@
             }
 		}
 
-		public function manage_research(){
-			$json['result_html'] = $this->load->view('pages/manage_research', "", true);
-            if ($this->input->is_ajax_request()) {
-                set_content_type($json);
-            }
-		}
+		// public function manage_research(){
+		// 	$json['result_html'] = $this->load->view('pages/manage_research', "", true);
+  //           if ($this->input->is_ajax_request()) {
+  //               set_content_type($json);
+  //           }
+		// }
 
 		public function register_user(){
             $data['other_rights'] = $this->Setting_model->get_other_rights();
@@ -194,7 +194,7 @@
 		}
 
 		public function signature(){
-			$json['result_html'] = $this->load->view('pages/doctor_signature', "", true);
+			$json['result_html'] = $this->load->view('doctor_signature/doctor_signature', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }

@@ -1714,30 +1714,6 @@ $(document.body).on('click', '#pat_research', function () {
 /////////////////////////////////// load manage research page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-$(document.body).on('click', '#manage_research', function () {
-    $.ajax({
-        url: '/cms/setting/manage_research',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    "scrollY": '50vh',
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "info": false
-                });
-            }
-        }
-    });
-});
-
-/////////////////////////////////// load manage research page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
 $(document.body).on('click', '#register-user', function () {
     $.ajax({
         url: '/cms/setting/register_user',
@@ -1952,26 +1928,6 @@ $(document.body).on('click', '#booking-limiter', function () {
 $(document.body).on('click', '#lab_test', function () {
     $.ajax({
         url: '/cms/setting/laboratory_test',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true
-                });
-            }
-        }
-    });
-});
-
-/////////////////////////////////// load doctor's signature page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#doc_sig', function () {
-    $.ajax({
-        url: '/cms/setting/dr_signature',
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -2535,7 +2491,7 @@ $(document.body).on('click', '#save_new_profile', function () {
     var profilerelative = $('#pat_profile_relative_name').val();
     var profileagedigit = $('#pat_profile_age_digit').val();
     var profileage = $('#pat_profile_age').val();
-    var profileprofession = $('#pat_profile_profession option:selected').text()
+    var profileprofession = $('#pat_profile_profession option:selected').text();
     var profilesex = $('input[name="pat_sex"]:checked').val();
     var profilecontact = $('#pat_profile_contact').val();
     var profileheight = $('#pat_profile_height').val();
@@ -2933,27 +2889,6 @@ function get_research(func_call) {
     });
 }
 
-function get_manage_reasearch(func_call) {
-    $.ajax({
-        url: '/cms/setting/manage_research',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    "scrollY": '50vh',
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "info": false
-                });
-            }
-        }
-    });
-}
-
 
 function get_register_user(func_call) {
     $.ajax({
@@ -3075,23 +3010,187 @@ function grade_special_instruction(func_call) {
     });
 }
 
+///////////////////////////////// doctor signature module/////////////////////////////////////
+
 function get_items_signature(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: '/cms/doctor_signature/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('.signature_table').remove();
+                $('#signature_table').append(response.signature_table);
+            }
+        }
+    });
+}
+
+$(document.body).on('click', '#save_signature',function(){
+    var docName = $('#doc_sig_name').val();
+    var docQuali = $('#doc_sig_quali').val();
+    var docDesi = $('#doc_sig_desi').val();
+    var docInst = $('#doc_sig_institution').val();
+    $.ajax({
+        url:'/cms/doctor_signature/save_doc_signature',
+        type: 'post',
+        data: {
+            docName: docName,
+            docQuali: docQuali,
+            docDesi: docDesi,
+            docInst: docInst
+        },
+        cache: false,
+        success:function(response){
+            if(response.signature_table != ''){
+                $('.signature_table').remove();
+                $('#signature_table').append(response.signature_table);
+                if(response.message != ''){
+                    toastr["success"](response.message);
+                }else{
+                    toastr["warning"](response.error);
+                }
+                
+            }
+        }
+    });
+});
+
+function showEdit(editableObj) {
+            $(editableObj).css("background", "#FFF");
+        }
+function saveToDatabase(editableObj, column, id) {
+    $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
+    $.ajax({
+        url: "/cms/doctor_signature/update_signature_details",
+        type: "POST",
+        data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+        success: function (response) {
+            $(editableObj).css("background", "#FDFDFD");
+            if (response.message == 'Updated successfully!') {
+                toastr["success"](response.message);
+            } else {
+                toastr["warning"](response.message);
+            }
+        }
+    });
+}
+
+$(document.body).on('click', '.delete-signature', function () {
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function (response) {
+                if(response.signature_table != ''){
+                    $('.signature_table').remove();
+                    $('#signature_table').append(response.signature_table);
+                    if(response.success == true){
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["warning"](response.error);
+                    }
+                
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+/////////////////////////////// manage research module ///////////////////////////////////////////
+
+function get_manage_reasearch(func_call) {
+    $.ajax({
+        url: '/cms/manage_research/'+func_call,
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.dashboard-content').remove();
+                $('#dashboard-content').append(response.result_html);
+                $('.manage_research_table').remove();
+                $('#manage_research_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
-                    "scrollX": true
+                    "scrollX": true,
+                    "scrollY": '50vh',
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "info": false
                 });
             }
         }
     });
 }
 
+$(document.body).on('click', '#delete_research_profile', function () {
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function (response) {
+                if(response.profile_table != ''){
+                    $('.manage_research_table').remove();
+                    $('#manage_research_table').append(response.profile_table);
+                    if(response.success == true){
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["warning"](response.error);
+                    }
+                
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+/////////////////////////////////////////////// diary module ////////////////////////////////////
+$(document.body).on('click', '#save_diary', function (){
+    var user = $('#diary_user option:selected').text();
+    var note = $.trim($('#diary_conent').text());
+    $.ajax({
+        url: '/cms/profile/save_note',
+        type: 'post',
+        data: {
+            username: user,
+            note: note
+        },
+        cache:false,
+        success:function(response){
+            if(response.success == true){
+                toastr["success"](response.message);
+                $('#diary_conent').text('');
+            }else{
+                toastr["warning"](response.message);
+            }
+        }
+    });
+});
+
+$(document.body).on('click', '.delete-notes', function () {
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function (response) {
+                if(response.success == true){
+                    toastr["success"](response.message);
+                }else{
+                    toastr["warning"](response.error);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
 
 
 

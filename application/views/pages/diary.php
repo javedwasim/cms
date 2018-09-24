@@ -25,6 +25,8 @@
                                     							<label>Select User:</label>
                                     							<select class="form-control">
                                     								<option>Select...</option>
+                                                                    <option value="admin">admin</option>
+                                                                    <option value="test">test</option>
                                     							</select>
                                     						</div>
                                     					</div>
@@ -38,10 +40,17 @@
                                     								</tr>
                                     							</thead>
                                     							<tbody>
+                                                                    <?php foreach($note_details as $details){?>
                                     								<tr>
-                                    									<td><i class="fa fa-trash"></i></td>
-                                    									<td>9/12/2018 11:42 am</td>
+                                    									<td>
+                                                                            <a class="delete-notes btn btn-danger btn-xs" href="javascript:void(0)" title="delete" data-href="<?php echo site_url('profile/delete_note/') . $details['id'] ?>">
+                                                                               <i class="fa fa-trash" title="Delete"></i>
+                                                                            </a>                            
+                                                                        </td>
+                                    									<td><?php echo  date('d-m-Y h:i a', strtotime($details['updated_at'])); ?>
+                                                                        </td>
                                     								</tr>
+                                                                    <?php }?>
                                     							</tbody>
                                     						</table>
                                     					</div>
@@ -52,11 +61,11 @@
                                     	<div class="col-md-9 p-l-0">
                                     		<div class="card">
                                     			<div class="card-header">
-                                    				<button class="btn btn-default btn-block pull-right col-md-3" >Update</button>
+                                    				<button class="btn btn-default btn-block pull-right col-md-3" id="update_note">Update</button>
                                     			</div>
                                     			<div class="card-body">
                                     				<div contenteditable="true" style="height: 71vh; width: 100%;">
-		                                    			something to edit
+		                                    			
 		                                    		</div>
                                     			</div>
                                     		</div>
@@ -73,19 +82,20 @@
 	                                						<label>Select User:</label>
 	                                					</div>
 	                                					<div class="col-md-2">
-		                                					<select class="form-control">
+		                                					<select class="form-control" id="diary_user">
 		                                						<option>Select...</option>
+                                                                <option value="admin">admin</option>
+                                                                <option value="test">test</option>
 		                                					</select>
 	                                					</div>
-	                                					<div class="col-md-8"></div>
-	                                					<div class="col-md-3">
-	                                						<button class="btn btn-default btn-block pull-right" >Update</button>
+	                                					<div class="col-md-7"></div>
+	                                					<div class="col-md-2">
+	                                						<button class="btn btn-default btn-block pull-right" id="save_diary">Save</button>
 	                                					</div>
 	                                				</div>
 	                                			</div>
 	                                			<div class="card-body">
-	                                				<div contenteditable="true" style="height: 71vh; width: 100%;">
-		                                    			write something
+	                                				<div contenteditable="true" style="height: 71vh; width: 100%;" id="diary_conent">
 		                                    		</div>
 	                                			</div>
 	                                		</div>

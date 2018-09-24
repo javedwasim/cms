@@ -2,7 +2,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
-        <nav class="navbar navbar-expand-lg topbar">
+        <nav class="navbar navbar-expand-lg topbar" style="width:100% !important;">
             <a class="navbar-brand" href="<?php echo base_url(); ?>" ><h2 style="color: #fff;">Clinic Management System</h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="fas fa-bars" style="color: #fff;"></span>
