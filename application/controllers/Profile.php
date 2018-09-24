@@ -16,6 +16,8 @@
 			$data['professions'] = $this->Setting_model->get_professions();
 			$data['districts'] = $this->Setting_model->get_districts();
 			$data['profiles'] = $this->Profile_model->get_profiles();
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
             $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
             $json['result_html'] = $this->load->view('pages/profile', $data, true);
             if ($this->input->is_ajax_request()) {

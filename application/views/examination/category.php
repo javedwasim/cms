@@ -1,11 +1,19 @@
+<?php
+if(isset($rights[0]['user_rights']))
+{
+    $appointment_rights = explode(',',$rights[0]['user_rights']);
+    //print_r($appointment_rights);
+    $loggedin_user = $this->session->userdata('userdata');
+}
+?>
 <div class="tab-pane active" id="category" role="tabpanel">
     <div class="card">
         <div class="card-header" style="display: inline-flex;">
             <div class="row">
                 <div class="col-md-12">
                     <label>New Category</label>
-                    <input type="text" class="form-control col-md-6" name="instruction_name" id="instruction_name">
-                    <button class="btn btn-primary add-examination-category">Add</button>
+                    <input type="text" class="form-control col-md-6"  name="instruction_name" id="instruction_name">
+                    <button class="btn btn-primary add-examination-category" <?php  echo(in_array("examinations-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))?'':'disabled'; ?>>Add</button>
                 </div>
             </div>
         </div>

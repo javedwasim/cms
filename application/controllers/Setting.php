@@ -151,7 +151,10 @@
 		}
 
 		public function register_user(){
-			$json['result_html'] = $this->load->view('pages/register-user', "", true);
+            $data['other_rights'] = $this->Setting_model->get_other_rights();
+            //print_r($data['other_rights']); die();
+            $data['userdata'] = $this->session->userdata('userdata');
+			$json['result_html'] = $this->load->view('pages/register-user', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -777,6 +780,40 @@
             $data['active_tab'] = 'items';
             $data['selected_test_id'] = $test_id;
             $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function register_new_user(){
+            $this->load->library('form_validation');
+            $this->load->helper('security');
+            //rules for required fields e.g email should be unique
+            $this->form_validation->set_rules('full_name', 'User Name', 'required|xss_clean');
+            $this->form_validation->set_rules('gender', 'Gender', 'required|xss_clean');
+            $this->form_validation->set_rules('username', 'Username', 'required|is_unique[login.username]|xss_clean');
+            $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
+            $this->form_validation->set_rules('contact_no', 'Contact No', 'required|xss_clean');
+            $this->form_validation->set_rules('company', 'Company', 'required|xss_clean');
+            $this->form_validation->set_rules('address', 'Address', 'required|xss_clean');
+            if ($this->form_validation->run() == FALSE) {
+                $data['error'] = true;
+                $validation_errors = validation_errors();
+                //$this->session->set_flashdata('errors', $validation_errors);
+                $json['message'] = $validation_errors;
+            }else{
+                $user = $this->input->post();
+                $result = $this->Setting_model->register_new_user($user);
+                if($result){
+                    $json['success'] = true;
+                    $json['message'] = "User created successfully!";
+                }else{
+                    $json['error'] = true;
+                    $json['message'] = "Seem to be an error!";
+                }
+            }
+
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }

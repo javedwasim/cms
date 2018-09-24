@@ -1,3 +1,11 @@
+<?php
+    if(isset($rights[0]['user_rights']))
+    {
+        $appointment_rights = explode(',',$rights[0]['user_rights']);
+        //print_r($appointment_rights);
+        $loggedin_user = $this->session->userdata('userdata');
+    }
+?>
 <div class="content-wrapper">
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
@@ -52,7 +60,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="button" name="book_appointment" id="book_appointment" class="btn btn-primary">Save</button>
+                                    <button type="button" name="book_appointment" <?php  echo(in_array("appointments-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))?'':'disabled'; ?>
+                                            id="book_appointment" class="btn btn-primary">Save</button>
                                 </form>
                             </div>
                         </div>

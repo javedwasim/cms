@@ -1,3 +1,11 @@
+<?php
+if(isset($rights[0]['user_rights']))
+{
+    $appointment_rights = explode(',',$rights[0]['user_rights']);
+    //print_r($appointment_rights);
+    $loggedin_user = $this->session->userdata('userdata');
+}
+?>
 <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
@@ -10,6 +18,7 @@
         <tr class="table-row">
             <td>
                 <a class="delete-examination btn btn-danger btn-xs"
+                    <?php  echo(in_array("examinations-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))?'':'disabled'; ?>
                    href="javascript:void(0)" title="delete"
                    data-href="<?php echo site_url('examination/delete_examination_category/') . $category['id'] ?>">
                    <i class="fa fa-trash" title="Delete"></i></a>

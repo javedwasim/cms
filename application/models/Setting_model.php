@@ -22,6 +22,56 @@
 			}
 		}
 
+		public function get_other_rights(){
+		    $other_rights = array();
+            $sql = "SELECT org.other_rights_name,GROUP_CONCAT(class,'-',other_rights_id) as other_rights 
+                    FROM other_rights org 
+                    GROUP BY other_rights_name";
+            $result = $query = $this->db->query($sql);
+            if ($result) {
+                foreach ($result->result_array() as $right){
+                    $other_rights[$right['other_rights_name']] = $right['other_rights'];
+                }
+
+                return $other_rights;
+            } else {
+                return array();
+            }
+        }
+
+        public function register_new_user($user){
+            //menu_group
+            $this->db->insert('menu_group', array('menu_group_name'=>$user['username'],'created_by'=>1,'status'=>1));
+            $menu_group_id =  $this->db->insert_id();
+
+            //menu group detail
+            $default_menues = $this->config->item('user_default_menu');
+            foreach ($default_menues as $menu){
+                $this->db->insert('menu_group_detail',array('menu_group_id'=>$menu_group_id,'menu_id'=>$menu));
+            }
+
+            //other rights group
+            $this->db->insert('other_rights_group', array('other_rights_group_name'=>$user['username'],'created_by'=>1,'status'=>1));
+            $other_rights_group_id =  $this->db->insert_id();
+
+            //other rights group detail
+            $other_rights = $user['user_rights'];
+            foreach ($other_rights as $right){
+                $this->db->insert('other_rights_group_detail', array('other_rights_group_id'=>$other_rights_group_id,'other_rights_id'=>$right,'status'=>1));
+            }
+
+            //login rights group
+            $this->db->insert('login_rights_group', array('menu_group_id'=>$menu_group_id,'other_rights_group_id'=>$other_rights_group_id));
+            $login_rights_group_id =  $this->db->insert_id();
+
+
+            $password = password_hash($user['password'], PASSWORD_BCRYPT);
+            $user_data = array('full_name'=>$user['full_name'],'gender'=>$user['gender'],'company'=>$user['company'],
+                        'is_admin'=>0, 'login_rights_group_id'=>$login_rights_group_id, 'address'=>$user['address'],'username'=>$user['username'],'password'=>$password,'contact_no'=>$user['contact_no']);
+            $this->db->insert('login', $user_data);
+            return $this->db->insert_id();
+        }
+
 		public function get_professions(){
 			$result = $this->db->select('*')
 						->get('profession_tbl');

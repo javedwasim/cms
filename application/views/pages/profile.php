@@ -1,7 +1,16 @@
+<?php
+if(isset($rights[0]['user_rights']))
+{
+    $appointment_rights = explode(',',$rights[0]['user_rights']);
+    //print_r($appointment_rights);
+    $loggedin_user = $this->session->userdata('userdata');
+}
+?>
 <div class="content-wrapper" style="margin: 0 .5%;">
 	<div class="row page-titles">
 		<div class="col-md-5" style="display: inline-flex;">
-			<button class="btn btn-success" data-toggle="modal" data-target="#add-new-patient" id="addProfile"><i class="fas fa-user-plus"></i> Add New</button>
+			<button class="btn btn-success" data-toggle="modal" <?php  echo(in_array("profile-create_new_profile-1", $appointment_rights)&&($loggedin_user['is_admin']==0))?'':'disabled'; ?>
+                    data-target="#add-new-patient" id="addProfile"><i class="fas fa-user-plus"></i> Add New</button>
     		<button class="btn btn-info" id="pat_profile">Refresh</button>
 		</div>
         <div class="col-md-7 align-self-center">
@@ -155,7 +164,8 @@
                                     <button class="btn btn-info btn-md waves-effect waves-light" id="pat-spInstructions" style="padding: 10px 10px;" type="button">Sp. Instructions</button>
                                     <button class="btn btn-primary btn-md waves-effect waves-light" id="pat-labtest" style="padding: 10px 15px;" type="button">Lab. Test</button>
                                     <button class="btn btn-danger waves-effect waves-light" id="pat-echo-test" style="padding: 7px 15px;" type="button">Echo</button>
-                                    <button class="btn btn-danger waves-effect waves-light" id="pat-ett-test" style="padding: 7px 15px;" type="button">ETT</button>
+                                    <button class="btn btn-danger waves-effect waves-light" <?php  echo(in_array("profile-edit_profile-1", $appointment_rights)&&($loggedin_user['is_admin']==0))?'':'disabled'; ?>
+                                            id="pat-ett-test" style="padding: 7px 15px;" type="button">ETT</button>
                                     <button class="btn btn-success btn-md waves-effect waves-light" style="padding: 10px 15px;" type="button">Upload Files</button>
                                 </div>
                             </div>

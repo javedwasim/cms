@@ -1572,3 +1572,20 @@ $(document).ready(function () {
         $('.sidebar-menu').fadeIn('fast');
     });
 });
+
+$(document.body).on('click', '#register_new_user', function(){
+    $.ajax({
+        url: $('#register_user_form').attr('data-action'),
+        type: 'post',
+        data:  $('#register_user_form').serialize(),
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});

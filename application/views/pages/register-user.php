@@ -6,8 +6,10 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <form>
-                        <div class="row">
+                    <form id="register_user_form" method="post" role="form"
+                          data-action="<?php echo site_url('setting/register_new_user') ?>"
+                          enctype="multipart/form-data">
+                    <div class="row">
                             <div class="col-md-12"></div>
                             <div class="col-md-6">
                                 <div class="row">
@@ -15,52 +17,52 @@
                                         <label>Name:</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" name="" class="form-control col-md-10" />
+                                        <input type="text" name="full_name" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Sex:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
                                         <div class="form-group" >
-                                            <label class="radio-inline" style="color:#000 !important;margin-right: 15px;"><input type="radio" name="optradio" checked>Male</label>
-                                            <label class="radio-inline" style="color:#000 !important;"><input type="radio" name="optradio">Female</label>
+                                            <label class="radio-inline" style="color:#000 !important;margin-right: 15px;"><input type="radio" name="gender" checked>Male</label>
+                                            <label class="radio-inline" style="color:#000 !important;"><input type="radio" name="gender">Female</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Username:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="text" name="" class="form-control col-md-10" />
+                                        <input type="text" name="username" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Password:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="password" name="" class="form-control col-md-10" />
+                                        <input type="password" name="password" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Re-Type Password:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="password" name="" class="form-control col-md-10" />
+                                        <input type="password" name="confirm_password" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Contact:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="password" name="" class="form-control col-md-10" />
+                                        <input type="password" name="contact_no" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Company:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="text" name="" value="Shahadat Clinic" class="form-control col-md-10" readonly="readonly" />
+                                        <input type="text" name="company" value="Shahadat Clinic" class="form-control col-md-10"  />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Address:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <textarea class="form-control col-md-10" rows="2"></textarea>
+                                        <textarea class="form-control col-md-10" name="address" rows="2"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -69,13 +71,24 @@
                                     <div class="col-md-8">
                                         <div class="ribbon-wrapper card">
                                             <div class="ribbon ribbon-info">Appointments</div>
-                                            <p class="ribbon-content m-t-10 ">
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Appointments
-                                                </label>
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Appointment Printing
-                                                </label>
+                                            <?php $appointment_rights = explode(',',$other_rights['appointments']) ?>
+                                            <p class="ribbon-content m-t-10">
+                                                <?php foreach ($appointment_rights as $a): $right_name = explode('-',$a); ?>
+                                                    <?php if(($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add')){ ?>
+                                                        <label class="checkbox-inline m-l-10">
+                                                            <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
+                                                            <?php
+                                                                if($right_name[0]=='can_delete'){
+                                                                    echo "Delete";
+                                                                } elseif($right_name[0]=='can_edit'){
+                                                                    echo "Edit";
+                                                                }elseif($right_name[0]=='can_add'){
+                                                                    echo "Add";
+                                                                }
+                                                            ?>
+                                                        </label>
+                                                    <?php } ?>
+                                                <?php endforeach; ?>
                                             </p>
                                         </div>
                                     </div>
@@ -89,35 +102,52 @@
                                             </p>
                                         </div>
                                     </div>
+
                                     <div class="col-md-7">
                                         <div class="ribbon-wrapper card">
                                             <div class="ribbon ribbon-info">Profile</div>
+                                            <?php $appointment_rights = explode(',',$other_rights['profile']) ?>
                                             <p class="ribbon-content m-t-10">
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> View
-                                                </label>
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Add
-                                                </label>
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Edit
-                                                </label>
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Delete
-                                                </label>
+                                                <?php foreach ($appointment_rights as $a): $right_name = explode('-',$a);?>
+                                                    <?php if(($right_name[0]=='delete_profile') || ($right_name[0]=='edit_profile') || ($right_name[0]=='create_new_profile')){ ?>
+                                                        <label class="checkbox-inline m-l-10">
+                                                            <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
+                                                            <?php
+                                                            if($right_name[0]=='delete_profile'){
+                                                                echo "Delete";
+                                                            } elseif($right_name[0]=='edit_profile'){
+                                                                echo "Edit";
+                                                            }elseif($right_name[0]=='create_new_profile'){
+                                                                echo "Add";
+                                                            }
+                                                            ?>
+                                                        </label>
+                                                    <?php } ?>
+                                                <?php endforeach; ?>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="ribbon-wrapper card">
                                             <div class="ribbon ribbon-info">Examination</div>
+                                            <?php $examinations_rights = explode(',',$other_rights['examinations']) ?>
                                             <p class="ribbon-content m-t-10">
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Edit
-                                                </label>
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> New
-                                                </label>
+                                                <?php foreach ($examinations_rights as $e): $right_name = explode('-',$e); ?>
+                                                    <?php if(($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add')){ ?>
+                                                        <label class="checkbox-inline m-l-10">
+                                                          <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
+                                                            <?php
+                                                            if($right_name[0]=='can_delete'){
+                                                                echo "Delete";
+                                                            } elseif($right_name[0]=='can_edit'){
+                                                                echo "Edit";
+                                                            }elseif($right_name[0]=='can_add'){
+                                                                echo "Add";
+                                                            }
+                                                            ?>
+                                                        </label>
+                                                    <?php } ?>
+                                                <?php endforeach; ?>
                                             </p>
                                         </div>
                                     </div>
@@ -125,66 +155,96 @@
                                     <div class="col-md-6">
                                         <div class="ribbon-wrapper card">
                                             <div class="ribbon ribbon-info">Echo</div>
+                                            <?php $echos_rights = explode(',',$other_rights['echos']) ?>
                                             <p class="ribbon-content m-t-10">
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Add
-                                                </label>
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Edit
-                                                </label>
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Delete
-                                                </label>
+                                                <?php foreach ($echos_rights as $echo): $right_name = explode('-',$echo); ?>
+                                                    <?php if(($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add')){ ?>
+                                                        <label class="checkbox-inline m-l-10">
+                                                            <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
+                                                            <?php
+                                                            if($right_name[0]=='can_delete'){
+                                                                echo "Delete";
+                                                            } elseif($right_name[0]=='can_edit'){
+                                                                echo "Edit";
+                                                            }elseif($right_name[0]=='can_add'){
+                                                                echo "Add";
+                                                            }
+                                                            ?>
+                                                        </label>
+                                                    <?php } ?>
+                                                <?php endforeach; ?>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="ribbon-wrapper card">
                                             <div class="ribbon ribbon-info">ETT</div>
+                                            <?php $ett_rights = explode(',',$other_rights['ett']) ?>
                                             <p class="ribbon-content m-t-10">
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Add
-                                                </label>
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Edit
-                                                </label>
-                                                <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Delete
-                                                </label>
+                                                <?php foreach ($ett_rights as $ett): $right_name = explode('-',$ett); ?>
+                                                    <?php if(($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add')){ ?>
+                                                        <label class="checkbox-inline m-l-10">
+                                                            <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
+                                                            <?php
+                                                            if($right_name[0]=='can_delete'){
+                                                                echo "Delete";
+                                                            } elseif($right_name[0]=='can_edit'){
+                                                                echo "Edit";
+                                                            }elseif($right_name[0]=='can_add'){
+                                                                echo "Add";
+                                                            }
+                                                            ?>
+                                                        </label>
+                                                    <?php } ?>
+                                                <?php endforeach; ?>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="ribbon-wrapper card">
                                             <div class="ribbon ribbon-info">Lab Test</div>
-                                            <div class="ribbon-content m-t-10 m-l-10">
-                                                <label class="checkbox-inline m-r-30">
-                                                  <input type="checkbox" value=""> Add
-                                                </label>
-                                                <label class="checkbox-inline m-r-30">
-                                                  <input type="checkbox" value=""> Edit
-                                                </label>
-                                                <label class="checkbox-inline m-r-30">
-                                                  <input type="checkbox" value=""> Delete
-                                                </label>
-                                            </div>
+                                            <?php $lab_rights = explode(',',$other_rights['lab_tests']) ?>
+                                            <p class="ribbon-content m-t-10">
+                                                <?php foreach ($lab_rights as $lab_right): $right_name = explode('-',$lab_right); ?>
+                                                    <?php if(($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add')){ ?>
+                                                        <label class="checkbox-inline m-l-10">
+                                                            <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
+                                                            <?php
+                                                            if($right_name[0]=='can_delete'){
+                                                                echo "Delete";
+                                                            } elseif($right_name[0]=='can_edit'){
+                                                                echo "Edit";
+                                                            }elseif($right_name[0]=='can_add'){
+                                                                echo "Add";
+                                                            }
+                                                            ?>
+                                                        </label>
+                                                    <?php } ?>
+                                                <?php endforeach; ?>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="ribbon-wrapper card">
                                             <div class="ribbon ribbon-info">Special Instructions</div>
+                                            <?php $special_instructions = explode(',',$other_rights['special_instructions']) ?>
                                             <p class="ribbon-content m-t-10">
-                                                <div class="ribbon-content m-l-10">
-                                                    <label class="checkbox-inline m-r-30">
-                                                      <input type="checkbox" value=""> Add
-                                                    </label>
-                                                    <label class="checkbox-inline m-r-30">
-                                                      <input type="checkbox" value=""> Edit
-                                                    </label>
-                                                    <label class="checkbox-inline m-r-30">
-                                                      <input type="checkbox" value=""> Delete
-                                                    </label>
-                                                </div>
+                                                <?php foreach ($special_instructions as $special_instruction): $right_name = explode('-',$special_instruction); ?>
+                                                    <?php if(($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add')){ ?>
+                                                        <label class="checkbox-inline m-l-10">
+                                                            <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
+                                                            <?php
+                                                            if($right_name[0]=='can_delete'){
+                                                                echo "Delete";
+                                                            } elseif($right_name[0]=='can_edit'){
+                                                                echo "Edit";
+                                                            }elseif($right_name[0]=='can_add'){
+                                                                echo "Add";
+                                                            }
+                                                            ?>
+                                                        </label>
+                                                    <?php } ?>
+                                                <?php endforeach; ?>
                                             </p>
                                         </div>
                                     </div>
@@ -202,7 +262,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <button class="btn btn-primary btn-block ">Save</button>
+                                        <button type="submit" class="btn btn-primary btn-block" id="register_new_user">Save</button>
                                     </div>
                                 </div>
                             </div>

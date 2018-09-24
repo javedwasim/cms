@@ -3,7 +3,7 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <?php if(isset($rights[0]['rights'])):
+                    <?php if(isset($rights[0]['rights'])): print_r($rights[0]['user_rights']);
                         $permissions = explode(',',$rights[0]['rights']);
                         if (in_array("create_new_profile-1", $permissions)): ?>
                             <div class="row">
