@@ -143,12 +143,12 @@
             }
 		}
 
-		public function manage_research(){
-			$json['result_html'] = $this->load->view('pages/manage_research', "", true);
-            if ($this->input->is_ajax_request()) {
-                set_content_type($json);
-            }
-		}
+		// public function manage_research(){
+		// 	$json['result_html'] = $this->load->view('pages/manage_research', "", true);
+  //           if ($this->input->is_ajax_request()) {
+  //               set_content_type($json);
+  //           }
+		// }
 
 		public function register_user(){
 			$json['result_html'] = $this->load->view('pages/register-user', "", true);

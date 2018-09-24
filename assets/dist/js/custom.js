@@ -2491,7 +2491,7 @@ $(document.body).on('click', '#save_new_profile', function () {
     var profilerelative = $('#pat_profile_relative_name').val();
     var profileagedigit = $('#pat_profile_age_digit').val();
     var profileage = $('#pat_profile_age').val();
-    var profileprofession = $('#pat_profile_profession option:selected').text()
+    var profileprofession = $('#pat_profile_profession option:selected').text();
     var profilesex = $('input[name="pat_sex"]:checked').val();
     var profilecontact = $('#pat_profile_contact').val();
     var profileheight = $('#pat_profile_height').val();
@@ -3027,7 +3027,6 @@ function get_items_signature(func_call) {
     });
 }
 
-
 $(document.body).on('click', '#save_signature',function(){
     var docName = $('#doc_sig_name').val();
     var docQuali = $('#doc_sig_quali').val();
@@ -3103,14 +3102,17 @@ $(document.body).on('click', '.delete-signature', function () {
 });
 
 /////////////////////////////// manage research module ///////////////////////////////////////////
+
 function get_manage_reasearch(func_call) {
     $.ajax({
-        url: '/cms/setting/manage_research',
+        url: '/cms/manage_research/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('.manage_research_table').remove();
+                $('#manage_research_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,
@@ -3123,6 +3125,72 @@ function get_manage_reasearch(func_call) {
         }
     });
 }
+
+$(document.body).on('click', '#delete_research_profile', function () {
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function (response) {
+                if(response.profile_table != ''){
+                    $('.manage_research_table').remove();
+                    $('#manage_research_table').append(response.profile_table);
+                    if(response.success == true){
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["warning"](response.error);
+                    }
+                
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+/////////////////////////////////////////////// diary module ////////////////////////////////////
+$(document.body).on('click', '#save_diary', function (){
+    var user = $('#diary_user option:selected').text();
+    var note = $.trim($('#diary_conent').text());
+    $.ajax({
+        url: '/cms/profile/save_note',
+        type: 'post',
+        data: {
+            username: user,
+            note: note
+        },
+        cache:false,
+        success:function(response){
+            if(response.success == true){
+                toastr["success"](response.message);
+                $('#diary_conent').text('');
+            }else{
+                toastr["warning"](response.message);
+            }
+        }
+    });
+});
+
+$(document.body).on('click', '.delete-notes', function () {
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function (response) {
+                if(response.success == true){
+                    toastr["success"](response.message);
+                }else{
+                    toastr["warning"](response.error);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
 
 
 

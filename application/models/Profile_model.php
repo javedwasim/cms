@@ -56,6 +56,36 @@
 			}
 		}
 
+		public function get_notes(){
+			$result = $this->db->select('*')
+						->from('diary')
+						->get();
+			if ($result){
+				return $result->result_array();
+			}else{
+				return array();
+			}
+		}
+
+		public function insert_notes($data){
+			$result = $this->db->insert('diary', $data);
+            if ($result) {
+            	return true;
+            }else{
+            	return false;
+            }
+		}
+
+		public function delete_notes($id){
+			$result = $this->db->delete('diary', array('id' => $id));
+			if ($result) {
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+
 	}
 
 ?>

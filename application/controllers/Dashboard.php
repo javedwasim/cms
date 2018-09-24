@@ -9,6 +9,7 @@ class Dashboard extends CI_Controller {
 			$this->load->model('Dashboard_model');
       $this->load->helper('content-type');
       $this->load->model('User_model');
+      $this->load->model('Profile_model');
       date_default_timezone_set("Asia/Karachi");
 		}
 
@@ -184,10 +185,11 @@ class Dashboard extends CI_Controller {
 
     public function diary()
     {
-        $json['result_html'] = $this->load->view('pages/diary', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
+      $data['note_details'] = $this->Profile_model->get_notes();
+      $json['result_html'] = $this->load->view('pages/diary', $data, true);
+      if ($this->input->is_ajax_request()) {
+          set_content_type($json);
+      }
     }
 
     public function get_menus()
