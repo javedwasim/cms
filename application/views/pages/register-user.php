@@ -253,7 +253,8 @@
                                             <div class="ribbon ribbon-info">General</div>
                                             <p class="ribbon-content m-t-10">
                                                 <label class="checkbox-inline m-l-10">
-                                                  <input type="checkbox" value=""> Settings
+                                                  <?php $setting_id = explode('-',$other_rights['setting']) ?>
+                                                  <input type="checkbox" name="user_rights[]" value="<?php echo $setting_id[1]; ?>"> Settings
                                                 </label>
                                                 <label class="checkbox-inline m-l-10">
                                                   <input type="checkbox" value=""> Backup

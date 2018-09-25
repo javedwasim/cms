@@ -1,3 +1,4 @@
+<?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
 <div class="tab-pane <?php echo isset($active_tab) && ($active_tab == 'category') ? 'active' : ''; ?>"
      id="category" role="tabpanel">
     <div class="card">
@@ -6,7 +7,13 @@
                 <div class="col-md-12">
                     <label>New Category</label>
                     <input type="text" class="form-control col-md-6" name="" id="lab_category">
-                    <button class="btn btn-primary add-lab-category">Add</button>
+                    <?php if($loggedin_user['is_admin']==1){ ?>
+                        <button class="btn btn-primary add-lab-category">Add</button>
+                    <?php } elseif(in_array("lab_tests-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                        <button class="btn btn-primary add-lab-category">Add</button>
+                    <?php } else{ ?>
+                        <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -23,20 +30,31 @@
                 <?php foreach ($categories as $category): ?>
                     <tr>
                         <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
-                            <a class="delete-lab-category btn btn-danger btn-xs"
-                               href="javascript:void(0)" title="delete"
-                               data-href="<?php echo site_url('setting/delete_lab_category/') . $category['id'] ?>">
-                                <i class="fa fa-trash" title="Delete"></i></a>
-                            <a class="edit-lab-cat-btn btn btn-info btn-xs"
-                               href="javascript:void(0)"
-                               data-lab-category-id="<?php echo $category['id']; ?>"><i
-                                    class="far fa-question-circle"></i></a>
-
+                            <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
+                                <a class="delete-lab-category btn btn-danger btn-xs"
+                                   href="javascript:void(0)" title="delete"
+                                   data-href="<?php echo site_url('setting/delete_lab_category/') . $category['id'] ?>">
+                                    <i class="fa fa-trash" title="Delete"></i></a>
+                                <a class="edit-lab-cat-btn btn btn-info btn-xs"
+                                   href="javascript:void(0)"
+                                   data-lab-category-id="<?php echo $category['id']; ?>"><i
+                                   class="far fa-question-circle"></i></a>
+                            <?php } else{ ?>
+                                <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
+                                    <i class="fa fa-trash" title="Delete"></i></a>
+                                <a class="btn btn-info btn-xs" style="opacity: 0.5;" onclick="showError()">
+                                    <i class="far fa-question-circle" title="Delete"></i></a>
+                            <?php } ?>
                         </td>
-                        <td contenteditable="true"
-                            onBlur="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')"
-                            onClick="showEdit(this);">
-                            <?php echo $category['name']; ?></td>
+                        <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
+                            <td contenteditable="true"
+                                onBlur="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')"
+                                onClick="showEdit(this);">
+                                <?php echo $category['name']; ?></td>
+                        <?php } else{ ?>
+                            <td contenteditable="true" onClick="showError(this);">
+                                <?php echo $category['name']; ?></td>
+                        <?php } ?>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -85,8 +103,6 @@
             success: function (response) {
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
-                    toastr["success"](response.message);
-                } else {
                     toastr["success"](response.message);
                 }
             }

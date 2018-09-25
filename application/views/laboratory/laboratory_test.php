@@ -1,3 +1,4 @@
+<?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
 <div class="tab-pane <?php echo isset($active_tab) && ($active_tab == 'tests') ? 'active' : ''; ?>"
      id="tests" role="tabpanel">
     <div class="card">
@@ -25,7 +26,13 @@
                     </div>
                     <div class="col-lg-2 col-md-4 p-0">
                         <div class="form-group m-t-25" style="display: inline-flex;">
-                            <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item">Add</button>
+                            <?php if($loggedin_user['is_admin']==1){ ?>
+                                <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item">Add</button>
+                            <?php } elseif(in_array("lab_tests-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                                <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item">Add</button>
+                            <?php } else{ ?>
+                                <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -59,20 +66,31 @@
                 <?php foreach ($tests as $test): ?>
                     <tr>
                         <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
-                            <a class="delete-lab-test btn btn-danger btn-xs"
-                               href="javascript:void(0)" title="delete"
-                               data-href="<?php echo site_url('setting/delete_lab_test/') . $test['id'] ?>">
-                                <i class="fa fa-trash" title="Delete"></i></a>
-                            <a class="edit-lab-test-btn btn btn-info btn-xs"
-                               href="javascript:void(0)"
-                               data-lab-test-id="<?php echo $test['id']; ?>"><i
-                                    class="far fa-question-circle"></i></a>
-
+                            <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
+                                <a class="delete-lab-test btn btn-danger btn-xs"
+                                   href="javascript:void(0)" title="delete"
+                                   data-href="<?php echo site_url('setting/delete_lab_test/') . $test['id'] ?>">
+                                    <i class="fa fa-trash" title="Delete"></i></a>
+                                <a class="edit-lab-test-btn btn btn-info btn-xs"
+                                   href="javascript:void(0)"
+                                   data-lab-test-id="<?php echo $test['id']; ?>"><i
+                                   class="far fa-question-circle"></i></a>
+                            <?php } else{ ?>
+                                <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
+                                    <i class="fa fa-trash" title="Delete"></i></a>
+                                <a class="btn btn-info btn-xs" style="opacity: 0.5;" onclick="showError()">
+                                    <i class="far fa-question-circle" title="Delete"></i></a>
+                            <?php } ?>
                         </td>
-                        <td contenteditable="true"
-                            onBlur="saveTestDescription(this,'test_name','<?php echo $test['id']; ?>')"
-                            onClick="showEdit(this);">
-                            <?php echo $test['name']; ?></td>
+                        <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
+                            <td contenteditable="true"
+                                onBlur="saveTestDescription(this,'test_name','<?php echo $test['id']; ?>')"
+                                onClick="showEdit(this);">
+                                <?php echo $test['name']; ?></td>
+                        <?php } else{ ?>
+                            <td contenteditable="true" onClick="showError(this);">
+                                <?php echo $test['name']; ?></td>
+                        <?php } ?>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -123,8 +141,6 @@
             success: function (response) {
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
-                    toastr["success"](response.message);
-                } else {
                     toastr["success"](response.message);
                 }
             }
