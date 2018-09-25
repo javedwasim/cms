@@ -254,6 +254,11 @@
             return $this->db->affected_rows();
         }
 
+        public function delete_lab_test_item($id) {
+            $this->db->where('id', $id)->delete('lab_test_item');
+            return $this->db->affected_rows();
+        }
+
         public function get_lab_test_description($id){
             $result = $this->db->select('description')->from('lab_test')->where('id',$id)->limit(1)->get();
             if ($result) {

@@ -13,7 +13,11 @@ if(isset($rights[0]['user_rights']))
                 <div class="col-md-12">
                     <label>New Category</label>
                     <input type="text" class="form-control col-md-6"  name="instruction_name" id="instruction_name">
-                    <button class="btn btn-primary add-examination-category" <?php  echo(in_array("examinations-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))?'':'disabled'; ?>>Add</button>
+                    <?php  if(($loggedin_user['is_admin']==1) || (in_array("echos-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
+                        <button class="btn btn-primary add-examination-category">Add</button>
+                    <?php } else{ ?>
+                        <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
+                    <?php } ?>
                 </div>
             </div>
         </div>

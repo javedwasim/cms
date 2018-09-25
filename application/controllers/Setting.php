@@ -26,6 +26,7 @@
         public function insert_profession(){
             $profession = $this->input->post('profession');
             $result = $this->Setting_model->insert_profession($profession);
+            $data['rights'] = $this->session->userdata('other_rights');
             if ($result) {
                 $data['professions'] = $this->Setting_model->get_professions();
                 $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
@@ -42,6 +43,7 @@
 
 		public function diestrict(){
 			$data['districts'] = $this->Setting_model->get_districts();
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['district_table'] = $this->load->view('pages/district_table', $data, true);
 			$json['result_html'] = $this->load->view('pages/district', $data, true);
             if ($this->input->is_ajax_request()) {
@@ -52,6 +54,7 @@
         public function insert_district(){
             $district = $this->input->post('district');
             $result = $this->Setting_model->insert_district($district);
+            $data['rights'] = $this->session->userdata('other_rights');
             if ($result) {
                 $data['districts'] = $this->Setting_model->get_districts();
                 $json['district_table'] = $this->load->view('pages/district_table', $data, true);
@@ -68,6 +71,7 @@
 
 		public function history(){
             $data['history_categories'] = $this->Setting_model->get_history_categories();
+            $data['rights'] = $this->session->userdata('other_rights');
 			$json['result_html'] = $this->load->view('history/history', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -77,6 +81,7 @@
         public function add_history_category(){
             $category = $this->input->post('category');
             $result = $this->Setting_model->save_history_category($category);
+            $data['rights'] = $this->session->userdata('other_rights');
             if ($result) {
                 $data['history_categories'] = $this->Setting_model->get_history_categories();
                 $json['category_table'] = $this->load->view('pages/category_table', $data, true);
@@ -129,6 +134,7 @@
             $data['advices'] = $this->Setting_model->get_advices();
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'advice';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -137,6 +143,7 @@
 
 		public function research(){
             $data['researches'] = $this->Setting_model->get_researches();
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('pages/add_research', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -175,6 +182,7 @@
 		}
 
 		public function limiter(){
+            $data['rights'] = $this->session->userdata('other_rights');
 			$data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
 			$json['result_html'] = $this->load->view('pages/limiter', $data, true);
             if ($this->input->is_ajax_request()) {
@@ -187,6 +195,7 @@
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_lab_test_items();
             $data['active_tab'] = 'category';
+            $data['rights'] = $this->session->userdata('other_rights');
 			$json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -250,6 +259,7 @@
             $data['advices'] = $this->Setting_model->get_advices();
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'advice';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -283,6 +293,7 @@
             $data['advices'] = $this->Setting_model->get_advices();
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'advice';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -316,6 +327,7 @@
             $data['advices'] = $this->Setting_model->get_advices();
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'advice_item';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -335,6 +347,7 @@
             $data['advices'] = $this->Setting_model->get_advices();
             $data['items'] = $this->Setting_model->get_advice_items();
             $data['active_tab'] = 'advice_item';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
 
             if($this->input->is_ajax_request()) {
@@ -378,6 +391,7 @@
                 }
             }
             $data['researches'] = $this->Setting_model->get_researches();
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('pages/add_research', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -452,6 +466,7 @@
                 $json['message'] = "Seems to an error in deleting research record.";
             }
             $data['researches'] = $this->Setting_model->get_researches();
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('pages/add_research', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -481,7 +496,8 @@
             $data['categories'] = $this->Setting_model->get_lab_categories();
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_lab_test_items();
-            $data['active_tab'] = 'tests';
+            $data['active_tab'] = 'category';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -542,7 +558,8 @@
             $data['categories'] = $this->Setting_model->get_lab_categories();
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_lab_test_items();
-            $data['active_tab'] = 'tests';
+            $data['active_tab'] = 'category';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -590,6 +607,7 @@
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_lab_test_items();
             $data['active_tab'] = 'tests';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -624,6 +642,28 @@
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_lab_test_items();
             $data['active_tab'] = 'tests';
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+
+        }
+
+        public function delete_lab_test_item($id){
+            $result = $this->Setting_model->delete_lab_test_item($id);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Laboratory test item successfully deleted.";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error.";
+            }
+            $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['tests'] = $this->Setting_model->get_lab_tests();
+            $data['items'] = $this->Setting_model->get_lab_test_items();
+            $data['active_tab'] = 'items';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -679,6 +719,7 @@
             $data['items'] = $this->Setting_model->get_lab_test_items();
             $data['active_tab'] = 'tests';
             $data['selected_category'] = $cat_id;
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -710,6 +751,7 @@
             $data['tests'] = $this->Setting_model->get_lab_tests();
             $data['items'] = $this->Setting_model->get_lab_test_items();
             $data['active_tab'] = 'items';
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -779,6 +821,7 @@
             $data['items'] = $this->Setting_model->get_lab_item_by_test_id($test_id);
             $data['active_tab'] = 'items';
             $data['selected_test_id'] = $test_id;
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);

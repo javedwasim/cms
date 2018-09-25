@@ -13,7 +13,6 @@
                     <?php } else{ ?>
                         <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
                     <?php } ?>
-
                 </div>
             </div>
         </div>
