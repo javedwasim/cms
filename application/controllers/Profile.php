@@ -27,6 +27,7 @@
 		}
 
 		public function patient_special_instructions(){
+            $data['rights'] = $this->session->userdata('other_rights');
 			$json['result_html'] = $this->load->view('pages/pat_sp_instructions', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -41,6 +42,7 @@
 		}
 		
 		public function patient_echo_test(){
+            $data['rights'] = $this->session->userdata('other_rights');
 			$json['result_html'] = $this->load->view('pages/patient_echo_test', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -48,6 +50,7 @@
 		}
 
 		public function patient_ett_test(){
+            $data['rights'] = $this->session->userdata('other_rights');
 			$json['result_html'] = $this->load->view('pages/pat_ett_test', "", true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -102,6 +105,7 @@
                 	$json['message'] = "Seems to an error";
 	        	}
 	        	$data['profiles'] = $this->Profile_model->get_profiles();
+                $data['rights'] = $this->session->userdata('other_rights');
             	$json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
 		        if ($this->input->is_ajax_request()) {
 		            set_content_type($json);
@@ -120,6 +124,7 @@
                 $json['message'] = "Seems to an error";
 			}
 			$data['profiles'] = $this->Profile_model->get_profiles();
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
             if ($this->input->is_ajax_request()) {
 		            set_content_type($json);
@@ -131,6 +136,7 @@
 			$data['professions'] = $this->Setting_model->get_professions();
 			$data['districts'] = $this->Setting_model->get_districts();
 			$data['profile_data'] = $this->Profile_model->get_profile_by_id($id);
+            $data['rights'] = $this->session->userdata('other_rights');
 			$json['edit_modal'] = $this->load->view('profile/edit_profile', $data, true);
             if ($this->input->is_ajax_request()) {
 		            set_content_type($json);
@@ -186,6 +192,7 @@
                 	$json['message'] = "Seems to an error";
 	        	}
 	        	$data['profiles'] = $this->Profile_model->get_profiles();
+                $data['rights'] = $this->session->userdata('other_rights');
             	$json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
 		        if ($this->input->is_ajax_request()) {
 		            set_content_type($json);

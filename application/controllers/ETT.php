@@ -21,6 +21,7 @@ class ETT extends MY_Controller
     	$data['descriptions'] = $this->ETT_model->get_descriptions();
     	$data['conclusions'] = $this->ETT_model->get_conclusions();
         $data['protocols'] = $this->ETT_model->get_protocol();
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);
 		$json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -49,6 +50,8 @@ class ETT extends MY_Controller
         }
         $data['test_reasons'] = $this->ETT_model->get_test_reasons();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/test_reason_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -66,6 +69,8 @@ class ETT extends MY_Controller
         }
         $data['test_reasons'] = $this->ETT_model->get_test_reasons();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/test_reason_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -110,6 +115,8 @@ class ETT extends MY_Controller
         }
         $data['ending_reasons'] = $this->ETT_model->get_ending_reasons();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/ending_reason_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -127,6 +134,8 @@ class ETT extends MY_Controller
         }
         $data['ending_reasons'] = $this->ETT_model->get_ending_reasons();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/ending_reason_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -171,6 +180,8 @@ class ETT extends MY_Controller
         }
         $data['descriptions'] = $this->ETT_model->get_descriptions();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/description_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -188,6 +199,8 @@ class ETT extends MY_Controller
         }
         $data['descriptions'] = $this->ETT_model->get_descriptions();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/description_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -232,6 +245,8 @@ class ETT extends MY_Controller
         }
         $data['conclusions'] = $this->ETT_model->get_conclusions();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/conclusion_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -249,6 +264,8 @@ class ETT extends MY_Controller
         }
         $data['conclusions'] = $this->ETT_model->get_conclusions();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/conclusion_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -295,6 +312,8 @@ class ETT extends MY_Controller
         }
         $data['protocols'] = $this->ETT_model->get_protocol();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/protocol_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -312,6 +331,8 @@ class ETT extends MY_Controller
         }
         $data['protocols'] = $this->ETT_model->get_protocol();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/protocol_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -339,6 +360,8 @@ class ETT extends MY_Controller
     {
         $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);
         $data['selected_category'] = $p_id;
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/protocol_details_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -360,9 +383,6 @@ class ETT extends MY_Controller
             set_content_type($json);
         }
     }
-
-
-
 }
 
 

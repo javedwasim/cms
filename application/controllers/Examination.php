@@ -46,6 +46,7 @@ class Examination extends MY_Controller
         }
         $data['categories'] = $this->Examination_model->get_examination_categories();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('examination/category_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -75,6 +76,7 @@ class Examination extends MY_Controller
         }
         $data['items'] = $this->Examination_model->get_examination_items();
         $data['active_tab'] = 'items';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('examination/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -109,6 +111,7 @@ class Examination extends MY_Controller
         }
         $data['categories'] = $this->Examination_model->get_examination_categories();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('examination/category_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -124,6 +127,7 @@ class Examination extends MY_Controller
         $data['items'] = $this->Examination_model->get_examination_items_by_category($cat_id);
         $data['selected_category'] = $cat_id;
         $data['active_tab'] = 'tests';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('examination/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -202,6 +206,7 @@ class Examination extends MY_Controller
         }
         $data['items'] = $this->Examination_model->get_examination_items();
         $data['active_tab'] = 'items';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('examination/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
