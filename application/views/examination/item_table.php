@@ -1,3 +1,11 @@
+<?php
+if(isset($rights[0]['user_rights']))
+{
+    $appointment_rights = explode(',',$rights[0]['user_rights']);
+    //print_r($appointment_rights);
+    $loggedin_user = $this->session->userdata('userdata');
+}
+?>
 <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
@@ -9,19 +17,47 @@
     <?php foreach ($items as $item): ?>
         <tr class="table-row">
             <td>
-                <a class="delete-examination-item btn btn-danger btn-xs"
-                   href="javascript:void(0)" title="delete"
-                   data-href="<?php echo site_url('examination/delete_examination_item/') . $item['id'] ?>">
-                    <i class="fa fa-trash" title="Delete"></i></a>
-                <a class="edit-examination-item-btn btn btn-info btn-xs"
-                   href="javascript:void(0)"
-                   data-examination-item-id="<?php echo $item['id']; ?>">
-                   <i class="far fa-question-circle"></i></a>
+                <?php if($loggedin_user['is_admin']==1){ ?>
+                    <a class="delete-examination-item btn btn-danger btn-xs"
+                       href="javascript:void(0)" title="delete"
+                       data-href="<?php echo site_url('examination/delete_examination_item/') . $item['id'] ?>">
+                        <i class="fa fa-trash" title="Delete"></i></a>
+                    <a class="edit-examination-item-btn btn btn-info btn-xs"
+                       href="javascript:void(0)"
+                       data-examination-item-id="<?php echo $item['id']; ?>">
+                        <i class="far fa-question-circle"></i></a>
+                <?php } elseif(in_array("examinations-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                    <a class="delete-examination-item btn btn-danger btn-xs"
+                       href="javascript:void(0)" title="delete"
+                       data-href="<?php echo site_url('examination/delete_examination_item/') . $item['id'] ?>">
+                        <i class="fa fa-trash" title="Delete"></i></a>
+                    <a class="edit-examination-item-btn btn btn-info btn-xs"
+                       href="javascript:void(0)"
+                       data-examination-item-id="<?php echo $item['id']; ?>">
+                        <i class="far fa-question-circle"></i></a>
+                <?php } else{ ?>
+                    <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
+                        <i class="fa fa-trash" title="Delete"></i></a>
+                    <a class="btn btn-info btn-xs" style="opacity: 0.5;" onclick="showError()">
+                        <i class="far fa-question-circle"></i></a>
+                <?php } ?>
             </td>
-            <td contenteditable="true"
-                onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                onClick="showEdit(this);">
-                <?php echo $item['name']; ?></td>
+            <?php if($loggedin_user['is_admin']==1){ ?>
+                <td contenteditable="true"
+                    onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
+                    onClick="showEdit(this);">
+                    <?php echo $item['name']; ?></td>
+            <?php } elseif(in_array("examinations-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                <td contenteditable="true"
+                    onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
+                    onClick="showEdit(this);">
+                    <?php echo $item['name']; ?></td>
+                <i class="fa fa-trash" title="Delete"></i></a>
+            <?php } else{ ?>
+                <td contenteditable="true" onClick="showError(this);">
+                    <?php echo $item['name']; ?></td>
+            <?php } ?>
+
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -68,10 +104,7 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
-                }
-            }
+                }             }
         });
     }
 

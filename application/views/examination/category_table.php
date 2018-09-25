@@ -17,25 +17,51 @@ if(isset($rights[0]['user_rights']))
     <?php foreach ($categories as $category): ?>
         <tr class="table-row">
             <td>
-                <a class="delete-examination btn btn-danger btn-xs"
-                    <?php  echo(in_array("examinations-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))?'':'disabled'; ?>
-                   href="javascript:void(0)" title="delete"
-                   data-href="<?php echo site_url('examination/delete_examination_category/') . $category['id'] ?>">
-                   <i class="fa fa-trash" title="Delete"></i></a>
+                <?php if($loggedin_user['is_admin']==1){ ?>
+                    <a class="delete-examination btn btn-danger btn-xs"
+                       href="javascript:void(0)" title="delete"
+                       data-href="<?php echo site_url('examination/delete_examination_category/') . $category['id'] ?>">
+                        <i class="fa fa-trash" title="Delete"></i></a>
+                <?php } elseif(in_array("examinations-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                    <a class="delete-examination btn btn-danger btn-xs"
+                       href="javascript:void(0)" title="delete"
+                       data-href="<?php echo site_url('examination/delete_examination_category/') . $category['id'] ?>">
+                        <i class="fa fa-trash" title="Delete"></i></a>
+                <?php } else{ ?>
+                    <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
+                        <i class="fa fa-trash" title="Delete"></i></a>
+                <?php } ?>
+
             </td>
-            <td contenteditable="true"
-                onBlur="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')"
-                onClick="showEdit(this);">
-                <?php echo $category['name']; ?></td>
+
+            <?php if($loggedin_user['is_admin']==1){ ?>
+                <td contenteditable="true"
+                    onBlur="saveExamination(this,'cate_name','<?php echo $category['id']; ?>')"
+                    onClick="showExamination(this);">
+                    <?php echo $category['name']; ?></td>
+            <?php } elseif(in_array("examinations-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                <td contenteditable="true"
+                    onBlur="saveExamination(this,'cate_name','<?php echo $category['id']; ?>')"
+                    onClick="showExamination(this);">
+                    <?php echo $category['name']; ?></td>
+            <?php } else{ ?>
+                <td contenteditable="true" onClick="showError(this);">
+                    <?php echo $category['name']; ?></td>
+            <?php } ?>
+
+
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <script>
-    function showEdit(editableObj) {
+    function showError() {
+        toastr["error"]('You are not authorised for this action.');
+    }
+    function showExamination(editableObj) {
         $(editableObj).css("background", "#FFF");
     }
-    function saveToDatabase(editableObj, column, id) {
+    function saveExamination(editableObj, column, id) {
         $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'examination/save_examination_category' ?>",
@@ -44,8 +70,6 @@ if(isset($rights[0]['user_rights']))
             success: function (response) {
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
-                    toastr["success"](response.message);
-                } else {
                     toastr["success"](response.message);
                 }
             }
