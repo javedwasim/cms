@@ -1,3 +1,4 @@
+<?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
 <table class="table table-bordered nowrap responsive structure_table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
@@ -9,16 +10,39 @@
     <?php foreach ($structures as $structure): ?>
         <tr class="table-row">
             <td>
-                <a class="delete-structure btn btn-danger btn-xs"
-                   href="javascript:void(0)" title="delete"
-                   data-href="<?php echo site_url('Echo_controller/delete_structure_category/') . $structure['id'] ?>">
-                    <i class="fa fa-trash" title="Delete"></i></a>
+                <?php if($loggedin_user['is_admin']==1){ ?>
+                    <a class="delete-structure btn btn-danger btn-xs"
+                       href="javascript:void(0)" title="delete"
+                       data-href="<?php echo site_url('Echo_controller/delete_structure_category/') . $structure['id'] ?>">
+                        <i class="fa fa-trash" title="Delete"></i></a>
+                <?php } elseif(in_array("echos-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                    <a class="delete-structure btn btn-danger btn-xs"
+                       href="javascript:void(0)" title="delete"
+                       data-href="<?php echo site_url('Echo_controller/delete_structure_category/') . $structure['id'] ?>">
+                        <i class="fa fa-trash" title="Delete"></i></a>
+                <?php } else{ ?>
+                    <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
+                        <i class="fa fa-trash" title="Delete"></i></a>
+                <?php } ?>
+
             </td>
-            <td contenteditable="true"
-                onBlur="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
-                onClick="structureEdit(this,'<?php echo $structure['id']; ?>');"
-                id="<?php echo $structure['id']; ?>">
-                <?php echo $structure['name']; ?></td>
+            <?php if($loggedin_user['is_admin']==1){ ?>
+                <td contenteditable="true"
+                    onBlur="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
+                    onClick="structureEdit(this,'<?php echo $structure['id']; ?>');"
+                    id="<?php echo $structure['id']; ?>">
+                    <?php echo $structure['name']; ?></td>
+            <?php } elseif(in_array("echos-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                <td contenteditable="true"
+                    onBlur="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
+                    onClick="structureEdit(this,'<?php echo $structure['id']; ?>');"
+                    id="<?php echo $structure['id']; ?>">
+                    <?php echo $structure['name']; ?></td>
+            <?php } else{ ?>
+                <td contenteditable="true" onClick="showError(this);">
+                    <?php echo $structure['name']; ?></td>
+            <?php } ?>
+
         </tr>
     <?php endforeach; ?>
     </tbody>
