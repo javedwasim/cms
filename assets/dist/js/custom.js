@@ -1711,7 +1711,7 @@ $(document.body).on('click', '#pat_research', function () {
     });
 });
 
-/////////////////////////////////// load manage research page ///////////////////////////////////
+/////////////////////////////////// load register user page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#register-user', function () {
@@ -1736,7 +1736,7 @@ $(document.body).on('click', '#register-user', function () {
 });
 
 
-/////////////////////////////////// load manage research page ///////////////////////////////////
+/////////////////////////////////// load special instructions page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#special_instruction', function () {
@@ -3119,8 +3119,14 @@ function get_manage_reasearch(func_call) {
                     "scrollY": '50vh',
                     "scrollCollapse": true,
                     "paging": false,
-                    "info": false
+                    "info": false,
+                    "searching": false
                 });
+                $('#research-table tbody tr:first').addClass('row_selected');
+                $("#research-table tbody tr").click(function (e) {
+                $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
             }
         }
     });
@@ -3148,6 +3154,27 @@ $(document.body).on('click', '#delete_research_profile', function () {
         return false;
     }
     return false;
+});
+
+$(document.body).on('click','#assign_research',function(){
+    var researchid = $('#research_option option:selected').val();
+    var profileid = $('#research-table tbody tr.row_selected').find('.prof_id').text();
+    $.ajax({
+        url: '/cms/manage_research/assign_research',
+        type: 'post',
+        data: {
+            rid:researchid,
+            pid:profileid
+        },
+        cache: false,
+        success:function(response){
+            if(response.success == true){
+                toastr["success"]("Patient added to Research Successfully.");
+            }else{
+                toastr["error"]("There is a problem while adding.");
+            }
+        }
+    });
 });
 
 /////////////////////////////////////////////// diary module ////////////////////////////////////
@@ -3246,5 +3273,76 @@ $(document.body).on('click', '#update_note', function(){
         }
     });
 });
+/////////////////////// filter research managment ///////////////////////////////////////
+function research_filters(){
+    $.ajax({
+        url: '/cms/manage_research/research_filters',
+        data: $('#research_filter').serialize(),
+        type: 'post',
+        cache: false,
+        success: function(response) {
+            if(response.profile_table != ''){
+                $('.manage_research_table').remove();
+                $('#manage_research_table').append(response.profile_table);
+                $('#research-table').DataTable({
+                    "scrollX": true,
+                    "scrollY": '50vh',
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "info": false,
+                    "searching": false
+                });
+                $('#research-table tbody tr:first').addClass('row_selected');
+                $("#research-table tbody tr").click(function (e) {
+                    $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+            }
+        }
+    });
+}
+$(document.body).on('click', '#reset_research', function () {
+    $.ajax({
+        url: '/cms/manage_research/reset_research_table',
+        cache: false,
+        success: function (response) {
+            if(response.profile_table != ''){
+                document.getElementById('research_filter').reset();
+                $('.manage_research_table').remove();
+                $('#manage_research_table').append(response.profile_table);
+                $('#research-table').DataTable({
+                    "scrollX": true,
+                    "scrollY": '50vh',
+                    "scrollCollapse": true,
+                    "paging": false,
+                    "info": false,
+                    "searching": false
+                });
+                $('#research-table tbody tr:first').addClass('row_selected');
+                $("#research-table tbody tr").click(function (e) {
+                    $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+            }
+        }
+    });
+    return false;
+});
 
+$(document.body).on('click', '#research_option', function () {
+    $('#research_modal').removeClass('hide');
+    $('#research_modal').addClass('show');
+});
 
+// $(document.body).on('click', '#research_modal', function () {
+//     var researchid = $('#research_option option:selected').val();
+//     $.ajax({
+//         url: '/cms/manage_research/research_description',
+//         type: 'post',
+//         data: {id:researchid},
+//         cache: false,
+//         success: function(){
+            
+//         }
+//     });
+// });

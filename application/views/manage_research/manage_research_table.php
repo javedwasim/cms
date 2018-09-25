@@ -23,7 +23,7 @@
                            <i class="fa fa-trash" title="Delete"></i>
                         </a>
                     </td>
-                    <td><?php echo $key['id']; ?></td>
+                    <td class="prof_id"><?php echo $key['id']; ?></td>
                     <td><?php echo $key['pat_name']; ?></td>
                     <td><?php echo $key['pat_relative']; ?></td>
                     <td><?php echo $key['pat_height']; ?></td>
