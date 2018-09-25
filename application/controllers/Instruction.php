@@ -18,6 +18,7 @@ class Instruction extends MY_Controller
         $data['category'] = 'special';
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
         $data['items'] = $this->Instruction_model->get_inst_items($data);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/instruction', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -29,6 +30,7 @@ class Instruction extends MY_Controller
         $data['category'] = 'clinical';
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
         $data['items'] = $this->Instruction_model->get_inst_items($data);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/instruction', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -57,6 +59,7 @@ class Instruction extends MY_Controller
         }
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/category_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -78,6 +81,7 @@ class Instruction extends MY_Controller
         }
         $data['categories'] = $this->Instruction_model->get_instruction_categories($category);
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/category_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -127,6 +131,7 @@ class Instruction extends MY_Controller
         }
         $data['items'] = $this->Instruction_model->get_inst_items($data);
         $data['active_tab'] = 'items';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -140,6 +145,7 @@ class Instruction extends MY_Controller
         $data['items'] = $this->Instruction_model->get_inst_items_by_category($filters);
         $data['selected_category'] = $cat_id;
         $data['active_tab'] = 'tests';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -222,6 +228,7 @@ class Instruction extends MY_Controller
         }
         $data['items'] = $this->Instruction_model->get_inst_items($category);
         $data['active_tab'] = 'items';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

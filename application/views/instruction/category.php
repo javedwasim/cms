@@ -1,3 +1,4 @@
+<?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
 <div class="tab-pane active" id="category" role="tabpanel">
     <div class="card">
         <div class="card-header" style="display: inline-flex;">
@@ -7,7 +8,13 @@
                     <input type="text" class="form-control col-md-6" name="instruction_name" id="instruction_name">
                     <input type="hidden" name="instruction_category" id="instruction_category"
                            value="<?php echo isset($category)?$category:'' ?>">
-                    <button class="btn btn-primary add-instruction-category">Add</button>
+                    <?php if($loggedin_user['is_admin']==1){ ?>
+                        <button class="btn btn-primary add-instruction-category">Add</button>
+                    <?php } elseif(in_array("special_instructions-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                        <button class="btn btn-primary add-instruction-category">Add</button>
+                    <?php } else{ ?>
+                        <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
+                    <?php } ?>
                 </div>
             </div>
         </div>
