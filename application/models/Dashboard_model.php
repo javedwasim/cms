@@ -9,8 +9,7 @@ class Dashboard_model extends CI_Model
         date_default_timezone_set("Asia/Karachi");
     }
 
-public function get_user($username)
-    {
+    public function get_user($username){
         $result = $this->db->select("*")
                 ->from("login")
                 ->where("username", $username)
@@ -24,6 +23,17 @@ public function get_user($username)
                         ->where("name", $username)
                         ->get();
             return $result->row_array();
+        }
+    }
+
+    public function get_all_user(){
+        $result = $this->db->select('*')
+                    ->from('login')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return array();
         }
     }
 

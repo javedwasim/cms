@@ -9,6 +9,7 @@
 			parent:: __construct();
 			$this->load->model('Setting_model');
 			$this->load->model('Profile_model');
+			$this->load->model('Dashboard_model');
 			$this->load->helper('content-type');
 			date_default_timezone_set("Asia/Karachi");
 		}
@@ -210,6 +211,9 @@
 				$json['error'] = true;
             	$json['message'] = "Seems to an error";
 			}
+			$data['note_details'] = $this->Profile_model->get_notes();
+			$data['users'] = $this->Dashboard_model->get_all_user();
+		    $json['diary_update'] = $this->load->view('diary/diary_update', $data, true);
 			if ($this->input->is_ajax_request()) {
 	            set_content_type($json);
 	        }
@@ -229,6 +233,37 @@
 	        }
 		}
 
+		public function get_notes_record(){
+			$name = $this->input->post('username');
+			$data['notes_record'] = $this->Profile_model->notes_record($name);
+			$json['diary_sidebar'] = $this->load->view('diary/diary_sidebar', $data, true);
+			if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+		public function get_selected_note(){
+			$id = $this->input->post('id');
+			$data['note'] = $this->Profile_model->selectd_note($id);
+			$json['update_note'] = $this->load->view('diary/diary_update', $data, true);
+			if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+		public function update_note(){
+			$id = $this->input->post('id');
+			$note = $this->input->post('note');
+			$result = $this->Profile_model->update_diary_note($id,$note);
+			if ($result) {
+				$json['success'] = true;
+			}else{
+				$json['error'] = true;
+			}
+			if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
 
 
 	}
