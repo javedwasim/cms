@@ -2333,6 +2333,10 @@ $(document.body).on('click', '#diary', function () {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
+                $('.diary_sidebar').remove();
+                $('#diary_sidebar').append(response.diary_sidebar);
+                $('.diary_note_update').remove();
+                $('#diary_note_update').append(response.diary_update);
                 $('.lab-date').datepicker({
                     format: 'd-M-yyyy'
                 });
