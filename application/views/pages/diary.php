@@ -18,19 +18,31 @@
                                     			<div class="card-header">
                                     				Old Notes
                                     			</div>
-                                    			<div class="card-body" id="diary_sidebar">
-                                    				
+                                    			<div class="card-body">
+                                    				<div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label>Select User:</label>
+                                                                <select class="form-control" id="diary_user_note">
+                                                                    <option>Select...</option>
+                                                                    <?php foreach($users as $user){?>
+                                                                    <option value="<?php echo $user['username']; ?>"><?php echo $user['username']; ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" id="diary_sidebar">
+
+                                                        </div>
+                                                    </div>
                                     			</div>
                                     		</div>
                                     	</div>
                                     	<div class="col-md-9 p-l-0">
-                                    		<div class="card">
+                                    		<div class="card" id="diary_note_update">
                                     			<div class="card-header">
-                                    				<button class="btn btn-default btn-block pull-right col-md-3" id="update_note">Update</button>
-                                    			</div>
-                                    			<div class="card-body" id="diary_note_update">
-                                    				
-                                    			</div>
+                                                    <button class="btn btn-default btn-md pull-right hide" id="update_note">Update</button>
+                                                </div>
                                     		</div>
                                     	</div>
                                     </div>
@@ -47,8 +59,9 @@
 	                                					<div class="col-md-2">
 		                                					<select class="form-control" id="diary_user">
 		                                						<option>Select...</option>
-                                                                <option value="admin">admin</option>
-                                                                <option value="test">test</option>
+                                                                <?php foreach($users as $user){?>
+                                                                <option value="<?php echo $user['username']; ?>"><?php echo $user['username']; ?></option>
+                                                                <?php } ?>
 		                                					</select>
 	                                					</div>
 	                                					<div class="col-md-7"></div>

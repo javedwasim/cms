@@ -2333,10 +2333,6 @@ $(document.body).on('click', '#diary', function () {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
-                $('.diary_sidebar').remove();
-                $('#diary_sidebar').append(response.diary_sidebar);
-                $('.diary_note_update').remove();
-                $('#diary_note_update').append(response.diary_update);
                 $('.lab-date').datepicker({
                     format: 'd-M-yyyy'
                 });
@@ -3196,5 +3192,59 @@ $(document.body).on('click', '.delete-notes', function () {
     return false;
 });
 
+$(document.body).on('change', '#diary_user_note', function(){
+    var username = $(this).val();
+    $.ajax({
+        url: '/cms/profile/get_notes_record',
+        type: 'post',
+        data: {username:username},
+        cache: false,
+        success: function(response){
+            $('.diary_sidebar').remove();
+            $('#diary_sidebar').append(response.diary_sidebar);
+            $("#diray_table tbody tr").click(function (e) {
+                $('#diray_table tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+        }
+    });
+});
+
+$(document.body).on('click', '#diray_table tbody tr.row_selected', function(){
+    var note_id = $(this).find('.note_id').text();
+    $.ajax({
+        url: '/cms/profile/get_selected_note',
+        type: 'post',
+        data: {id:note_id},
+        cache: false,
+        success: function(response){
+            $('.diary_note_update').remove();
+            $('#diary_note_update').append(response.update_note);
+            $('#update_note').removeClass('hide');
+            $('#update_note').addClass('show');
+        }
+    });
+});
+
+$(document.body).on('click', '#update_note', function(){
+    var note_id = $('#diray_table tbody tr.row_selected').find('.note_id').text();
+    var notevalue = $.trim($('#note_update').text());
+    $.ajax({
+        url: '/cms/profile/update_note',
+        type: 'post',
+        data: {
+            id: note_id,
+            note: notevalue
+        },
+        cache: false,
+        success: function(response){
+            if (response.success == true) {
+                toastr['success']('Updated Successfully.');
+            }else{
+                toastr['error']('Could not be updated.');
+            }
+        }
+    });
+});
 
 
