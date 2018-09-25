@@ -186,6 +186,8 @@ class Dashboard extends CI_Controller {
     public function diary()
     {
       $data['note_details'] = $this->Profile_model->get_notes();
+      $json['diary_sidebar'] = $this->load->view('diary/diary_sidebar', $data, true);
+      $json['diary_update'] = $this->load->view('diary/diary_update', $data, true);
       $json['result_html'] = $this->load->view('pages/diary', $data, true);
       if ($this->input->is_ajax_request()) {
           set_content_type($json);
