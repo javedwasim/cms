@@ -51,6 +51,7 @@ class Echo_controller extends MY_Controller
         }
         $data['categories'] = $this->Echo_model->get_disease_categories();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/disease_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -80,6 +81,7 @@ class Echo_controller extends MY_Controller
         }
         $data['items'] = $this->Echo_model->get_disease_items();
         $data['active_tab'] = 'items';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('disease/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -114,6 +116,7 @@ class Echo_controller extends MY_Controller
         }
         $data['categories'] = $this->Echo_model->get_disease_categories();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/disease_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -129,6 +132,7 @@ class Echo_controller extends MY_Controller
         $data['items'] = $this->Echo_model->get_disease_items_by_category($cat_id);
         $data['selected_category'] = $cat_id;
         $data['active_tab'] = 'tests';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('disease/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -207,6 +211,7 @@ class Echo_controller extends MY_Controller
         }
         $data['items'] = $this->Echo_model->get_disease_items();
         $data['active_tab'] = 'items';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('disease/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -267,6 +272,7 @@ class Echo_controller extends MY_Controller
 
         $data['structures'] = $this->Echo_model->get_Structure_categories();
         $data['active_tab'] = 'structure';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/structure_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -318,6 +324,7 @@ class Echo_controller extends MY_Controller
         }
         $data['findings'] = $this->Echo_model->get_structure_findings();
         $data['active_tab'] = 'structure';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/finding_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -350,6 +357,7 @@ class Echo_controller extends MY_Controller
         $data['findings'] = $this->Echo_model->get_structure_findings_by_id($id);
         $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($id);
         $data['active_tab'] = 'structure';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/finding_table', $data, true);
         $json['diagnosis_html'] = $this->load->view('echo/diagnosis_table', $data, true);
         $json['dfinding_html'] = $this->load->view('echo/default_finding_table', $data, true);
@@ -478,6 +486,7 @@ class Echo_controller extends MY_Controller
         }
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/main_category_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -511,6 +520,7 @@ class Echo_controller extends MY_Controller
     public function get_main_category_by_filter($category){
         $data['main_categories'] = $this->Echo_model->get_main_category_by_filter($category);
         $data['active_tab'] = 'category';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/main_category_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -547,6 +557,7 @@ class Echo_controller extends MY_Controller
         }
         $data['measurements'] = $this->Echo_model->get_category_measurement();
         $data['active_tab'] = 'measurement';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/category_measurement_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -580,6 +591,7 @@ class Echo_controller extends MY_Controller
     public function get_measurement_by_filter($category){
         $data['measurements'] = $this->Echo_model->get_measurement_by_filter($category);
         $data['active_tab'] = 'measurement';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/category_measurement_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

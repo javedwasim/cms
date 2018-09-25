@@ -76,7 +76,11 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/custom.js"></script>
     <script src="<?php echo base_url(); ?>assets/dist/js/script.js"></script>
     <!-- End custom js-->
-    
+    <script>
+        function showError() {
+            toastr["error"]('You are not authorised for this action.');
+        }
+    </script>
 </body>
 
 </html>
