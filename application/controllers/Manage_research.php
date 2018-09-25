@@ -13,6 +13,8 @@
 		}
 
 		public function manage_research(){
+			$data['professions'] = $this->Setting_model->get_professions();
+			$data['districts'] = $this->Setting_model->get_districts();
 			$data['profiles'] = $this->Profile_model->get_profiles();
 			$data['researches'] = $this->Setting_model->get_researches();
 			$json['profile_table'] = $this->load->view('manage_research/manage_research_table', $data, true);
@@ -38,6 +40,43 @@
 		    }
 
 		}
+
+		public function assign_research(){
+			$researchid = $this->input->post('rid');
+			$profileid = $this->input->post('pid');
+			$result = $this->Profile_model->research_assign($researchid,$profileid);
+			if ($result) {
+				$json['success'] = true;
+			}else{
+				$json['error'] = true;
+			}
+			if ($this->input->is_ajax_request()) {
+		            set_content_type($json);
+		    }
+		}
+
+		public function research_filters(){
+			$filters = $this->input->post();
+			$data['profiles'] = $this->Profile_model->get_profiles_by_filters($filters);
+	        $data['filters'] = $filters;
+	        // print_r($data['batches']);
+	        $json['profile_table'] = $this->load->view('manage_research/manage_research_table', $data, true);
+	        if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+		public function reset_research_table(){
+			$data['profiles'] = $this->Profile_model->get_profiles();
+			$json['profile_table'] = $this->load->view('manage_research/manage_research_table', $data, true);
+	        if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+		// public function research_description(){
+			
+		// }
 	}
 
 ?>
