@@ -13,7 +13,7 @@ class Instruction extends MY_Controller
 
     }
 
-    public function special_instruction()
+    public function instruction()
     {
         $data['category'] = 'special';
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);

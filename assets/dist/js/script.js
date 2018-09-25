@@ -1589,3 +1589,22 @@ $(document.body).on('click', '#register_new_user', function(){
     });
     return false;
 });
+
+$(document.body).on('click', '.user_permission', function(){
+    var permission = $(this).val();
+    if($(this).is(":checked")){
+        var status=1;
+    }else{
+        var status=0;
+    }
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'setting/assign_permission',
+        type: 'post',
+        data:  {permission:permission,status:status},
+        cache: false,
+        success: function(response) {
+            toastr["success"](response.message);
+        }
+
+    });
+});

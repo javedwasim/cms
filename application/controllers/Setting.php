@@ -210,7 +210,8 @@
 		}
 
 		public function permission(){
-			$json['result_html'] = $this->load->view('pages/change_permissions', "", true);
+            $data['users'] = $this->Setting_model->get_users();
+			$json['result_html'] = $this->load->view('pages/change_permissions', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -856,6 +857,19 @@
                     $json['message'] = "Seem to be an error!";
                 }
             }
+
+            if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function assign_permission(){
+            $data = $this->input->post();
+            $user_permission = explode('-',$data['permission']);
+            $user_permission['status'] = $data['status'];
+            $result = $this->Setting_model->assign_permission($user_permission);
+            $json['success'] = true;
+            $json['message'] = "Permission assigned to user!";
 
             if($this->input->is_ajax_request()) {
                 set_content_type($json);

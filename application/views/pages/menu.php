@@ -42,8 +42,8 @@
         get_echo($(this).attr('data-func-call'));
    });
 
-   $('#list_itmes_employee_profile_fields').click(function(){
-    emp_fields($(this).attr('data-func-call'));
+   $('#list_itmes_medicine').click(function(){
+        get_medicine($(this).attr('data-func-call'));
    });
 
    $('#list_itmes_employee_cat').click(function(){
@@ -155,5 +155,8 @@ $rights = $this->session->userdata('other_rights');
 $user_role = $rights[0]['is_admin'];
 $user_rights = explode(',',$rights[0]['user_rights']);
 if((!in_array("setting-menu-1", $user_rights) && $user_role==0)){  ?>
-    <script> $("li").addClass("disabled"); </script>
+    <script>
+        $("li").addClass("disable_menu");
+        $('li').attr('onclick', 'showError()');
+    </script>
 <?php } ?>
