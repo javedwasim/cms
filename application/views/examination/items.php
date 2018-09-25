@@ -1,3 +1,11 @@
+<?php
+if(isset($rights[0]['user_rights']))
+{
+    $appointment_rights = explode(',',$rights[0]['user_rights']);
+    //print_r($appointment_rights);
+    $loggedin_user = $this->session->userdata('userdata');
+}
+?>
 <div class="tab-pane" id="items" role="tabpanel">
     <div class="card">
         <div class="card-header">
@@ -26,7 +34,14 @@
                     </div>
                     <div class="col-lg-2 col-md-4 p-0">
                         <div class="form-group m-t-25" style="display: inline-flex;">
-                            <button type= "submit" class="btn btn-sm btn-primary" id="examination_item_btn">Add</button>
+                            <?php if($loggedin_user['is_admin']==1){ ?>
+                                <button type= "submit" class="btn btn-sm btn-primary" id="examination_item_btn">Add</button>
+                            <?php } elseif(in_array("examinations-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                                <button type= "submit" class="btn btn-sm btn-primary" id="examination_item_btn">Add</button>
+                            <?php } else{ ?>
+                                <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
+                            <?php } ?>
+
                         </div>
                     </div>
                 </div>

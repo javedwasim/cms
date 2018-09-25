@@ -22,6 +22,7 @@ class Echo_controller extends MY_Controller
         $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
         $data['measurements'] = $this->Echo_model->get_category_measurement();
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/echo', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

@@ -9,8 +9,16 @@ if(isset($rights[0]['user_rights']))
 <div class="content-wrapper" style="margin: 0 .5%;">
 	<div class="row page-titles">
 		<div class="col-md-5" style="display: inline-flex;">
-			<button class="btn btn-success" data-toggle="modal" <?php  echo(in_array("profile-create_new_profile-1", $appointment_rights)&&($loggedin_user['is_admin']==0))?'':'disabled'; ?>
-                    data-target="#add-new-patient" id="addProfile"><i class="fas fa-user-plus"></i> Add New</button>
+            <?php if($loggedin_user['is_admin']==1){ ?>
+                <button class="btn btn-success" data-toggle="modal"  data-target="#add-new-patient" id="addProfile">
+                    <i class="fas fa-user-plus"></i> Add New</button>
+            <?php } elseif(in_array("profile-create_new_profile-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                <button class="btn btn-success" data-toggle="modal"  data-target="#add-new-patient" id="addProfile">
+                    <i class="fas fa-user-plus"></i> Add New</button>
+            <?php } else{ ?>
+                <button class="btn btn-success" style="opacity: 0.5;" onclick="showError()">
+                    <i class="fas fa-user-plus"></i> Add New</button>
+            <?php } ?>
     		<button class="btn btn-info" id="pat_profile">Refresh</button>
 		</div>
         <div class="col-md-7 align-self-center">

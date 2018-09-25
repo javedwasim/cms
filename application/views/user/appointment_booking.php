@@ -60,8 +60,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="button" name="book_appointment" <?php  echo(in_array("appointments-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))?'':'disabled'; ?>
-                                            id="book_appointment" class="btn btn-primary">Save</button>
+                                    <?php if($loggedin_user['is_admin']==1){ ?>
+                                        <button type="button" name="book_appointment"
+                                                id="book_appointment" class="btn btn-primary">Save</button>
+                                    <?php } elseif(in_array("appointments-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                                        <button type="button" name="book_appointment"
+                                                id="book_appointment" class="btn btn-primary">Save</button>
+                                    <?php } else{ ?>
+                                        <button class="btn btn-primary" style="opacity: 0.5;" onclick="showError()">
+                                            <i class="fas fa-user-plus"></i>Save</button>
+                                    <?php } ?>
                                 </form>
                             </div>
                         </div>
