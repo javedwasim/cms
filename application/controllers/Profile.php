@@ -30,7 +30,9 @@
 
 		public function patient_special_instructions(){
             $data['rights'] = $this->session->userdata('other_rights');
-			$json['result_html'] = $this->load->view('pages/pat_sp_instructions', "", true);
+            $data['category'] = 'clinical';
+            $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
+			$json['result_html'] = $this->load->view('pages/pat_sp_instructions', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -272,6 +274,36 @@
 	            set_content_type($json);
 	        }
 		}
+
+
+        public function get_inst_item()
+        {
+            $filters = $this->input->post();
+            $cat_id = $filters['inst_id'];
+            $data['items'] = $this->Instruction_model->get_inst_items_by_category($filters);
+            $data['selected_category'] = $cat_id;
+            $data['active_tab'] = 'tests';
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['result_html'] = $this->load->view('pages/instruction_item_table', $data, true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function patient_special_instruction(){
+            $data = $this->input->post();
+            $result = $this->Profile_model->save_special_instructions($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Information save successfully!";
+            }else{
+                $json['error'] = true;
+                $json['message'] = "seem to be an error.";
+            }
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
 
 		public function profile_filters(){
 			$filters = $this->input->post();
