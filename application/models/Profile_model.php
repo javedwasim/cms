@@ -163,9 +163,16 @@
 	            $pat_sex = $filters['pat_sex'];
 	            $where .=  " AND (pat_sex = '' OR pat_sex = '$pat_sex')";
 	        }
-	        if(isset($filters['pat_height']) && (!empty($filters['pat_height'])) ){
+	        if(isset($filters['pat_height']) && isset($filters['height_bt']) && (!empty($filters['pat_height'])) && (!empty($filters['height_bt'])) ){
 	            $pat_height = $filters['pat_height'];
-	            $where .=  " AND (pat_height = '' OR pat_height = '$pat_height')";
+	            $height_bt = $filters['height_bt'];
+	            if($height_bt == 'height_below' ){
+	            	$where .=  " AND (pat_height = '' OR pat_height < '$pat_height')";
+	            }
+	            if ($height_bt == 'height_above') {
+	            	$where .=  " AND (pat_height = '' OR pat_height > '$pat_height')";
+	            }
+	            
 	        }
 	        if(isset($filters['pat_bmi']) && (!empty($filters['pat_bmi'])) ){
 	            $pat_bmi = $filters['pat_bmi'];

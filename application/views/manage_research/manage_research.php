@@ -70,11 +70,11 @@
                             <div class="col-md-3 col-lg-2">
                                 <div class="form-group">
                                     <label>Age</label>
-                                    <select class="form-control">
-                                        <option>Select</option>
-                                        <option value="">Age Below</option>
-                                        <option>Age Above</option>
-                                        <option>Age Between</option>
+                                    <select class="form-control" name="age_bt">
+                                        <option value="">Select</option>
+                                        <option value="age_below">Age Below</option>
+                                        <option value="age_above">Age Above</option>
+                                        <option value="age_between">Age Between</option>
                                     </select>
                                 </div>
                             </div>
@@ -99,11 +99,11 @@
                                 <div class="form-group">
                                     <label>Height</label>
                                     <div style="display: inline-flex;">
-                                        <select class="form-control col-md-8">
-                                            <option>Select</option>
-                                            <option>Height Below</option>
-                                            <option>Height Above</option>
-                                            <option>Height Between</option>
+                                        <select class="form-control col-md-8" name="height_bt">
+                                            <option value="">Select</option>
+                                            <option value="height_below">Height Below</option>
+                                            <option value="height_above">Height Above</option>
+                                            <option value="height_between">Height Between</option>
                                         </select>
                                         <input type="text" name="pat_height" class="form-control" onchange="research_filters()">
                                     </div>
@@ -113,11 +113,11 @@
                                 <div class="form-group">
                                     <label>BMI</label>
                                     <div style="display: inline-flex;">
-                                        <select class="form-control col-md-8"  >
-                                            <option>Select</option>
-                                            <option>BMI Below</option>
-                                            <option>BMI Above</option>
-                                            <option>BMI Between</option>
+                                        <select class="form-control col-md-8" name="bmi_bt" >
+                                            <option value="" >Select</option>
+                                            <option value="bmi_below">BMI Below</option>
+                                            <option value="bmi_above">BMI Above</option>
+                                            <option value="bmi_between">BMI Between</option>
                                         </select>
                                         <input type="text" name="pat_bmi" class="form-control" onchange="research_filters()">
                                     </div>
@@ -127,11 +127,11 @@
                                 <div class="form-group">
                                     <label>Weight</label>
                                     <div style="display: inline-flex;">
-                                        <select class="form-control col-md-8" >
-                                            <option>Select</option>
-                                            <option>Weight Below</option>
-                                            <option>Weight Above</option>
-                                            <option>Weight Between</option>
+                                        <select class="form-control col-md-8" name="weight_bt" >
+                                            <option value="">Select</option>
+                                            <option value="weight_below">Weight Below</option>
+                                            <option value="weight_above">Weight Above</option>
+                                            <option value="weight_between">Weight Between</option>
                                         </select>
                                         <input type="text" name="pat_weight" class="form-control" onchange="research_filters()">
                                     </div>
@@ -141,11 +141,11 @@
                                 <div class="form-group">
                                     <label>BSA</label>
                                     <div style="display: inline-flex;">
-                                        <select class="form-control col-md-8"  >
-                                            <option>Select</option>
-                                            <option>BSA Below</option>
-                                            <option>BSA Above</option>
-                                            <option>BSA Between</option>
+                                        <select class="form-control col-md-8" name="bsa_bt"  >
+                                            <option value="">Select</option>
+                                            <option value="bsa_below">BSA Below</option>
+                                            <option value="bsa_above">BSA Above</option>
+                                            <option value="bsa_between">BSA Between</option>
                                         </select>
                                         <input type="text" name="pat_bsa" class="form-control" onchange="research_filters()">
                                     </div>
