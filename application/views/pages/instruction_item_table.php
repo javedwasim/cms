@@ -58,7 +58,8 @@
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
         $('#special_instruction').append(description+"\n");
-
+        $('#instruction_id').val(inst_id);
+        $('#item_id').val(item_id);
 //        $.ajax({
 //            url: '/cms/profile/patient_special_instruction',
 //            type: 'post',
@@ -73,5 +74,7 @@
 //        });
 //        return false;
     }
+
+
 
 </script>

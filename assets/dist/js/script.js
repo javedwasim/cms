@@ -1648,3 +1648,21 @@ $(document.body).on('click', '#save_inst_description', function(){
     });
     return false;
 });
+
+$(document.body).on('click', '#save_profile_instruction', function(){
+    $.ajax({
+        url: $('#profile_inst_form_modal').attr('data-action'),
+        type: 'post',
+        data:  $('#profile_inst_form_modal').serialize(),
+        cache: false,
+        success: function(response) {
+
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
