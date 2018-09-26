@@ -275,6 +275,7 @@
 	        }
 		}
 
+
         public function get_inst_item()
         {
             $filters = $this->input->post();
@@ -303,6 +304,17 @@
                 set_content_type($json);
             }
         }
+
+		public function profile_filters(){
+			$filters = $this->input->post();
+			$data['profiles'] = $this->Profile_model->get_profiles_by_filters($filters);
+	        $data['filters'] = $filters;
+	        $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+	        if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
 
 	}
 ?>

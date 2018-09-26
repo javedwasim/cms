@@ -2,9 +2,9 @@
     <table class="table table-bordered nowrap responsive" id="research-table" cellspacing="0" width="100%" >
        <thead>
             <tr>
-                <th style="width: 10%"></th>
-                <th>ID</th>
-                <th>Name</th>
+                <th style="width:30px"></th>
+                <th>ProfileID</th>
+                <th>Patient Name</th>
                 <th>Father/Husband Name</th>
                 <th>Height</th>
                 <th>Weight</th>
@@ -18,7 +18,7 @@
         <tbody>
             <?php foreach ($profiles as $key) { ?>
                 <tr>
-                    <td>
+                    <td style="width: 30px;">
                         <a class="delete-signature btn btn-danger btn-xs" href="javascript:void(0)" title="delete" data-href="<?php echo site_url('manage_research/delete_research_profile/') . $key['id'] ?>">
                            <i class="fa fa-trash" title="Delete"></i>
                         </a>
