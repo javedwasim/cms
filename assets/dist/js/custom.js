@@ -2305,6 +2305,8 @@ $(document.body).on('click', '#pat-spInstructions', function () {
                 $('#content-wrapper').append(response.result_html);
                 $('.patient_info').remove();
                 $('#pat_sp_information').append(response.patient_information);
+                $('.sp_data_table').remove();
+                $('#sp_data_table').append(response.sp_table);
             }
         }
     });

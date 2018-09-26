@@ -34,6 +34,8 @@
             $id = $this->input->post('patid');
 			$data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
             $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
+            $data['sp_info'] = $this->Profile_model->get_sp_info($id);
+            $json['sp_table']=$this->load->view('profile/sp_inst_table',$data,true);
             $json['patient_information']=$this->load->view('profile/patient_information',$data,true);
 			$json['result_html'] = $this->load->view('pages/pat_sp_instructions', $data, true);
             if ($this->input->is_ajax_request()) {
@@ -297,6 +299,8 @@
             $data = $this->input->post();
             $result = $this->Profile_model->save_special_instructions($data);
             if ($result) {
+            	$data['sp_info'] = $this->Profile_model->get_sp_info($data['patient_id']);
+            	$json['sp_table']=$this->load->view('profile/sp_inst_table',$data,true);
                 $json['success'] = true;
                 $json['message'] = "Information save successfully!";
             }else{

@@ -252,6 +252,18 @@
 			}
 		}
 
+		public function get_sp_info($id){
+			$result = $this->db->select('*')
+						->from('patient_special_instruction')
+						->where('patient_id',$id)
+						->get();
+			if ($result) {
+				return $result->result_array();
+			}else{
+				return array();
+			}
+		}
+
 
 
 	}

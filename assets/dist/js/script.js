@@ -1652,7 +1652,6 @@ $(document.body).on('click', '#save_inst_description', function(){
 $(document.body).on('click', '#save_profile_instruction', function(){
     var patient_id = $('#label_patient_id').text();
     $('#patient_id').val(patient_id);
-    console.log($('#patient_id').val());
     $.ajax({
         url: $('#profile_inst_form_modal').attr('data-action'),
         type: 'post',
@@ -1660,6 +1659,8 @@ $(document.body).on('click', '#save_profile_instruction', function(){
         cache: false,
         success: function(response) {
             if (response.success) {
+                $('.sp_data_table').remove();
+                $('#sp_data_table').append(response.sp_table);
                 toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);

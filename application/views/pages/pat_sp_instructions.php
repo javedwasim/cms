@@ -73,11 +73,6 @@
                                                       id="special_instruction" rows="10"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="10"></textarea>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -100,33 +95,14 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4 p-r-0">
-                                    <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
-                                           width="100%">
-                                        <thead>
-                                        <th style="width: 20px"></th>
-                                        <th>Dates</th>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td><i class="fa fa-print"></i></td>
-                                            <td>6/11/2018</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="col-md-4 p-r-0" id="sp_data_table">
+                                    
                                 </div>
                                 <div class="col-md-8 p-l-0">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                        <textarea class="form-control" rows="10"
-                                                                  readonly="readonly"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                        <textarea class="form-control" rows="10"
-                                                                  readonly="readonly"></textarea>
+                                                <textarea class="form-control" rows="10" readonly="readonly"></textarea>
                                             </div>
                                         </div>
                                     </div>
