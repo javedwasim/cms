@@ -1610,7 +1610,7 @@ $(document.body).on('click', '.user_permission', function(){
 });
 
 $(document.body).on('click', '.edit-inst-btn', function(){
-    $('#inst_item_form_modal')[0].reset();
+    $('#inst_form_modal')[0].reset();
     var item_id = $(this).attr('data-inst-id');
     $('#inst_id').val($(this).attr('data-inst-id'));
     $.ajax({

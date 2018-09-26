@@ -196,7 +196,26 @@
 	        }
 		}
 
+        public function save_special_instructions($data){
+            $query = $this->db->select('*')
+                        ->from('patient_special_instruction')
+                        ->where('patient_id',1)
+                        ->where('instruction_id',$data['instruction_id'])
+                        ->where('item_id',$data['item_id'])
+                        ->limit(1)
+                        ->get();
+            if($query->num_rows()==0){
+                $result = $this->db->insert('patient_special_instruction', $data);
+                if ($result) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
 
+        }
 	}
 
 ?>
