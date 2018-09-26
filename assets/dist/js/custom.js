@@ -2292,7 +2292,6 @@ $(document.body).on('click', '#pat-exemination', function () {
 
 /////////////////////////////////// load patient special instructions page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
-
 $(document.body).on('click', '#pat-spInstructions', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({

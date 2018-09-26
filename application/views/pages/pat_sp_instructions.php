@@ -3,35 +3,8 @@
     	<div class="card" style="margin-bottom:0px !important; ">
     		<div class="card-body">
     			<div class="row">
-    				<div class="col-md-12 col-lg-12 pt-info">
-			            <strong>ID:</strong>
-			            <label>1233</label>
-			            <strong>Name:</strong>
-			            <label>Ali Hamza</label>
-			            <strong>S/W/o:</strong>
-			            <label>Hamza ali</label>
-			            <strong>Age:</strong>
-			            <label>18 Years</label>
-			            <strong>Sex:</strong>
-			            <label>Male</label>
-			            <strong>Profession:</strong>
-			            <label>Farmar</label>
-			            <strong>HT:</strong>
-			            <label>1233</label>
-			            <strong>WT:</strong>
-			            <label>Ali Hamza</label>
-			            <strong>BMI:</strong>
-			            <label>26.345</label>
-			            <strong>BSA:</strong>
-			            <label>1.324</label>
-			            <strong>Contact:</strong>
-			            <label>0323435454</label>
-			            <strong>Email:</strong>
-			            <label>test@gmail.com</label>
-			            <strong>Address:</strong>
-			            <label>Chak no.13 gujiyani , teh/chistian.</label>
-			            <strong>District:</strong>
-			            <label>Bahawalnagar</label>
+    				<div class="col-md-12 col-lg-12 pt-info" id="pat_sp_information">
+			           
 			        </div>
     			</div>
     		</div>
