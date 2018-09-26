@@ -1517,14 +1517,56 @@ $(document.body).on('click', '#pat_profile', function () {
                     icon.toggleClass('fa-arrow-left fa-arrow-right');
                     $('.resize2').toggleClass("active_resize2");
                     $('.resize1').toggleClass("inactive_resize1");
-
-
+                });
+                $('#profiletable tbody tr:first').addClass('row_selected');
+                $("#profiletable tbody tr").click(function (e) {
+                    $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
                 });
             }
         }
     });
 });
 
+function profile_filter(){
+    $.ajax({
+        url: '/cms/profile/profile_filters',
+        data: $('#profile_filter').serialize(),
+        type: 'post',
+        cache: false,
+        success: function(response) {
+            if(response.profile_table != ''){
+                $('.profile-table').remove();
+                $('#profile_table').append(response.profile_table);
+                ///////////////// initilize datatable //////////////
+                $('.profiletable').DataTable({
+                    // "scrollX": true,
+                    "initComplete": function (settings, json) {
+                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    }
+                });
+                $("#toggleresize1").click(function () {
+                    var icon = $('#toggleresize1 > .arro');
+                    icon.toggleClass('fa-arrow-left fa-arrow-right');
+                    $('.resize1').toggleClass("active_resize1");
+                    $('.resize2').toggleClass("inactive_resize2");
+
+                });
+                $("#toggleresize2").click(function () {
+                    var icon = $('#toggleresize2 > .arro');
+                    icon.toggleClass('fa-arrow-left fa-arrow-right');
+                    $('.resize2').toggleClass("active_resize2");
+                    $('.resize1').toggleClass("inactive_resize1");
+                });
+                $('#profiletable tbody tr:first').addClass('row_selected');
+                $("#profiletable tbody tr").click(function (e) {
+                    $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+            }
+        }
+    });
+}
 /////////////////////////////////// load history page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3256,7 +3298,7 @@ $(document.body).on('click', '#diray_table tbody tr.row_selected', function(){
 $(document.body).on('click', '#update_note', function(){
     var note_id = $('#diray_table tbody tr.row_selected').find('.note_id').text();
     var notevalue = $.trim($('#note_update').text());
-    $.ajax({
+    $.ajax({ 
         url: '/cms/profile/update_note',
         type: 'post',
         data: {
@@ -3329,20 +3371,22 @@ $(document.body).on('click', '#reset_research', function () {
     return false;
 });
 
-$(document.body).on('click', '#research_option', function () {
+$(document.body).on('click', '#research_option', function (){
     $('#research_modal').removeClass('hide');
     $('#research_modal').addClass('show');
 });
 
-// $(document.body).on('click', '#research_modal', function () {
-//     var researchid = $('#research_option option:selected').val();
-//     $.ajax({
-//         url: '/cms/manage_research/research_description',
-//         type: 'post',
-//         data: {id:researchid},
-//         cache: false,
-//         success: function(){
-            
-//         }
-//     });
-// });
+$(document.body).on('click', '#research_modal', function (){
+    var researchid = $('#research_option option:selected').val();
+    $.ajax({
+        url: '/cms/manage_research/research_description',
+        type: 'post',
+        data: {id:researchid},
+        cache: false,
+        success: function(response){
+            console.log(response);
+            $('.research_modal_body').remove();
+            $('#research_modal_body').append(response.description_html);
+        }
+    });
+});

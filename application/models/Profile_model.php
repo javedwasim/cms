@@ -155,9 +155,15 @@
 	            $pat_district = $filters['pat_district'];
 	            $where .=  " AND (pat_district = '' OR pat_district = '$pat_district')";
 	        }
-	        if(isset($filters['pat_age']) && (!empty($filters['pat_age'])) ){
+	        if(isset($filters['pat_age']) && isset($filters['age_bt']) && (!empty($filters['pat_age'])) && (!empty($filters['age_bt'])) ){
 	            $pat_age = $filters['pat_age'];
-	            $where .=  " AND (pat_age = '' OR pat_age = '$pat_age')";
+	            $age_bt = $filters['age_bt'];
+	            if($pat_age == 'age_below' ){
+	            	$where .=  " AND (pat_age = '' OR pat_age < '$pat_age')";
+	            }
+	            if ($pat_age == 'age_above') {
+	            	$where .=  " AND (pat_age = '' OR pat_age > '$pat_age')";
+	            }
 	        }
 	        if(isset($filters['pat_sex']) && (!empty($filters['pat_sex'])) ){
 	            $pat_sex = $filters['pat_sex'];
@@ -172,21 +178,41 @@
 	            if ($height_bt == 'height_above') {
 	            	$where .=  " AND (pat_height = '' OR pat_height > '$pat_height')";
 	            }
-	            
 	        }
-	        if(isset($filters['pat_bmi']) && (!empty($filters['pat_bmi'])) ){
+	        if(isset($filters['pat_bmi']) && isset($filters['bmi_bt']) && (!empty($filters['pat_bmi'])) && (!empty($filters['bmi_bt'])) ){
 	            $pat_bmi = $filters['pat_bmi'];
-	            $where .=  " AND (pat_bmi = '' OR pat_bmi = '$pat_bmi')";
+	            $bmi_bt = $filters['bmi_bt'];
+	            if($bmi_bt == 'bmi_below' ){
+	            	$where .=  " AND (pat_bmi = '' OR pat_bmi < '$pat_bmi')";
+	            }
+	            if ($bmi_bt == 'bmi_above') {
+	            	$where .=  " AND (pat_bmi = '' OR pat_bmi > '$pat_bmi')";
+	            }
 	        }
-	        if(isset($filters['pat_weight']) && (!empty($filters['pat_weight'])) ){
+	        if(isset($filters['pat_weight']) && isset($filters['weight_bt']) && (!empty($filters['pat_weight'])) && (!empty($filters['weight_bt'])) ){
 	            $pat_weight = $filters['pat_weight'];
-	            $where .=  " AND (pat_weight = '' OR pat_weight = '$pat_weight')";
+	            $weight_bt = $filters['weight_bt'];
+	            if($weight_bt == 'weight_below' ){
+	            	$where .=  " AND (pat_weight = '' OR pat_weight < '$pat_weight')";
+	            }
+	            if ($weight_bt == 'weight_above') {
+	            	$where .=  " AND (pat_weight = '' OR pat_weight > '$pat_weight')";
+	            }  
 	        }
-	        if(isset($filters['pat_bsa']) && (!empty($filters['pat_bsa'])) ){
+	        if(isset($filters['pat_bsa']) && isset($filters['bsa_bt']) && (!empty($filters['pat_bsa'])) && (!empty($filters['bsa_bt'])) ){
 	            $pat_bsa = $filters['pat_bsa'];
-	            $where .=  " AND (pat_bsa = '' OR pat_bsa = '$pat_bsa')";
+	            $bsa_bt = $filters['bsa_bt'];
+	            if($bsa_bt == 'bsa_below' ){
+	            	$where .=  " AND (pat_bsa = '' OR pat_bsa < '$pat_bsa')";
+	            }
+	            if ($bsa_bt == 'bsa_above') {
+	            	$where .=  " AND (pat_bsa = '' OR pat_bsa > '$pat_bsa')";
+	            }  
 	        }
-
+	        if(isset($filters['creation_date']) && (!empty($filters['creation_date']))){
+	        	$registration_date = date('Y-m-d', strtotime($filters['creation_date']));
+	        	$where .=  " AND (creation_date = '' OR DATE(creation_date) = '$registration_date')";
+	        }
 	        $sql = "SELECT patient_profile.* FROM patient_profile where $where";
 	        $result = $query = $this->db->query($sql);
 	        if($result) {
@@ -194,6 +220,18 @@
 	        } else {
 	            return array();
 	        }
+		}
+
+		public function get_research_description($id){
+			$result = $this->db->select('*')
+						->from('research')
+						->where('id',$id)
+						->get();
+			if ($result) {
+				return $result->row();
+			}else{
+				return false;
+			}
 		}
 
 

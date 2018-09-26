@@ -74,9 +74,14 @@
 	        }
 		}
 
-		// public function research_description(){
-			
-		// }
+		public function research_description(){
+			$researchid = $this->input->post('id');
+			$data['description'] = $this->Profile_model->get_research_description($researchid);
+			$json['description_html'] = $this->load->view('manage_research/research_modal',$data,true);
+			if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
 	}
 
 ?>

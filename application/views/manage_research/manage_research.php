@@ -74,7 +74,6 @@
                                         <option value="">Select</option>
                                         <option value="age_below">Age Below</option>
                                         <option value="age_above">Age Above</option>
-                                        <option value="age_between">Age Between</option>
                                     </select>
                                 </div>
                             </div>
@@ -103,7 +102,6 @@
                                             <option value="">Select</option>
                                             <option value="height_below">Height Below</option>
                                             <option value="height_above">Height Above</option>
-                                            <option value="height_between">Height Between</option>
                                         </select>
                                         <input type="text" name="pat_height" class="form-control" onchange="research_filters()">
                                     </div>
@@ -117,7 +115,6 @@
                                             <option value="" >Select</option>
                                             <option value="bmi_below">BMI Below</option>
                                             <option value="bmi_above">BMI Above</option>
-                                            <option value="bmi_between">BMI Between</option>
                                         </select>
                                         <input type="text" name="pat_bmi" class="form-control" onchange="research_filters()">
                                     </div>
@@ -131,7 +128,6 @@
                                             <option value="">Select</option>
                                             <option value="weight_below">Weight Below</option>
                                             <option value="weight_above">Weight Above</option>
-                                            <option value="weight_between">Weight Between</option>
                                         </select>
                                         <input type="text" name="pat_weight" class="form-control" onchange="research_filters()">
                                     </div>
@@ -145,7 +141,6 @@
                                             <option value="">Select</option>
                                             <option value="bsa_below">BSA Below</option>
                                             <option value="bsa_above">BSA Above</option>
-                                            <option value="bsa_between">BSA Between</option>
                                         </select>
                                         <input type="text" name="pat_bsa" class="form-control" onchange="research_filters()">
                                     </div>
@@ -208,7 +203,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger waves-effect waves-light">Update</button>
                 </div>
             </div>
         </div>

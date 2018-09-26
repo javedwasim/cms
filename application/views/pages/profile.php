@@ -40,29 +40,29 @@ if(isset($rights[0]['user_rights']))
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header pro-filter p-b-0">
-                            <form>
+                            <form rol="form" style="width: 100%;" id="profile_filter">
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>ID</label>
-                                            <input type="text" name="" class="form-control">
+                                            <input type="text" name="id" class="form-control" onchange="profile_filter()">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" name="" class="form-control">
+                                            <input type="text" name="pat_name" class="form-control" onchange="profile_filter()" >
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Profession</label>
-                                            <select class="form-control" style="text-transform: capitalize;">
-                                                <option>Select...</option>
+                                            <select class="form-control" style="text-transform: capitalize;" name="pat_profession" onchange="profile_filter()">
+                                                <option value="">Select...</option>
                                                 <?php 
                                                 foreach ($professions as $key) {
                                             ?>
-                                                <option value="<?php $key['profession_name'] ?>" style="text-transform: capitalize;"><?php echo $key['profession_name'] ?></option>
+                                                <option value="<?php echo $key['profession_name'] ?>" style="text-transform: capitalize;"><?php echo $key['profession_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -70,12 +70,12 @@ if(isset($rights[0]['user_rights']))
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>District</label>
-                                            <select class="form-control" style="text-transform: capitalize;">
-                                                <option>Select...</option>
+                                            <select class="form-control" style="text-transform: capitalize;" name="pat_district" onchange="profile_filter()">
+                                                <option value="">Select...</option>
                                                 <?php 
                                                 foreach ($districts as $key) {
                                             ?>
-                                                <option value="<?php $key['district_name'] ?>" style="text-transform: capitalize;"><?php echo $key['district_name'] ?></option>
+                                                <option value="<?php echo $key['district_name'] ?>" style="text-transform: capitalize;"><?php echo $key['district_name'] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -88,21 +88,21 @@ if(isset($rights[0]['user_rights']))
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Registration</label>
-                                            <input type="text" value="<?php echo date('d-M-Y') ?>" id="" class="form-control profile_filter" autocomplete="off" required="required" />
+                                            <input type="text" name="creation_date" class="form-control profile_filter" autocomplete="off" required="required" onchange="profile_filter()" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label>Last Visit</label>
-                                            <input type="text" value="<?php echo date('d-M-Y') ?>" id="" class="form-control profile_filter"  autocomplete="off" required="required" />
-                                        </div>
-                                    </div>
+                                            <input type="text" value="<?php echo date('d-M-Y') ?>" id="" class="form-control profile_filter" onchange="profile_filter()" autocomplete="off" required="required" />
+                                        </div> -->
+                                    </div><!-- 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Search In:</label>
                                             <input type="text" name="" class="form-control">
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-2">
                                         <div class="form-group m-t-15" style="display: inline-flex;">
                                             <button class="btn btn-info btn-sm">Reset</button>
@@ -199,7 +199,7 @@ if(isset($rights[0]['user_rights']))
                         <div class="card-body" style="height:533px;">
                             <div class="row">
                                 <div id="re1">
-                                    <div class="col-md-12 p-0">
+                                    <div class="col-md-12 p-r-0">
                                         <h4 class="text-center"> Click to edit</h4>
                                         <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
                                            <thead>
@@ -228,7 +228,7 @@ if(isset($rights[0]['user_rights']))
                                     </div>
                                 </div>
                                 <div id="re2">
-                                    <div class="col-md-12 p-0">
+                                    <div class="col-md-12 p-l-0">
                                     <h4 class="text-center">Report</h4>
                                     <div class="b-all" style="height:450px;">  
                                     </div>
