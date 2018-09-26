@@ -283,6 +283,16 @@
 	        }
 		}
 
+		public function patient_info(){
+			$id = $this->input->post('patid');
+			$data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+			$json['patient_information']=$this->load->view('profile/patient_information',$data,true);
+			if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+
+		}
+
 
 	}
 ?>

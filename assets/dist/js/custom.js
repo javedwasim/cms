@@ -3384,9 +3384,24 @@ $(document.body).on('click', '#research_modal', function (){
         data: {id:researchid},
         cache: false,
         success: function(response){
-            console.log(response);
             $('.research_modal_body').remove();
             $('#research_modal_body').append(response.description_html);
+        }
+    });
+});
+
+///////////////////////////////////// load patient information /////////////////////////////////////////////////
+
+$(document.body).on('click', '#profiletable tbody tr.row_selected', function(){
+    var patid = $.trim($(this).find('.profile_id').text());
+    $.ajax({
+        url: '/cms/profile/patient_info',
+        type: 'post',
+        data: {patid:patid},
+        cache: false,
+        success: function(response){
+            $('.patient_info').remove();
+            $('#patient_info').append(response.patient_information);
         }
     });
 });

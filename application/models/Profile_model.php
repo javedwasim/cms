@@ -234,6 +234,18 @@
 			}
 		}
 
+		public function patient_info_by_id($id){
+			$result = $this->db->select('*')
+						->from('patient_profile')
+						->where('id',$id)
+						->get();
+			if ($result) {
+				return $result->row();
+			}else{
+				return false;
+			}
+		}
+
 
 	}
 
