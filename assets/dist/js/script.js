@@ -1608,3 +1608,43 @@ $(document.body).on('click', '.user_permission', function(){
 
     });
 });
+
+$(document.body).on('click', '.edit-inst-btn', function(){
+    $('#inst_item_form_modal')[0].reset();
+    var item_id = $(this).attr('data-inst-id');
+    $('#inst_id').val($(this).attr('data-inst-id'));
+    $.ajax({
+        url: '/cms/instruction/get_inst_description',
+        type: 'post',
+        data: {id:item_id},
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                $('#inst_description').val(response.description);
+                $('#inst_modal').modal('show');
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '#save_inst_description', function(){
+    $.ajax({
+        url: $('#inst_form_modal').attr('data-action'),
+        type: 'post',
+        data:  $('#inst_form_modal').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#inst_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});

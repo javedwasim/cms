@@ -10,6 +10,7 @@
 			$this->load->model('Setting_model');
 			$this->load->model('Profile_model');
 			$this->load->model('Dashboard_model');
+            $this->load->model('Instruction_model');
 			$this->load->helper('content-type');
 			date_default_timezone_set("Asia/Karachi");
 		}

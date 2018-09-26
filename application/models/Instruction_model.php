@@ -97,6 +97,20 @@
                 return array();
             }
         }
+
+        public function get_inst_description($id){
+            $result = $this->db->select('description')->from('instruction')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function save_inst_description($data){
+            $this->db->where('id',$data['inst_id'])->update('instruction',array('description'=>$data['description']));
+            return $this->db->affected_rows();
+        }
 	}
 
 ?>
