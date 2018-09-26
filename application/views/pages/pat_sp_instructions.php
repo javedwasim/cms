@@ -1,5 +1,6 @@
 <div class="content-wrapper" style="margin: 0% 0.5%;">
     <div class="row p-t-10 m-0">
+
         <div class="card" style="margin-bottom:0px !important; ">
             <div class="card-body">
                 <div class="row">
@@ -11,6 +12,18 @@
         </div>
         <div class="col-md-4 col-lg-4 p-0">
             <div class="card">
+
+    	<div class="card" style="margin-bottom:0px !important; ">
+    		<div class="card-body">
+    			<div class="row">
+    				<div class="col-md-12 col-lg-12 pt-info" id="pat_sp_information">
+			           
+			        </div>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="col-md-4 col-lg-4 p-0">
+    		<div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 p-r-0">

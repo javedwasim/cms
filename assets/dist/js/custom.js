@@ -2292,15 +2292,19 @@ $(document.body).on('click', '#pat-exemination', function () {
 
 /////////////////////////////////// load patient special instructions page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
-
 $(document.body).on('click', '#pat-spInstructions', function () {
+    var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: '/cms/profile/patient_special_instructions',
+        type: 'post',
+        data: {patid:patid},
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pat_sp_information').append(response.patient_information);
             }
         }
     });
@@ -3384,9 +3388,24 @@ $(document.body).on('click', '#research_modal', function (){
         data: {id:researchid},
         cache: false,
         success: function(response){
-            console.log(response);
             $('.research_modal_body').remove();
             $('#research_modal_body').append(response.description_html);
+        }
+    });
+});
+
+///////////////////////////////////// load patient information /////////////////////////////////////////////////
+
+$(document.body).on('click', '#profiletable tbody tr.row_selected', function(){
+    var patid = $.trim($(this).find('.profile_id').text());
+    $.ajax({
+        url: '/cms/profile/patient_info',
+        type: 'post',
+        data: {patid:patid},
+        cache: false,
+        success: function(response){
+            $('.patient_info').remove();
+            $('#patient_info').append(response.patient_information);
         }
     });
 });

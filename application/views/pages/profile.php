@@ -131,35 +131,8 @@ if(isset($rights[0]['user_rights']))
                                         <i class="fas fa-arrow-left arro"></i>
                                     </button>
                                 </div>
-                                <div class="col-md-11 col-lg-11 pt-info">
-                                    <strong>ID:</strong>
-                                    <label>1233</label>
-                                    <strong>Name:</strong>
-                                    <label>Ali Hamza</label>
-                                    <strong>S/W/o:</strong>
-                                    <label>Hamza ali</label>
-                                    <strong>Age:</strong>
-                                    <label>18 Years</label>
-                                    <strong>Sex:</strong>
-                                    <label>Male</label>
-                                    <strong>Profession:</strong>
-                                    <label>Farmar</label>
-                                    <strong>HT:</strong>
-                                    <label>1233</label>
-                                    <strong>WT:</strong>
-                                    <label>Ali Hamza</label>
-                                    <strong>BMI:</strong>
-                                    <label>26.345</label>
-                                    <strong>BSA:</strong>
-                                    <label>1.324</label>
-                                    <strong>Contact:</strong>
-                                    <label>0323435454</label>
-                                    <strong>Email:</strong>
-                                    <label>test@gmail.com</label>
-                                    <strong>Address:</strong>
-                                    <label>Chak no.13 gujiyani , teh/chistian.</label>
-                                    <strong>District:</strong>
-                                    <label>Bahawalnagar</label>
+                                <div class="col-md-11 col-lg-11 pt-info" id="patient_info">
+                            
                                 </div>
                             </div>
                         </div>
