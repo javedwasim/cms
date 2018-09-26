@@ -412,7 +412,8 @@
                     ->update('other_rights_group_detail',array('status'=>$data['status']));
                 echo $this->db->last_query();
             }else{
-                $this->db->insert('other_rights_group_detail',array('other_rights_group_id'=>$other_rights_group_id,'other_rights_id'=>$other_rights_id));
+                $this->db->insert('other_rights_group_detail',
+                    array('other_rights_group_id'=>$other_rights_group_id,'other_rights_id'=>$other_rights_id,'status'=>1));
                 return $this->db->insert_id();
             }
         }
