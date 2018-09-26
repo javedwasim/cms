@@ -39,44 +39,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-6 p-l-0 dashboard-content">
-                            <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
-                                   width="100%">
-                                <thead>
-                                <tr>
-                                    <th style="width: 10%"></th>
-                                    <th>Template</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i
-                                                class="far fa-question-circle"></i></td>
-                                    <td>CVS</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i
-                                                class="far fa-question-circle"></i></td>
-                                    <td>Chest</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i
-                                                class="far fa-question-circle"></i></td>
-                                    <td>Abdomen</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i
-                                                class="far fa-question-circle"></i></td>
-                                    <td>CNS</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i
-                                                class="far fa-question-circle"></i></td>
-                                    <td>GPE</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <div class="col-md-6 p-l-0 dashboard-content"></div>
                     </div>
                 </div>
             </div>

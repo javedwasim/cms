@@ -1,6 +1,6 @@
 <div class="patient_info">
       <strong>ID:</strong>
-      <label><?php echo $patient_info->id ?></label>
+      <label id="label_patient_id"><?php echo $patient_info->id ?></label>
       <strong>Name:</strong>
       <label><?php echo $patient_info->pat_name ?></label>
       <strong>S/W/o:</strong>
