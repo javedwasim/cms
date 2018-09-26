@@ -2294,13 +2294,18 @@ $(document.body).on('click', '#pat-exemination', function () {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#pat-spInstructions', function () {
+    var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: '/cms/profile/patient_special_instructions',
+        type: 'post',
+        data: {patid:patid},
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pat_sp_information').append(response.patient_information);
             }
         }
     });

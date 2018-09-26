@@ -31,7 +31,10 @@
 		public function patient_special_instructions(){
             $data['rights'] = $this->session->userdata('other_rights');
             $data['category'] = 'clinical';
+            $id = $this->input->post('patid');
+			$data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
             $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
+            $json['patient_information']=$this->load->view('profile/patient_information',$data,true);
 			$json['result_html'] = $this->load->view('pages/pat_sp_instructions', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
