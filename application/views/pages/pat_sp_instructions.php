@@ -1,6 +1,5 @@
 <div class="content-wrapper" style="margin: 0% 0.5%;">
     <div class="row p-t-10 m-0">
-
         <div class="card" style="margin-bottom:0px !important; ">
             <div class="card-body">
                 <div class="row">
@@ -10,24 +9,14 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-4 col-lg-4 p-0">
             <div class="card">
-
-    	<div class="card" style="margin-bottom:0px !important; ">
-    		<div class="card-body">
-    			<div class="row">
-    				<div class="col-md-12 col-lg-12 pt-info" id="pat_sp_information">
-			           
-			        </div>
-    			</div>
-    		</div>
-    	</div>
-    	<div class="col-md-4 col-lg-4 p-0">
-    		<div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 p-r-0">
-                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%">
+                            <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
+                                   width="100%">
                                 <thead>
                                 <tr>
                                     <th style="width: 10%"></th>
@@ -51,7 +40,8 @@
                             </table>
                         </div>
                         <div class="col-md-6 p-l-0 dashboard-content">
-                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%">
+                            <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
+                                   width="100%">
                                 <thead>
                                 <tr>
                                     <th style="width: 10%"></th>
@@ -106,7 +96,9 @@
                                         <label>To whom it may concern</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <button id="save_profile_instruction" type="submit" class="btn btn-primary">Save</button>
+                                        <button id="save_profile_instruction" type="submit"
+                                                class="btn btn-primary">Save
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +130,8 @@
                             Previous Instructions<br/>
                             Print size:<label class="radio-inline"><input type="radio" name="optradio"
                                                                           checked>A4</label>
-                            <label class="radio-inline m-r-30"><input type="radio" name="optradio">Half A4</label>
+                            <label class="radio-inline m-r-30"><input type="radio" name="optradio">Half
+                                A4</label>
                             <label class="m-r-20">Click to View</label>
                             <label>Double Click to Edit</label>
                         </div>
@@ -163,12 +156,14 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <textarea class="form-control" rows="10" readonly="readonly"></textarea>
+                                                        <textarea class="form-control" rows="10"
+                                                                  readonly="readonly"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <textarea class="form-control" rows="10" readonly="readonly"></textarea>
+                                                        <textarea class="form-control" rows="10"
+                                                                  readonly="readonly"></textarea>
                                             </div>
                                         </div>
                                     </div>

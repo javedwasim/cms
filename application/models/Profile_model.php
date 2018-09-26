@@ -225,13 +225,6 @@
 
         public function save_special_instructions($data)
         {
-            $query = $this->db->select('*')
-                        ->from('patient_special_instruction')
-                        ->where('patient_id', 1)
-                        ->where('instruction_id', $data['instruction_id'])
-                        ->where('item_id', $data['item_id'])
-                        ->limit(1)
-                        ->get();
             $this->db->insert('patient_special_instruction', $data);
             return $this->db->insert_id();
         }
