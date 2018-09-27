@@ -45,13 +45,13 @@ if(isset($rights[0]['user_rights']))
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>ID</label>
-                                            <input type="text" name="id" class="form-control" onchange="profile_filter()">
+                                            <input type="text" name="id" class="form-control" onchange="profile_filter()" autocomplete="off" >
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" name="pat_name" class="form-control" onchange="profile_filter()" >
+                                            <input type="text" name="pat_name" class="form-control" onchange="profile_filter()" autocomplete="off" >
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -88,7 +88,7 @@ if(isset($rights[0]['user_rights']))
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Registration</label>
-                                            <input type="text" name="creation_date" class="form-control profile_filter" autocomplete="off" required="required" onchange="profile_filter()" />
+                                            <input type="text" name="creation_date" class="form-control profile_filter" autocomplete="off" required="required" autocomplete="off" onchange="profile_filter()" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -105,7 +105,7 @@ if(isset($rights[0]['user_rights']))
                                     </div> -->
                                     <div class="col-md-2">
                                         <div class="form-group m-t-15" style="display: inline-flex;">
-                                            <button class="btn btn-info btn-sm">Reset</button>
+                                            <button class="btn btn-info btn-sm" id="reset_profile_filter">Reset</button>
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@ if(isset($rights[0]['user_rights']))
                                                 <th style="width: 20px"></th>
                                                 <th style="width: 20px"></th>
                                                 <th style="width: 20px"></th>
-                                                <th>ETT Date</th>
+                                                <th style="width: 50px;">ETT Date</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -188,13 +188,13 @@ if(isset($rights[0]['user_rights']))
                                                     <td style="width: 20px"><i class="fa fa-trash"></i></td>
                                                     <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                                     <td style="width: 20px"><i class="fa fa-print"></i></td>
-                                                    <td>30/08/2018</td>
+                                                    <td style="width: 50px;">30/08/2018</td>
                                                 </tr>
                                                 <tr>
                                                     <td style="width: 20px"><i class="fa fa-trash"></i></td>
                                                     <td style="width: 20px"><i class="fa fa-edit"></i></td>
                                                     <td style="width: 20px"><i class="fa fa-print"></i></td>
-                                                    <td>30/08/2018</td>
+                                                    <td style="width: 50px;">30/08/2018</td>
                                                 </tr>
                                             </tbody>
                                         </table>

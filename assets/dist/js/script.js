@@ -1651,16 +1651,23 @@ $(document.body).on('click', '#save_inst_description', function(){
 
 $(document.body).on('click', '#save_profile_instruction', function(){
     var patient_id = $('#label_patient_id').text();
-    $('#patient_id').val(patient_id);
+    var sd = $('#patient_id').val(patient_id);
+    var  sp_inst_id = $('#sp-ins-table tbody tr.row_selected').find('.pat_sp_id').text();
+    var as = $('#sp_inst_id').val(sp_inst_id);
     $.ajax({
         url: $('#profile_inst_form_modal').attr('data-action'),
         type: 'post',
         data:  $('#profile_inst_form_modal').serialize(),
         cache: false,
         success: function(response) {
+            $('#special_instruction').val('');
             if (response.success) {
                 $('.sp_data_table').remove();
                 $('#sp_data_table').append(response.sp_table);
+                $("#sp-ins-table tbody tr").click(function (e) {
+                    $('#sp-ins-table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
                 toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
@@ -1668,4 +1675,34 @@ $(document.body).on('click', '#save_profile_instruction', function(){
         }
     });
     return false;
+});
+
+$(document.body).on('click', '#sp-ins-table tbody tr.row_selected', function(){
+    var spid = $(this).find('.pat_sp_id').text();
+    $.ajax({
+        url: '/cms/profile/get_special_instructions',
+        type: 'post',
+        data: {spid:spid},
+        cache: false,
+        success: function(response){
+            $('#special_instruction').val(response.special_instructions);
+            $('#sp-instruction-noneditable').val(response.special_instructions);
+        }
+    });
+});
+
+/////////////////////////////////// load patient ett test page ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+$(document.body).on('click', '#pat-ett-test', function () {
+    $.ajax({
+        url: '/cms/profile/patient_ett_test',
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+            }
+        }
+    });
 });

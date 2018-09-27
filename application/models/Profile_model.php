@@ -225,8 +225,24 @@
 
         public function save_special_instructions($data)
         {
-            $this->db->insert('patient_special_instruction', $data);
-            return $this->db->insert_id();
+        	$spid = $data['sp_inst_id'];
+        	if ($spid =='') {
+        		$data_array = array(
+        			'patient_id' => $data['patient_id'],
+        			'description' => $data['description']
+        		);
+        		$result = $this->db->insert('patient_special_instruction', $data_array);
+        	}else{
+        		$result = $this->db->set('description',$data['description'])
+        					->where('id',$spid)
+        					->update('patient_special_instruction');
+        	}
+        	if ($result) {
+        		return true;
+        	}else{
+        		return false;
+        	}
+            
         }
 		public function get_research_description($id){
 			$result = $this->db->select('*')
@@ -259,6 +275,18 @@
 						->get();
 			if ($result) {
 				return $result->result_array();
+			}else{
+				return array();
+			}
+		}
+
+		public function get_special_instructions_by_id($id){
+			$result = $this->db->select('*')
+						->from('patient_special_instruction')
+						->where('id',$id)
+						->get();
+			if ($result) {
+				return $result->row();
 			}else{
 				return array();
 			}

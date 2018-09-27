@@ -9,7 +9,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 col-lg-4 p-0">
             <div class="card">
                 <div class="card-body">
@@ -50,17 +49,18 @@
                       data-action="<?php echo site_url('profile/patient_special_instruction') ?>"
                       enctype="multipart/form-data">
                     <input type="hidden" name="patient_id" id="patient_id" value="1">
+                    <input type="hidden" name="sp_inst_id" id="sp_inst_id" value="">
                     <div class="col-md-12">
                         <div class="card" style="height:80vh;">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-9">
                                         <input type="checkbox" name="">
                                         <label>To whom it may concern</label>
                                     </div>
-                                    <div class="col-md-4">
-                                        <button id="save_profile_instruction" type="submit"
-                                                class="btn btn-primary">Save
+                                    <div class="col-md-3">
+                                        <button id="save_profile_instruction"
+                                                class="btn btn-primary btn-sm">Save
                                         </button>
                                     </div>
                                 </div>
@@ -69,8 +69,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description"
-                                                      id="special_instruction" rows="10"></textarea>
+                                            <textarea class="form-control" name="description" id="special_instruction" rows="20"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -90,8 +89,7 @@
                                                                           checked>A4</label>
                             <label class="radio-inline m-r-30"><input type="radio" name="optradio">Half
                                 A4</label>
-                            <label class="m-r-20">Click to View</label>
-                            <label>Double Click to Edit</label>
+                            <label class="m-r-20">Click to View/edit</label>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -102,7 +100,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <textarea class="form-control" rows="10" readonly="readonly"></textarea>
+                                                <textarea class="form-control" rows="20" readonly="readonly" id="sp-instruction-noneditable"></textarea>
                                             </div>
                                         </div>
                                     </div>
