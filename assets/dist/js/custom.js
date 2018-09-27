@@ -2322,6 +2322,8 @@ $(document.body).on('click', '#pat-labtest', function () {
                 $('.lab-date').datepicker({
                     format: 'd-M-yyyy'
                 });
+                $('#lab_test_data_table').empty();
+                $('#lab_test_data_table').append(response.test_table);
             }
         }
     });

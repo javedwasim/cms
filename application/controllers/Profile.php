@@ -55,6 +55,9 @@
             $data['items'] = $this->Setting_model->get_lab_test_items();
             $json['laboratory_html'] = $this->load->view('laboratory/laboratory', $data, true);
 
+            $data['tests'] = $this->Profile_model->get_lab_test_info($id);
+            $json['test_table']=$this->load->view('profile/lab_test_detail_table',$data,true);
+
             $json['patient_information']=$this->load->view('profile/patient_information',$data,true);
 			$json['result_html'] = $this->load->view('pages/pat_lab_test', $data, true);
             if ($this->input->is_ajax_request()) {
@@ -393,16 +396,34 @@
 
 		}
 
-		public function get_profile_protocol_details($p_id)
-    {
-        $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);
-        $data['selected_category'] = $p_id;
-        $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('profile/protocol_table', $data, true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
+
+		public function save_patient_lab_test(){
+            $data = $this->input->post();
+            $result = $this->Profile_model->save_patient_lab_test($data);
+            if ($result) {
+                $data['tests'] = $this->Profile_model->get_lab_test_info($data['patient_id']);
+                $json['sp_table']=$this->load->view('profile/lab_test_detail_table',$data,true);
+                $json['success'] = true;
+                $json['message'] = "Information save successfully!";
+            }else{
+                $json['error'] = true;
+                $json['message'] = "seem to be an error.";
+            }
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
         }
-    }
+
+		public function get_profile_protocol_details($p_id)
+        {
+            $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);
+            $data['selected_category'] = $p_id;
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['result_html'] = $this->load->view('profile/protocol_table', $data, true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
 
     public function save_ett_test(){
     	$patientid = $this->input->post('patientid');
@@ -456,5 +477,12 @@
     }
 
 
+        public function get_lab_test_unit($key){
+            $data['items'] = $this->Profile_model->get_lab_test_unit($key);
+            $json['result_html'] = $this->load->view('profile/lab_test_unit_table', $data, true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
 	}
 ?>

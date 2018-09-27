@@ -9,9 +9,9 @@
     <?php foreach ($tests as $test): ?>
         <tr class="table-row">
             <td>
-                <a class="edit-inst-item-btn btn btn-info btn-xs"
+                <a class="info-lab-test-btn btn btn-info btn-xs"
                    href="javascript:void(0)"
-                   data-inst-item-id="<?php echo $test['id']; ?>"><i
+                   data-lab-test-id="<?php echo $test['id']; ?>"><i
                    class="far fa-question-circle"></i></a>
             </td>
             <td contenteditable="true" class="p_item"
@@ -22,13 +22,14 @@
     <?php endforeach; ?>
     </tbody>
 </table>
-<div id="inst_item_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+
+<div id="lab_test_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
-        <form id="inst_item_form_modal" method="post" role="form"
-              data-action="<?php echo site_url('instruction/save_inst_item_description') ?>"
+        <form id="lab_test_form" method="post" role="form"
+              data-action="<?php echo site_url('setting/save_lab_category_description') ?>"
               enctype="multipart/form-data">
-            <input type="hidden" name="inst_item_id" id="inst_item_id">
+            <input type="hidden" name="lab_test_id" id="lab_test_id">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Description</h4>
@@ -37,19 +38,35 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Risk Factor and Cardiac Problems</label>
-                        <textarea class="form-control" rows="3" name="description" id="inst_item_description"></textarea>
+                        <textarea class="form-control" rows="3" name="description" id="test_description"></textarea>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger waves-effect waves-light"
-                            id="save_inst_item_description">Update
-                    </button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<script>
+    $(document.body).on('click', '.info-lab-test-btn', function(){
+        $('#lab_test_form')[0].reset();
+        var test_id = $(this).attr('data-lab-test-id');
+        $('#lab_test_id').val($(this).attr('data-lab-test-id'));
+        $.ajax({
+            url: '/cms/setting/get_lab_test_description',
+            type: 'post',
+            data: {id:test_id},
+            cache: false,
+            success: function(response) {
+                if (response.success) {
+                    $('#test_description').val(response.description);
+                    $('#lab_test_modal').modal('show');
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+        return false;
+    });
+</script>
 <script>
     function showEdit(editableObj ,test_id, category_id) {
         $('td.p_item').css('background', '#FFF');

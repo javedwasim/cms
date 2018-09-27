@@ -57,8 +57,8 @@
     		</div>
     	</div>
     	<div class="col-md-3 p-l-0 p-r-0">
-            <form id="profile_inst_form_modal" method="post" role="form"
-                  data-action="<?php echo site_url('profile/patient_special_instruction') ?>"
+            <form id="lab_test_form_modal" method="post" role="form"
+                  data-action="<?php echo site_url('profile/save_patient_lab_test') ?>"
                   enctype="multipart/form-data">
                 <input type="hidden" name="patient_id" id="patient_id" value="">
                 <input type="hidden" name="test_id" id="test_id" value="">
@@ -69,7 +69,7 @@
                             <label class="m-t-10">Test Date</label>
                             <input type="text"  class="form-control lab-date col-md-7" name="test_date">
                         </div>
-                        <button class="btn btn-primary btn-sm" id="save_profile_instruction">Save</button>
+                        <button class="btn btn-primary btn-sm" id="save_lab_test">Save</button>
                     </div>
                     <div class="card-body laboratory-test-item-content">
                         <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
@@ -103,7 +103,7 @@
     			</div>
     			<div class="card-body">
     				<div class="row">
-    					<div class="col-md-4 p-r-0 ">
+    					<div class="col-md-4 p-r-0" id="lab_test_data_table">
     						<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 		                       <thead>
 		                        <tr>
@@ -119,7 +119,7 @@
 			                    </tbody>
 			                </table>
     					</div>
-    					<div class="col-md-8 p-l-0">
+    					<div class="col-md-8 p-l-0 laboratory-test-unit-content">
     						<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 		                       	<thead>
 		                        <tr>
@@ -171,6 +171,7 @@
 </div>
 
 <script>
+
     function editLaboratoryTest(editableObj, id) {
         $('td.p_category').css('background', '#FFF');
         $('td.p_category').css('color', '#212529');
@@ -216,6 +217,8 @@
         return false;
 
     });
+
+
 </script>
 
 <div id="lab_category_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
