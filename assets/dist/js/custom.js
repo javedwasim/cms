@@ -3419,3 +3419,17 @@ $(document.body).on('click', '#reset_profile_filter', function () {
     });
     return false;
 });
+
+
+function profile_protocol_details(protocol_id){
+    $.ajax({
+        url: '/cms/profile/get_profile_protocol_details/'+protocol_id,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.profile_protocol_table').remove();
+            $('#profile_protocol_table').append(response.result_html);
+        }
+    });
+    return false;
+}

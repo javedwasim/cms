@@ -1695,13 +1695,28 @@ $(document.body).on('click', '#sp-ins-table tbody tr.row_selected', function(){
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#pat-ett-test', function () {
+    var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: '/cms/profile/patient_ett_test',
+        type: 'post',
+        data: {patid:patid},
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pat_ett_information').append(response.patient_information);
+                $("#profile_ett_desc_table tbody tr:first").addClass('row_selected')
+                $("#profile_ett_desc_table tbody tr").click(function (e) {
+                    $('#profile_ett_desc_table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+                $("#profile_ett_conc_table tbody tr:first").addClass('row_selected')
+                $("#profile_ett_conc_table tbody tr").click(function (e) {
+                    $('#profile_ett_conc_table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
             }
         }
     });
