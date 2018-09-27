@@ -1768,26 +1768,26 @@ $(document.body).on('click', '#register-user', function () {
 /////////////////////////////////// load special instructions page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-$(document.body).on('click', '#special_instruction', function () {
-    $.ajax({
-        url: '/cms/instruction/special_instruction',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    scrollY: '50vh',
-                    scrollCollapse: true,
-                    paging: false,
-                    info: false
-                });
-            }
-        }
-    });
-});
+// $(document.body).on('click', '#special_instruction', function () {
+//     $.ajax({
+//         url: '/cms/instruction/special_instruction',
+//         cache: false,
+//         success: function (response) {
+//             if (response.result_html != '') {
+//                 $('.dashboard-content').remove();
+//                 $('#dashboard-content').append(response.result_html);
+//                 ///////////////// initilize datatable //////////////
+//                 $('#research-table').DataTable({
+//                     "scrollX": true,
+//                     scrollY: '50vh',
+//                     scrollCollapse: true,
+//                     paging: false,
+//                     info: false
+//                 });
+//             }
+//         }
+//     });
+// });
 
 /////////////////////////////////// load profession page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -2294,7 +2294,6 @@ $(document.body).on('click', '#pat-spInstructions', function () {
                 $('#pat_sp_information').append(response.patient_information);
                 $('.sp_data_table').remove();
                 $('#sp_data_table').append(response.sp_table);
-                $('#sp-ins-table tbody tr:first').addClass('row_selected');
                 $("#sp-ins-table tbody tr").click(function (e) {
                     $('#sp-ins-table tbody tr.row_selected').removeClass('row_selected');
                     $(this).addClass('row_selected');

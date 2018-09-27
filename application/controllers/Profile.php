@@ -340,6 +340,17 @@
 	        }
 		}
 
+		public function get_special_instructions(){
+			$spid = $this->input->post('spid');	
+			$data['sp_inst'] = $this->Profile_model->get_special_instructions_by_id($spid);
+			$description = $data['sp_inst']->description;
+			$json['special_instructions']=$description;
+			if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+
+		}
+
 
 	}
 ?>
