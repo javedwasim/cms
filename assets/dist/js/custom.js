@@ -2316,13 +2316,18 @@ $(document.body).on('click', '#pat-spInstructions', function () {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#pat-labtest', function () {
+    var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: '/cms/profile/patient_lab_test',
+        type: 'post',
+        data: {patid:patid},
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pat_sp_information').append(response.patient_information);
                 $('.lab-date').datepicker({
                     format: 'd-M-yyyy'
                 });
