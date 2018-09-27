@@ -18,7 +18,7 @@
     					<div class="col-md-3 p-r-0">
     						<div class="form-group">
     							<label>Reason for Test</label>
-    							<select class="form-control">
+    							<select class="form-control" name="test_reason" id="ett_test_reason">
     								<option value="">Select ...</option>
                                     <?php foreach($test_reasons as $reason){?>
                                         <option value="<?php echo $reason['id']; ?>"><?php echo $reason['test_reason']; ?></option>
@@ -27,7 +27,7 @@
     						</div>
     						<div class="form-group">
     							<label>Medication</label>
-    							<textarea class="form-control" rows="6"></textarea>
+    							<textarea class="form-control" rows="6" name="medication" id="ett_medication"></textarea>
     						</div>
     						<div class="form-group">
     							<div class="card">
@@ -39,7 +39,7 @@
                                             <tbody>
                                                 <?php foreach($descriptions as $desc){?>
                                                     <tr >
-                                                        <td><?php echo $desc['description']; ?></td>
+                                                        <td class="ett_pro_desc"><?php echo $desc['description']; ?></td>
                                                     </tr>
                                                 <?php }?>
                                             </tbody>                           
@@ -57,7 +57,7 @@
                                             <tbody>
                                                 <?php foreach($conclusions as $conc){?>
                                                     <tr >
-                                                        <td><?php echo $conc['conclusion']; ?></td>
+                                                        <td class="ett_pro_conc"><?php echo $conc['conclusion']; ?></td>
                                                     </tr>
                                                 <?php }?>
                                             </tbody>                           
@@ -75,16 +75,16 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Resting HR:</label>
-                                                        <input type="text" name="" class="form-control">    
+                                                        <input type="text" name="resting_hr" id="resting_hr" class="form-control">    
                                                     </div>    
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Resting BP:</label>
                                                         <div style="display: inline-flex;">
-                                                            <input type="test" name="" class="form-control col-md-5">
+                                                            <input type="test" name="resting_bp_a" id="resting_bp_a" class="form-control col-md-5">
                                                             <label class="">/</label>
-                                                            <input type="text" name="" class="form-control col-md-5">
+                                                            <input type="text" name="resting_bp_b" id="resting_bp_b" class="form-control col-md-5">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,14 +94,14 @@
     										<div class="row">
                                                 <div class="col-md-6">
                                                     <label>Max HR:</label>
-                                                    <input type="text" name="" class="form-control">
+                                                    <input type="text" name="max_hr" id="max_hr" class="form-control">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Max BP:</label>
                                                     <div style="display: inline-flex;">
-                                                        <input type="test" name="" class="form-control col-md-5">
+                                                        <input type="test" name="max_bp_a" id="max_bp_a" class="form-control col-md-5">
                                                         <label class="">/</label>
-                                                        <input type="text" name="" class="form-control col-md-5">
+                                                        <input type="text" name="max_bp_b" id="max_bp_b" class="form-control col-md-5">
                                                     </div>
                                                 </div>
                                             </div>
@@ -111,14 +111,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Max Predicted Target HR:</label>
-                                                        <input type="text" name="" class="form-control">
+                                                        <input type="text" name="max_pre_tar" id="max_pre_tar" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>% Max Predicted Target HR:</label>
+                                                        <label>% Max Predicted HR:</label>
                                                         <div style="display: inline-flex;">
-                                                            <input type="text" name="" class="form-control">
+                                                            <input type="text" name="max_pre_hr" id="max_pre_hr" class="form-control">
                                                             <label>%</label>
                                                         </div>
                                                     </div>
@@ -127,17 +127,17 @@
     									</div>
     									<div class="col-md-12 m-t-10" style="display: inline-flex;">
     										<label class="m-r-10">HR X BP:</label>
-    										<input type="text" name="" class="form-control col-md-4">
+    										<input type="text" name="hr_bp" id="hr_bp" class="form-control col-md-4">
     										<label class="m-r-10 m-l-20">Mets:</label>
-    										<input type="test" name="" class="form-control col-md-4">
+    										<input type="test" name="mets" id="ett_mets" class="form-control col-md-4">
     									</div>
     									<div class="col-md-12 m-t-10" style="display: inline-flex;">
     										<label class="m-r-10">Total exercise time:</label>
-    										<input type="text" name="" class="form-control col-md-2">
+    										<input type="text" name="exercise_time" id="exercise_time" class="form-control col-md-2">
     									</div>
     									<div class="col-md-12 m-t-10" style="display: inline-flex;">
     										<label class="m-r-10">Reason of ending test:</label>
-    										<select class="form-control col-md-6">
+    										<select class="form-control col-md-6" name="ending_reason" id="ett_ending_reason">
     											<option value="">Select...</option>
                                                 <?php foreach($ending_reasons as $key){?>
                                                     <option value="<?php echo $key['id']; ?>"><?php echo $key['ending_reason']; ?></option>
@@ -145,10 +145,10 @@
     										</select>
     									</div>
     									<div class="col-md-12">
-    										<textarea class="form-control" rows="7"></textarea>
+    										<textarea class="form-control" id="ett_desc_pro" name="description" rows="7"></textarea>
     									</div>
     									<div class="col-md-12">
-    										<textarea class="form-control" rows="5"></textarea>
+    										<textarea class="form-control" id="ett_conc_pro" name="conclusion" rows="5"></textarea>
     									</div>
     								</div>
     							</div>
@@ -158,7 +158,7 @@
     						<div class="card">
     							<div class="card-header" style="display: inline-flex;">
     								<label class="m-t-10">Select Protocol:</label>
-    								<select class="form-control col-md-6" onchange="profile_protocol_details(this.value)">
+    								<select class="form-control col-md-6" name="protocol_id" onchange="profile_protocol_details(this.value)" id="ett_protocol_id">
                                         <option value="">Select..</option>
                                         <?php foreach($protocols as $pro){?>
                                             <option value="<?php echo $pro['id']; ?>" ><?php echo $pro['protocol']; ?></option>
@@ -193,7 +193,7 @@
 				    				<option>Select</option>
 				    				<option></option>
 				    			</select>
-				    			<button class="btn btn-primary">Save</button>
+				    			<button class="btn btn-primary" id="save_ett_test">Save</button>
 				    		</div>
     					</div>
     				</div>

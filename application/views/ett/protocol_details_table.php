@@ -24,7 +24,7 @@
                     onClick="showEdit(this);"><?php echo $key['grade']; ?></td>
                 <td contenteditable="true"
                     onBlur="saveToDatabase(this,'stage_time','<?php echo $key['id']; ?>')"
-                    onClick="showEdit(this);">0<?php echo $key['stage_time']; ?>:00</td>
+                    onClick="showEdit(this);"><?php echo date('i:s', strtotime($key['stage_time'])) ?></td>
                 <td contenteditable="true"
                     onBlur="saveToDatabase(this,'mets','<?php echo $key['id']; ?>')"
                     onClick="showEdit(this);"><?php echo $key['mets']; ?></td>

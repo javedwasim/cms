@@ -292,6 +292,14 @@
 			}
 		}
 
+		public function insert_ett_test($data){	
+			$result = $this->db->insert('patient_ett_test', $data);
+			if ($result) {
+				return true;
+			}else{
+				return false;
+			}
+		}
 
 
 	}

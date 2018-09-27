@@ -404,6 +404,57 @@
         }
     }
 
+    public function save_ett_test(){
+    	$patientid = $this->input->post('patientid');
+    	$testreason = $this->input->post('testreason');
+    	$medication = $this->input->post('medication');
+    	$description = $this->input->post('description');
+    	$conclusion = $this->input->post('conclusion');
+    	$restinghr = $this->input->post('restinghr');
+    	$restingbpa = $this->input->post('restingbpa');
+    	$restingbpb = $this->input->post('restingbpb');
+    	$restingbp = $restingbpa."\\".$restingbpb;
+    	$maxhr = $this->input->post('maxhr');
+    	$maxbpa = $this->input->post('maxbpa');
+    	$maxbpb = $this->input->post('maxbpb');
+    	$maxbp = $maxbpa."\\".$maxbpb;
+    	$maxpretar = $this->input->post('maxpretar');
+    	$maxprehr = $this->input->post('maxprehr');
+    	$hrbp = $this->input->post('hrbp');
+    	$ettmets = $this->input->post('ettmets');
+    	$exercisetime = $this->input->post('exercisetime');
+    	$endingreason = $this->input->post('endingreason');
+    	$ettprotocolid = $this->input->post('ettprotocolid');
+    	$data_array = array(
+    			'patient_id' => $patientid,
+    			'test_reason' => $testreason,
+    			'medication' => $medication,
+    			'description' => $description,
+    			'conclusion' => $conclusion,
+    			'resting_hr' => $restinghr,
+    			'resting_bp' => $restingbp,
+    			'max_hr' => $maxhr,
+    			'max_bp' => $maxbp,
+    			'max_pre_tar' => $maxpretar,
+    			'max_pre_hr' => $maxprehr,
+    			'hr_bp' => $hrbp,
+    			'mets' => $ettmets,
+    			'exercise_time' => $exercisetime,
+    			'ending_reason' => $endingreason,
+    			'protocol_id' => $ettprotocolid
+    	);
+    	$result = $this->Profile_model->insert_ett_test($data_array);
+    	if ($result) {
+    		$json['success']= true;
+    	}else{
+    		$json['error'] = true;
+    	}
+
+    	if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
 
 	}
 ?>
