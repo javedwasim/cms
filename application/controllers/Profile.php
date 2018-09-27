@@ -11,6 +11,7 @@
 			$this->load->model('Profile_model');
 			$this->load->model('Dashboard_model');
             $this->load->model('Instruction_model');
+            $this->load->model('ETT_model');
 			$this->load->helper('content-type');
 			date_default_timezone_set("Asia/Karachi");
 		}
@@ -59,8 +60,14 @@
 		}
 
 		public function patient_ett_test(){
-            $data['rights'] = $this->session->userdata('other_rights');
-			$json['result_html'] = $this->load->view('pages/pat_ett_test', "", true);
+            $data['test_reasons'] = $this->ETT_model->get_test_reasons();
+	    	$data['ending_reasons'] = $this->ETT_model->get_ending_reasons();
+	    	$data['descriptions'] = $this->ETT_model->get_descriptions();
+	    	$data['conclusions'] = $this->ETT_model->get_conclusions();
+	        $data['protocols'] = $this->ETT_model->get_protocol();
+	        $data['rights'] = $this->session->userdata('other_rights');
+	        // $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);		
+			$json['result_html'] = $this->load->view('pages/pat_ett_test', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }

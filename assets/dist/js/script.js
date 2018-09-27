@@ -1690,3 +1690,19 @@ $(document.body).on('click', '#sp-ins-table tbody tr.row_selected', function(){
         }
     });
 });
+
+/////////////////////////////////// load patient ett test page ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+$(document.body).on('click', '#pat-ett-test', function () {
+    $.ajax({
+        url: '/cms/profile/patient_ett_test',
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+            }
+        }
+    });
+});

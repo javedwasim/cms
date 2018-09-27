@@ -5,34 +5,7 @@
 	    		<div class="card-body">
 	    			<div class="row">
 	    				<div class="col-md-12 col-lg-12 pt-info">
-				            <strong>ID:</strong>
-				            <label>1233</label>
-				            <strong>Name:</strong>
-				            <label>Ali Hamza</label>
-				            <strong>S/W/o:</strong>
-				            <label>Hamza ali</label>
-				            <strong>Age:</strong>
-				            <label>18 Years</label>
-				            <strong>Sex:</strong>
-				            <label>Male</label>
-				            <strong>Profession:</strong>
-				            <label>Farmar</label>
-				            <strong>HT:</strong>
-				            <label>1233</label>
-				            <strong>WT:</strong>
-				            <label>Ali Hamza</label>
-				            <strong>BMI:</strong>
-				            <label>26.345</label>
-				            <strong>BSA:</strong>
-				            <label>1.324</label>
-				            <strong>Contact:</strong>
-				            <label>0323435454</label>
-				            <strong>Email:</strong>
-				            <label>test@gmail.com</label>
-				            <strong>Address:</strong>
-				            <label>Chak no.13 gujiyani , teh/chistian.</label>
-				            <strong>District:</strong>
-				            <label>Bahawalnagar</label>
+				         
 				        </div>
 	    			</div>
 	    		</div>
@@ -46,7 +19,10 @@
     						<div class="form-group">
     							<label>Reason for Test</label>
     							<select class="form-control">
-    								<option>Select ...</option>
+    								<option value="">Select ...</option>
+                                    <?php foreach($test_reasons as $reason){?>
+                                        <option value="<?php echo $reason['id']; ?>"><?php echo $reason['test_reason']; ?></option>
+                                    <?php }?>
     							</select>
     						</div>
     						<div class="form-group">
@@ -60,10 +36,9 @@
     								</div>
     								<div class="card-body">
     									<ul class="list-group">
-		    								<li class="list-group-item">THis is a discription</li>
-		    								<li class="list-group-item">THis is a discription</li>
-		    								<li class="list-group-item">THis is a discription</li>
-		    								<li class="list-group-item">THis is a discription</li>
+                                            <?php foreach($descriptions as $desc){?>
+		    								  <li class="list-group-item"><?php echo $desc['description']; ?></li>
+                                            <?php }?>
 		    							</ul>
     								</div>
     							</div>
@@ -75,10 +50,9 @@
     								</div>
     								<div class="card-body">
     									<ul class="list-group">
-		    								<li class="list-group-item">THis is a discription</li>
-		    								<li class="list-group-item">THis is a discription</li>
-		    								<li class="list-group-item">THis is a discription</li>
-		    								<li class="list-group-item">THis is a discription</li>
+                                            <?php foreach($conclusions as $conc){?>
+		    								  <li class="list-group-item"><?php echo $conc['conclusion']; ?></li>
+                                            <?php }?>
 		    							</ul>
     								</div>
     							</div>
