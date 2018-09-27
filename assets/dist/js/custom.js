@@ -1545,19 +1545,6 @@ function profile_filter(){
                         $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                     }
                 });
-                $("#toggleresize1").click(function () {
-                    var icon = $('#toggleresize1 > .arro');
-                    icon.toggleClass('fa-arrow-left fa-arrow-right');
-                    $('.resize1').toggleClass("active_resize1");
-                    $('.resize2').toggleClass("inactive_resize2");
-
-                });
-                $("#toggleresize2").click(function () {
-                    var icon = $('#toggleresize2 > .arro');
-                    icon.toggleClass('fa-arrow-left fa-arrow-right');
-                    $('.resize2').toggleClass("active_resize2");
-                    $('.resize1').toggleClass("inactive_resize1");
-                });
                 $('#profiletable tbody tr:first').addClass('row_selected');
                 $("#profiletable tbody tr").click(function (e) {
                     $('#profiletable tbody tr.row_selected').removeClass('row_selected');
@@ -2307,6 +2294,11 @@ $(document.body).on('click', '#pat-spInstructions', function () {
                 $('#pat_sp_information').append(response.patient_information);
                 $('.sp_data_table').remove();
                 $('#sp_data_table').append(response.sp_table);
+                $('#sp-ins-table tbody tr:first').addClass('row_selected');
+                $("#sp-ins-table tbody tr").click(function (e) {
+                    $('#sp-ins-table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
             }
         }
     });
@@ -3410,4 +3402,31 @@ $(document.body).on('click', '#profiletable tbody tr.row_selected', function(){
             $('#patient_info').append(response.patient_information);
         }
     });
+});
+
+$(document.body).on('click', '#reset_profile_filter', function () {
+    $.ajax({
+        url: '/cms/profile/reset_profile_table',
+        cache: false,
+        success: function (response) {
+            if(response.profile_table != ''){
+                document.getElementById('profile_filter').reset();
+                $('.profile-table').remove();
+                $('#profile_table').append(response.profile_table);
+                ///////////////// initilize datatable //////////////
+                $('.profiletable').DataTable({
+                    // "scrollX": true,
+                    "initComplete": function (settings, json) {
+                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    }
+                });
+                $('#profiletable tbody tr:first').addClass('row_selected');
+                $("#profiletable tbody tr").click(function (e) {
+                    $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+            }
+        }
+    });
+    return false;
 });

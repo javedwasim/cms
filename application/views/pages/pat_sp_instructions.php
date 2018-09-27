@@ -9,7 +9,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 col-lg-4 p-0">
             <div class="card">
                 <div class="card-body">
@@ -54,13 +53,13 @@
                         <div class="card" style="height:80vh;">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-9">
                                         <input type="checkbox" name="">
                                         <label>To whom it may concern</label>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <button id="save_profile_instruction" type="submit"
-                                                class="btn btn-primary">Save
+                                                class="btn btn-primary btn-sm">Save
                                         </button>
                                     </div>
                                 </div>
@@ -69,8 +68,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description"
-                                                      id="special_instruction" rows="10"></textarea>
+                                            <textarea class="form-control" name="description" id="special_instruction" rows="20"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +100,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <textarea class="form-control" rows="10" readonly="readonly"></textarea>
+                                                <textarea class="form-control" rows="20" readonly="readonly"></textarea>
                                             </div>
                                         </div>
                                     </div>

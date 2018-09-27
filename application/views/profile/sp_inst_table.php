@@ -1,5 +1,5 @@
-<div class="sp_data_table">
-    <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%">
+<div class="sp_data_table" style="height: 60vh; overflow-y: scroll;">
+    <table class="table table-bordered nowrap responsive" cellspacing="0" id="sp-ins-table" width="100%">
         <thead>
         <th style="width: 20px"></th>
         <th>Dates</th>

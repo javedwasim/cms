@@ -332,6 +332,14 @@
 
 		}
 
+		public function reset_profile_table(){
+			$data['profiles'] = $this->Profile_model->get_profiles();
+			$json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+	        if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
 
 	}
 ?>

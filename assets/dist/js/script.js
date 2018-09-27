@@ -1658,9 +1658,15 @@ $(document.body).on('click', '#save_profile_instruction', function(){
         data:  $('#profile_inst_form_modal').serialize(),
         cache: false,
         success: function(response) {
+            $('#special_instruction').val('');
             if (response.success) {
                 $('.sp_data_table').remove();
                 $('#sp_data_table').append(response.sp_table);
+                $('#sp-ins-table tbody tr:first').addClass('row_selected');
+                $("#sp-ins-table tbody tr").click(function (e) {
+                    $('#sp-ins-table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
                 toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
