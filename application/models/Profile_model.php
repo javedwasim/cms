@@ -292,8 +292,77 @@
 			}
 		}
 
+        public function save_patient_lab_test($data)
+        {
+            if(isset($data['item_id']) && !empty($data['item_id'])){
+                $items = $data['item_id'];
+                $values = $data['item_value'];
+                $units = $data['item_units'];
+                $key =  $this->generateRandomString();
+                for($j=0;$j<count($items);$j++){
+                    $this->db->insert('patient_lab_test',
+                        array('patient_id'=>$data['patient_id'],
+                            'category_id'=>$data['category_id'],
+                            'test_date'=>date('Y-m-d', strtotime($data['test_date'])),
+                            'test_id'=>$data['test_id'],
+                            'item_id'=>$items[$j],
+                            'item_value'=>$values[$j],
+                            'item_units'=>$units[$j],
+                            'info_key'=>$key,
+                         ));
 
+                }
+                $this->db->insert('patient_lab_test_info',
+                            array('patient_id'=>$data['patient_id'],
+                                  'info_key'=>$key,
+                                  'test_date'=>date('Y-m-d', strtotime($data['test_date']))));
+                return true;
+            }else{
+                return false;
+            }
+        }
 
+        public function get_lab_test_info($id){
+            $query = "SELECT id,info.test_date, labtest.name,labtest.test_id,labtest.info_key,patient_id
+                        FROM patient_lab_test_info as info
+                        LEFT JOIN(
+                            SELECT lab_test.name,patient_lab_test.info_key,patient_lab_test.test_id
+                            FROM lab_test
+                            LEFT JOIN patient_lab_test ON patient_lab_test.test_id = lab_test.id	
+                            GROUP BY patient_lab_test.info_key
+                        )labtest  ON labtest.info_key = info.info_key
+                        WHERE patient_id = $id";
+
+            $result = $this->db->query($query);
+            if ($result) {
+                return $result->result_array();
+            } else {
+                return array();
+            }
+        }
+
+        public function get_lab_test_unit($key){
+            $query = "SELECT plt.*,test_item.name FROM patient_lab_test plt
+                        LEFT JOIN (
+                            SELECT id,name FROM lab_test_item
+                        )test_item ON test_item.id=plt.item_id Where info_key = '$key'";
+            $result = $this->db->query($query);
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        function generateRandomString($length = 10) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
+        }
 	}
 
 ?>
