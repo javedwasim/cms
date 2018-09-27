@@ -66,7 +66,9 @@
 	    	$data['conclusions'] = $this->ETT_model->get_conclusions();
 	        $data['protocols'] = $this->ETT_model->get_protocol();
 	        $data['rights'] = $this->session->userdata('other_rights');
-	        // $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);		
+	        $id = $this->input->post('patid');
+			$data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+	        $json['patient_information']=$this->load->view('profile/patient_information',$data,true);		
 			$json['result_html'] = $this->load->view('pages/pat_ett_test', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -357,6 +359,17 @@
 	        }
 
 		}
+
+		public function get_profile_protocol_details($p_id)
+    {
+        $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);
+        $data['selected_category'] = $p_id;
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('profile/protocol_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
 
 
 	}

@@ -4,7 +4,7 @@
     		<div class="card" style="margin-bottom:0px !important; ">
 	    		<div class="card-body">
 	    			<div class="row">
-	    				<div class="col-md-12 col-lg-12 pt-info">
+	    				<div class="col-md-12 col-lg-12 pt-info" id="pat_ett_information">
 				         
 				        </div>
 	    			</div>
@@ -27,33 +27,41 @@
     						</div>
     						<div class="form-group">
     							<label>Medication</label>
-    							<textarea class="form-control" rows="5"></textarea>
+    							<textarea class="form-control" rows="6"></textarea>
     						</div>
     						<div class="form-group">
     							<div class="card">
-    								<div class="card-header">
-    									Description
-    								</div>
-    								<div class="card-body">
-    									<ul class="list-group">
-                                            <?php foreach($descriptions as $desc){?>
-		    								  <li class="list-group-item"><?php echo $desc['description']; ?></li>
-                                            <?php }?>
-		    							</ul>
+    								<div class="card-body" style="height: 27vh; overflow-y: scroll;">
+                                        <table class="table table-bordered responsive" id="profile_ett_desc_table">
+                                            <thead>
+                                                <th>Description</th>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach($descriptions as $desc){?>
+                                                    <tr >
+                                                        <td><?php echo $desc['description']; ?></td>
+                                                    </tr>
+                                                <?php }?>
+                                            </tbody>                           
+                                        </table>
     								</div>
     							</div>
     						</div>
     						<div class="form-group">
     							<div class="card">
-    								<div class="card-header">
-    									Conclusion
-    								</div>
-    								<div class="card-body">
-    									<ul class="list-group">
-                                            <?php foreach($conclusions as $conc){?>
-		    								  <li class="list-group-item"><?php echo $conc['conclusion']; ?></li>
-                                            <?php }?>
-		    							</ul>
+    								<div class="card-body" style="height: 25vh; overflow-y: scroll;">
+    									<table class="table table-bordered responsive" id="profile_ett_conc_table">
+                                            <thead>
+                                                <th>Conclusion</th>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach($conclusions as $conc){?>
+                                                    <tr >
+                                                        <td><?php echo $conc['conclusion']; ?></td>
+                                                    </tr>
+                                                <?php }?>
+                                            </tbody>                           
+                                        </table>
     								</div>
     							</div>
     						</div>
@@ -62,34 +70,64 @@
     						<div class="card">
     							<div class="card-body">
     								<div class="row">
-    									<div class="col-md-12 m-t-10" style="display: inline-flex;">
-    										<label class="m-r-10">Resting HR:</label>
-    										<input type="text" name="" class="form-control col-md-2 m-r-10">
-    										<label class="m-r-10 m-l-10">Resting BP:</label>
-    										<input type="test" name="" class="form-control col-md-2">
-    										<label class="">/</label>
-    										<input type="text" name="" class="form-control col-md-2">
+    									<div class="col-md-12 m-t-10">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Resting HR:</label>
+                                                        <input type="text" name="" class="form-control">    
+                                                    </div>    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Resting BP:</label>
+                                                        <div style="display: inline-flex;">
+                                                            <input type="test" name="" class="form-control col-md-5">
+                                                            <label class="">/</label>
+                                                            <input type="text" name="" class="form-control col-md-5">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
     									</div>
     									<div class="col-md-12 m-t-10" style="display: inline-flex;">
-    										<label class="m-r-10">Max HR:</label>
-    										<input type="text" name="" class="form-control col-md-2 m-r-10">
-    										<label class="m-r-10 m-l-10">Max BP:</label>
-    										<input type="test" name="" class="form-control col-md-2">
-    										<label class="">/</label>
-    										<input type="text" name="" class="form-control col-md-2">
+    										<div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Max HR:</label>
+                                                    <input type="text" name="" class="form-control">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Max BP:</label>
+                                                    <div style="display: inline-flex;">
+                                                        <input type="test" name="" class="form-control col-md-5">
+                                                        <label class="">/</label>
+                                                        <input type="text" name="" class="form-control col-md-5">
+                                                    </div>
+                                                </div>
+                                            </div>
     									</div>
-    									<div class="col-md-12 m-t-10" style="display: inline-flex;">
-    										<label class="m-r-10">Max Predicted Target HR:</label>
-    										<input type="text" name="" class="form-control col-md-2">
-    									</div>
-    									<div class="col-md-12 m-t-10" style="display: inline-flex;">
-    										<label class="m-r-10">% Max Predicted Target HR:</label>
-    										<input type="text" name="" class="form-control col-md-2">
-    										<label>%</label>
+    									<div class="col-md-12 m-t-10">
+    										<div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Max Predicted Target HR:</label>
+                                                        <input type="text" name="" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>% Max Predicted Target HR:</label>
+                                                        <div style="display: inline-flex;">
+                                                            <input type="text" name="" class="form-control">
+                                                            <label>%</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
     									</div>
     									<div class="col-md-12 m-t-10" style="display: inline-flex;">
     										<label class="m-r-10">HR X BP:</label>
-    										<input type="text" name="" class="form-control col-md-2 m-r-10">
+    										<input type="text" name="" class="form-control col-md-4">
     										<label class="m-r-10 m-l-20">Mets:</label>
     										<input type="test" name="" class="form-control col-md-4">
     									</div>
@@ -100,7 +138,10 @@
     									<div class="col-md-12 m-t-10" style="display: inline-flex;">
     										<label class="m-r-10">Reason of ending test:</label>
     										<select class="form-control col-md-6">
-    											<option>Select...</option>
+    											<option value="">Select...</option>
+                                                <?php foreach($ending_reasons as $key){?>
+                                                    <option value="<?php echo $key['id']; ?>"><?php echo $key['ending_reason']; ?></option>
+                                                <?php }?>
     										</select>
     									</div>
     									<div class="col-md-12">
@@ -117,7 +158,12 @@
     						<div class="card">
     							<div class="card-header" style="display: inline-flex;">
     								<label class="m-t-10">Select Protocol:</label>
-    								<input type="text" name="" class="form-control col-md-6">
+    								<select class="form-control col-md-6" onchange="profile_protocol_details(this.value)">
+                                        <option value="">Select..</option>
+                                        <?php foreach($protocols as $pro){?>
+                                            <option value="<?php echo $pro['id']; ?>" ><?php echo $pro['protocol']; ?></option>
+                                        <?php }?>
+                                    </select>
     							</div>
     							<div class="card-body" style="height: 60vh;">
     								<table class="table table-bordered responsive">
@@ -134,52 +180,10 @@
 	    										<th>Condition</th>
     										</tr>
     									</thead>
-    									<tbody>
-    										<tr>
-    											<td>REST</td>
-    											<td>1.2</td>
-    											<td>0</td>
-    											<td>00:00</td>
-    											<td>2</td>
-    											<td>0</td>
-    											<td>0</td>
-    											<td>0</td>
-    											<td></td>
-    										</tr>
-    										<tr>
-    											<td>Stage 1</td>
-    											<td>1.2</td>
-    											<td>0</td>
-    											<td>00:00</td>
-    											<td>2</td>
-    											<td>0</td>
-    											<td>0</td>
-    											<td>0</td>
-    											<td></td>
-    										</tr>
-    										<tr>
-    											<td>Stage 2</td>
-    											<td>1.2</td>
-    											<td>0</td>
-    											<td>00:00</td>
-    											<td>2</td>
-    											<td>0</td>
-    											<td>0</td>
-    											<td>0</td>
-    											<td></td>
-    										</tr>
-    										<tr>
-    											<td>Stage 3</td>
-    											<td>1.2</td>
-    											<td>0</td>
-    											<td>00:00</td>
-    											<td>2</td>
-    											<td>0</td>
-    											<td>0</td>
-    											<td>0</td>
-    											<td></td>
-    										</tr>
-    									</tbody>
+                                        <tbody id="profile_protocol_table">
+                                            
+                                        </tbody>
+    									
     								</table>
     							</div>
     						</div>
