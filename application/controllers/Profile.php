@@ -11,6 +11,8 @@
 			$this->load->model('Profile_model');
 			$this->load->model('Dashboard_model');
             $this->load->model('Instruction_model');
+
+            $this->load->model('Setting_model');
             $this->load->model('ETT_model');
 			$this->load->helper('content-type');
 			date_default_timezone_set("Asia/Karachi");
@@ -45,7 +47,16 @@
 		}
 
 		public function patient_lab_test(){
-			$json['result_html'] = $this->load->view('pages/pat_lab_test', "", true);
+            $id = $this->input->post('patid');
+            $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+
+            $data['categories'] = $this->Setting_model->get_lab_categories();
+            $data['tests'] = $this->Setting_model->get_lab_tests();
+            $data['items'] = $this->Setting_model->get_lab_test_items();
+            $json['laboratory_html'] = $this->load->view('laboratory/laboratory', $data, true);
+
+            $json['patient_information']=$this->load->view('profile/patient_information',$data,true);
+			$json['result_html'] = $this->load->view('pages/pat_lab_test', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -300,6 +311,28 @@
             $data['rights'] = $this->session->userdata('other_rights');
             $json['result_html'] = $this->load->view('pages/instruction_item_table', $data, true);
             if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function get_lab_test()
+        {
+            $filters = $this->input->post();
+            $lab_id = $filters['lab_id'];
+            $data['tests'] = $this->Setting_model->get_lab_tests_by_category($lab_id);
+            $data['selected_category'] = $lab_id;
+            $data['active_tab'] = 'tests';
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['result_html'] = $this->load->view('profile/lab_test_table', $data, true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function get_lab_item_by_test_id($test_id){
+            $data['items'] = $this->Setting_model->get_lab_item_by_test_id($test_id);
+            $json['result_html'] = $this->load->view('profile/lab_test_item_table', $data, true);
+            if($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
         }
