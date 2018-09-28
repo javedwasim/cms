@@ -41,13 +41,13 @@ class Instruction extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'Instruction Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Instruction Name', 'required|is_unique[instruction.name]|xss_clean');
+        $data = $this->input->post();
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
             $json['message'] = validation_errors();
         } else {
-            $data = $this->input->post();
             $result = $this->Instruction_model->add_instruction_category($data);
             if ($result) {
                 $json['success'] = true;

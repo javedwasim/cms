@@ -2,11 +2,13 @@
     <div class="card">
         <div class="card-header" style="display: inline-flex;">
             <div class="row">
-                <div class="col-md-12">
-                    <label>New Category</label>
-                    <input type="text" class="form-control col-md-6" name="name" id="dosage_name">
-                    <button class="btn btn-primary add-dosage-category">Add</button>
-                </div>
+                <form id="dosage_category_form">
+                    <div class="col-md-12">
+                        <label>New Category</label>
+                        <input type="text" class="form-control col-md-6" name="name" id="dosage_name" required maxlength="50">
+                        <button class="btn btn-primary add-dosage-category">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="card-body dosage_category_container">

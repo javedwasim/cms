@@ -18,9 +18,9 @@
                    data-medicine-item-id="<?php echo $item['id']; ?>">
                    <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true"
+            <td contenteditable="true" class="medicine_item"
                 onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                onClick="showEdit(this);">
+                onClick="medicineItemEdit(this);">
                 <?php echo $item['name']; ?></td>
         </tr>
     <?php endforeach; ?>
@@ -73,11 +73,13 @@
 </script>
 
 <script>
-    function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+    function medicineItemEdit(editableObj) {
+        $('td.medicine_item').css('background', '#FFF');
+        $('td.medicine_item').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'medicine/save_medicine_item' ?>",
             type: "POST",
@@ -91,5 +93,6 @@
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 </script>
