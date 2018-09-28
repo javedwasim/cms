@@ -417,6 +417,37 @@
                 return $this->db->insert_id();
             }
         }
+
+        public function profession_exist($profession){
+            $result = $this->db->where('profession_name',$profession)
+                        ->get('profession_tbl');
+            if ($result->num_rows() >= 1) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function delete_pat_profession($id){
+            $result = $this->db->where('profession_id', $id)->delete('profession_tbl');
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function update_profession($data){
+            $id = $data['id'];
+            $editval = trim($data['editval']);
+            $editval = preg_replace('/(<br>)+$/', '', $editval);
+            $result = $this->db->where('profession_id',$id)->update('profession_tbl',array('profession_name'=>$editval));
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
 	}
 
 ?>

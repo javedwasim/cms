@@ -1792,28 +1792,28 @@ $(document.body).on('click', '#register-user', function () {
 /////////////////////////////////// load profession page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-$(document.body).on('click', '#pat_profession', function () {
-    $.ajax({
-        url: '/cms/setting/pat_profession',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                $('.profession_table').remove();
-                $('#profession_table').append(response.profession_table);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    scrollY: '50vh',
-                    scrollCollapse: true,
-                    paging: false,
-                    info: false
-                });
-            }
-        }
-    });
-});
+// $(document.body).on('click', '#pat_profession', function () {
+//     $.ajax({
+//         url: '/cms/setting/pat_profession',
+//         cache: false,
+//         success: function (response) {
+//             if (response.result_html != '') {
+//                 $('.dashboard-content').remove();
+//                 $('#dashboard-content').append(response.result_html);
+//                 $('.profession_table').remove();
+//                 $('#profession_table').append(response.profession_table);
+//                 ///////////////// initilize datatable //////////////
+//                 $('#research-table').DataTable({
+//                     "scrollX": true,
+//                     scrollY: '50vh',
+//                     scrollCollapse: true,
+//                     paging: false,
+//                     info: false
+//                 });
+//             }
+//         }
+//     });
+// });
 
 $(document.body).on('click', '#profes_add', function () {
     var profession = $('#profession_add').val();
@@ -1823,27 +1823,49 @@ $(document.body).on('click', '#profes_add', function () {
         data: {profession: profession},
         cache: false,
         success: function (response) {
-            if (response.profession_table != '') {
-                $('.profession_table').remove();
-                $('#profession_table').append(response.profession_table);
-                $('#profession_add').val('');
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    scrollY: '50vh',
-                    scrollCollapse: true,
-                    paging: false,
-                    info: false
-                });
-                if (response.message == "Added Successfully.") {
-                    toastr["success"](response.message);
-                } else {
-                    toastr["warning"](response.message);
-                }
+            $('.profession_table').remove();
+            $('#profession_table').append(response.profession_table);
+            $('#profession_add').val('');
+            $('#prof_table tbody tr:first').addClass('row_selected');
+            $("#prof_table tbody tr").click(function (e) {
+                $('#prof_table tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+            if (response.success == true) {
+                toastr["success"](response.message);
+            } else {
+                toastr["warning"](response.message);
             }
         }
     });
 });
+$(document.body).on('click', '.delete_profession', function () {
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function (response) {
+                $('.profession_table').remove();
+                $('#profession_table').append(response.profession_table);
+                $('#prof_table tbody tr:first').addClass('row_selected');
+                $("#prof_table tbody tr").click(function (e) {
+                    $('#prof_table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+                if (response.success== true) {
+                    toastr["error"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+
 
 /////////////////////////////////// load district page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -2720,14 +2742,6 @@ function get_professions(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.profession_table').remove();
                 $('#profession_table').append(response.profession_table);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    scrollY: '50vh',
-                    scrollCollapse: true,
-                    paging: false,
-                    info: false
-                });
             }
         }
     });
