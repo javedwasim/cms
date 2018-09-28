@@ -97,18 +97,30 @@
 		}
 
         public function insert_district(){
-            $district = $this->input->post('district');
-            $result = $this->Setting_model->insert_district($district);
-            $data['rights'] = $this->session->userdata('other_rights');
-            if ($result) {
-                $data['districts'] = $this->Setting_model->get_districts();
-                $json['district_table'] = $this->load->view('pages/district_table', $data, true);
-                $json['message']= "Added Successfully.";
+            $this->form_validation->set_rules('district', 'District', 'required|xss_clean');
+            if($this->form_validation->run() == FALSE){
+                $json['error'] = true;
+                $json['message'] = validation_errors(); 
             }else{
-                $data['districts'] = $this->Setting_model->get_districts();
-                $json['district_table'] = $this->load->view('pages/district_table', $data, true);
-                $json['message']= "Seems to be an error.";
+                $district = $this->input->post('district');
+                $districtexist = $this->Setting_model->district_exist($district);
+                if ($districtexist) {
+                    $json['error'] = true;
+                    $json['message'] = 'Already Exist.'; 
+                }else{
+                    $result = $this->Setting_model->insert_district($district);
+                    $data['rights'] = $this->session->userdata('other_rights');
+                    if ($result) {
+                        $json['success'] = true;
+                        $json['message']= "Added Successfully.";
+                    }else{
+                        $json['error'] = true;
+                        $json['message']= "Seems to be an error.";
+                    }
+                }
             }
+            $data['districts'] = $this->Setting_model->get_districts();
+            $json['district_table'] = $this->load->view('pages/district_table', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
@@ -917,6 +929,37 @@
             $json['message'] = "Permission assigned to user!";
 
             if($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function delete_district($id){
+            $result = $this->Setting_model->delete_pat_district($id);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Deleted Successfully.";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+            $data['districts'] = $this->Setting_model->get_districts();
+            $json['district_table'] = $this->load->view('pages/district_table', $data, true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function update_district(){
+            $data = $this->input->post();
+            $result = $this->Setting_model->update_pat_district($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+            if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
         }

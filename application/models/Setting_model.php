@@ -448,6 +448,37 @@
                 return false;
             }
         }
+
+        public function district_exist($district){
+            $result = $this->db->where('district_name',$district)
+                        ->get('districts_tbl');
+            if ($result->num_rows() >= 1) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function delete_pat_district($id){
+            $result = $this->db->where('district_id', $id)->delete('districts_tbl');
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function update_pat_district($data){
+            $id = $data['id'];
+            $editval = trim($data['editval']);
+            $editval = preg_replace('/(<br>)+$/', '', $editval);
+            $result = $this->db->where('district_id',$id)->update('districts_tbl',array('district_name'=>$editval));
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
 	}
 
 ?>

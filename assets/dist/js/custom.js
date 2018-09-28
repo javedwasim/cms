@@ -1826,10 +1826,6 @@ $(document.body).on('click', '#profes_add', function () {
             $('.profession_table').remove();
             $('#profession_table').append(response.profession_table);
             $('#profession_add').val('');
-            $("#prof_table tbody tr").click(function (e) {
-                $('#prof_table tbody tr.row_selected').removeClass('row_selected');
-                $(this).addClass('row_selected');
-            });
             if (response.success == true) {
                 toastr["success"](response.message);
             } else {
@@ -1846,10 +1842,6 @@ $(document.body).on('click', '.delete_profession', function () {
             success: function (response) {
                 $('.profession_table').remove();
                 $('#profession_table').append(response.profession_table);
-                $("#prof_table tbody tr").click(function (e) {
-                    $('#prof_table tbody tr.row_selected').removeClass('row_selected');
-                    $(this).addClass('row_selected');
-                });
                 if (response.success== true) {
                     toastr["error"](response.message);
                 } else {
@@ -1868,28 +1860,28 @@ $(document.body).on('click', '.delete_profession', function () {
 /////////////////////////////////// load district page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-$(document.body).on('click', '#pat_district', function () {
-    $.ajax({
-        url: '/cms/setting/pat_district',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                $('.district_content').remove();
-                $('#district_content').append(response.district_table);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    scrollY: '50vh',
-                    scrollCollapse: true,
-                    paging: false,
-                    info: false
-                });
-            }
-        }
-    });
-});
+// $(document.body).on('click', '#pat_district', function () {
+//     $.ajax({
+//         url: '/cms/setting/pat_district',
+//         cache: false,
+//         success: function (response) {
+//             if (response.result_html != '') {
+//                 $('.dashboard-content').remove();
+//                 $('#dashboard-content').append(response.result_html);
+//                 $('.district_content').remove();
+//                 $('#district_content').append(response.district_table);
+//                 ///////////////// initilize datatable //////////////
+//                 $('#research-table').DataTable({
+//                     "scrollX": true,
+//                     scrollY: '50vh',
+//                     scrollCollapse: true,
+//                     paging: false,
+//                     info: false
+//                 });
+//             }
+//         }
+//     });
+// });
 
 $(document.body).on('click', '#add_district', function () {
     var district = $('#distrtict_add').val();
@@ -1903,15 +1895,7 @@ $(document.body).on('click', '#add_district', function () {
                 $('.district_content').remove();
                 $('#district_content').append(response.district_table);
                 $('#distrtict_add').val('');
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    scrollY: '50vh',
-                    scrollCollapse: true,
-                    paging: false,
-                    info: false
-                });
-                if (response.message == "Added Successfully.") {
+                if (response.success == true) {
                     toastr["success"](response.message);
                 } else {
                     toastr["warning"](response.message);
@@ -2743,10 +2727,6 @@ function get_professions(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.profession_table').remove();
                 $('#profession_table').append(response.profession_table);
-                $("#prof_table tbody tr").click(function (e) {
-                    $('#prof_table tbody tr.row_selected').removeClass('row_selected');
-                    $(this).addClass('row_selected');
-                });
             }
         }
     });
@@ -2761,14 +2741,6 @@ function get_districts(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.district_content').remove();
                 $('#district_content').append(response.district_table);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    scrollY: '50vh',
-                    scrollCollapse: true,
-                    paging: false,
-                    info: false
-                });
             }
         }
     });
@@ -3459,13 +3431,23 @@ function profile_protocol_details(protocol_id){
     return false;
 }
 
-// $(document).ready(function(){
-//     $( "#profile_form" ).validate({
-//       rules: {
-//         pat_profile_name: {
-//           required: true,
-//           alphanumeric: true
-//         }
-//       }
-//     });
-// });
+$(document.body).on('click', '.delete_district', function () {
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function (response) {
+                $('.district_content').remove();
+                $('#district_content').append(response.district_table);
+                if (response.success == true) {
+                    toastr["error"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});

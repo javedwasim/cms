@@ -19,9 +19,9 @@
                     </a>
                 </td>
                 <td style="text-transform: capitalize;"
-                    contenteditable="true"
+                    contenteditable="true" class="exam_cate"
                     onBlur="saveToDatabase(this,'profession_name','<?php echo $key['profession_id']; ?>')"
-                    onClick="showEdit(this);"
+                    onClick="showExamination(this);"
                 ><?php echo $key['profession_name']; ?></td>
             </tr>
         <?php } ?>
@@ -41,7 +41,7 @@
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#3300FF");
+                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
                 }
