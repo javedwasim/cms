@@ -292,6 +292,16 @@
 			}
 		}
 
+
+		public function insert_ett_test($data){	
+			$result = $this->db->insert('patient_ett_test', $data);
+			if ($result) {
+				return true;
+			}else{
+				return false;
+			}
+		}
+
         public function save_patient_lab_test($data)
         {
             if(isset($data['item_id']) && !empty($data['item_id'])){
@@ -340,6 +350,7 @@
                 return array();
             }
         }
+
 
         public function get_lab_test_unit($key){
             $query = "SELECT plt.*,test_item.name FROM patient_lab_test plt
