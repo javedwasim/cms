@@ -111,9 +111,10 @@ class Examination extends MY_Controller
             $json['message'] = "Seems to an error";
         }
         $data['categories'] = $this->Examination_model->get_examination_categories();
+        $data['items'] = $this->Examination_model->get_examination_items();
         $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('examination/category_table', $data, true);
+        $json['result_html'] = $this->load->view('examination/examination', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
