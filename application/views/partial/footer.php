@@ -91,7 +91,7 @@
             })
             .ajaxStop(function () {
                 //got response so hide the loading image
-               // $loading.show();
+                $loading.hide();
             });
     </script>
 </body>

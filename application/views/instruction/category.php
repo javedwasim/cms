@@ -4,17 +4,19 @@
         <div class="card-header" style="display: inline-flex;">
             <div class="row">
                 <div class="col-md-12">
-                    <label>New Category</label>
-                    <input type="text" class="form-control col-md-6" name="instruction_name" id="instruction_name">
-                    <input type="hidden" name="instruction_category" id="instruction_category"
-                           value="<?php echo isset($category)?$category:'' ?>">
-                    <?php if($loggedin_user['is_admin']==1){ ?>
-                        <button class="btn btn-primary add-instruction-category">Add</button>
-                    <?php } elseif(in_array("special_instructions-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                        <button class="btn btn-primary add-instruction-category">Add</button>
-                    <?php } else{ ?>
-                        <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
-                    <?php } ?>
+                    <form id="inst_category_form">
+                        <label>New Category</label>
+                        <input type="text" class="form-control col-md-6" name="instruction_name" id="instruction_name"  maxlength="50" required>
+                        <input type="hidden" name="instruction_category" id="instruction_category" maxlength="50"
+                               required value="<?php echo isset($category)?$category:'' ?>">
+                        <?php if($loggedin_user['is_admin']==1){ ?>
+                            <button class="btn btn-primary add-instruction-category">Add</button>
+                        <?php } elseif(in_array("special_instructions-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+                            <button class="btn btn-primary add-instruction-category">Add</button>
+                        <?php } else{ ?>
+                            <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
+                        <?php } ?>
+                    </form>
                 </div>
             </div>
         </div>

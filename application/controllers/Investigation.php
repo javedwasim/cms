@@ -27,7 +27,7 @@ class Investigation extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'Investigation Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Investigation Name', 'required|is_unique[investigation.name]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;

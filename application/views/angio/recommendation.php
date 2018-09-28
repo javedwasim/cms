@@ -4,15 +4,15 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Recommendation</label>
-                                <textarea class="form-control" id="add_description"  name="description" rows="3"></textarea>
+                        <form id="angio_form">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Recommendation</label>
+                                    <textarea class="form-control" id="add_description"  name="description" rows="3" required></textarea>
+                                    <button class="btn btn-primary" id="add_recommendation">Add</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2" style="margin-top: 26px;">
-                            <button class="btn btn-primary" id="add_recommendation">Add</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="card-body recommendation_container" >

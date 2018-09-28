@@ -28,7 +28,7 @@ class Medicine extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'medicine Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'medicine Name', 'required|is_unique[medicine.name]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
@@ -38,15 +38,17 @@ class Medicine extends MY_Controller
             $result = $this->Medicine_model->add_medicine_category($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "medicine created successfully!";
+                $json['message'] = "Medicine created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
             }
         }
+        $data['dosages'] = $this->Medicine_model->get_dosage_categories();
         $data['categories'] = $this->Medicine_model->get_medicine_categories();
+        $data['items'] = $this->Medicine_model->get_medicine_items();
         $data['active_tab'] = 'category';
-        $json['result_html'] = $this->load->view('medicine/category_table', $data, true);
+        $json['result_html'] = $this->load->view('medicine/medicine', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -67,7 +69,7 @@ class Medicine extends MY_Controller
             $result = $this->Medicine_model->add_medicine_item($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "medicine Item created successfully!";
+                $json['message'] = "Medicine Item created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -87,7 +89,7 @@ class Medicine extends MY_Controller
         $result = $this->Medicine_model->add_medicine_category($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "medicine  save successfully!";
+            $json['message'] = "Medicine  save successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -118,14 +120,16 @@ class Medicine extends MY_Controller
         $result = $this->Medicine_model->delete_medicine_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "medicine Category successfully deleted.";
+            $json['message'] = "Medicine Category successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
+        $data['dosages'] = $this->Medicine_model->get_dosage_categories();
         $data['categories'] = $this->Medicine_model->get_medicine_categories();
+        $data['items'] = $this->Medicine_model->get_medicine_items();
         $data['active_tab'] = 'category';
-        $json['result_html'] = $this->load->view('medicine/category_table', $data, true);
+        $json['result_html'] = $this->load->view('medicine/medicine', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -211,7 +215,7 @@ class Medicine extends MY_Controller
         $result = $this->Medicine_model->delete_medicine_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "medicine item successfully deleted.";
+            $json['message'] = "Medicine item successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
@@ -248,7 +252,7 @@ class Medicine extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'Dosage Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Dosage Name', 'required|is_unique[dosage.name]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;

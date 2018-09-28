@@ -16,14 +16,14 @@ if(isset($rights[0]['user_rights']))
                     <div class="col-lg-2 col-md-3">
                         <div class="form-group">
                             <label>Item Name:</label>
-                            <input type="text" class="form-control" name="name" maxlength="50">
+                            <input type="text" class="form-control" name="name" maxlength="50" required>
                         </div>
                     </div>
                     <div class=" col-lg-3 col-md-4">
                         <div class="form-group">
                             <label>Category:</label>
-                            <select class="form-control" name="examination_id">
-                                <option>Select</option>
+                            <select class="form-control" name="examination_id" required>
+                                <option value="">Select</option>
                                 <?php foreach ($categories as $category): ?>
                                     <option value="<?php echo $category['id']; ?>"
                                         <?php echo isset($selected_category)&&($selected_category==$category['id'])?'selected':'' ?>>

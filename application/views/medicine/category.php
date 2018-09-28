@@ -2,11 +2,13 @@
     <div class="card">
         <div class="card-header" style="display: inline-flex;">
             <div class="row">
-                <div class="col-md-12">
-                    <label>New Category</label>
-                    <input type="text" class="form-control col-md-6" name="medicine_name" id="medicine_name">
-                    <button class="btn btn-primary add-medicine-category">Add</button>
-                </div>
+                <form id="medicine_category_form">
+                    <div class="col-md-12">
+                        <label>New Category</label>
+                        <input type="text" class="form-control col-md-6" name="medicine_name" id="medicine_name" maxlength="50" required>
+                        <button class="btn btn-primary add-medicine-category">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="card-body medicine_category_container">

@@ -2,14 +2,14 @@
 <div class="tab-pane" id="items" role="tabpanel">
     <div class="card">
         <div class="card-header">
-            <form id="lab_test_item_form" method="post" role="form"
+            <form id="isnt_item_form" method="post" role="form"
                   data-action="<?php echo site_url('instruction/add_instruction_item') ?>"
                   enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-2 col-md-3">
                         <div class="form-group">
                             <label>Item Name:</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" required maxlength="50">
                             <input type="hidden" name="category" id="category"
                                    value="<?php $scategory = $category; echo $scategory; ?>">
                         </div>
@@ -17,8 +17,8 @@
                     <div class=" col-lg-3 col-md-4">
                         <div class="form-group">
                             <label>Category:</label>
-                            <select class="form-control" name="instruction_id">
-                                <option>Select</option>
+                            <select class="form-control" name="instruction_id" required>
+                                <option value="">Select</option>
                                 <?php foreach ($categories as $category): ?>
                                     <option value="<?php echo $category['id']; ?>"
                                         <?php echo isset($selected_category)&&($selected_category==$category['id'])?'selected':'' ?>>
