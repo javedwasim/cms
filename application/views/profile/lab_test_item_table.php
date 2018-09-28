@@ -14,7 +14,7 @@
             <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
                 <a class="info-lab-test-item-btn btn btn-info btn-xs"
                    href="javascript:void(0)"
-                   data-lab-test-id="<?php echo $item['id']; ?>"><i
+                   data-lab-test-item-id="<?php echo $item['id']; ?>"><i
                    class="far fa-question-circle"></i></a>
 
             </td>
@@ -33,20 +33,18 @@
 </table>
 <script>
     $(document.body).on('click', '.info-lab-test-item-btn', function(){
-        $('#lab_test_form')[0].reset();
-        var test_id = $(this).attr('data-lab-test-id');
-        $('#lab_test_id').val($(this).attr('data-lab-test-id'));
-        alert(test_id);
+        $('#lab_test_item_form')[0].reset();
+        var test_id = $(this).attr('data-lab-test-item-id');
+        $('#lab_test_item_id').val($(this).attr('data-lab-test-item-id'));
         $.ajax({
-            url: '/cms/setting/get_lab_test_description',
+            url: '/cms/setting/get_lab_test_item_description',
             type: 'post',
             data: {id:test_id},
             cache: false,
             success: function(response) {
-                console.log(response);
                 if (response.success) {
-                    $('#test_description').val(response.description);
-                    $('#lab_test_modal').modal('show');
+                    $('#test_item_description').val(response.description);
+                    $('#lab_test_item_modal').modal('show');
                 } else {
                     toastr["error"](response.message);
                 }
@@ -58,13 +56,13 @@
     });
 </script>
 
-<div id="lab_category_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div id="lab_test_item_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
-        <form id="lab_test_form" method="post" role="form"
+        <form id="lab_test_item_form" method="post" role="form"
               data-action="<?php echo site_url('setting/save_lab_category_description') ?>"
               enctype="multipart/form-data">
-            <input type="hidden" name="lab_test_id" id="lab_test_id">
+            <input type="hidden" name="lab_test_item_id" id="lab_test_item_id">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Description</h4>
@@ -73,7 +71,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Risk Factor and Cardiac Problems</label>
-                        <textarea class="form-control" rows="3" name="description" id="description"></textarea>
+                        <textarea class="form-control" rows="3" name="description" id="test_item_description"></textarea>
                     </div>
                 </div>
             </div>
