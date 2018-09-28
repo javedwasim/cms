@@ -1806,4 +1806,24 @@ $(document.body).on('click', '#save_ett_test', function(){
             }
         }
     });
+
+});
+$(document.body).on('click', '#save_lab_test', function(){
+    $.ajax({
+        url: $('#lab_test_form_modal').attr('data-action'),
+        type: 'post',
+        data:  $('#lab_test_form_modal').serialize(),
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                $('#lab_test_data_table').empty();
+                $('#lab_test_data_table').append(response.sp_table);
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+
 });

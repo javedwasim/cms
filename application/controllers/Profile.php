@@ -111,7 +111,7 @@
 	        $this->form_validation->set_rules('relatename', 'Relative Name', 'required|xss_clean');
 	        if ($this->form_validation->run() == FALSE) {
 	        	$json['error'] = true;
-            	$json['message'] = validation_errors();
+            	$json['message'] = "Please fill all the fields with valid inputs.";
 	        }else{
 	        	$data = array(
                             'pat_name' => $name,

@@ -22,6 +22,8 @@
     <!-- ============================================================== -->
     <!-- plugins:js -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- daterangepicker -->
     <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
