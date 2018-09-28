@@ -58,9 +58,10 @@ class Instruction extends MY_Controller
             }
         }
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
+        $data['items'] = $this->Instruction_model->get_inst_items($data);
         $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('instruction/category_table', $data, true);
+        $json['result_html'] = $this->load->view('instruction/instruction', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -74,15 +75,16 @@ class Instruction extends MY_Controller
         $result = $this->Instruction_model->delete_instruction_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Instruction Category successfully deleted.";
+            $json['message'] = "Instruction  successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
         $data['categories'] = $this->Instruction_model->get_instruction_categories($category);
+        $data['items'] = $this->Instruction_model->get_inst_items($data);
         $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('instruction/category_table', $data, true);
+        $json['result_html'] = $this->load->view('instruction/instruction', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

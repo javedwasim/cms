@@ -31,7 +31,6 @@ if(isset($rights[0]['user_rights']))
                     <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
                         <i class="fa fa-trash" title="Delete"></i></a>
                 <?php } ?>
-
             </td>
 
             <?php if($loggedin_user['is_admin']==1){ ?>
@@ -69,7 +68,7 @@ if(isset($rights[0]['user_rights']))
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
+
                 if (response.success) {
                     toastr["success"](response.message);
                 }

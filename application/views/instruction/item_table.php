@@ -1,8 +1,8 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:1px !important;">Action</th>
+        <th class="table-header" style="width: 9%">Action</th>
         <th class="table-header">Item Name</th>
     </tr>
     </thead>
@@ -28,12 +28,12 @@
 
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
-                <td contenteditable="true"
+                <td contenteditable="true" class="inst_item"
                     onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
                     onClick="showEdit(this);">
                     <?php echo $item['name']; ?></td>
             <?php } elseif(in_array("special_instructions-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td contenteditable="true"
+                <td contenteditable="true" class="inst_item"
                     onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
                     onClick="showEdit(this);">
                     <?php echo $item['name']; ?></td>
@@ -76,10 +76,12 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.inst_item').css('background', '#FFF');
+        $('td.inst_item').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'instruction/save_inst_item' ?>",
             type: "POST",
@@ -88,11 +90,10 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 
 </script>

@@ -428,24 +428,28 @@ $(document.body).on('click', '.edit-lab-test-item-btn', function(){
 
 
 $(document.body).on('click', '.add-instruction-category', function(){
-    var name = $('#instruction_name').val();
-    var category = $('#instruction_category').val();
-    $.ajax({
-        url: '/cms/instruction/add_instruction_category',
-        type: 'post',
-        data: {name:name,category:category},
-        cache: false,
-        success: function(response) {
-            $('.ins_category_container').empty();
-            $('.ins_category_container').append(response.result_html);
-            if (response.success) {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+    var validate = $( "#inst_category_form" ).validate();
+    if (validate.form()) {
+        var name = $('#instruction_name').val();
+        var category = $('#instruction_category').val();
+        $.ajax({
+            url: '/cms/instruction/add_instruction_category',
+            type: 'post',
+            data: {name: name, category: category},
+            cache: false,
+            success: function (response) {
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+                $('#instruction_name').val('');
             }
-        }
-    });
-    return false;
+        });
+        return false;
+    }
 });
 
 $(document.body).on('click', '.delete-inst', function(){
@@ -458,8 +462,8 @@ $(document.body).on('click', '.delete-inst', function(){
             data: {category:category,id:id},
             cache: false,
             success: function(response) {
-                $('.ins_category_container').empty();
-                $('.ins_category_container').append(response.result_html);
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
                 if (response.success) {
                     toastr["error"](response.message);
                 } else {
@@ -490,23 +494,26 @@ function filter_inst_item_category(inst_id,category) {
 }
 
 $(document.body).on('click', '#inst_item_btn', function(){
-    $.ajax({
-        url: $('#lab_test_item_form').attr('data-action'),
-        type: 'post',
-        data: $('#lab_test_item_form').serialize(),
-        cache: false,
-        success: function(response) {
-            $('.ins_item_container').empty();
-            $('.ins_item_container').append(response.result_html);
-            if (response.success) {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
-            }
+    var validate = $( "#isnt_item_form" ).validate();
+    if (validate.form()) {
+        $.ajax({
+            url: $('#isnt_item_form').attr('data-action'),
+            type: 'post',
+            data: $('#isnt_item_form').serialize(),
+            cache: false,
+            success: function (response) {
+                $('.ins_item_container').empty();
+                $('.ins_item_container').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
 
-        }
-    });
-    return false;
+            }
+        });
+        return false;
+    }
 });
 
 $(document.body).on('click', '.edit-inst-item-btn', function(){
@@ -868,6 +875,7 @@ $(document.body).on('click', '#add_recommendation', function(){
             } else {
                 toastr["error"](response.message);
             }
+            $('#add_description').val('');
         }
     });
     return false;
