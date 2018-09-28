@@ -228,13 +228,13 @@ if(isset($rights[0]['user_rights']))
                     		<div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Name</label>
-		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" value="" style="text-transform: capitalize;" maxlength="40" required="required">
+		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" value="" style="text-transform: capitalize;" minlength="5" maxlength="40" required>
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Father/Wife Name:</label>
-		                            <input type="text" class="form-control" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" value="" style="text-transform: capitalize;" maxlength="40" required="required">
+		                            <input type="text" class="form-control" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" value="" style="text-transform: capitalize;" maxlength="40" required>
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
@@ -340,7 +340,7 @@ if(isset($rights[0]['user_rights']))
 </div>
 <script type="text/javascript">
 	$(document).ready(function() {
-	    //////////////////////////////initilize datepicker///////////////////////
+    //////////////////////////////initilize datepicker///////////////////////
 	    $('.profile_filter').datepicker({
 	            format: 'd-M-yyyy'
 	    });

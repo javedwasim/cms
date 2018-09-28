@@ -2516,57 +2516,67 @@ $(document.body).on('click', '#print_all_list', function () {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#save_new_profile', function () {
-    var profilename = $('#pat_profile_name').val();
-    var profilerelative = $('#pat_profile_relative_name').val();
-    var profileagedigit = $('#pat_profile_age_digit').val();
-    var profileage = $('#pat_profile_age').val();
-    var profileprofession = $('#pat_profile_profession option:selected').text();
-    var profilesex = $('input[name="pat_sex"]:checked').val();
-    var profilecontact = $('#pat_profile_contact').val();
-    var profileheight = $('#pat_profile_height').val();
-    var profilebmi = $('#pat_profile_bmi').val();
-    var profileweight = $('#pat_profile_weight').val();
-    var profilebsa = $('#pat_profile_bsa').val();
-    var profileemail = $('#pat_profile_email').val();
-    var profiledistrict = $('#pat_profile_district option:selected').text();
-    var profileaddress = $('#pat_profile_address').val();
-    $.ajax({
-        url: '/cms/profile/add_profile',
-        type: 'post',
-        data: {
-            name: profilename,
-            relatename: profilerelative,
-            agedigit: profileagedigit,
-            age: profileage,
-            profession: profileprofession,
-            sex: profilesex,
-            contact: profilecontact,
-            height: profileheight,
-            bmi: profilebmi,
-            weight: profileweight,
-            bsa: profilebsa,
-            email: profileemail,
-            district: profiledistrict,
-            address: profileaddress
-        }, success: function (response) {
-            if (response.success) {
-                $('#add-new-patient').modal('hide');
-                document.getElementById('profile_form').reset();
-                $('.profile-table').remove();
-                $('#profile_table').append(response.profile_table);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    // "scrollX": true,
-                    "initComplete": function (settings, json) {
-                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+    var validate = $( "#profile_form" ).validate();
+    if (validate.form()) {
+        var profilename = $('#pat_profile_name').val();
+        var profilerelative = $('#pat_profile_relative_name').val();
+        var profileagedigit = $('#pat_profile_age_digit').val();
+        var profileage = $('#pat_profile_age').val();
+        var profileprofession = $('#pat_profile_profession option:selected').text();
+        var profilesex = $('input[name="pat_sex"]:checked').val();
+        var profilecontact = $('#pat_profile_contact').val();
+        var profileheight = $('#pat_profile_height').val();
+        var profilebmi = $('#pat_profile_bmi').val();
+        var profileweight = $('#pat_profile_weight').val();
+        var profilebsa = $('#pat_profile_bsa').val();
+        var profileemail = $('#pat_profile_email').val();
+        var profiledistrict = $('#pat_profile_district option:selected').text();
+        var profileaddress = $('#pat_profile_address').val();
+        $.ajax({
+            url: '/cms/profile/add_profile',
+            type: 'post',
+            data: {
+                name: profilename,
+                relatename: profilerelative,
+                agedigit: profileagedigit,
+                age: profileage,
+                profession: profileprofession,
+                sex: profilesex,
+                contact: profilecontact,
+                height: profileheight,
+                bmi: profilebmi,
+                weight: profileweight,
+                bsa: profilebsa,
+                email: profileemail,
+                district: profiledistrict,
+                address: profileaddress
+            }, success: function (response) {
+                if (response.success) {
+                    $('#add-new-patient').modal('hide');
+                    document.getElementById('profile_form').reset();
+                    $('.profile-table').remove();
+                    $('#profile_table').append(response.profile_table);
+                    ///////////////// initilize datatable //////////////
+                    $('.profiletable').DataTable({
+                        // "scrollX": true,
+                        "initComplete": function (settings, json) {
+                            $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                        }
+                    });
+
+                    if (response.success == true ) {
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["error"](response.message);
                     }
-                });
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+                    
+                } else {
+                    toastr["error"](response.message);
+                }
             }
-        }
-    });
+        });
+    }
+    
 });
 
 ////////////////////////////////////// Delete from profile page ////////////////////////////
@@ -3433,3 +3443,14 @@ function profile_protocol_details(protocol_id){
     });
     return false;
 }
+
+// $(document).ready(function(){
+//     $( "#profile_form" ).validate({
+//       rules: {
+//         pat_profile_name: {
+//           required: true,
+//           alphanumeric: true
+//         }
+//       }
+//     });
+// });

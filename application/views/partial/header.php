@@ -41,6 +41,7 @@
   <link href="<?php echo base_url(); ?>assets/plugins/gridstack/gridstack.css" rel="stylesheet">
     <!-- toster alerts -->
   <link href="<?php echo base_url(); ?>assets/plugins/toster/build/toastr.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/plugins/jquery-validation/css/screen.css">
   <!--alerts CSS -->
   <link href="<?php echo base_url(); ?>/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
   <!-- You can change the theme colors from here -->

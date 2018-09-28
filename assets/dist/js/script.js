@@ -1722,7 +1722,6 @@ $(document.body).on('click', '#pat-ett-test', function () {
     });
 });
 
-<<<<<<< HEAD
 $(document.body).on('click','#profile_ett_desc_table tbody tr.row_selected',function(){
     var desc = $(this).find('.ett_pro_desc').text();
     $('#ett_desc_pro').val($('#ett_desc_pro').val()+desc+'\n');
@@ -1786,7 +1785,7 @@ $(document.body).on('click', '#save_ett_test', function(){
             }
         }
     });
-
+});
 $(document.body).on('click', '#save_lab_test', function(){
     $.ajax({
         url: $('#lab_test_form_modal').attr('data-action'),
