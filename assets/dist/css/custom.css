@@ -565,7 +565,13 @@ li#list_itmes_clinical {
 li#list_itmes_setting {
     border-bottom: 1px solid #26c6da;
 }
-
+#spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: transparent;
+    z-index: 99999;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
