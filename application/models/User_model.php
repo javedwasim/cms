@@ -268,7 +268,7 @@ class User_model extends CI_Model {
                 ->where('DATE(appointment_date) >=', $fromdate)
                 ->where('DATE(appointment_date) <=', $todate)
                 ->delete('appointment_booking');
-        if($result){
+        if($this->db->affected_rows()>0){
             return true;
         }else{
             return false;

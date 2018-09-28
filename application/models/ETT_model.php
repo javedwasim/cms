@@ -198,7 +198,7 @@
                 $column = $data['column'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('ett_test_reason',array($column=>$editval));
+                $this->db->where('id',$id)->update('ett_protocol_details',array($column=>$editval));
                 return $this->db->affected_rows();
             }else{
                 return false;

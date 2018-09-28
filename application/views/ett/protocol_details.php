@@ -3,7 +3,7 @@
     	<div class="card-header" >
 			<div class="row">
 				<div class="col-md-12" style="display: inline-flex;">
-					<label>Protocol:</label>
+					<label>Protocol</label>
 					<select class="form-control col-md-4" onchange="filter_protocol_details(this.value)">
     						<option>Select</option>
                             <?php foreach($protocols as $key){?>

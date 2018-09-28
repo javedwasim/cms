@@ -87,7 +87,6 @@ class ETT extends MY_Controller
             $json['message'] = "Updated successfully!";
         } else {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

@@ -10,6 +10,8 @@
 			$this->load->helper('content-type');
 			$this->load->model('Dashboard_model');
 			$this->load->model('Setting_model');
+            $this->load->library('form_validation');
+            $this->load->helper('security');
 
 		}
 
@@ -24,17 +26,60 @@
 		}
 
         public function insert_profession(){
-            $profession = $this->input->post('profession');
-            $result = $this->Setting_model->insert_profession($profession);
-            $data['rights'] = $this->session->userdata('other_rights');
-            if ($result) {
-                $data['professions'] = $this->Setting_model->get_professions();
-                $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
-                $json['message']= "Added Successfully.";
+            $this->form_validation->set_rules('profession', 'Profession', 'required|xss_clean');
+            if($this->form_validation->run() == FALSE){
+                $json['error'] = true;
+                $json['message'] = validation_errors(); 
             }else{
-                $data['professions'] = $this->Setting_model->get_professions();
-                $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
-                $json['message']= "Seems to be an error.";
+                $profession = strtolower($this->input->post('profession'));
+                $professionexist = $this->Setting_model->profession_exist($profession);
+                if ($professionexist) {
+                    $json['error'] = true;
+                    $json['message'] = 'Already Exist.'; 
+                }else{
+                    $result = $this->Setting_model->insert_profession($profession);
+                    $data['rights'] = $this->session->userdata('other_rights');
+                    if ($result) {
+                        $json['success'] = true;
+                        $json['message']= "Added Successfully.";
+                    }else{
+                        $json['error'] = true;
+                        $json['message']= "Seems to be an error.";
+                    }
+                }
+            }
+            $data['professions'] = $this->Setting_model->get_professions();
+            $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function delete_profession($id){
+            $result = $this->Setting_model->delete_pat_profession($id);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Deleted Successfully.";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+            $data['professions'] = $this->Setting_model->get_professions();
+            $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        public function update_profession(){
+            $data = $this->input->post();
+            $result = $this->Setting_model->update_profession($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
             }
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
