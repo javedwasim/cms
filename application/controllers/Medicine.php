@@ -240,10 +240,8 @@ class Medicine extends MY_Controller
             $json['message'] = "Seems to an error.";
         }
         $data['dosages'] = $this->Medicine_model->get_dosage_categories();
-        $data['categories'] = $this->Medicine_model->get_medicine_categories();
-        $data['items'] = $this->Medicine_model->get_medicine_items();
         $data['active_tab'] = 'dosage';
-        $json['result_html'] = $this->load->view('medicine/medicine', $data, true);
+        $json['result_html'] = $this->load->view('medicine/dosage_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -271,10 +269,8 @@ class Medicine extends MY_Controller
             }
         }
         $data['dosages'] = $this->Medicine_model->get_dosage_categories();
-        $data['categories'] = $this->Medicine_model->get_medicine_categories();
-        $data['items'] = $this->Medicine_model->get_medicine_items();
         $data['active_tab'] = 'dosage';
-        $json['result_html'] = $this->load->view('medicine/medicine', $data, true);
+        $json['result_html'] = $this->load->view('medicine/dosage_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

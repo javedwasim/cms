@@ -1059,8 +1059,8 @@ $(document.body).on('click', '.add-dosage-category', function(){
             data: {name: name},
             cache: false,
             success: function (response) {
-                $('.dashboard-content').empty();
-                $('.dashboard-content').append(response.result_html);
+                $('.dosage_category_container').empty();
+                $('.dosage_category_container').append(response.result_html);
                 if (response.success) {
                     toastr["success"](response.message);
                 } else {
