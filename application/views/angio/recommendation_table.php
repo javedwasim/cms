@@ -1,7 +1,7 @@
 <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 10%">Delete</th>
+        <th class="table-header" style="width: 5%">Delete</th>
         <th class="table-header">Recommendations</th>
     </tr>
     </thead>
@@ -14,7 +14,7 @@
                    data-href="<?php echo site_url('Angio_recommendation/delete_recommendation/') . $recommendation['id'] ?>">
                    <i class="fa fa-trash" title="Delete"></i></a>
             </td>
-            <td contenteditable="true"
+            <td contenteditable="true" class="recommendation"
                 onBlur="saveToDatabase(this,'cate_name','<?php echo $recommendation['id']; ?>')"
                 onClick="showEdit(this);">
                 <?php echo $recommendation['description']; ?></td>
@@ -24,10 +24,12 @@
 </table>
 <script>
     function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.recommendation').css('background', '#FFF');
+        $('td.recommendation').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'Angio_recommendation/save_recommendation' ?>",
             type: "POST",
@@ -36,11 +38,10 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 
 </script>

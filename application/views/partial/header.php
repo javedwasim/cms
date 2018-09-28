@@ -71,5 +71,5 @@
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     <div id="spinner" class="spinner" style="display:none;">
-        <img id="img-spinner" src="<?php echo base_url(); ?>assets/uploads/images/spinner.gif" alt="Loading"/>
+        <img id="img-spinner" src="<?php echo base_url(); ?>ajax-loader.gif" alt="Loading"/>
     </div>

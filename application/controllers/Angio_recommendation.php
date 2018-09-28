@@ -49,7 +49,7 @@ class Angio_recommendation extends MY_Controller
             $result = $this->Recommendation_model->add_recommendation($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "investigation created successfully!";
+                $json['message'] = "Recommendation created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
