@@ -603,8 +603,8 @@ $(document.body).on('click', '.delete-examination', function(){
             url: $(this).attr('data-href'),
             cache: false,
             success: function(response) {
-                $('.ins_category_container').empty();
-                $('.ins_category_container').append(response.result_html);
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
                 if (response.success) {
                     toastr["error"](response.message);
                 } else {
@@ -723,13 +723,14 @@ $(document.body).on('click', '.add-investigation-category', function(){
         data: {name:name},
         cache: false,
         success: function(response) {
-            $('.investigation_category_container').empty();
-            $('.investigation_category_container').append(response.result_html);
+            $('.dashboard-content').empty();
+            $('.dashboard-content').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
             }
+            $('#instruction_name').val('');
         }
     });
     return false;
@@ -741,8 +742,8 @@ $(document.body).on('click', '.delete-investigation', function(){
             url: $(this).attr('data-href'),
             cache: false,
             success: function(response) {
-                $('.investigation_category_container').empty();
-                $('.investigation_category_container').append(response.result_html);
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
                 if (response.success) {
                     toastr["error"](response.message);
                 } else {
@@ -770,9 +771,9 @@ $(document.body).on('click', '#investigation_item_btn', function(){
             } else {
                 toastr["error"](response.message);
             }
-
         }
     });
+    $('#investigation_item_form')[0].reset();
     return false;
 });
 
@@ -1734,6 +1735,25 @@ $(document.body).on('click','#profile_ett_conc_table tbody tr.row_selected',func
     
 });
 
+$(document.body).on('click', '#save_lab_test', function(){
+    $.ajax({
+        url: $('#lab_test_form_modal').attr('data-action'),
+        type: 'post',
+        data:  $('#lab_test_form_modal').serialize(),
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                $('#lab_test_data_table').empty();
+                $('#lab_test_data_table').append(response.sp_table);
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
 $(document.body).on('click', '#save_ett_test', function(){
     var patientid = $('#label_patient_id').text();
     var testreason = $('#ett_test_reason option:selected').val();
@@ -1786,6 +1806,7 @@ $(document.body).on('click', '#save_ett_test', function(){
             }
         }
     });
+
 });
 $(document.body).on('click', '#save_lab_test', function(){
     $.ajax({
@@ -1804,4 +1825,5 @@ $(document.body).on('click', '#save_lab_test', function(){
         }
     });
     return false;
+
 });

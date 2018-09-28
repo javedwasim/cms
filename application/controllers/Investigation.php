@@ -44,8 +44,9 @@ class Investigation extends MY_Controller
             }
         }
         $data['categories'] = $this->Investigation_model->get_investigation_categories();
+        $data['items'] = $this->Investigation_model->get_investigation_items();
         $data['active_tab'] = 'category';
-        $json['result_html'] = $this->load->view('investigation/category_table', $data, true);
+        $json['result_html'] = $this->load->view('investigation/investigation', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -86,7 +87,7 @@ class Investigation extends MY_Controller
         $result = $this->Investigation_model->add_investigation_category($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "investigation  save successfully!";
+            $json['message'] = "Investigation  save successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -101,14 +102,15 @@ class Investigation extends MY_Controller
         $result = $this->Investigation_model->delete_investigation_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "investigation Category successfully deleted.";
+            $json['message'] = "Investigation Category successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
         $data['categories'] = $this->Investigation_model->get_investigation_categories();
+        $data['items'] = $this->Investigation_model->get_investigation_items();
         $data['active_tab'] = 'category';
-        $json['result_html'] = $this->load->view('investigation/category_table', $data, true);
+        $json['result_html'] = $this->load->view('investigation/investigation', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -179,7 +181,7 @@ class Investigation extends MY_Controller
         $result = $this->Investigation_model->add_investigation_item($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "investigation item save successfully!";
+            $json['message'] = "Investigation item save successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -194,7 +196,7 @@ class Investigation extends MY_Controller
         $result = $this->Investigation_model->delete_investigation_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "investigation item successfully deleted.";
+            $json['message'] = "Investigation item successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";

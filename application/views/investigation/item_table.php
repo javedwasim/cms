@@ -1,7 +1,7 @@
 <table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" >Action</th>
+        <th class="table-header" style="width: 9%;">Action</th>
         <th class="table-header">Item Name</th>
     </tr>
     </thead>
@@ -18,7 +18,7 @@
                    data-investigation-item-id="<?php echo $item['id']; ?>">
                    <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true"
+            <td contenteditable="true" class="investigation_item"
                 onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
                 onClick="showEdit(this);">
                 <?php echo $item['name']; ?></td>
@@ -74,10 +74,12 @@
 
 <script>
     function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.investigation_item').css('background', '#FFF');
+        $('td.investigation_item').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'investigation/save_investigation_item' ?>",
             type: "POST",
@@ -86,10 +88,9 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 </script>
