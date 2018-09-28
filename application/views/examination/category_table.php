@@ -6,10 +6,10 @@ if(isset($rights[0]['user_rights']))
     $loggedin_user = $this->session->userdata('userdata');
 }
 ?>
-<table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 10%">Delete</th>
+        <th class="table-header" style="width: 5%">Delete</th>
         <th class="table-header">Category Name</th>
     </tr>
     </thead>
@@ -35,12 +35,12 @@ if(isset($rights[0]['user_rights']))
             </td>
 
             <?php if($loggedin_user['is_admin']==1){ ?>
-                <td contenteditable="true"
+                <td contenteditable="true" class="exam_cate"
                     onBlur="saveExamination(this,'cate_name','<?php echo $category['id']; ?>')"
                     onClick="showExamination(this);">
                     <?php echo $category['name']; ?></td>
             <?php } elseif(in_array("examinations-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td contenteditable="true"
+                <td contenteditable="true" class="exam_cate"
                     onBlur="saveExamination(this,'cate_name','<?php echo $category['id']; ?>')"
                     onClick="showExamination(this);">
                     <?php echo $category['name']; ?></td>
@@ -48,7 +48,6 @@ if(isset($rights[0]['user_rights']))
                 <td contenteditable="true" onClick="showError(this);">
                     <?php echo $category['name']; ?></td>
             <?php } ?>
-
 
         </tr>
     <?php endforeach; ?>
@@ -59,10 +58,12 @@ if(isset($rights[0]['user_rights']))
         toastr["error"]('You are not authorised for this action.');
     }
     function showExamination(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.exam_cate').css('background', '#FFF');
+        $('td.exam_cate').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveExamination(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'examination/save_examination_category' ?>",
             type: "POST",
@@ -74,6 +75,7 @@ if(isset($rights[0]['user_rights']))
                 }
             }
         });
-    }
+        $(editableObj).css("color", "#212529");
 
+    }
 </script>

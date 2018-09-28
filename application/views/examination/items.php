@@ -16,7 +16,7 @@ if(isset($rights[0]['user_rights']))
                     <div class="col-lg-2 col-md-3">
                         <div class="form-group">
                             <label>Item Name:</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" maxlength="50">
                         </div>
                     </div>
                     <div class=" col-lg-3 col-md-4">

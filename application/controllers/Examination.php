@@ -28,7 +28,7 @@ class Examination extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'Examination Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Examination Name', 'required|is_unique[examination.name]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
@@ -45,9 +45,10 @@ class Examination extends MY_Controller
             }
         }
         $data['categories'] = $this->Examination_model->get_examination_categories();
+        $data['items'] = $this->Examination_model->get_examination_items();
         $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('examination/category_table', $data, true);
+        $json['result_html'] = $this->load->view('examination/examination', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -89,7 +90,7 @@ class Examination extends MY_Controller
         $result = $this->Examination_model->add_examination_category($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "examination  save successfully!";
+            $json['message'] = "Examination  save successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -104,7 +105,7 @@ class Examination extends MY_Controller
         $result = $this->Examination_model->delete_examination_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "examination Category successfully deleted.";
+            $json['message'] = "Examination Category successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -199,7 +200,7 @@ class Examination extends MY_Controller
         $result = $this->Examination_model->delete_examination_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "examination item successfully deleted.";
+            $json['message'] = "Examination item successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";

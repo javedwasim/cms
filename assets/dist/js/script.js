@@ -27,7 +27,7 @@ $(document.body).on('click', '.delete-advice', function(){
                 $('.dashboard-content').empty();
                 $('.dashboard-content').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -71,7 +71,7 @@ $(document.body).on('click', '.delete-advice-item', function(){
                 $('.dashboard-content').empty();
                 $('.dashboard-content').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -156,7 +156,7 @@ $(document.body).on('click', '.delete-research', function(){
                 $('.dashboard-content').empty();
                 $('.dashboard-content').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -241,7 +241,7 @@ $(document.body).on('click', '.delete-lab-category', function(){
                 $('.dashboard-content').empty();
                 $('.dashboard-content').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -283,7 +283,7 @@ $(document.body).on('click', '.delete-lab-test', function(){
                 $('.dashboard-content').empty();
                 $('.dashboard-content').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -461,7 +461,7 @@ $(document.body).on('click', '.delete-inst', function(){
                 $('.ins_category_container').empty();
                 $('.ins_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -564,7 +564,7 @@ $(document.body).on('click', '.delete-inst-item', function(){
                 $('.ins_item_container').empty();
                 $('.ins_item_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -584,13 +584,14 @@ $(document.body).on('click', '.add-examination-category', function(){
         data: {name:name},
         cache: false,
         success: function(response) {
-            $('.ins_category_container').empty();
-            $('.ins_category_container').append(response.result_html);
+            $('.dashboard-content').empty();
+            $('.dashboard-content').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
             }
+            $('#instruction_name').val('');
         }
     });
     return false;
@@ -605,7 +606,7 @@ $(document.body).on('click', '.delete-examination', function(){
                 $('.ins_category_container').empty();
                 $('.ins_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -624,6 +625,7 @@ $(document.body).on('click', '#examination_item_btn', function(){
         data: $('#examination_item_form').serialize(),
         cache: false,
         success: function(response) {
+            $('#examination_item_form')[0].reset();
             $('.examination_item_container').empty();
             $('.examination_item_container').append(response.result_html);
             if (response.success) {
@@ -646,7 +648,7 @@ $(document.body).on('click', '.delete-examination-item', function(){
                 $('.examination_item_container').empty();
                 $('.examination_item_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -707,7 +709,6 @@ $(document.body).on('click', '#save_examination_item_description', function(){
             } else {
                 toastr["error"](response.message);
             }
-
         }
     });
     return false;
@@ -743,7 +744,7 @@ $(document.body).on('click', '.delete-investigation', function(){
                 $('.investigation_category_container').empty();
                 $('.investigation_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -826,7 +827,7 @@ $(document.body).on('click', '.delete-investigation-item', function(){
                 $('.investigation_item_container').empty();
                 $('.investigation_item_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -880,7 +881,7 @@ $(document.body).on('click', '.delete-recommendation', function(){
                 $('.recommendation_container').empty();
                 $('.recommendation_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -922,7 +923,7 @@ $(document.body).on('click', '.delete-medicine', function(){
                 $('.medicine_category_container').empty();
                 $('.medicine_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -963,7 +964,7 @@ $(document.body).on('click', '.delete-medicine-item', function(){
                 $('.medicine_item_container').empty();
                 $('.medicine_item_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -1006,7 +1007,7 @@ $(document.body).on('click', '#save_medicine_item_description', function(){
         success: function(response) {
             $('#medicine_item_modal').modal('hide');
             if (response.success) {
-                toastr["success"](response.message);
+                toastr["error"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -1044,7 +1045,7 @@ $(document.body).on('click', '.delete-dosage', function(){
                 $('.dosage_category_container').empty();
                 $('.dosage_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -1129,7 +1130,7 @@ $(document.body).on('click', '.delete-disease', function(){
                 $('.disease_category_container').empty();
                 $('.disease_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -1170,7 +1171,7 @@ $(document.body).on('click', '.delete-structure', function(){
                 $('.structure_category_container').empty();
                 $('.structure_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -1219,7 +1220,7 @@ $(document.body).on('click', '.delete-finding', function(){
                 $('#'+structure_id).css("background", "#1e88e5");
                 $('#'+structure_id).css("color", "#FFF");
 
-                toastr["success"]('Finding deleted successfully!');
+                toastr["error"]('Finding deleted successfully!');
             }
         });
     } else {
@@ -1264,7 +1265,7 @@ $(document.body).on('click', '.delete-diagnosis', function(){
                 var structure_id = $('#structure_id').val();
                 $('#'+structure_id).css("background", "#1e88e5");
                 $('#'+structure_id).css("color", "#FFF");
-                toastr["success"]('Finding deleted successfully!');
+                toastr["error"]('Finding deleted successfully!');
             }
         });
     } else {
@@ -1283,7 +1284,7 @@ $(document.body).on('click', '.finding_radio', function(){
         cache: false,
         success: function(response) {
             if (response.success) {
-                toastr["success"](response.message);
+                toastr["error"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -1301,7 +1302,7 @@ $(document.body).on('click', '.diagnose_radio', function(){
         cache: false,
         success: function(response) {
             if (response.success) {
-                toastr["success"](response.message);
+                toastr["error"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -1341,7 +1342,7 @@ $(document.body).on('click', '.delete-main-category-item', function(){
                 $('.main_category_container').empty();
                 $('.main_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -1411,7 +1412,7 @@ $(document.body).on('click', '.delete-main-measurement', function(){
                 $('.category_measurement_container').empty();
                 $('.category_measurement_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -1452,7 +1453,7 @@ $(document.body).on('click', '.delete-history', function(){
                 $('.history_category_container').empty();
                 $('.history_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }

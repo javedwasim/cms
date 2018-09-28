@@ -2061,7 +2061,7 @@ $(document.body).on('click', '.delete-test-reason', function () {
                 $('.ins_category_container').empty();
                 $('.ins_category_container').append(response.result_html);
                 if (response.success) {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -2085,7 +2085,7 @@ $(document.body).on('click', '#add_ending_reason', function () {
             $('.ending_reason_table').empty();
             $('.ending_reason_table').append(response.result_html);
             if (response.message == "Added successfully!") {
-                toastr["success"](response.message);
+                toastr["error"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -2103,9 +2103,9 @@ $(document.body).on('click', '.delete-ending-reason', function () {
                 $('.ending_reason_table').empty();
                 $('.ending_reason_table').append(response.result_html);
                 if (response.message == "Updated successfully!") {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
-                    toastr["warning"](response.message);
+                    toastr["error"](response.message);
                 }
             }
         });
@@ -2127,7 +2127,7 @@ $(document.body).on('click', '#add_ett_discription', function () {
             $('.discription-table').empty();
             $('.discription-table').append(response.result_html);
             if (response.message == "Added successfully!") {
-                toastr["success"](response.message);
+                toastr["error"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -2145,9 +2145,9 @@ $(document.body).on('click', '.delete-description', function () {
                 $('.discription-table').empty();
                 $('.discription-table').append(response.result_html);
                 if (response.message == "Deleted Successfully.") {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
-                    toastr["warning"](response.message);
+                    toastr["error"](response.message);
                 }
             }
         });
@@ -2187,9 +2187,9 @@ $(document.body).on('click', '.delete-conclusion', function () {
                 $('.conclusion_table_content').empty();
                 $('.conclusion_table_content').append(response.result_html);
                 if (response.message == "Deleted Successfully.") {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
-                    toastr["warning"](response.message);
+                    toastr["error"](response.message);
                 }
             }
         });
@@ -2237,9 +2237,9 @@ $(document.body).on('click', '.delete-protocol', function () {
                 $('.protocol_table_content').empty();
                 $('.protocol_table_content').append(response.result_html);
                 if (response.message == "Deleted Successfully.") {
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 } else {
-                    toastr["warning"](response.message);
+                    toastr["error"](response.message);
                 }
             }
         });
@@ -2770,10 +2770,6 @@ function get_examinations(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -3116,9 +3112,9 @@ $(document.body).on('click', '.delete-signature', function () {
                     $('.signature_table').remove();
                     $('#signature_table').append(response.signature_table);
                     if(response.success == true){
-                        toastr["success"](response.message);
+                        toastr["error"](response.message);
                     }else{
-                        toastr["warning"](response.error);
+                        toastr["error"](response.error);
                     }
                 
                 }
@@ -3236,9 +3232,9 @@ $(document.body).on('click', '.delete-notes', function () {
             cache: false,
             success: function (response) {
                 if(response.success == true){
-                    toastr["success"](response.message);
+                    toastr["error"](response.message);
                 }else{
-                    toastr["warning"](response.error);
+                    toastr["error"](response.error);
                 }
             }
         });
