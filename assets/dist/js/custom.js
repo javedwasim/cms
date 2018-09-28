@@ -1826,7 +1826,6 @@ $(document.body).on('click', '#profes_add', function () {
             $('.profession_table').remove();
             $('#profession_table').append(response.profession_table);
             $('#profession_add').val('');
-            $('#prof_table tbody tr:first').addClass('row_selected');
             $("#prof_table tbody tr").click(function (e) {
                 $('#prof_table tbody tr.row_selected').removeClass('row_selected');
                 $(this).addClass('row_selected');
@@ -1847,7 +1846,6 @@ $(document.body).on('click', '.delete_profession', function () {
             success: function (response) {
                 $('.profession_table').remove();
                 $('#profession_table').append(response.profession_table);
-                $('#prof_table tbody tr:first').addClass('row_selected');
                 $("#prof_table tbody tr").click(function (e) {
                     $('#prof_table tbody tr.row_selected').removeClass('row_selected');
                     $(this).addClass('row_selected');
@@ -2106,8 +2104,9 @@ $(document.body).on('click', '#add_ending_reason', function () {
             $('#ett_test_reason').val('');
             $('.ending_reason_table').empty();
             $('.ending_reason_table').append(response.result_html);
+            $('#ending_reason').val('');
             if (response.message == "Added successfully!") {
-                toastr["error"](response.message);
+                toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -2149,7 +2148,7 @@ $(document.body).on('click', '#add_ett_discription', function () {
             $('.discription-table').empty();
             $('.discription-table').append(response.result_html);
             if (response.message == "Added successfully!") {
-                toastr["error"](response.message);
+                toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -2597,6 +2596,8 @@ $(document.body).on('click', '#save_new_profile', function () {
                 }
             }
         });
+    }else{
+        return false;
     }
     
 });
@@ -2742,6 +2743,10 @@ function get_professions(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.profession_table').remove();
                 $('#profession_table').append(response.profession_table);
+                $("#prof_table tbody tr").click(function (e) {
+                    $('#prof_table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
             }
         }
     });

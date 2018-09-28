@@ -29,24 +29,25 @@
     </table>
 </div>
 <script type="text/javascript">
-    function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+    function showExamination(editableObj) {
+        $('td.exam_cate').css('background', '#FFF');
+        $('td.exam_cate').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'setting/update_profession' ?>",
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
+                $(editableObj).css("background", "#3300FF");
                 if (response.success) {
-                    toastr["success"](response.message);
-                } else {
                     toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 </script>
     

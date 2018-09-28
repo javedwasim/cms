@@ -27,13 +27,13 @@
 
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
-                <td contenteditable="true"
-                    onBlur="saveToDatabase(this,'conclusion','<?php echo $key['id']; ?>')"
-                    onClick="showEdit(this);"><?php echo $key['conclusion']; ?></td>
+                <td contenteditable="true" class="exam_cate"
+                    onBlur="saveToconclusion(this,'conclusion','<?php echo $key['id']; ?>')"
+                    onClick="showExamination(this);"><?php echo $key['conclusion']; ?></td>
             <?php } elseif(in_array("ett-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td contenteditable="true"
-                    onBlur="saveToDatabase(this,'conclusion','<?php echo $key['id']; ?>')"
-                    onClick="showEdit(this);"><?php echo $key['conclusion']; ?></td>
+                <td contenteditable="true" class="exam_cate"
+                    onBlur="saveToconclusion(this,'conclusion','<?php echo $key['id']; ?>')"
+                    onClick="showExamination(this);"><?php echo $key['conclusion']; ?></td>
             <?php } else{ ?>
                 <td contenteditable="true" onClick="showError(this);">
                     <?php echo $key['conclusion']; ?></td>
@@ -45,23 +45,18 @@
 </table>
 
 <script type="text/javascript">
-    function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
-    }
-    function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
+    function saveToconclusion(editableObj, column, id) {
         $.ajax({
             url: "<?php echo base_url() . 'ett/update_conclusion' ?>",
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
                 $(editableObj).css("background", "#FDFDFD");
-                if (response.success) {
-                    toastr["success"](response.message);
-                } else {
+                if (response.success == true) {
                     toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 </script>
