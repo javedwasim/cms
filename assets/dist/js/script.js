@@ -1660,6 +1660,7 @@ $(document.body).on('click', '.user_permission', function(){
         }
 
     });
+    toastr["success"]('Information  save successfully!');
 });
 
 $(document.body).on('click', '.edit-inst-btn', function(){
