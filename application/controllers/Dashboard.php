@@ -15,13 +15,13 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-    $date = date('Y-m-d');
+    $date = date('Y-m-d'); 
 		 if(!$this->session->userdata('is_logged_in')){
        		$this->load->view('login');
 	     } else{
         if($this->session->userdata('username')=='test'){
-          $data['total_attended'] = $this->User_model->count_total_attendent();
-          $data['total_not_attended'] = $this->User_model->count_not_attendent();
+          $data['total_attended'] = $this->User_model->count_total_attendent($date);
+          $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
           $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
           $data['remaining_patient'] = $this->Dashboard_model->get_total_checked();
           $data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
@@ -32,10 +32,10 @@ class Dashboard extends CI_Controller {
           $data['investigation_count'] = $this->User_model->count_investigation_waiting();
           $data['checkup_count'] = $this->User_model->count_checkup_waiting();
           $data['count_complete'] = $this->User_model->count_complete();
-          $data['fee_count'] = $this->User_model->get_todays_fee_paid();
-          $data['ett_fee'] = $this->User_model->get_todays_ett_fee_paid();
-          $data['echo_fee'] = $this->User_model->get_todays_echo_fee_paid();
-          $data['fee_refund'] = $this->User_model->get_todays_total_refund();
+          $data['fee_count'] = $this->User_model->get_todays_fee_paid($date);
+          $data['ett_fee'] = $this->User_model->get_todays_ett_fee_paid($date);
+          $data['echo_fee'] = $this->User_model->get_todays_echo_fee_paid($date);
+          $data['fee_refund'] = $this->User_model->get_todays_total_refund($date);
           $data['rights'] = $this->session->userdata('other_rights');
           $this->load->view('partial/header');
           $this->load->view('partial/navbar');
