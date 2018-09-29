@@ -187,6 +187,13 @@ $(document.body).on('click', '.feepaid', function () {
                     $('.pat_search').datepicker({
                         format: 'd-M-yyyy'
                     });
+                    $('#sidebarCollapse').on('click', function () {
+                        var icon = $('#sidebarCollapse > .fas');
+                        icon.toggleClass('fa-arrow-left fa-arrow-right');
+                        $("#full_name").focus();
+                        $('#sidebar').toggleClass('active');
+                        $('#content').toggleClass('actv');
+                    });
                     //////// initilize datatable///////////////////
                     var oTable = $('#editable-datatable').DataTable({
                         "info": false,
@@ -271,6 +278,13 @@ $(document.body).on('click', '.wecg', function () {
                     });
                     $('.pat_search').datepicker({
                         format: 'd-M-yyyy'
+                    });
+                    $('#sidebarCollapse').on('click', function () {
+                        var icon = $('#sidebarCollapse > .fas');
+                        icon.toggleClass('fa-arrow-left fa-arrow-right');
+                        $("#full_name").focus();
+                        $('#sidebar').toggleClass('active');
+                        $('#content').toggleClass('actv');
                     });
                     //////// initilize datatable///////////////////
                     var oTable = $('#editable-datatable').DataTable({
@@ -358,6 +372,13 @@ $(document.body).on('click', '.wett', function () {
                     $('.pat_search').datepicker({
                         format: 'd-M-yyyy'
                     });
+                    $('#sidebarCollapse').on('click', function () {
+                        var icon = $('#sidebarCollapse > .fas');
+                        icon.toggleClass('fa-arrow-left fa-arrow-right');
+                        $("#full_name").focus();
+                        $('#sidebar').toggleClass('active');
+                        $('#content').toggleClass('actv');
+                    });
                     //////// initilize datatable///////////////////
                     var oTable = $('#editable-datatable').DataTable({
                         "info": false,
@@ -441,6 +462,13 @@ $(document.body).on('click', '.wecho', function () {
                     });
                     $('.pat_search').datepicker({
                         format: 'd-M-yyyy'
+                    });
+                    $('#sidebarCollapse').on('click', function () {
+                        var icon = $('#sidebarCollapse > .fas');
+                        icon.toggleClass('fa-arrow-left fa-arrow-right');
+                        $("#full_name").focus();
+                        $('#sidebar').toggleClass('active');
+                        $('#content').toggleClass('actv');
                     });
                     //////// initilize datatable///////////////////
                     var oTable = $('#editable-datatable').DataTable({
@@ -527,6 +555,13 @@ $(document.body).on('click', '.investigation', function () {
                     $('.pat_search').datepicker({
                         format: 'd-M-yyyy'
                     });
+                    $('#sidebarCollapse').on('click', function () {
+                        var icon = $('#sidebarCollapse > .fas');
+                        icon.toggleClass('fa-arrow-left fa-arrow-right');
+                        $("#full_name").focus();
+                        $('#sidebar').toggleClass('active');
+                        $('#content').toggleClass('actv');
+                    });
                     //////// initilize datatable///////////////////
                     var oTable = $('#editable-datatable').DataTable({
                         "info": false,
@@ -610,6 +645,13 @@ $(document.body).on('click', '.checkup', function () {
                     });
                     $('.pat_search').datepicker({
                         format: 'd-M-yyyy'
+                    });
+                    $('#sidebarCollapse').on('click', function () {
+                        var icon = $('#sidebarCollapse > .fas');
+                        icon.toggleClass('fa-arrow-left fa-arrow-right');
+                        $("#full_name").focus();
+                        $('#sidebar').toggleClass('active');
+                        $('#content').toggleClass('actv');
                     });
                     //////// initilize datatable///////////////////
                     var oTable = $('#editable-datatable').DataTable({
@@ -695,6 +737,13 @@ $(document.body).on('click', '.complete', function () {
                     });
                     $('.pat_search').datepicker({
                         format: 'd-M-yyyy'
+                    });
+                    $('#sidebarCollapse').on('click', function () {
+                        var icon = $('#sidebarCollapse > .fas');
+                        icon.toggleClass('fa-arrow-left fa-arrow-right');
+                        $("#full_name").focus();
+                        $('#sidebar').toggleClass('active');
+                        $('#content').toggleClass('actv');
                     });
                     //////// initilize datatable///////////////////
                     var oTable = $('#editable-datatable').DataTable({
@@ -1003,6 +1052,13 @@ function valupdate(val) {
                         oTable.$('tr.row_selected').removeClass('row_selected');
                         $(this).addClass('row_selected');
                     }
+                });
+                $('#sidebarCollapse').on('click', function () {
+                    var icon = $('#sidebarCollapse > .fas');
+                    icon.toggleClass('fa-arrow-left fa-arrow-right');
+                    $("#full_name").focus();
+                    $('#sidebar').toggleClass('active');
+                    $('#content').toggleClass('actv');
                 });
                 $('.app_date').datepicker({
                     format: 'd-M-yyyy'
@@ -2987,6 +3043,23 @@ function get_item_limiter(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('#limiter_date').datepicker({
                     format: 'd-M-yyyy'
+                });
+            }
+        }
+    });
+}
+
+function get_vitals(func_call) {
+    $.ajax({
+        url: '/cms/user/'+func_call,
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.dashboard-content').remove();
+                $('#dashboard-content').append(response.result_html);
+                $('.datatable').DataTable({
+                    paging: false,
+                    info: false
                 });
             }
         }

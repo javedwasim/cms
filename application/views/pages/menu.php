@@ -121,6 +121,10 @@
        get_income_expanse($(this).attr('data-func-call'));
    });
 
+   $('#list_itmes_vital').click(function(){
+       get_vitals($(this).attr('data-func-call'));
+   });
+
    $(document).ready(function(){
       $("#list_itmes_").click(function(){
         $(this).children('ul').show();
