@@ -1,6 +1,6 @@
 <div class="table-responsive">
     <?php
-        if(isset($rights[0]['rights'])):print_r($rights[0]['rights']);
+        if(isset($rights[0]['rights']))://print_r($rights[0]['rights']);
             $permissions = explode(',',$rights[0]['rights']);
         endif;
         $user_info = ($this->session->userdata('user_data_logged_in'));
