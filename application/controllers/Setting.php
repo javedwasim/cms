@@ -218,6 +218,7 @@
             $data['other_rights'] = $this->Setting_model->get_other_rights();
             //print_r($data['other_rights']); die();
             $data['userdata'] = $this->session->userdata('userdata');
+            $data['users'] = $this->Setting_model->get_users();
 			$json['result_html'] = $this->load->view('pages/register-user', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
@@ -925,8 +926,9 @@
             $user_permission = explode('-',$data['permission']);
             $user_permission['status'] = $data['status'];
             $result = $this->Setting_model->assign_permission($user_permission);
+
             $json['success'] = true;
-            $json['message'] = "Permission assigned to user!";
+            $json['message'] = "Information save successfully!";
 
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
