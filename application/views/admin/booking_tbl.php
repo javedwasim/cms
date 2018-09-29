@@ -7,9 +7,7 @@
     <table class="table table-bordered" cellspacing="0" id="editable-datatable" width="100%">
         <thead class="tb-bg white-text">
             <tr>
-                <?php  if(!in_array("can_delete-0", $permissions)): ?>
-                    <th>Action</th>
-                <?php endif; ?>
+                <th class="<?php echo !in_array("appointments-can_delete-0", $permissions)?"hide":''; ?>" >Action</th>
                 <th>Sr</th>
                 <th>Order</th>
                 <th style="width:150px;">Name</th>
@@ -56,13 +54,12 @@
                 for($i=1; $i<=5; $i++){
                     ?>
                 <tr class="gradeX colorchnage">
-                    <?php  if(!in_array("can_delete-0", $permissions)): ?>
-                        <td>
-                            <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </td>
-                    <?php endif; ?>
+
+                    <td class="<?php echo !in_array("can_delete-0", $permissions)?"hide":''; ?>">
+                        <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
 
                     <td ><?php echo $i?></td>
                     <td class="order-number" ><?php echo $i?></td>
@@ -234,13 +231,11 @@
                 ?>
 
                 <tr class="gradeX colorchnage">
-                    <?php  if(!in_array("can_delete-0", $permissions)): ?>
-                        <td>
-                            <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </td>
-                    <?php endif; ?>
+                    <td class="<?php echo !in_array("appointments-can_delete-0", $permissions)?"hide":''; ?>">
+                        <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
                     <td ><?php echo $order; ?></td>
                     <td>
                         <?php echo $details['order_number']; ?>
@@ -346,13 +341,11 @@
                 ?>
 
                 <tr class="gradeX colorchnage">
-                    <?php  if(!in_array("can_delete-0", $permissions)): ?>
-                        <td>
-                            <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </td>
-                    <?php endif; ?>
+                    <td class="<?php echo !in_array("appointments-can_delete-0", $permissions)?"hide":''; ?>">
+                        <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                     </td>
                     <td ><?php echo $order; ?></td>
                     <td>
                         <?php echo $details['order_number']; ?>

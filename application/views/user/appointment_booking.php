@@ -1,6 +1,4 @@
-<?php
-    if(isset($rights[0]['user_rights'])){$appointment_rights = explode(',',$rights[0]['user_rights']);$loggedin_user = $this->session->userdata('userdata');}
-?>
+<?php if(isset($rights[0]['user_rights'])){$appointment_rights = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
 <div class="content-wrapper">
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
