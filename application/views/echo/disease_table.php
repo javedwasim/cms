@@ -1,8 +1,8 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive disease_table datatables" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive disease_table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 10%">Delete</th>
+        <th class="table-header" style="width: 5%">Delete</th>
         <th class="table-header">Name</th>
     </tr>
     </thead>
@@ -64,11 +64,13 @@
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
+                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 
 </script>

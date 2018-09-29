@@ -1,8 +1,8 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive structure_table" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive structure_table" cellspacing="0" id="" style="width: 100%;table-layout: fixed;" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 10%">Delete</th>
+        <th class="table-header" style="width:5%">Delete</th>
         <th class="table-header">Structure</th>
     </tr>
     </thead>
