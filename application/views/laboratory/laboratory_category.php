@@ -8,9 +8,9 @@
                     <label>New Category</label>
                     <input type="text" class="form-control col-md-6" name="" id="lab_category">
                     <?php if($loggedin_user['is_admin']==1){ ?>
-                        <button class="btn btn-primary add-lab-category">Add</button>
+                        <button class="btn btn-primary btn-sm add-lab-category">Add</button>
                     <?php } elseif(in_array("lab_tests-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                        <button class="btn btn-primary add-lab-category">Add</button>
+                        <button class="btn btn-primary btn-sm add-lab-category">Add</button>
                     <?php } else{ ?>
                         <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
                     <?php } ?>
@@ -18,18 +18,18 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id=""
+            <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
                    width="100%">
                 <thead>
                 <tr>
-                    <th style="width: 10%"></th>
+                    <th style="width:95px;"></th>
                     <th>Category Name</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($categories as $category): ?>
                     <tr>
-                        <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
+                        <td style="width:95px;" data-toggle="modal" data-target="#history-modal">
                             <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
                                 <a class="delete-lab-category btn btn-danger btn-xs"
                                    href="javascript:void(0)" title="delete"
@@ -47,12 +47,12 @@
                             <?php } ?>
                         </td>
                         <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                            <td contenteditable="true"
+                            <td contenteditable="true" class="exam_cate"
                                 onBlur="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')"
                                 onClick="showEdit(this);">
                                 <?php echo $category['name']; ?></td>
                         <?php } else{ ?>
-                            <td contenteditable="true" onClick="showError(this);">
+                            <td contenteditable="true" class="exam_cate"  onClick="showError(this);">
                                 <?php echo $category['name']; ?></td>
                         <?php } ?>
                     </tr>
@@ -92,10 +92,12 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.exam_cate').css('background', '#FFF');
+        $('td.exam_cate').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'setting/save_lab_category' ?>",
             type: "POST",
@@ -107,5 +109,6 @@
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 </script>

@@ -230,6 +230,9 @@ li.paginate_button.page-item.active {
     background:#26c6da;
     color: #fff;
 }
+li#list_itmes_vital {
+    padding-left: 25px;
+}
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */

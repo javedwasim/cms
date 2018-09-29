@@ -1298,6 +1298,14 @@ class User extends MY_Controller {
         }
     }
 
+    public function vital(){
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['result_html'] = $this->load->view('pages/vitals', $data, true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
 }
 ?>
 
