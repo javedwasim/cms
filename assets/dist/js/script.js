@@ -1150,23 +1150,27 @@ $(document.body).on('click', '#update_dosage_medicine_btn', function(){
 });
 
 $(document.body).on('click', '.add-disease-category', function(){
-    var name = $('#disease').val();
-    $.ajax({
-        url: window.location.origin+window.location.pathname+'echo_controller/add_disease_category',
-        type: 'post',
-        data: {name:name},
-        cache: false,
-        success: function(response) {
-            $('.disease_category_container').empty();
-            $('.disease_category_container').append(response.result_html);
-            if (response.success) {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+    var validate = $( "#disease_category_form" ).validate();
+    if (validate.form()) {
+        var name = $('#disease').val();
+        $.ajax({
+            url: window.location.origin + window.location.pathname + 'echo_controller/add_disease_category',
+            type: 'post',
+            data: {name: name},
+            cache: false,
+            success: function (response) {
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+                $('#disease').val('');
             }
-        }
-    });
-    return false;
+        });
+        return false;
+    }
 });
 
 $(document.body).on('click', '.delete-disease', function(){

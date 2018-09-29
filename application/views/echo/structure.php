@@ -6,7 +6,7 @@
                 <div class="col-lg-2 col-md-3" >
                     <div class="form-group">
                         <label>New Disease</label>
-                        <input type="text" class="form-control" name="structure" id="structure">
+                        <input type="text" class="form-control" name="structure" id="structure" required maxlength="50">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 p-0">
@@ -23,7 +23,7 @@
                 <div class="col-lg-2 col-md-3" >
                     <div class="form-group">
                         <label>New Finding:</label>
-                        <input type="text" class="form-control" name="structure_finding" id="structure_finding">
+                        <input type="text" class="form-control" name="structure_finding" id="structure_finding" required maxlength="50">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 p-0">
@@ -40,7 +40,7 @@
                 <div class="col-lg-2 col-md-3" >
                     <div class="form-group">
                         <label>New Diagnosis:</label>
-                        <input type="text" class="form-control" name="name" id="structure_diagnosis">
+                        <input type="text" class="form-control" name="name" id="structure_diagnosis" required maxlength="50">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 p-0">
