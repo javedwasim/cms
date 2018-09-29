@@ -1,10 +1,5 @@
 <?php
-    if(isset($rights[0]['user_rights']))
-    {
-        $appointment_rights = explode(',',$rights[0]['user_rights']);
-        //print_r($appointment_rights);
-        $loggedin_user = $this->session->userdata('userdata');
-    }
+    if(isset($rights[0]['user_rights'])){$appointment_rights = explode(',',$rights[0]['user_rights']);$loggedin_user = $this->session->userdata('userdata');}
 ?>
 <div class="content-wrapper">
     <!-- ============================================================== -->
@@ -60,7 +55,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php if($loggedin_user['is_admin']==1){ ?>
+                                    <?php if($loggedin_user['is_admin']==1){   ?>
                                         <button type="button" name="book_appointment"
                                                 id="book_appointment" class="btn btn-primary">Save</button>
                                     <?php } elseif(in_array("appointments-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>

@@ -7,7 +7,7 @@
                         <form id="research_category_form">
                             <div class="col-md-12">
                                 <label>Research Name</label>
-                                <input type="text" class="form-control col-md-6" name="name" id="research_name" >
+                                <input type="text" class="form-control col-md-6" name="name" id="research_name" required maxlength="50">
                                 <button class="btn btn-primary add-research">Add</button>
                             </div>
                         </form>

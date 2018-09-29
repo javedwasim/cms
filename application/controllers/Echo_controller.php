@@ -33,7 +33,7 @@ class Echo_controller extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'disease Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Disease  Name', 'required|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
@@ -43,7 +43,7 @@ class Echo_controller extends MY_Controller
             $result = $this->Echo_model->add_disease_category($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "disease created successfully!";
+                $json['message'] = "Info save successfully successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -109,7 +109,7 @@ class Echo_controller extends MY_Controller
         $result = $this->Echo_model->delete_disease_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "disease Category successfully deleted.";
+            $json['message'] = "Disease Category successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -189,7 +189,7 @@ class Echo_controller extends MY_Controller
         $result = $this->Echo_model->add_disease_item($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "disease item save successfully!";
+            $json['message'] = "Disease  item save successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -204,7 +204,7 @@ class Echo_controller extends MY_Controller
         $result = $this->Echo_model->delete_disease_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "disease item successfully deleted.";
+            $json['message'] = "Disease  item successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
