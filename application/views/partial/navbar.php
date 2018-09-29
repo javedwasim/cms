@@ -52,11 +52,9 @@
                                 <div class="u-img"><img src="<?php echo base_url(); ?>/assets/dist/images/dr_shahadat.jpg" alt="user"></div>
                                 <div class="u-text">
                                     <h4><?php echo $this->session->userdata('username')?></h4>
-                                    <p class="text-muted"><?php echo $this->session->userdata('username')?>@gmail.com</p><a href="#" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                    <p class="text-muted"><?php echo $this->session->userdata('username')?>@gmail.com
                                 </div>
                             </li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="<?php echo base_url('dashboard/logout'); ?>"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>

@@ -1,14 +1,5 @@
 
 <script type="text/javascript">
-   $('#expList > li').click(function(e){
-      e.stopPropagation();
-      if(this.getElementsByTagName("ul")[0].style.display == 'block'){
-        $(this).find("ul").slideUp();
-    }
-      else{
-        $(this).find("ul").slideDown();
-    }
-    });
 
    $('li #list_itmes_profession').click(function(){
    	    get_professions($(this).attr('data-func-call'));
@@ -130,22 +121,27 @@
        get_income_expanse($(this).attr('data-func-call'));
    });
 
-   $(document).ready(function()
-   {
-       $('#expList li').click(function(e)
-       {
-           if(this.id!='list_itmes_'){
-               $( "li" ).removeClass( "active nav-link" );
-               $( "#"+this.id ).addClass( "active nav-link" );
-           }
-
-       });
+   $(document).ready(function(){
+      $("#list_itmes_").click(function(){
+        $(this).children('ul').show();
+        $('#list_itmes_clinical ul').hide();
+        $('#list_itmes_setting ul').hide();
+      });
+      $("#list_itmes_clinical").click(function(){
+        $('#list_itmes_ ul').hide();
+        $(this).children('ul').show();
+        $('#list_itmes_setting ul').hide();
+      });
+      $("#list_itmes_setting").click(function(){
+        $('#list_itmes_ ul').hide();
+        $('#list_itmes_clinical ul').hide();
+        $(this).children('ul').show();
+      });
+       $(".sidebar-menu .components li ul li").click(function() {
+          $(".sidebar-menu .components li ul li.active").removeClass('active');
+            $(this).addClass('active');
+        });
    });
-
-   $(".list-unstyled li").click(function (e) {
-         e.stopPropagation();
-         $(this).children('ul').toggle();
-    });
 
 </script>
 

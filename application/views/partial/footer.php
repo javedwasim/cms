@@ -78,14 +78,13 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/custom.js"></script>
     <script src="<?php echo base_url(); ?>assets/dist/js/script.js"></script>
     <!-- End custom js-->
-    <script>
+ <!--    <script>
         function showError() {
             toastr["error"]('You are not authorised for this action.');
         }
         var $loading = $('.preloader').hide();
         //Attach the event handler to any element
-        $(document)
-            .ajaxStart(function () {
+        $(document).ajaxStart(function () {
                 //ajax request went so show the loading image
                $loading.show();
             })
@@ -93,7 +92,7 @@
                 //got response so hide the loading image
                 $loading.hide();
             });
-    </script>
+    </script> -->
 </body>
 
 </html>

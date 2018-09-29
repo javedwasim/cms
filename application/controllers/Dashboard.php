@@ -74,6 +74,7 @@ class Dashboard extends CI_Controller {
                 if ($result) {
                     if (password_verify($this->input->post('password'), $result['password'])) {
                         $this->session->set_userdata('userdata', $result);
+                        $this->session->set_userdata($result);
                         $other_rights = $this->Dashboard_model->get_other_rights_detail();
                         $this->session->set_userdata('other_rights', $other_rights);
                         $this->session->set_userdata('user_data_logged_in', $result);

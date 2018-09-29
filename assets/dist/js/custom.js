@@ -94,11 +94,6 @@ $(document).ready(function () {
 
     });
 
-    $(".list-unstyled li").click(function (e) {
-         e.stopPropagation();
-         $(this).children('ul').toggle();
-    });
-
     /////////////// focus script ///////////////////
 
     $("#full_name").focus();

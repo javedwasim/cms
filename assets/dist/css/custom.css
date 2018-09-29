@@ -226,7 +226,10 @@ li.paginate_button.page-item.active {
     width: 50%;
     transition: all 0.6s;
 }
-
+.list_items.active{
+    background:#26c6da;
+    color: #fff;
+}
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
