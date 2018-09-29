@@ -2,7 +2,8 @@ var oTable = "";
 $(document).ready(function () {
     //////////////////////////////initilize datepicker///////////////////////
     $('.app_date').datepicker({
-        format: 'd-M-yyyy'
+        format: 'd-M-yyyy',
+        autoclose: true
     });
     $('#limiter_date').datepicker({
         format: 'd-M-yyyy'
@@ -874,7 +875,8 @@ function appointments() {
                 });
                 $('.app_date').datepicker({
                     format: 'd-M-yyyy',
-                    startDate: date
+                    startDate: date,
+                    autoclose: true
                 });
             }
         }
@@ -959,7 +961,8 @@ $(document.body).on('click', '#book_appointment', function (e) {
                     }
                 });
                 $('.app_date').datepicker({
-                    format: 'd-M-yyyy'
+                    format: 'd-M-yyyy',
+                    autoclose: true
                 });
 
                 if (data.message == "Name and contact Number cannot be null.") {
@@ -1061,7 +1064,8 @@ function valupdate(val) {
                     $('#content').toggleClass('actv');
                 });
                 $('.app_date').datepicker({
-                    format: 'd-M-yyyy'
+                    format: 'd-M-yyyy',
+                    autoclose: true
                 });
                 toastr["success"]('Status Update');
             }
@@ -1137,7 +1141,8 @@ function bookings() {
                     }
                 });
                 $('.app_date').datepicker({
-                    format: 'd-M-yyyy'
+                    format: 'd-M-yyyy',
+                    autoclose: true
                 });
             }
         }
@@ -1227,7 +1232,8 @@ $(document.body).on('click', '#time_consultant', function () {
                 });
                 $('.app_date').datepicker({
                     format: 'd-M-yyyy',
-                    startDate: 'date'
+                    startDate: 'date',
+                    autoclose: true
                 });
                 $("#divCollapse").click(function () {
                     $("#full_name").focus();
@@ -2433,6 +2439,7 @@ function consultant_booking(val) {
     var dataToupdate = val.name;
     // var Toupdate = $(val).parent().parent().find('.appointment_booking_id').text();
     // var whereToupdate = $.trim(Toupdate);
+    var appdate = $('#app_date').val();
     var orderno = $.trim($(val).parent().parent().find('.order-number').text());
     var valuetoinsert = val.value;
     var bookingflag = $('#booking_flag').val();
@@ -2445,7 +2452,8 @@ function consultant_booking(val) {
             valToUpdate: dataToupdate,
             flag: bookingflag,
             orderno: orderno,
-            tabledate: tabledate
+            tabledate: tabledate,
+            appdate:appdate
         }, success: function (response) {
             if (response.booking_table != '') {
                 $('.table-responsive').remove();
@@ -2498,7 +2506,8 @@ function consultant_booking(val) {
                     }
                 });
                 $('.app_date').datepicker({
-                    format: 'd-M-yyyy'
+                    format: 'd-M-yyyy',
+                    autoclose: true
                 });
 
                 if (response.message == 'Inserted successfully') {

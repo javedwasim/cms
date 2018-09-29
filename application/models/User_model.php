@@ -458,8 +458,7 @@ class User_model extends CI_Model {
         }
     }
 
-    public function insert_consultant($value,$wheretoinsert,$flag,$orderno){
-        $date = date('Y-m-d H:i:s');
+    public function insert_consultant($value,$wheretoinsert,$flag,$orderno,$date){
         $collectedby = $this->session->userdata('user_data_logged_in');
         $collectedby = $collectedby['username'];
         if($wheretoinsert == 'full_name'){

@@ -130,6 +130,8 @@
                     if (response.booking_table != '') {
                         $('.table-responsive').remove();
                         $('#table-booking').append(response.booking_table);
+                        $('.wallet-modal-box').remove();
+                        $('#wallet-modal-box').append(response.wallet_count);
                         $("#full_name").focus();
                         //////////////// datatable initilization//////////////
                         var oTable = $('#editable-datatable').DataTable({
