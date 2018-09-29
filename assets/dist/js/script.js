@@ -91,23 +91,27 @@ $(document.body).on('click', '.delete-advice-item', function(){
 });
 
 $(document.body).on('click', '.add-research', function(){
-    var name = $('#research_name').val();
-    $.ajax({
-        url: '/cms/setting/add_research',
-        type: 'post',
-        data: {name:name},
-        cache: false,
-        success: function(response) {
-            $('.dashboard-content').empty();
-            $('.dashboard-content').append(response.result_html);
-            if (response.success) {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+    var validate = $( "#research_category_form" ).validate();
+    if (validate.form()) {
+        var name = $('#research_name').val();
+        $.ajax({
+            url: '/cms/setting/add_research',
+            type: 'post',
+            data: {name: name},
+            cache: false,
+            success: function (response) {
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+                $('#research_name').val('');
             }
-        }
-    });
-    return false;
+        });
+        return false;
+    }
 });
 
 $(document.body).on('click', '.edit-research-btn', function(){
