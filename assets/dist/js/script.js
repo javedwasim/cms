@@ -1,21 +1,25 @@
 $(document.body).on('click', '.add-advice', function(){
-    var name = $('#advice_name').val();
-    $.ajax({
-        url: '/cms/setting/add_advice',
-        type: 'post',
-        data: {name:name},
-        cache: false,
-        success: function(response) {
-            $('.dashboard-content').empty();
-            $('.dashboard-content').append(response.result_html);
-            if (response.success) {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+    var validate = $( "#advice_category_form" ).validate();
+    if (validate.form()) {
+        var name = $('#advice_name').val();
+        $.ajax({
+            url: '/cms/setting/add_advice',
+            type: 'post',
+            data: {name: name},
+            cache: false,
+            success: function (response) {
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+                $('#advice_name').val('');
             }
-        }
-    });
-    return false;
+        });
+        return false;
+    }
 });
 
 $(document.body).on('click', '.delete-advice', function(){
@@ -41,24 +45,27 @@ $(document.body).on('click', '.delete-advice', function(){
 
 
 $(document.body).on('click', '#advice_item_btn', function(){
-    $.ajax({
-        url: $('#advice_item_form').attr('data-action'),
-        type: 'post',
-        data: $('#advice_item_form').serialize(),
-        cache: false,
-        success: function(response) {
-            $('.dashboard-content').empty();
-            $('.dashboard-content').append(response.result_html);
-            if (response.success) {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+    var validate = $( "#advice_item_form" ).validate();
+    if (validate.form()) {
+        $.ajax({
+            url: $('#advice_item_form').attr('data-action'),
+            type: 'post',
+            data: $('#advice_item_form').serialize(),
+            cache: false,
+            success: function (response) {
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
+                if (response.success) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+                $('#advice_item_form')[0].reset();
             }
+        });
 
-        }
-    });
-
-    return false;
+        return false;
+    }
 });
 
 
@@ -1863,3 +1870,16 @@ $(document.body).on('click', '#save_lab_test', function(){
     return false;
 
 });
+
+function filter_advice_item_category(advice_id) {
+    $.ajax({
+        url: '/cms/setting/get_advice_item/'+advice_id,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.dashboard-content').empty();
+            $('.dashboard-content').append(response.result_html);
+        }
+    });
+    return false;
+}
