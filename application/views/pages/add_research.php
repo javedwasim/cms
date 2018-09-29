@@ -4,15 +4,17 @@
             <div class="card">
             	<div class="card-header">
             		<div class="row">
-    					<div class="col-md-6">
-	    					<label>Research Name</label>
-	    					<input type="text" class="form-control col-md-6" name="name" id="research_name" >
-                            <button class="btn btn-primary add-research">Add</button>
-    					</div>
+                        <form id="research_category_form">
+                            <div class="col-md-12">
+                                <label>Research Name</label>
+                                <input type="text" class="form-control col-md-6" name="name" id="research_name" >
+                                <button class="btn btn-primary add-research">Add</button>
+                            </div>
+                        </form>
     				</div>
             	</div>
                 <div class="card-body" id="advice_item_table_container">
-                    <table class="table table-bordered nowrap responsive tbl-qa datatables" cellspacing="0" width="100%" >
+                    <table class="table table-bordered nowrap responsive tbl-qa" cellspacing="0" width="100%" >
                        <thead>
                             <tr>
                                 <th style="width: 10%"></th>
@@ -31,7 +33,7 @@
                                            data-research-id="<?php echo $research['id']; ?>"><i class="far fa-question-circle"></i></a>
 
                                     </td>
-                                    <td contenteditable="true"
+                                    <td contenteditable="true" class="research_cate"
                                         onBlur="saveToDatabase(this,'research_name','<?php echo $research['id']; ?>')"
                                         onClick="showEdit(this);">
                                         <?php echo $research['name']; ?></td>
@@ -69,42 +71,7 @@
             </form>
         </div>
     </div>
-    <style>
-        body {
-            width: 100%;
-        }
-
-        .current-row {
-            background-color: #B24926;
-            color: #FFF;
-        }
-
-        .current-col {
-            background-color: #1b1b1b;
-            color: #FFF;
-        }
-
-        .tbl-qa {
-            width: 100%;
-            font-size: 0.9em;
-            background-color: #FFFFFF;
-        }
-
-        .tbl-qa th.table-header {
-            padding: 5px;
-            text-align: left;
-            padding: 10px;
-        }
-
-        .tbl-qa .table-row td {
-            padding: 10px;
-            background-color: #FDFDFD;
-        }
-    </style>
 </div>
-
-
-
 <script>
     $(document).ready(function () {
         $('.datatables').DataTable({
@@ -114,10 +81,12 @@
         });
     });
     function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.research_cate').css('background', '#FFF');
+        $('td.research_cate').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'setting/save_research' ?>",
             type: "POST",
@@ -126,10 +95,9 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 </script>

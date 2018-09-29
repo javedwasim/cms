@@ -195,8 +195,8 @@
             $json['result_html'] = $this->load->view('pages/advice',$data, true);
             if($this->input->is_ajax_request()) {
                 set_content_type($json);
-            }
         }
+    }
 
 		public function research(){
             $data['researches'] = $this->Setting_model->get_researches();
@@ -963,5 +963,21 @@
                 set_content_type($json);
             }
         }
+
+        public function get_advice_item($cat_id)
+        {
+            $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
+            $data['advices'] = $this->Setting_model->get_advices();
+            $data['selected_category'] = $cat_id;
+            $data['active_tab'] = 'advice_item';
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['result_html'] = $this->load->view('pages/advice', $data, true);
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
 	}
+
+
 ?>
