@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Patient's Examination Settings
+                    Laboratory Test Settings
                 </div>
                 <div class="card-body">
                     <!-- Nav tabs -->
@@ -35,12 +35,3 @@
         </div>
     </div>
     <!-- row -->
-<script>
-    $(document).ready(function () {
-        $('.datatables').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false
-        });
-    });
-</script>

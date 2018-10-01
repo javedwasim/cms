@@ -11,9 +11,6 @@
   <title>CMS by TECHSOL</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/iconfonts/puse-icons-feather/feather.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/css/vendor.bundle.addons.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/login_style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/dist/images/favicon.png" />
@@ -69,14 +66,14 @@
                 <div class="form-group">
                   <button class="btn btn-primary submit-btn btn-block">Login</button>
                 </div>
-                <div class="form-group d-flex justify-content-between">
+               <!--  <div class="form-group d-flex justify-content-between">
                   <div class="form-check form-check-flat mt-0">
                     <label class="form-check-label">
                       <input type="checkbox" class="form-check-input" checked> Keep me signed in
                     </label>
                   </div>
                   <a href="#" class="text-small forgot-password text-black">Forgot Password</a>
-                </div>
+                </div> -->
                 <!-- <div class="form-group">
                   <button class="btn btn-block g-login">
                     <img class="mr-3" src="../../images/file-icons/icon-google.svg" alt="">Log in with Google</button>
@@ -106,14 +103,6 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script src="<?php echo base_url(); ?>assets/vendors/js/vendor.bundle.base.js"></script>
-  <script src="<?php echo base_url(); ?>assets/vendors/js/vendor.bundle.addons.js"></script>
-  <!-- endinject -->
-  <!-- inject:js -->
-  <script src="<?php echo base_url(); ?>assets/dist/js/misc.js"></script>
-  <!-- endinject -->
 </body>
 
 </html>

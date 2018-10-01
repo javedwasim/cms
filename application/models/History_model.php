@@ -19,6 +19,17 @@
             }
         }
 
+        public function get_profile_history_exist($data){
+            $editval = trim($data['name']);
+            $editval = preg_replace('/(<br>)+$/', '', $editval);
+            $result = $this->db->select('*')->from('profile_history')->where('name',$editval)->get();
+            if ($result->num_rows()>0) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         public function add_profile_history($data){
 		    if(isset($data['id'])){
                 $id = $data['id'];
@@ -62,6 +73,17 @@
             }
         }
 
+        public function history_item_exits($data){
+            $name = trim($data['name']);
+            $name = preg_replace('/(<br>)+$/', '', $name);
+            $result = $this->db->select('*')->from('history_item')->where('name',$name)->get();
+            if ($result->num_rows()>0) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         public function delete_history_item($id) {
             $this->db->where('id', $id)->delete('history_item');
             return $this->db->affected_rows();
@@ -92,7 +114,7 @@
 
         public function get_history_items_by_category($cate_id){
             if($cate_id>0){
-                $result = $this->db->select('*')->from('history_item')->where('history_id',$cate_id)->get();
+                $result = $this->db->select('*')->from('history_item')->where('profile_history_id',$cate_id)->get();
             }else{
                 $result = $this->db->select('*')->from('history_item')->get();
             }

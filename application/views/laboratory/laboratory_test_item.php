@@ -62,11 +62,11 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id=""
+            <table class="table table-bordered responsive" cellspacing="0" id=""
                    width="100%">
                 <thead>
                 <tr>
-                    <th style="width: 10%"></th>
+                    <th style="width:95px;"></th>
                     <th>Item Name</th>
                     <th>Units</th>
                 </tr>
@@ -74,7 +74,7 @@
                 <tbody>
                     <?php foreach ($items as $item): ?>
                         <tr>
-                            <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
+                            <td style="width:95px; word-break: break-all;" data-toggle="modal" data-target="#history-modal">
                                 <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
                                     <a class="delete-lab-test btn btn-danger btn-xs"
                                        href="javascript:void(0)" title="delete"
@@ -93,18 +93,18 @@
 
                             </td>
                             <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                                <td contenteditable="true"
+                                <td contenteditable="true" style="word-break: break-all; width: 42%'"class="exam_cate"
                                     onBlur="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')"
                                     onClick="showEdit(this);">
                                     <?php echo $item['name']; ?></td>
-                                <td contenteditable="true"
+                                <td contenteditable="true" style="word-break: break-all;width: 50%;"class="exam_cate"
                                     onBlur="saveTestItemDescription(this,'unit','<?php echo $item['id']; ?>')"
                                     onClick="showEdit(this);">
                                     <?php echo $item['units']; ?></td>
                             <?php } else{ ?>
-                                <td contenteditable="true" onClick="showError(this);">
+                                <td  onClick="showError(this);">
                                     <?php echo $item['name']; ?></td>
-                                <td contenteditable="true" onClick="showError(this);">
+                                <td  onClick="showError(this);">
                                     <?php echo $item['units']; ?></td>
                             <?php } ?>
 
@@ -145,10 +145,12 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.exam_cate').css('background', '#FFF');
+        $('td.exam_cate').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveTestItemDescription(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'setting/save_lab_test_item' ?>",
             type: "POST",
@@ -157,10 +159,9 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 </script>

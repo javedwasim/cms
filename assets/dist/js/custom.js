@@ -72,10 +72,6 @@ $(document).ready(function () {
     ///////////////////////////////////////////////////
 
     /////////////// sidebar toggle code///////////////
-
-    $("#sidebar").mCustomScrollbar({
-        theme: "minimal"
-    });
     $('#dismiss, .overlay').on('click', function () {
         $('#sidebar').removeClass('active');
         $('.overlay').removeClass('active');
@@ -1821,56 +1817,8 @@ $(document.body).on('click', '#register-user', function () {
     });
 });
 
-
-/////////////////////////////////// load special instructions page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-// $(document.body).on('click', '#special_instruction', function () {
-//     $.ajax({
-//         url: '/cms/instruction/special_instruction',
-//         cache: false,
-//         success: function (response) {
-//             if (response.result_html != '') {
-//                 $('.dashboard-content').remove();
-//                 $('#dashboard-content').append(response.result_html);
-//                 ///////////////// initilize datatable //////////////
-//                 $('#research-table').DataTable({
-//                     "scrollX": true,
-//                     scrollY: '50vh',
-//                     scrollCollapse: true,
-//                     paging: false,
-//                     info: false
-//                 });
-//             }
-//         }
-//     });
-// });
-
 /////////////////////////////////// load profession page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
-
-// $(document.body).on('click', '#pat_profession', function () {
-//     $.ajax({
-//         url: '/cms/setting/pat_profession',
-//         cache: false,
-//         success: function (response) {
-//             if (response.result_html != '') {
-//                 $('.dashboard-content').remove();
-//                 $('#dashboard-content').append(response.result_html);
-//                 $('.profession_table').remove();
-//                 $('#profession_table').append(response.profession_table);
-//                 ///////////////// initilize datatable //////////////
-//                 $('#research-table').DataTable({
-//                     "scrollX": true,
-//                     scrollY: '50vh',
-//                     scrollCollapse: true,
-//                     paging: false,
-//                     info: false
-//                 });
-//             }
-//         }
-//     });
-// });
 
 $(document.body).on('click', '#profes_add', function () {
     var profession = $('#profession_add').val();
@@ -1916,29 +1864,6 @@ $(document.body).on('click', '.delete_profession', function () {
 
 /////////////////////////////////// load district page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
-
-// $(document.body).on('click', '#pat_district', function () {
-//     $.ajax({
-//         url: '/cms/setting/pat_district',
-//         cache: false,
-//         success: function (response) {
-//             if (response.result_html != '') {
-//                 $('.dashboard-content').remove();
-//                 $('#dashboard-content').append(response.result_html);
-//                 $('.district_content').remove();
-//                 $('#district_content').append(response.district_table);
-//                 ///////////////// initilize datatable //////////////
-//                 $('#research-table').DataTable({
-//                     "scrollX": true,
-//                     scrollY: '50vh',
-//                     scrollCollapse: true,
-//                     paging: false,
-//                     info: false
-//                 });
-//             }
-//         }
-//     });
-// });
 
 $(document.body).on('click', '#add_district', function () {
     var district = $('#distrtict_add').val();
@@ -3513,3 +3438,37 @@ $(document.body).on('click', '.delete_district', function () {
     }
     return false;
 });
+
+$(document.body).on('click', '.delete-history-item', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.history_item_container').empty();
+                $('.history_item_container').append(response.result_html);
+                if (response.success) {
+                    toastr["error"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+function filter_history_item_category(category) {
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'profile_history/get_history_item/'+category,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.history_item_container').empty();
+            $('.history_item_container').append(response.result_html);
+        }
+    });
+    return false;
+}

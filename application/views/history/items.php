@@ -8,13 +8,13 @@
                     <div class="col-lg-2 col-md-3">
                         <div class="form-group">
                             <label>Item Name:</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" id="history_items_name" name="name">
                         </div>
                     </div>
                     <div class=" col-lg-3 col-md-4">
                         <div class="form-group">
                             <label>Category:</label>
-                            <select class="form-control" name="profile_history_id">
+                            <select class="form-control" name="profile_history_id" id="profile_history_id">
                                 <option>Select</option>
                                 <?php foreach ($categories as $category): ?>
                                     <option value="<?php echo $category['id']; ?>"

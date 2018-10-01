@@ -34,13 +34,19 @@ class Profile_history extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
-            $result = $this->History_model->add_profile_history($data);
-            if ($result) {
-                $json['success'] = true;
-                $json['message'] = "History created successfully!";
-            } else {
+            $nameexist = $this->History_model->get_profile_history_exist($data);
+            if ($nameexist) {
                 $json['error'] = true;
-                $json['message'] = "Seems to an error";
+                $json['message'] = 'Already Exists!';
+            }else{
+                $result = $this->History_model->add_profile_history($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "History created successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error";
+                }
             }
         }
         $data['categories'] = $this->History_model->get_profile_history();
@@ -63,13 +69,19 @@ class Profile_history extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
-            $result = $this->History_model->add_history_item($data);
-            if ($result) {
-                $json['success'] = true;
-                $json['message'] = "history Item created successfully!";
-            } else {
+            $itemexits = $this->History_model->history_item_exits($data);
+            if ($itemexits) {
                 $json['error'] = true;
-                $json['message'] = "Seems to an error";
+                $json['message'] = 'Already Exists!';
+            }else{
+                $result = $this->History_model->add_history_item($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = "history Item created successfully!";
+                } else {
+                    $json['error'] = true;
+                    $json['message'] = "Seems to an error";
+                }
             }
         }
         $data['items'] = $this->History_model->get_history_items();
@@ -119,7 +131,7 @@ class Profile_history extends MY_Controller
     }
 
     public function get_history_item($cat_id)
-    {
+    { 
         $data['items'] = $this->History_model->get_history_items_by_category($cat_id);
         $data['selected_category'] = $cat_id;
         $data['active_tab'] = 'tests';
