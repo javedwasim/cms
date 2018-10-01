@@ -1179,10 +1179,10 @@ $(document.body).on('click', '.delete-disease', function(){
             url: $(this).attr('data-href'),
             cache: false,
             success: function(response) {
-                $('.disease_category_container').empty();
-                $('.disease_category_container').append(response.result_html);
                 if (response.success) {
                     toastr["error"](response.message);
+                    $('.dashboard-content').empty();
+                    $('.dashboard-content').append(response.result_html);
                 } else {
                     toastr["error"](response.message);
                 }
@@ -1202,13 +1202,15 @@ $(document.body).on('click', '.add-structure-category', function(){
         data: {name:name},
         cache: false,
         success: function(response) {
-            $('.structure_category_container').empty();
-            $('.structure_category_container').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
+                $('.structure_category_container').empty();
+                $('.structure_category_container').append(response.result_html);
+
             } else {
                 toastr["error"](response.message);
             }
+
         }
     });
     return false;
@@ -1244,10 +1246,10 @@ $(document.body).on('click', '.add-structure-finding', function(){
         data: {name:finding_name,structure_id:structure_id},
         cache: false,
         success: function(response) {
-            $('.structure_finding_container').empty();
-            $('.structure_finding_container').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
+                $('.structure_finding_container').empty();
+                $('.structure_finding_container').append(response.result_html);
             } else {
                 toastr["error"](response.message);
             }
@@ -1336,7 +1338,7 @@ $(document.body).on('click', '.finding_radio', function(){
         cache: false,
         success: function(response) {
             if (response.success) {
-                toastr["error"](response.message);
+                toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -1354,7 +1356,7 @@ $(document.body).on('click', '.diagnose_radio', function(){
         cache: false,
         success: function(response) {
             if (response.success) {
-                toastr["error"](response.message);
+                toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -1372,15 +1374,19 @@ $(document.body).on('click', '#main_category_item_btn', function(){
         data: {name:main_category_name,main_category:main_category},
         cache: false,
         success: function(response) {
-            $('.main_category_container').empty();
-            $('.main_category_container').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
             } else {
                 toastr["error"](response.message);
             }
+            $('#main_category').val('');
+            $('#main_category_name').val('');
+            $( ".disease_container" ).removeClass( "active" );
         }
     });
+
     return false;
 });
 
@@ -1450,6 +1456,9 @@ $(document.body).on('click', '#main_category_measurement_btn', function(){
             } else {
                 toastr["error"](response.message);
             }
+            $('#measurement_item').val('');
+            $('#normal_value').val('');
+            $('#category_id').val('');
         }
     });
     return false;

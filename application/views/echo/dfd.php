@@ -6,7 +6,7 @@
                     <div class="card">
                         <div class="card-header">Disease</div>
                         <div class="card-body">
-                            <?php $this->load->view('echo/disease_table'); ?>
+                            <?php $this->load->view('echo/default_disease_table'); ?>
                             <input type="hidden" id="assign_disease_id" value="" />
                         </div>
                     </div>
@@ -15,7 +15,8 @@
                     <div class="card-header ">Structure</div>
                     <div class="card">
                         <div class="card-body structure_category_container" id="dfd_structure">
-                            <?php $this->load->view('echo/structure_table'); ?>
+                            <?php $this->load->view('echo/default_structure_table'); ?>
+                            <input type="hidden" id="assign_structure_id" value="" />
                         </div>
                     </div>
                 </div>
@@ -45,7 +46,7 @@
 <script>
     $(document).ready(function () {
         $('.structure_table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -56,7 +57,7 @@
         });
 
         $('.datatables').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -67,7 +68,7 @@
         });
 
         $('.finding_table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -78,7 +79,7 @@
         });
 
         $('.diagnosis_table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -89,7 +90,7 @@
         });
 
         $('.default_structure_table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -100,7 +101,7 @@
         });
 
         $('.main-category-table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,

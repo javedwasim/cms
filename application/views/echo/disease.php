@@ -1,5 +1,5 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<div class="tab-pane active" id="tb1" role="tabpanel">
+<div class="tab-pane active disease_container" id="tb1" role="tabpanel">
     <div class="card">
         <div class="card-header" style="display: inline-flex;">
             <div class="row">

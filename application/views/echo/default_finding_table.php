@@ -6,7 +6,7 @@
     </tr>
     </thead>
     <tbody>
-    <?php foreach ($findings as $finding): ?>
+    <?php foreach ($findings as $finding):  ?>
         <tr class="table-row">
             <td>
                 <label class="btn btn-xs btn-primary active" style="padding: 10px 5px 5px 10px;">

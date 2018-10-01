@@ -1,8 +1,8 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive structure_table" cellspacing="0" id="" style="width: 100%;table-layout: fixed;" >
+<table class="table table-bordered nowrap responsive structure_table" cellspacing="0" style="width: 100%">
     <thead>
     <tr>
-        <th class="table-header" style="width:5%">Delete</th>
+        <th class="table-header" style="width:5%;">Delete</th>
         <th class="table-header">Structure</th>
     </tr>
     </thead>
@@ -81,19 +81,18 @@
 
     }
     function saveStructure(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
-        $(editableObj).css("color", "#1b1a1a");
         $.ajax({
             url: "<?php echo base_url() . 'Echo_controller/save_structure_category' ?>",
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
+                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
                 }
-                $(editableObj).css('background-image', 'none');
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 
     $(document.body).on('click', '#structure_finding', function(){

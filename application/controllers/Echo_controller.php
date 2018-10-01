@@ -120,17 +120,23 @@ class Echo_controller extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
+
         $data['categories'] = $this->Echo_model->get_disease_categories();
+        $data['structures'] = $this->Echo_model->get_Structure_categories();
+        $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
+        $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
+        $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
+        $data['measurements'] = $this->Echo_model->get_category_measurement();
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('echo/disease_table', $data, true);
+        $json['result_html'] = $this->load->view('echo/echo', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-
     }
 
     public function get_disease_item($cat_id)
@@ -229,7 +235,7 @@ class Echo_controller extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'Structure Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Structure Name', 'required|is_unique[structure.name]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
@@ -237,10 +243,23 @@ class Echo_controller extends MY_Controller
         } else {
             $data = $this->input->post();
             $result = $this->Echo_model->add_structure_category($data);
-            $message = "Structure Category successfully created.";
-            $this->structure_load($result,$message);
+            if($result){
+                $data['structures'] = $this->Echo_model->get_Structure_categories();
+                $json['success'] = true;
+                $json['message'] = "Structure Category successfully created.";
+                $data['active_tab'] = 'structure';
+                $data['rights'] = $this->session->userdata('other_rights');
+                $json['result_html'] = $this->load->view('echo/structure_table', $data, true);
+            }else{
+                $json['error'] = true;
+                $json['message'] = 'Seem to be an error!';
+            }
+
         }
 
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
     }
 
     public function save_structure_category()
@@ -289,18 +308,20 @@ class Echo_controller extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'Finding Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Finding Name', 'required|is_unique[structure_finding.name]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
             $json['message'] = validation_errors();
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
         } else {
             $data = $this->input->post();
             $result = $this->Echo_model->add_structure_finding($data);
             $message = "Structure finding successfully created.";
             $this->get_structure_finding_by_id($data['structure_id'],$result,$message);
         }
-
     }
 
     public function save_structure_finding()
@@ -352,6 +373,15 @@ class Echo_controller extends MY_Controller
         $this->get_structure_finding_by_id($id,$result,$message);
     }
 
+    public function get_default_findings_by_id(){
+        $data = $this->input->post();
+        $id = $data['id'];
+        $disease_id = $data['disease_id'];
+        $result = true;
+        $message = '';
+        $this->get_structure_finding_by_id($id,$result,$message);
+    }
+
     public function get_structure_finding_by_id($id,$result,$message){
         if ($result) {
             $json['success'] = true;
@@ -384,6 +414,7 @@ class Echo_controller extends MY_Controller
         }
         $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($id);
         $data['active_tab'] = 'structure';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/diagnosis_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -435,14 +466,25 @@ class Echo_controller extends MY_Controller
     }
 
     public function assign_finding_to_disease(){
-        $data = $this->input->post();
-        $result = $this->Echo_model->assign_finding_to_disease($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Information save successfully!";
-        } else {
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('finding_id', 'Finding', 'required|xss_clean');
+        $this->form_validation->set_rules('disease_id', 'Disease', 'required|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = validation_errors();
+        }else{
+            $data = $this->input->post();
+            $result = $this->Echo_model->assign_finding_to_disease($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Information save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -476,8 +518,21 @@ class Echo_controller extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $result = $this->Echo_model->add_main_category_item($data);
-            $message = "Category successfully created.";
-            $this->get_echo_main_categories($result,$message);
+            $json['success'] = true;
+            $json['message'] = "Category successfully created.";
+            $data['categories'] = $this->Echo_model->get_disease_categories();
+            $data['structures'] = $this->Echo_model->get_Structure_categories();
+            $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
+            $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
+            $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
+            $data['measurements'] = $this->Echo_model->get_category_measurement();
+            $data['rights'] = $this->session->userdata('other_rights');
+            $data['active_tab'] = 'category';
+            $json['result_html'] = $this->load->view('echo/echo', $data, true);
+
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
         }
 
     }
