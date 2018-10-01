@@ -1,14 +1,14 @@
 <table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" >Action</th>
+        <th class="table-header" style="width:100px;" >Action</th>
         <th class="table-header">Item Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
         <tr class="table-row">
-            <td>
+            <td style="width: 100px;">
                 <a class="delete-history-item btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
                    data-href="<?php echo site_url('Profile_history/delete_history_item/') . $item['id'] ?>">
@@ -54,30 +54,14 @@
         </form>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('.item_table').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false,
-            "sort": false,
-            autoWidth: false, //step 1
-            columnDefs: [
-                { width: '10%', targets: 0 }, //step 2, column 1 out of 4
-            ]
-        });
-
-
-    });
-</script>
-
 <script>
     function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.exam_cate').css('background', '#FFF');
+        $('td.exam_cate').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveToDatabase(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'Profile_history/save_history_item' ?>",
             type: "POST",
@@ -86,10 +70,9 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 </script>

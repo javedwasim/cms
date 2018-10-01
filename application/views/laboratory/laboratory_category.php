@@ -47,7 +47,7 @@
                             <?php } ?>
                         </td>
                         <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                            <td contenteditable="true" class="exam_cate"
+                            <td contenteditable="true" class="exam_cate" style="word-break: break-all;"
                                 onBlur="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')"
                                 onClick="showEdit(this);">
                                 <?php echo $category['name']; ?></td>

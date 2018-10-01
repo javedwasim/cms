@@ -1,14 +1,14 @@
 <table class="table table-bordered nowrap responsive history_table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 10%">Delete</th>
+        <th class="table-header" style="width:100px;">Delete</th>
         <th class="table-header">Category Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($categories as $category): ?>
         <tr class="table-row">
-            <td>
+            <td style="width:100px;">
                 <a class="delete-history btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
                    data-href="<?php echo site_url('Profile_history/delete_profile_history/') . $category['id'] ?>">
@@ -18,7 +18,7 @@
                    data-profile-history-id="<?php echo $category['id']; ?>">
                    <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true"
+            <td contenteditable="true" class="exam_cate"
                 onBlur="saveProfileHistory(this,'cate_name','<?php echo $category['id']; ?>')"
                 onClick="showEdit(this);">
                 <?php echo $category['name']; ?></td>
@@ -56,10 +56,12 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.exam_cate').css('background', '#FFF');
+        $('td.exam_cate').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
     function saveProfileHistory(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'Profile_history/save_profile_history' ?>",
             type: "POST",
@@ -68,11 +70,10 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 
 </script>

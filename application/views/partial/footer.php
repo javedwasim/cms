@@ -49,7 +49,7 @@
     <script src="<?php echo base_url(); ?>assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/sparkline/jquery.sparkline.min.js"></script>
      <!-- jQuery Custom Scroller -->
-    <script src="<?php echo base_url(); ?>assets/vendors/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets/vendors/js/jquery.mCustomScrollbar.concat.min.js"></script> -->
     <!--c3 JavaScript -->
     <script src="<?php echo base_url(); ?>assets/plugins/d3/d3.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/c3-master/c3.min.js"></script>

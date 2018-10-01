@@ -54,18 +54,18 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id=""
+            <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
                    width="100%">
                 <thead>
                 <tr>
-                    <th style="width: 10%"></th>
+                    <th style="width:95px"></th>
                     <th>Item Name</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($tests as $test): ?>
                     <tr>
-                        <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
+                        <td style="width:95px; word-break: break-all;" data-toggle="modal" data-target="#history-modal">
                             <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
                                 <a class="delete-lab-test btn btn-danger btn-xs"
                                    href="javascript:void(0)" title="delete"
@@ -83,12 +83,12 @@
                             <?php } ?>
                         </td>
                         <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                            <td contenteditable="true"
+                            <td contenteditable="true" style="word-break: break-all;"class="exam_cate"
                                 onBlur="saveTestDescription(this,'test_name','<?php echo $test['id']; ?>')"
                                 onClick="showEdit(this);">
                                 <?php echo $test['name']; ?></td>
                         <?php } else{ ?>
-                            <td contenteditable="true" onClick="showError(this);">
+                            <td onClick="showError(this);">
                                 <?php echo $test['name']; ?></td>
                         <?php } ?>
                     </tr>
@@ -129,11 +129,12 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $(editableObj).css("background", "#FFF");
+        $('td.exam_cate').css('background', '#FFF');
+        $('td.exam_cate').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
     }
-
     function saveTestDescription(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
         $.ajax({
             url: "<?php echo base_url() . 'setting/save_lab_test' ?>",
             type: "POST",
@@ -145,5 +146,6 @@
                 }
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 </script>

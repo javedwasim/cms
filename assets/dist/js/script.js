@@ -1486,6 +1486,7 @@ $(document.body).on('click', '.add-profile-history', function(){
         success: function(response) {
             $('.history_category_container').empty();
             $('.history_category_container').append(response.result_html);
+            $('#profile_history').val('');
             if (response.success) {
                 toastr["success"](response.message);
             } else {
@@ -1526,6 +1527,8 @@ $(document.body).on('click', '#history_item_btn', function(){
         success: function(response) {
             $('.history_item_container').empty();
             $('.history_item_container').append(response.result_html);
+            $('#history_items_name').val('');
+            $('#profile_history_id').prop('selectedIndex',0);
             if (response.success) {
                 toastr["success"](response.message);
             } else {
