@@ -45,7 +45,7 @@
 <script>
     $(document).ready(function () {
         $('.structure_table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -56,7 +56,7 @@
         });
 
         $('.datatables').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -67,7 +67,7 @@
         });
 
         $('.finding_table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -78,7 +78,7 @@
         });
 
         $('.diagnosis_table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -89,7 +89,7 @@
         });
 
         $('.default_structure_table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,
@@ -100,7 +100,7 @@
         });
 
         $('.main-category-table').DataTable({
-            "info": true,
+            "info": false,
             "paging": false,
             "searching": false,
             "sort": false,

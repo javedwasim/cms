@@ -2,7 +2,7 @@
 <table class="table table-bordered nowrap responsive finding_table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 10%">Delete</th>
+        <th class="table-header" style="width: 5%">Delete</th>
         <th class="table-header">finding</th>
     </tr>
     </thead>
@@ -27,12 +27,12 @@
 
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
-                <td contenteditable="true"
+                <td contenteditable="true" class="finding_cate"
                     onBlur="saveFinding(this,'cate_name','<?php echo $finding['id']; ?>')"
                     onClick="findingEdit(this);">
                     <?php echo $finding['name']; ?></td>
             <?php } elseif(in_array("echos-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td contenteditable="true"
+                <td contenteditable="true" class="finding_cate"
                     onBlur="saveFinding(this,'cate_name','<?php echo $finding['id']; ?>')"
                     onClick="findingEdit(this);">
                     <?php echo $finding['name']; ?></td>
@@ -46,29 +46,25 @@
 </table>
 <script>
     function findingEdit(editableObj) {
+        $('td.finding_cate').css('background', '#FFF');
+        $('td.finding_cate').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-        //select parent structure
-        $(".structure_table td").css("background-color", "");
-        var structure_id = $('#structure_id').val();
-        $('#'+structure_id).css("background", "#1e88e5");
-        $('#'+structure_id).css("color", "#FFF");
 
     }
     function saveFinding(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
-        $(editableObj).css("color", "#1b1a1a");
-        $.ajax({
+         $.ajax({
             url: "<?php echo base_url() . 'Echo_controller/save_structure_finding' ?>",
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
+                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
                 }
-                $(editableObj).css('background-image', 'none');
             }
         });
+        $(editableObj).css("color", "#212529");
     }
 
 </script>

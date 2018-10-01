@@ -1202,13 +1202,15 @@ $(document.body).on('click', '.add-structure-category', function(){
         data: {name:name},
         cache: false,
         success: function(response) {
-            $('.structure_category_container').empty();
-            $('.structure_category_container').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
+                $('.structure_category_container').empty();
+                $('.structure_category_container').append(response.result_html);
+
             } else {
                 toastr["error"](response.message);
             }
+
         }
     });
     return false;
@@ -1244,10 +1246,10 @@ $(document.body).on('click', '.add-structure-finding', function(){
         data: {name:finding_name,structure_id:structure_id},
         cache: false,
         success: function(response) {
-            $('.structure_finding_container').empty();
-            $('.structure_finding_container').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
+                $('.structure_finding_container').empty();
+                $('.structure_finding_container').append(response.result_html);
             } else {
                 toastr["error"](response.message);
             }
