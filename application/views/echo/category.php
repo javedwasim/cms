@@ -1,5 +1,5 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<div class="tab-pane" id="tb4" role="tabpanel">
+<div class="tab-pane <?php echo  isset($active_tab)&&($active_tab=='category')?'active':''; ?>" id="tb4" role="tabpanel">
     <div class="card">
         <div class="card-header">
             <form id="2d_echo_category_item_form" method="post" role="form"

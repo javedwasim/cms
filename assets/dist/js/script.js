@@ -1374,15 +1374,19 @@ $(document.body).on('click', '#main_category_item_btn', function(){
         data: {name:main_category_name,main_category:main_category},
         cache: false,
         success: function(response) {
-            $('.main_category_container').empty();
-            $('.main_category_container').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
+                $('.dashboard-content').empty();
+                $('.dashboard-content').append(response.result_html);
             } else {
                 toastr["error"](response.message);
             }
+            $('#main_category').val('');
+            $('#main_category_name').val('');
+            $( ".disease_container" ).removeClass( "active" );
         }
     });
+
     return false;
 });
 
@@ -1452,6 +1456,9 @@ $(document.body).on('click', '#main_category_measurement_btn', function(){
             } else {
                 toastr["error"](response.message);
             }
+            $('#measurement_item').val('');
+            $('#normal_value').val('');
+            $('#category_id').val('');
         }
     });
     return false;

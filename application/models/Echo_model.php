@@ -228,17 +228,21 @@
         }
 
         public function add_main_category_item($data){
-            if(isset($data['id'])){
-                $id = $data['id'];
-                $editval = trim($data['editval']);
-                $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('echo_category',array('name'=>$editval));
-                return $this->db->affected_rows();
+            $query = $this->db->select('*')->from('echo_category')->where('name',$data['name'])->where('main_category',trim($data['main_category']))->limit(1)->get();
+            if ($query->num_rows() >= 1) {
+                return false;
             }else{
-                $this->db->insert('echo_category', $data);
-                return $this->db->insert_id();
+                if(isset($data['id'])){
+                    $id = $data['id'];
+                    $editval = trim($data['editval']);
+                    $editval = preg_replace('/(<br>)+$/', '', $editval);
+                    $this->db->where('id',$id)->update('echo_category',array('name'=>$editval));
+                    return $this->db->affected_rows();
+                }else{
+                    $this->db->insert('echo_category', $data);
+                    return $this->db->insert_id();
+                }
             }
-
         }
 
         public function get_echo_main_categories(){

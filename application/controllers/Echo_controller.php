@@ -518,8 +518,21 @@ class Echo_controller extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $result = $this->Echo_model->add_main_category_item($data);
-            $message = "Category successfully created.";
-            $this->get_echo_main_categories($result,$message);
+            $json['success'] = true;
+            $json['message'] = "Category successfully created.";
+            $data['categories'] = $this->Echo_model->get_disease_categories();
+            $data['structures'] = $this->Echo_model->get_Structure_categories();
+            $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
+            $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
+            $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
+            $data['measurements'] = $this->Echo_model->get_category_measurement();
+            $data['rights'] = $this->session->userdata('other_rights');
+            $data['active_tab'] = 'category';
+            $json['result_html'] = $this->load->view('echo/echo', $data, true);
+
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
         }
 
     }
