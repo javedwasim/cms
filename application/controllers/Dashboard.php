@@ -113,6 +113,24 @@ class Dashboard extends CI_Controller {
         $data['booking_vip'] = $this->User_model->get_bookings_vip($vip);
         $data['booking_onwalk'] = $this->User_model->get_bookings_on_walk($onwalk);
         $data['booking_oncall'] = $this->User_model->get_bookings_on_call($oncall);
+        $data['fee_paid'] = $this->User_model->count_fee_paid();
+        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
+        $data['ett_count'] = $this->User_model->count_ett_waiting();
+        $data['echo_count'] = $this->User_model->count_echo_waiting();
+        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
+        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
+        $data['count_complete'] = $this->User_model->count_complete();
+        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($date);
+        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($date);
+        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($date);
+        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($date);
+        $data['total_attended'] = $this->User_model->count_total_attendent($date);
+        $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
+        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
+        $data['refund_count'] = $this->User_model->count_refund_rows($date);
+        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
+        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
+        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
         $json['booking_cate'] = $this->load->view('admin/booking_categories', $data, true);
         $json['result_html'] = $this->load->view('admin/bookings', $data, true);
         if ($this->input->is_ajax_request()) {

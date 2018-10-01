@@ -1,4 +1,9 @@
-
+/* Main tabs */
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+body {
+    font-family: 'Roboto Condensed', san-serif;
+    background: #16A085;
+}
 .board {
     width: 100%;
     height: auto;

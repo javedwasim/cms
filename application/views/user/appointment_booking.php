@@ -109,9 +109,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#wallet_date').datepicker({
-            format: 'd-M-yyyy'
-        });
         $('.pat_search').datepicker({
             format: 'd-M-yyyy'
         });

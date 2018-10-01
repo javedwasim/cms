@@ -1,5 +1,5 @@
 <div class="content-wrapper" style="margin:0 .5%">
-	<div class="row page-titles" style="margin-bottom: 0px;">
+	<div class="row page-titles" style="margin: 0px;">
         <div class="col-xs-12 col-md-4 col-sm-12" style="display: inline-flex;">
             <div class="row">
                 <div class="col-md-2">
@@ -15,12 +15,15 @@
         </div>
         <div class="col-md-5 col-xs-12 col-sm-12">
             <div class="row">
-                <div class="col-md-5 offset-1 p-r-0">
-                <input type="text" name="" value="<?php echo date('d-M-Y') ?>" class="form-control m-t-5" id="search-all-cat" style="height:35px;">        
-            </div>
-            <div class="col-md-4 p-0">
-                <button class="btn btn-default" id="search_all_list">Search</button> 
-            </div>
+                <div class="col-md-5 offset-1 p-r-0" style="display:inline-flex;">
+                    <label class="m-t-10 m-r-5">Search</label>
+                    <input type="text" name="" value="<?php echo date('d-M-Y') ?>" class="form-control m-t-5" id="search-all-cat" style="height:35px;">        
+                </div>
+                <div class="col-md-3">
+                    <div class="round round-sm align-self-center green m-b-10" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
+                        <i class="fa fa-wallet"></i>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-12 col-xs-12 ">
@@ -43,7 +46,25 @@
         
     </div>
 </div>
-
+<!-- modal content for wallet-->
+<div id="wallet-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <label>Wallet Status</label>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div id="wallet-modal-box">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     $(document).ready(function(){
         $('.print_date').datepicker({
@@ -55,7 +76,8 @@
     });
     //////////////////////////////////////////////// search all categories ///////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    $(document.body).on('click','#search_all_list', function(){
+  
+    $('#search-all-cat').on("change",function(){
         var searchDate = $('#search-all-cat').val();
         $.ajax({
             type: "post",
@@ -66,6 +88,8 @@
                 if (response.result_html != '') {
                     $('.booking_category_tables').remove();
                     $('#booking_category_tables').append(response.result_html);
+                    $('.wallet-modal-box').remove();
+                    $('#wallet-modal-box').append(response.wallet_count);
                     ///////////// reinitilizing the datatable///////////
                     $('.booking_tables').DataTable({
                         "info": false,

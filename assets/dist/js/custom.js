@@ -1106,6 +1106,8 @@ function bookings() {
                 $('#content-wrapper').append(response.result_html);
                 $('.booking_category_tables').remove();
                 $('#booking_category_tables').append(response.booking_cate);
+                $('.wallet-modal-box').remove();
+                $('#wallet-modal-box').append(response.wallet_count);
                 ///////////// reinitilizing the datatable///////////
                 $('.booking_tables').DataTable({
                     "info": false,
