@@ -52,16 +52,16 @@
         $(editableObj).css("color", "#FFF");
     }
     function saveMainCategoryItem(editableObj, column, id) {
+        $(editableObj).css("background", "#FDFDFD");
         $.ajax({
             url: "<?php echo base_url() . 'Echo_controller/save_main_category_item' ?>",
             type: "POST",
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
+
                 if (response.success) {
                     toastr["success"](response.message);
                 }
-                $(editableObj).css('background-image', 'none');
             }
         });
         $(editableObj).css("color", "#212529");
