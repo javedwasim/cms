@@ -1901,3 +1901,26 @@ function filter_advice_item_category(advice_id) {
     });
     return false;
 }
+
+
+$(document.body).on('click', '#pat-echo-test', function () {
+    var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    $.ajax({
+        url: '/cms/profile/patient_echo_test',
+        type: 'post',
+        data: {patid:patid},
+        cache: false,
+        success: function (response) {
+            console.log(response.patient_information);
+            $('.patient_info').remove();
+            $('#pats_ett_information').append(response.patient_information);
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.lab-date').datepicker({
+                    format: 'd-M-yyyy'
+                });
+            }
+        }
+    });
+});

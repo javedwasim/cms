@@ -67,7 +67,10 @@
 		
 		public function patient_echo_test(){
             $data['rights'] = $this->session->userdata('other_rights');
-			$json['result_html'] = $this->load->view('pages/patient_echo_test', "", true);
+            $id = $this->input->post('patid');
+            $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+            $json['patient_information']=$this->load->view('profile/patient_information',$data,true);
+            $json['result_html'] = $this->load->view('pages/patient_echo_test', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }
