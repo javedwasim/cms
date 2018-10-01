@@ -93,7 +93,7 @@
 
                             </td>
                             <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                                <td contenteditable="true" style="word-break: break-all; width: 42%'"class="exam_cate"
+                                <td contenteditable="true" style="word-break: break-all; width: 42%;"class="exam_cate"
                                     onBlur="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')"
                                     onClick="showEdit(this);">
                                     <?php echo $item['name']; ?></td>

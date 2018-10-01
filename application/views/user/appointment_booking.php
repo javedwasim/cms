@@ -93,8 +93,6 @@
             <div class="modal-header">
                 <div>
                     <label>Wallet Status</label>
-                    <input type="text" name="wallet_status" id="wallet_date" class="form-control col-md-6" value="<?php echo date('d-M-Y') ?>" />
-                    <button class="btn btn-info btn-sm" id="wallet_search">Search</button> 
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
