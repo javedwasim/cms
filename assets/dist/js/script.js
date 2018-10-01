@@ -1179,10 +1179,10 @@ $(document.body).on('click', '.delete-disease', function(){
             url: $(this).attr('data-href'),
             cache: false,
             success: function(response) {
-                $('.disease_category_container').empty();
-                $('.disease_category_container').append(response.result_html);
                 if (response.success) {
                     toastr["error"](response.message);
+                    $('.dashboard-content').empty();
+                    $('.dashboard-content').append(response.result_html);
                 } else {
                     toastr["error"](response.message);
                 }

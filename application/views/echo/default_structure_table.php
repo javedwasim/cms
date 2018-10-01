@@ -15,8 +15,8 @@
 
             </td>
             <td contenteditable="true" class="default_structure_cate"
-                onBlur="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
-                onClick="structureEdit(this,'<?php echo $structure['id']; ?>');"
+                onBlur="defaultsaveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
+                onClick="defaultstructureEdit(this,'<?php echo $structure['id']; ?>');"
                 id="<?php echo $structure['id']; ?>">
                 <?php echo $structure['name']; ?></td>
         </tr>
@@ -27,16 +27,18 @@
 <input type="hidden" name="structure_id" id="structure_id">
 <script>
 
-    function structureEdit(editableObj,id) {
+    function defaultstructureEdit(editableObj,id) {
         $(".default_structure_cate").css("background-color", "");
         $(".default_structure_cate").css("color", "black");
         $(editableObj).css("background-color", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-
+        var disease_id = $('#assign_disease_id').val();
         //load structure findings
         $.ajax({
-            url: "<?php echo base_url() . 'Echo_controller/get_findings_by_id/'?>"+id,
-            type: "get",
+            url: "<?php echo base_url() . 'Echo_controller/get_default_findings_by_id'?>",
+            type: "post",
+            cache: false,
+            data: {id: id,disease_id:disease_id},
             success: function (response) {
                 $('.structure_finding_container').empty();
                 $('.structure_finding_container').append(response.result_html);
@@ -53,7 +55,7 @@
         });
 
     }
-    function saveStructure(editableObj, column, id) {
+    function defaultsaveStructure(editableObj, column, id) {
         $.ajax({
             url: "<?php echo base_url() . 'Echo_controller/save_structure_category' ?>",
             type: "POST",

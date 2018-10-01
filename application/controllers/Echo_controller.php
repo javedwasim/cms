@@ -120,17 +120,23 @@ class Echo_controller extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
+
         $data['categories'] = $this->Echo_model->get_disease_categories();
+        $data['structures'] = $this->Echo_model->get_Structure_categories();
+        $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
+        $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
+        $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
+        $data['measurements'] = $this->Echo_model->get_category_measurement();
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('echo/disease_table', $data, true);
+        $json['result_html'] = $this->load->view('echo/echo', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-
     }
 
     public function get_disease_item($cat_id)
@@ -362,6 +368,15 @@ class Echo_controller extends MY_Controller
     }
 
     public function get_findings_by_id($id){
+        $result = true;
+        $message = '';
+        $this->get_structure_finding_by_id($id,$result,$message);
+    }
+
+    public function get_default_findings_by_id(){
+        $data = $this->input->post();
+        $id = $data['id'];
+        $disease_id = $data['disease_id'];
         $result = true;
         $message = '';
         $this->get_structure_finding_by_id($id,$result,$message);
