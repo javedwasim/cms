@@ -1338,7 +1338,7 @@ $(document.body).on('click', '.finding_radio', function(){
         cache: false,
         success: function(response) {
             if (response.success) {
-                toastr["error"](response.message);
+                toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -1356,7 +1356,7 @@ $(document.body).on('click', '.diagnose_radio', function(){
         cache: false,
         success: function(response) {
             if (response.success) {
-                toastr["error"](response.message);
+                toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
             }

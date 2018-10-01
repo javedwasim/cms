@@ -6,7 +6,7 @@
                     <div class="card">
                         <div class="card-header">Disease</div>
                         <div class="card-body">
-                            <?php $this->load->view('echo/disease_table'); ?>
+                            <?php $this->load->view('echo/default_disease_table'); ?>
                             <input type="hidden" id="assign_disease_id" value="" />
                         </div>
                     </div>
@@ -15,7 +15,7 @@
                     <div class="card-header ">Structure</div>
                     <div class="card">
                         <div class="card-body structure_category_container" id="dfd_structure">
-                            <?php $this->load->view('echo/structure_table'); ?>
+                            <?php $this->load->view('echo/default_structure_table'); ?>
                         </div>
                     </div>
                 </div>

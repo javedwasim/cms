@@ -451,14 +451,25 @@ class Echo_controller extends MY_Controller
     }
 
     public function assign_finding_to_disease(){
-        $data = $this->input->post();
-        $result = $this->Echo_model->assign_finding_to_disease($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Information save successfully!";
-        } else {
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('finding_id', 'Finding', 'required|xss_clean');
+        $this->form_validation->set_rules('disease_id', 'Disease', 'required|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = validation_errors();
+        }else{
+            $data = $this->input->post();
+            $result = $this->Echo_model->assign_finding_to_disease($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Information save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
