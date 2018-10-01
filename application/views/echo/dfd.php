@@ -16,6 +16,7 @@
                     <div class="card">
                         <div class="card-body structure_category_container" id="dfd_structure">
                             <?php $this->load->view('echo/default_structure_table'); ?>
+                            <input type="hidden" id="assign_structure_id" value="" />
                         </div>
                     </div>
                 </div>

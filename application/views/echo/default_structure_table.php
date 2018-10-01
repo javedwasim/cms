@@ -32,6 +32,7 @@
         $(".default_structure_cate").css("color", "black");
         $(editableObj).css("background-color", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+        $('#assign_structure_id').val(id);
         var disease_id = $('#assign_disease_id').val();
         //load structure findings
         $.ajax({

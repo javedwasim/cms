@@ -32,5 +32,27 @@
         $(editableObj).css("background-color", "#1e88e5");
         $(editableObj).css("color", "#FFF");
         $('#assign_disease_id').val(id);
+        var structure_id = $('#assign_structure_id_id').val();
+        var disease_id = id;
+
+//        $.ajax({
+//            url: "<?php //echo base_url() . 'Echo_controller/get_default_findings'?>//",
+//            type: "post",
+//            cache: false,
+//            data: {id: id,disease_id:disease_id},
+//            success: function (response) {
+//                $('.structure_finding_container').empty();
+//                $('.structure_finding_container').append(response.result_html);
+//
+//                $('.structure_diagnosis_container').empty();
+//                $('.structure_diagnosis_container').append(response.diagnosis_html);
+//
+//                $('.default_finding_container').empty();
+//                $('.default_finding_container').append(response.dfinding_html);
+//
+//                $('.default_diagnosis_container').empty();
+//                $('.default_diagnosis_container').append(response.ddiagnose_html);
+//            }
+//        });
     }
 </script>
