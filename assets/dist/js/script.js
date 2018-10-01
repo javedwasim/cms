@@ -1914,12 +1914,11 @@ $(document.body).on('click', '#pat-echo-test', function () {
         data: {patid:patid},
         cache: false,
         success: function (response) {
-            console.log(response.patient_information);
-            $('.patient_info').remove();
-            $('#pats_ett_information').append(response.patient_information);
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pats_ett_information').append(response.patient_information);
                 $('.lab-date').datepicker({
                     format: 'd-M-yyyy'
                 });

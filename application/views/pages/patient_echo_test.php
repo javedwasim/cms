@@ -4,7 +4,9 @@
     		<div class="card" style="margin-bottom:0px !important; ">
 	    		<div class="card-body">
 	    			<div class="row">
-	    				<div class="col-md-12 col-lg-12 pt-info" id="pats_ett_information">sdfsdf</div>
+	    				<div class="col-md-12 col-lg-12 pt-info" id="pats_ett_information">
+	    					
+	    				</div>
 	    			</div>
 	    		</div>
 	    	</div>	
