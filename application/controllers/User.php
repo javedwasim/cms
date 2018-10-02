@@ -65,8 +65,7 @@ class User extends MY_Controller {
         $date = date('Y-m-d', strtotime($appdate));
         $currentdate = date('Y-m-d');
         $limiterexist = $this->User_model->check_limiter($date);
-        $limiter = $this->Dashboard_model->get_limiter();
-        $limit = $limiter->limiter;
+        $limit=$limiterexist->limiter;
         $bookingCount = $this->User_model->count_bookings();
         $count = $bookingCount;
         if ($limiterexist) {
@@ -137,7 +136,6 @@ class User extends MY_Controller {
                         $app['datetime'] = $appdate . " " . date('H:i:s');
                         $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
                         $AppFee = $this->input->post('fee');
-                        //calculating daily token number
                         $cur_date = date('Y-m-d');
                         $get_last_orderno = $this->User_model->get_last_booking();
                         if ($get_last_orderno == false) {

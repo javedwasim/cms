@@ -685,7 +685,7 @@ class User_model extends CI_Model {
         $result = $this->db->where('limiter_date',$date)
                     ->get('booking_limiter');
         if ($result->num_rows()>0) {
-            return true;
+            return $result->row();
         }else{
             return false;
         }
