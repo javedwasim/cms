@@ -75,6 +75,8 @@ class Profile extends MY_Controller
         $id = $this->input->post('patid');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
+        $data['diseases'] = $this->Echo_model->get_disease_categories();
+        $data['structures'] = $this->Echo_model->get_Structure_categories();
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
         $json['result_html'] = $this->load->view('pages/patient_echo_test', $data, true);
@@ -583,6 +585,54 @@ class Profile extends MY_Controller
             set_content_type($json);
         }
     }
+
+    public function set_echo_data(){
+        $data = $this->input->post();
+        $category_id = $data['measurement_cate_id'];
+        $main_category = $this->Profile_model->get_main_category($category_id);
+        //echo "<pre>"; print_r($data['item_value']);
+        if(isset($data['item_value'])&&(empty($data['item_value']))){
+            $json['error'] = true;
+            $json['message'] = 'Please enter item value';
+
+        }else{
+            $patient_echo_id = $this->Profile_model->save_echo_profile_info($data);
+            $json['success'] = true;
+            $json['message'] = 'Information save successfully!';
+            $json['category_id'] = $main_category['main_category'];
+
+            $data['measurements'] = $this->Profile_model->get_patient_measurement_by_category($patient_echo_id);
+            $data['active_tab'] = 'measurement';
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['result_html'] = $this->load->view('profile/profile_measurement_table', $data, true);
+
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function save_profile_echo_info(){
+        $data = $this->input->post();
+        $this->Profile_model->save_profile_echo_info($data);
+    }
+
+    public function get_disease_findings_diagnosis($disease_id){
+        $result =  $this->Profile_model->get_disease_findings_diagnosis($disease_id);
+        $data['findings'] = $result['findings'];
+        $data['diagnosis'] = $result['diagnosis'];
+        $json['success'] = true;
+        $json['result_html'] = $this->load->view('profile/finding_table', $data, true);
+        $json['diagnosis_html'] = $this->load->view('profile/profile_diagnosis_table', $data, true);
+
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       // print_r($results); die('dfd');
+
+    }
+
+
 }
 
 ?>

@@ -375,6 +375,118 @@
             return $randomString;
         }
 
+<<<<<<< HEAD
+        public function save_echo_profile_info($data){
+            $query = $this->db->select('*')->from('patient_echo')->limit(1)->get();
+            $result = $query->row_array();
+            $patient_echo_id = $result['id'];
+            $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_measurement');
+
+
+            $this->db->where('patient_id', $data['patient_id'])->delete('patient_echo');
+            $this->db->insert('patient_echo',array('patient_id'=>$data['patient_id'],'measurement_cate_id'=>$data['measurement_cate_id']));
+            $patient_echo_id = $this->db->insert_id();
+
+             for ($i=0;$i<count($data['item_id']);$i++){
+                 $item_id = $data['item_id'];
+                 $item_value = $data['item_value'];
+                 $measurement_value = $data['measurement_value'];
+
+                 $this->db->insert('patient_echo_measurement',
+                            array(
+                                    'patient_echo_id'=>$patient_echo_id,
+                                    'item_id'=>$item_id[$i],
+                                    'item_value'=>$item_value[$i],
+                                    'measurement_value'=>$measurement_value[$i],
+                            ));
+            }
+            return $patient_echo_id;
+        }
+
+        public function get_patient_measurement_by_category($category_id){
+            $result = $this->db->select('patient_echo_measurement.*,category_measurement.item')->from('patient_echo_measurement')
+                       ->join('category_measurement','category_measurement.id=patient_echo_measurement.item_id','left')
+                       ->where('patient_echo_id',"$category_id")->get();
+            //echo $this->db->last_query(); die();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function get_main_category($category_id){
+            $result = $this->db->select('*')->from('echo_category')->where('id',"$category_id")->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function get_disease_findings_diagnosis($disease_id){
+            $finddings = $this->db->select('disease_findings.*,structure_finding.name')->from('disease_findings')
+                        ->join('structure_finding','structure_finding.id=disease_findings.finding_id')
+                        ->where('disease_findings.disease_id',"$disease_id")
+                        ->group_by('disease_findings.finding_id')
+                        ->get();
+
+            $diagnosis = $this->db->select('disease_diagnosis.*,diagnosis.name')->from('disease_diagnosis')
+                        ->join('diagnosis','diagnosis.id=disease_diagnosis.diagnosis_id')
+                        ->where('disease_diagnosis.disease_id',"$disease_id")
+                        ->group_by('disease_diagnosis.diagnosis_id')
+                        ->get();
+            //echo $this->db->last_query(); die();
+            $data['findings'] =  $finddings->result_array();
+            $data['diagnosis'] =  $diagnosis->result_array();
+            return $data;
+        }
+
+        public function save_profile_echo_info($data){
+            //print_r($data); die();
+            $patient_echo_id = $data['patient_id'];
+            $disease_id = $data['disease_id'];
+            $this->db->delete('profile_echo_measurement', array('patient_id' => $patient_echo_id));
+            $this->db->delete('profile_echo_findings', array('patient_id' => $patient_echo_id));
+
+            for ($i=0;$i<count($data['item_id']);$i++){
+                $item_id = $data['item_id'];
+                $item_value = $data['item_value'];
+                $measurement_value = $data['measurement_value'];
+
+                $this->db->insert('profile_echo_measurement',
+                    array(
+                        'patient_id'=>$patient_echo_id,
+                        'item_id'=>$item_id[$i],
+                        'item_value'=>$item_value[$i],
+                        'measurement_value'=>$measurement_value[$i],
+                    ));
+            }
+
+            for ($i=0;$i<count($data['disease_finding_id']);$i++){
+                $disease_finding_id = $data['disease_finding_id'];
+                $this->db->insert('profile_echo_findings',
+                    array(
+                        'patient_id'=>$patient_echo_id,
+                        'finding_id'=>$disease_finding_id[$i],
+                        'disease_id'=>$disease_id,
+                    ));
+            }
+
+            for ($i=0;$i<count($data['disease_diagnosis_id']);$i++){
+                $disease_diagnosis_id = $data['disease_diagnosis_id'];
+                $this->db->insert('profile_echo_diagnosis',
+                    array(
+                        'patient_id'=>$patient_echo_id,
+                        'diagnosis_id'=>$disease_diagnosis_id[$i],
+                        'disease_id'=>$disease_id,
+                    ));
+            }
+
+            return $patient_echo_id;
+        }
+
+=======
 
         function insert_ett_protocols($data,$id){
         	if(isset($data['stage_name']) && !empty($data['stage_name'])){
@@ -412,6 +524,7 @@
                 }
             }
         }
+>>>>>>> f2f2be7cefcfb084444ad8060edf0ceb75fa071e
 	}
 
 ?>

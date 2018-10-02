@@ -31,8 +31,8 @@
 		    						</div>
 		    					</div>
 		    					<div class="col-md-7 p-l-0">
-                                    <form id="investigation_item_form_modal" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/save_investigation_item_description') ?>"
+                                    <form id="echo_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
                                           enctype="multipart/form-data">
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
                                         <input type="hidden" name="patient_id" id="patient_id"/>
@@ -56,7 +56,7 @@
                                         </div>
                                         <div>
                                             <button class="btn btn-primary btn-sm">Clear Values</button>
-                                            <button class="btn btn-default pull-right btn-sm">Get Values</button>
+                                            <button type="submit" class="btn btn-default pull-right btn-sm" id="echo_profile_form_btn">Get Values</button>
                                         </div>
                                     </form>
 		    					</div>
@@ -69,83 +69,60 @@
 		    			<div class="card-body">
 		    				<div class="row">
 		    					<div class="col-md-5 p-r-0">
-		    						<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-				                       	<thead>
-				                        <tr>
-				                            <th> MMODE Measurment</th>
-				                            <th> Value</th>
-				                            <th> Noramal Value</th>
-				                        </tr>
-					                    </thead>
-					                    <tbody>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-					                    </tbody>
-					                </table>
+                                    <form id="echo_mmode_content_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
+                                        <div id="mmode_content">
+                                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                <thead>
+                                                <tr>
+                                                    <th> MMODE Measurment</th>
+                                                    <th> Value</th>
+                                                    <th> Noramal Value</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Urea</td>
+                                                    <td></td>
+                                                    <td>mg/dl</td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+
 					                <div>
 					                	<button class="btn btn-primary btn-sm pull-right">Reset MMode Measurements</button>	
 					                </div>
 		    					</div>
 		    					<div class="col-md-5 p-l-0 p-r-0">
-		    						<table class="table table-bordered responsive" cellspacing="0" id="" width="100%" >
-				                       	<thead>
-				                        <tr>
-				                            <th> Doppler Measurement</th>
-				                            <th> Value</th>
-				                            <th> Noramal Value</th>
-				                        </tr>
-					                    </thead>
-					                    <tbody>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-					                    </tbody>
-					                </table>
+                                    <form id="echo_dooplers_content_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
+                                        <div id="dooplers_content">
+                                            <table class="table table-bordered responsive" cellspacing="0" id="" width="100%" >
+                                                <thead>
+                                                <tr>
+                                                    <th> Doppler Measurement</th>
+                                                    <th> Value</th>
+                                                    <th> Noramal Value</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Urea</td>
+                                                    <td></td>
+                                                    <td>mg/dl</td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
 					                <div>
 					                	<button class="btn btn-primary btn-sm pull-right">Reset Doppler Measurements</button>	
 					                </div>
@@ -191,51 +168,72 @@
 									Select Structure	
 								</div>
 								<div class="card-body p-0">
-									<ul class="list-group">
-		    							<li class="list-group-item">MMOD</li>
-		    							<li class="list-group-item">MITRAL VALUW</li>
-		    						</ul>		
+                                    <?php $this->load->view('profile/disease_table'); ?>
 								</div>
 							</div>
 	    				</div>
 	    				<div class="col-md-3 p-r-0 p-l-0">
 	    					<div class="card">
 								<div class="card-header">
-									Findings	
+                                    Select Disease
 								</div>
 								<div class="card-body p-0">
-									<ul class="list-group">
-		    							<li class="list-group-item">MVR</li>
-		    							<li class="list-group-item">Post-Op Rastelli for VSD and Pulmonart</li>
-		    						</ul>		
+                                    <table class="table table-bordered nowrap responsive category-measurement-table" cellspacing="0" id="" width="100%" >
+                                        <thead>
+                                        <tr>
+                                            <th class="table-header">Findings</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php  foreach ($diseases as $disease):  ?>
+                                            <tr class="table-row">
+                                                <td contenteditable="true" class=disease_cate"
+                                                    onClick="showEditDisease(this,'<?php echo $disease['id']; ?>');">
+                                                    <?php echo $disease['name']; ?>
+                                                    <input type="hidden" name="disease_id" id="disease_id" value="<?php echo $disease['id']; ?>">
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
 								</div>
 							</div>
 	    				</div>
 	    				<div class="col-md-4 p-r-0 p-l-0">
-	    					<div class="card">
-								<div class="card-header">
-									Finding by Disease/Structure
-								</div>
-								<div class="card-body p-0">
-									<ul class="list-group">
-		    							<li class="list-group-item">Dialted RA</li>
-		    							<li class="list-group-item">Post-Op Rastelli for VSD and Pulmonart</li>
-		    						</ul>		
-								</div>
-							</div>
+                            <form id="echo_finding_form" method="post" role="form"
+                                  data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" name="patient_id" class="patient_id"/>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Finding by Disease/Structure
+                                    </div>
+                                    <div class="card-body p-0" id="disease_findings">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">Dialted RA</li>
+                                            <li class="list-group-item">Post-Op Rastelli for VSD and Pulmonart</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
 	    				</div>
 	    				<div class="col-md-3 p-l-0">
-	    					<div class="card">
-								<div class="card-header">
-									Finding by Disease/Structure
-								</div>
-								<div class="card-body p-0">
-									<ul class="list-group">
-		    							<li class="list-group-item">Dialted RA</li>
-		    							<li class="list-group-item">Post-Op Rastelli for VSD and Pulmonart</li>
-		    						</ul>		
-								</div>
-							</div>
+                            <form id="echo_diagnosis_form" method="post" role="form"
+                                  data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" name="patient_id" class="patient_id"/>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Diagnosis by Disease/Structure
+                                    </div>
+                                    <div class="card-body p-0" id="disease_diagnosis">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">Dialted RA</li>
+                                            <li class="list-group-item">Post-Op Rastelli for VSD and Pulmonart</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
 	    				</div>
     				</div>
     			</div>
@@ -246,7 +244,7 @@
     				<option>Select</option>
     				<option></option>
     			</select>
-    			<button class="btn btn-primary">Save</button>
+    			<button class="btn btn-primary" id="save_patient_echo_info">Save</button>
     		</div>
     	</div>   	
     </div>

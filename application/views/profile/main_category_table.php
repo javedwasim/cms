@@ -8,7 +8,6 @@
     <?php foreach ($main_categories as $category): ?>
         <tr class="table-row">
             <td contenteditable="true" class="2d_echo_cate"
-                onBlur="saveMainCategoryItem(this,'cate_name','<?php echo $category['id']; ?>')"
                 onClick="showEditMainCategory(this,'<?php echo $category['id']; ?>');">
                 <?php echo $category['name']; ?></td>
 
@@ -31,7 +30,6 @@
             url: "<?php echo base_url() . 'profile/get_measurement_by_filter/' ?>"+category_id,
             type: "get",
             success: function (response) {
-                console.log(response.result_html);
                 $('#main_category_items').empty();
                 $('#main_category_items').append(response.result_html);
                 if (response.success) {
