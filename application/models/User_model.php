@@ -52,33 +52,6 @@ class User_model extends CI_Model {
         }
     }
     
-    // public function get_last_booking(){
-    //     $result = $this->db->select('appointment_date ,order_number')
-    //             ->order_by('appointment_booking_id', 'DESC')
-    //             ->limit(1)
-    //             ->get('appointment_booking');
-    //     if($result->num_rows()>0){
-    //         return $result->row();
-    //     } else {
-    //         return false;
-    //     }
-        
-    // }
-    
-    // public function get_last_vip_booking($flag){
-    //     $date = date('Y-m-d');
-    //     $result = $this->db->select('appointment_date ,order_number')
-    //             ->where('DATE(appointment_date)', $date)
-    //             ->order_by('order_number', 'DESC')
-    //             ->limit(1)
-    //             ->get('appointment_booking');
-    //     if($result->num_rows()>0){
-    //         return $result->row();
-    //     } else {
-    //         return false;
-    //     }
-        
-    // }
     public function get_last_booking(){
        $date = date('Y-m-d');
         $result = $this->db->select('appointment_date ,order_number')

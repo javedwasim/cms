@@ -138,21 +138,27 @@ class Dashboard extends CI_Controller {
         }
     }
 
-    public function update_limiter()
-    {
+    public function insert_limiter(){
         $limiter = $this->input->post('limiter');
         $limiterdate = date('Y-m-d', strtotime($this->input->post('limiterDate')));
         $clinic = date('H:i:s', strtotime($this->input->post('clinicTime')));
-        $data = array(
+        $data_array = array(
             'limiter' => $limiter,
             'limiter_date' => $limiterdate,
             'clinic_time' => $clinic
         );
-        $result = $this->Dashboard_model->limiter_update($data);
+        $result = $this->Dashboard_model->add_limiter($data_array);
         if ($result) {
-            return true;
+            $json['success'] = true;
+            $json['message'] = 'Successfully Added.'; 
         } else {
-            return false;
+            $json['error'] = true;
+            $json['message'] = 'Seems an error';
+        }
+        $data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
+        $json['result_html'] = $this->load->view('pages/limiter_table',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
         }
     }
 
@@ -219,6 +225,39 @@ class Dashboard extends CI_Controller {
         $data['menu_result'] = print_menu(0, $menus_array);
         $data['user_data'] = $this->session->userdata('userdata');
         $this->load->view('pages/menu', $data);
+    }
+
+    public function update_limiter(){
+      $data = $this->input->post();
+        $result = $this->Dashboard_model->limiter_update($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Updated successfully!";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function limiter_delete($id){
+        $result = $this->Dashboard_model->delete_limiter($id);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Deleted Successfully.";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        $data['rights'] = $this->session->userdata('other_rights');
+        $data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
+        $json['result_html'] = $this->load->view('pages/limiter_table',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
     }
 
 
