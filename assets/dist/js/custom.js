@@ -1432,13 +1432,12 @@ $(document.body).on('click', '#time_on_call', function () {
 
 ////////////////////////////////// save limiter settings ///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
-
 $(document.body).on('click', '#save_limiter', function () {
     var limiter = $('#limiter').val();
     var limiterdate = $('#limiter_date').val();
     var clinictime = $('#example-time-input').val();
     $.ajax({
-        url: '/cms/dashboard/update_limiter',
+        url: '/cms/dashboard/insert_limiter',
         type: 'post',
         data: {
             limiter: limiter,
@@ -1447,7 +1446,16 @@ $(document.body).on('click', '#save_limiter', function () {
         },
         cache: false,
         success: function (response) {
-            toastr["success"]("Successfully updated.");
+            $('.limiter_table').remove();
+            $('#limiter_table').append(response.result_html);
+            if (response.success == true) {
+                $('#limiter').val('');
+                $('#limiter_date').val('');
+                $('#example-time-input').val('');
+                toastr["success"](response.message);
+            }else{
+                toastr["warning"](response.message);
+            }
         }
     });
 });
@@ -1923,21 +1931,23 @@ $(document.body).on('click', '#pat_delete', function () {
 /////////////////////////////////// load limiter page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-$(document.body).on('click', '#booking-limiter', function () {
-    $.ajax({
-        url: '/cms/setting/booking_limiter',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                $('#limiter_date').datepicker({
-                    format: 'd-M-yyyy'
-                });
-            }
-        }
-    });
-});
+// $(document.body).on('click', '#booking-limiter', function () {
+//     $.ajax({
+//         url: '/cms/setting/booking_limiter',
+//         cache: false,
+//         success: function (response) {
+//             if (response.result_html != '') {
+//                 $('.dashboard-content').remove();
+//                 $('#dashboard-content').append(response.result_html);
+//                 $('.limiter_table').remove();
+//                 $('#limiter_table').append(response.result_html);
+//                 $('#limiter_date').datepicker({
+//                     format: 'd-M-yyyy'
+//                 });
+//             }
+//         }
+//     });
+// });
 
 /////////////////////////////////// load laboratory test page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -2962,6 +2972,8 @@ function get_item_limiter(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('.limiter_table').remove();
+                $('#limiter_table').append(response.limiter_table);
                 $('#limiter_date').datepicker({
                     format: 'd-M-yyyy'
                 });
@@ -3474,3 +3486,24 @@ function filter_history_item_category(category) {
     });
     return false;
 }
+
+$(document.body).on('click', '.delete-limiter', function(){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function(response) {
+                $('.limiter_table').remove();
+                $('#limiter_table').append(response.result_html);
+                if (response.success) {
+                    toastr["error"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});

@@ -63,8 +63,8 @@ class Dashboard_model extends CI_Model
         }
     }
 
-    public function limiter_update($data){
-        $result = $this->db->update('booking_limiter',$data);
+    public function add_limiter($data){
+        $result = $this->db->insert('booking_limiter',$data);
         if($result){
             return true;
         }else{
@@ -137,6 +137,23 @@ class Dashboard_model extends CI_Model
         } else {
             return array();
         }
+    }
+
+    public function limiter_update($data){
+            if(isset($data['id'])){
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $this->db->where('limiter_id',$id)->update('booking_limiter',array('limiter'=>$editval));
+                return $this->db->affected_rows();
+            }else{
+                return false;
+            }
+        }
+
+    public function delete_limiter($id){
+        $this->db->where('limiter_id', $id)->delete('booking_limiter');
+        return $this->db->affected_rows();
     }
 
 }

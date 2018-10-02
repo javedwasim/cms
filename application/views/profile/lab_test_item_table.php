@@ -14,9 +14,9 @@
             <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
                 <a class="info-lab-test-item-btn btn btn-info btn-xs"
                    href="javascript:void(0)"
-                   data-lab-test-item-id="<?php echo $item['id']; ?>"><i
-                   class="far fa-question-circle"></i></a>
-
+                   data-lab-test-item-id="<?php echo $item['id']; ?>">
+                   <i class="far fa-question-circle"></i>
+               </a>
             </td>
             <td contenteditable="true">
                 <?php echo $item['name']; ?>

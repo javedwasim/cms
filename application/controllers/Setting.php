@@ -242,6 +242,7 @@
 		public function limiter(){
             $data['rights'] = $this->session->userdata('other_rights');
 			$data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
+            $json['limiter_table'] = $this->load->view('pages/limiter_table',$data,true);
 			$json['result_html'] = $this->load->view('pages/limiter', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);

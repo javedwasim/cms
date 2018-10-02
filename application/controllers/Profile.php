@@ -275,6 +275,66 @@ class Profile extends MY_Controller
         }
     }
 
+
+    public function save_ett_test(){
+    	$data = $this->input->post();
+    	$patientid = $data['pat_id'];
+    	$testreason = $data['test_reason'];
+    	$medication = $data['medication'];
+    	$description = $data['description'];
+    	$conclusion = $data['conclusion'];
+    	$restinghr = $data['resting_hr'];
+    	$restingbpa = $data['resting_bp_a'];
+    	$restingbpb = $data['resting_bp_b'];
+    	$restingbp = $restingbpa."\\".$restingbpb;
+    	$maxhr = $data['max_hr'];
+    	$maxbpa = $data['max_bp_a'];
+    	$maxbpb = $data['max_bp_b'];
+    	$maxbp = $maxbpa."\\".$maxbpb;
+    	$maxpretar = $data['max_pre_tar'];
+    	$maxprehr = $data['max_pre_hr'];
+    	$hrbp = $data['hr_bp'];
+    	$ettmets = $data['mets'];
+    	$exercisetime = $data['exercise_time'];
+    	$endingreason = $data['ending_reason'];
+    	$ettprotocolid = $data['protocol_id'];
+    	$sig = $data['doc_sig'];
+    	$data_array = array(
+    			'patient_id' => $patientid,
+    			'test_reason' => $testreason,
+    			'medication' => $medication,
+    			'description' => $description,
+    			'conclusion' => $conclusion,
+    			'resting_hr' => $restinghr,
+    			'resting_bp' => $restingbp,
+    			'max_hr' => $maxhr,
+    			'max_bp' => $maxbp,
+    			'max_pre_tar' => $maxpretar,
+    			'max_pre_hr' => $maxprehr,
+    			'hr_bp' => $hrbp,
+    			'mets' => $ettmets,
+    			'exercise_time' => $exercisetime,
+    			'ending_reason' => $endingreason,
+    			'protocol_id' => $ettprotocolid,
+    			'doc_sig' => $sig
+    	);
+    	$insertedid = $this->Profile_model->insert_ett_test($data_array);
+    	if ($insertedid) {
+    		$result = $this->Profile_model->insert_ett_protocols($data,$insertedid);
+    		if ($result) {
+    			$json['success'] = true;
+    		}else{
+    			$json['error'] = true;
+    		}
+    	}else{
+    		$json['error'] = true;
+    	}
+
+    	if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
     public function delete_note($id)
     {
         $result = $this->Profile_model->delete_notes($id);

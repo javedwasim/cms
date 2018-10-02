@@ -293,10 +293,10 @@
 		}
 
 
-		public function insert_ett_test($data){	
+		public function insert_ett_test($data){
 			$result = $this->db->insert('patient_ett_test', $data);
 			if ($result) {
-				return true;
+				return $this->db->insert_id();
 			}else{
 				return false;
 			}
@@ -375,6 +375,7 @@
             return $randomString;
         }
 
+<<<<<<< HEAD
         public function save_echo_profile_info($data){
             $query = $this->db->select('*')->from('patient_echo')->limit(1)->get();
             $result = $query->row_array();
@@ -485,6 +486,45 @@
             return $patient_echo_id;
         }
 
+=======
+
+        function insert_ett_protocols($data,$id){
+        	if(isset($data['stage_name']) && !empty($data['stage_name'])){
+                $name = $data['stage_name'];
+                $speed = $data['stage_speed'];
+                $grade = $data['stage_grade'];
+                $time = $data['stage_time'];
+                $mets = $data['stage_mets'];
+                $hr = $data['stage_hr'];
+                $sbp = $data['stage_sbp'];
+                $dbp = $data['stage_dbp'];
+                $condition = $data['stage_condition'];
+                for($j=0;$j<count($name);$j++){
+                   	$result = $this->db->insert('patient_ett_test_protocol',
+                    array(
+                    	'patient_ett_test_id'=>$id,
+                    	'patient_id'=>$data['pat_id'],
+                    	'protocol_id'=>$data['protocol_id'],
+                        'stage_name'=>$name[$j],
+                        'speed'=>$speed[$j],
+                        'grade'=>$grade[$j],
+                        'stage_time'=>date('h:i',strtotime($time[$j])),
+                        'mets'=>$mets[$j],
+                        'hr'=>$hr[$j],
+                        'sbp'=>$sbp[$j],
+                        'dbp'=>$dbp[$j],
+                        'protocol_condition'=>$condition[$j],
+                    ));
+
+                }
+                if ($result) {
+                	return true;
+                }else{
+                	return false;
+                }
+            }
+        }
+>>>>>>> f2f2be7cefcfb084444ad8060edf0ceb75fa071e
 	}
 
 ?>

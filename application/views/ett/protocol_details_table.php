@@ -24,7 +24,7 @@
                     onClick="showExamination(this);"><?php echo $key['grade']; ?></td>
                 <td contenteditable="true" class="exam_cate"
                     onBlur="saveToDatabase(this,'stage_time','<?php echo $key['id']; ?>')"
-                    onClick="showExamination(this);"><?php echo date('i:s', strtotime($key['stage_time'])) ?></td>
+                    onClick="showExamination(this);"><?php echo date('h:i', strtotime($key['stage_time'])) ?></td>
                 <td contenteditable="true" class="exam_cate"
                     onBlur="saveToDatabase(this,'mets','<?php echo $key['id']; ?>')"
                     onClick="showExamination(this);"><?php echo $key['mets']; ?></td>
