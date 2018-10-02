@@ -429,26 +429,28 @@
         }
 
     public function save_ett_test(){
-    	$patientid = $this->input->post('patientid');
-    	$testreason = $this->input->post('testreason');
-    	$medication = $this->input->post('medication');
-    	$description = $this->input->post('description');
-    	$conclusion = $this->input->post('conclusion');
-    	$restinghr = $this->input->post('restinghr');
-    	$restingbpa = $this->input->post('restingbpa');
-    	$restingbpb = $this->input->post('restingbpb');
+    	$data = $this->input->post();
+    	$patientid = $data['pat_id'];
+    	$testreason = $data['test_reason'];
+    	$medication = $data['medication'];
+    	$description = $data['description'];
+    	$conclusion = $data['conclusion'];
+    	$restinghr = $data['resting_hr'];
+    	$restingbpa = $data['resting_bp_a'];
+    	$restingbpb = $data['resting_bp_b'];
     	$restingbp = $restingbpa."\\".$restingbpb;
-    	$maxhr = $this->input->post('maxhr');
-    	$maxbpa = $this->input->post('maxbpa');
-    	$maxbpb = $this->input->post('maxbpb');
+    	$maxhr = $data['max_hr'];
+    	$maxbpa = $data['max_bp_a'];
+    	$maxbpb = $data['max_bp_b'];
     	$maxbp = $maxbpa."\\".$maxbpb;
-    	$maxpretar = $this->input->post('maxpretar');
-    	$maxprehr = $this->input->post('maxprehr');
-    	$hrbp = $this->input->post('hrbp');
-    	$ettmets = $this->input->post('ettmets');
-    	$exercisetime = $this->input->post('exercisetime');
-    	$endingreason = $this->input->post('endingreason');
-    	$ettprotocolid = $this->input->post('ettprotocolid');
+    	$maxpretar = $data['max_pre_tar'];
+    	$maxprehr = $data['max_pre_hr'];
+    	$hrbp = $data['hr_bp'];
+    	$ettmets = $data['mets'];
+    	$exercisetime = $data['exercise_time'];
+    	$endingreason = $data['ending_reason'];
+    	$ettprotocolid = $data['protocol_id'];
+    	$sig = $data['doc_sig'];
     	$data_array = array(
     			'patient_id' => $patientid,
     			'test_reason' => $testreason,
@@ -465,11 +467,17 @@
     			'mets' => $ettmets,
     			'exercise_time' => $exercisetime,
     			'ending_reason' => $endingreason,
-    			'protocol_id' => $ettprotocolid
+    			'protocol_id' => $ettprotocolid,
+    			'doc_sig' => $sig
     	);
-    	$result = $this->Profile_model->insert_ett_test($data_array);
-    	if ($result) {
-    		$json['success']= true;
+    	$insertedid = $this->Profile_model->insert_ett_test($data_array);
+    	if ($insertedid) {
+    		$result = $this->Profile_model->insert_ett_protocols($data,$insertedid);
+    		if ($result) {
+    			$json['success'] = true;
+    		}else{
+    			$json['error'] = true;
+    		}
     	}else{
     		$json['error'] = true;
     	}

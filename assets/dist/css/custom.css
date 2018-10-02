@@ -226,6 +226,10 @@ li.paginate_button.page-item.active {
 li#list_itmes_vital {
     padding-left: 25px;
 }
+.profile_protocol_table input[type="text"] {
+    border: none;
+    width: 100%;
+}
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */

@@ -1818,49 +1818,14 @@ $(document.body).on('click', '#save_lab_test', function(){
     return false;
 });
 
-$(document.body).on('click', '#save_ett_test', function(){
+$(document.body).on('click', '#save_ett_test', function(e){
+    e.preventDefault()
     var patientid = $('#label_patient_id').text();
-    var testreason = $('#ett_test_reason option:selected').val();
-    var medication = $('#ett_medication').val();
-    var description = $('#ett_desc_pro').val();
-    var conclusion = $('#ett_conc_pro').val();
-    var restinghr = $('#resting_hr').val();
-    var restingbpa = $('#resting_bp_a').val();
-    var restingbpb = $('#resting_bp_b').val();
-    var maxhr = $('#max_hr').val();
-    var maxbpa = $('#max_bp_a').val();
-    var maxbpb = $('#max_bp_b').val();
-    var maxpretar = $('#max_pre_tar').val();
-    var maxprehr = $('#max_pre_hr').val();
-    var hrbp = $('#hr_bp').val();
-    var ettmets = $('#ett_mets').val();
-    var exercisetime = $('#exercise_time').val();
-    var endingreason = $('#ett_ending_reason').val();
-    var ettprotocolid = $('#ett_protocol_id option:selected').val();
+    $('#ett_pat_id').val(patientid);
     $.ajax({
         url: '/cms/profile/save_ett_test',
         type: 'post',
-        data: {
-            patientid:patientid,
-            testreason:testreason,
-            medication:medication,
-            description:description,
-            conclusion:conclusion,
-            restinghr:restinghr,
-            restingbpa:restingbpa,
-            restingbpb:restingbpb,
-            maxhr:maxhr,
-            maxbpa:maxbpa,
-            maxbpb:maxbpb,
-            maxpretar:maxpretar,
-            maxprehr:maxprehr,
-            hrbp:hrbp,
-            ettmets:ettmets,
-            exercisetime:exercisetime,
-            endingreason:endingreason,
-            ettprotocolid:ettprotocolid
-
-        },
+        data:$('#ett_protocol_form').serialize(),
         cache: false,
         success: function(response){
             if (response.success == true) {
