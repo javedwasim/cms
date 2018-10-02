@@ -23,7 +23,7 @@
 		    								Select Value Name	
 		    							</div>
 		    							<div class="card-body p-0">
-		    								<ul class="list-group">
+		    								<ul class="list-group" id="main_category_list">
 				    							<li class="list-group-item">MMOD</li>
 				    							<li class="list-group-item">MITRAL VALUW</li>
 				    						</ul>		
@@ -31,46 +31,34 @@
 		    						</div>
 		    					</div>
 		    					<div class="col-md-7 p-l-0">
-		    						<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-				                       	<thead>
-				                        <tr>
-				                            <th> Items</th>
-				                            <th> Value</th>
-				                            <th> Noramal Value</th>
-				                        </tr>
-					                    </thead>
-					                    <tbody>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-				                            <tr>
-				                                <td>Urea</td>
-				                                <td></td>
-				                                <td>mg/dl</td>
-				                            </tr>
-					                    </tbody>
-					                </table>
-					                <div>
-					                	<button class="btn btn-primary btn-sm">Clear Values</button>
-					                	<button class="btn btn-default pull-right btn-sm">Get Values</button>
-					                </div>
+                                    <form id="investigation_item_form_modal" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/save_investigation_item_description') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <div id="main_category_items">
+                                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                <thead>
+                                                <tr>
+                                                    <th> Items</th>
+                                                    <th> Value</th>
+                                                    <th> Noramal Value</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Urea</td>
+                                                    <td></td>
+                                                    <td>mg/dl</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-primary btn-sm">Clear Values</button>
+                                            <button class="btn btn-default pull-right btn-sm">Get Values</button>
+                                        </div>
+                                    </form>
 		    					</div>
 		    				</div>
 		    			</div>

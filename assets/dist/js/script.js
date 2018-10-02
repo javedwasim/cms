@@ -124,7 +124,6 @@ $(document.body).on('click', '.edit-research-btn', function(){
         data: {id:r_id},
         cache: false,
         success: function(response) {
-            console.log(response);
             if (response.success) {
                 $('#description').val(response.description);
                 $('#research_modal').modal('show');
@@ -1919,6 +1918,11 @@ $(document.body).on('click', '#pat-echo-test', function () {
                 $('#content-wrapper').append(response.result_html);
                 $('.patient_info').remove();
                 $('#pats_ett_information').append(response.patient_information);
+
+                $('#main_category_list').empty();
+                $('#main_category_list').append(response.main_category_table);
+
+
                 $('.lab-date').datepicker({
                     format: 'd-M-yyyy'
                 });
