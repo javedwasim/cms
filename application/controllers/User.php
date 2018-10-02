@@ -20,79 +20,42 @@ class User extends MY_Controller {
         $date = date('Y-m-d');
         if ($flag == 'vip') {
             $data['booking_flag'] = $flag;
-            $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
-            $data['booking_details'] = $this->User_model->get_bookings_with_flag($flag);
-            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($date);
-            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($date);
-            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($date);
-            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($date);
-            $data['total_attended'] = $this->User_model->count_total_attendent($date);
-            $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
-            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
-            $data['refund_count'] = $this->User_model->count_refund_rows($date);
-            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
-            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
-        }
-        else if ($flag == 'on_walk') {
+        } else if ($flag == 'on_walk') {
             $data['booking_flag'] = $flag;
-            $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
-            $data['booking_details'] = $this->User_model->get_bookings_with_flag($flag);
-            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($date);
-            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($date);
-            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($date);
-            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($date);
-            $data['total_attended'] = $this->User_model->count_total_attendent($date);
-            $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
-            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
-            $data['refund_count'] = $this->User_model->count_refund_rows($date);
-            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
-            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
-        }
-        else if ($flag == 'on_call') {
+        } else if ($flag == 'on_call') {
             $data['booking_flag'] = $flag;
-            $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
-            $data['booking_details'] = $this->User_model->get_bookings_with_flag($flag);
-            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($date);
-            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($date);
-            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($date);
-            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($date);
-            $data['total_attended'] = $this->User_model->count_total_attendent($date);
-            $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
-            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
-            $data['refund_count'] = $this->User_model->count_refund_rows($date);
-            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
-            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
+        } else {
+            $data['booking_flag'] = "";
         }
-        else {
-                $data['booking_flag'] = "";
-                $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
-                $data['booking_details'] = $this->User_model->get_bookings();
-                $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($date);
-                $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($date);
-                $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($date);
-                $data['wallet_refund'] = $this->User_model->get_todays_total_refund($date);
-                $data['total_attended'] = $this->User_model->count_total_attendent($date);
-                $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
-                $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
-                $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
-                $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
-            }
-            $data['fee_paid'] = $this->User_model->count_fee_paid();
-            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-            $data['ett_count'] = $this->User_model->count_ett_waiting();
-            $data['echo_count'] = $this->User_model->count_echo_waiting();
-            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-            $data['count_complete'] = $this->User_model->count_complete();
-            $data['rights'] = $this->session->userdata('other_rights');
-            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-            $json['status_row'] = $this->load->view('admin/patient_status_row', $data, true);
-            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-            if ($this->input->is_ajax_request()) {
-                set_content_type($json);
-            }
+        $data['booking_details'] = $this->User_model->get_bookings();
+        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+        $data['booking_details'] = $this->User_model->get_bookings_with_flag($flag);
+        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($date);
+        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($date);
+        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($date);
+        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($date);
+        $data['total_attended'] = $this->User_model->count_total_attendent($date);
+        $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
+        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
+        $data['refund_count'] = $this->User_model->count_refund_rows($date);
+        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
+        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
+        $data['fee_paid'] = $this->User_model->count_fee_paid();
+        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
+        $data['ett_count'] = $this->User_model->count_ett_waiting();
+        $data['echo_count'] = $this->User_model->count_echo_waiting();
+        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
+        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
+        $data['count_complete'] = $this->User_model->count_complete();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
+        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
+        $json['status_row'] = $this->load->view('admin/patient_status_row', $data, true);
+        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
         }
+    }
 
     public function book_appointment() {
         $patName = $this->input->post('patName');
@@ -101,12 +64,12 @@ class User extends MY_Controller {
         $appdate = $this->input->post('appointmentDate');
         $date = date('Y-m-d', strtotime($appdate));
         $currentdate = date('Y-m-d');
+        $limiterexist = $this->User_model->check_limiter($date);
         $limiter = $this->Dashboard_model->get_limiter();
         $limit = $limiter->limiter;
-        $limiter_date = $limiter->limiter_date; 
         $bookingCount = $this->User_model->count_bookings();
         $count = $bookingCount;
-        if($date==$limiter_date){
+        if ($limiterexist) {
             if ($limit > $count) {
                 if ($bookingFlag == "vip") {
                     if (!empty($patName) && !empty($patCell) && !empty($appdate)) {
@@ -156,88 +119,17 @@ class User extends MY_Controller {
                         $result = $this->User_model->appointment_book($data);
                         if ($result) {
                             $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                             $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                             $json['message'] = "Booked successfully";
                         } else {
                             $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                             $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                             $json['error'] = true;
                         }
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                        $data['fee_paid'] = $this->User_model->count_fee_paid();
-                        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                        $data['ett_count'] = $this->User_model->count_ett_waiting();
-                        $data['echo_count'] = $this->User_model->count_echo_waiting();
-                        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                        $data['count_complete'] = $this->User_model->count_complete();
-                        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                        $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                        $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                        $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                         $json['message'] = "Please fill all the fields .";
-                    }
-
-                    if ($this->input->is_ajax_request()) {
-                        set_content_type($json);
                     }
                 } else if ($bookingFlag == 'on_walk') {
                     if (!empty($patName) && !empty($patCell)) {
@@ -290,87 +182,17 @@ class User extends MY_Controller {
                         $result = $this->User_model->appointment_book($data);
                         if ($result) {
                             $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                             $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                             $json['message'] = "Booked successfully";
                         } else {
                             $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                             $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                             $json['error'] = true;
                         }
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                        $data['fee_paid'] = $this->User_model->count_fee_paid();
-                        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                        $data['ett_count'] = $this->User_model->count_ett_waiting();
-                        $data['echo_count'] = $this->User_model->count_echo_waiting();
-                        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                        $data['count_complete'] = $this->User_model->count_complete();
-                        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                        $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                        $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                        $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                         $json['message'] = "Name and contact Number cannot be null.";
-                    }
-
-                    if ($this->input->is_ajax_request()) {
-                        set_content_type($json);
                     }
                 } else if ($bookingFlag == 'on_call') {
                     if (!empty($patName) && !empty($patCell) && !empty($appdate)) {
@@ -423,87 +245,17 @@ class User extends MY_Controller {
                         $result = $this->User_model->appointment_book($data);
                         if ($result) {
                             $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                             $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                             $json['message'] = "Booked successfully";
                         } else {
                             $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                             $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                             $json['error'] = true;
                         }
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                        $data['fee_paid'] = $this->User_model->count_fee_paid();
-                        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                        $data['ett_count'] = $this->User_model->count_ett_waiting();
-                        $data['echo_count'] = $this->User_model->count_echo_waiting();
-                        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                        $data['count_complete'] = $this->User_model->count_complete();
-                        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                        $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                        $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                        $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                         $json['message'] = "Please fill all the fields .";
-                    }
-
-                    if ($this->input->is_ajax_request()) {
-                        set_content_type($json);
                     }
                 } else {
                     if (!empty($patName) && !empty($patCell)) {
@@ -554,640 +306,296 @@ class User extends MY_Controller {
                         $result = $this->User_model->appointment_book($data);
                         if ($result) {
                             $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                             $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                             $json['message'] = "Booked successfully";
                         } else {
                             $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                             $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                             $json['error'] = true;
                         }
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                        $data['fee_paid'] = $this->User_model->count_fee_paid();
-                        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                        $data['ett_count'] = $this->User_model->count_ett_waiting();
-                        $data['echo_count'] = $this->User_model->count_echo_waiting();
-                        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                        $data['count_complete'] = $this->User_model->count_complete();
-                        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                        $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                        $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                        $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                         $json['message'] = "Name and contact Number cannot be null.";
                     }
                 }
             } else {
                 $data['booking_flag'] = $bookingFlag;
-                $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                 $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                $data['fee_paid'] = $this->User_model->count_fee_paid();
-                $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                $data['ett_count'] = $this->User_model->count_ett_waiting();
-                $data['echo_count'] = $this->User_model->count_echo_waiting();
-                $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                $data['count_complete'] = $this->User_model->count_complete();
-                $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                $data['rights'] = $this->session->userdata('other_rights');
-                $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
                 $json['message'] = "Limit reached for bookings.";
             }
-        }else{
+        } else {
             if ($bookingFlag == "vip") {
-                    if (!empty($patName) && !empty($patCell) && !empty($appdate)) {
-                        $AppFee = $this->input->post('fee');
-                        $get_last_orderno = $this->User_model->get_last_booking();
-                        if ($get_last_orderno == false) {
+                if (!empty($patName) && !empty($patCell) && !empty($appdate)) {
+                    $AppFee = $this->input->post('fee');
+                    $get_last_orderno = $this->User_model->get_last_booking();
+                    if ($get_last_orderno == false) {
+                        $order_no = 6;
+                    } else {
+                        $lastbookingate = date('Y-m-d', strtotime($get_last_orderno->appointment_date));
+                        if ($lastbookingate < $date) {
                             $order_no = 6;
                         } else {
-                            $lastbookingate = date('Y-m-d', strtotime($get_last_orderno->appointment_date));
-                            if ($lastbookingate < $date) {
+                            $order_no = $get_last_orderno->order_number;
+                            if ($order_no < 6) {
                                 $order_no = 6;
                             } else {
-                                $order_no = $get_last_orderno->order_number;
-                                if ($order_no < 6) {
-                                    $order_no = 6;
-                                } else {
-                                    $order_no = $order_no + 1;
-                                }
+                                $order_no = $order_no + 1;
                             }
                         }
-                        $app['datetime'] = $appdate . " " . date('H:i:s');
-                        $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                        $data = array();
-                        $collectedby = $this->session->userdata('username');
-                        if ($AppFee == "") {
-                            $data = array(
-                                'order_number' => $order_no,
-                                'full_name' => $patName,
-                                'contact_number' => $patCell,
-                                'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
-                                'booking_flag' => $bookingFlag
-                            );
-                        } else {
-                            $data = array(
-                                'order_number' => $order_no,
-                                'full_name' => $patName,
-                                'contact_number' => $patCell,
-                                'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
-                                'fee_collected_by' => $collectedby,
-                                'fee_paid_at' => $bookingDatetime,
-                                'fee_paid_status' => '1',
-                                'booking_flag' => $bookingFlag
-                            );
-                        }
-                        $result = $this->User_model->appointment_book($data);
-                        if ($result) {
-                            $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                            $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                            $json['message'] = "Booked successfully";
-                        } else {
-                            $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                            $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                            $json['error'] = true;
-                        }
+                    }
+                    $app['datetime'] = $appdate . " " . date('H:i:s');
+                    $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
+                    $data = array();
+                    $collectedby = $this->session->userdata('username');
+                    if ($AppFee == "") {
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'consultant_fee' => $AppFee,
+                            'booking_flag' => $bookingFlag
+                        );
+                    } else {
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'consultant_fee' => $AppFee,
+                            'fee_collected_by' => $collectedby,
+                            'fee_paid_at' => $bookingDatetime,
+                            'fee_paid_status' => '1',
+                            'booking_flag' => $bookingFlag
+                        );
+                    }
+                    $result = $this->User_model->appointment_book($data);
+                    if ($result) {
+                        $data['booking_flag'] = $bookingFlag;
+                        $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                        $json['message'] = "Booked successfully";
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                        $data['fee_paid'] = $this->User_model->count_fee_paid();
-                        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                        $data['ett_count'] = $this->User_model->count_ett_waiting();
-                        $data['echo_count'] = $this->User_model->count_echo_waiting();
-                        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                        $data['count_complete'] = $this->User_model->count_complete();
-                        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                        $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                        $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                        $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                        $json['message'] = "Please fill all the fields .";
-                    }
-
-                    if ($this->input->is_ajax_request()) {
-                        set_content_type($json);
-                    }
-                } else if ($bookingFlag == 'on_walk') {
-                    if (!empty($patName) && !empty($patCell)) {
-                        $appdate = $this->input->post('appointmentDate');
-                        $app['datetime'] = $appdate . " " . date('H:i:s');
-                        $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                        $AppFee = $this->input->post('fee');
-                        //calculating daily token number
-                        $cur_date = date('Y-m-d');
-                        $get_last_orderno = $this->User_model->get_last_booking();
-                        if ($get_last_orderno == false) {
-                            $order_no = 6;
-                        } else {
-                            $lastbookingate = date('Y-m-d', strtotime($get_last_orderno->appointment_date));
-                            if ($lastbookingate < $date) {
-                                $order_no = 6;
-                            } else {
-                                $order_no = $get_last_orderno->order_number;
-                                if ($order_no < 6) {
-                                    $order_no = 6;
-                                } else {
-                                    $order_no = $order_no + 1;
-                                }
-                            }
-                        }
-                        $data = array();
-                        $collectedby = $this->session->userdata('username');
-                        if ($AppFee == "") {
-                            $data = array(
-                                'order_number' => $order_no,
-                                'full_name' => $patName,
-                                'contact_number' => $patCell,
-                                'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
-                                'booking_flag' => $bookingFlag
-                            );
-                        } else {
-                            $data = array(
-                                'order_number' => $order_no,
-                                'full_name' => $patName,
-                                'contact_number' => $patCell,
-                                'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
-                                'fee_collected_by' => $collectedby,
-                                'fee_paid_at' => $bookingDatetime,
-                                'fee_paid_status' => '1',
-                                'booking_flag' => $bookingFlag
-                            );
-                        }
-                        $result = $this->User_model->appointment_book($data);
-                        if ($result) {
-                            $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                            $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                            $json['message'] = "Booked successfully";
-                        } else {
-                            $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                            $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                            $json['error'] = true;
-                        }
-                    } else {
-                        $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                        $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                        $data['fee_paid'] = $this->User_model->count_fee_paid();
-                        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                        $data['ett_count'] = $this->User_model->count_ett_waiting();
-                        $data['echo_count'] = $this->User_model->count_echo_waiting();
-                        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                        $data['count_complete'] = $this->User_model->count_complete();
-                        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                        $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                        $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                        $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                        $json['message'] = "Name and contact Number cannot be null.";
-                    }
-
-                    if ($this->input->is_ajax_request()) {
-                        set_content_type($json);
-                    }
-                } else if ($bookingFlag == 'on_call') {
-                    if (!empty($patName) && !empty($patCell) && !empty($appdate)) {
-                        $appdate = $this->input->post('appointmentDate');
-                        $app['datetime'] = $appdate . " " . date('H:i:s');
-                        $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                        $AppFee = $this->input->post('fee');
-                        //calculating daily token number
-                        $cur_date = date('Y-m-d');
-                        $get_last_orderno = $this->User_model->get_last_booking();
-                        if ($get_last_orderno == false) {
-                            $order_no = 6;
-                        } else {
-                            $lastbookingate = date('Y-m-d', strtotime($get_last_orderno->appointment_date));
-                            if ($lastbookingate < $date) {
-                                $order_no = 6;
-                            } else {
-                                $order_no = $get_last_orderno->order_number;
-                                if ($order_no < 6) {
-                                    $order_no = 6;
-                                } else {
-                                    $order_no = $order_no + 1;
-                                }
-                            }
-                        }
-                        $data = array();
-                        $collectedby = $this->session->userdata('username');
-                        if ($AppFee == "") {
-                            $data = array(
-                                'order_number' => $order_no,
-                                'full_name' => $patName,
-                                'contact_number' => $patCell,
-                                'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
-                                'booking_flag' => $bookingFlag
-                            );
-                        } else {
-                            $data = array(
-                                'order_number' => $order_no,
-                                'full_name' => $patName,
-                                'contact_number' => $patCell,
-                                'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
-                                'fee_collected_by' => $collectedby,
-                                'fee_paid_at' => $bookingDatetime,
-                                'fee_paid_status' => '1',
-                                'booking_flag' => $bookingFlag
-                            );
-                        }
-                        $result = $this->User_model->appointment_book($data);
-                        if ($result) {
-                            $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                            $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                            $json['message'] = "Booked successfully";
-                        } else {
-                            $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                            $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                            $json['error'] = true;
-                        }
-                    } else {
-                        $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                        $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                        $data['fee_paid'] = $this->User_model->count_fee_paid();
-                        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                        $data['ett_count'] = $this->User_model->count_ett_waiting();
-                        $data['echo_count'] = $this->User_model->count_echo_waiting();
-                        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                        $data['count_complete'] = $this->User_model->count_complete();
-                        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                        $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                        $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                        $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                        $json['message'] = "Please fill all the fields .";
-                    }
-
-                    if ($this->input->is_ajax_request()) {
-                        set_content_type($json);
+                        $json['error'] = true;
                     }
                 } else {
-                    if (!empty($patName) && !empty($patCell)) {
-                        $appdate = $this->input->post('appointmentDate');
-                        $app['datetime'] = $appdate . " " . date('H:i:s');
-                        $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                        $AppFee = $this->input->post('fee');
-                        //calculating daily token number
-                        $cur_date = date('Y-m-d');
-                        $get_last_orderno = $this->User_model->get_last_booking();
-                        if ($get_last_orderno == false) {
+                    $data['booking_flag'] = $bookingFlag;
+                    $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                    $json['message'] = "Please fill all the fields .";
+                }
+            } else if ($bookingFlag == 'on_walk') {
+                if (!empty($patName) && !empty($patCell)) {
+                    $appdate = $this->input->post('appointmentDate');
+                    $app['datetime'] = $appdate . " " . date('H:i:s');
+                    $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
+                    $AppFee = $this->input->post('fee');
+                    //calculating daily token number
+                    $cur_date = date('Y-m-d');
+                    $get_last_orderno = $this->User_model->get_last_booking();
+                    if ($get_last_orderno == false) {
+                        $order_no = 6;
+                    } else {
+                        $lastbookingate = date('Y-m-d', strtotime($get_last_orderno->appointment_date));
+                        if ($lastbookingate < $date) {
                             $order_no = 6;
                         } else {
-                            $lastbookingate = date('Y-m-d', strtotime($get_last_orderno->appointment_date));
-                            if ($lastbookingate < $date) {
+                            $order_no = $get_last_orderno->order_number;
+                            if ($order_no < 6) {
                                 $order_no = 6;
                             } else {
-                                $order_no = $get_last_orderno->order_number;
-                                if ($order_no < 6) {
-                                    $order_no = 6;
-                                } else {
-                                    $order_no = $order_no + 1;
-                                }
+                                $order_no = $order_no + 1;
                             }
                         }
-                        $data = array();
-                        $collectedby = $this->session->userdata('username');
-                        if ($AppFee == "") {
-                            $data = array(
-                                'order_number' => $order_no,
-                                'full_name' => $patName,
-                                'contact_number' => $patCell,
-                                'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee
-                            );
-                        } else {
-                            $data = array(
-                                'order_number' => $order_no,
-                                'full_name' => $patName,
-                                'contact_number' => $patCell,
-                                'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
-                                'fee_collected_by' => $collectedby,
-                                'fee_paid_at' => $bookingDatetime,
-                                'fee_paid_status' => '1'
-                            );
-                        }
-                        $result = $this->User_model->appointment_book($data);
-                        if ($result) {
-                            $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                            $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                            $json['message'] = "Booked successfully";
-                        } else {
-                            $data['booking_flag'] = $bookingFlag;
-                            $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
-                            $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                            $data['fee_paid'] = $this->User_model->count_fee_paid();
-                            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                            $data['ett_count'] = $this->User_model->count_ett_waiting();
-                            $data['echo_count'] = $this->User_model->count_echo_waiting();
-                            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                            $data['count_complete'] = $this->User_model->count_complete();
-                            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                            $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                            $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                            $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                            $data['rights'] = $this->session->userdata('other_rights');
-                            $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                            $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                            $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                            $json['error'] = true;
-                        }
+                    }
+                    $data = array();
+                    $collectedby = $this->session->userdata('username');
+                    if ($AppFee == "") {
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'consultant_fee' => $AppFee,
+                            'booking_flag' => $bookingFlag
+                        );
+                    } else {
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'consultant_fee' => $AppFee,
+                            'fee_collected_by' => $collectedby,
+                            'fee_paid_at' => $bookingDatetime,
+                            'fee_paid_status' => '1',
+                            'booking_flag' => $bookingFlag
+                        );
+                    }
+                    $result = $this->User_model->appointment_book($data);
+                    if ($result) {
+                        $data['booking_flag'] = $bookingFlag;
+                        $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                        $json['message'] = "Booked successfully";
                     } else {
                         $data['booking_flag'] = $bookingFlag;
-                        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
                         $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
-                        $data['fee_paid'] = $this->User_model->count_fee_paid();
-                        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-                        $data['ett_count'] = $this->User_model->count_ett_waiting();
-                        $data['echo_count'] = $this->User_model->count_echo_waiting();
-                        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-                        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-                        $data['count_complete'] = $this->User_model->count_complete();
-                        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
-                        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
-                        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
-                        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
-                        $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
-                        $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
-                        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
-                        $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
-                        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
-                        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
-                        $data['rights'] = $this->session->userdata('other_rights');
-                        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
-                        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
-                        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
-                        $json['message'] = "Name and contact Number cannot be null.";
+                        $json['error'] = true;
                     }
+                } else {
+                    $data['booking_flag'] = $bookingFlag;
+                    $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                    $json['message'] = "Name and contact Number cannot be null.";
                 }
+            } else if ($bookingFlag == 'on_call') {
+                if (!empty($patName) && !empty($patCell) && !empty($appdate)) {
+                    $appdate = $this->input->post('appointmentDate');
+                    $app['datetime'] = $appdate . " " . date('H:i:s');
+                    $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
+                    $AppFee = $this->input->post('fee');
+                    //calculating daily token number
+                    $cur_date = date('Y-m-d');
+                    $get_last_orderno = $this->User_model->get_last_booking();
+                    if ($get_last_orderno == false) {
+                        $order_no = 6;
+                    } else {
+                        $lastbookingate = date('Y-m-d', strtotime($get_last_orderno->appointment_date));
+                        if ($lastbookingate < $date) {
+                            $order_no = 6;
+                        } else {
+                            $order_no = $get_last_orderno->order_number;
+                            if ($order_no < 6) {
+                                $order_no = 6;
+                            } else {
+                                $order_no = $order_no + 1;
+                            }
+                        }
+                    }
+                    $data = array();
+                    $collectedby = $this->session->userdata('username');
+                    if ($AppFee == "") {
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'consultant_fee' => $AppFee,
+                            'booking_flag' => $bookingFlag
+                        );
+                    } else {
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'consultant_fee' => $AppFee,
+                            'fee_collected_by' => $collectedby,
+                            'fee_paid_at' => $bookingDatetime,
+                            'fee_paid_status' => '1',
+                            'booking_flag' => $bookingFlag
+                        );
+                    }
+                    $result = $this->User_model->appointment_book($data);
+                    if ($result) {
+                        $data['booking_flag'] = $bookingFlag;
+                        $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                        $json['message'] = "Booked successfully";
+                    } else {
+                        $data['booking_flag'] = $bookingFlag;
+                        $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                        $json['error'] = true;
+                    }
+                } else {
+                    $data['booking_flag'] = $bookingFlag;
+                    $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                    $json['message'] = "Please fill all the fields .";
+                }
+            } else {
+                if (!empty($patName) && !empty($patCell)) {
+                    $appdate = $this->input->post('appointmentDate');
+                    $app['datetime'] = $appdate . " " . date('H:i:s');
+                    $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
+                    $AppFee = $this->input->post('fee');
+                    //calculating daily token number
+                    $cur_date = date('Y-m-d');
+                    $get_last_orderno = $this->User_model->get_last_booking();
+                    if ($get_last_orderno == false) {
+                        $order_no = 6;
+                    } else {
+                        $lastbookingate = date('Y-m-d', strtotime($get_last_orderno->appointment_date));
+                        if ($lastbookingate < $date) {
+                            $order_no = 6;
+                        } else {
+                            $order_no = $get_last_orderno->order_number;
+                            if ($order_no < 6) {
+                                $order_no = 6;
+                            } else {
+                                $order_no = $order_no + 1;
+                            }
+                        }
+                    }
+                    $data = array();
+                    $collectedby = $this->session->userdata('username');
+                    if ($AppFee == "") {
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'consultant_fee' => $AppFee
+                        );
+                    } else {
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'consultant_fee' => $AppFee,
+                            'fee_collected_by' => $collectedby,
+                            'fee_paid_at' => $bookingDatetime,
+                            'fee_paid_status' => '1'
+                        );
+                    }
+                    $result = $this->User_model->appointment_book($data);
+                    if ($result) {
+                        $data['booking_flag'] = $bookingFlag;
+                        $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                        $json['message'] = "Booked successfully";
+                    } else {
+                        $data['booking_flag'] = $bookingFlag;
+                        $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                        $json['error'] = true;
+                    }
+                } else {
+                    $data['booking_flag'] = $bookingFlag;
+                    $data['booking_details'] = $this->User_model->get_bookings_with_flag($bookingFlag);
+                    $json['message'] = "Name and contact Number cannot be null.";
+                }
+            }
         }
-        
+        $data['consultant_booking'] = $this->User_model->get_first_five_rows_today();
+        $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($currentdate);
+        $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($currentdate);
+        $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($currentdate);
+        $data['wallet_refund'] = $this->User_model->get_todays_total_refund($currentdate);
+        $data['total_attended'] = $this->User_model->count_total_attendent($currentdate);
+        $data['total_not_attended'] = $this->User_model->count_not_attendent($currentdate);
+        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($currentdate);
+        $data['refund_count'] = $this->User_model->count_refund_rows($currentdate);
+        $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($currentdate);
+        $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($currentdate);
+        $data['fee_paid'] = $this->User_model->count_fee_paid();
+        $data['ecg_count'] = $this->User_model->count_ecg_waiting();
+        $data['ett_count'] = $this->User_model->count_ett_waiting();
+        $data['echo_count'] = $this->User_model->count_echo_waiting();
+        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
+        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
+        $data['count_complete'] = $this->User_model->count_complete();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
+        $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
+        $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -1647,13 +1055,13 @@ class User extends MY_Controller {
 
     public function consultant_bookings() {
         $value = $this->input->post('appValue');
-        $appdate = date('Y-m-d',strtotime($this->input->post('appdate')));
+        $appdate = date('Y-m-d', strtotime($this->input->post('appdate')));
         $wheretoinsert = $this->input->post('valToUpdate');
         $flag = $this->input->post('flag');
         $orderno = $this->input->post('orderno');
         $current_date = date('Y-m-d');
         $searchdate = date('Y-m-d', strtotime($this->input->post('tabledate')));
-        if($searchdate >= $current_date){
+        if ($searchdate >= $current_date) {
             $check_order_exist = $this->User_model->order_exist($orderno, $searchdate);
             if ($check_order_exist) {
                 $result = $this->User_model->update_consultant($value, $wheretoinsert, $orderno);
@@ -1709,7 +1117,7 @@ class User extends MY_Controller {
                     $json['message'] = 'Not inserted';
                 }
             } else {
-                $result = $this->User_model->insert_consultant($value, $wheretoinsert, $flag, $orderno,$searchdate);
+                $result = $this->User_model->insert_consultant($value, $wheretoinsert, $flag, $orderno, $searchdate);
                 if ($result) {
                     $data['booking_flag'] = $flag;
                     $data['consultant_booking'] = $this->User_model->get_first_five_rows($searchdate);
@@ -1762,7 +1170,7 @@ class User extends MY_Controller {
                     $json['message'] = 'Not inserted';
                 }
             }
-        }else {
+        } else {
             $data['booking_flag'] = $flag;
             $data['consultant_booking'] = $this->User_model->get_first_five_rows($searchdate);
             $data['booking_details'] = $this->User_model->search_by_date($searchdate, $flag);
@@ -1852,7 +1260,7 @@ class User extends MY_Controller {
         }
     }
 
-    public function search_wallet_status(){
+    public function search_wallet_status() {
         $walletdate = date('Y-m-d', strtotime($this->input->post('walletsearch')));
         $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($walletdate);
         $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($walletdate);
@@ -1871,13 +1279,13 @@ class User extends MY_Controller {
         }
     }
 
-    public function vital(){
-            $data['rights'] = $this->session->userdata('other_rights');
-            $json['result_html'] = $this->load->view('pages/vitals', $data, true);
-            if ($this->input->is_ajax_request()) {
-                set_content_type($json);
-            }
+    public function vital() {
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('pages/vitals', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
         }
+    }
 
 }
 ?>
