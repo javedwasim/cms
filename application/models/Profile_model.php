@@ -375,7 +375,7 @@
             return $randomString;
         }
 
-<<<<<<< HEAD
+
         public function save_echo_profile_info($data){
             $query = $this->db->select('*')->from('patient_echo')->limit(1)->get();
             $result = $query->row_array();
@@ -448,6 +448,7 @@
             $disease_id = $data['disease_id'];
             $this->db->delete('profile_echo_measurement', array('patient_id' => $patient_echo_id));
             $this->db->delete('profile_echo_findings', array('patient_id' => $patient_echo_id));
+            $this->db->delete('profile_echo_diagnosis', array('patient_id' => $patient_echo_id));
 
             for ($i=0;$i<count($data['item_id']);$i++){
                 $item_id = $data['item_id'];
@@ -486,7 +487,7 @@
             return $patient_echo_id;
         }
 
-=======
+
 
         function insert_ett_protocols($data,$id){
         	if(isset($data['stage_name']) && !empty($data['stage_name'])){
@@ -524,7 +525,7 @@
                 }
             }
         }
->>>>>>> f2f2be7cefcfb084444ad8060edf0ceb75fa071e
+
 	}
 
 ?>
