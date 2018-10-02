@@ -1,3 +1,4 @@
+<input type="hidden" name="item_category_id" id="item_category_id" value="<?php echo isset($measurements[0]['category_id'])?$measurements[0]['category_id']:''; ?>"/>
 <table class="table table-bordered nowrap responsive category-measurement-table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
@@ -7,7 +8,7 @@
     </tr>
     </thead>
     <tbody>
-    <?php foreach ($measurements as $measurement): ?>
+    <?php  foreach ($measurements as $measurement): ?>
         <tr class="table-row">
             <td contenteditable="true" class="measurement_care"
                 onBlur="saveItemMeasurement(this,'item','<?php echo $measurement['id']; ?>')"
@@ -15,7 +16,7 @@
                 <?php echo $measurement['item']; ?></td>
             <input type="hidden" name="item_id[]" value="<?php echo $measurement['id']; ?>">
             <td style="text-align: center">
-                <input type="text" name="item_value[]" value="" class="form-control">
+                <input type="text" name="item_value[]" value="<?php echo isset($measurement['item_value'])?$measurement['item_value']:''; ?>"  class="form-control">
             </td>
             <td contenteditable="true" class="measurement_care"
                 onBlur="saveValueMeasurement(this,'value','<?php echo $measurement['id']; ?>')"

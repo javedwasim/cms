@@ -1930,3 +1930,49 @@ $(document.body).on('click', '#pat-echo-test', function () {
         }
     });
 });
+
+$(document.body).on('click', '#echo_profile_form_btn', function () {
+
+    $.ajax({
+        url: $('#echo_profile_form').attr('data-action'),
+        type: 'post',
+        data:  $('#echo_profile_form').serialize(),
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                if(response.category_id=='mmode'){
+                    $('#mmode_content').empty();
+                    $('#mmode_content').append(response.result_html);
+                }else{
+                    $('#dooplers_content').empty();
+                    $('#dooplers_content').append(response.result_html);
+                }
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '#save_patient_echo_info', function(){
+    var patient_id = $('#label_patient_id').text();
+    var sd = $('.patient_id').val(patient_id);
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'profile/save_profile_echo_info',
+        type: 'post',
+        data:  $("#echo_mmode_content_form").serialize() + "&" + $("#echo_dooplers_content_form").serialize()
+               + "&" +$("#echo_finding_form").serialize() + "&" + $("#echo_diagnosis_form").serialize(),
+        cache: false,
+        success: function(response) {
+            $('#research_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});

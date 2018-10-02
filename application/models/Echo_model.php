@@ -208,6 +208,11 @@
         }
 
         public function assign_finding_to_disease($data){
+            $query = $this->db->select('*')->from('disease_findings')->where('disease_id',$data['disease_id'])->where('finding_id',$data['finding_id'])->limit(1)->get();
+            if ($query->num_rows() == 0) {
+                $this->db->insert('disease_findings', array('disease_id'=>$data['disease_id'],'finding_id'=>$data['finding_id']));
+            }
+
             $result = $this->db->select('structure_id')->from('structure_finding')->where('id',$data['finding_id'])->limit(1)->get();
             $row = $result->row_array();
             $structure_id = $row['structure_id'];
@@ -218,6 +223,16 @@
         }
 
         public function assign_diagnose_to_disease($data){
+
+            $query = $this->db->select('*')->from('disease_diagnosis')
+                    ->where('disease_id',$data['disease_id'])
+                    ->where('diagnosis_id',$data['diagnose_id'])->limit(1)->get();
+//            echo $this->db->last_query();
+//            print_r($query->num_rows()); die();
+            if ($query->num_rows() == 0) {
+                $this->db->insert('disease_diagnosis', array('disease_id'=>$data['disease_id'],'diagnosis_id'=>$data['diagnose_id']));
+            }
+
             $result = $this->db->select('structure_id')->from('diagnosis')->where('id',$data['diagnose_id'])->limit(1)->get();
             $row = $result->row_array();
             $structure_id = $row['structure_id'];
