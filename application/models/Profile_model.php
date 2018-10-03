@@ -391,14 +391,15 @@
                  $item_id = $data['item_id'];
                  $item_value = $data['item_value'];
                  $measurement_value = $data['measurement_value'];
-
-                 $this->db->insert('patient_echo_measurement',
-                            array(
-                                    'patient_echo_id'=>$patient_echo_id,
-                                    'item_id'=>$item_id[$i],
-                                    'item_value'=>$item_value[$i],
-                                    'measurement_value'=>$measurement_value[$i],
-                            ));
+                 if(!empty($item_value[$i])){
+                     $this->db->insert('patient_echo_measurement',
+                         array(
+                             'patient_echo_id'=>$patient_echo_id,
+                             'item_id'=>$item_id[$i],
+                             'item_value'=>$item_value[$i],
+                             'measurement_value'=>$measurement_value[$i],
+                         ));
+                 }
             }
             return $patient_echo_id;
         }

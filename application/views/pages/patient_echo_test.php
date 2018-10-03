@@ -165,7 +165,7 @@
     					<div class="col-md-2 p-r-0">
 	    					<div class="card">
 								<div class="card-header">
-									Select Structure	
+									Select Disease
 								</div>
 								<div class="card-body p-0">
                                     <?php $this->load->view('profile/disease_table'); ?>
@@ -175,27 +175,10 @@
 	    				<div class="col-md-3 p-r-0 p-l-0">
 	    					<div class="card">
 								<div class="card-header">
-                                    Select Disease
+                                    Select Structure
 								</div>
 								<div class="card-body p-0">
-                                    <table class="table table-bordered nowrap responsive category-measurement-table" cellspacing="0" id="" width="100%" >
-                                        <thead>
-                                        <tr>
-                                            <th class="table-header">Findings</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php  foreach ($diseases as $disease):  ?>
-                                            <tr class="table-row">
-                                                <td contenteditable="true" class=disease_cate"
-                                                    onClick="showEditDisease(this,'<?php echo $disease['id']; ?>');">
-                                                    <?php echo $disease['name']; ?>
-                                                    <input type="hidden" name="disease_id" id="disease_id" value="<?php echo $disease['id']; ?>">
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                    <?php $this->load->view('profile/structure_table'); ?>
 								</div>
 							</div>
 	    				</div>
