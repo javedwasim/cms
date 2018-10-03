@@ -75,10 +75,13 @@ class User_model extends CI_Model {
         $collectedby = $this->session->userdata('user_data_logged_in');
         $collectedby = $collectedby['username'];
         if ($updateValue == 'full_name') {
+            $data = array(
+                'full_name' => $value,
+                'name_updated_by' => $collectedby
+            );
             $result = $this->db
-                    ->set('full_name', $value)
                     ->where('appointment_booking_id', $toupdate)
-                    ->update('appointment_booking');
+                    ->update('appointment_booking',$data);
         } elseif ($updateValue == 'consultant_fee') {
             $data = array(
                 'consultant_fee' => $value,
@@ -517,15 +520,21 @@ class User_model extends CI_Model {
         $collectedby = $this->session->userdata('user_data_logged_in');
         $collectedby = $collectedby['username'];
         if ($wheretoinsert == 'full_name') {
+             $data = array(
+                'full_name' => $value,
+                'name_updated_by' => $collectedby
+            );
             $result = $this->db
-                    ->set('full_name', $value)
                     ->where('order_number', $orderno)
-                    ->update('appointment_booking');
+                    ->update('appointment_booking',$data);
         }else if($wheretoinsert == 'contact_number'){
+            $data = array(
+                'contact_number' => $value,
+                'contact_updated_by' => $collectedby
+            );
             $result = $this->db
-                    ->set('contact_number', $value)
                     ->where('order_number', $orderno)
-                    ->update('appointment_booking');
+                    ->update('appointment_booking',$data);
         }else if($wheretoinsert == 'consultant_fee'){
             $data = array(
                 'consultant_fee' => $value,

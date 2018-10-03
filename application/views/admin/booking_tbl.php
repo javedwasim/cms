@@ -50,6 +50,8 @@
                     $bkarray[$key['order_number']]['refund'] = $key['refund'] ;
                     $bkarray[$key['order_number']]['fee_paid_status'] = $key['fee_paid_status'] ;
                     $bkarray[$key['order_number']]['creation_time'] = $key['creation_time'] ;
+                    $bkarray[$key['order_number']]['name_updated_by'] = $key['name_updated_by'] ;
+                    $bkarray[$key['order_number']]['contact_updated_by'] = $key['contact_updated_by'] ;
                 }
                     
 
@@ -65,7 +67,15 @@
 
                     <td ><?php echo $i?></td>
                     <td class="order-number" ><?php echo $i?></td>
-                    <td>
+                    <td
+                        data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                        title="<?php 
+                        if(isset($bkarray[$i]['name_updated_by'])){
+                            echo $bkarray[$i]['name_updated_by'];
+                        }else{
+                            echo "";
+                        }?>"
+                    >
                         <input type="text" name="full_name" style="text-transform: capitalize;width:150px;" id="patient-name" onchange="consultant_booking(this)" autocomplete="off" class="dt-input" value="<?php 
                         if(isset($bkarray[$i]['full_name'])){
                             echo $bkarray[$i]['full_name'];
@@ -73,7 +83,15 @@
                             echo "";
                         }?>">
                     </td>
-                    <td>
+                    <td
+                        data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                        title="<?php 
+                        if(isset($bkarray[$i]['contact_updated_by'])){
+                            echo $bkarray[$i]['contact_updated_by'];
+                        }else{
+                            echo "";
+                        }?>"
+                    >
                        <input type="text" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)" autocomplete="off" class="dt-input" value="<?php 
                         if(isset($bkarray[$i]['contact_number'])){
                             echo $bkarray[$i]['contact_number'];
@@ -242,7 +260,15 @@
                     <td>
                         <?php echo $details['order_number']; ?>
                     </td>
-                    <td>
+                    <td
+                        data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                        title="<?php 
+                        if(isset($details['name_updated_by'])){
+                            echo $details['name_updated_by'];
+                        }else{
+                            echo "";
+                        }?>"
+                    >
                         <input type="text" name="full_name" style="text-transform: capitalize;width:150px;" id="input-name" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>">
                     </td>
                     <td>

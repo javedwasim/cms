@@ -1818,7 +1818,7 @@ $(document.body).on('click', '#save_lab_test', function(){
 });
 
 $(document.body).on('click', '#save_ett_test', function(e){
-    e.preventDefault()
+    e.preventDefault();
     var patientid = $('#label_patient_id').text();
     $('#ett_pat_id').val(patientid);
     $.ajax({
