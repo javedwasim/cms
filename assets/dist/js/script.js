@@ -1801,7 +1801,7 @@ $(document.body).on('click','#profile_ett_conc_table tbody tr.row_selected',func
 
 
 $(document.body).on('click', '#save_ett_test', function(e){
-    e.preventDefault()
+    e.preventDefault();
     var patientid = $('#label_patient_id').text();
     $('#ett_pat_id').val(patientid);
     $.ajax({

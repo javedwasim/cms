@@ -12,6 +12,7 @@
 			$this->load->model('Setting_model');
             $this->load->library('form_validation');
             $this->load->helper('security');
+            $this->load->library('Csvimport');
 
 		}
 
@@ -979,6 +980,43 @@
                 set_content_type($json);
             }
         }
+
+        public function export_history_items($category_id){
+            $history_items = $this->Setting_model->get_history_items($category_id);
+            if ($history_items) {
+               $this->export_history_items_csv($history_items);
+            }else{
+                $json['error']= true;
+                $json['message'] = 'No item found.';
+            }
+            
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+        public function export_history_items_csv($history_items){
+
+             // file name 
+               $filename = 'history_items_'.date('d-m-Y').'.csv'; 
+               header("Content-Description: File Transfer"); 
+               header("Content-Disposition: attachment; filename=$filename"); 
+               header("Content-Type: application/csv; ");
+               // file creation 
+               $file = fopen('php://output', 'w');
+               $header = array('name'); 
+               fputcsv($file, $header);
+               foreach ($history_items as $key=>$line){ 
+                 fputcsv($file,$line); 
+               }
+               fclose($file); 
+               exit;
+        }
+
+        // public function import_history_items(){
+        //     $file_data = $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
+        //     print_r($file_data);
+        //      die();
+        // }
 
 	}
 

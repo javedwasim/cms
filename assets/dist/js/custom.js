@@ -1927,28 +1927,6 @@ $(document.body).on('click', '#pat_delete', function () {
     });
 });
 
-
-/////////////////////////////////// load limiter page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-// $(document.body).on('click', '#booking-limiter', function () {
-//     $.ajax({
-//         url: '/cms/setting/booking_limiter',
-//         cache: false,
-//         success: function (response) {
-//             if (response.result_html != '') {
-//                 $('.dashboard-content').remove();
-//                 $('#dashboard-content').append(response.result_html);
-//                 $('.limiter_table').remove();
-//                 $('#limiter_table').append(response.result_html);
-//                 $('#limiter_date').datepicker({
-//                     format: 'd-M-yyyy'
-//                 });
-//             }
-//         }
-//     });
-// });
-
 /////////////////////////////////// load laboratory test page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3475,6 +3453,8 @@ $(document.body).on('click', '.delete-history-item', function(){
 });
 
 function filter_history_item_category(category) {
+    var nurl = window.location.origin+window.location.pathname+'/setting/export_history_items/'+category;
+    $("#export_history_items").attr("href", nurl);
     $.ajax({
         url: window.location.origin+window.location.pathname+'profile_history/get_history_item/'+category,
         type: 'get',
@@ -3507,3 +3487,6 @@ $(document.body).on('click', '.delete-limiter', function(){
     }
     return false;
 });
+
+
+

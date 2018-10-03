@@ -492,6 +492,17 @@
                 return array();
             }
         }
+
+        public function get_history_items($id){
+            $result = $this->db->select('name')
+                                ->where('profile_history_id',$id)
+                                ->get('history_item');
+            if ($result){
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
 	}
 
 ?>
