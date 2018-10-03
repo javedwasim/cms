@@ -564,6 +564,11 @@ class Profile extends MY_Controller
     public function save_profile_echo_info(){
         $data = $this->input->post();
         $this->Profile_model->save_profile_echo_info($data);
+        $json['success'] = true;
+        $json['message'] = 'Information save successfully!';
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
     }
 
     public function get_disease_findings_diagnosis($disease_id){
@@ -618,6 +623,46 @@ class Profile extends MY_Controller
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
         $json['result_html'] = $this->load->view('pages/patient_echo_test', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_lab_test_detail(){
+        $patient_id = $this->input->post('patient_id');
+        $data['details'] = $this->Profile_model->get_lab_test_detail($patient_id);
+        //print_r($data['details']);
+        if ($data) {
+            $json['success'] = true;
+            $json['lab_detail'] = $this->load->view('profile/lab_detail_table', $data, true);
+
+        } else {
+            $json['error'] = true;
+            $json['message'] = "seem to be an error.";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
+
+    public function patient_echo_lab_edit_detail()
+    {
+        $data = $this->input->post();
+        $id = $data['detail_id'];
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+
+        $data['categories'] = $this->Setting_model->get_lab_categories();
+        $data['tests'] = $this->Setting_model->get_lab_tests();
+        $data['items'] = $this->Setting_model->get_lab_test_items();
+        $json['laboratory_html'] = $this->load->view('laboratory/laboratory', $data, true);
+
+        $data['tests'] = $this->Profile_model->get_lab_test_info($id);
+        $json['test_table'] = $this->load->view('profile/lab_test_detail_table', $data, true);
+
+        $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
+        $json['result_html'] = $this->load->view('pages/pat_lab_test', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

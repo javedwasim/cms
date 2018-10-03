@@ -10,7 +10,7 @@
         <tr class="table-row">
             <td contenteditable="true" class=disease_cate"
                 onClick="showEditDisease(this,'<?php echo $finding['finding_id']; ?>');">
-                <?php echo $finding['name']; ?>
+                <input type="text" name="disease_finding_value[]" class="form-control" value="<?php echo $finding['name']; ?>">
                 <input type="hidden" name="disease_finding_id[]" id="disease_finding_id" value="<?php echo $finding['finding_id']; ?>">
             </td>
         </tr>

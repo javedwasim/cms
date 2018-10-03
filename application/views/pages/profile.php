@@ -164,7 +164,7 @@ if(isset($rights[0]['user_rights']))
                                       <input type="radio" name="optradio">Special
                                     </label>
                                     <label class="radio-inline">
-                                      <input type="radio" name="optradio">Lab Test
+                                      <input type="radio" name="optradio" id="lab_test_detail">Lab Test
                                     </label>
                                 </div>
                             </div>
