@@ -9,9 +9,9 @@
     <?php  foreach ($diagnosis as $diagnose):  ?>
         <tr class="table-row">
             <td contenteditable="true" class=disease_cate"
-                onClick="showEditDisease(this,'<?php echo $diagnose['id']; ?>');">
+                onClick="showEditDisease(this,'<?php echo $diagnose['diagnosis_id']; ?>');">
                 <?php echo $diagnose['name']; ?>
-                <input type="hidden" name="disease_diagnosis_id[]" id="disease_diagnosis_id" value="<?php echo $diagnose['id']; ?>">
+                <input type="hidden" name="disease_diagnosis_id[]" id="disease_diagnosis_id" value="<?php echo $diagnose['diagnosis_id']; ?>">
             </td>
         </tr>
     <?php endforeach; ?>

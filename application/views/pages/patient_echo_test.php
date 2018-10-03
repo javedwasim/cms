@@ -42,7 +42,7 @@
                                                 <tr>
                                                     <th> Items</th>
                                                     <th> Value</th>
-                                                    <th> Noramal Value</th>
+                                                    <th> Normal Value</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -83,12 +83,15 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td>Urea</td>
-                                                    <td></td>
-                                                    <td>mg/dl</td>
-                                                </tr>
-
+                                                    <?php if(isset($measurements)): ?>
+                                                        <?php foreach ($measurements as $measurement): if($measurement['main_category']=='mmode'): ?>
+                                                            <tr>
+                                                                <td><?php echo $measurement['item'] ?></td>
+                                                                <td><?php echo $measurement['item_value'] ?></td>
+                                                                <td><?php echo $measurement['measurement_value'] ?></td>
+                                                            </tr>
+                                                        <?php endif; endforeach; ?>
+                                                    <?php endif; ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -113,12 +116,15 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td>Urea</td>
-                                                    <td></td>
-                                                    <td>mg/dl</td>
-                                                </tr>
-
+                                                    <?php if(isset($measurements)): ?>
+                                                        <?php  foreach ($measurements as $measurement): if($measurement['main_category']=='dooplers'): ?>
+                                                            <tr>
+                                                                <td><?php echo $measurement['item'] ?></td>
+                                                                <td><?php echo $measurement['item_value'] ?></td>
+                                                                <td><?php echo $measurement['measurement_value'] ?></td>
+                                                            </tr>
+                                                        <?php endif; endforeach; ?>
+                                                    <?php endif; ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -193,8 +199,11 @@
                                     </div>
                                     <div class="card-body p-0" id="disease_findings">
                                         <ul class="list-group">
-                                            <li class="list-group-item">Dialted RA</li>
-                                            <li class="list-group-item">Post-Op Rastelli for VSD and Pulmonart</li>
+                                            <?php if(isset($findings)): ?>
+                                                <?php foreach ($findings as $finding): ?>
+                                                    <li class="list-group-item"><?php echo $finding['name']; ?></li>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -211,8 +220,11 @@
                                     </div>
                                     <div class="card-body p-0" id="disease_diagnosis">
                                         <ul class="list-group">
-                                            <li class="list-group-item">Dialted RA</li>
-                                            <li class="list-group-item">Post-Op Rastelli for VSD and Pulmonart</li>
+                                            <?php if(isset($diagnosis)): ?>
+                                                <?php foreach ($diagnosis as $diagnose): ?>
+                                                    <li class="list-group-item"><?php echo $diagnose['name']; ?></li>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </ul>
                                     </div>
                                 </div>

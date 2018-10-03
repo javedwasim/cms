@@ -155,7 +155,7 @@ if(isset($rights[0]['user_rights']))
                                       <input type="radio" name="optradio" checked>Prescription
                                     </label>
                                     <label class="radio-inline">
-                                      <input type="radio" name="optradio">Echo
+                                      <input type="radio" name="optradio" id="echo_detail">Echo
                                     </label>
                                     <label class="radio-inline">
                                       <input type="radio" name="optradio">ETT
@@ -174,30 +174,10 @@ if(isset($rights[0]['user_rights']))
                                 <div id="re1">
                                     <div class="col-md-12 p-r-0">
                                         <h4 class="text-center"> Click to edit</h4>
-                                        <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-                                           <thead>
-                                            <tr>
-                                                <th style="width: 20px"></th>
-                                                <th style="width: 20px"></th>
-                                                <th style="width: 20px"></th>
-                                                <th style="width: 50px;">ETT Date</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                                    <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                                    <td style="width: 20px"><i class="fa fa-print"></i></td>
-                                                    <td style="width: 50px;">30/08/2018</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 20px"><i class="fa fa-trash"></i></td>
-                                                    <td style="width: 20px"><i class="fa fa-edit"></i></td>
-                                                    <td style="width: 20px"><i class="fa fa-print"></i></td>
-                                                    <td style="width: 50px;">30/08/2018</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div id="echo_detail_container">
+
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div id="re2">
@@ -439,5 +419,8 @@ if(isset($rights[0]['user_rights']))
                 $(this).removeData("ui-resizable-alsoresize-reverse");
             }
         });
+
+
+
 	});
 </script>

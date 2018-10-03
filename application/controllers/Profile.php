@@ -581,6 +581,48 @@ class Profile extends MY_Controller
 
     }
 
+    public function get_echo_detail(){
+        $patient_id = $this->input->post('patient_id');
+        $data['details'] = $this->Profile_model->get_echo_detail($patient_id);
+        //print_r($data['details']);
+        if ($data) {
+            $json['success'] = true;
+            $json['echo_detail'] = $this->load->view('profile/echo_detail_table', $data, true);
+
+        } else {
+            $json['error'] = true;
+            $json['message'] = "seem to be an error.";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
+    public function patient_echo_edit_detail()
+    {
+        $data = $this->input->post();
+        $patient_id = $data['patid'];
+        $detail_id = $data['detail_id'];
+
+        $data['rights'] = $this->session->userdata('other_rights');
+        $id = $this->input->post('patid');
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+        $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
+        $data['diseases'] = $this->Echo_model->get_disease_categories();
+        $data['structures'] = $this->Echo_model->get_Structure_categories();
+        $data['measurements'] = $this->Profile_model->get_patient_measurement($patient_id,$detail_id);
+        $data['findings'] = $this->Profile_model->get_patient_echo_findings($patient_id,$detail_id);
+        $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id,$detail_id);
+
+        $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
+        $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
+        $json['result_html'] = $this->load->view('pages/patient_echo_test', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
 
 }
 

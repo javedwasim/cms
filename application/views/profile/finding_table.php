@@ -9,11 +9,12 @@
     <?php  foreach ($findings as $finding):  ?>
         <tr class="table-row">
             <td contenteditable="true" class=disease_cate"
-                onClick="showEditDisease(this,'<?php echo $finding['id']; ?>');">
+                onClick="showEditDisease(this,'<?php echo $finding['finding_id']; ?>');">
                 <?php echo $finding['name']; ?>
-                <input type="hidden" name="disease_finding_id[]" id="disease_finding_id" value="<?php echo $finding['id']; ?>">
+                <input type="hidden" name="disease_finding_id[]" id="disease_finding_id" value="<?php echo $finding['finding_id']; ?>">
             </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
+

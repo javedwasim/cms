@@ -447,7 +447,7 @@
             //print_r($data); die();
             $patient_echo_id = $data['patient_id'];
             $disease_id = $data['disease_id'];
-            $this->db->insert('profile_ehco_detail',array('patient_id'=>$patient_echo_id));
+            $this->db->insert('profile_echo_detail',array('patient_id'=>$patient_echo_id));
             $echo_deatil_id = $this->db->insert_id();
             //$this->db->delete('profile_echo_measurement', array('patient_id' => $patient_echo_id));
             //$this->db->delete('profile_echo_findings', array('patient_id' => $patient_echo_id));
@@ -529,6 +529,65 @@
                 }else{
                 	return false;
                 }
+            }
+        }
+
+        public function get_echo_detail($patient_id){
+            $result = $this->db->select('*')->from('profile_echo_detail')->where('patient_id',$patient_id)->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return false;
+            }
+        }
+
+        public function get_patient_measurement($patient_id,$detail_id){
+
+            $result = $this->db->select('profile_echo_measurement.*,category_measurement.item,echo_category.main_category')
+                        ->from('profile_echo_measurement')
+                        ->join('category_measurement','category_measurement.id=profile_echo_measurement.item_id','left')
+                        ->join('echo_category','echo_category.id=category_measurement.category_id','left')
+                        ->where('echo_detail_id',"$detail_id")
+                        ->where('patient_id',"$patient_id")
+                        ->get();
+            //echo $this->db->last_query(); die();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+
+        }
+
+        public function get_patient_echo_findings($patient_id,$detail_id){
+
+            $result = $this->db->select('profile_echo_findings.*,structure_finding.name')
+                        ->from('profile_echo_findings')
+                        ->join('structure_finding','structure_finding.id=profile_echo_findings.finding_id','left')
+                        ->where('echo_detail_id',"$detail_id")
+                        ->where('patient_id',"$patient_id")
+                        ->get();
+            //echo $this->db->last_query(); die();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+
+        }
+
+        public function get_patient_echo_diagnosis($patient_id,$detail_id){
+            $result = $this->db->select('profile_echo_diagnosis.*,diagnosis.name')
+                ->from('profile_echo_diagnosis')
+                ->join('diagnosis','diagnosis.id=profile_echo_diagnosis.diagnosis_id','left')
+                ->where('echo_detail_id',"$detail_id")
+                ->where('patient_id',"$patient_id")
+                ->get();
+            //echo $this->db->last_query(); die();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
             }
         }
 
