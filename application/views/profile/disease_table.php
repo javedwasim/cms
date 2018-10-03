@@ -8,7 +8,7 @@
     <tbody>
     <?php  foreach ($diseases as $disease):  ?>
         <tr class="table-row">
-            <td contenteditable="true" class=disease_cate"
+            <td contenteditable="true" class=disease_category"
                 onClick="showEditDisease(this,'<?php echo $disease['id']; ?>');">
                 <?php echo $disease['name']; ?>
                 <input type="hidden" name="disease_id" id="disease_id" value="<?php echo $disease['id']; ?>">
@@ -19,8 +19,8 @@
 </table>
 <script>
     function showEditDisease(editableObj,disease_id) {
-        $('td.disease_cate').css('background', '#FFF');
-        $('td.disease_cate').css('color', '#212529');
+        $('td').css('background', 'white');
+        $('td').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
 
@@ -34,7 +34,9 @@
                 $('#disease_diagnosis').empty();
                 $('#disease_diagnosis').append(response.diagnosis_html);
             }
+
         });
+
         return false;
     }
 </script>

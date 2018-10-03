@@ -12,7 +12,7 @@
             <td><?php echo $dosage['name']; ?></td>
             <td style="width: 10%">
                 <input type="checkbox" name="dosage[]" value="<?php echo $dosage['id']; ?>"
-                    <?php echo isset($dosage['medicine_category_id'])&&($dosage['medicine_category_id'] == $dosage['medicine_id'])?'checked':''; ?>>
+                    <?php echo isset($dosage['medicine_category_id'])&&($dosage['medicine_category_id'] > 0)?'checked':''; ?>>
             </td>
         </tr>
     <?php endforeach; ?>

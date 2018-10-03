@@ -2,14 +2,14 @@
 <table class="table table-bordered nowrap responsive category-measurement-table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header">Select Disease</th>
+        <th class="table-header">Select Structure</th>
     </tr>
     </thead>
     <tbody>
     <?php  foreach ($structures as $structure):  ?>
         <tr class="table-row">
             <td contenteditable="true" class=disease_cate"
-                onClick="showEditDisease(this,'<?php echo $structure['id']; ?>');">
+                onClick="showStructureDisease(this,'<?php echo $structure['id']; ?>');">
                 <?php echo $structure['name']; ?>
                 <input type="hidden" name="disease_id" id="disease_id" value="<?php echo $structure['id']; ?>">
             </td>
@@ -18,9 +18,9 @@
     </tbody>
 </table>
 <script>
-    function showEditDisease(editableObj,disease_id) {
-        $('td.disease_cate').css('background', '#FFF');
-        $('td.disease_cate').css('color', '#212529');
+    function showStructureDisease(editableObj,disease_id) {
+        $('td.structure_cate').css('background', '#FFF');
+        $('td.structure_cate').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
 

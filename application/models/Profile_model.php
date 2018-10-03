@@ -447,9 +447,11 @@
             //print_r($data); die();
             $patient_echo_id = $data['patient_id'];
             $disease_id = $data['disease_id'];
-            $this->db->delete('profile_echo_measurement', array('patient_id' => $patient_echo_id));
-            $this->db->delete('profile_echo_findings', array('patient_id' => $patient_echo_id));
-            $this->db->delete('profile_echo_diagnosis', array('patient_id' => $patient_echo_id));
+            $this->db->insert('profile_ehco_detail',array('patient_id'=>$patient_echo_id));
+            $echo_deatil_id = $this->db->insert_id();
+            //$this->db->delete('profile_echo_measurement', array('patient_id' => $patient_echo_id));
+            //$this->db->delete('profile_echo_findings', array('patient_id' => $patient_echo_id));
+            //$this->db->delete('profile_echo_diagnosis', array('patient_id' => $patient_echo_id));
 
             for ($i=0;$i<count($data['item_id']);$i++){
                 $item_id = $data['item_id'];
@@ -458,6 +460,7 @@
 
                 $this->db->insert('profile_echo_measurement',
                     array(
+                        'echo_detail_id'=>$echo_deatil_id,
                         'patient_id'=>$patient_echo_id,
                         'item_id'=>$item_id[$i],
                         'item_value'=>$item_value[$i],
@@ -469,6 +472,7 @@
                 $disease_finding_id = $data['disease_finding_id'];
                 $this->db->insert('profile_echo_findings',
                     array(
+                        'echo_detail_id'=>$echo_deatil_id,
                         'patient_id'=>$patient_echo_id,
                         'finding_id'=>$disease_finding_id[$i],
                         'disease_id'=>$disease_id,
@@ -479,6 +483,7 @@
                 $disease_diagnosis_id = $data['disease_diagnosis_id'];
                 $this->db->insert('profile_echo_diagnosis',
                     array(
+                        'echo_detail_id'=>$echo_deatil_id,
                         'patient_id'=>$patient_echo_id,
                         'diagnosis_id'=>$disease_diagnosis_id[$i],
                         'disease_id'=>$disease_id,
