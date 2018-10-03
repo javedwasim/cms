@@ -1941,3 +1941,47 @@ $(document.body).on('click', '#save_patient_echo_info', function(){
     });
     return false;
 });
+
+$(document.body).on('click', '#echo_detail', function () {
+    var patient_id = $('#label_patient_id').text();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'profile/get_echo_detail',
+        type: 'post',
+        data:  {patient_id:patient_id},
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                $('#echo_detail_container').empty();
+                $('#echo_detail_container').append(response.echo_detail);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+
+});
+
+function showEditEchoDetail(editableObj,echo_id,patient_id) {
+    $.ajax({
+        url: '/cms/profile/patient_echo_edit_detail',
+        type: 'post',
+        data: {detail_id:echo_id,patid:patient_id},
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pats_ett_information').append(response.patient_information);
+
+                $('#main_category_list').empty();
+                $('#main_category_list').append(response.main_category_table);
+
+
+                $('.lab-date').datepicker({
+                    format: 'd-M-yyyy'
+                });
+            }
+        }
+    });
+}

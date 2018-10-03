@@ -2,25 +2,25 @@
 <table class="table table-bordered nowrap responsive category-measurement-table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header">Select Disease</th>
+        <th class="table-header">Select Structure</th>
     </tr>
     </thead>
     <tbody>
-    <?php  foreach ($diseases as $disease):  ?>
+    <?php  foreach ($structures as $structure):  ?>
         <tr class="table-row">
-            <td contenteditable="true" class=disease_category"
-                onClick="showEditDisease(this,'<?php echo $disease['id']; ?>');">
-                <?php echo $disease['name']; ?>
-                <input type="hidden" name="disease_id" id="disease_id" value="<?php echo $disease['id']; ?>">
+            <td contenteditable="true" class=disease_cate"
+                onClick="showStructureDisease(this,'<?php echo $structure['id']; ?>');">
+                <?php echo $structure['name']; ?>
+                <input type="hidden" name="disease_id" id="disease_id" value="<?php echo $structure['id']; ?>">
             </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <script>
-    function showEditDisease(editableObj,disease_id) {
-        $('td').css('background', 'white');
-        $('td').css('color', '#212529');
+    function showStructureDisease(editableObj,disease_id) {
+        $('td.structure_cate').css('background', '#FFF');
+        $('td.structure_cate').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
 
@@ -34,9 +34,7 @@
                 $('#disease_diagnosis').empty();
                 $('#disease_diagnosis').append(response.diagnosis_html);
             }
-
         });
-
         return false;
     }
 </script>

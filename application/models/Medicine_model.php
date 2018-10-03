@@ -29,10 +29,14 @@
         }
 
         public function get_dosage_medicine_category($medicine_id){
-            $result = $this->db->select('dosage.*,medicine.id as medicine_category_id')
-                        ->from('dosage')
-                        ->join('medicine',"medicine.id = dosage.medicine_id and medicine.id = $medicine_id",'left')
-                        ->get();
+            $sql = "SELECT dosage.*, medicine_dosage.medicine_id as medicine_category_id 
+                    FROM dosage 
+                    LEFT JOIN medicine_dosage ON medicine_dosage.dosage_id = dosage.id 
+                    and medicine_dosage.medicine_id = $medicine_id
+                    order by dosage.id;
+                    ";
+
+            $result = $query = $this->db->query($sql);
             if ($result) {
                 return $result->result_array();
             }else{
@@ -138,8 +142,9 @@
         public function update_dosage_medicine($data){
             $category = $data['medicine_category'];
             $dosages = $data['dosage'];
+            $this->db->delete('medicine_dosage', array('medicine_id' => $category));
             foreach ($dosages as $dosage){
-                $this->db->where('id',$dosage)->update('dosage',array('medicine_id'=>$category));
+                $this->db->insert('medicine_dosage', array('dosage_id'=>$dosage,'medicine_id' => $category));
             }
             return true;
         }

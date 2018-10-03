@@ -304,7 +304,7 @@ class Medicine extends MY_Controller
 
     public function get_dosage_medicine_category($medicine_id){
         $data['dosages'] = $this->Medicine_model->get_dosage_medicine_category($medicine_id);
-        //print_r($data['dosages']);
+        //print_r($data['dosages']); die();
         $data['active_tab'] = 'ditems';
         $json['result_html'] = $this->load->view('medicine/dosage_medicine_table', $data, true);
         if ($this->input->is_ajax_request()) {
