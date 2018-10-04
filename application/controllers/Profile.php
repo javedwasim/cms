@@ -276,61 +276,62 @@ class Profile extends MY_Controller
     }
 
 
-    public function save_ett_test(){
-    	$data = $this->input->post();
-    	$patientid = $data['pat_id'];
-    	$testreason = $data['test_reason'];
-    	$medication = $data['medication'];
-    	$description = $data['description'];
-    	$conclusion = $data['conclusion'];
-    	$restinghr = $data['resting_hr'];
-    	$restingbpa = $data['resting_bp_a'];
-    	$restingbpb = $data['resting_bp_b'];
-    	$restingbp = $restingbpa."\\".$restingbpb;
-    	$maxhr = $data['max_hr'];
-    	$maxbpa = $data['max_bp_a'];
-    	$maxbpb = $data['max_bp_b'];
-    	$maxbp = $maxbpa."\\".$maxbpb;
-    	$maxpretar = $data['max_pre_tar'];
-    	$maxprehr = $data['max_pre_hr'];
-    	$hrbp = $data['hr_bp'];
-    	$ettmets = $data['mets'];
-    	$exercisetime = $data['exercise_time'];
-    	$endingreason = $data['ending_reason'];
-    	$ettprotocolid = $data['protocol_id'];
-    	$sig = $data['doc_sig'];
-    	$data_array = array(
-    			'patient_id' => $patientid,
-    			'test_reason' => $testreason,
-    			'medication' => $medication,
-    			'description' => $description,
-    			'conclusion' => $conclusion,
-    			'resting_hr' => $restinghr,
-    			'resting_bp' => $restingbp,
-    			'max_hr' => $maxhr,
-    			'max_bp' => $maxbp,
-    			'max_pre_tar' => $maxpretar,
-    			'max_pre_hr' => $maxprehr,
-    			'hr_bp' => $hrbp,
-    			'mets' => $ettmets,
-    			'exercise_time' => $exercisetime,
-    			'ending_reason' => $endingreason,
-    			'protocol_id' => $ettprotocolid,
-    			'doc_sig' => $sig
-    	);
-    	$insertedid = $this->Profile_model->insert_ett_test($data_array);
-    	if ($insertedid) {
-    		$result = $this->Profile_model->insert_ett_protocols($data,$insertedid);
-    		if ($result) {
-    			$json['success'] = true;
-    		}else{
-    			$json['error'] = true;
-    		}
-    	}else{
-    		$json['error'] = true;
-    	}
+    public function save_ett_test()
+    {
+        $data = $this->input->post();
+        $patientid = $data['pat_id'];
+        $testreason = $data['test_reason'];
+        $medication = $data['medication'];
+        $description = $data['description'];
+        $conclusion = $data['conclusion'];
+        $restinghr = $data['resting_hr'];
+        $restingbpa = $data['resting_bp_a'];
+        $restingbpb = $data['resting_bp_b'];
+        $restingbp = $restingbpa . "\\" . $restingbpb;
+        $maxhr = $data['max_hr'];
+        $maxbpa = $data['max_bp_a'];
+        $maxbpb = $data['max_bp_b'];
+        $maxbp = $maxbpa . "\\" . $maxbpb;
+        $maxpretar = $data['max_pre_tar'];
+        $maxprehr = $data['max_pre_hr'];
+        $hrbp = $data['hr_bp'];
+        $ettmets = $data['mets'];
+        $exercisetime = $data['exercise_time'];
+        $endingreason = $data['ending_reason'];
+        $ettprotocolid = $data['protocol_id'];
+        $sig = $data['doc_sig'];
+        $data_array = array(
+            'patient_id' => $patientid,
+            'test_reason' => $testreason,
+            'medication' => $medication,
+            'description' => $description,
+            'conclusion' => $conclusion,
+            'resting_hr' => $restinghr,
+            'resting_bp' => $restingbp,
+            'max_hr' => $maxhr,
+            'max_bp' => $maxbp,
+            'max_pre_tar' => $maxpretar,
+            'max_pre_hr' => $maxprehr,
+            'hr_bp' => $hrbp,
+            'mets' => $ettmets,
+            'exercise_time' => $exercisetime,
+            'ending_reason' => $endingreason,
+            'protocol_id' => $ettprotocolid,
+            'doc_sig' => $sig
+        );
+        $insertedid = $this->Profile_model->insert_ett_test($data_array);
+        if ($insertedid) {
+            $result = $this->Profile_model->insert_ett_protocols($data, $insertedid);
+            if ($result) {
+                $json['success'] = true;
+            } else {
+                $json['error'] = true;
+            }
+        } else {
+            $json['error'] = true;
+        }
 
-    	if ($this->input->is_ajax_request()) {
+        if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
     }
@@ -487,16 +488,25 @@ class Profile extends MY_Controller
 
     public function save_patient_lab_test()
     {
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('test_date', 'Test Date', 'required|xss_clean');
+
         $data = $this->input->post();
-        $result = $this->Profile_model->save_patient_lab_test($data);
-        if ($result) {
-            $data['tests'] = $this->Profile_model->get_lab_test_info($data['patient_id']);
-            $json['sp_table'] = $this->load->view('profile/lab_test_detail_table', $data, true);
-            $json['success'] = true;
-            $json['message'] = "Information save successfully!";
-        } else {
+        if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
-            $json['message'] = "seem to be an error.";
+            $json['message'] = validation_errors();
+        } else {
+            $result = $this->Profile_model->save_patient_lab_test($data);
+            if ($result) {
+                $data['tests'] = $this->Profile_model->get_lab_test_info($data['patient_id']);
+                $json['sp_table'] = $this->load->view('profile/lab_test_detail_table', $data, true);
+                $json['success'] = true;
+                $json['message'] = "Information save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "seem to be an error.";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -515,7 +525,6 @@ class Profile extends MY_Controller
     }
 
 
-
     public function get_lab_test_unit($key)
     {
         $data['items'] = $this->Profile_model->get_lab_test_unit($key);
@@ -525,7 +534,8 @@ class Profile extends MY_Controller
         }
     }
 
-    public function get_measurement_by_filter($category){
+    public function get_measurement_by_filter($category)
+    {
         $data['measurements'] = $this->Echo_model->get_measurement_by_filter($category);
         $data['active_tab'] = 'measurement';
         $data['rights'] = $this->session->userdata('other_rights');
@@ -535,16 +545,17 @@ class Profile extends MY_Controller
         }
     }
 
-    public function set_echo_data(){
+    public function set_echo_data()
+    {
         $data = $this->input->post();
         $category_id = $data['measurement_cate_id'];
         $main_category = $this->Profile_model->get_main_category($category_id);
         //echo "<pre>"; print_r($data['item_value']);
-        if(isset($data['item_value'])&&(empty($data['item_value']))){
+        if (isset($data['item_value']) && (empty($data['item_value']))) {
             $json['error'] = true;
             $json['message'] = 'Please enter item value';
 
-        }else{
+        } else {
             $patient_echo_id = $this->Profile_model->save_echo_profile_info($data);
             $json['success'] = true;
             $json['message'] = 'Information save successfully!';
@@ -561,7 +572,8 @@ class Profile extends MY_Controller
         }
     }
 
-    public function save_profile_echo_info(){
+    public function save_profile_echo_info()
+    {
         $data = $this->input->post();
         $this->Profile_model->save_profile_echo_info($data);
         $json['success'] = true;
@@ -571,8 +583,9 @@ class Profile extends MY_Controller
         }
     }
 
-    public function get_disease_findings_diagnosis($disease_id){
-        $result =  $this->Profile_model->get_disease_findings_diagnosis($disease_id);
+    public function get_disease_findings_diagnosis($disease_id)
+    {
+        $result = $this->Profile_model->get_disease_findings_diagnosis($disease_id);
         $data['findings'] = $result['findings'];
         $data['diagnosis'] = $result['diagnosis'];
         $json['success'] = true;
@@ -582,11 +595,12 @@ class Profile extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-       // print_r($results); die('dfd');
+        // print_r($results); die('dfd');
 
     }
 
-    public function get_echo_detail(){
+    public function get_echo_detail()
+    {
         $patient_id = $this->input->post('patient_id');
         $data['details'] = $this->Profile_model->get_echo_detail($patient_id);
         //print_r($data['details']);
@@ -616,9 +630,9 @@ class Profile extends MY_Controller
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
         $data['diseases'] = $this->Echo_model->get_disease_categories();
         $data['structures'] = $this->Echo_model->get_Structure_categories();
-        $data['measurements'] = $this->Profile_model->get_patient_measurement($patient_id,$detail_id);
-        $data['findings'] = $this->Profile_model->get_patient_echo_findings($patient_id,$detail_id);
-        $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id,$detail_id);
+        $data['measurements'] = $this->Profile_model->get_patient_measurement($patient_id, $detail_id);
+        $data['findings'] = $this->Profile_model->get_patient_echo_findings($patient_id, $detail_id);
+        $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id, $detail_id);
 
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
@@ -628,7 +642,8 @@ class Profile extends MY_Controller
         }
     }
 
-    public function get_lab_test_detail(){
+    public function get_lab_test_detail()
+    {
         $patient_id = $this->input->post('patient_id');
         $data['details'] = $this->Profile_model->get_lab_test_detail($patient_id);
         //print_r($data['details']);
