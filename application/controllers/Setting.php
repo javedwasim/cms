@@ -10,6 +10,7 @@
 			$this->load->helper('content-type');
 			$this->load->model('Dashboard_model');
 			$this->load->model('Setting_model');
+			$this->load->model('History_model');
             $this->load->library('form_validation');
             $this->load->helper('security');
             $this->load->library('Csvimport');
@@ -293,10 +294,14 @@
 
 		public function patient_exemination($patient_id){
 		    $data['patient_id'] = $patient_id;
-            $data['history_category'] = $this->Examination_model->get_examination_categories();
+            $data['examination_category'] = $this->Examination_model->get_examination_categories();
             $data['items'] = $this->Examination_model->get_examination_items();
 
+            $data['history_category'] = $this->History_model->get_profile_history();
+            $data['history_items'] = $this->History_model->get_history_items();
+
             $json['history_table'] = $this->load->view('profile/profile_history_table', $data, true);
+            $json['examination_table'] = $this->load->view('profile/profile_examination_table', $data, true);
 			$json['result_html'] = $this->load->view('pages/pat_examination', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
