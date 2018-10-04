@@ -1329,11 +1329,12 @@ $(document.body).on('click', '.delete-diagnosis', function(){
 
 $(document.body).on('click', '.finding_radio', function(){
    var finding_id = $(this).attr('data-finding-id');
+   var structure_id = $(this).attr('data-structure-id');
    var disease_id = $('#assign_disease_id').val();
     $.ajax({
         url: window.location.origin+window.location.pathname+'echo_controller/assign_finding_to_disease',
         type: 'post',
-        data: {finding_id:finding_id,disease_id:disease_id},
+        data: {finding_id:finding_id,disease_id:disease_id,structure_id:structure_id},
         cache: false,
         success: function(response) {
             if (response.success) {
@@ -1348,10 +1349,11 @@ $(document.body).on('click', '.finding_radio', function(){
 $(document.body).on('click', '.diagnose_radio', function(){
     var diagnose_id = $(this).attr('data-diagnose-id');
     var disease_id = $('#assign_disease_id').val();
+    var structure_id = $(this).attr('data-structure-id');
     $.ajax({
         url: window.location.origin+window.location.pathname+'echo_controller/assign_diagnose_to_disease',
         type: 'post',
-        data: {disease_id:disease_id,diagnose_id:diagnose_id},
+        data: {disease_id:disease_id,diagnose_id:diagnose_id,structure_id:structure_id},
         cache: false,
         success: function(response) {
             if (response.success) {
