@@ -13,7 +13,7 @@
             $this->load->library('form_validation');
             $this->load->helper('security');
             $this->load->library('Csvimport');
-
+            $this->load->model('Examination_model');
 		}
 
 		public function profession(){
@@ -291,8 +291,13 @@
             }
 		}
 
-		public function patient_exemination(){
-			$json['result_html'] = $this->load->view('pages/pat_examination', "", true);
+		public function patient_exemination($patient_id){
+		    $data['patient_id'] = $patient_id;
+            $data['history_category'] = $this->Examination_model->get_examination_categories();
+            $data['items'] = $this->Examination_model->get_examination_items();
+
+            $json['history_table'] = $this->load->view('profile/profile_history_table', $data, true);
+			$json['result_html'] = $this->load->view('pages/pat_examination', $data, true);
             if ($this->input->is_ajax_request()) {
                 set_content_type($json);
             }

@@ -34,6 +34,7 @@
                                     <form id="echo_profile_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_echo_data') ?>"
                                           enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
                                         <input type="hidden" name="patient_id" id="patient_id"/>
                                         <div id="main_category_items">
@@ -73,6 +74,7 @@
                                           data-action="<?php echo site_url('profile/set_echo_data') ?>"
                                           enctype="multipart/form-data">
                                         <input type="hidden" name="patient_id" class="patient_id"/>
+                                        <input type="hidden" name="echo_detail_id_mmode" class="echo_detail_id" value="<?php echo isset($measurements)?$measurements[0]['echo_detail_id']:''; ?>"/>
                                         <div id="mmode_content">
                                             <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
                                                 <thead>
@@ -86,9 +88,18 @@
                                                     <?php if(isset($measurements)): ?>
                                                         <?php foreach ($measurements as $measurement): if($measurement['main_category']=='mmode'): ?>
                                                             <tr>
-                                                                <td><?php echo $measurement['item'] ?></td>
-                                                                <td><?php echo $measurement['item_value'] ?></td>
-                                                                <td><?php echo $measurement['measurement_value'] ?></td>
+                                                                <td>
+                                                                    <?php echo $measurement['item'] ?>
+                                                                    <input type="hidden" name="item_id[]" value="<?php echo $measurement['item_id']; ?>">
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $measurement['item_value'] ?>
+                                                                    <input type="hidden" name="item_value[]" value="<?php echo isset($measurement['item_value'])?$measurement['item_value']:''; ?>"  class="form-control" />
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $measurement['measurement_value'] ?>
+                                                                    <input type="hidden" name="measurement_value[]" value="<?php echo $measurement['measurement_value']; ?>">
+                                                                </td>
                                                             </tr>
                                                         <?php endif; endforeach; ?>
                                                     <?php endif; ?>
@@ -105,6 +116,7 @@
                                     <form id="echo_dooplers_content_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_echo_data') ?>"
                                           enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id_dooplers" class="echo_detail_id" value="<?php echo isset($measurements)?$measurements[0]['echo_detail_id']:''; ?>"/>
                                         <input type="hidden" name="patient_id" class="patient_id"/>
                                         <div id="dooplers_content">
                                             <table class="table table-bordered responsive" cellspacing="0" id="" width="100%" >
@@ -119,9 +131,18 @@
                                                     <?php if(isset($measurements)): ?>
                                                         <?php  foreach ($measurements as $measurement): if($measurement['main_category']=='dooplers'): ?>
                                                             <tr>
-                                                                <td><?php echo $measurement['item'] ?></td>
-                                                                <td><?php echo $measurement['item_value'] ?></td>
-                                                                <td><?php echo $measurement['measurement_value'] ?></td>
+                                                                <td>
+                                                                    <?php echo $measurement['item'] ?>
+                                                                    <input type="hidden" name="item_id[]" value="<?php echo $measurement['item_id']; ?>">
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $measurement['item_value'] ?>
+                                                                    <input type="hidden" name="item_value[]" value="<?php echo isset($measurement['item_value'])?$measurement['item_value']:''; ?>"  class="form-control">
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $measurement['measurement_value'] ?>
+                                                                    <input type="hidden" name="measurement_value[]" value="<?php echo $measurement['measurement_value']; ?>">
+                                                                </td>
                                                             </tr>
                                                         <?php endif; endforeach; ?>
                                                     <?php endif; ?>
@@ -192,7 +213,9 @@
                             <form id="echo_finding_form" method="post" role="form"
                                   data-action="<?php echo site_url('profile/set_echo_data') ?>"
                                   enctype="multipart/form-data">
+                                <input type="hidden" name="echo_detail_id_finding" class="echo_detail_id" value="<?php echo isset($findings)?$findings[0]['echo_detail_id']:''; ?>"/>
                                 <input type="hidden" name="patient_id" class="patient_id"/>
+                                <input type="hidden" name="disease_id" id="disease_id" value="<?php echo isset($findings[0]['disease_id'])?$findings[0]['disease_id']:''; ?>"/>
                                 <div class="card">
                                     <div class="card-header">
                                         Finding by Disease/Structure
@@ -201,7 +224,9 @@
                                         <ul class="list-group">
                                             <?php if(isset($findings)): ?>
                                                 <?php foreach ($findings as $finding): ?>
-                                                    <li class="list-group-item"><?php echo $finding['name']; ?></li>
+                                                    <input type="text" name="disease_finding_value[]" class="form-control" value="<?php echo $finding['finding_value']; ?>">
+                                                    <input type="hidden" name="finding_structure_id[]" id="finding_structure_id" value="<?php echo $finding['structure_id']; ?>">
+                                                    <input type="hidden" name="disease_finding_id[]" id="disease_finding_id" value="<?php echo $finding['finding_id']; ?>">
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </ul>
@@ -214,6 +239,8 @@
                                   data-action="<?php echo site_url('profile/set_echo_data') ?>"
                                   enctype="multipart/form-data">
                                 <input type="hidden" name="patient_id" class="patient_id"/>
+                                <input type="hidden" name="echo_detail_id_diagnosis" class="echo_detail_id" value="<?php echo isset($diagnosis)?$diagnosis[0]['echo_detail_id']:''; ?>"/>
+                                <input type="hidden" name="disease_id" id="disease_id" value="<?php echo isset($diagnosis[0]['disease_id'])?$diagnosis[0]['disease_id']:''; ?>"/>
                                 <div class="card">
                                     <div class="card-header">
                                         Diagnosis by Disease/Structure
@@ -222,7 +249,9 @@
                                         <ul class="list-group">
                                             <?php if(isset($diagnosis)): ?>
                                                 <?php foreach ($diagnosis as $diagnose): ?>
-                                                    <li class="list-group-item"><?php echo $diagnose['name']; ?></li>
+                                                    <input type="text" name="disease_diagnosis_value[]" class="form-control" value="<?php echo $diagnose['diagnosis_value']; ?>">
+                                                    <input type="hidden" name="disease_diagnosis_id[]" id="disease_diagnosis_id" value="<?php echo $diagnose['diagnosis_id']; ?>">
+                                                    <input type="hidden" name="diagnose_structure_id[]" id="diagnose_structure_id" value="<?php echo $diagnose['structure_id']; ?>">
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </ul>

@@ -10,8 +10,9 @@
         <tr class="table-row">
             <td contenteditable="true" class=disease_cate"
                 onClick="showEditDisease(this,'<?php echo $diagnose['diagnosis_id']; ?>');">
-                <?php echo $diagnose['name']; ?>
+                <input type="text" name="disease_diagnosis_value[]" class="form-control" value="<?php echo $diagnose['name']; ?>">
                 <input type="hidden" name="disease_diagnosis_id[]" id="disease_diagnosis_id" value="<?php echo $diagnose['diagnosis_id']; ?>">
+                <input type="hidden" name="diagnose_structure_id[]" id="diagnose_structure_id" value="<?php echo $diagnose['structure_id']; ?>">
             </td>
         </tr>
     <?php endforeach; ?>

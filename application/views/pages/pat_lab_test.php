@@ -136,30 +136,6 @@
 		                                <td></td>
 		                                <td>mg/dl</td>
 		                            </tr>
-		                            <tr>
-		                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-		                                <td>Urea</td>
-		                                <td></td>
-		                                <td>mg/dl</td>
-		                            </tr>
-		                            <tr>
-		                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-		                                <td>Urea</td>
-		                                <td></td>
-		                                <td>mg/dl</td>
-		                            </tr>
-		                            <tr>
-		                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-		                                <td>Urea</td>
-		                                <td></td>
-		                                <td>mg/dl</td>
-		                            </tr>
-		                            <tr>
-		                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-		                                <td>Urea</td>
-		                                <td></td>
-		                                <td>mg/dl</td>
-		                            </tr>
 			                    </tbody>
 			                </table>
     					</div>

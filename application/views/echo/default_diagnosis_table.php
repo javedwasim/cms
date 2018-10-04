@@ -10,8 +10,11 @@
         <tr class="table-row">
             <td>
                 <label class="btn btn-xs btn-primary active" style="padding: 10px 5px 5px 10px;">
-                    <input type="radio" name="rs" class="diagnose_radio" data-diagnose-id="<?php echo $diagnose['id']; ?>"
-                           value="<?php echo $diagnose['id']; ?>" autocomplete="off" <?php echo $diagnose['disease_id']>0?'checked':''; ?>>
+                    <input type="radio" name="rs" class="diagnose_radio"
+                           data-diagnose-id="<?php echo $diagnose['id']; ?>"
+                           data-structure-id="<?php echo $diagnose['structure_id']; ?>"
+                           value="<?php echo $diagnose['id']; ?>"
+                           autocomplete="off" <?php echo $diagnose['disease_id']>0?'checked':''; ?>>
                 </label>
             </td>
             <td><?php echo $diagnose['name']; ?></td>

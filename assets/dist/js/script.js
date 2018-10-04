@@ -1329,11 +1329,12 @@ $(document.body).on('click', '.delete-diagnosis', function(){
 
 $(document.body).on('click', '.finding_radio', function(){
    var finding_id = $(this).attr('data-finding-id');
+   var structure_id = $(this).attr('data-structure-id');
    var disease_id = $('#assign_disease_id').val();
     $.ajax({
         url: window.location.origin+window.location.pathname+'echo_controller/assign_finding_to_disease',
         type: 'post',
-        data: {finding_id:finding_id,disease_id:disease_id},
+        data: {finding_id:finding_id,disease_id:disease_id,structure_id:structure_id},
         cache: false,
         success: function(response) {
             if (response.success) {
@@ -1348,10 +1349,11 @@ $(document.body).on('click', '.finding_radio', function(){
 $(document.body).on('click', '.diagnose_radio', function(){
     var diagnose_id = $(this).attr('data-diagnose-id');
     var disease_id = $('#assign_disease_id').val();
+    var structure_id = $(this).attr('data-structure-id');
     $.ajax({
         url: window.location.origin+window.location.pathname+'echo_controller/assign_diagnose_to_disease',
         type: 'post',
-        data: {disease_id:disease_id,diagnose_id:diagnose_id},
+        data: {disease_id:disease_id,diagnose_id:diagnose_id,structure_id:structure_id},
         cache: false,
         success: function(response) {
             if (response.success) {
@@ -1798,24 +1800,7 @@ $(document.body).on('click','#profile_ett_conc_table tbody tr.row_selected',func
     
 });
 
-$(document.body).on('click', '#save_lab_test', function(){
-    $.ajax({
-        url: $('#lab_test_form_modal').attr('data-action'),
-        type: 'post',
-        data:  $('#lab_test_form_modal').serialize(),
-        cache: false,
-        success: function(response) {
-            if (response.success) {
-                $('#lab_test_data_table').empty();
-                $('#lab_test_data_table').append(response.sp_table);
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
-            }
-        }
-    });
-    return false;
-});
+
 
 $(document.body).on('click', '#save_ett_test', function(e){
     e.preventDefault();
@@ -1962,6 +1947,7 @@ $(document.body).on('click', '#echo_detail', function () {
 });
 
 function showEditEchoDetail(editableObj,echo_id,patient_id) {
+    $('.echo_detail_id').val(echo_id);
     $.ajax({
         url: '/cms/profile/patient_echo_edit_detail',
         type: 'post',
@@ -1981,6 +1967,50 @@ function showEditEchoDetail(editableObj,echo_id,patient_id) {
                 $('.lab-date').datepicker({
                     format: 'd-M-yyyy'
                 });
+            }
+        }
+    });
+}
+
+
+$(document.body).on('click', '#lab_test_detail', function () {
+    var patient_id = $('#label_patient_id').text();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'profile/get_lab_test_detail',
+        type: 'post',
+        data:  {patient_id:patient_id},
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                $('#echo_detail_container').empty();
+                $('#echo_detail_container').append(response.lab_detail);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+
+});
+
+
+function showEditLabDetail(editableObj,echo_id,patient_id) {
+    $('.echo_detail_id').val(echo_id);
+    $.ajax({
+        url: '/cms/profile/patient_echo_lab_edit_detail',
+        type: 'post',
+        data: {detail_id:echo_id,patid:patient_id},
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pat_sp_information').append(response.patient_information);
+                $('.lab-date').datepicker({
+                    format: 'd-M-yyyy'
+                });
+                $('#lab_test_data_table').empty();
+                $('#lab_test_data_table').append(response.test_table);
             }
         }
     });

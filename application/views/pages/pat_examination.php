@@ -47,7 +47,7 @@
                         	<div class="row m-0">
                         		<div class="col-md-5 p-0">
 	                        		<div class="card">
-						    			<div class="card-body">
+						    			<div class="card-body" id="">
 						    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -56,26 +56,12 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
+                                                    <?php foreach ($history_category as $category): ?>
+                                                        <tr>
+                                                            <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
+                                                            <td><?php echo $category['name']; ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -83,7 +69,7 @@
 	                        	</div>
 	                        	<div class="col-md-7 p-0">
 	                        		<div class="card">
-	                        			<div class="card-body">
+	                        			<div class="card-body" id="">
 	                        				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -187,39 +173,22 @@
 	                        			</div>
 						    			<div class="card-body">
 						    				<div class="row">
-						    					<div class="col-lg-3 col-md-4">
+						    					<div class="col-lg-3 col-md-4" id="profile_history_container">
 							    					<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 								                       <thead>
 								                        <tr>
-								                            <th style="width: 10%"></th>
 								                            <th>Category Name</th>
 								                        </tr>
 									                    </thead>
 									                    <tbody>
 								                            <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 								                                <td>CVS</td>
 								                            </tr>
-								                            <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>Chest</td>
-								                            </tr>
-								                            <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>Abdomen</td>
-								                            </tr>
-								                            <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>CNS</td>
-								                            </tr>
-								                            <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>GPE</td>
-								                            </tr>
+
 									                    </tbody>
 									                </table>
 							    				</div>
-							    				<div class="col-lg-9 col-md-8">
+							    				<div class="col-lg-9 col-md-8" id="patient_history_item_container">
 							    					<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 								                       <thead>
 								                        <tr>

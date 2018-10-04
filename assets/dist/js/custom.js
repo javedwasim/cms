@@ -2230,8 +2230,9 @@ $(document.body).on('click', '.delete-protocol', function () {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#pat-exemination', function () {
+    var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
-        url: '/cms/setting/patient_exemination',
+        url: '/cms/setting/patient_exemination/'+patid,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -2249,6 +2250,9 @@ $(document.body).on('click', '#pat-exemination', function () {
                 $('.app_date').datepicker({
                     format: 'd-M-yyyy'
                 });
+
+                $('#profile_history_container').empty();
+                $('#profile_history_container').append(response.history_table);;
             }
         }
     });
