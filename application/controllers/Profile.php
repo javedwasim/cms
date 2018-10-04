@@ -12,6 +12,7 @@ class Profile extends MY_Controller
         $this->load->model('Dashboard_model');
         $this->load->model('Instruction_model');
         $this->load->model('Echo_model');
+        $this->load->model('Examination_model');
 
         $this->load->model('Setting_model');
         $this->load->model('ETT_model');
@@ -681,6 +682,15 @@ class Profile extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
+    }
+
+    public function get_examination_category_item($examination_id){
+        $data['items'] = $this->Examination_model->get_examination_items_by_category($examination_id);
+        $json['result_html'] = $this->load->view('profile/profile_history_item_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
     }
 
 
