@@ -225,6 +225,7 @@
                                             <?php if(isset($findings)): ?>
                                                 <?php foreach ($findings as $finding): ?>
                                                     <input type="text" name="disease_finding_value[]" class="form-control" value="<?php echo $finding['finding_value']; ?>">
+                                                    <input type="hidden" name="finding_structure_id[]" id="finding_structure_id" value="<?php echo $finding['structure_id']; ?>">
                                                     <input type="hidden" name="disease_finding_id[]" id="disease_finding_id" value="<?php echo $finding['finding_id']; ?>">
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
@@ -250,6 +251,7 @@
                                                 <?php foreach ($diagnosis as $diagnose): ?>
                                                     <input type="text" name="disease_diagnosis_value[]" class="form-control" value="<?php echo $diagnose['diagnosis_value']; ?>">
                                                     <input type="hidden" name="disease_diagnosis_id[]" id="disease_diagnosis_id" value="<?php echo $diagnose['diagnosis_id']; ?>">
+                                                    <input type="hidden" name="diagnose_structure_id[]" id="diagnose_structure_id" value="<?php echo $diagnose['structure_id']; ?>">
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </ul>
