@@ -8,8 +8,7 @@
     <?php foreach ($items as $item): ?>
         <tr class="table-row">
                 <td contenteditable="true" class="exam_item"
-                    onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                    onClick="showEdit(this);">
+                    onClick="showEdit(this,'<?php echo $item['id']; ?>');">
                     <a class="edit-examination-item-btn btn btn-info btn-xs"
                        href="javascript:void(0)"
                        data-examination-item-id="<?php echo $item['id']; ?>">
