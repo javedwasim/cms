@@ -47,7 +47,7 @@
                         	<div class="row m-0">
                         		<div class="col-md-5 p-0">
 	                        		<div class="card">
-						    			<div class="card-body" id="">
+						    			<div class="card-body" id="profile_history_container">
 						    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -69,7 +69,7 @@
 	                        	</div>
 	                        	<div class="col-md-7 p-0">
 	                        		<div class="card">
-	                        			<div class="card-body" id="">
+	                        			<div class="card-body" id="profile_history_item_container">
 	                        				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -173,7 +173,7 @@
 	                        			</div>
 						    			<div class="card-body">
 						    				<div class="row">
-						    					<div class="col-lg-3 col-md-4" id="profile_history_container">
+						    					<div class="col-lg-3 col-md-4" id="profile_examination_container">
 							    					<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 								                       <thead>
 								                        <tr>
@@ -188,7 +188,7 @@
 									                    </tbody>
 									                </table>
 							    				</div>
-							    				<div class="col-lg-9 col-md-8" id="patient_history_item_container">
+							    				<div class="col-lg-9 col-md-8" id="patient_examination_item_container">
 							    					<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 								                       <thead>
 								                        <tr>

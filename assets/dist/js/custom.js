@@ -2251,8 +2251,11 @@ $(document.body).on('click', '#pat-exemination', function () {
                     format: 'd-M-yyyy'
                 });
 
+                $('#profile_examination_container').empty();
+                $('#profile_examination_container').append(response.examination_table);
+
                 $('#profile_history_container').empty();
-                $('#profile_history_container').append(response.history_table);;
+                $('#profile_history_container').append(response.history_table);
             }
         }
     });
