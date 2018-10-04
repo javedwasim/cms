@@ -12,6 +12,7 @@
                 onClick="showEditDisease(this,'<?php echo $finding['finding_id']; ?>');">
                 <input type="text" name="disease_finding_value[]" class="form-control" value="<?php echo $finding['name']; ?>">
                 <input type="hidden" name="disease_finding_id[]" id="disease_finding_id" value="<?php echo $finding['finding_id']; ?>">
+                <input type="hidden" name="finding_structure_id[]" id="finding_structure_id" value="<?php echo $finding['structure_id']; ?>">
             </td>
         </tr>
     <?php endforeach; ?>

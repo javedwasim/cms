@@ -475,6 +475,7 @@
             for ($i=0;$i<count($data['disease_finding_id']);$i++){
                 $disease_finding_id = $data['disease_finding_id'];
                 $disease_finding_value = $data['disease_finding_value'];
+                $finding_structure_id = $data['finding_structure_id'];
                 $this->db->insert('profile_echo_findings',
                 array(
                     'echo_detail_id'=>$echo_deatil_id,
@@ -482,12 +483,15 @@
                     'finding_id'=>$disease_finding_id[$i],
                     'finding_value'=>$disease_finding_value[$i],
                     'disease_id'=>$disease_id,
+                    'disease_id'=>$disease_id,
+                    'structure_id'=>$finding_structure_id[$i],
                 ));
             }
 
             for ($i=0;$i<count($data['disease_diagnosis_id']);$i++){
                 $disease_diagnosis_id = $data['disease_diagnosis_id'];
                 $disease_diagnosis_value = $data['disease_diagnosis_value'];
+                $diagnose_structure_id = $data['diagnose_structure_id'];
                 $this->db->insert('profile_echo_diagnosis',
                 array(
                     'echo_detail_id'=>$echo_deatil_id,
@@ -495,6 +499,7 @@
                     'diagnosis_id'=>$disease_diagnosis_id[$i],
                     'diagnosis_value'=>$disease_diagnosis_value[$i],
                     'disease_id'=>$disease_id,
+                    'structure_id'=>$diagnose_structure_id[$i],
                 ));
             }
 

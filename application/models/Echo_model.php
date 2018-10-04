@@ -227,12 +227,11 @@
         }
 
         public function assign_diagnose_to_disease($data){
-
             $query = $this->db->select('*')->from('disease_diagnosis')
                     ->where('disease_id',$data['disease_id'])
                     ->where('diagnosis_id',$data['diagnose_id'])->limit(1)->get();
             if ($query->num_rows() == 0) {
-                $this->db->insert('disease_diagnosis', array('disease_id'=>$data['disease_id'],'diagnosis_id'=>$data['diagnose_id']));
+                $this->db->insert('disease_diagnosis', array('disease_id'=>$data['disease_id'],'diagnosis_id'=>$data['diagnose_id'],'structure_id'=>$data['structure_id']));
             }else{
                 $this->db->where('disease_id',$data['disease_id'])->where('diagnosis_id',$data['diagnose_id'])->update('disease_diagnosis',
                     array('disease_id'=>$data['disease_id'],'diagnosis_id'=>$data['diagnose_id'],'structure_id'=>$data['structure_id']));
