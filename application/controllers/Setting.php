@@ -1012,13 +1012,57 @@
                exit;
         }
 
-        // public function import_history_items(){
-        //     $file_data = $this->csvimport->get_array($_FILES["csv_file"]["tmp_name"]);
-        //     print_r($file_data);
-        //      die();
-        // }
+        public function import_history_items($id){
+            if (isset($_FILES['csv_file']['name'])) {
+                // total files //
+                $count = count($_FILES['csv_file']['name']);
+                $today = date("Y-m-d H:i:s");
+                $date_f = date('Y-m-d', strtotime($today));
+                $uploads = $_FILES['csv_file'];
+                $fname = $uploads['name'];
+                $exp = explode(".", $fname);
+                $ext = end($exp);
+                if ($ext == 'CSV' || $ext == 'csv') {
+                    move_uploaded_file($_FILES['csv_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                    $result = $this->read_item_csv_file($fname,$date_f,$id);
+                    if ($result) {
+                        $json['success']=true;
+                        $json['message'] = 'Successfully Uploaded.';
+                    }else{
+                        $json['error']=false;
+                        $json['message']='Seems an error.';
+                    }
+         
+                } else {
+                    echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+                }
+            } else {
+                echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+            }
+
+            if ($this->input->is_ajax_request()) {
+                set_content_type($json);
+            }
+        }
+
+        function read_item_csv_file($fname, $date_f,$id) {
+        $path = $this->config->item('file_upload_path') . $fname;
+            if ($this->csvimport->get_array($path)) {
+                $csv_array = $this->csvimport->get_array($path);
+                foreach ($csv_array as $row) {
+                    $insert_data = array(
+                        'name'=>$row['name'],
+                        'profile_history_id' => $id
+                    );
+                    $this->Setting_model->insert_csv_history($insert_data);
+                }
+            return true;
+        }else{
+            return false;
+        }
+
 
 	}
-
+}
 
 ?>

@@ -12,7 +12,6 @@ class Profile extends MY_Controller
         $this->load->model('Dashboard_model');
         $this->load->model('Instruction_model');
         $this->load->model('Echo_model');
-
         $this->load->model('Setting_model');
         $this->load->model('ETT_model');
         $this->load->helper('content-type');
@@ -178,8 +177,7 @@ class Profile extends MY_Controller
         }
     }
 
-    public function update_modal()
-    {
+    public function update_modal()   {
         $id = $this->input->post('id');
         $data['professions'] = $this->Setting_model->get_professions();
         $data['districts'] = $this->Setting_model->get_districts();

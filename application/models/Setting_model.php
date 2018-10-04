@@ -503,6 +503,14 @@
                 return array();
             }
         }
+        public function insert_csv_history($data){
+            $result = $this->db->insert('history_item',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
 	}
 
 ?>
