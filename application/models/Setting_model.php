@@ -503,8 +503,69 @@
                 return array();
             }
         }
+
         public function insert_csv_history($data){
             $result = $this->db->insert('history_item',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function get_examination_items($id){
+            $result = $this->db->select('name')
+                                ->where('examination_id',$id)
+                                ->get('examination_item');
+            if ($result){
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function insert_csv_examination($data){
+            $result = $this->db->insert('examination_item',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function get_investigation_items($id){
+            $result = $this->db->select('name')
+                                ->where('investigation_id',$id)
+                                ->get('investigation_item');
+            if ($result){
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function insert_csv_investigation($data){
+            $result = $this->db->insert('investigation_item',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function get_instruction_items($id){
+            $result = $this->db->select('name')
+                                ->where('instruction_id',$id)
+                                ->get('instruction_item');
+            if ($result){
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function insert_csv_instruction($data){
+            $result = $this->db->insert('instruction_item',$data);
             if ($result) {
                 return true;
             }else{
