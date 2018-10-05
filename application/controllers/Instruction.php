@@ -15,7 +15,7 @@ class Instruction extends MY_Controller
 
     public function instruction()
     {
-        $data['category'] = 'special';
+        $data['category'] = 'clinical';
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
         $data['items'] = $this->Instruction_model->get_inst_items($data);
         $data['rights'] = $this->session->userdata('other_rights');
@@ -27,7 +27,7 @@ class Instruction extends MY_Controller
 
     public function special_instructions()
     {
-        $data['category'] = 'clinical';
+        $data['category'] = 'special';
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
         $data['items'] = $this->Instruction_model->get_inst_items($data);
         $data['rights'] = $this->session->userdata('other_rights');

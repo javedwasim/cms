@@ -2024,3 +2024,21 @@ function showEditLabDetail(editableObj,echo_id,patient_id) {
         }
     });
 }
+$(document.body).on('click', '#echo_detail', function () {
+    var patient_id = $('#label_patient_id').text();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'profile/get_echo_detail',
+        type: 'post',
+        data:  {patient_id:patient_id},
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                $('#echo_detail_container').empty();
+                $('#echo_detail_container').append(response.echo_detail);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+
+});

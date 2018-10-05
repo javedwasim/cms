@@ -4,8 +4,9 @@
         event.preventDefault();
         var itemfile = new FormData($('#import_csv_instruction')[0]);
         var catid = $('#instruction_id option:selected').val();
+        var pgcatid = $('#page_cat_id').val();
         $.ajax({
-           url:"<?php echo base_url(); ?>setting/import_instruction_items/"+catid,
+           url:"<?php echo base_url(); ?>setting/import_instruction_items/"+catid+"/"+pgcatid,
            method:"POST",
            data: itemfile,
            contentType:false,
@@ -85,6 +86,7 @@
             
             <div class="row">
                 <div class="col-lg-3 col-md-4">
+                    <input type="hidden" name="page_cat_id" id="page_cat_id" value="<?php echo $scategory; ?>">
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control" name="filter_inst_category" onchange="filter_inst_item_category(this.value,'<?php echo $scategory; ?>')">

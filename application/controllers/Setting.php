@@ -189,13 +189,13 @@ class Setting extends MY_Controller
         }
     }
 
-    public function special_instructions()
-    {
-        $json['result_html'] = $this->load->view('pages/instruction', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
+    // public function special_instructions()
+    // {
+    //     $json['result_html'] = $this->load->view('pages/instruction', "", true);
+    //     if ($this->input->is_ajax_request()) {
+    //         set_content_type($json);
+    //     }
+    // }
 
     public function medicine()
     {
@@ -1353,7 +1353,7 @@ class Setting extends MY_Controller
         exit;
     }
 
-    public function import_instruction_items($id)
+    public function import_instruction_items($id,$pid)
     {
         if (isset($_FILES['csv_instruction_file']['name'])) {
             // total files //
@@ -1366,7 +1366,7 @@ class Setting extends MY_Controller
             $ext = end($exp);
             if ($ext == 'CSV' || $ext == 'csv') {
                 move_uploaded_file($_FILES['csv_instruction_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
-                $result = $this->read_item_instruction_file($fname, $date_f, $id);
+                $result = $this->read_item_instruction_file($fname, $date_f, $id,$pid);
                 if ($result) {
                     $json['success'] = true;
                     $json['message'] = 'Successfully Uploaded.';
@@ -1387,7 +1387,7 @@ class Setting extends MY_Controller
         }
     }
 
-    function read_item_instruction_file($fname, $date_f, $id)
+    function read_item_instruction_file($fname, $date_f, $id,$pid)
     {
         $path = $this->config->item('file_upload_path') . $fname;
         if ($this->csvimport->get_array($path)) {
@@ -1396,7 +1396,7 @@ class Setting extends MY_Controller
                 $insert_data = array(
                     'name' => $row['Instruction items'],
                     'instruction_id' => $id,
-                    'category' => 'clinical'
+                    'category' => $pid
                 );
                 $this->Setting_model->insert_csv_instruction($insert_data);
             }
