@@ -15,6 +15,7 @@
             $this->load->helper('security');
             $this->load->library('Csvimport');
             $this->load->model('Examination_model');
+            $this->load->model('Investigation_model');
 		}
 
 		public function profession(){
@@ -300,6 +301,14 @@
             $data['history_category'] = $this->History_model->get_profile_history();
             $data['history_items'] = $this->History_model->get_history_items();
 
+            $data['investigations'] = $this->Investigation_model->get_investigation_categories();
+            $data['investigation_items'] = $this->Investigation_model->get_investigation_items();
+
+            $data['advices'] = $this->Setting_model->get_advices();
+            $data['advice_items'] = $this->Setting_model->get_advice_items();
+
+            $json['advice_html'] = $this->load->view('profile/advice_category_table',$data, true);
+            $json['investigation_html'] = $this->load->view('profile/investigation_category_table', $data, true);
             $json['history_table'] = $this->load->view('profile/profile_history_table', $data, true);
             $json['examination_table'] = $this->load->view('profile/profile_examination_table', $data, true);
 			$json['result_html'] = $this->load->view('pages/pat_examination', $data, true);

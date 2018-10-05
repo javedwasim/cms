@@ -14,6 +14,7 @@ class Profile extends MY_Controller
         $this->load->model('Echo_model');
         $this->load->model('History_model');
         $this->load->model('Examination_model');
+        $this->load->model('Investigation_model');
 
         $this->load->model('Setting_model');
         $this->load->model('ETT_model');
@@ -698,6 +699,24 @@ class Profile extends MY_Controller
     public function get_history_category_item($history_id){
         $data['items'] = $this->History_model->get_history_items_by_category($history_id);
         $json['history_html'] = $this->load->view('profile/profile_history_item_table', $data, true);        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
+    public function get_investigation_item($cat_id){
+        $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
+        $json['result_html'] = $this->load->view('profile/investigation_category_item_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
+    public function get_advice_item($cat_id){
+        $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
+        $json['result_html'] = $this->load->view('profile/advice_category_item_table', $data, true);
+        if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
 
