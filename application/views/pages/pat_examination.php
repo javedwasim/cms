@@ -199,7 +199,7 @@
 									                    <tbody>
 								                            <tr>
 								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>CVS</td>
+								                                <td>CVSdddd</td>
 								                            </tr>
 								                            <tr>
 								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
@@ -230,7 +230,7 @@
                         	<div class="row m-0">
                         		<div class="col-md-5 p-0">
 	                        		<div class="card">
-						    			<div class="card-body">
+						    			<div class="card-body" id="investigation_category_container">
 						    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -266,7 +266,7 @@
 	                        	</div>
 	                        	<div class="col-md-7 p-0">
 	                        		<div class="card">
-	                        			<div class="card-body">
+	                        			<div class="card-body" id="investigation_category_item_container">
 	                        				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -279,22 +279,7 @@
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>CVS</td>
 						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
+
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -319,22 +304,7 @@
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>CVS</td>
 						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
+
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -412,7 +382,7 @@
                         	<div class="row m-0">
                         		<div class="col-md-5 p-0">
 	                        		<div class="card">
-						    			<div class="card-body">
+						    			<div class="card-body" id="advice_category_container">
 						    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -448,7 +418,7 @@
 	                        	</div>
 	                        	<div class="col-md-7 p-0">
 	                        		<div class="card">
-	                        			<div class="card-body">
+	                        			<div class="card-body" id="advice_category_item_container">
 	                        				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -459,7 +429,7 @@
 							                    <tbody>
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
+						                                <td>CVSdddd</td>
 						                            </tr>
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
@@ -488,7 +458,7 @@
                         	<div class="row m-0">
                         		<div class="col-md-5 p-0">
 	                        		<div class="card">
-						    			<div class="card-body">
+						    			<div class="card-body" id="instruction_category_container">
 						    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -524,7 +494,7 @@
 	                        	</div>
 	                        	<div class="col-md-7 p-0">
 	                        		<div class="card">
-	                        			<div class="card-body">
+	                        			<div class="card-body" id="instruction_category_item_container">
 	                        				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -536,82 +506,6 @@
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>CVS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
 						                            </tr>
 							                    </tbody>
 							                </table>

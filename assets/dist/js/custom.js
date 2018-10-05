@@ -2256,6 +2256,15 @@ $(document.body).on('click', '#pat-exemination', function () {
 
                 $('#profile_history_container').empty();
                 $('#profile_history_container').append(response.history_table);
+
+                $('#investigation_category_container').empty();
+                $('#investigation_category_container').append(response.investigation_html);
+
+                $('#advice_category_container').empty();
+                $('#advice_category_container').append(response.advice_html);
+
+                $('#instruction_category_container').empty();
+                $('#instruction_category_container').append(response.instruction_html);
             }
         }
     });

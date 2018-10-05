@@ -14,6 +14,10 @@ class Profile extends MY_Controller
         $this->load->model('Echo_model');
         $this->load->model('History_model');
         $this->load->model('Examination_model');
+        $this->load->model('Instruction_model');
+
+        $this->load->model('Investigation_model');
+
         $this->load->model('Setting_model');
         $this->load->model('ETT_model');
         $this->load->helper('content-type');
@@ -701,7 +705,34 @@ class Profile extends MY_Controller
 
     }
 
+    public function get_investigation_item($cat_id){
+        $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
+        $json['result_html'] = $this->load->view('profile/investigation_category_item_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
 
+    }
+
+    public function get_advice_item($cat_id){
+        $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
+        $json['result_html'] = $this->load->view('profile/advice_category_item_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
+    public function get_instruction_item($cat_id){
+        $data['inst_id']=$cat_id;
+        $data['category']='special';
+
+        $data['items'] = $this->Instruction_model->get_inst_items_by_category($data);
+        $json['result_html'] = $this->load->view('profile/instruction_category_item_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
 }
 
 ?>
