@@ -583,6 +583,15 @@
                 return array();
             }
         }
+
+        public function insert_csv_medicine($data){
+            $result = $this->db->insert('medicine_item',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
 	}
 
 ?>

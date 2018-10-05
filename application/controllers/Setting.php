@@ -1439,18 +1439,18 @@ class Setting extends MY_Controller
     }
 
     public function import_medicine_items($id){
-        if (isset($_FILES['csv_instruction_file']['name'])) {
+        if (isset($_FILES['csv_medicine_file']['name'])) {
             // total files //
-            $count = count($_FILES['csv_instruction_file']['name']);
+            $count = count($_FILES['csv_medicine_file']['name']);
             $today = date("Y-m-d H:i:s");
             $date_f = date('Y-m-d', strtotime($today));
-            $uploads = $_FILES['csv_instruction_file'];
+            $uploads = $_FILES['csv_medicine_file'];
             $fname = $uploads['name'];
             $exp = explode(".", $fname);
             $ext = end($exp);
             if ($ext == 'CSV' || $ext == 'csv') {
-                move_uploaded_file($_FILES['csv_instruction_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
-                $result = $this->read_item_instruction_file($fname,$date_f,$id);
+                move_uploaded_file($_FILES['csv_medicine_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_item_medicine_file($fname,$date_f,$id);
                 if ($result) {
                     $json['success']=true;
                     $json['message'] = 'Successfully Uploaded.';
@@ -1471,17 +1471,16 @@ class Setting extends MY_Controller
         }
     }
 
-    function read_item_instruction_file($fname, $date_f,$id) {
+    function read_item_medicine_file($fname, $date_f,$id) {
         $path = $this->config->item('file_upload_path') . $fname;
             if ($this->csvimport->get_array($path)) {
                 $csv_array = $this->csvimport->get_array($path);
                 foreach ($csv_array as $row) {
                     $insert_data = array(
-                        'name'=>$row['Instruction items'],
-                        'instruction_id' => $id,
-                        'category' => 'clinical'
+                        'name'=>$row['Medicine items'],
+                        'medicine_id' => $id
                     );
-                    $this->Setting_model->insert_csv_instruction($insert_data);
+                    $this->Setting_model->insert_csv_medicine($insert_data);
                 }
             return true;
         }else{
