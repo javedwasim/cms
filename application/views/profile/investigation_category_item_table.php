@@ -1,7 +1,7 @@
-<table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 9%;"></th>
+        <th class="table-header" style="width: 5%;"></th>
         <th class="table-header">Item</th>
     </tr>
     </thead>
@@ -15,8 +15,7 @@
                     <i class="far fa-question-circle"></i></a>
             </td>
             <td contenteditable="true" class="investigation_item"
-                onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                onClick="showEdit(this);">
+                onClick="addInvestigationItem(this,'<?php echo $item['name']; ?>');">
                 <?php echo $item['name']; ?></td>
         </tr>
     <?php endforeach; ?>
@@ -45,43 +44,14 @@
         </form>
     </div>
 </div>
-
 <script>
-    $(document).ready(function () {
-        $('.item_table').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false,
-            "sort": false,
-            autoWidth: false, //step 1
-            columnDefs: [
-                { width: '10%', targets: 0 }, //step 2, column 1 out of 4
-            ]
-        });
-
-
-    });
-</script>
-
-<script>
-    function showEdit(editableObj) {
+    function addInvestigationItem(editableObj,text) {
         $('td.investigation_item').css('background', '#FFF');
         $('td.investigation_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+
+        $('#investigation_item').append(text+'\n');
     }
-    function saveToDatabase(editableObj, column, id) {
-        $.ajax({
-            url: "<?php echo base_url() . 'investigation/save_investigation_item' ?>",
-            type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
-            success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
-                if (response.success) {
-                    toastr["success"](response.message);
-                }
-            }
-        });
-        $(editableObj).css("color", "#212529");
-    }
+
 </script>

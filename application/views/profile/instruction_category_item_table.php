@@ -15,8 +15,7 @@
                    class="far fa-question-circle"></i></a>
             </td>
             <td contenteditable="true" class="inst_item"
-                onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                onClick="showEdit(this);">
+                onClick="showEdit(this,'<?php echo $item['name']; ?>');">
                 <?php echo $item['name']; ?></td>
         </tr>
     <?php endforeach; ?>
@@ -51,25 +50,14 @@
     </div>
 </div>
 <script>
-    function showEdit(editableObj) {
+    function showEdit(editableObj,text) {
         $('td.inst_item').css('background', '#FFF');
         $('td.inst_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+
+        $('#instruction_item').append(text+'\n');
     }
-    function saveToDatabase(editableObj, column, id) {
-        $.ajax({
-            url: "<?php echo base_url() . 'instruction/save_inst_item' ?>",
-            type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
-            success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
-                if (response.success) {
-                    toastr["success"](response.message);
-                }
-            }
-        });
-        $(editableObj).css("color", "#212529");
-    }
+
 
 </script>

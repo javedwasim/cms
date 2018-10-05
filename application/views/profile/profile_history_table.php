@@ -1,8 +1,8 @@
 <table class="table table-bordered nowrap responsive history_table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:100px;">Delete</th>
-        <th class="table-header">Category Name</th>
+        <th class="table-header" style="width:5%;"></th>
+        <th class="table-header">History</th>
     </tr>
     </thead>
     <tbody>
@@ -51,6 +51,8 @@
 </div>
 <script>
     function loadHistoryItem(editableObj,id) {
+        var patient_id = $('#label_patient_id').text();
+
         $('td.exam_cate').css('background', '#FFF');
         $('td.exam_cate').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");

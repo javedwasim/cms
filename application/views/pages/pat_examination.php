@@ -52,7 +52,7 @@
 						                       <thead>
 						                        <tr>
 						                            <th style="width: 10%"></th>
-						                            <th>Category Name</th>
+						                            <th>History</th>
 						                        </tr>
 							                    </thead>
 							                    <tbody>
@@ -80,24 +80,9 @@
 							                    <tbody>
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
+						                                <td>&nbsp;</td>
 						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
+
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -177,7 +162,7 @@
 							    					<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 								                       <thead>
 								                        <tr>
-								                            <th>Category Name</th>
+								                            <th>Examinations</th>
 								                        </tr>
 									                    </thead>
 									                    <tbody>
@@ -193,29 +178,13 @@
 								                       <thead>
 								                        <tr>
 								                            <th style="width: 10%"></th>
-								                            <th>Category Name</th>
+								                            <th>Item</th>
 								                        </tr>
 									                    </thead>
 									                    <tbody>
 								                            <tr>
 								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>CVSdddd</td>
-								                            </tr>
-								                            <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>Chest</td>
-								                            </tr>
-								                            <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>Abdomen</td>
-								                            </tr>
-								                            <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>CNS</td>
-								                            </tr>
-								                            <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>GPE</td>
+								                                <td>&nbsp;</td>
 								                            </tr>
 									                    </tbody>
 									                </table>
@@ -234,30 +203,14 @@
 						    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
-						                            <th style="width: 10%"></th>
-						                            <th>Category Name</th>
+						                            <th style="width: 5%"></th>
+						                            <th>Investigations</th>
 						                        </tr>
 							                    </thead>
 							                    <tbody>
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
+						                                <td>&nbsp;</td>
 						                            </tr>
 							                    </tbody>
 							                </table>
@@ -271,7 +224,7 @@
 						                       <thead>
 						                        <tr>
 						                            <th style="width: 10%"></th>
-						                            <th>items</th>
+						                            <th>Items</th>
 						                        </tr>
 							                    </thead>
 							                    <tbody>
@@ -296,13 +249,13 @@
 						                       <thead>
 						                        <tr>
 						                            <th style="width: 10%"></th>
-						                            <th>Category Name</th>
+						                            <th>Medicines</th>
 						                        </tr>
 							                    </thead>
 							                    <tbody>
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
+						                                <td>&nsbp;</td>
 						                            </tr>
 
 							                    </tbody>
@@ -317,7 +270,7 @@
 						                       <thead>
 						                        <tr>
 						                            <th style="width: 10%"></th>
-						                            <th>Medicine</th>
+						                            <th>Items</th>
 						                        </tr>
 							                    </thead>
 							                    <tbody>
@@ -360,30 +313,15 @@
 						                       <thead>
 						                        <tr>
 						                            <th style="width: 10%"></th>
-						                            <th>Category Name</th>
+						                            <th>Advice</th>
 						                        </tr>
 							                    </thead>
 							                    <tbody>
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
+						                                <td>&nbsp;</td>
 						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
+
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -396,30 +334,15 @@
 						                       <thead>
 						                        <tr>
 						                            <th style="width: 10%"></th>
-						                            <th>items</th>
+						                            <th>Items</th>
 						                        </tr>
 							                    </thead>
 							                    <tbody>
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVSdddd</td>
+						                                <td>&nbsp;</td>
 						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
+
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -436,30 +359,15 @@
 						                       <thead>
 						                        <tr>
 						                            <th style="width: 10%"></th>
-						                            <th>Category Name</th>
+						                            <th>Instructions</th>
 						                        </tr>
 							                    </thead>
 							                    <tbody>
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
+						                                <td>&nbsp;</td>
 						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
+
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -472,13 +380,13 @@
 						                       <thead>
 						                        <tr>
 						                            <th style="width: 10%"></th>
-						                            <th>items</th>
+						                            <th>Items</th>
 						                        </tr>
 							                    </thead>
 							                    <tbody>
 						                            <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
+						                                <td>&nbsp;</td>
 						                            </tr>
 							                    </tbody>
 							                </table>
@@ -506,85 +414,161 @@
                         <div class="card-body" style="height:533px;">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 p-0">
-                                	<div class="card">
-						    			<div class="card-body">
-						    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-						                       <thead>
-						                        <tr>
-						                            <th>Medicine</th>
-						                        </tr>
-							                    </thead>
-							                    <tbody>
-						                            <tr>
-						                                <td>CVS</td>
-						                            </tr>
-						                            <tr>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td>GPE</td>
-						                            </tr>
-							                    </tbody>
-							                </table>
-						    			</div>
-		    						</div>
+                                    <form id="history_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                   <thead><tr><th>History</th></tr></thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="padding: 0px">
+                                                                <textarea class="form-control" rows="5" name="history_item" id="history_item"></textarea>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="col-lg-4 col-md-4 p-0">
-                                	<div class="card">
-						    			<div class="card-body">
-						    				<table class="table table-bordered nowrap responsive right-table" cellspacing="0" id="" width="100%" >
-						                       <thead>
-						                        <tr>
-						                            <th>Dosage</th>
-						                        </tr>
-							                    </thead>
-							                    <tbody>
-						                            <tr>
-						                                <td>CVS</td>
-						                            </tr>
-						                            <tr>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td>GPE</td>
-						                            </tr>
-							                    </tbody>
-							                </table>
-						    			</div>
-		    						</div>
+                                    <form id="examination_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                    <thead><tr><th>Examination</th></tr></thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="padding: 0px">
+                                                            <textarea class="form-control" rows="5" name="examination_item" id="examination_item"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="col-lg-4 col-md-4 p-0">
-                                	<div class="row">
-                                		<div class="col-md-12 p-0">
-                                			
-                                		</div>
-                                		<div class="col-md-12 p-0">
-                                			
-                                		</div>
-                                		<div class="col-md-12 p-0">
-                                			
-                                		</div>
-                                		<div class="col-md-12 p-0">
-                                			
-                                		</div>
-                                		<div class="col-md-12 p-0">
-                                			
-                                		</div>
-                                	</div>
+                                    <form id="investigation_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                    <thead><tr><th>Investigation</th></tr></thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="padding: 0px">
+                                                            <textarea class="form-control" rows="5" name="investigation_item" id="investigation_item"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 p-0">
+                                    <form id="medicine_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                    <thead><tr><th>Medicine</th></tr></thead>
+                                                    <tbody id="medicine_item"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-lg-6 col-md-6 p-0">
+                                    <form id="medicine_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                    <thead><tr><th>Dosage</th></tr></thead>
+                                                    <tbody id="dosage_item"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 p-0">
+                                    <form id="advice_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                    <thead><tr><th>Test Advice</th></tr></thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="padding: 0px">
+                                                            <textarea class="form-control" rows="5" name="advice_item" id="advice_item"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-lg-6 col-md-6 p-0">
+                                    <form id="instruction_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                    <thead><tr><th>Instruction</th></tr></thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="padding: 0px">
+                                                            <textarea class="form-control" rows="5" name="instruction_item" id="instruction_item"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="card">
