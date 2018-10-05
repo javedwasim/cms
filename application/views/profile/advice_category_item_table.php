@@ -13,10 +13,21 @@
                     &nbsp;
                 </td>
                 <td contenteditable="true" class="advice_item"
-                    onBlur="saveAdviceItem(this,'item_name','<?php echo $item['id']; ?>')"
-                    onClick="showEdit(this);">
+                    onClick="addAdviceItem(this,'<?php echo $item['name']; ?>');">
                     <?php echo $item['name']; ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+<script>
+    function addAdviceItem(editableObj,text) {
+        var patient_id = $('#label_patient_id').text();
+        $('td.advice_item').css('background', '#FFF');
+        $('td.advice_item').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
+
+        $('#advice_item').append(text+'\n');
+    }
+
+</script>

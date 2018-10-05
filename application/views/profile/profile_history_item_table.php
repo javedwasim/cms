@@ -1,22 +1,21 @@
 <table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:100px;" >Action</th>
-        <th class="table-header">Item Name</th>
+        <th class="table-header" style="width:100px;" ></th>
+        <th class="table-header">Items</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
         <tr class="table-row">
-            <td style="width: 100px;">
+            <td style="width: 5%;">
                 <a class="edit-history-item-btn btn btn-info btn-xs"
                    href="javascript:void(0)"
                    data-history-item-id="<?php echo $item['id']; ?>">
                     <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true"
-                onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                onClick="showEdit(this);">
+            <td contenteditable="true" class="history_item"
+                onClick="addHistoryItem(this,'<?php echo $item['name']; ?>');">
                 <?php echo $item['name']; ?></td>
         </tr>
     <?php endforeach; ?>
@@ -40,35 +39,19 @@
                         <textarea class="form-control" rows="3" name="description" id="history_item_description"></textarea>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger waves-effect waves-light"
-                            id="save_history_item_description">Update
-                    </button>
-                </div>
             </div>
         </form>
     </div>
 </div>
 <script>
-    function showEdit(editableObj) {
-        $('td.exam_cate').css('background', '#FFF');
-        $('td.exam_cate').css('color', '#212529');
+    function addHistoryItem(editableObj,text) {
+        var patient_id = $('#label_patient_id').text();
+        $('td.history_item').css('background', '#FFF');
+        $('td.history_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+
+        $('#history_item').append(text+'\n');
     }
-    function saveToDatabase(editableObj, column, id) {
-        $.ajax({
-            url: "<?php echo base_url() . 'Profile_history/save_history_item' ?>",
-            type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
-            success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
-                if (response.success) {
-                    toastr["success"](response.message);
-                }
-            }
-        });
-        $(editableObj).css("color", "#212529");
-    }
+
 </script>

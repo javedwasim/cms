@@ -8,7 +8,7 @@
     <?php foreach ($items as $item): ?>
         <tr class="table-row">
                 <td contenteditable="true" class="exam_item"
-                    onClick="showEdit(this,'<?php echo $item['id']; ?>');">
+                    onClick="addExaminationItem(this,'<?php echo $item['name']; ?>');">
                     <a class="edit-examination-item-btn btn btn-info btn-xs"
                        href="javascript:void(0)"
                        data-examination-item-id="<?php echo $item['id']; ?>">
@@ -41,3 +41,15 @@
         </form>
     </div>
 </div>
+<script>
+    function addExaminationItem(editableObj,text) {
+        var patient_id = $('#label_patient_id').text();
+        $('td.exam_item').css('background', '#FFF');
+        $('td.exam_item').css('color', '#212529');
+        $(editableObj).css("background", "#1e88e5");
+        $(editableObj).css("color", "#FFF");
+
+        $('#examination_item').append(text+'\n');
+    }
+
+</script>
