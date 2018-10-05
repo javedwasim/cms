@@ -750,6 +750,12 @@ class Profile extends MY_Controller
             set_content_type($json);
         }
     }
+    public function get_color_doopler(){
+        $json['color_doppler'] = $this->load->view('profile/color_doppler',"",true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
 }
 
 ?>

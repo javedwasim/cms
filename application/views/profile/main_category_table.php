@@ -25,18 +25,31 @@
         var patient_id = $('#label_patient_id').text();
         var measurement_cate_id = $('#measurement_cate_id').val(category_id);
         var patient_id = $('#patient_id').val(patient_id);
-
-        $.ajax({
-            url: "<?php echo base_url() . 'profile/get_measurement_by_filter/' ?>"+category_id,
-            type: "get",
-            success: function (response) {
-                $('#main_category_items').empty();
-                $('#main_category_items').append(response.result_html);
-                if (response.success) {
-                    toastr["success"](response.message);
+        if (category_id==9) {
+            $.ajax({
+                url: "<?php echo base_url() . 'profile/get_color_doopler/' ?>",
+                type: "get",
+                success: function (response) {
+                    $('#main_category_items').empty();
+                    $('#main_category_items').append(response.color_doppler);
+                    if (response.success) {
+                        toastr["success"](response.message);
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            $.ajax({
+                url: "<?php echo base_url() . 'profile/get_measurement_by_filter/' ?>"+category_id,
+                type: "get",
+                success: function (response) {
+                    $('#main_category_items').empty();
+                    $('#main_category_items').append(response.result_html);
+                    if (response.success) {
+                        toastr["success"](response.message);
+                    }
+                }
+            });
+        }
     }
 
 </script>

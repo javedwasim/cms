@@ -189,13 +189,13 @@ class Setting extends MY_Controller
         }
     }
 
-    public function special_instructions()
-    {
-        $json['result_html'] = $this->load->view('pages/instruction', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
+    // public function special_instructions()
+    // {
+    //     $json['result_html'] = $this->load->view('pages/instruction', "", true);
+    //     if ($this->input->is_ajax_request()) {
+    //         set_content_type($json);
+    //     }
+    // }
 
     public function medicine()
     {
@@ -1051,13 +1051,13 @@ class Setting extends MY_Controller
         }
     }
 
-    public function get_advice_item($cat_id)
-    {
+    public function get_advice_item($cat_id){
         $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
         $data['advices'] = $this->Setting_model->get_advices();
         $data['selected_category'] = $cat_id;
         $data['active_tab'] = 'advice_item';
         $data['rights'] = $this->session->userdata('other_rights');
+        $json['cat_id'] = $cat_id;
         $json['result_html'] = $this->load->view('pages/advice', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1353,7 +1353,7 @@ class Setting extends MY_Controller
         exit;
     }
 
-    public function import_instruction_items($id)
+    public function import_instruction_items($id,$pid)
     {
         if (isset($_FILES['csv_instruction_file']['name'])) {
             // total files //
@@ -1366,7 +1366,7 @@ class Setting extends MY_Controller
             $ext = end($exp);
             if ($ext == 'CSV' || $ext == 'csv') {
                 move_uploaded_file($_FILES['csv_instruction_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
-                $result = $this->read_item_instruction_file($fname, $date_f, $id);
+                $result = $this->read_item_instruction_file($fname, $date_f, $id,$pid);
                 if ($result) {
                     $json['success'] = true;
                     $json['message'] = 'Successfully Uploaded.';
@@ -1387,7 +1387,7 @@ class Setting extends MY_Controller
         }
     }
 
-    function read_item_instruction_file($fname, $date_f, $id)
+    function read_item_instruction_file($fname, $date_f, $id,$pid)
     {
         $path = $this->config->item('file_upload_path') . $fname;
         if ($this->csvimport->get_array($path)) {
@@ -1396,7 +1396,7 @@ class Setting extends MY_Controller
                 $insert_data = array(
                     'name' => $row['Instruction items'],
                     'instruction_id' => $id,
-                    'category' => 'clinical'
+                    'category' => $pid
                 );
                 $this->Setting_model->insert_csv_instruction($insert_data);
             }
@@ -1405,6 +1405,167 @@ class Setting extends MY_Controller
             return false;
         }
 
+    }
+
+///////////////////////////////////////////// medicine import export ////////////////////////////////////////
+    public function export_medicine_items($id){
+        $medicine_items = $this->Setting_model->get_medicine_items($id);
+        if ($medicine_items) {
+           $this->export_medicine_items_csv($medicine_items);
+        }else{
+            $json['error']= true;
+            $json['message'] = 'No item found.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function export_medicine_items_csv($medicine_items){
+       $filename = 'medicine_items_'.date('d-m-Y').'.csv'; 
+       header("Content-Description: File Transfer"); 
+       header("Content-Disposition: attachment; filename=$filename"); 
+       header("Content-Type: application/csv; ");
+       // file creation 
+       $file = fopen('php://output', 'w');
+       $header = array('Medicine items'); 
+       fputcsv($file, $header);
+       foreach ($medicine_items as $key=>$line){ 
+         fputcsv($file,$line); 
+       }
+       fclose($file); 
+       exit;
+    }
+
+    public function import_medicine_items($id){
+        if (isset($_FILES['csv_medicine_file']['name'])) {
+            // total files //
+            $count = count($_FILES['csv_medicine_file']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['csv_medicine_file'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv') {
+                move_uploaded_file($_FILES['csv_medicine_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_item_medicine_file($fname,$date_f,$id);
+                if ($result) {
+                    $json['success']=true;
+                    $json['message'] = 'Successfully Uploaded.';
+                }else{
+                    $json['error']=false;
+                    $json['message']='Seems an error.';
+                }
+     
+            } else {
+                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+            }
+        } else {
+            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+        }
+
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    function read_item_medicine_file($fname, $date_f,$id) {
+        $path = $this->config->item('file_upload_path') . $fname;
+            if ($this->csvimport->get_array($path)) {
+                $csv_array = $this->csvimport->get_array($path);
+                foreach ($csv_array as $row) {
+                    $insert_data = array(
+                        'name'=>$row['Medicine items'],
+                        'medicine_id' => $id
+                    );
+                    $this->Setting_model->insert_csv_medicine($insert_data);
+                }
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function export_advice_items($id){
+        $advice_items = $this->Setting_model->get_advice_items_csv($id);
+        if ($advice_items) {
+           $this->export_advice_items_csv($advice_items);
+        }else{
+            $json['error']= true;
+            $json['message'] = 'No item found.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function export_advice_items_csv($advice_items){
+       $filename = 'advice_items_'.date('d-m-Y').'.csv'; 
+       header("Content-Description: File Transfer"); 
+       header("Content-Disposition: attachment; filename=$filename"); 
+       header("Content-Type: application/csv; ");
+       // file creation 
+       $file = fopen('php://output', 'w');
+       $header = array('Advice items'); 
+       fputcsv($file, $header);
+       foreach ($advice_items as $key=>$line){ 
+         fputcsv($file,$line); 
+       }
+       fclose($file); 
+       exit;
+    }
+
+    public function import_advice_items($id){
+        if (isset($_FILES['csv_advice_file']['name'])) {
+            // total files //
+            $count = count($_FILES['csv_advice_file']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['csv_advice_file'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv') {
+                move_uploaded_file($_FILES['csv_advice_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_item_advice_file($fname,$date_f,$id);
+                if ($result) {
+                    $json['success']=true;
+                    $json['message'] = 'Successfully Uploaded.';
+                }else{
+                    $json['error']=false;
+                    $json['message']='Seems an error.';
+                }
+     
+            } else {
+                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+            }
+        } else {
+            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+        }
+
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    function read_item_advice_file($fname, $date_f,$id) {
+        $path = $this->config->item('file_upload_path') . $fname;
+            if ($this->csvimport->get_array($path)) {
+                $csv_array = $this->csvimport->get_array($path);
+                foreach ($csv_array as $row) {
+                    $insert_data = array(
+                        'name'=>$row['Advice items'],
+                        'advice_id' => $id
+                    );
+                    $this->Setting_model->insert_csv_advice($insert_data);
+                }
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

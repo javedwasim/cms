@@ -1110,6 +1110,8 @@ $(document.body).on('click', '.delete-dosage', function(){
 });
 
 function filter_medicine_item_category(inst_id) {
+    var nurl = window.location.origin+window.location.pathname+'/setting/export_medicine_items/'+inst_id;
+    $("#export_medicine_items").attr("href", nurl);
     $.ajax({
         url: '/cms/medicine/get_medicine_item/'+inst_id,
         type: 'get',
@@ -1854,6 +1856,8 @@ function filter_advice_item_category(advice_id) {
         success: function(response) {
             $('.dashboard-content').empty();
             $('.dashboard-content').append(response.result_html);
+            var nurl = window.location.origin+window.location.pathname+'/setting/export_advice_items/'+response.cat_id;
+            $("#export_advice_items").attr("href", nurl);
         }
     });
     return false;
@@ -2020,3 +2024,21 @@ function showEditLabDetail(editableObj,echo_id,patient_id) {
         }
     });
 }
+$(document.body).on('click', '#echo_detail', function () {
+    var patient_id = $('#label_patient_id').text();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'profile/get_echo_detail',
+        type: 'post',
+        data:  {patient_id:patient_id},
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                $('#echo_detail_container').empty();
+                $('#echo_detail_container').append(response.echo_detail);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+
+});

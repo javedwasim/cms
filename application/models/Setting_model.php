@@ -572,6 +572,46 @@
                 return false;
             }
         }
+
+        public function get_medicine_items($id){
+            $result = $this->db->select('name')
+                                ->where('medicine_id',$id)
+                                ->get('medicine_item');
+            if ($result){
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function insert_csv_medicine($data){
+            $result = $this->db->insert('medicine_item',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function get_advice_items_csv($id){
+            $result = $this->db->select('name')
+                                ->where('advice_id',$id)
+                                ->get('advice_item');
+            if ($result){
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function insert_csv_advice($data){
+            $result = $this->db->insert('advice_item',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
 	}
 
 ?>

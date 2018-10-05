@@ -25,12 +25,12 @@
 		    							<div class="card-body p-0">
 		    								<ul class="list-group" id="main_category_list">
 				    							<li class="list-group-item">MMOD</li>
-				    							<li class="list-group-item">MITRAL VALUW</li>
+				    							<li class="list-group-item">MITRAL VALUW </li>
 				    						</ul>		
 		    							</div>
 		    						</div>
 		    					</div>
-		    					<div class="col-md-7 p-l-0">
+		    					<div class="col-md-7 p-l-5">
                                     <form id="echo_profile_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_echo_data') ?>"
                                           enctype="multipart/form-data">
