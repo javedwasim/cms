@@ -29,8 +29,8 @@
         						</div>
         						<div class="form-group">
         							<label>Medication</label>
-        							<textarea class="form-control" rows="6" name="medication" id="ett_medication"></textarea>
-        						</div>
+<textarea class="form-control" rows="6" name="medication" id="ett_medication"><?php if(isset($details)){ foreach($details as $info){ echo $info['medication']; }}?></textarea>
+                                </div>
         						<div class="form-group">
         							<div class="card">
         								<div class="card-body" style="height: 27vh; overflow-y: scroll;">
@@ -77,16 +77,31 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Resting HR:</label>
-                                                            <input type="text" name="resting_hr" id="resting_hr" class="form-control">    
+                                                            <input type="text" name="resting_hr"
+                                                            <?php if(isset($details)){
+                                                                foreach($details as $info){ ?>
+                                                            value="<?php echo $info['resting_hr']; ?> " <?php } }?>  id="resting_hr" class="form-control">
                                                         </div>    
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Resting BP:</label>
                                                             <div style="display: inline-flex;">
-                                                                <input type="test" name="resting_bp_a" id="resting_bp_a" class="form-control col-md-5">
+                                                                <input type="test" name="resting_bp_a" id="resting_bp_a" 
+                                                                <?php if(isset($details)){
+                                                                foreach($details as $info){ 
+                                                                    $bp = explode('\\', $info['resting_bp'])
+                                                                    ?>
+                                                                    value="<?php echo $bp[0]?>"
+                                                                <?php } }?>
+                                                                class="form-control col-md-5">
                                                                 <label class="">/</label>
-                                                                <input type="text" name="resting_bp_b" id="resting_bp_b" class="form-control col-md-5">
+                                                                <input type="text" name="resting_bp_b"
+                                                                <?php if(isset($details)){
+                                                                foreach($details as $info){ ?>
+                                                                    value="<?php echo $bp[1]?>"
+                                                                <?php } }?>
+                                                                 id="resting_bp_b" class="form-control col-md-5">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -96,14 +111,31 @@
         										<div class="row">
                                                     <div class="col-md-6">
                                                         <label>Max HR:</label>
-                                                        <input type="text" name="max_hr" id="max_hr" class="form-control">
+                                                        <input type="text" name="max_hr"
+                                                        <?php if(isset($details)){
+                                                                foreach($details as $info){ ?>
+                                                                    value="<?php echo $info['max_hr']?>"
+                                                                <?php } }?>
+                                                         id="max_hr" class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>Max BP:</label>
                                                         <div style="display: inline-flex;">
-                                                            <input type="test" name="max_bp_a" id="max_bp_a" class="form-control col-md-5">
+                                                            <input type="test" name="max_bp_a"
+                                                                <?php if(isset($details)){
+                                                                foreach($details as $info){ 
+                                                                    $mbp = explode('\\', $info['max_bp'])
+                                                                    ?>
+                                                                    value="<?php echo $mbp[0]?>"
+                                                                <?php } }?>
+                                                             id="max_bp_a" class="form-control col-md-5">
                                                             <label class="">/</label>
-                                                            <input type="text" name="max_bp_b" id="max_bp_b" class="form-control col-md-5">
+                                                            <input type="text" name="max_bp_b"
+                                                            <?php if(isset($details)){
+                                                                foreach($details as $info){ ?>
+                                                                    value="<?php echo $mbp[1]?>"
+                                                                <?php } }?>
+                                                             id="max_bp_b" class="form-control col-md-5">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -113,14 +145,24 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Max Predicted Target HR:</label>
-                                                            <input type="text" name="max_pre_tar" id="max_pre_tar" class="form-control">
+                                                            <input type="text" name="max_pre_tar"
+                                                            <?php if(isset($details)){
+                                                                foreach($details as $info){ ?>
+                                                                    value="<?php echo $info['max_pre_tar']?>"
+                                                                <?php } }?>
+                                                             id="max_pre_tar" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>% Max Predicted HR:</label>
                                                             <div style="display: inline-flex;">
-                                                                <input type="text" name="max_pre_hr" id="max_pre_hr" class="form-control">
+                                                                <input type="text" name="max_pre_hr"
+                                                                <?php if(isset($details)){
+                                                                foreach($details as $info){ ?>
+                                                                    value="<?php echo $info['max_pre_hr']?>"
+                                                                <?php } }?>
+                                                                 id="max_pre_hr" class="form-control">
                                                                 <label>%</label>
                                                             </div>
                                                         </div>
@@ -129,13 +171,28 @@
         									</div>
         									<div class="col-md-12 m-t-10" style="display: inline-flex;">
         										<label class="m-r-10">HR X BP:</label>
-        										<input type="text" name="hr_bp" id="hr_bp" class="form-control col-md-4">
+        										<input type="text" name="hr_bp" 
+                                                <?php if(isset($details)){
+                                                                foreach($details as $info){ ?>
+                                                                    value="<?php echo $info['hr_bp']?>"
+                                                                <?php } }?>
+                                                id="hr_bp" class="form-control col-md-4">
         										<label class="m-r-10 m-l-20">Mets:</label>
-        										<input type="test" name="mets" id="ett_mets" class="form-control col-md-4">
+        										<input type="test" name="mets" id="ett_mets"
+                                                <?php if(isset($details)){
+                                                    foreach($details as $info){ ?>
+                                                        value="<?php echo $info['mets']?>"
+                                                    <?php } }?>
+                                                 class="form-control col-md-4">
         									</div>
         									<div class="col-md-12 m-t-10" style="display: inline-flex;">
         										<label class="m-r-10">Total exercise time:</label>
-        										<input type="text" name="exercise_time" id="exercise_time" class="form-control col-md-2">
+        										<input type="text" name="exercise_time"
+                                                <?php if(isset($details)){
+                                                    foreach($details as $info){ ?>
+                                                        value="<?php echo $info['exercise_time']?>"
+                                                    <?php } }?>
+                                                 id="exercise_time" class="form-control col-md-2">
         									</div>
         									<div class="col-md-12 m-t-10" style="display: inline-flex;">
         										<label class="m-r-10">Reason of ending test:</label>
@@ -147,10 +204,10 @@
         										</select>
         									</div>
         									<div class="col-md-12">
-        										<textarea class="form-control" id="ett_desc_pro" name="description" rows="7"></textarea>
+<textarea class="form-control" id="ett_desc_pro" name="description" rows="7"><?php if(isset($details)){foreach($details as $info){echo $info['description']; } }?></textarea>
         									</div>
         									<div class="col-md-12">
-        										<textarea class="form-control" id="ett_conc_pro" name="conclusion" rows="5"></textarea>
+<textarea class="form-control" id="ett_conc_pro" name="conclusion" rows="5"><?php if(isset($details)){foreach($details as $info){echo $info['conclusion']; } }?></textarea>
         									</div>
         								</div>
         							</div>

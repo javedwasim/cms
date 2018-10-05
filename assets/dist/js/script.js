@@ -2024,17 +2024,17 @@ function showEditLabDetail(editableObj,echo_id,patient_id) {
         }
     });
 }
-$(document.body).on('click', '#echo_detail', function () {
+$(document.body).on('click', '#ett_details', function () {
     var patient_id = $('#label_patient_id').text();
     $.ajax({
-        url: window.location.origin+window.location.pathname+'profile/get_echo_detail',
+        url: window.location.origin+window.location.pathname+'profile/get_ett_detail',
         type: 'post',
         data:  {patient_id:patient_id},
         cache: false,
         success: function(response) {
             if (response.success) {
                 $('#echo_detail_container').empty();
-                $('#echo_detail_container').append(response.echo_detail);
+                $('#echo_detail_container').append(response.ett_detail);
             } else {
                 toastr["error"](response.message);
             }
@@ -2042,3 +2042,30 @@ $(document.body).on('click', '#echo_detail', function () {
     });
 
 });
+
+function showEditEttDetail(editableObj,ett_id,patient_id) {
+    $.ajax({
+        url: '/cms/profile/patient_ett_edit_detail',
+        type: 'post',
+        data: {detail_id:ett_id,patid:patient_id},
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pat_ett_information').append(response.patient_information);
+                $("#profile_ett_desc_table tbody tr:first").addClass('row_selected')
+                $("#profile_ett_desc_table tbody tr").click(function (e) {
+                    $('#profile_ett_desc_table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+                $("#profile_ett_conc_table tbody tr:first").addClass('row_selected')
+                $("#profile_ett_conc_table tbody tr").click(function (e) {
+                    $('#profile_ett_conc_table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+            }
+        }
+    });
+}

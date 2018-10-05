@@ -613,6 +613,26 @@
             }
         }
 
+        public function get_ett_detail($patient_id){
+            $result = $this->db->select('*')->from('patient_ett_test')->where('patient_id',$patient_id)->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return false;
+            }
+        }
+
+        public function get_ett_detail_by_ids($patient_id,$detail_id){
+            $result = $this->db->select('*')->from('patient_ett_test')->where('patient_id',$patient_id)
+            			->where('id',$detail_id)
+            			->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return false;
+            }
+        }
+
 	}
 
 ?>
