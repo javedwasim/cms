@@ -1856,6 +1856,8 @@ function filter_advice_item_category(advice_id) {
         success: function(response) {
             $('.dashboard-content').empty();
             $('.dashboard-content').append(response.result_html);
+            var nurl = window.location.origin+window.location.pathname+'/setting/export_advice_items/'+response.cat_id;
+            $("#export_advice_items").attr("href", nurl);
         }
     });
     return false;
