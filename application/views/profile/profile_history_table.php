@@ -57,6 +57,7 @@
         $('td.exam_cate').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+        $('#history_id').val(id);
 
         $.ajax({
             url: '/cms/profile/get_history_category_item/'+id,

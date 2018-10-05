@@ -756,6 +756,17 @@ class Profile extends MY_Controller
             set_content_type($json);
         }
     }
+
+    public function save_profile_examination_info()
+    {
+        $data = $this->input->post();
+        $this->Profile_model->save_profile_examination_info($data);
+        $json['success'] = true;
+        $json['message'] = 'Information save successfully!';
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
 }
 
 ?>

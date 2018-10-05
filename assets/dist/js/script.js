@@ -2042,3 +2042,27 @@ $(document.body).on('click', '#echo_detail', function () {
     });
 
 });
+
+$(document.body).on('click', '#save_patient_examination_info', function(){
+    var patient_id = $('#label_patient_id').text();
+    var sd = $('.patient_id').val(patient_id);
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'profile/save_profile_examination_info',
+        type: 'post',
+        data:  $("#history_profile_form").serialize() + "&" + $("#examination_profile_form").serialize()
+                + "&" +$("#investigation_profile_form").serialize() + "&" + $("#medicine_profile_form").serialize()
+                + "&" +$("#dosage_profile_form").serialize() + "&" + $("#advice_profile_form").serialize()
+                + "&" +$("#instruction_profile_form").serialize()+ "&" + $("#next_date_visit_form").serialize(),
+        cache: false,
+        success: function(response) {
+            $('#research_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});

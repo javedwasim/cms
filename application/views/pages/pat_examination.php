@@ -415,11 +415,10 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 p-0">
                                     <form id="history_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
-                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
-                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
+                                        <input type="hidden" name="history_id" id="history_id"/>
                                         <div class="card">
                                             <div class="card-body">
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
@@ -438,11 +437,10 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 p-0">
                                     <form id="examination_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
-                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
                                         <div class="card">
                                             <div class="card-body">
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
@@ -461,11 +459,10 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 p-0">
                                     <form id="investigation_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
-                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
                                         <div class="card">
                                             <div class="card-body">
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
@@ -487,11 +484,10 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 p-0">
                                     <form id="medicine_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
-                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
                                         <div class="card">
                                             <div class="card-body">
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
@@ -503,12 +499,11 @@
                                     </form>
                                 </div>
                                 <div class="col-lg-6 col-md-6 p-0">
-                                    <form id="medicine_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                    <form id="dosage_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
-                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
                                         <div class="card">
                                             <div class="card-body">
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
@@ -523,11 +518,10 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 p-0">
                                     <form id="advice_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
-                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
                                         <div class="card">
                                             <div class="card-body">
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
@@ -546,11 +540,10 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 p-0">
                                     <form id="instruction_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                        <input type="hidden" name="echo_detail_id" class="echo_detail_id"/>
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
-                                        <input type="hidden" name="patient_id" id="patient_id"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
                                         <div class="card">
                                             <div class="card-body">
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
@@ -574,16 +567,20 @@
                     <div class="card">
                     	<div class="card-body">
                     		<div class="row">
-                            	<div class="col-md-7">
-                            		<div class="form-group show-inline m-t-10">
-                            			<label>Nest Visit Date:</label>
-                            			<input type="text" name="" class="app_date form-control col-md-7" value="<?php echo date('d-M-Y') ?>" >
-                            		</div>
-                            	</div>
+                                <form id="next_date_visit_form" method="post" role="form"
+                                      data-action="<?php echo site_url('profile/set_examination_data') ?>"
+                                      enctype="multipart/form-data">
+                                    <div class="col-md-7">
+                                        <div class="form-group show-inline m-t-10">
+                                            <label>Next Visit Date:</label>
+                                            <input type="text" name="next_date_visit_form" id="next_date_visit_form" class="app_date form-control col-md-7" value="<?php echo date('d-M-Y') ?>" >
+                                        </div>
+                                    </div>
+                                </form>
                             	<div class="col-md-5">
                             		<button class="btn btn-primary btn-md waves-effect waves-light" style="padding: 10px 15px;" type="button">Sp. Instructions</button>
                                     <button class="btn btn-info btn-md waves-effect waves-light" style="padding: 10px 10px;" type="button">Lab. Test</button>
-                                    <button class="btn btn-primary btn-md waves-effect waves-light" style="padding: 10px 15px;" type="button">Save</button>
+                                    <button class="btn btn-primary btn-md waves-effect waves-light" id="save_patient_examination_info" style="padding: 10px 15px;" type="button">Save</button>
                             	</div>
                             </div>
                     	</div>
