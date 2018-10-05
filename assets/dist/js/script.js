@@ -1110,6 +1110,8 @@ $(document.body).on('click', '.delete-dosage', function(){
 });
 
 function filter_medicine_item_category(inst_id) {
+    var nurl = window.location.origin+window.location.pathname+'/setting/export_medicine_items/'+inst_id;
+    $("#export_medicine_items").attr("href", nurl);
     $.ajax({
         url: '/cms/medicine/get_medicine_item/'+inst_id,
         type: 'get',

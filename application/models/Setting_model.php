@@ -572,6 +572,17 @@
                 return false;
             }
         }
+
+        public function get_medicine_items($id){
+            $result = $this->db->select('name')
+                                ->where('medicine_id',$id)
+                                ->get('medicine_item');
+            if ($result){
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
 	}
 
 ?>
