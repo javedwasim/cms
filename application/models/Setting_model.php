@@ -552,6 +552,26 @@
                 return false;
             }
         }
+
+        public function get_instruction_items($id){
+            $result = $this->db->select('name')
+                                ->where('instruction_id',$id)
+                                ->get('instruction_item');
+            if ($result){
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function insert_csv_instruction($data){
+            $result = $this->db->insert('instruction_item',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
 	}
 
 ?>

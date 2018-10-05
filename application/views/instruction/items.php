@@ -30,7 +30,7 @@
                 <div class="col-md-6">
                     <form id="isnt_item_form" method="post" role="form" data-action="<?php echo site_url('instruction/add_instruction_item') ?>" enctype="multipart/form-data">
                         <div class="row">
-                            <div class="col-lg-2 col-md-3">
+                            <div class="col-lg-5 col-md-5">
                                 <div class="form-group">
                                     <label>Item Name:</label>
                                     <input type="text" class="form-control" name="name" required maxlength="50">
@@ -38,10 +38,10 @@
                                            value="<?php $scategory = $category; echo $scategory; ?>">
                                 </div>
                             </div>
-                            <div class=" col-lg-3 col-md-4">
+                            <div class=" col-lg-5 col-md-5">
                                 <div class="form-group">
                                     <label>Category:</label>
-                                    <select class="form-control" name="instruction_id" required>
+                                    <select class="form-control" name="instruction_id" required id="instruction_id">
                                         <option value="">Select</option>
                                         <?php foreach ($categories as $category): ?>
                                             <option value="<?php echo $category['id']; ?>"
@@ -51,7 +51,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-4 p-0">
+                            <div class="col-lg-2 col-md-2 p-0">
                                 <div class="form-group m-t-25" style="display: inline-flex;">
                                     <?php if($loggedin_user['is_admin']==1){ ?>
                                         <button type= "submit" class="btn btn-sm btn-primary" id="inst_item_btn">Add</button>

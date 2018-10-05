@@ -297,22 +297,16 @@
 		public function patient_exemination($patient_id){
 		    $data['patient_id'] = $patient_id;
             $instruction_category['category'] = 'special';
-
             $data['examination_category'] = $this->Examination_model->get_examination_categories();
             $data['items'] = $this->Examination_model->get_examination_items();
-
             $data['history_category'] = $this->History_model->get_profile_history();
             $data['history_items'] = $this->History_model->get_history_items();
-
             $data['investigations'] = $this->Investigation_model->get_investigation_categories();
             $data['investigation_items'] = $this->Investigation_model->get_investigation_items();
-
             $data['advices'] = $this->Setting_model->get_advices();
             $data['advice_items'] = $this->Setting_model->get_advice_items();
-
             $data['instructions'] = $this->Instruction_model->get_instruction_categories($instruction_category);
             $data['instruction_item'] = $this->Instruction_model->get_inst_items($instruction_category);
-
             $json['instruction_html'] = $this->load->view('profile/instruction_category_table',$data, true);
             $json['advice_html'] = $this->load->view('profile/advice_category_table',$data, true);
             $json['investigation_html'] = $this->load->view('profile/investigation_category_table', $data, true);
@@ -1252,6 +1246,88 @@
     }
 
 ///////////////////////////////////////////// instruction import export ////////////////////////////////////////
+    public function export_instruction_items($id){
+        $instruction_items = $this->Setting_model->get_instruction_items($id);
+        if ($instruction_items) {
+           $this->export_instruction_items_csv($instruction_items);
+        }else{
+            $json['error']= true;
+            $json['message'] = 'No item found.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function export_instruction_items_csv($instruction_items){
+       $filename = 'instruction_items_'.date('d-m-Y').'.csv'; 
+       header("Content-Description: File Transfer"); 
+       header("Content-Disposition: attachment; filename=$filename"); 
+       header("Content-Type: application/csv; ");
+       // file creation 
+       $file = fopen('php://output', 'w');
+       $header = array('Instruction items'); 
+       fputcsv($file, $header);
+       foreach ($instruction_items as $key=>$line){ 
+         fputcsv($file,$line); 
+       }
+       fclose($file); 
+       exit;
+    }
+
+    public function import_instruction_items($id){
+        if (isset($_FILES['csv_instruction_file']['name'])) {
+            // total files //
+            $count = count($_FILES['csv_instruction_file']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['csv_instruction_file'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv') {
+                move_uploaded_file($_FILES['csv_instruction_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_item_instruction_file($fname,$date_f,$id);
+                if ($result) {
+                    $json['success']=true;
+                    $json['message'] = 'Successfully Uploaded.';
+                }else{
+                    $json['error']=false;
+                    $json['message']='Seems an error.';
+                }
+     
+            } else {
+                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+            }
+        } else {
+            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+        }
+
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    function read_item_instruction_file($fname, $date_f,$id) {
+    $path = $this->config->item('file_upload_path') . $fname;
+        if ($this->csvimport->get_array($path)) {
+            $csv_array = $this->csvimport->get_array($path);
+            foreach ($csv_array as $row) {
+                $insert_data = array(
+                    'name'=>$row['Instruction items'],
+                    'instruction_id' => $id,
+                    'category' => 'clinical'
+                );
+                $this->Setting_model->insert_csv_instruction($insert_data);
+            }
+        return true;
+    }else{
+        return false;
+    }
+
+    }
+
 
 }
 
