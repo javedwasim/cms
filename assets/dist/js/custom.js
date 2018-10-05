@@ -2603,7 +2603,7 @@ $(document.body).on('click', '#delete_profile', function () {
 
 $(document.body).on('click', '#profile_modal_edit', function () {
     var tr = $(this).closest('tr');
-    var profileid = tr.find('.profile_id').text();
+    var profileid = $.trim(tr.find('.profile_id').text());
     $.ajax({
         url: '/cms/profile/update_modal',
         type: 'post',
@@ -3500,6 +3500,5 @@ $(document.body).on('click', '.delete-limiter', function(){
     }
     return false;
 });
-
 
 

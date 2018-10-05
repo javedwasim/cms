@@ -14,6 +14,7 @@ class Profile extends MY_Controller
         $this->load->model('Echo_model');
         $this->load->model('History_model');
         $this->load->model('Examination_model');
+
         $this->load->model('Investigation_model');
 
         $this->load->model('Setting_model');
@@ -181,8 +182,7 @@ class Profile extends MY_Controller
         }
     }
 
-    public function update_modal()
-    {
+    public function update_modal()   {
         $id = $this->input->post('id');
         $data['professions'] = $this->Setting_model->get_professions();
         $data['districts'] = $this->Setting_model->get_districts();
