@@ -1071,8 +1071,172 @@
             return false;
         }
 
-
 	}
+///////////////////////////// examination import export////////////////////////////////////////////
+    public function export_examination_items($id){
+        $examination_items = $this->Setting_model->get_examination_items($id);
+        if ($examination_items) {
+           $this->export_examination_items_csv($examination_items);
+        }else{
+            $json['error']= true;
+            $json['message'] = 'No item found.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function export_examination_items_csv($examination_items){
+       $filename = 'examintaion_items_'.date('d-m-Y').'.csv'; 
+       header("Content-Description: File Transfer"); 
+       header("Content-Disposition: attachment; filename=$filename"); 
+       header("Content-Type: application/csv; ");
+       // file creation 
+       $file = fopen('php://output', 'w');
+       $header = array('Examination items'); 
+       fputcsv($file, $header);
+       foreach ($examination_items as $key=>$line){ 
+         fputcsv($file,$line); 
+       }
+       fclose($file); 
+       exit;
+    }
+
+    public function import_examination_items($id){
+        if (isset($_FILES['csv_exami_file']['name'])) {
+            // total files //
+            $count = count($_FILES['csv_exami_file']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['csv_exami_file'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv') {
+                move_uploaded_file($_FILES['csv_exami_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_item_examination_file($fname,$date_f,$id);
+                if ($result) {
+                    $json['success']=true;
+                    $json['message'] = 'Successfully Uploaded.';
+                }else{
+                    $json['error']=false;
+                    $json['message']='Seems an error.';
+                }
+     
+            } else {
+                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+            }
+        } else {
+            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+        }
+
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    function read_item_examination_file($fname, $date_f,$id) {
+    $path = $this->config->item('file_upload_path') . $fname;
+        if ($this->csvimport->get_array($path)) {
+            $csv_array = $this->csvimport->get_array($path);
+            foreach ($csv_array as $row) {
+                $insert_data = array(
+                    'name'=>$row['Examination items'],
+                    'examination_id' => $id
+                );
+                $this->Setting_model->insert_csv_examination($insert_data);
+            }
+        return true;
+    }else{
+        return false;
+    }
+
+    }
+//////////////////////////////////// investigation import export /////////////////////////////////////
+     public function export_investigation_items($id){
+        $investigation_items = $this->Setting_model->get_investigation_items($id);
+        if ($investigation_items) {
+           $this->export_investigation_items_csv($investigation_items);
+        }else{
+            $json['error']= true;
+            $json['message'] = 'No item found.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function export_investigation_items_csv($investigation_items){
+       $filename = 'investigation_items_'.date('d-m-Y').'.csv'; 
+       header("Content-Description: File Transfer"); 
+       header("Content-Disposition: attachment; filename=$filename"); 
+       header("Content-Type: application/csv; ");
+       // file creation 
+       $file = fopen('php://output', 'w');
+       $header = array('Investigation items'); 
+       fputcsv($file, $header);
+       foreach ($investigation_items as $key=>$line){ 
+         fputcsv($file,$line); 
+       }
+       fclose($file); 
+       exit;
+    }
+
+    public function import_investigation_items($id){
+        if (isset($_FILES['csv_investigation_file']['name'])) {
+            // total files //
+            $count = count($_FILES['csv_investigation_file']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['csv_investigation_file'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv') {
+                move_uploaded_file($_FILES['csv_investigation_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_item_investigation_file($fname,$date_f,$id);
+                if ($result) {
+                    $json['success']=true;
+                    $json['message'] = 'Successfully Uploaded.';
+                }else{
+                    $json['error']=false;
+                    $json['message']='Seems an error.';
+                }
+     
+            } else {
+                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+            }
+        } else {
+            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+        }
+
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    function read_item_investigation_file($fname, $date_f,$id) {
+    $path = $this->config->item('file_upload_path') . $fname;
+        if ($this->csvimport->get_array($path)) {
+            $csv_array = $this->csvimport->get_array($path);
+            foreach ($csv_array as $row) {
+                $insert_data = array(
+                    'name'=>$row['Investigation items'],
+                    'investigation_id' => $id
+                );
+                $this->Setting_model->insert_csv_investigation($insert_data);
+            }
+        return true;
+    }else{
+        return false;
+    }
+
+    }
+
+///////////////////////////////////////////// instruction import export ////////////////////////////////////////
+
 }
 
 ?>

@@ -488,7 +488,8 @@ $(document.body).on('click', '.delete-inst', function(){
 });
 
 function filter_inst_item_category(inst_id,category) {
-
+    var nurl = window.location.origin+window.location.pathname+'/setting/export_instruction_items/'+inst_id;
+    $("#export_instruction_items").attr("href", nurl);
     $.ajax({
         url: '/cms/instruction/get_inst_item',
         type: 'post',
@@ -684,6 +685,8 @@ $(document.body).on('click', '.delete-examination-item', function(){
 });
 
 function filter_examination_item_category(inst_id) {
+    var nurl = window.location.origin+window.location.pathname+'/setting/export_examination_items/'+inst_id;
+    $("#export_examination_items").attr("href", nurl);
     $.ajax({
         url: '/cms/examination/get_examination_item/'+inst_id,
         type: 'get',
@@ -870,6 +873,8 @@ $(document.body).on('click', '.delete-investigation-item', function(){
 });
 
 function filter_investigation_item_category(inst_id) {
+    var nurl = window.location.origin+window.location.pathname+'/setting/export_investigation_items/'+inst_id;
+    $("#export_investigation_items").attr("href", nurl);
     $.ajax({
         url: '/cms/investigation/get_investigation_item/'+inst_id,
         type: 'get',

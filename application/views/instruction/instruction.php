@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
             	<div class="card-header">
-            		Special Instructions
+            		Instructions Settings
             	</div>
                 <div class="card-body">
                     <!-- Nav tabs -->

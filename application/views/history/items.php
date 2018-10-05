@@ -72,27 +72,27 @@
               </form>
             </div>
           </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-4">
-                    <div class="form-group ">
-                        <label>Select Category:</label>
-                        <select class="form-control" name="filter_history_category" onchange="filter_history_item_category(this.value)" id="history_items" required>
-                            <option value="">Select</option>
-                            <option value="0">All</option>
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?php echo $category['id']; ?>"
-                                    <?php echo isset($selected_category)&&($selected_category==$category['id'])?'selected':'' ?>>
-                                    <?php echo $category['name']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3">
-                    <div class="form-group m-t-25">
-                        <a class="btn btn-sm btn-info" href="javascript:void(0)" id="export_history_items" >Export items</a>    
-                    </div>
+          <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <div class="form-group ">
+                    <label>Select Category:</label>
+                    <select class="form-control" name="filter_history_category" onchange="filter_history_item_category(this.value)" id="history_items" required>
+                        <option value="">Select</option>
+                        <option value="0">All</option>
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?php echo $category['id']; ?>"
+                                <?php echo isset($selected_category)&&($selected_category==$category['id'])?'selected':'' ?>>
+                                <?php echo $category['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
+            <div class="col-lg-2 col-md-3">
+                <div class="form-group m-t-25">
+                    <a class="btn btn-sm btn-info" href="javascript:void(0)" id="export_history_items" >Export items</a>    
+                </div>
+            </div>
+          </div>
         </div>
         <div class="card-body history_item_container">
             <?php $this->load->view('history/item_table'); ?>
