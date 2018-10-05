@@ -148,6 +148,17 @@
             }
             return true;
         }
+
+        public function get_medicine_dosage($id){
+            $result = $this->db->select('medicine_dosage.*,dosage.name as dosage_name')->from('medicine_dosage')
+                        ->join('dosage','dosage.id=medicine_dosage.dosage_id','left')
+                        ->where('medicine_dosage.medicine_id',$id)->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
 	}
 
 ?>

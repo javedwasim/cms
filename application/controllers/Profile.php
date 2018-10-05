@@ -15,6 +15,7 @@ class Profile extends MY_Controller
         $this->load->model('History_model');
         $this->load->model('Examination_model');
         $this->load->model('Instruction_model');
+        $this->load->model('Medicine_model');
 
         $this->load->model('Investigation_model');
 
@@ -729,6 +730,22 @@ class Profile extends MY_Controller
 
         $data['items'] = $this->Instruction_model->get_inst_items_by_category($data);
         $json['result_html'] = $this->load->view('profile/instruction_category_item_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_medicine_item($cat_id){
+        $data['items'] = $this->Medicine_model->get_medicine_items_by_category($cat_id);
+        $json['result_html'] = $this->load->view('profile/medicine_category_item_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_medicine_dosage($cat_id){
+        $data['dosages'] = $this->Medicine_model->get_medicine_dosage($cat_id);
+        $json['result_html'] = $this->load->view('profile/medicine_dosage_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
