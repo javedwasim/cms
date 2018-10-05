@@ -2262,6 +2262,9 @@ $(document.body).on('click', '#pat-exemination', function () {
 
                 $('#advice_category_container').empty();
                 $('#advice_category_container').append(response.advice_html);
+
+                $('#instruction_category_container').empty();
+                $('#instruction_category_container').append(response.instruction_html);
             }
         }
     });
