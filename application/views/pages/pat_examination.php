@@ -291,7 +291,7 @@
                         	<div class="row m-0">
                         		<div class="col-md-4 p-0">
 	                        		<div class="card">
-						    			<div class="card-body">
+						    			<div class="card-body" id="medicine_category_container">
 						    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -312,7 +312,7 @@
 	                        	</div>
 	                        	<div class="col-md-3 p-0">
 	                        		<div class="card">
-	                        			<div class="card-body">
+	                        			<div class="card-body" id="medicine_category_item_container">
 	                        				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -325,22 +325,6 @@
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>CVS</td>
 						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>GPE</td>
-						                            </tr>
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -348,7 +332,7 @@
 	                        	</div>
 	                        	<div class="col-md-5 p-0">
 	                        		<div class="card">
-	                        			<div class="card-body">
+	                        			<div class="card-body" id="medicine_dosage_container">
 	                        				<table class="table table-bordered nowrap responsive right-table" cellspacing="0" id="" width="100%" >
 						                       <thead>
 						                        <tr>
@@ -359,18 +343,7 @@
 						                            <tr>
 						                                <td>CVS</td>
 						                            </tr>
-						                            <tr>
-						                                <td>Chest</td>
-						                            </tr>
-						                            <tr>
-						                                <td>Abdomen</td>
-						                            </tr>
-						                            <tr>
-						                                <td>CNS</td>
-						                            </tr>
-						                            <tr>
-						                                <td>GPE</td>
-						                            </tr>
+
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -524,37 +497,8 @@
                     <div class="card" style="margin-bottom: 0px !important;">
                         <div class="card-header">Patient Information</div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12 col-lg-12 pt-info">
-                                    <strong>ID:</strong>
-                                    <label>1233</label>
-                                    <strong>Name:</strong>
-                                    <label>Ali Hamza</label>
-                                    <strong>S/W/o:</strong>
-                                    <label>Hamza ali</label>
-                                    <strong>Age:</strong>
-                                    <label>18 Years</label>
-                                    <strong>Sex:</strong>
-                                    <label>Male</label>
-                                    <strong>Profession:</strong>
-                                    <label>Farmar</label>
-                                    <strong>HT:</strong>
-                                    <label>1233</label>
-                                    <strong>WT:</strong>
-                                    <label>Ali Hamza</label>
-                                    <strong>BMI:</strong>
-                                    <label>26.345</label>
-                                    <strong>BSA:</strong>
-                                    <label>1.324</label>
-                                    <strong>Contact:</strong>
-                                    <label>0323435454</label>
-                                    <strong>Email:</strong>
-                                    <label>test@gmail.com</label>
-                                    <strong>Address:</strong>
-                                    <label>Chak no.13 gujiyani , teh/chistian.</label>
-                                    <strong>District:</strong>
-                                    <label>Bahawalnagar</label>
-                                </div>
+                            <div class="row" id="pat_ett_information">
+
                             </div>
                         </div>
                     </div>

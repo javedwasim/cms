@@ -2238,11 +2238,11 @@ $(document.body).on('click', '#pat-exemination', function () {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
-                $('.datatables').DataTable({
-                    "info": true,
-                    "paging": false,
-                    "searching": false
-                });
+                // $('.datatables').DataTable({
+                //     "info": true,
+                //     "paging": false,
+                //     "searching": false
+                // });
                 ///////////////// initilize datatable //////////////
                 $('#permissions-table').DataTable({
                     "scrollX": true
@@ -2265,6 +2265,12 @@ $(document.body).on('click', '#pat-exemination', function () {
 
                 $('#instruction_category_container').empty();
                 $('#instruction_category_container').append(response.instruction_html);
+
+                $('#medicine_category_container').empty();
+                $('#medicine_category_container').append(response.medicine_html);
+
+                $('#pat_ett_information').empty();
+                $('#pat_ett_information').append(response.patient_information);
             }
         }
     });

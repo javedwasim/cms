@@ -17,6 +17,8 @@
             $this->load->model('Examination_model');
             $this->load->model('Investigation_model');
             $this->load->model('Instruction_model');
+            $this->load->model('Medicine_model');
+            $this->load->model('Profile_model');
 		}
 
 		public function profession(){
@@ -313,10 +315,17 @@
             $data['instructions'] = $this->Instruction_model->get_instruction_categories($instruction_category);
             $data['instruction_item'] = $this->Instruction_model->get_inst_items($instruction_category);
 
+            $data['medicines'] = $this->Medicine_model->get_medicine_categories();
+
+            $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
+
+
+            $json['medicine_html'] = $this->load->view('profile/medicine_category_table', $data, true);
             $json['instruction_html'] = $this->load->view('profile/instruction_category_table',$data, true);
             $json['advice_html'] = $this->load->view('profile/advice_category_table',$data, true);
             $json['investigation_html'] = $this->load->view('profile/investigation_category_table', $data, true);
             $json['history_table'] = $this->load->view('profile/profile_history_table', $data, true);
+            $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
             $json['examination_table'] = $this->load->view('profile/profile_examination_table', $data, true);
 			$json['result_html'] = $this->load->view('pages/pat_examination', $data, true);
             if ($this->input->is_ajax_request()) {
