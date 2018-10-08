@@ -648,15 +648,16 @@ class Profile_model extends CI_Model
 
     public function save_profile_examination_info($data)
     {
-        print_r($data); die();
+        print_r($data);
+        die();
         $patient_id = $data['patient_id'];
         $next_visit_date = $data['next_date_visit_form'];
-        $this->db->insert('profile_examination_detail', array('patient_id' => $patient_id,'next_visit_date'));
+        $this->db->insert('profile_examination_detail', array('patient_id' => $patient_id, 'next_visit_date'));
         $examination_detail_id = $this->db->insert_id();
 
         if (isset($data['history_item'])) {
             $history_item = $data['history_item'];
-            $this->db->insert('profile_examination_history',array('examination_detail_id' => $examination_detail_id,'patient_id' => $patient_id, 'history_value' => $history_item));
+            $this->db->insert('profile_examination_history', array('examination_detail_id' => $examination_detail_id, 'patient_id' => $patient_id, 'history_value' => $history_item));
         }
 
         if (isset($data['examination_item'])) {
@@ -665,6 +666,7 @@ class Profile_model extends CI_Model
                 array('examination_detail_id' => $examination_detail_id,
                     'patient_id' => $patient_id, 'examination_value' => $examination_item));
         }
+
 
         if (isset($data['investigation_item'])) {
             $investigation_item = $data['investigation_item'];
@@ -675,18 +677,38 @@ class Profile_model extends CI_Model
 
         if (isset($data['medicine_value']) && !empty($data['medicine_value'])) {
             $medicine_value = $data['medicine_value'];
-            foreach ($medicine_value as $value){
+            foreach ($medicine_value as $value) {
                 $this->db->insert('examination_detail_id',
                     array('profile_examination_medicine' => $examination_detail_id,
                         'patient_id' => $patient_id, 'medicine_value' => $value['medicine_value']));
             }
-
         }
-
-
 
     }
 
+    public function get_ett_detail($patient_id)
+    {
+        $result = $this->db->select('*')->from('patient_ett_test')->where('patient_id', $patient_id)->get();
+        if ($result) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function get_ett_detail_by_ids($patient_id, $detail_id)
+    {
+        $result = $this->db->select('*')->from('patient_ett_test')->where('patient_id', $patient_id)
+            ->where('id', $detail_id)
+            ->get();
+        if ($result) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
+
 }
+
 
 ?>

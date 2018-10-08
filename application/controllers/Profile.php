@@ -604,8 +604,7 @@ class Profile extends MY_Controller
 
     }
 
-    public function get_echo_detail()
-    {
+    public function get_echo_detail(){
         $patient_id = $this->input->post('patient_id');
         $data['details'] = $this->Profile_model->get_echo_detail($patient_id);
         //print_r($data['details']);
@@ -628,7 +627,6 @@ class Profile extends MY_Controller
         $data = $this->input->post();
         $patient_id = $data['patid'];
         $detail_id = $data['detail_id'];
-
         $data['rights'] = $this->session->userdata('other_rights');
         $id = $this->input->post('patid');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
@@ -638,7 +636,6 @@ class Profile extends MY_Controller
         $data['measurements'] = $this->Profile_model->get_patient_measurement($patient_id, $detail_id);
         $data['findings'] = $this->Profile_model->get_patient_echo_findings($patient_id, $detail_id);
         $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id, $detail_id);
-
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
         $json['result_html'] = $this->load->view('pages/patient_echo_test', $data, true);
@@ -757,16 +754,59 @@ class Profile extends MY_Controller
         }
     }
 
+
+    public function get_ett_detail(){
+        $patient_id = $this->input->post('patient_id');
+        $data['details'] = $this->Profile_model->get_ett_detail($patient_id);
+        //print_r($data['details']);
+        if ($data) {
+            $json['success'] = true;
+            $json['ett_detail'] = $this->load->view('profile/ett_detail_table', $data, true);
+
+        } else {
+            $json['error'] = true;
+            $json['message'] = "seem to be an error.";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
+    public function patient_ett_edit_detail()
+    {
+        $data = $this->input->post();
+        $patient_id = $data['patid'];
+        $detail_id = $data['detail_id'];
+        $data['rights'] = $this->session->userdata('other_rights');
+        $data['test_reasons'] = $this->ETT_model->get_test_reasons();
+        $data['ending_reasons'] = $this->ETT_model->get_ending_reasons();
+        $data['descriptions'] = $this->ETT_model->get_descriptions();
+        $data['conclusions'] = $this->ETT_model->get_conclusions();
+        $data['protocols'] = $this->ETT_model->get_protocol();
+        $data['details'] = $this->Profile_model->get_ett_detail_by_ids($patient_id,$detail_id);
+        $data['rights'] = $this->session->userdata('other_rights');
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
+        $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
+        $json['result_html'] = $this->load->view('pages/pat_ett_test', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
     public function save_profile_examination_info()
     {
         $data = $this->input->post();
         $this->Profile_model->save_profile_examination_info($data);
         $json['success'] = true;
         $json['message'] = 'Information save successfully!';
+
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
     }
+
+
 }
 
 ?>
