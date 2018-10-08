@@ -649,9 +649,9 @@ class Profile_model extends CI_Model
     public function save_profile_examination_info($data)
     {
         print_r($data); die();
-
         $patient_id = $data['patient_id'];
-        $this->db->insert('profile_examination_detail', array('patient_id' => $patient_id));
+        $next_visit_date = $data['next_date_visit_form'];
+        $this->db->insert('profile_examination_detail', array('patient_id' => $patient_id,'next_visit_date'));
         $examination_detail_id = $this->db->insert_id();
 
         if (isset($data['history_item'])) {
@@ -666,67 +666,25 @@ class Profile_model extends CI_Model
                     'patient_id' => $patient_id, 'examination_value' => $examination_item));
         }
 
+        if (isset($data['investigation_item'])) {
+            $investigation_item = $data['investigation_item'];
+            $this->db->insert('examination_detail_id',
+                array('examination_detail_id' => $examination_detail_id,
+                    'patient_id' => $patient_id, 'investigation_value' => $investigation_item));
+        }
+
+        if (isset($data['medicine_value']) && !empty($data['medicine_value'])) {
+            $medicine_value = $data['medicine_value'];
+            foreach ($medicine_value as $value){
+                $this->db->insert('examination_detail_id',
+                    array('profile_examination_medicine' => $examination_detail_id,
+                        'patient_id' => $patient_id, 'medicine_value' => $value['medicine_value']));
+            }
+
+        }
 
 
 
-//            $disease_id = $data['disease_id'];
-//            if(isset($data['echo_detail_id_mmode'])&&!empty($data['echo_detail_id_mmode'])){
-//                $echo_deatil_id = $data['echo_detail_id_mmode'];
-//            }else{
-//                $this->db->insert('profile_echo_detail',array('patient_id'=>$patient_echo_id));
-//                $echo_deatil_id = $this->db->insert_id();
-//            }
-//            $this->db->delete('profile_echo_measurement', array('patient_id' => $patient_echo_id,'echo_detail_id'=>$echo_deatil_id));
-//            $this->db->delete('profile_echo_findings', array('patient_id' => $patient_echo_id,'echo_detail_id'=>$echo_deatil_id));
-//            $this->db->delete('profile_echo_diagnosis', array('patient_id' => $patient_echo_id,'echo_detail_id'=>$echo_deatil_id));
-//
-//            for ($i=0;$i<count($data['item_id']);$i++){
-//                $item_id = $data['item_id'];
-//                $item_value = $data['item_value'];
-//                $measurement_value = $data['measurement_value'];
-//
-//                $this->db->insert('profile_echo_measurement',
-//                    array(
-//                        'echo_detail_id'=>$echo_deatil_id,
-//                        'patient_id'=>$patient_echo_id,
-//                        'item_id'=>$item_id[$i],
-//                        'item_value'=>$item_value[$i],
-//                        'measurement_value'=>$measurement_value[$i],
-//                    ));
-//            }
-//
-//            for ($i=0;$i<count($data['disease_finding_id']);$i++){
-//                $disease_finding_id = $data['disease_finding_id'];
-//                $disease_finding_value = $data['disease_finding_value'];
-//                $finding_structure_id = $data['finding_structure_id'];
-//                $this->db->insert('profile_echo_findings',
-//                    array(
-//                        'echo_detail_id'=>$echo_deatil_id,
-//                        'patient_id'=>$patient_echo_id,
-//                        'finding_id'=>$disease_finding_id[$i],
-//                        'finding_value'=>$disease_finding_value[$i],
-//                        'disease_id'=>$disease_id,
-//                        'disease_id'=>$disease_id,
-//                        'structure_id'=>$finding_structure_id[$i],
-//                    ));
-//            }
-//
-//            for ($i=0;$i<count($data['disease_diagnosis_id']);$i++){
-//                $disease_diagnosis_id = $data['disease_diagnosis_id'];
-//                $disease_diagnosis_value = $data['disease_diagnosis_value'];
-//                $diagnose_structure_id = $data['diagnose_structure_id'];
-//                $this->db->insert('profile_echo_diagnosis',
-//                    array(
-//                        'echo_detail_id'=>$echo_deatil_id,
-//                        'patient_id'=>$patient_echo_id,
-//                        'diagnosis_id'=>$disease_diagnosis_id[$i],
-//                        'diagnosis_value'=>$disease_diagnosis_value[$i],
-//                        'disease_id'=>$disease_id,
-//                        'structure_id'=>$diagnose_structure_id[$i],
-//                    ));
-//            }
-//
-//            return $patient_echo_id;
     }
 
 }
