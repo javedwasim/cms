@@ -746,6 +746,14 @@ class Profile_model extends CI_Model
             }
         }
 
+        public function get_update_protocol_details_by_id($p_id,$detailid){
+            $result = $this->db->select('*')->from('patient_ett_test_protocol')->where('protocol_id',$p_id)->where('patient_ett_test_id',$detailid)->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
 
 
   

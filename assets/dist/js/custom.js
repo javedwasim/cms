@@ -3420,9 +3420,11 @@ $(document.body).on('click', '#reset_profile_filter', function () {
 
 
 function profile_protocol_details(protocol_id){
+    var detailid = $('#ett_pat_detail_id').val();
     $.ajax({
         url: '/cms/profile/get_profile_protocol_details/'+protocol_id,
-        type: 'get',
+        type: 'post',
+        data: {detailid:detailid},
         cache: false,
         success: function(response) {
             $('.profile_protocol_table').remove();

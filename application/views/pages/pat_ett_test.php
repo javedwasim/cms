@@ -2,6 +2,13 @@
     <div class="row p-t-10 m-0">
         <form id="ett_protocol_form">
             <input type="hidden" name="pat_id" value="" id="ett_pat_id">
+            <input type="hidden" name="details_id" value="<?php
+            if(isset($details)){
+                foreach($details as $info){
+                    echo $info['id'];
+                }
+            }
+            ?>" id="ett_pat_detail_id">
         	<div class="col-md-12 p-l-0 p-r-0">
         		<div class="card" style="margin-bottom:0px !important; ">
     	    		<div class="card-body">
