@@ -21,4 +21,3 @@
     	<td class="ett_protocol_condition" ><input type="text" name="stage_condition[]" value=""></td>
     </tr>
 <?php }?>
-	
