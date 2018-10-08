@@ -2043,7 +2043,6 @@ $(document.body).on('click', '#ett_details', function () {
 
 });
 
-<<<<<<< HEAD
 function showEditEttDetail(editableObj,ett_id,patient_id) {
     $.ajax({
         url: '/cms/profile/patient_ett_edit_detail',
@@ -2070,7 +2069,6 @@ function showEditEttDetail(editableObj,ett_id,patient_id) {
         }
     });
 }
-=======
 $(document.body).on('click', '#save_patient_examination_info', function(){
     var patient_id = $('#label_patient_id').text();
     var sd = $('.patient_id').val(patient_id);
@@ -2094,4 +2092,4 @@ $(document.body).on('click', '#save_patient_examination_info', function(){
     });
     return false;
 });
->>>>>>> b858d3c089efb6643fa0dfd498b82d536457a5e0
+

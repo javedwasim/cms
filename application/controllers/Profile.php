@@ -806,6 +806,17 @@ class Profile extends MY_Controller
         }
     }
 
+    public function get_profile_protocol_details($p_id)
+    {
+        $data['protocol_details'] = $this->ETT_model->get_protocol_details_by_id($p_id);
+        $data['selected_category'] = $p_id;
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('profile/protocol_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
 
 }
 
