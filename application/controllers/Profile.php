@@ -285,7 +285,6 @@ class Profile extends MY_Controller
     {
         $data = $this->input->post();
         if ($data['details_id']=='') {
-            echo "if"; die();
             $patientid = $data['pat_id'];
             $testreason = $data['test_reason'];
             $medication = $data['medication'];
@@ -338,7 +337,7 @@ class Profile extends MY_Controller
                 $json['error'] = true;
             }
         }else{
-            $data['details_id'];
+            $detailid = $data['details_id'];
             $patientid = $data['pat_id'];
             $testreason = $data['test_reason'];
             $medication = $data['medication'];
@@ -361,7 +360,6 @@ class Profile extends MY_Controller
             $ettprotocolid = $data['protocol_id'];
             $sig = $data['doc_sig'];
             $data_array = array(
-                'patient_id' => $patientid,
                 'test_reason' => $testreason,
                 'medication' => $medication,
                 'description' => $description,
@@ -379,6 +377,21 @@ class Profile extends MY_Controller
                 'protocol_id' => $ettprotocolid,
                 'doc_sig' => $sig
             );
+            $update_result = $this->Profile_model->update_ett_test($data_array,$detailid);
+            if ($update_result) {
+                $result = $this->Profile_model->update_ett_protocols($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = 'Successfully updated.';
+                }else{
+                    $json['error'] = true;
+                    $json['message'] = 'Seems an error.';
+                }
+            }else{
+                $json['error'] = true;
+                $json['message'] = 'Seems an error.';
+            }
+            
         }
 
         if ($this->input->is_ajax_request()) {

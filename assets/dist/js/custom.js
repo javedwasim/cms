@@ -3512,4 +3512,24 @@ $(document.body).on('click', '.delete-limiter', function(){
     return false;
 });
 
+function printresearchData()
+{
+    newWin= window.open("");
+    newWin.document.write( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">" );
+    newWin.document.write( "<html>" );
+    newWin.document.write( "<head>" );
+    newWin.document.write( "<meta charset='utf-8'><style rel='stylesheet'>td{text-align:center;}</style>" );
+    newWin.document.write( "</head>" );
+    newWin.document.write( "<body style='-webkit-print-color-adjust: exact !important;'>" );
+    newWin.document.write( "<div style='width:90%; margin:0 auto;'><h2>Shahadat Clinic</h2>" );
+    newWin.document.write( "<table border='1' border-collapse: collapse; width='100%' ><thead><tr><th style='border:none;background:#000;color:#fff;'></th><th style='background:#000;color:#fff;'>ProfileID</th><th style='border:none;background:#000;color:#fff;'>PatientName</th><th style='border:none;background:#000;color:#fff;'>Father/Husband Name</th><th style='border:none;background:#000;color:#fff;'>Height</th><th style='border:none;background:#000;color:#fff;'>Weight</th><th style='border:none;background:#000;color:#fff;'>BSA</th><th style='border:none;background:#000;color:#fff;'>BMI</th><th style='border:none;background:#000;color:#fff;'>Contact</th><th style='border:none;background:#000;color:#fff;'>Profession</th><th style='border:none;background:#000;color:#fff;'>District</th></tr></thead>" );
+    newWin.document.write(divToPrint.outerHTML);
+    newWin.document.write( "</table>" );
+    newWin.document.write( "</div>" );
+    newWin.document.write( "</body>" );
+    newWin.document.write( "</html>" );
+    newWin.print();
+    newWin.close();
+}
+
 

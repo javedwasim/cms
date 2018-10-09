@@ -179,7 +179,8 @@
                             </div>
                             <div class="col-md-5 col-lg-4 m-t-20">
                                 <button type="reset" class="btn btn-primary" id="reset_research">Reset</button>
-                                <button class="btn btn-primary">View/Print</button>
+                                <a class="btn btn-primary" href="javascript:void(0)" onclick="printresearchData()">View/Print</a>
+                                <a href="javascript:void(0)" class="btn btn-default" onclick="get_manage_reasearch('manage_research')">Refresh</a>
                             </div>
                         </div>
                     </form>

@@ -561,7 +561,7 @@ class Profile_model extends CI_Model
                         'hr' => $hr[$j],
                         'sbp' => $sbp[$j],
                         'dbp' => $dbp[$j],
-                        'protocol_condition' => $condition[$j],
+                        'protocol_condition' => $condition[$j]
                     ));
 
             }
@@ -684,6 +684,7 @@ class Profile_model extends CI_Model
             }
         }
 
+    }
 
         public function get_update_protocol_details_by_id($p_id,$detailid){
             $result = $this->db->select('*')->from('patient_ett_test_protocol')->where('protocol_id',$p_id)->where('patient_ett_test_id',$detailid)->get();
@@ -693,7 +694,6 @@ class Profile_model extends CI_Model
                 return array();
             }
         }
-    }
 
     public function get_ett_detail($patient_id)
     {
@@ -714,6 +714,59 @@ class Profile_model extends CI_Model
             return $result->result_array();
         } else {
             return false;
+        }
+    }
+
+    public function update_ett_test($data,$id)
+    {
+        $result = $this->db->where('id',$id)->update('patient_ett_test', $data);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function update_ett_protocols($data)
+    {	$date = date('Y-m-d H:i:s');
+        if (isset($data['details_id']) && !empty($data['details_id'])) {
+        	$result = $this->db->delete('patient_ett_test_protocol', array('patient_ett_test_id' => $data['details_id']));
+	        if ($result) {
+	            $name = $data['stage_name'];
+	            $speed = $data['stage_speed'];
+	            $grade = $data['stage_grade'];
+	            $time = $data['stage_time'];
+	            $mets = $data['stage_mets'];
+	            $hr = $data['stage_hr'];
+	            $sbp = $data['stage_sbp'];
+	            $dbp = $data['stage_dbp'];
+	            $condition = $data['stage_condition'];
+	            for ($j = 0; $j < count($name); $j++) {
+	                $result = $this->db->insert('patient_ett_test_protocol',
+	                    array(
+	                        'patient_ett_test_id' => $data['details_id'],
+	                        'patient_id' => $data['pat_id'],
+	                        'protocol_id' => $data['protocol_id'],
+	                        'stage_name' => $name[$j],
+	                        'speed' => $speed[$j],
+	                        'grade' => $grade[$j],
+	                        'stage_time' => date('h:i', strtotime($time[$j])),
+	                        'mets' => $mets[$j],
+	                        'hr' => $hr[$j],
+	                        'sbp' => $sbp[$j],
+	                        'dbp' => $dbp[$j],
+	                        'protocol_condition' => $condition[$j]
+	                    ));
+
+	            }
+	            if ($result) {
+	            	return true;
+	            }else{
+	            	return false;
+	            }
+	        } else {
+	            return false;
+	        }
         }
     }
 

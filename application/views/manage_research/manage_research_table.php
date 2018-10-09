@@ -15,10 +15,10 @@
                 <th>District</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="bodypro">
             <?php foreach ($profiles as $key) { ?>
                 <tr>
-                    <td style="width: 30px;">
+                    <td style="width: 30px;border:none;">
                         <a class="delete-signature btn btn-danger btn-xs" href="javascript:void(0)" title="delete" data-href="<?php echo site_url('manage_research/delete_research_profile/') . $key['id'] ?>">
                            <i class="fa fa-trash" title="Delete"></i>
                         </a>
