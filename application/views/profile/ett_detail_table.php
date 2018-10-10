@@ -14,8 +14,8 @@
                     <td style="padding: 0px;">
                         <button class="btn btn-info btn-xs" onClick="showEditEttDetail(this,'<?php echo $detail['id']; ?>','<?php echo $detail['patient_id']; ?>');" style="margin: 0px;"><i class="fa fa-edit" id="echo_detail_btn"></i></button>
                     </td>
-                    <td style="width: 20px"><i class="fa fa-print"></i></td>
-                    <td style="width: 50px;"><?php echo date('Y-m-d',strtotime($detail['created_at'])) ?></td>
+                    <td style="width: 20px"><a class="btn btn-success btn-xs" onClick="printEtt(this,'<?php echo $detail['id']; ?>','<?php echo $detail['patient_id']; ?>');" style="margin: 0px;" href="javascript:void(0)"><i class="fa fa-print"></i></a></td>
+                    <td style="width: 100px;"><?php echo date('Y-m-d',strtotime($detail['created_at'])) ?></td>
                 </tr>
         <?php endforeach; ?>
     </tbody>

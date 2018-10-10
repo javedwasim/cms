@@ -3532,4 +3532,14 @@ function printresearchData()
     newWin.close();
 }
 
+ function printEtt(editableObj,ett_id,patient_id) {
+
+    var win = window.open('/cms/print_profiles/print_ett/?testid=' + ett_id +'&patid='+patient_id, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
+}
 

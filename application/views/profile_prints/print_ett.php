@@ -142,7 +142,66 @@
             }
 
         }
+        .padding {
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
         
+</style>
+<style type="text/css" media="print">
+    .row {
+        width: 100%;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .col-md-12{
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+
+    }
+    .col-md-6{
+        width: 50%;
+        float: left;
+    }
+    .offset-1 {
+        margin-left: 8.333333%;
+    }
+    .col-md-2 {
+        max-width: 16.666667%;
+        float: left;
+    }
+    .col-md-5 {
+        float: left;    
+        max-width: 41.666667%;
+    }
+    .col-md-10 {
+        -ms-flex: 0 0 83.333333%;
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%;
+      }
+    .col-md-4 {
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    .col-md-8 {
+        -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+    .padding {
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 </style>
 </head>
 <body class="A4 " >
@@ -157,17 +216,17 @@
             <div class="row border border-dark" style="width: 100%;">
                 <div class="col-md-6">
                     <label>Ref.ID</label>
-                    <strong>1728</strong>
+                    <strong><?php echo $patient_info->id ?></strong>
                 </div>
                 <div class="col-md-2">
-                    <label>50 Years</label>
-                    <label>Male</label>
+                    <label><?php echo $patient_info->pat_age ?></label>
+                    <label><?php echo $patient_info->pat_sex ?></label>
                 </div>
                 <div class="col-md-2">
                     
                 </div>
                 <div class="col-md-2">
-                    <label>Thursday 27</label>
+                    <label><?php echo date('d-M-Y');?></label>
                 </div>
             </div>
             <br>
@@ -175,44 +234,88 @@
                 <div class="col-md-6">
                     <div>
                         <h3><u>Indication of Exercise:</u></h3>
-                        <strong>sdfsfsdfsdfsdf</strong>
+                        <?php if(isset($testreason)){?>
+                            <strong><?php echo $testreason; ?></strong>
+                        <?php }?>
                     </div>
                     <div class="">
                         <h3><u>Medication</u></h3>
-                        <strong>lsdjflksjfsdkljfselkfj</strong>
+                        <?php foreach($test_details as $key){?>
+                            <strong><?php echo $key['medication']; ?></strong>
+                        <?php }?>
                     </div>
                     <div class="">
                         <h3><u>Reason for Ending Test</u></h3>
-                        <strong>l;kksjjf'lskjfdf</strong>
+                        <?php if(isset($endingtestreason)){?>
+                            <strong><?php echo $endingtestreason; ?></strong>
+                        <?php }?>
                     </div>
                     <div >
                         <h3><u>Protocol:</u></h3>
-                        <strong>testssfdd</strong>
+                        <?php if(isset($protocol)){?>
+                            <strong><?php echo $protocol; ?></strong>
+                        <?php }?>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6 border border-dark p-0">
-                            <div class="mb-1 border-bottom border-dark">Resting HR:</div>
-                            <div class="mb-1 border-bottom border-dark">Resting BP:</div>
-                            <div class="mb-1 border-bottom border-dark">Max Predicted Target HR:</div>
-                            <div class="mb-1 border-bottom border-dark">Max HR:</div>
-                            <div class="mb-1 border-bottom border-dark">Max Predicted HR Achived:</div>
-                            <div class="mb-1 border-bottom border-dark">Max BP:</div>
-                            <div class="mb-1 border-bottom border-dark">HR x BP:</div>
-                            <div class="mb-1 border-bottom border-dark">Total Exercise Time:</div>
-                            <div>Mets:</div>
+                            <div class="mb-1 border-bottom border-dark padding">Resting HR:</div>
+                            <div class="mb-1 border-bottom border-dark padding">Resting BP:</div>
+                            <div class="mb-1 border-bottom border-dark padding">Max Predicted Target HR:</div>
+                            <div class="mb-1 border-bottom border-dark padding">Max HR:</div>
+                            <div class="mb-1 border-bottom border-dark padding">Max Predicted HR Achived:</div>
+                            <div class="mb-1 border-bottom border-dark padding">Max BP:</div>
+                            <div class="mb-1 border-bottom border-dark padding">HR x BP:</div>
+                            <div class="mb-1 border-bottom border-dark padding">Total Exercise Time:</div>
+                            <div class="padding">Mets:</div>
                         </div>
                         <div class="col-md-6 border border-dark p-0">
-                            <div class="mb-1 border-bottom border-dark">3(bpm)</div>
-                            <div class="mb-1 border-bottom border-dark">4(mmHg)</div>
-                            <div class="mb-1 border-bottom border-dark">5(bpm)</div>
-                            <div class="mb-1 border-bottom border-dark">34(bpm)</div>
-                            <div class="mb-1 border-bottom border-dark">34(%)</div>
-                            <div class="mb-1 border-bottom border-dark">34(mmHg)</div>
-                            <div class="mb-1 border-bottom border-dark">34(bpm x mmHg)</div>
-                            <div class="mb-1 border-bottom border-dark">43(minuts)</div>
-                            <div>54(ml O2/kg/min)</div>
+                            <div class="mb-1 border-bottom border-dark padding">
+                                <?php foreach($test_details as $key){?>
+                                        <strong><?php echo $key['resting_hr']; ?></strong>
+                                <?php }?>(bpm)
+                            </div>
+                            <div class="mb-1 border-bottom border-dark padding">
+                                <?php foreach($test_details as $key){?>
+                                        <strong><?php echo $key['resting_bp']; ?></strong>
+                                <?php }?>(ml O2/kg/min)
+                            </div>
+                            <div class="mb-1 border-bottom border-dark padding">
+                                <?php foreach($test_details as $key){?>
+                                        <strong><?php echo $key['max_pre_tar']; ?></strong>
+                                <?php }?>(mmHg)
+                            </div>
+                            <div class="mb-1 border-bottom border-dark padding">
+                                <?php foreach($test_details as $key){?>
+                                        <strong><?php echo $key['max_hr']; ?></strong>
+                                <?php }?>(bpm)
+                            </div>
+                            <div class="mb-1 border-bottom border-dark padding">
+                                <?php foreach($test_details as $key){?>
+                                        <strong><?php echo $key['max_pre_hr']; ?></strong>
+                                <?php }?>(bpm)
+                            </div>
+                            <div class="mb-1 border-bottom border-dark padding">
+                                <?php foreach($test_details as $key){?>
+                                        <strong><?php echo $key['max_bp']; ?></strong>
+                                <?php }?>(%)
+                            </div>
+                            <div class="mb-1 border-bottom border-dark padding">
+                                <?php foreach($test_details as $key){?>
+                                        <strong><?php echo $key['hr_bp']; ?></strong>
+                                <?php }?>(mmHg)
+                            </div>
+                            <div class="mb-1 border-bottom border-dark padding">
+                                <?php foreach($test_details as $key){?>
+                                        <strong><?php echo $key['exercise_time']; ?></strong>
+                                <?php }?>(bpm x mmHg)
+                            </div>
+                            <div class="padding">
+                                <?php foreach($test_details as $key){?>
+                                        <strong><?php echo $key['mets']; ?></strong>
+                                <?php }?>(minuts)
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -235,17 +338,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($protocol_details as $key){?>
                             <tr>
-                                <td>Rest</td>
-                                <td>34</td>
-                                <td>23</td>
-                                <td>32</td>
-                                <td>34</td>
-                                <td>43</td>
-                                <td>23</td>
-                                <td>45</td>
-                                <td>53</td>
+                                <td><?php echo $key['stage_name']; ?></td>
+                                <td><?php echo $key['speed']; ?></td>
+                                <td><?php echo $key['grade']; ?></td>
+                                <td><?php echo date('h:i', strtotime($key['stage_time'])); ?></td>
+                                <td><?php echo $key['mets']; ?></td>
+                                <td><?php echo $key['hr']; ?></td>
+                                <td><?php $sbp = $key['sbp']; $dbp = $key['dbp']; echo $result = $sbp/$dbp ?></td>
+                                <td><?php $sbp = $key['sbp']; $dbp = $key['dbp']; echo $result = $sbp*$dbp ?></td>
+                                <td><?php echo $key['protocol_condition']; ?></td>
                             </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -255,17 +360,17 @@
                 <div class="col-md-12">
                     <h3>Description:</h3>
                     <p>
-                        kjshdfljsdfjlsjdfljlfdjlksjdfljjdsfjsdlfkjlskdjfklsdjfljsdfjdsklfjdklfjlsdkjflksdjf
-                        jflsdfjlfjsdjfljsdflkjsdlfjskldfjlksdjflksdjfkljsdflkkjsdfkljsdlfjlksdjflksdjfsdflkjsdflkjjdf
-                        lsdjfljsdfljsdlfkjsdlkfjsldkfjlksdjflksdjfljsdflkjsdflkjsdlfsdlkjjdfjjsdfjlkjdflkjlsdjfsdhlk
+                        <?php foreach($test_details as $key){
+                             echo $key['description'];
+                         }?>
                     </p>
                 </div>
                 <div class="col-md-12">
                     <h3>Conclution:</h3>
                     <p>
-                        kjshdfljsdfjlsjdfljlfdjlksjdfljjdsfjsdlfkjlskdjfklsdjfljsdfjdsklfjdklfjlsdkjflksdjf
-                        jflsdfjlfjsdjfljsdflkjsdlfjskldfjlksdjflksdjfkljsdflkkjsdfkljsdlfjlksdjflksdjfsdflkjsdflkjjdf
-                        lsdjfljsdfljsdlfkjsdlkfjsldkfjlksdjflksdjfljsdflkjsdflkjsdlfsdlkjjdfjjsdfjlkjdflkjlsdjfsdhlk
+                       <?php foreach($test_details as $key){
+                             echo $key['conclusion'];
+                        }?> 
                     </p>
                 </div>
             </div> 

@@ -16,9 +16,7 @@ class Profile extends MY_Controller
         $this->load->model('Examination_model');
         $this->load->model('Instruction_model');
         $this->load->model('Medicine_model');
-
         $this->load->model('Investigation_model');
-
         $this->load->model('Setting_model');
         $this->load->model('ETT_model');
         $this->load->helper('content-type');
@@ -839,8 +837,7 @@ class Profile extends MY_Controller
     {
         $data = $this->input->post();
         $patient_id = $data['patid'];
-        $detail_id = $data['detail_id'];
-        $data['rights'] = $this->session->userdata('other_rights');
+        $detail_id = $data['detail_id'];        
         $data['test_reasons'] = $this->ETT_model->get_test_reasons();
         $data['ending_reasons'] = $this->ETT_model->get_ending_reasons();
         $data['descriptions'] = $this->ETT_model->get_descriptions();
