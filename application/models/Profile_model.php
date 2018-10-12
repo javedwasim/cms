@@ -363,7 +363,6 @@ class Profile_model extends CI_Model
                             GROUP BY patient_lab_test.info_key
                         )labtest  ON labtest.info_key = info.info_key
                         WHERE patient_id = $id";
-
         $result = $this->db->query($query);
         if ($result) {
             return $result->result_array();
@@ -767,6 +766,16 @@ class Profile_model extends CI_Model
 	        } else {
 	            return false;
 	        }
+        }
+    }
+
+    public function get_sp_inst_detail($patient_id)
+    {
+        $result = $this->db->select('*')->from('patient_special_instruction')->where('patient_id', $patient_id)->get();
+        if ($result) {
+            return $result->result_array();
+        } else {
+            return false;
         }
     }
 

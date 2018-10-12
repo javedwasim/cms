@@ -729,15 +729,12 @@ class Profile extends MY_Controller
         $data = $this->input->post();
         $id = $data['detail_id'];
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
-
         $data['categories'] = $this->Setting_model->get_lab_categories();
         $data['tests'] = $this->Setting_model->get_lab_tests();
         $data['items'] = $this->Setting_model->get_lab_test_items();
         $json['laboratory_html'] = $this->load->view('laboratory/laboratory', $data, true);
-
         $data['tests'] = $this->Profile_model->get_lab_test_info($id);
         $json['test_table'] = $this->load->view('profile/lab_test_detail_table', $data, true);
-
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['result_html'] = $this->load->view('pages/pat_lab_test', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -860,6 +857,23 @@ class Profile extends MY_Controller
         $json['success'] = true;
         $json['message'] = 'Information save successfully!';
 
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_sp_inst_details(){
+        $patient_id = $this->input->post('patient_id');
+        $data['details'] = $this->Profile_model->get_sp_inst_detail($patient_id);
+        //print_r($data['details']);
+        if ($data) {
+            $json['success'] = true;
+            $json['sp_inst_details'] = $this->load->view('profile/sp_inst_details_table', $data, true);
+
+        } else {
+            $json['error'] = true;
+            $json['message'] = "seem to be an error.";
+        }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

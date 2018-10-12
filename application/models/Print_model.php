@@ -39,5 +39,32 @@
 	    		return false;
 	    	}
 	    }
+
+	    public function get_sp_inst_detail_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+            ->from('patient_special_instruction')
+            ->where('id', $testid)
+            ->where('patient_id', $patid)
+            ->get();
+	        if ($result) {
+	            return $result->row();
+	        } else {
+	            return array();
+	        }
+	    }
+
+	    public function delete_test_ett($testid,$patid){
+	    	$result = $this->db->delete('patient_ett_test', array('id' => $testid,'patient_id'=>$patid));
+	    	if ($result) {
+	    		$result = $this->db->delete('patient_ett_test_protocol', array('patient_ett_test_id' => $testid,'patient_id'=>$patid));
+	    		if ($result) {
+	    			return true;
+	    		}else{
+	    			return false;
+	    		}
+	    	}else{
+	    		return false;
+	    	}
+	    }
 	}
 ?>

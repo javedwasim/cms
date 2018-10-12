@@ -9,7 +9,6 @@
     <title>Print Appointments list</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" media='screen,print'>
     <style type="text/css">
       @page {
             margin: 0;
@@ -147,7 +146,7 @@
             padding-top: 5px;
             padding-bottom: 5px;
         }
-        
+  
 </style>
 <style type="text/css" media="print">
     .row {
@@ -167,10 +166,11 @@
         padding-left: 15px;
 
     }
-    .col-md-6{
-        width: 50%;
-        float: left;
-    }
+    .col-md-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
     .offset-1 {
         margin-left: 8.333333%;
     }
@@ -202,6 +202,42 @@
         padding-top: 5px;
         padding-bottom: 5px;
     }
+    .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+    .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent;
+    }
+    .table-bordered thead td, .table-bordered thead th {
+        border-bottom-width: 2px;
+    }
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+    }
+    .table-bordered td, .table-bordered th {
+        border: 1px solid #dee2e6;
+    }
+    .table td, .table th {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+    .border-dark {
+        border-color: #343a40!important;
+    }
+    .border {
+        border: 1px solid #dee2e6!important;
+    }
+    .p-0 {
+        padding: 0!important;
+    }
+    .border-bottom {
+      border-bottom: 1px solid #dee2e6 !important;
+    }
 </style>
 </head>
 <body class="A4 " >
@@ -218,12 +254,9 @@
                     <label>Ref.ID</label>
                     <strong><?php echo $patient_info->id ?></strong>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label><?php echo $patient_info->pat_age ?></label>
                     <label><?php echo $patient_info->pat_sex ?></label>
-                </div>
-                <div class="col-md-2">
-                    
                 </div>
                 <div class="col-md-2">
                     <label><?php echo date('d-M-Y');?></label>
@@ -258,63 +291,67 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6 border border-dark p-0">
-                            <div class="mb-1 border-bottom border-dark padding">Resting HR:</div>
-                            <div class="mb-1 border-bottom border-dark padding">Resting BP:</div>
-                            <div class="mb-1 border-bottom border-dark padding">Max Predicted Target HR:</div>
-                            <div class="mb-1 border-bottom border-dark padding">Max HR:</div>
-                            <div class="mb-1 border-bottom border-dark padding">Max Predicted HR Achived:</div>
-                            <div class="mb-1 border-bottom border-dark padding">Max BP:</div>
-                            <div class="mb-1 border-bottom border-dark padding">HR x BP:</div>
-                            <div class="mb-1 border-bottom border-dark padding">Total Exercise Time:</div>
-                            <div class="padding">Mets:</div>
+                    <div class="row" style="margin: 0px;">
+                        <div class="col-md-6">
+                            <div class="border border-dark p-0" style="width: 99.5%; margin: 0 auto;">
+                                <div class="mb-1 border-bottom border-dark padding">Resting HR:</div>
+                                <div class="mb-1 border-bottom border-dark padding">Resting BP:</div>
+                                <div class="mb-1 border-bottom border-dark padding">Max Predicted Target HR:</div>
+                                <div class="mb-1 border-bottom border-dark padding">Max HR:</div>
+                                <div class="mb-1 border-bottom border-dark padding">Max Predicted HR Achived:</div>
+                                <div class="mb-1 border-bottom border-dark padding">Max BP:</div>
+                                <div class="mb-1 border-bottom border-dark padding">HR x BP:</div>
+                                <div class="mb-1 border-bottom border-dark padding">Total Exercise Time:</div>
+                                <div class="padding">Mets:</div>
+                            </div>
                         </div>
-                        <div class="col-md-6 border border-dark p-0">
-                            <div class="mb-1 border-bottom border-dark padding">
-                                <?php foreach($test_details as $key){?>
-                                        <strong><?php echo $key['resting_hr']; ?></strong>
-                                <?php }?>(bpm)
-                            </div>
-                            <div class="mb-1 border-bottom border-dark padding">
-                                <?php foreach($test_details as $key){?>
-                                        <strong><?php echo $key['resting_bp']; ?></strong>
-                                <?php }?>(ml O2/kg/min)
-                            </div>
-                            <div class="mb-1 border-bottom border-dark padding">
-                                <?php foreach($test_details as $key){?>
-                                        <strong><?php echo $key['max_pre_tar']; ?></strong>
-                                <?php }?>(mmHg)
-                            </div>
-                            <div class="mb-1 border-bottom border-dark padding">
-                                <?php foreach($test_details as $key){?>
-                                        <strong><?php echo $key['max_hr']; ?></strong>
-                                <?php }?>(bpm)
-                            </div>
-                            <div class="mb-1 border-bottom border-dark padding">
-                                <?php foreach($test_details as $key){?>
-                                        <strong><?php echo $key['max_pre_hr']; ?></strong>
-                                <?php }?>(bpm)
-                            </div>
-                            <div class="mb-1 border-bottom border-dark padding">
-                                <?php foreach($test_details as $key){?>
-                                        <strong><?php echo $key['max_bp']; ?></strong>
-                                <?php }?>(%)
-                            </div>
-                            <div class="mb-1 border-bottom border-dark padding">
-                                <?php foreach($test_details as $key){?>
-                                        <strong><?php echo $key['hr_bp']; ?></strong>
-                                <?php }?>(mmHg)
-                            </div>
-                            <div class="mb-1 border-bottom border-dark padding">
-                                <?php foreach($test_details as $key){?>
-                                        <strong><?php echo $key['exercise_time']; ?></strong>
-                                <?php }?>(bpm x mmHg)
-                            </div>
-                            <div class="padding">
-                                <?php foreach($test_details as $key){?>
-                                        <strong><?php echo $key['mets']; ?></strong>
-                                <?php }?>(minuts)
+                        <div class="col-md-6">
+                            <div class="border border-dark p-0" style="width: 99.5%; margin: 0 auto;">
+                                <div class="mb-1 border-bottom border-dark padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['resting_hr']; ?></strong>
+                                    <?php }?>(bpm)
+                                </div>
+                                <div class="mb-1 border-bottom border-dark padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['resting_bp']; ?></strong>
+                                    <?php }?>(ml O2/kg/min)
+                                </div>
+                                <div class="mb-1 border-bottom border-dark padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['max_pre_tar']; ?></strong>
+                                    <?php }?>(mmHg)
+                                </div>
+                                <div class="mb-1 border-bottom border-dark padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['max_hr']; ?></strong>
+                                    <?php }?>(bpm)
+                                </div>
+                                <div class="mb-1 border-bottom border-dark padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['max_pre_hr']; ?></strong>
+                                    <?php }?>(bpm)
+                                </div>
+                                <div class="mb-1 border-bottom border-dark padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['max_bp']; ?></strong>
+                                    <?php }?>(%)
+                                </div>
+                                <div class="mb-1 border-bottom border-dark padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['hr_bp']; ?></strong>
+                                    <?php }?>(mmHg)
+                                </div>
+                                <div class="mb-1 border-bottom border-dark padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['exercise_time']; ?></strong>
+                                    <?php }?>(bpm x mmHg)
+                                </div>
+                                <div class="padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['mets']; ?></strong>
+                                    <?php }?>(minuts)
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -373,28 +410,31 @@
                         }?> 
                     </p>
                 </div>
-            </div> 
-            <div class="row">
-                <div class="col-md-12 ">
-                    <div style="float: right;">
-                        <h3><i>Dr.Shahadat Hussain Ch.</i></h3>
-                        <label>MBBS, FCPS(Cardiology)</label><br>
-                        <label><i>Asst. Professor Cardiology/CCU</i></label><br>
-                        <label>QAMC/BVH Bahawalpur</label>
+            </div>
+            <div class="row" style=" position: fixed;bottom: 0px;">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div style="float: right;">
+                            <h3><i>Dr.Shahadat Hussain Ch.</i></h3>
+                            <label>MBBS, FCPS(Cardiology)</label><br>
+                            <label><i>Asst. Professor Cardiology/CCU</i></label><br>
+                            <label>QAMC/BVH Bahawalpur</label>
+                        </div>
+                        <br>
                     </div>
                 </div>
-            </div>
-            <hr size="10">
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="text-align: center;">Shahadat Clinic: 14-B Medical Colony Bahawalpur. Phone: 0322-6526467</p>
+
+                <div class="row" style="border-top:1px solid #ddd;">
+                    <div class="col-md-12">
+                        <br>
+                        <p style="text-align: center;">Shahadat Clinic: 14-B Medical Colony Bahawalpur. Phone: 0322-6526467</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<!--     <script type="text/javascript">
+    <script type="text/javascript">
       window.onload = function() { window.print(); }
-    </script> -->
+    </script>
 </body>
 </html>

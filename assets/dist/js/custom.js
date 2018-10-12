@@ -3532,7 +3532,7 @@ function printresearchData()
     newWin.close();
 }
 
- function printEtt(editableObj,ett_id,patient_id) {
+function printEtt(editableObj,ett_id,patient_id) {
 
     var win = window.open('/cms/print_profiles/print_ett/?testid=' + ett_id +'&patid='+patient_id, '_blank');
     if (win) {
@@ -3543,3 +3543,94 @@ function printresearchData()
     }
 }
 
+function printlabtest(editableObj,key,patient_id) {
+
+    var win = window.open('/cms/print_profiles/print_lab_test/?key=' + key +'&patid='+patient_id, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
+}
+
+// $(document.body).on('click', '#prescription_details', function () {
+//     var patient_id = $('#label_patient_id').text();
+//     $.ajax({
+//         url: window.location.origin+window.location.pathname+'profile/get_lab_test_detail',
+//         type: 'post',
+//         data:  {patient_id:patient_id},
+//         cache: false,
+//         success: function(response) {
+//             if (response.success) {
+//                 $('#echo_detail_container').empty();
+//                 $('#echo_detail_container').append(response.lab_detail);
+//             } else {
+//                 toastr["error"](response.message);
+//             }
+//         }
+//     });
+
+// });
+
+function print_prescription(editableObj,test_id,patient_id) {
+
+    var win = window.open('/cms/print_profiles/print_prescription/?testid=' + test_id +'&patid='+patient_id, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
+}
+$(document.body).on('click', '#sp_inst_details', function () {
+    var patient_id = $('#label_patient_id').text();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'profile/get_sp_inst_details',
+        type: 'post',
+        data:  {patient_id:patient_id},
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                $('#echo_detail_container').empty();
+                $('#echo_detail_container').append(response.sp_inst_details);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+
+});
+
+function printsp(editableObj,test_id,patient_id) {
+
+    var win = window.open('/cms/print_profiles/print_sp_inst/?testid=' + test_id +'&patid='+patient_id, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
+}
+
+function deleteEttDetail(editableObj,test_id,patient_id){
+     $.ajax({
+        url: '/cms/print_profiles/delete_ett_test_details',
+        type: 'post',
+        data: {detail_id:test_id,patid:patient_id},
+        cache: false,
+        success: function (response) {
+            if (response.success) {
+                $('#echo_detail_container').empty();
+                $('#echo_detail_container').append(response.ett_detail);
+                if (response.success == true) {
+                    toastr["success"](response.message);
+                }else{
+                    toastr["error"](response.message);
+                }
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+}
