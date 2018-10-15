@@ -59,7 +59,7 @@
                     ?>
                 <tr class="gradeX colorchnage">
 
-                    <td class="<?php echo !in_array("can_delete-0", $permissions)&&($user_info['is_admin']!=1)?"hide":''; ?>">
+                    <td class="<?php echo !in_array("appointments-can_delete-0", $permissions)&&($user_info['is_admin']!=1)?"hide":''; ?>">
                         <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
                             <i class="fa fa-trash"></i>
                         </a>
@@ -81,7 +81,9 @@
                             echo $bkarray[$i]['full_name'];
                         }else{
                             echo "";
-                        }?>">
+                        }?>"
+                        <?php  echo ($user_info['is_admin']!=1)&&($booking_flag == 'vip')?'readonly':''; ?>
+                        >
                     </td>
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover" 
@@ -269,7 +271,7 @@
                             echo "";
                         }?>"
                     >
-                        <input type="text" name="full_name" style="text-transform: capitalize;width:150px;" id="input-name" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>">
+                        <input type="text" name="full_name" style="text-transform: capitalize;width:150px;" id="input-name" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>" <?php  echo ($user_info['is_admin']!=1)&&($booking_flag == 'vip')?'readonly':''; ?>>
                     </td>
                     <td>
                         <?php echo $details['contact_number'] ?>

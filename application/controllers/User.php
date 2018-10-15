@@ -65,7 +65,9 @@ class User extends MY_Controller {
         $date = date('Y-m-d', strtotime($appdate));
         $currentdate = date('Y-m-d');
         $limiterexist = $this->User_model->check_limiter($date);
-        $limit=$limiterexist->limiter;
+        if ($limiterexist) {
+            $limit=$limiterexist->limiter;
+        }
         $bookingCount = $this->User_model->count_bookings();
         $count = $bookingCount;
         if ($limiterexist) {
