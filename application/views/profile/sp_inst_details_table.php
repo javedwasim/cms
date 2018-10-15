@@ -10,7 +10,7 @@
         <tbody>
             <?php foreach ($details as $detail): ?>
                 <tr style="cursor: pointer;">
-                    <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                    <td style="width: 20px"><a href="javascript:void(0)" class="btn btn-danger btn-xs"  onClick="deletespinstDetail(this,'<?php echo $detail['id']; ?>','<?php echo $detail['patient_id']; ?>');"><i class="fa fa-trash"></i></a></td>
                     <td style="padding: 0px;">
                         <a class="btn btn-info btn-xs" href="javascript:void(0)" style="margin: 0px;"><i class="fa fa-edit" id="echo_detail_btn"></i></a>
                     </td>

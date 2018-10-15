@@ -1819,6 +1819,35 @@ $(document.body).on('click', '#save_ett_test', function(e){
         data:$('#ett_protocol_form').serialize(),
         cache: false,
         success: function(response){
+            $('.content-wrapper').remove();
+            $('#content-wrapper').append(response.result_html);
+            $('.profile-table').remove();
+            $('#profile_table').append(response.profile_table);
+            ///////////////// initilize datatable //////////////
+            $('.profiletable').DataTable({
+                // "scrollX": true,
+                "initComplete": function (settings, json) {
+                    $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                }
+            });
+            $("#toggleresize1").click(function () {
+                var icon = $('#toggleresize1 > .arro');
+                icon.toggleClass('fa-arrow-left fa-arrow-right');
+                $('.resize1').toggleClass("active_resize1");
+                $('.resize2').toggleClass("inactive_resize2");
+
+            });
+            $("#toggleresize2").click(function () {
+                var icon = $('#toggleresize2 > .arro');
+                icon.toggleClass('fa-arrow-left fa-arrow-right');
+                $('.resize2').toggleClass("active_resize2");
+                $('.resize1').toggleClass("inactive_resize1");
+            });
+            $('#profiletable tbody tr:first').addClass('row_selected');
+            $("#profiletable tbody tr").click(function (e) {
+                $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
             if (response.success == true) {
                 toastr['success']('Saved Successfully.');
             }else{
@@ -1828,6 +1857,7 @@ $(document.body).on('click', '#save_ett_test', function(e){
     });
 
 });
+
 $(document.body).on('click', '#save_lab_test', function(){
     $.ajax({
         url: $('#lab_test_form_modal').attr('data-action'),

@@ -66,5 +66,27 @@
 	    		return false;
 	    	}
 	    }
+	    public function delete_test_sp_inst($testid,$patid){
+	    	$result = $this->db->delete('patient_special_instruction',array('id' => $testid,'patient_id'=>$patid));
+	    	if ($result) {
+	    		return true;
+	    	}else{
+	    		return false;
+	    	}
+	    }
+
+	    public function delete_lab_test_details($testid,$patid){
+	    	$result = $this->db->delete('patient_lab_test_info', array('info_key' => $testid,'patient_id'=>$patid));
+	    	if ($result) {
+	    		$result = $this->db->delete('patient_lab_test', array('info_key' => $testid,'patient_id'=>$patid));
+	    		if ($result) {
+	    			return true;
+	    		}else{
+	    			return false;
+	    		}
+	    	}else{
+	    		return false;
+	    	}
+	    }
 	}
 ?>

@@ -28,7 +28,13 @@
         						<div class="form-group">
         							<label>Reason for Test</label>
         							<select class="form-control" name="test_reason" id="ett_test_reason">
-        								<option value="">Select ...</option>
+                                        <?php if(isset($details)){ foreach ($details as $info) { ?>
+                                                <option value="<?php echo $info['test_reason']?>"><?php echo $testreason; ?></option>
+                                            <?php 
+                                            }
+                                        }else{ ?>
+                                                <option value="">Select ...</option>
+                                        <?php }?>
                                         <?php foreach($test_reasons as $reason){?>
                                             <option value="<?php echo $reason['id']; ?>"><?php echo $reason['test_reason']; ?></option>
                                         <?php }?>
@@ -204,7 +210,13 @@
         									<div class="col-md-12 m-t-10" style="display: inline-flex;">
         										<label class="m-r-10">Reason of ending test:</label>
         										<select class="form-control col-md-6" name="ending_reason" id="ett_ending_reason">
-        											<option value="">Select...</option>
+        											<?php if(isset($details)){ foreach ($details as $info) { ?>
+                                                        <option value="<?php echo $info['ending_reason']?>"><?php echo $endingtestreason; ?></option>
+                                                    <?php 
+                                                        }
+                                                    }else{ ?>
+                                                            <option value="">Select ...</option>
+                                                    <?php }?>
                                                     <?php foreach($ending_reasons as $key){?>
                                                         <option value="<?php echo $key['id']; ?>"><?php echo $key['ending_reason']; ?></option>
                                                     <?php }?>

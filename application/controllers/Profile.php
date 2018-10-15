@@ -19,6 +19,7 @@ class Profile extends MY_Controller
         $this->load->model('Investigation_model');
         $this->load->model('Setting_model');
         $this->load->model('ETT_model');
+        $this->load->model('Print_model');
         $this->load->helper('content-type');
         date_default_timezone_set("Asia/Karachi");
     }
@@ -279,8 +280,7 @@ class Profile extends MY_Controller
     }
 
 
-    public function save_ett_test()
-    {
+    public function save_ett_test(){
         $data = $this->input->post();
         if ($data['details_id']=='') {
             $patientid = $data['pat_id'];
@@ -391,7 +391,13 @@ class Profile extends MY_Controller
             }
             
         }
-
+        $data['professions'] = $this->Setting_model->get_professions();
+        $data['districts'] = $this->Setting_model->get_districts();
+        $data['profiles'] = $this->Profile_model->get_profiles();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+        $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+        $json['result_html'] = $this->load->view('pages/profile', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -841,6 +847,14 @@ class Profile extends MY_Controller
         $data['conclusions'] = $this->ETT_model->get_conclusions();
         $data['protocols'] = $this->ETT_model->get_protocol();
         $data['details'] = $this->Profile_model->get_ett_detail_by_ids($patient_id,$detail_id);
+        foreach($data['details'] as $key){
+            $protocolid = $key['protocol_id']; 
+            $testreasonid = $key['test_reason']; 
+            $endingtestreasonid = $key['ending_reason']; 
+        }
+        $data['protocol'] = $this->Print_model->get_protocol_name_by_id($protocolid);
+        $data['testreason'] = $this->Print_model->get_testreason_name_by_id($testreasonid);
+        $data['endingtestreason'] = $this->Print_model->get_endingtestreason_name_by_id($endingtestreasonid);
         $data['rights'] = $this->session->userdata('other_rights');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);

@@ -3634,3 +3634,47 @@ function deleteEttDetail(editableObj,test_id,patient_id){
         }
     });
 }
+
+function deletespinstDetail(editableObj,test_id,patient_id){
+     $.ajax({
+        url: '/cms/print_profiles/delete_sp_isnt_test_details',
+        type: 'post',
+        data: {detail_id:test_id,patid:patient_id},
+        cache: false,
+        success: function (response) {
+            if (response.success) {
+                $('#echo_detail_container').empty();
+                $('#echo_detail_container').append(response.sp_inst_details);
+                if (response.success == true) {
+                    toastr["success"](response.message);
+                }else{
+                    toastr["error"](response.message);
+                }
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+}
+
+function deletelabtestDetail(editableObj,key,patient_id){
+     $.ajax({
+        url: '/cms/print_profiles/delete_lab_test_test_details',
+        type: 'post',
+        data: {key:key,patid:patient_id},
+        cache: false,
+        success: function (response) {
+            if (response.success) {
+                $('#echo_detail_container').empty();
+                $('#echo_detail_container').append(response.lab_detail);
+                if (response.success == true) {
+                    toastr["success"](response.message);
+                }else{
+                    toastr["error"](response.message);
+                }
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+}

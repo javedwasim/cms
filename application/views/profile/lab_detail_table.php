@@ -10,7 +10,7 @@
         <tbody>
             <?php foreach ($details as $detail): ?>
                 <tr>
-                    <td style="width: 20px"><i class="fa fa-trash"></i></td>
+                    <td style="width: 20px"><a href="javascript:void(0)" class="btn btn-danger btn-xs"  onClick="deletelabtestDetail(this,'<?php echo $detail['info_key']; ?>','<?php echo $detail['patient_id']; ?>');"><i class="fa fa-trash"></i></a></td>
                     <td>
                         <a href="javascript:void(0)" contenteditable="true"
                         onClick="showEditLabDetail(this,'<?php echo $detail['info_key']; ?>','<?php echo $detail['patient_id']; ?>');"><i class="fa fa-edit" ></i></a>

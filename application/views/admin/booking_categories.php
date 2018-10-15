@@ -288,7 +288,7 @@
             <div class="col-lg-4 p-0">
                 <div class="card p-0">
                     <div class="card-header">
-                        <button class="btn btn-block btn-success">Time by Consultant</button>
+                        <button class="btn btn-block btn-success" id="time_consultant">Time by Consultant</button>
                     </div>
                     <div class="card-body p-t-0">
                         <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >

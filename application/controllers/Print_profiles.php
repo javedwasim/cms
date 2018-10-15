@@ -101,5 +101,42 @@ class Print_profiles extends CI_Controller {
         }
 	}
 
+	public function delete_sp_isnt_test_details(){
+		$testid = $this->input->post('detail_id');
+		$patid = $this->input->post('patid');
+		$result = $this->Print_model->delete_test_sp_inst($testid,$patid);
+		if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+		}else{
+			$json['error'] = true;
+	        $json['message'] = "seem to be an error.";
+		}
+        $data['details'] = $this->Profile_model->get_sp_inst_detail($patid);
+		$json['sp_inst_details'] = $this->load->view('profile/sp_inst_details_table', $data, true);
+		if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+	}
+
+
+    public function delete_lab_test_test_details(){
+		$testid = $this->input->post('key');
+		$patid = $this->input->post('patid');
+		$result = $this->Print_model->delete_lab_test_details($testid,$patid);
+		if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+		}else{
+			$json['error'] = true;
+	        $json['message'] = "seem to be an error.";
+		}
+        $data['details'] = $this->Profile_model->get_lab_test_detail($patid);
+		$json['lab_detail'] = $this->load->view('profile/lab_detail_table', $data, true);
+		if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+	}
+
 }
 ?>
