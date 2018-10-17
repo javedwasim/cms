@@ -11,7 +11,7 @@
             <?php foreach($notes_record as $details){?>
             <tr>
                 <td>
-                    <a class="delete-notes btn btn-danger btn-xs" href="javascript:void(0)" title="delete" data-href="<?php echo site_url('profile/delete_note/') . $details['id'] ?>">
+                    <a class="delete-notes btn btn-danger btn-xs" href="javascript:void(0)" title="delete" data-href="<?php echo site_url('profile/delete_note/'. $details['id'].'/'. $details['username'])  ?>">
                        <i class="fa fa-trash" title="Delete"></i>
                     </a>
 

@@ -153,6 +153,7 @@ $(document).ready(function () {
 $(document.body).on('click', '.feepaid', function () {
     var tr = $('tr.row_selected');
     var odata = $.trim(tr.find('.appointment_booking_id').text());
+    var status_id = $.trim(tr.find('.booking_status_id').text());
     if (odata != "") {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
@@ -163,7 +164,8 @@ $(document.body).on('click', '.feepaid', function () {
                 bkId: odata,
                 fee_status: '1',
                 flag: bookingflag,
-                tabledate: tabledate
+                tabledate: tabledate,
+                statusId: status_id
             },
             cache: false,
             success: function (response) {
@@ -230,7 +232,11 @@ $(document.body).on('click', '.feepaid', function () {
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
                     };
-                    toastr["success"]('Status Update');
+                    if (response.success == true) {
+                        toastr["success"](response.message);    
+                    }else{
+                        toastr["error"](response.message);    
+                    }
 
                 } else {
                     console.log('not working');
@@ -245,6 +251,7 @@ $(document.body).on('click', '.feepaid', function () {
 $(document.body).on('click', '.wecg', function () {
     var tr = $('tr.row_selected');
     var odata = $.trim(tr.find('.appointment_booking_id').text());
+    var status_id = $.trim(tr.find('.booking_status_id').text());
     if (odata != "") {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
@@ -255,7 +262,8 @@ $(document.body).on('click', '.wecg', function () {
                 bkId: odata,
                 fee_status: '2',
                 flag: bookingflag,
-                tabledate: tabledate
+                tabledate: tabledate,
+                statusId: status_id
             },
             cache: false,
             success: function (response) {
@@ -322,7 +330,11 @@ $(document.body).on('click', '.wecg', function () {
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
                     };
-                    toastr["success"]("Status Updated");
+                    if (response.success == true) {
+                        toastr["success"](response.message);    
+                    }else{
+                        toastr["error"](response.message);    
+                    }
 
                 } else {
                     console.log('not working');
@@ -338,6 +350,7 @@ $(document.body).on('click', '.wecg', function () {
 $(document.body).on('click', '.wett', function () {
     var tr = $('tr.row_selected');
     var odata = $.trim(tr.find('.appointment_booking_id').text());
+    var status_id = $.trim(tr.find('.booking_status_id').text());
     if (odata != "") {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
@@ -348,7 +361,8 @@ $(document.body).on('click', '.wett', function () {
                 bkId: odata,
                 fee_status: '3',
                 flag: bookingflag,
-                tabledate: tabledate
+                tabledate: tabledate,
+                statusId: status_id
             },
             cache: false,
             success: function (response) {
@@ -415,7 +429,11 @@ $(document.body).on('click', '.wett', function () {
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
                     };
-                    toastr["success"]("Status Updated");
+                    if (response.success == true) {
+                        toastr["success"](response.message);    
+                    }else{
+                        toastr["error"](response.message);    
+                    }
                 } else {
                     console.log('not working');
                 }
@@ -429,6 +447,7 @@ $(document.body).on('click', '.wett', function () {
 $(document.body).on('click', '.wecho', function () {
     var tr = $('tr.row_selected');
     var odata = $.trim(tr.find('.appointment_booking_id').text());
+    var status_id = $.trim(tr.find('.booking_status_id').text());
     if (odata != "") {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
@@ -439,7 +458,8 @@ $(document.body).on('click', '.wecho', function () {
                 bkId: odata,
                 fee_status: '4',
                 flag: bookingflag,
-                tabledate: tabledate
+                tabledate: tabledate,
+                statusId: status_id
             },
             cache: false,
             success: function (response) {
@@ -506,7 +526,11 @@ $(document.body).on('click', '.wecho', function () {
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
                     };
-                    toastr["success"]("Status Updated");
+                    if (response.success == true) {
+                        toastr["success"](response.message);    
+                    }else{
+                        toastr["error"](response.message);    
+                    }
                 } else {
                     console.log('not working');
                 }
@@ -521,6 +545,7 @@ $(document.body).on('click', '.wecho', function () {
 $(document.body).on('click', '.investigation', function () {
     var tr = $('tr.row_selected');
     var odata = $.trim(tr.find('.appointment_booking_id').text());
+    var status_id = $.trim(tr.find('.booking_status_id').text());
     if (odata != "") {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
@@ -531,7 +556,8 @@ $(document.body).on('click', '.investigation', function () {
                 bkId: odata,
                 fee_status: '5',
                 flag: bookingflag,
-                tabledate: tabledate
+                tabledate: tabledate,
+                statusId: status_id
             },
             cache: false,
             success: function (response) {
@@ -598,7 +624,11 @@ $(document.body).on('click', '.investigation', function () {
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
                     };
-                    toastr["success"]("Status Updated");
+                    if (response.success == true) {
+                        toastr["success"](response.message);    
+                    }else{
+                        toastr["error"](response.message);    
+                    }
                 } else {
                     console.log('not working');
                 }
@@ -612,6 +642,7 @@ $(document.body).on('click', '.investigation', function () {
 $(document.body).on('click', '.checkup', function () {
     var tr = $('tr.row_selected');
     var odata = $.trim(tr.find('.appointment_booking_id').text());
+    var status_id = $.trim(tr.find('.booking_status_id').text());
     if (odata != "") {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
@@ -622,7 +653,8 @@ $(document.body).on('click', '.checkup', function () {
                 bkId: odata,
                 fee_status: '6',
                 flag: bookingflag,
-                tabledate: tabledate
+                tabledate: tabledate,
+                statusId: status_id
             },
             cache: false,
             success: function (response) {
@@ -689,7 +721,11 @@ $(document.body).on('click', '.checkup', function () {
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
                     };
-                    toastr["success"]("Status Updated");
+                    if (response.success == true) {
+                        toastr["success"](response.message);    
+                    }else{
+                        toastr["error"](response.message);    
+                    }
                 } else {
                     console.log('not working');
                 }
@@ -704,6 +740,7 @@ $(document.body).on('click', '.checkup', function () {
 $(document.body).on('click', '.complete', function () {
     var tr = $('tr.row_selected');
     var odata = $.trim(tr.find('.appointment_booking_id').text());
+    var status_id = $.trim(tr.find('.booking_status_id').text());
     if (odata != "") {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
@@ -714,7 +751,8 @@ $(document.body).on('click', '.complete', function () {
                 bkId: odata,
                 fee_status: '7',
                 flag: bookingflag,
-                tabledate: tabledate
+                tabledate: tabledate,
+                statusId: status_id
             },
             cache: false,
             success: function (response) {
@@ -781,7 +819,11 @@ $(document.body).on('click', '.complete', function () {
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
                     };
-                    toastr["success"]("Status Updated");
+                    if (response.success == true) {
+                        toastr["success"](response.message);    
+                    }else{
+                        toastr["error"](response.message);    
+                    }
                 } else {
                     console.log('not working');
                 }
@@ -889,6 +931,7 @@ $(document.body).on('click', '#book_appointment', function (e) {
     var appdate = $('#app_date').val();
     var consultantfee = $('#consultant_fee').val();
     var bookingflag = $('#booking_flag').val();
+    var tabledate = $('.pat_search').val();
     $(this).attr("disabled", true);
     $.ajax({
         url: $('#appointment_booking_form').attr('data-action'),
@@ -898,7 +941,8 @@ $(document.body).on('click', '#book_appointment', function (e) {
             cellNo: cellnum,
             appointmentDate: appdate,
             fee: consultantfee,
-            bookingflag: bookingflag
+            bookingflag: bookingflag,
+            searchdate: tabledate
         },
         success: function (data) {
             if (data.booking_table != '') {
@@ -1831,23 +1875,29 @@ $(document.body).on('click', '#register-user', function () {
 ////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#profes_add', function () {
-    var profession = $('#profession_add').val();
-    $.ajax({
-        url: '/cms/setting/insert_profession',
-        type: 'post',
-        data: {profession: profession},
-        cache: false,
-        success: function (response) {
-            $('.profession_table').remove();
-            $('#profession_table').append(response.profession_table);
-            $('#profession_add').val('');
-            if (response.success == true) {
-                toastr["success"](response.message);
-            } else {
-                toastr["warning"](response.message);
+    if (professionvalidate.form()) {
+        var profession = $('#profession_add').val();
+        $.ajax({
+            url: '/cms/setting/insert_profession',
+            type: 'post',
+            data: {profession: profession},
+            cache: false,
+            success: function (response) {
+                $('.profession_table').remove();
+                $('#profession_table').append(response.profession_table);
+                $('#profession_add').val('');
+                $('.prof_his_id').prop('selectedIndex',0);
+                $('#history_items').prop('selectedIndex',0);
+                if (response.success == true) {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["warning"](response.message);
+                }
             }
-        }
-    });
+        });
+    }else{
+        return false;
+    }
 });
 $(document.body).on('click', '.delete_profession', function () {
     if (confirm('Are you sure to delete this record?')) {
@@ -2006,25 +2056,28 @@ $(document.body).on('click', '#ett-setting', function () {
 });
 
 
-$(document.body).on('click', '.add_ett_test_reason', function () {
-    var testreason = $('#ett_test_reason').val();
-    $.ajax({
-        url: '/cms/ett/add_ett_testreason',
-        type: 'post',
-        data: {testreason: testreason},
-        cache: false,
-        success: function (response) {
-            $('#ett_test_reason').val('');
-            $('.ins_category_container').empty();
-            $('.ins_category_container').append(response.result_html);
-            if (response.message == "Added successfully!") {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+$(document.body).on('click', '#add_ett_test_reason', function () {
+    var validatetest = $('#test_reason_form').validate();
+    if(validatetest.form()){
+        var testreason = $('#ett_test_reason').val();
+        $.ajax({
+            url: '/cms/ett/add_ett_testreason',
+            type: 'post',
+            data: {testreason: testreason},
+            cache: false,
+            success: function (response) {
+                $('#ett_test_reason').val('');
+                $('.ins_category_container').empty();
+                $('.ins_category_container').append(response.result_html);
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
             }
-        }
-    });
-    return false;
+        });
+        return false;
+    }
 });
 
 
@@ -2050,25 +2103,28 @@ $(document.body).on('click', '.delete-test-reason', function () {
 });
 
 $(document.body).on('click', '#add_ending_reason', function () {
-    var endingreason = $('#ending_reason').val();
-    $.ajax({
-        url: '/cms/ett/add_ett_endingreason',
-        type: 'post',
-        data: {endingreason: endingreason},
-        cache: false,
-        success: function (response) {
-            $('#ett_test_reason').val('');
-            $('.ending_reason_table').empty();
-            $('.ending_reason_table').append(response.result_html);
-            $('#ending_reason').val('');
-            if (response.message == "Added successfully!") {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+    var validate = $('#ending_reason_form').validate();
+    if (validate.form()) {
+        var endingreason = $('#ending_reason').val();
+        $.ajax({
+            url: '/cms/ett/add_ett_endingreason',
+            type: 'post',
+            data: {endingreason: endingreason},
+            cache: false,
+            success: function (response) {
+                $('#ett_test_reason').val('');
+                $('.ending_reason_table').empty();
+                $('.ending_reason_table').append(response.result_html);
+                $('#ending_reason').val('');
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
             }
-        }
-    });
-    return false;
+        });
+        return false;
+    }
 });
 
 $(document.body).on('click', '.delete-ending-reason', function () {
@@ -2093,24 +2149,27 @@ $(document.body).on('click', '.delete-ending-reason', function () {
 });
 
 $(document.body).on('click', '#add_ett_discription', function () {
-    var description = $('#ett_discription').val();
-    $.ajax({
-        url: '/cms/ett/add_ett_discription',
-        type: 'post',
-        data: {description: description},
-        cache: false,
-        success: function (response) {
-            $('#ett_discription').val('');
-            $('.discription-table').empty();
-            $('.discription-table').append(response.result_html);
-            if (response.message == "Added successfully!") {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+    var validate = $('#ett_discription_form').validate();
+    if (validate.form()) {
+        var description = $('#ett_discription').val();
+        $.ajax({
+            url: '/cms/ett/add_ett_discription',
+            type: 'post',
+            data: {description: description},
+            cache: false,
+            success: function (response) {
+                $('#ett_discription').val('');
+                $('.discription-table').empty();
+                $('.discription-table').append(response.result_html);
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
             }
-        }
-    });
-    return false;
+        });
+        return false;
+    }
 });
 
 $(document.body).on('click', '.delete-description', function () {
@@ -2135,24 +2194,27 @@ $(document.body).on('click', '.delete-description', function () {
 });
 
 $(document.body).on('click', '#add_conclusion', function () {
-    var conclusion = $('#ett_conclusion').val();
-    $.ajax({
-        url: '/cms/ett/add_conclusion',
-        type: 'post',
-        data: {conclusion: conclusion},
-        cache: false,
-        success: function (response) {
-            $('#ett_conclusion').val('');
-            $('.conclusion_table_content').empty();
-            $('.conclusion_table_content').append(response.result_html);
-            if (response.message == "Added successfully!") {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+    var validate = $('#ett_conclusion_form').validate();
+    if(validate.form()){
+        var conclusion = $('#ett_conclusion').val();
+        $.ajax({
+            url: '/cms/ett/add_conclusion',
+            type: 'post',
+            data: {conclusion: conclusion},
+            cache: false,
+            success: function (response) {
+                $('#ett_conclusion').val('');
+                $('.conclusion_table_content').empty();
+                $('.conclusion_table_content').append(response.result_html);
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
             }
-        }
-    });
-    return false;
+        });
+        return false;
+    }
 });
 
 $(document.body).on('click', '.delete-conclusion', function () {
@@ -2177,32 +2239,35 @@ $(document.body).on('click', '.delete-conclusion', function () {
 });
 
 $(document.body).on('click', '#add_protocol', function () {
-    var protocol = $('#new_protocol').val();
-    var stages = $('#protocol_stages').val();
-    var recovery = $('#protocol_recovery').val();
-    $.ajax({
-        url: '/cms/ett/protocol',
-        type: 'post',
-        data: {
-            protocol: protocol,
-            stages: stages,
-            recovery: recovery
-        },
-        cache: false,
-        success: function (response) {
-            $('#new_protocol').val('');
-            $('#protocol_stages').val('');
-            $('#protocol_recovery').val('');
-            $('.protocol_table_content').empty();
-            $('.protocol_table_content').append(response.result_html);
-            if (response.message == "Added successfully!") {
-                toastr["success"](response.message);
-            } else {
-                toastr["error"](response.message);
+    var validate = $('#ett_protocol_form').validate();
+    if (validate.form()) {
+        var protocol = $('#new_protocol').val();
+        var stages = $('#protocol_stages').val();
+        var recovery = $('#protocol_recovery').val();
+        $.ajax({
+            url: '/cms/ett/protocol',
+            type: 'post',
+            data: {
+                protocol: protocol,
+                stages: stages,
+                recovery: recovery
+            },
+            cache: false,
+            success: function (response) {
+                $('#new_protocol').val('');
+                $('#protocol_stages').val('');
+                $('#protocol_recovery').val('');
+                $('.protocol_table_content').empty();
+                $('.protocol_table_content').append(response.result_html);
+                if (response.message == "Added successfully!") {
+                    toastr["success"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
             }
-        }
-    });
-    return false;
+        });
+        return false;
+    }
 });
 
 $(document.body).on('click', '.delete-protocol', function () {
@@ -2550,7 +2615,11 @@ $(document.body).on('click', '#save_new_profile', function () {
                             $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                         }
                     });
-
+                     $('#profiletable tbody tr:first').addClass('row_selected');
+                    $("#profiletable tbody tr").click(function (e) {
+                        $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                        $(this).addClass('row_selected');
+                    });
                     if (response.success == true ) {
                         toastr["success"](response.message);
                     }else{
@@ -2568,12 +2637,38 @@ $(document.body).on('click', '#save_new_profile', function () {
     
 });
 
+function calculateBsaBmi(val){
+    var weight = val.value;
+    var height = $('#pat_profile_height').val();
+    var height_m = height / 100;
+    var height_m2 = Math.pow(height_m, 2);
+    var bmi = weight/height_m2;
+    var a = weight*height;
+    var b = a/3600;
+    var bsa = Math.sqrt(b);
+    var value_bmi = $('#pat_profile_bmi').val(bmi.toFixed(2));
+    var value_bsa = $('#pat_profile_bsa').val(bsa.toFixed(2));
+}
+
+function calculateBmiBsa(val){
+    var height = val.value;
+    var weight = $('#pat_profile_weight').val();
+    var height_m = height / 100;
+    var height_m2 = Math.pow(height_m, 2);
+    var bmi = weight/height_m2;
+    var a = weight*height;
+    var b = a/3600;
+    var bsa = Math.sqrt(b);
+    var value_bmi = $('#pat_profile_bmi').val(bmi.toFixed(2));
+    var value_bsa = $('#pat_profile_bsa').val(bsa.toFixed(2));
+}
+
 ////////////////////////////////////// Delete from profile page ////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#delete_profile', function () {
     var tr = $(this).closest('tr');
-    var profileid = tr.find('.profile_id').text();
+    var profileid = $.trim(tr.find('.profile_id').text());
     if (confirm('Are you sure you want to delete.')) {
         $.ajax({
             url: '/cms/profile/delete_profile',
@@ -2592,6 +2687,11 @@ $(document.body).on('click', '#delete_profile', function () {
                         "initComplete": function (settings, json) {
                             $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                         }
+                    });
+                     $('#profiletable tbody tr:first').addClass('row_selected');
+                    $("#profiletable tbody tr").click(function (e) {
+                        $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                        $(this).addClass('row_selected');
                     });
                     if (response.message == "Deleted successfully.") {
                         toastr["success"](response.message);
@@ -2676,6 +2776,11 @@ $(document.body).on('click', '#update_profile', function () {
                     "initComplete": function (settings, json) {
                         $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                     }
+                });
+                $('#profiletable tbody tr:first').addClass('row_selected');
+                $("#profiletable tbody tr").click(function (e) {
+                    $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
                 });
                 toastr["success"](response.message);
             } else {
@@ -3233,6 +3338,12 @@ $(document.body).on('click', '.delete-notes', function () {
             url: $(this).attr('data-href'),
             cache: false,
             success: function (response) {
+                $('.diary_sidebar').remove();
+                $('#diary_sidebar').append(response.diary_sidebar);
+                $("#diray_table tbody tr").click(function (e) {
+                    $('#diray_table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
                 if(response.success == true){
                     toastr["error"](response.message);
                 }else{
@@ -3555,7 +3666,7 @@ function printlabtest(editableObj,key,patient_id) {
 }
 
 // $(document.body).on('click', '#prescription_details', function () {
-//     var patient_id = $('#label_patient_id').text();
+//     var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
 //     $.ajax({
 //         url: window.location.origin+window.location.pathname+'profile/get_lab_test_detail',
 //         type: 'post',
@@ -3584,7 +3695,7 @@ function print_prescription(editableObj,test_id,patient_id) {
     }
 }
 $(document.body).on('click', '#sp_inst_details', function () {
-    var patient_id = $('#label_patient_id').text();
+    var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: window.location.origin+window.location.pathname+'profile/get_sp_inst_details',
         type: 'post',
@@ -3678,3 +3789,15 @@ function deletelabtestDetail(editableObj,key,patient_id){
         }
     });
 }
+
+$(document.body).on('click','#ett-details-pro',function(){
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'ett/get_protocol_detail_content',
+        cache: false,
+        success:function(response){
+            $('#ett6').empty();
+            $('#ett6').append(response.result_html);
+
+        }
+    });
+});

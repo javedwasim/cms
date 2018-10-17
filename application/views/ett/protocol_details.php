@@ -1,22 +1,20 @@
-<div class="tab-pane" id="ett6" role="tabpanel">
-    <div class="card">
-    	<div class="card-header" >
-			<div class="row">
-				<div class="col-md-12" style="display: inline-flex;">
-					<label>Protocol</label>
-					<select class="form-control col-md-4" onchange="filter_protocol_details(this.value)">
-    						<option>Select</option>
-                            <?php foreach($protocols as $key){?>
-                                <option value="<?php echo $key['id']; ?>"><?php echo $key['protocol']; ?></option>
-                            <?php }?>
-					</select>
-				</div>
+
+<div class="card">
+	<div class="card-header" >
+		<div class="row">
+			<div class="col-md-12" style="display: inline-flex;">
+				<label class="m-r-10 m-t-5">Protocol</label>
+				<select class="form-control col-md-4" onchange="filter_protocol_details(this.value)">
+						<option>Select</option>
+                        <?php foreach($protocols as $key){?>
+                            <option value="<?php echo $key['id']; ?>"><?php echo $key['protocol']; ?></option>
+                        <?php }?>
+				</select>
 			</div>
 		</div>
-		<div class="card-body protocol_container">
-            <?php $this->load->view('ett/protocol_details_table'); ?>
-        </div>
 	</div>
+	<div class="card-body protocol_container">
+    </div>
 </div>
 <script type="text/javascript">
     function filter_protocol_details(protocol_id){

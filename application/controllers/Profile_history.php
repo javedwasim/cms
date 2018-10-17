@@ -256,12 +256,23 @@ class Profile_history extends MY_Controller
             $json['message'] = "Seems to an error.";
         }
         $data['items'] = $this->History_model->get_history_items();
-        $data['active_tab'] = 'items';
+        $data['active_tab'] = 'history_items_content';
         $json['result_html'] = $this->load->view('history/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
 
+    }
+
+    public function get_item_tab(){
+        $data['items'] = $this->History_model->get_history_items();
+        $data['categories'] = $this->History_model->get_profile_history();
+        $data['active_tab'] = 'history_items_content';
+        $json['result_html'] = $this->load->view('history/items', $data, true);
+        $json['item_table'] = $this->load->view('history/item_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
     }
 }
 

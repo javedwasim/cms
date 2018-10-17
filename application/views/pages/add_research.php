@@ -3,28 +3,32 @@
         <div class="col-md-12">
             <div class="card">
             	<div class="card-header">
-            		<div class="row">
-                        <form id="research_category_form">
-                            <div class="col-md-12">
-                                <label>Research Name</label>
-                                <input type="text" class="form-control col-md-6" name="name" id="research_name" required maxlength="50">
-                                <button class="btn btn-primary add-research">Add</button>
+                    <form id="research_category_form">
+                		<div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Research Name</label>
+                                    <input type="text" class="form-control" name="name" id="research_name" required maxlength="50">
+                                </div>
                             </div>
-                        </form>
-    				</div>
+                            <div class="col-md-2 col-lg-1 m-t-25">
+                                <button class="btn btn-primary btn-sm add-research">Add</button>
+                            </div>
+        				</div>
+                    </form>
             	</div>
                 <div class="card-body" id="advice_item_table_container">
                     <table class="table table-bordered nowrap responsive tbl-qa" cellspacing="0" width="100%" >
                        <thead>
                             <tr>
-                                <th style="width: 10%"></th>
+                                <th style="width: 100px;">Action</th>
                                 <th>Research Name</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($researches as $research): ?>
                                 <tr>
-                                    <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
+                                    <td style="width:100px;" data-toggle="modal" data-target="#history-modal">
                                         <a class="delete-research btn btn-danger btn-xs"
                                            href="javascript:void(0)" title="delete"
                                            data-href="<?php echo site_url('setting/delete_research/') . $research['id'] ?>">

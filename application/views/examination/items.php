@@ -110,7 +110,7 @@ if(isset($rights[0]['user_rights']))
                 </div>
             </div>
         </div>
-        <div class="card-body examination_item_container">
+        <div class="card-body examination_item_container" style="overflow-y:auto; height:400px">
             <?php $this->load->view('examination/item_table'); ?>
         </div>
     </div>

@@ -382,6 +382,13 @@ class ETT extends MY_Controller
             set_content_type($json);
         }
     }
+    public function get_protocol_detail_content(){
+        $data['protocols'] = $this->ETT_model->get_protocol();
+        $json['result_html'] = $this->load->view('ett/protocol_details', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
 }
 
 

@@ -93,6 +93,20 @@
                 return array();
             }
         }
+
+        public function get_examication_description($id){
+            $result = $this->db->select('description')->from('examination')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function save_examination_category_description($data){
+            $this->db->where('id',$data['examination_cat_id'])->update('examination',array('description'=>$data['description']));
+            return $this->db->affected_rows();
+        }
 	}
 
 ?>

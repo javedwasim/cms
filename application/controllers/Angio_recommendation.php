@@ -26,7 +26,7 @@ class Angio_recommendation extends MY_Controller
         $result = $this->Recommendation_model->add_recommendation($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Recommendation  save successfully!";
+            $json['message'] = "Updated successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -49,7 +49,7 @@ class Angio_recommendation extends MY_Controller
             $result = $this->Recommendation_model->add_recommendation($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Recommendation created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -66,7 +66,7 @@ class Angio_recommendation extends MY_Controller
         $result = $this->Recommendation_model->delete_recommendation($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Recommendation deleted successfully.";
+            $json['message'] = "Deleted successfully.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";

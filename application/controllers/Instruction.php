@@ -51,7 +51,7 @@ class Instruction extends MY_Controller
             $result = $this->Instruction_model->add_instruction_category($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Instruction created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -75,7 +75,7 @@ class Instruction extends MY_Controller
         $result = $this->Instruction_model->delete_instruction_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Instruction  successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -100,7 +100,7 @@ class Instruction extends MY_Controller
         $result = $this->Instruction_model->add_instruction_category($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Instruction  save successfully!";
+            $json['message'] = "Updated successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -125,7 +125,7 @@ class Instruction extends MY_Controller
             $result = $this->Instruction_model->add_instruction_item($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Instruction Item created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -204,7 +204,7 @@ class Instruction extends MY_Controller
         $result = $this->Instruction_model->add_instruction_item($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Instruction item save successfully!";
+            $json['message'] = "updated successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -223,7 +223,7 @@ class Instruction extends MY_Controller
         $result = $this->Instruction_model->delete_inst_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Instruction item successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";

@@ -13,6 +13,8 @@
            success:function(response)
            {
               document.getElementById("csv_file").value = "";
+              $('.prof_his_id').prop('selectedIndex',0);
+                $('#history_items').prop('selectedIndex',0);
                 if (response.success==true) {
                   toastr["success"](response.message);
                 }else{
@@ -22,7 +24,7 @@
         });
     });
 </script>
-<div class="tab-pane" id="items" role="tabpanel">
+
     <div class="card">
         <div class="card-header">
           <div class="row">
@@ -98,5 +100,5 @@
             <?php $this->load->view('history/item_table'); ?>
         </div>
     </div>
-</div>
+
 

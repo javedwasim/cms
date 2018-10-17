@@ -8,23 +8,26 @@ if(isset($rights[0]['user_rights']))
 ?>
 <div class="tab-pane active" id="category" role="tabpanel">
     <div class="card">
-        <div class="card-header" style="display: inline-flex;">
-            <div class="row">
-                <form id="exam_category_form">
-                    <div class="col-md-12">
-                        <label>New Category</label>
-                        <input type="text" class="form-control col-md-6"  name="instruction_name" id="instruction_name" maxlength="50" required>
-                        <?php  if(($loggedin_user['is_admin']==1) || (in_array("examinations-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
-                            <button class="btn btn-primary add-examination-category">Add</button>
-                        <?php } else{ ?>
-                            <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
-                        <?php } ?>
+        <div class="card-header">
+            <form id="exam_category_form">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label>New Category</label>
+                            <input type="text" class="form-control"  name="instruction_name" id="instruction_name" maxlength="50" required>
+                        </div>
                     </div>
-                </form>
-
-            </div>
+                    <div class="col-md-2 col-lg-1 m-t-25">
+                    <?php  if(($loggedin_user['is_admin']==1) || (in_array("examinations-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
+                        <button class="btn btn-primary btn-sm add-examination-category">Add</button>
+                    <?php } else{ ?>
+                        <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
+                    <?php } ?>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="card-body ins_category_container">
+        <div class="card-body ins_category_container" style="overflow-y:auto; height:400px">
             <?php $this->load->view('examination/category_table'); ?>
         </div>
     </div>

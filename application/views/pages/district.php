@@ -10,7 +10,7 @@
                                 <input type="text" class="form-control" name="distrtict_add" id="distrtict_add" style="text-transform: capitalize;">
                             </div>
                         </div>
-                        <div class="col-md-2" style="margin-top: 20px;">
+                        <div class="col-md-2 p-l-0" style="margin-top: 25px;">
                             <button class="btn btn-primary btn-sm" id="add_district">Add</button>
                         </div>
                     </div>

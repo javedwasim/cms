@@ -1055,7 +1055,7 @@ $(document.body).on('click', '#save_medicine_item_description', function(){
         success: function(response) {
             $('#medicine_item_modal').modal('hide');
             if (response.success) {
-                toastr["error"](response.message);
+                toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
             }
@@ -1545,7 +1545,7 @@ $(document.body).on('click', '#history_item_btn', function(){
             $('.history_item_container').empty();
             $('.history_item_container').append(response.result_html);
             $('#history_items_name').val('');
-            $('#profile_history_id').prop('selectedIndex',0);
+            $('#profile_history_id').val("");
             if (response.success) {
                 toastr["success"](response.message);
             } else {
@@ -1967,7 +1967,7 @@ $(document.body).on('click', '#save_patient_echo_info', function(){
 });
 
 $(document.body).on('click', '#echo_detail', function () {
-    var patient_id = $('#label_patient_id').text();
+    var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: window.location.origin+window.location.pathname+'profile/get_echo_detail',
         type: 'post',
@@ -2013,7 +2013,7 @@ function showEditEchoDetail(editableObj,echo_id,patient_id) {
 
 
 $(document.body).on('click', '#lab_test_detail', function () {
-    var patient_id = $('#label_patient_id').text();
+    var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: window.location.origin+window.location.pathname+'profile/get_lab_test_detail',
         type: 'post',
@@ -2055,7 +2055,7 @@ function showEditLabDetail(editableObj,echo_id,patient_id) {
     });
 }
 $(document.body).on('click', '#ett_details', function () {
-    var patient_id = $('#label_patient_id').text();
+    var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: window.location.origin+window.location.pathname+'profile/get_ett_detail',
         type: 'post',
@@ -2123,3 +2123,99 @@ $(document.body).on('click', '#save_patient_examination_info', function(){
     return false;
 });
 
+$(document.body).on('click', '#history_item_tab', function(){
+    $.ajax({
+        url:window.location.origin+window.location.pathname+'profile_history/get_item_tab',
+        cache: false,
+        success: function(response){
+            $('#history_items_content').empty();
+            $('#history_items_content').append(response.result_html);
+            $('.history_item_container').empty();
+            $('.history_item_container').append(response.item_table);
+        }
+    });
+});
+$(document.body).on('click','#export_history_items',function(){
+    $('.prof_his_id').prop('selectedIndex',0);
+    $('#history_items').prop('selectedIndex',0);
+});
+
+$(document.body).on('click', '.edit_examination_category_modal', function(){
+    $('#examination_category_modal_form')[0].reset();
+    var cat_id = $(this).attr('data-examination-cat-id');
+    $('#examination_cat_id').val($(this).attr('data-examination-cat-id'));
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'examination/get_examination_cat_description',
+        type: 'post',
+        data: {id:cat_id},
+        cache: false,
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                $('#examination_cate_desc').val(response.description);
+                $('#examination_category_modal').modal('show');
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+$(document.body).on('click', '#save_examination_category_description', function(){
+    $.ajax({
+        url: $('#examination_category_modal_form').attr('data-action'),
+        type: 'post',
+        data:  $('#examination_category_modal_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#examination_category_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});
+
+$(document.body).on('click', '.edit_investigation_category_modal', function(){
+    $('#investigation_category_modal_form')[0].reset();
+    var cat_id = $(this).attr('data-investigation-cat-id');
+    $('#investigation_cat_id').val($(this).attr('data-investigation-cat-id'));
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'investigation/get_investigation_cat_description',
+        type: 'post',
+        data: {id:cat_id},
+        cache: false,
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                $('#investigation_cate_desc').val(response.description);
+                $('#investigation_category_modal').modal('show');
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
+    return false;
+});
+$(document.body).on('click', '#save_investigation_category_description', function(){
+    $.ajax({
+        url: $('#investigation_category_modal_form').attr('data-action'),
+        type: 'post',
+        data:  $('#investigation_category_modal_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#investigation_category_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
+});

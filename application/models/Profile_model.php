@@ -107,6 +107,7 @@ class Profile_model extends CI_Model
         }
     }
 
+
     public function selectd_note($id)
     {
         $result = $this->db->select('*')
@@ -281,7 +282,7 @@ class Profile_model extends CI_Model
         if ($result) {
             return $result->row();
         } else {
-            return false;
+            return array();
         }
     }
 

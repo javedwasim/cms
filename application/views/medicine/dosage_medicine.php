@@ -1,19 +1,21 @@
 <div class="tab-pane" id="assign-dosage" role="tabpanel">
     <div class="card">
         <div class="card-header">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label>Select Category:</label>
-                        <select class="form-control" onchange="assign_medicine_category(this.value)">
-                            <option>Select</option>
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
+            <form id="dosage_cat_form">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Select Category:</label>
+                            <select class="form-control" onchange="assign_medicine_category(this.value)">
+                                <option>Select</option>
+                                <?php foreach ($categories as $category): ?>
+                                    <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="card-body">
             <form id="update_dosage_medicine_form" method="post" role="form"
@@ -23,7 +25,7 @@
                 <div class="dosage_medicine_table">
                     <?php $this->load->view('medicine/dosage_medicine_table'); ?>
                 </div>
-                <button type="submit" class="btn btn-info pull-right btn-sm" id="update_dosage_medicine_btn">Update</button>
+                <button type="submit" class="btn btn-primary pull-right btn-sm" id="update_dosage_medicine_btn">Update</button>
             </form>
         </div>
     </div>

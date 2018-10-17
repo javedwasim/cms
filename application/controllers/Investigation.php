@@ -37,7 +37,7 @@ class Investigation extends MY_Controller
             $result = $this->Investigation_model->add_investigation_category($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "investigation created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -67,7 +67,7 @@ class Investigation extends MY_Controller
             $result = $this->Investigation_model->add_investigation_item($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "investigation Item created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -87,7 +87,11 @@ class Investigation extends MY_Controller
         $result = $this->Investigation_model->add_investigation_category($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Investigation  save successfully!";
+            if(isset($data['id'])){
+                $json['message'] = "Updated     successfully!";
+            }else{
+                $json['message'] = "Save successfully!";
+            }
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -102,7 +106,7 @@ class Investigation extends MY_Controller
         $result = $this->Investigation_model->delete_investigation_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Investigation Category successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -181,7 +185,11 @@ class Investigation extends MY_Controller
         $result = $this->Investigation_model->add_investigation_item($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Investigation item save successfully!";
+            if(isset($data['id'])){
+                $json['message'] = "Updated successfully!";
+            }else{
+                $json['message'] = "Saved successfully!";
+            }
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -196,7 +204,7 @@ class Investigation extends MY_Controller
         $result = $this->Investigation_model->delete_investigation_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Investigation item successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
@@ -208,6 +216,50 @@ class Investigation extends MY_Controller
             set_content_type($json);
         }
 
+    }
+
+    public function get_investigation_cat_description()
+    {
+        $data = $this->input->post();
+        $id = $data['id'];
+        $result = $this->Investigation_model->get_investigation_description($id);
+
+        if ($result) {
+            $json['success'] = true;
+            $json['description'] = $result['description'];
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function save_investigation_category_description()
+    {
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            $json['error'] = true;
+            $json['message'] = validation_errors();
+        } else {
+            $data = $this->input->post();
+            $result = $this->Investigation_model->save_investigation_category_description($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Description added successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error while adding description";
+            }
+        }
+
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
     }
 }
 

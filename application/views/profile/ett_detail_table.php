@@ -22,12 +22,12 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-<!-- <script type="text/javascript">
-    $(document.body).on('click', '#ett_details_table tbody tr', function () {
-        $('#ett_details_table tbody tr.row_selected').removeClass('row_selected');
+<script type="text/javascript">
+    $(document.body).on('click', '#ett_details_table tbody tr td:nth-child(4)', function () {
+        $('#ett_details_table tbody tr td:nth-child(4)').removeClass('row_selected');
         $(this).addClass('row_selected');
-        var etttestid = $('#ett_details_table tbody tr.row_selected').find('.etttestid').text();
-        var patid = $('#ett_details_table tbody tr.row_selected').find('.patid').text();
+        var etttestid = $('#ett_details_table tbody tr td:nth-child(4).row_selected').siblings('.etttestid').text();
+        var patid = $('#ett_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
         $.ajax({
             url: '/cms/print_profiles/get_ett_details',
             type: 'post',
@@ -41,4 +41,4 @@
             }
         });
     });
-</script> -->
+</script>

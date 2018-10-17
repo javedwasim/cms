@@ -93,6 +93,20 @@
                 return array();
             }
         }
+
+        public function get_investigation_description($id){
+            $result = $this->db->select('description')->from('investigation')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function save_investigation_category_description($data){
+            $this->db->where('id',$data['investigation_cat_id'])->update('investigation',array('description'=>$data['description']));
+            return $this->db->affected_rows();
+        }
 	}
 
 ?>

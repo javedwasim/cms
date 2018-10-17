@@ -1,4 +1,4 @@
-<div class="dashboard-content">
+<div class="dashboard-content" style="width: 88%;">
     <div class="row p-t-10 m-0">
         <div class="col-md-12">
             <div class="card-header">
@@ -50,13 +50,13 @@
                                         <label>Contact:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="password" name="contact_no" class="form-control col-md-10" />
+                                        <input type="text" name="contact_no" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Company:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="text" name="company" value="Shahadat Clinic" class="form-control col-md-10"  />
+                                        <input type="text" name="company" value="Shahadat Clinic" class="form-control col-md-10" readonly="readonly"  />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Address:</label>
@@ -283,6 +283,8 @@
                     <table class="table table-bordered nowrap responsive" cellspacing="0" id="permissions-table" width="100%" >
                         <thead>
                         <tr>
+                            <th>Delete</th>
+                            <th>Edit</th>
                             <th>Name</th>
                             <th>Username</th>
                             <th>Appointments</th>
@@ -313,6 +315,8 @@
                         <tbody>
                         <?php foreach ($users  as $user): $user_rights = explode(',',$user['user_rights']); //echo "<pre>"; print_r($user) ?>
                             <tr>
+                                <td><a class="btn btn-xs btn-danger" href="javascript:void(0)" ><i class="fa fa-trash"></i></a></td>
+                                <td><a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#useredit"><i class="fa fa-edit"></i></a></td>
                                 <td><?php echo $user['full_name']; ?></td>
                                 <td><?php echo $user['username']; ?></td>
                                 <td><input type="checkbox" value="<?php echo $user['login_id'].'-5'; ?>" class="user_permission"
@@ -369,5 +373,81 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+  <!-- Modal -->
+<div class="modal fade" id="useredit" role="dialog">
+    <div class="modal-dialog">
+          <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit User</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="update_registered_user_form" method="post" role="form"
+                          data-action="<?php echo site_url('setting/update_registered_user') ?>"
+                          enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Name:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" name="full_name" class="form-control col-md-10" />
+                        </div>
+                        <div class="col-md-3 m-t-10">
+                            <label>Sex:</label>
+                        </div>
+                        <div class="col-md-9 m-t-10">
+                            <div class="form-group" >
+                                <label class="radio-inline" style="color:#000 !important;margin-right: 15px;"><input type="radio" name="gender" checked>Male</label>
+                                <label class="radio-inline" style="color:#000 !important;"><input type="radio" name="gender">Female</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 m-t-10">
+                            <label>Username:</label>
+                        </div>
+                        <div class="col-md-9 m-t-10">
+                            <input type="text" name="username" class="form-control col-md-10" />
+                        </div>
+                        <div class="col-md-3 m-t-10">
+                            <label>Password:</label>
+                        </div>
+                        <div class="col-md-9 m-t-10">
+                            <input type="password" name="password" class="form-control col-md-10" />
+                        </div>
+                        <div class="col-md-3 m-t-10">
+                            <label>Re-Type Password:</label>
+                        </div>
+                        <div class="col-md-9 m-t-10">
+                            <input type="password" name="confirm_password" class="form-control col-md-10" />
+                        </div>
+                        <div class="col-md-3 m-t-10">
+                            <label>Contact:</label>
+                        </div>
+                        <div class="col-md-9 m-t-10">
+                            <input type="text" name="contact_no" class="form-control col-md-10" />
+                        </div>
+                        <div class="col-md-3 m-t-10">
+                            <label>Company:</label>
+                        </div>
+                        <div class="col-md-9 m-t-10">
+                            <input type="text" name="company" value="Shahadat Clinic" readonly="readonly" class="form-control col-md-10"  />
+                        </div>
+                        <div class="col-md-3 m-t-10">
+                            <label>Address:</label>
+                        </div>
+                        <div class="col-md-9 m-t-10">
+                            <textarea class="form-control col-md-10" name="address" rows="2"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Update</button>
+            </div>
+        </div> 
     </div>
 </div>

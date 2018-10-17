@@ -16,7 +16,8 @@
                 <a class="edit-profile-history-btn btn btn-info btn-xs"
                    href="javascript:void(0)"
                    data-profile-history-id="<?php echo $category['id']; ?>">
-                   <i class="far fa-question-circle"></i></a>
+                   <i class="far fa-question-circle"></i>
+                </a>
             </td>
             <td contenteditable="true" class="exam_cate"
                 onBlur="saveProfileHistory(this,'cate_name','<?php echo $category['id']; ?>')"

@@ -52,8 +52,7 @@ class User_model extends CI_Model {
         }
     }
     
-    public function get_last_booking(){
-       $date = date('Y-m-d');
+    public function get_last_booking($date){
         $result = $this->db->select('appointment_date ,order_number')
                 ->where('DATE(appointment_date)', $date)
                 ->order_by('order_number', 'DESC')

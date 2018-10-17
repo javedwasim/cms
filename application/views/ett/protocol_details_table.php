@@ -13,19 +13,19 @@
         <?php foreach($protocol_details as $key){?>
         <tr>
             <?php if(($loggedin_user['is_admin']==1) || in_array("ett-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td contenteditable="true" class="exam_cate"
+                <td contenteditable="true" class="exam_cate word_break"
                     onBlur="saveToDatabase(this,'stage_name','<?php echo $key['id']; ?>')"
                     onClick="showExamination(this);"><?php echo $key['stage_name']; ?></td>
-                <td contenteditable="true" class="exam_cate"
+                <td contenteditable="true" class="exam_cate word_break" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"
                     onBlur="saveToDatabase(this,'speed_mph','<?php echo $key['id']; ?>')"
                     onClick="showExamination(this);"><?php echo $key['speed_mph']; ?></td>
-                <td contenteditable="true" class="exam_cate"
+                <td contenteditable="true" class="exam_cate word_break" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"
                     onBlur="saveToDatabase(this,'grade','<?php echo $key['id']; ?>')"
                     onClick="showExamination(this);"><?php echo $key['grade']; ?></td>
-                <td contenteditable="true" class="exam_cate"
+                <td contenteditable="true" class="exam_cate word_break" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"
                     onBlur="saveToDatabase(this,'stage_time','<?php echo $key['id']; ?>')"
                     onClick="showExamination(this);"><?php echo date('h:i', strtotime($key['stage_time'])) ?></td>
-                <td contenteditable="true" class="exam_cate"
+                <td contenteditable="true" class="exam_cate word_break" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"
                     onBlur="saveToDatabase(this,'mets','<?php echo $key['id']; ?>')"
                     onClick="showExamination(this);"><?php echo $key['mets']; ?></td>
             <?php } else{ ?>

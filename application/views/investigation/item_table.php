@@ -56,23 +56,6 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        $('.item_table').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false,
-            "sort": false,
-            autoWidth: false, //step 1
-            columnDefs: [
-                { width: '10%', targets: 0 }, //step 2, column 1 out of 4
-            ]
-        });
-
-
-    });
-</script>
-
-<script>
     function showEdit(editableObj) {
         $('td.investigation_item').css('background', '#FFF');
         $('td.investigation_item').css('color', '#212529');

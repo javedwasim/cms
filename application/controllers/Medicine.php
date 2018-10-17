@@ -38,7 +38,7 @@ class Medicine extends MY_Controller
             $result = $this->Medicine_model->add_medicine_category($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Medicine created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -69,7 +69,7 @@ class Medicine extends MY_Controller
             $result = $this->Medicine_model->add_medicine_item($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Medicine Item created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -89,7 +89,7 @@ class Medicine extends MY_Controller
         $result = $this->Medicine_model->add_medicine_category($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Medicine  save successfully!";
+            $json['message'] = "Updated successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -105,7 +105,7 @@ class Medicine extends MY_Controller
         $result = $this->Medicine_model->add_dosage_category($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Dosage  save successfully!";
+            $json['message'] = "Updated successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -120,7 +120,7 @@ class Medicine extends MY_Controller
         $result = $this->Medicine_model->delete_medicine_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Medicine Category successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -182,7 +182,7 @@ class Medicine extends MY_Controller
             $result = $this->Medicine_model->save_medicine_item_description($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Description added successfully!";
+                $json['message'] = "Added successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error while adding description";
@@ -200,7 +200,7 @@ class Medicine extends MY_Controller
         $result = $this->Medicine_model->add_medicine_item($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "medicine item save successfully!";
+            $json['message'] = "Updated successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -215,7 +215,7 @@ class Medicine extends MY_Controller
         $result = $this->Medicine_model->delete_medicine_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Medicine item successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
@@ -234,7 +234,7 @@ class Medicine extends MY_Controller
         $result = $this->Medicine_model->delete_dosage_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Dosage  successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
@@ -262,7 +262,7 @@ class Medicine extends MY_Controller
             $result = $this->Medicine_model->add_dosage_category($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Dosage created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -290,7 +290,7 @@ class Medicine extends MY_Controller
             $result = $this->Medicine_model->update_dosage_medicine($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Dosage category updated successfully!";
+                $json['message'] = "Updated successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";

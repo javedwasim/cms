@@ -1,17 +1,19 @@
 <div class="tab-pane active" id="category" role="tabpanel">
     <div class="card">
-        <div class="card-header" style="display: inline-flex;">
-            <div class="row">
-                <form id="investigation_category_form">
-                    <div class="col-md-12">
+        <div class="card-header">
+            <form id="investigation_category_form">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
                         <label>New Category</label>
-                        <input type="text" class="form-control col-md-6" name="instruction_name" id="instruction_name" maxlength="50" required>
-                        <button class="btn btn-primary add-investigation-category">Add</button>
+                        <input type="text" class="form-control" name="instruction_name" id="instruction_name" maxlength="50" required>
                     </div>
-                </form>
-            </div>
+                    <div class="col-md-2 col-lg-1 m-t-25">
+                        <button class="btn btn-primary btn-sm add-investigation-category">Add</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="card-body investigation_category_container">
+        <div class="card-body investigation_category_container" style="height: 400px; overflow-y: scroll;">
             <?php $this->load->view('investigation/category_table'); ?>
         </div>
     </div>
@@ -48,17 +50,3 @@
         background-color: #FDFDFD;
     }
 </style>
-<script>
-    $(document).ready(function () {
-        $('.datatables').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false,
-            "sort": false,
-            columnDefs: [
-                { width: 1, targets: 0 }
-            ],
-            fixedColumns: true
-        });
-    });
-</script>

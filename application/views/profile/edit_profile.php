@@ -26,7 +26,7 @@
                                 <label>Age</label>
                                 <div style="display: inline-flex;">
                                     <?php $age = (int) filter_var($profile_data->pat_age, FILTER_SANITIZE_NUMBER_INT); ?>
-                                    <input type="text" name="" value="<?php echo $age ; ?>" class="form-control" id="updat_pat_profile_age_digit" required="required">
+                                    <input type="text" name="" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" value="<?php echo $age ; ?>" class="form-control" id="updat_pat_profile_age_digit" required="required">
                                     <select class="form-control" id="updat_pat_profile_age">
                                         <option>Years</option>
                                         <option>Months</option>
@@ -70,31 +70,31 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Contact</label>
-                                    <input type="number" name="" id="updat_pat_profile_contact" value="<?php echo $profile_data->pat_contact ; ?>" required="required" maxlength="11" class="form-control" />
+                                    <input type="text" name="" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" id="updat_pat_profile_contact" value="<?php echo $profile_data->pat_contact ; ?>" required="required" maxlength="11" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Height:</label>
-                                    <input type="number" class="form-control" id="updat_pat_profile_height" value="<?php echo $profile_data->pat_height ; ?>" placeholder="cm" required="required" maxlength="5">
+                                    <input type="text" class="form-control" id="updat_pat_profile_height" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" value="<?php echo $profile_data->pat_height ; ?>" placeholder="cm" required="required" maxlength="5">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="m-l-10">BMI:</label>
-                                    <input type="text" value="<?php echo $profile_data->pat_bmi ; ?>"  id="updat_pat_profile_bmi" class="form-control">
+                                    <input type="text" value="<?php echo $profile_data->pat_bmi ; ?>"  id="updat_pat_profile_bmi" class="form-control" readonly >
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Weight:</label>
-                                    <input type="number" class="form-control" value="<?php echo $profile_data->pat_weight ; ?>" id="updat_pat_profile_weight" placeholder="Kg" required="required" maxlength="5">
+                                    <input type="text" class="form-control" value="<?php echo $profile_data->pat_weight ; ?>" id="updat_pat_profile_weight" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" placeholder="Kg" required="required" maxlength="5">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="m-l-10">BSA:</label>
-                                    <input type="text" value="<?php echo $profile_data->pat_bsa ; ?>" id="updat_pat_profile_bsa" class="form-control">
+                                    <input type="text" value="<?php echo $profile_data->pat_bsa ; ?>" id="updat_pat_profile_bsa"  class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">

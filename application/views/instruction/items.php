@@ -107,7 +107,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body ins_item_container">
+        <div class="card-body ins_item_container" style="height: 400px; overflow-y: scroll;">
             <?php $this->load->view('instruction/item_table'); ?>
         </div>
     </div>

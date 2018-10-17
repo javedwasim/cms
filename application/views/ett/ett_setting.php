@@ -13,7 +13,7 @@
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#ett3" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Description</span></a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#ett4" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Conclusion</span></a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#ett5" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Protocols</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#ett6" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Protocols Details</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#ett6" id="ett-details-pro" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Protocols Details</span></a> </li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content tabcontent-border">
@@ -22,7 +22,8 @@
                         <?php $this->load->view('ett/description'); ?>
                         <?php $this->load->view('ett/conclusion'); ?>
                         <?php $this->load->view('ett/protocol'); ?>
-                        <?php $this->load->view('ett/protocol_details'); ?>
+                        <div class="tab-pane" id="ett6" role="tabpanel">
+                        </div>
                     </div>
                 </div>
             </div>

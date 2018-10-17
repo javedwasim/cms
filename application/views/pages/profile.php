@@ -208,24 +208,28 @@ if(isset($rights[0]['user_rights']))
                     		<div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Name</label>
-		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" value="" style="text-transform: capitalize;" minlength="5" maxlength="40" required>
+		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" style="text-transform: capitalize;" minlength="3" maxlength="40" required>
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Father/Wife Name:</label>
-		                            <input type="text" class="form-control" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" value="" style="text-transform: capitalize;" maxlength="40" required>
+		                            <input type="text" class="form-control" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" style="text-transform: capitalize;" maxlength="40" required>
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 	                        	<label>Age</label>
-	                        	<div style="display: inline-flex;">
-		                        	<input type="text" name="" class="form-control" id="pat_profile_age_digit" required="required">
-		                        	<select class="form-control" id="pat_profile_age">
-	                        			<option>Years</option>
-	                        			<option>Months</option>
-	                        			<option>Days</option>
-	                        		</select>
+	                        	<div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" name="" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" class="form-control" id="pat_profile_age_digit" maxlength="3" required="required">    
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="pat_profile_age">
+                                            <option>Years</option>
+                                            <option>Months</option>
+                                            <option>Days</option>
+                                        </select>
+                                    </div>
                         		</div>
 	                        </div>
 	                        <div class="col-md-4">
@@ -252,31 +256,31 @@ if(isset($rights[0]['user_rights']))
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Contact</label>
-                                    <input type="number" name="" id="pat_profile_contact" required="required" maxlength="11" class="form-control" />
+                                    <input type="text" name="" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" id="pat_profile_contact" required="required" maxlength="11" class="form-control" />
                                 </div>
                             </div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Height:</label>
-	                        		<input type="number" class="form-control" id="pat_profile_height" name="" placeholder="cm" required="required" maxlength="5">
+	                        		<input type="text" class="form-control" onchange="calculateBmiBsa(this)" id="pat_profile_height" name="" placeholder="cm" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" required="required" maxlength="5">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BMI:</label>
-	                        		<input type="text" name=""  id="pat_profile_bmi" class="form-control">
+	                        		<input type="text" name=""  id="pat_profile_bmi" class="form-control" readonly>
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Weight:</label>
-	                        		<input type="text" class="form-control" name="" id="pat_profile_weight" placeholder="Kg" required="required" maxlength="5">
+	                        		<input type="text" class="form-control" onchange="calculateBsaBmi(this)" name="" id="pat_profile_weight" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" placeholder="Kg" required="required" maxlength="5">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BSA:</label>
-	                        		<input type="text" name="" id="pat_profile_bsa" class="form-control">
+	                        		<input type="text" name="" id="pat_profile_bsa" class="form-control" readonly>
                         		</div>
                         	</div>
                         	<div class="col-md-4">

@@ -38,7 +38,7 @@ class Examination extends MY_Controller
             $result = $this->Examination_model->add_examination_category($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Examination created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -69,7 +69,7 @@ class Examination extends MY_Controller
             $result = $this->Examination_model->add_examination_item($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Examination Item created successfully!";
+                $json['message'] = "Created successfully!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error";
@@ -90,7 +90,11 @@ class Examination extends MY_Controller
         $result = $this->Examination_model->add_examination_category($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Examination  save successfully!";
+            if(isset($data['id'])){
+                $json['message'] = "Updated successfully!";
+            }else{
+                $json['message'] = "Created successfully!";
+            }
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -105,7 +109,7 @@ class Examination extends MY_Controller
         $result = $this->Examination_model->delete_examination_category($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Examination Category successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -186,7 +190,11 @@ class Examination extends MY_Controller
         $result = $this->Examination_model->add_examination_item($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "examination item save successfully!";
+            if(isset($data['id'])){
+                $json['message'] = "Updated successfully!";
+            }else{
+                $json['message'] = "Saved successfully!";
+            }
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -201,7 +209,7 @@ class Examination extends MY_Controller
         $result = $this->Examination_model->delete_examination_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Examination item successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
@@ -214,6 +222,50 @@ class Examination extends MY_Controller
             set_content_type($json);
         }
 
+    }
+
+    public function get_examination_cat_description()
+    {
+        $data = $this->input->post();
+        $id = $data['id'];
+        $result = $this->Examination_model->get_examication_description($id);
+
+        if ($result) {
+            $json['success'] = true;
+            $json['description'] = $result['description'];
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function save_examination_category_description()
+    {
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            $json['error'] = true;
+            $json['message'] = validation_errors();
+        } else {
+            $data = $this->input->post();
+            $result = $this->Examination_model->save_examination_category_description($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Description added successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error while adding description";
+            }
+        }
+
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
     }
 }
 

@@ -236,7 +236,7 @@
                             echo "";
                         }?>
                     </td>
-                    <td class="hide">
+                    <td class="hide booking_status_id">
                         <?php 
                         if(isset($bkarray[$i]['fee_paid_status'])){
                             echo $bkarray[$i]['fee_paid_status'];
@@ -359,7 +359,7 @@
                     <td class="appointment_booking_id hide" >
                         <?php echo $details['appointment_booking_id'] ?>
                     </td>
-                    <td class="hide">
+                    <td class="hide booking_status_id">
                         <?php echo $details['fee_paid_status'] ?>
                     </td>
                 </tr>
@@ -470,7 +470,7 @@
                     <td class="appointment_booking_id hide" >
                         <?php echo $details['appointment_booking_id'] ?>
                     </td>
-                    <td class="hide">
+                    <td class="hide booking_status_id">
                         <?php echo $details['fee_paid_status'] ?>
                     </td>
                 </tr>

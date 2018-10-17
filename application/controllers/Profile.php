@@ -403,7 +403,7 @@ class Profile extends MY_Controller
         }
     }
 
-    public function delete_note($id)
+    public function delete_note($id,$name)
     {
         $result = $this->Profile_model->delete_notes($id);
         if ($result) {
@@ -413,6 +413,8 @@ class Profile extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
+        $data['notes_record'] = $this->Profile_model->notes_record($name);
+        $json['diary_sidebar'] = $this->load->view('diary/diary_sidebar', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

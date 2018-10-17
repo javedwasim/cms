@@ -138,31 +138,21 @@ class Setting extends MY_Controller
         }
     }
 
-    public function history()
-    {
-        $data['history_categories'] = $this->Setting_model->get_history_categories();
-        $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('history/history', $data, true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
-
-    public function add_history_category()
-    {
-        $category = $this->input->post('category');
-        $result = $this->Setting_model->save_history_category($category);
-        $data['rights'] = $this->session->userdata('other_rights');
-        if ($result) {
-            $data['history_categories'] = $this->Setting_model->get_history_categories();
-            $json['category_table'] = $this->load->view('pages/category_table', $data, true);
-            $json['message'] = "Added Successfully.";
-        } else {
-            $data['history_categories'] = $this->Setting_model->get_history_categories();
-            $json['category_table'] = $this->load->view('pages/category_table', $data, true);
-            $json['message'] = "Seems an error.";
-        }
-    }
+    // public function add_history_category()
+    // {
+    //     $category = $this->input->post('category');
+    //     $result = $this->Setting_model->save_history_category($category);
+    //     $data['rights'] = $this->session->userdata('other_rights');
+    //     if ($result) {
+    //         $data['history_categories'] = $this->Setting_model->get_history_categories();
+    //         $json['category_table'] = $this->load->view('pages/category_table', $data, true);
+    //         $json['message'] = "Added Successfully.";
+    //     } else {
+    //         $data['history_categories'] = $this->Setting_model->get_history_categories();
+    //         $json['category_table'] = $this->load->view('pages/category_table', $data, true);
+    //         $json['message'] = "Seems an error.";
+    //     }
+    // }
 
 
     public function examination()
@@ -188,14 +178,6 @@ class Setting extends MY_Controller
             set_content_type($json);
         }
     }
-
-    // public function special_instructions()
-    // {
-    //     $json['result_html'] = $this->load->view('pages/instruction', "", true);
-    //     if ($this->input->is_ajax_request()) {
-    //         set_content_type($json);
-    //     }
-    // }
 
     public function medicine()
     {
@@ -226,13 +208,6 @@ class Setting extends MY_Controller
             set_content_type($json);
         }
     }
-
-    // public function manage_research(){
-    // 	$json['result_html'] = $this->load->view('pages/manage_research', "", true);
-    //           if ($this->input->is_ajax_request()) {
-    //               set_content_type($json);
-    //           }
-    // }
 
     public function register_user()
     {
@@ -333,7 +308,6 @@ class Setting extends MY_Controller
         $data['advice_items'] = $this->Setting_model->get_advice_items();
         $data['instructions'] = $this->Instruction_model->get_instruction_categories($instruction_category);
         $data['instruction_item'] = $this->Instruction_model->get_inst_items($instruction_category);
-
         $data['medicines'] = $this->Medicine_model->get_medicine_categories();
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
         $json['medicine_html'] = $this->load->view('profile/medicine_category_table', $data, true);
@@ -363,7 +337,7 @@ class Setting extends MY_Controller
             $result = $this->Setting_model->add_advice($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Advice created successfully!";
+                $json['message'] = "Successfully Created!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error while creating advice";
@@ -385,7 +359,7 @@ class Setting extends MY_Controller
         $result = $this->Setting_model->add_advice($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Advice save successfully!";
+            $json['message'] = "Successfully Updated!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error while saving advice";
@@ -400,7 +374,7 @@ class Setting extends MY_Controller
         $result = $this->Setting_model->delete_advice($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Advice successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error in deleting advice record.";
@@ -434,7 +408,7 @@ class Setting extends MY_Controller
             $result = $this->Setting_model->add_advice_item($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Advice item created successfully!";
+                $json['message'] = "Successfully Created !";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error while creating advice item";
@@ -456,7 +430,7 @@ class Setting extends MY_Controller
         $result = $this->Setting_model->delete_advice_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Advice successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error in deleting advice record.";
@@ -479,7 +453,7 @@ class Setting extends MY_Controller
         $result = $this->Setting_model->add_advice_item($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Advice Item save successfully!";
+            $json['message'] = "Successfully Updated!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error while saving advice item";
@@ -493,7 +467,7 @@ class Setting extends MY_Controller
     {
         $this->load->library('form_validation');
         $this->load->helper('security');
-        $this->form_validation->set_rules('name', 'Research Name', 'required|xss_clean');
+        $this->form_validation->set_rules('name', 'Research Name', 'required|is_unique[research.name]|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
@@ -503,7 +477,7 @@ class Setting extends MY_Controller
             $result = $this->Setting_model->add_research($data);
             if ($result) {
                 $json['success'] = true;
-                $json['message'] = "Research name added successfully!";
+                $json['message'] = "Successfully Added!";
             } else {
                 $json['error'] = true;
                 $json['message'] = "Seems to an error while creating research";
@@ -523,7 +497,7 @@ class Setting extends MY_Controller
         $result = $this->Setting_model->add_research($data);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Research name save successfully!";
+            $json['message'] = "Successfully Updated!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error while saving research name";
@@ -583,7 +557,7 @@ class Setting extends MY_Controller
         $result = $this->Setting_model->delete_research($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "Research successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error in deleting research record.";

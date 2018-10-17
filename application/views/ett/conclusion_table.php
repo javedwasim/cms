@@ -2,14 +2,14 @@
 <table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
    <thead>
         <tr>
-            <th style="width: 10%">Delete</th>
+            <th style="width:50px;">Delete</th>
             <th>Conclusion</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach($conclusions as $key){?>
         <tr>
-            <td style="width: 10%">
+            <td style="width:50px;">
                 <?php if($loggedin_user['is_admin']==1){ ?>
                     <a class="delete-conclusion btn btn-danger btn-xs"
                        href="javascript:void(0)" title="delete"

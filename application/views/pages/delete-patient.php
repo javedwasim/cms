@@ -7,15 +7,17 @@
                 </div>
                 <div class="card-body">
                    <form id="delete_patient_form">
-                        <div class="form-group">
-                            <div class="input-daterange input-group" id="date-range">
+                        <div class="row">
+                            <div class="col-md-5 p-r-0">
                                 <input type="text" class="form-control pat_search_from" name="start" placeholder="From date" required/>
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-info b-0 text-white">TO</span>
-                                </div>
+                            </div>
+                            <div class="col-md-1 p-0">
+                                <span class="input-group-text bg-info b-0 text-white" style="padding: 4px 15px;">TO</span>
+                            </div>
+                            <div class="col-md-5 p-l-0">
                                 <input type="text" class="form-control pat_search_to" placeholder="To date" name="end" required/>
                             </div>
-                        </div>
+                       </div>
                         <button type="button" id="delete_patient" class="btn btn-danger waves-effect waves-light">Delete</button>
                     </form>
                 </div>
