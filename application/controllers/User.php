@@ -65,6 +65,7 @@ class User extends MY_Controller {
         $appdate = $this->input->post('appointmentDate');
         $date = date('Y-m-d', strtotime($appdate));
         $currentdate = date('Y-m-d');
+        $collectedby = $this->session->userdata('username');
         $limiterexist = $this->User_model->check_limiter($date);
         if ($limiterexist) {
             $limit=$limiterexist->limiter;
@@ -95,7 +96,6 @@ class User extends MY_Controller {
                         $app['datetime'] = $appdate . " " . date('H:i:s');
                         $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
                         $data = array();
-                        $collectedby = $this->session->userdata('username');
                         if ($AppFee == "") {
                             $data = array(
                                 'order_number' => $order_no,
@@ -103,7 +103,9 @@ class User extends MY_Controller {
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
                                 'consultant_fee' => $AppFee,
-                                'booking_flag' => $bookingFlag
+                                'booking_flag' => $bookingFlag,
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
                             );
                         } else {
                             $data = array(
@@ -115,7 +117,9 @@ class User extends MY_Controller {
                                 'fee_collected_by' => $collectedby,
                                 'fee_paid_at' => $bookingDatetime,
                                 'fee_paid_status' => '1',
-                                'booking_flag' => $bookingFlag
+                                'booking_flag' => $bookingFlag,
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
                             );
                         }
                         $result = $this->User_model->appointment_book($data);
@@ -157,7 +161,6 @@ class User extends MY_Controller {
                             }
                         }
                         $data = array();
-                        $collectedby = $this->session->userdata('username');
                         if ($AppFee == "") {
                             $data = array(
                                 'order_number' => $order_no,
@@ -165,7 +168,9 @@ class User extends MY_Controller {
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
                                 'consultant_fee' => $AppFee,
-                                'booking_flag' => $bookingFlag
+                                'booking_flag' => $bookingFlag,
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
                             );
                         } else {
                             $data = array(
@@ -177,7 +182,9 @@ class User extends MY_Controller {
                                 'fee_collected_by' => $collectedby,
                                 'fee_paid_at' => $bookingDatetime,
                                 'fee_paid_status' => '1',
-                                'booking_flag' => $bookingFlag
+                                'booking_flag' => $bookingFlag,
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
                             );
                         }
                         $result = $this->User_model->appointment_book($data);
@@ -228,7 +235,9 @@ class User extends MY_Controller {
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
                                 'consultant_fee' => $AppFee,
-                                'booking_flag' => $bookingFlag
+                                'booking_flag' => $bookingFlag,
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
                             );
                         } else {
                             $data = array(
@@ -240,7 +249,9 @@ class User extends MY_Controller {
                                 'fee_collected_by' => $collectedby,
                                 'fee_paid_at' => $bookingDatetime,
                                 'fee_paid_status' => '1',
-                                'booking_flag' => $bookingFlag
+                                'booking_flag' => $bookingFlag,
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
                             );
                         }
                         $result = $this->User_model->appointment_book($data);
@@ -283,14 +294,15 @@ class User extends MY_Controller {
                             }
                         }
                         $data = array();
-                        $collectedby = $this->session->userdata('username');
                         if ($AppFee == "") {
                             $data = array(
                                 'order_number' => $order_no,
                                 'full_name' => $patName,
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee
+                                'consultant_fee' => $AppFee,
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
                             );
                         } else {
                             $data = array(
@@ -301,7 +313,9 @@ class User extends MY_Controller {
                                 'consultant_fee' => $AppFee,
                                 'fee_collected_by' => $collectedby,
                                 'fee_paid_at' => $bookingDatetime,
-                                'fee_paid_status' => '1'
+                                'fee_paid_status' => '1',
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
                             );
                         }
                         $result = $this->User_model->appointment_book($data);
@@ -348,7 +362,6 @@ class User extends MY_Controller {
                     $app['datetime'] = $appdate . " " . date('H:i:s');
                     $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
                     $data = array();
-                    $collectedby = $this->session->userdata('username');
                     if ($AppFee == "") {
                         $data = array(
                             'order_number' => $order_no,
@@ -356,7 +369,9 @@ class User extends MY_Controller {
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
                             'consultant_fee' => $AppFee,
-                            'booking_flag' => $bookingFlag
+                            'booking_flag' => $bookingFlag,
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
                         );
                     } else {
                         $data = array(
@@ -368,7 +383,9 @@ class User extends MY_Controller {
                             'fee_collected_by' => $collectedby,
                             'fee_paid_at' => $bookingDatetime,
                             'fee_paid_status' => '1',
-                            'booking_flag' => $bookingFlag
+                            'booking_flag' => $bookingFlag,
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
                         );
                     }
                     $result = $this->User_model->appointment_book($data);
@@ -419,7 +436,9 @@ class User extends MY_Controller {
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
                             'consultant_fee' => $AppFee,
-                            'booking_flag' => $bookingFlag
+                            'booking_flag' => $bookingFlag,
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
                         );
                     } else {
                         $data = array(
@@ -431,7 +450,9 @@ class User extends MY_Controller {
                             'fee_collected_by' => $collectedby,
                             'fee_paid_at' => $bookingDatetime,
                             'fee_paid_status' => '1',
-                            'booking_flag' => $bookingFlag
+                            'booking_flag' => $bookingFlag,
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
                         );
                     }
                     $result = $this->User_model->appointment_book($data);
@@ -482,7 +503,9 @@ class User extends MY_Controller {
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
                             'consultant_fee' => $AppFee,
-                            'booking_flag' => $bookingFlag
+                            'booking_flag' => $bookingFlag,
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
                         );
                     } else {
                         $data = array(
@@ -494,7 +517,9 @@ class User extends MY_Controller {
                             'fee_collected_by' => $collectedby,
                             'fee_paid_at' => $bookingDatetime,
                             'fee_paid_status' => '1',
-                            'booking_flag' => $bookingFlag
+                            'booking_flag' => $bookingFlag,
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
                         );
                     }
                     $result = $this->User_model->appointment_book($data);
@@ -544,7 +569,9 @@ class User extends MY_Controller {
                             'full_name' => $patName,
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $AppFee
+                            'consultant_fee' => $AppFee,
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
                         );
                     } else {
                         $data = array(
@@ -555,7 +582,9 @@ class User extends MY_Controller {
                             'consultant_fee' => $AppFee,
                             'fee_collected_by' => $collectedby,
                             'fee_paid_at' => $bookingDatetime,
-                            'fee_paid_status' => '1'
+                            'fee_paid_status' => '1',
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
                         );
                     }
                     $result = $this->User_model->appointment_book($data);

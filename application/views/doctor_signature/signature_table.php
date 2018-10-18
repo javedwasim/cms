@@ -21,22 +21,22 @@
                 </td>
                 <td
                 contenteditable="true"
-                onBlur="saveToDatabase(this,'name','<?php echo $details['id']; ?>')"
+                onBlur="updateSignature(this,'name','<?php echo $details['id']; ?>')"
                 onClick="showEdit(this);"
                 ><?php echo $details['name']; ?></td>
                 <td
                 contenteditable="true"
-                onBlur="saveToDatabase(this,'qualifications','<?php echo $details['id']; ?>')"
+                onBlur="updateSignature(this,'qualifications','<?php echo $details['id']; ?>')"
                 onClick="showEdit(this);"
                 ><?php echo $details['qualifications']; ?></td>
                 <td
                 contenteditable="true"
-                onBlur="saveToDatabase(this,'institute','<?php echo $details['id']; ?>')"
+                onBlur="updateSignature(this,'institute','<?php echo $details['id']; ?>')"
                 onClick="showEdit(this);"
                 ><?php echo $details['institute']; ?></td>
                 <td
                 contenteditable="true"
-                onBlur="saveToDatabase(this,'designation','<?php echo $details['id']; ?>')"
+                onBlur="updateSignature(this,'designation','<?php echo $details['id']; ?>')"
                 onClick="showEdit(this);"
                 ><?php echo $details['designation']; ?></td>
             </tr>

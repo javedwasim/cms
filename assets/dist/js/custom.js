@@ -1850,26 +1850,26 @@ $(document.body).on('click', '#pat_research', function () {
 /////////////////////////////////// load register user page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-$(document.body).on('click', '#register-user', function () {
-    $.ajax({
-        url: '/cms/setting/register_user',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    "scrollY": '50vh',
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "info": false
-                });
-            }
-        }
-    });
-});
+// $(document.body).on('click', '#register-user', function () {
+//     $.ajax({
+//         url: '/cms/setting/register_user',
+//         cache: false,
+//         success: function (response) {
+//             if (response.result_html != '') {
+//                 $('.dashboard-content').remove();
+//                 $('#dashboard-content').append(response.result_html);
+//                 ///////////////// initilize datatable //////////////
+//                 $('#research-table').DataTable({
+//                     "scrollX": true,
+//                     "scrollY": '50vh',
+//                     "scrollCollapse": true,
+//                     "paging": false,
+//                     "info": false
+//                 });
+//             }
+//         }
+//     });
+// });
 
 /////////////////////////////////// load profession page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -3011,14 +3011,8 @@ function get_register_user(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    "scrollY": '50vh',
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "info": false
-                });
+                $('.user_table_content').remove();
+                $('#user_table_content').append(response.user_html);
             }
         }
     });
@@ -3159,51 +3153,52 @@ function get_items_signature(func_call) {
     });
 }
 
-$(document.body).on('click', '#save_signature',function(){
-    var docName = $('#doc_sig_name').val();
-    var docQuali = $('#doc_sig_quali').val();
-    var docDesi = $('#doc_sig_desi').val();
-    var docInst = $('#doc_sig_institution').val();
-    $.ajax({
-        url:'/cms/doctor_signature/save_doc_signature',
-        type: 'post',
-        data: {
-            docName: docName,
-            docQuali: docQuali,
-            docDesi: docDesi,
-            docInst: docInst
-        },
-        cache: false,
-        success:function(response){
-            if(response.signature_table != ''){
-                $('.signature_table').remove();
-                $('#signature_table').append(response.signature_table);
-                if(response.message != ''){
-                    toastr["success"](response.message);
-                }else{
-                    toastr["warning"](response.error);
+$(document.body).on('click', '#save_signature',function(e){
+    e.preventDefault();
+    var validate = $('#doc_signature_form_validation').validate();
+    if (validate.form()) {
+        var docName = $('#doc_sig_name').val();
+        var docQuali = $('#doc_sig_quali').val();
+        var docDesi = $('#doc_sig_desi').val();
+        var docInst = $('#doc_sig_institution').val();
+        $.ajax({
+            url:'/cms/doctor_signature/save_doc_signature',
+            type: 'post',
+            data: {
+                docName: docName,
+                docQuali: docQuali,
+                docDesi: docDesi,
+                docInst: docInst
+            },
+            cache: false,
+            success:function(response){
+                if(response.signature_table != ''){
+                    $('.signature_table').remove();
+                    $('#signature_table').append(response.signature_table);
+                    if(response.message != ''){
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["warning"](response.error);
+                    }
+                    
                 }
-                
             }
-        }
-    });
+        });
+    }
 });
 
 function showEdit(editableObj) {
             $(editableObj).css("background", "#FFF");
         }
-function saveToDatabase(editableObj, column, id) {
-    $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
+function updateSignature(editableObj, column, id) {
     $.ajax({
         url: "/cms/doctor_signature/update_signature_details",
         type: "POST",
         data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
         success: function (response) {
             $(editableObj).css("background", "#FDFDFD");
-            if (response.message == 'Updated successfully!') {
+            if (response.success) {
                 toastr["success"](response.message);
-            } else {
-                toastr["warning"](response.message);
             }
         }
     });
@@ -3264,7 +3259,7 @@ function get_manage_reasearch(func_call) {
     });
 }
 
-$(document.body).on('click', '#delete_research_profile', function () {
+$(document.body).on('click', '.delete_research_profile', function () {
     if (confirm('Are you sure to delete this record?')) {
         $.ajax({
             url: $(this).attr('data-href'),
@@ -3273,6 +3268,20 @@ $(document.body).on('click', '#delete_research_profile', function () {
                 if(response.profile_table != ''){
                     $('.manage_research_table').remove();
                     $('#manage_research_table').append(response.profile_table);
+                    ///////////////// initilize datatable //////////////
+                    $('#research-table').DataTable({
+                        "scrollX": true,
+                        "scrollY": '50vh',
+                        "scrollCollapse": true,
+                        "paging": false,
+                        "info": false,
+                        "searching": false
+                    });
+                    $('#research-table tbody tr:first').addClass('row_selected');
+                    $("#research-table tbody tr").click(function (e) {
+                        $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                        $(this).addClass('row_selected');
+                    });
                     if(response.success == true){
                         toastr["success"](response.message);
                     }else{
@@ -3288,25 +3297,35 @@ $(document.body).on('click', '#delete_research_profile', function () {
     return false;
 });
 
-$(document.body).on('click','#assign_research',function(){
-    var researchid = $('#research_option option:selected').val();
-    var profileid = $('#research-table tbody tr.row_selected').find('.prof_id').text();
-    $.ajax({
-        url: '/cms/manage_research/assign_research',
-        type: 'post',
-        data: {
-            rid:researchid,
-            pid:profileid
-        },
-        cache: false,
-        success:function(response){
-            if(response.success == true){
-                toastr["success"]("Patient added to Research Successfully.");
-            }else{
-                toastr["error"]("There is a problem while adding.");
+$(document.body).on('click','#assign_research',function(e){
+    e.preventDefault();
+    var validate = $('#manage_research_form').validate({
+        rules: {
+            research_option: {
+              required: true
             }
         }
     });
+    if (validate.form()) {
+        var researchid = $('#research_option option:selected').val();
+        var profileid = $('#research-table tbody tr.row_selected').find('.prof_id').text();
+        $.ajax({
+            url: '/cms/manage_research/assign_research',
+            type: 'post',
+            data: {
+                rid:researchid,
+                pid:profileid
+            },
+            cache: false,
+            success:function(response){
+                if(response.success == true){
+                    toastr["success"]("Patient added to Research Successfully.");
+                }else{
+                    toastr["error"]("There is a problem while adding.");
+                }
+            }
+        });
+    }
 });
 
 /////////////////////////////////////////////// diary module ////////////////////////////////////
@@ -3467,9 +3486,15 @@ $(document.body).on('click', '#reset_research', function () {
     return false;
 });
 
-$(document.body).on('click', '#research_option', function (){
-    $('#research_modal').removeClass('hide');
-    $('#research_modal').addClass('show');
+$(document.body).on('change', '#research_option', function (){
+    if($(this).val()!=""){
+        $('#research_modal').css('visibility','visible');
+        var id = $(this).val();
+        $('#manage_research_id').val(id);
+
+    }else{
+        $('#research_modal').css('visibility','hidden');
+    }
 });
 
 $(document.body).on('click', '#research_modal', function (){
@@ -3484,6 +3509,25 @@ $(document.body).on('click', '#research_modal', function (){
             $('#research_modal_body').append(response.description_html);
         }
     });
+});
+
+$(document.body).on('click', '#update_research_desccription', function(){
+    $.ajax({
+        url: $('#manageresearch_form').attr('data-action'),
+        type: 'post',
+        data:  $('#manageresearch_form').serialize(),
+        cache: false,
+        success: function(response) {
+            $('#research_modal').modal('hide');
+            if (response.success) {
+                toastr["success"](response.message);
+            } else {
+                toastr["error"](response.message);
+            }
+
+        }
+    });
+    return false;
 });
 
 ///////////////////////////////////// load patient information /////////////////////////////////////////////////
@@ -3625,6 +3669,7 @@ $(document.body).on('click', '.delete-limiter', function(){
 
 function printresearchData()
 {
+    divToPrint = $('#bodypro').html();
     newWin= window.open("");
     newWin.document.write( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">" );
     newWin.document.write( "<html>" );
@@ -3634,7 +3679,7 @@ function printresearchData()
     newWin.document.write( "<body style='-webkit-print-color-adjust: exact !important;'>" );
     newWin.document.write( "<div style='width:90%; margin:0 auto;'><h2>Shahadat Clinic</h2>" );
     newWin.document.write( "<table border='1' border-collapse: collapse; width='100%' ><thead><tr><th style='border:none;background:#000;color:#fff;'></th><th style='background:#000;color:#fff;'>ProfileID</th><th style='border:none;background:#000;color:#fff;'>PatientName</th><th style='border:none;background:#000;color:#fff;'>Father/Husband Name</th><th style='border:none;background:#000;color:#fff;'>Height</th><th style='border:none;background:#000;color:#fff;'>Weight</th><th style='border:none;background:#000;color:#fff;'>BSA</th><th style='border:none;background:#000;color:#fff;'>BMI</th><th style='border:none;background:#000;color:#fff;'>Contact</th><th style='border:none;background:#000;color:#fff;'>Profession</th><th style='border:none;background:#000;color:#fff;'>District</th></tr></thead>" );
-    newWin.document.write(divToPrint.outerHTML);
+    newWin.document.write(divToPrint);
     newWin.document.write( "</table>" );
     newWin.document.write( "</div>" );
     newWin.document.write( "</body>" );

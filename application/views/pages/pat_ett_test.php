@@ -42,7 +42,7 @@
         						</div>
         						<div class="form-group">
         							<label>Medication</label>
-<textarea class="form-control" rows="6" name="medication" id="ett_medication"><?php if(isset($details)){ foreach($details as $info){ echo $info['medication']; }}?></textarea>
+<textarea class="form-control" rows="6" name="medication" id="ett_medication"><?php if(isset($details)){ foreach($details as $info){ echo $info['medication']; }} ?></textarea>
                                 </div>
         						<div class="form-group">
         							<div class="card">
@@ -90,7 +90,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Resting HR:</label>
-                                                            <input type="text" name="resting_hr"
+                                                            <input type="text" name="resting_hr" autocomplete="off"
                                                             <?php if(isset($details)){
                                                                 foreach($details as $info){ ?>
                                                             value="<?php echo $info['resting_hr']; ?> " <?php } }?>  id="resting_hr" class="form-control">
@@ -100,7 +100,7 @@
                                                         <div class="form-group">
                                                             <label>Resting BP:</label>
                                                             <div style="display: inline-flex;">
-                                                                <input type="test" name="resting_bp_a" id="resting_bp_a" 
+                                                                <input type="test" name="resting_bp_a" id="resting_bp_a" autocomplete="off"
                                                                 <?php if(isset($details)){
                                                                 foreach($details as $info){ 
                                                                     $bp = explode('\\', $info['resting_bp'])
@@ -109,7 +109,7 @@
                                                                 <?php } }?>
                                                                 class="form-control col-md-5">
                                                                 <label class="">/</label>
-                                                                <input type="text" name="resting_bp_b"
+                                                                <input type="text" autocomplete="off" name="resting_bp_b"
                                                                 <?php if(isset($details)){
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $bp[1]?>"
@@ -124,7 +124,7 @@
         										<div class="row">
                                                     <div class="col-md-6">
                                                         <label>Max HR:</label>
-                                                        <input type="text" name="max_hr"
+                                                        <input type="text" name="max_hr" autocomplete="off"
                                                         <?php if(isset($details)){
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $info['max_hr']?>"
@@ -134,7 +134,7 @@
                                                     <div class="col-md-6">
                                                         <label>Max BP:</label>
                                                         <div style="display: inline-flex;">
-                                                            <input type="test" name="max_bp_a"
+                                                            <input type="test" name="max_bp_a" autocomplete="off"
                                                                 <?php if(isset($details)){
                                                                 foreach($details as $info){ 
                                                                     $mbp = explode('\\', $info['max_bp'])
@@ -143,7 +143,7 @@
                                                                 <?php } }?>
                                                              id="max_bp_a" class="form-control col-md-5">
                                                             <label class="">/</label>
-                                                            <input type="text" name="max_bp_b"
+                                                            <input type="text" name="max_bp_b" autocomplete="off"
                                                             <?php if(isset($details)){
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $mbp[1]?>"
@@ -158,7 +158,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Max Predicted Target HR:</label>
-                                                            <input type="text" name="max_pre_tar"
+                                                            <input type="text" name="max_pre_tar" autocomplete="off"
                                                             <?php if(isset($details)){
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $info['max_pre_tar']?>"
@@ -170,7 +170,7 @@
                                                         <div class="form-group">
                                                             <label>% Max Predicted HR:</label>
                                                             <div style="display: inline-flex;">
-                                                                <input type="text" name="max_pre_hr"
+                                                                <input type="text" name="max_pre_hr" autocomplete="off"
                                                                 <?php if(isset($details)){
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $info['max_pre_hr']?>"
@@ -184,14 +184,14 @@
         									</div>
         									<div class="col-md-12 m-t-10" style="display: inline-flex;">
         										<label class="m-r-10">HR X BP:</label>
-        										<input type="text" name="hr_bp" 
+        										<input type="text" name="hr_bp" autocomplete="off"
                                                 <?php if(isset($details)){
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $info['hr_bp']?>"
                                                                 <?php } }?>
                                                 id="hr_bp" class="form-control col-md-4">
         										<label class="m-r-10 m-l-20">Mets:</label>
-        										<input type="test" name="mets" id="ett_mets"
+        										<input type="test" name="mets" id="ett_mets" autocomplete="off"
                                                 <?php if(isset($details)){
                                                     foreach($details as $info){ ?>
                                                         value="<?php echo $info['mets']?>"
@@ -200,7 +200,7 @@
         									</div>
         									<div class="col-md-12 m-t-10" style="display: inline-flex;">
         										<label class="m-r-10">Total exercise time:</label>
-        										<input type="text" name="exercise_time"
+        										<input type="text" name="exercise_time" autocomplete="off"
                                                 <?php if(isset($details)){
                                                     foreach($details as $info){ ?>
                                                         value="<?php echo $info['exercise_time']?>"
@@ -265,8 +265,8 @@
         							</div>
         						</div>
         						<div class="col-lg-12 col-md-12" style="display: inline-flex;">
-    				    			<label class="checkbox-inline m-r-10 m-t-15"><input type="checkbox" value="" class="m-r-10">Change Signature ?</label>
-    				    			<select class="form-control col-md-6 m-t-10" name="doc_sig">
+    				    			<label class="checkbox-inline m-r-10 m-t-15"><input type="checkbox" value="" class="m-r-10" id="ettcheckbox">Change Signature ?</label>
+    				    			<select class="form-control col-md-6 m-t-10" name="doc_sig" disabled="disabled" id="sig-ett">
     				    				<option value="">Select</option>
     				    				<option value="admin">admin</option>
     				    			</select>

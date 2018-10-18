@@ -3,19 +3,21 @@
         <div class="col-md-12">
             <div class="card">
             	<div class="card-header">
-            		<div class="row">
-    					<div class="col-md-10 col-lg-8">
-	    					<label>Research Name:</label>
-                            <i class="far fa-question-circle hide" id="research_modal" data-toggle="modal" data-target="#history-modal"></i>
-	    					<select class="form-control col-md-6" id="research_option">
-                                <option>Select</option>
-                                <?php foreach($researches as $research){?>
-                                    <option value="<?php echo $research['id']; ?>"><?php echo $research['name']; ?></option>
-                                <?php }?>
-                            </select>
-	    					<button class="btn btn-primary" id="assign_research">Add New</button>
-    					</div>
-    				</div>
+                    <form id="manage_research_form">
+                		<div class="row">
+        					<div class="col-md-10 col-lg-8">
+    	    					<label>Research Name:</label>
+                                <i class="far fa-question-circle " style="visibility: hidden;color: #1e88e5!important;" id="research_modal" data-toggle="modal" data-target="#history-modal"></i>
+    	    					<select class="form-control col-md-6" id="research_option" name="research_option">
+                                    <option value="">Select</option>
+                                    <?php foreach($researches as $research){?>
+                                        <option value="<?php echo $research['id']; ?>"><?php echo $research['name']; ?></option>
+                                    <?php }?>
+                                </select>
+    	    					<button class="btn btn-primary btn-sm" id="assign_research">Add New</button>
+        					</div>
+        				</div>
+                    </form>
                     <form rol="form" style="width: 100%;" id="research_filter">
                         <div class="row m-t-10" >
                             <div class="col-lg-1 col-md-2">
@@ -194,18 +196,24 @@
     <!-- row -->
       <div id="history-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Discription</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <form id="manageresearch_form" method="post" role="form"
+                  data-action="<?php echo site_url('setting/save_research_description') ?>"
+                  enctype="multipart/form-data">
+                <input type="hidden" name="research_id" id="manage_research_id">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Discription</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div id="research_modal_body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary waves-effect" id="update_research_desccription" data-dismiss="modal">Update</button>
+                    </div>
                 </div>
-                <div id="research_modal_body">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

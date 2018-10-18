@@ -212,9 +212,9 @@ class Setting extends MY_Controller
     public function register_user()
     {
         $data['other_rights'] = $this->Setting_model->get_other_rights();
-        //print_r($data['other_rights']); die();
         $data['userdata'] = $this->session->userdata('userdata');
         $data['users'] = $this->Setting_model->get_users();
+        $json['user_html'] = $this->load->view('pages/register-user_table',$data,true);
         $json['result_html'] = $this->load->view('pages/register-user', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -971,7 +971,8 @@ class Setting extends MY_Controller
                 $json['message'] = "Seem to be an error!";
             }
         }
-
+        $data['users'] = $this->Setting_model->get_users();
+        $json['user_html'] = $this->load->view('pages/register-user_table',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

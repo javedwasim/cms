@@ -70,6 +70,8 @@
     <!-- ============================================================== -->
     <!-- Bootstrap mbforms -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/mbbootstrap/js/popper.min.js"></script>
+    <!-- Print me -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/printme/jquery-printme.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/mbbootstrap/js/mdb.min.js"></script>
     <!-- toster alerts -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/toster/build/toastr.min.js"></script>

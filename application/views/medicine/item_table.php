@@ -70,8 +70,6 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
-                } else {
-                    toastr["success"](response.message);
                 }
             }
         });

@@ -56,6 +56,7 @@
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
+                            <li><a href="#" data-toggle="modal" data-target="#passwordmodal"><i class="fa fa-key"></i> Change Password</a></li>
                             <li><a href="<?php echo base_url('dashboard/logout'); ?>"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                     </div>
@@ -74,6 +75,47 @@
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
+
+          <!-- Modal -->
+<div id="passwordmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+          <!-- Modal content-->
+        <form id="update_user_password" method="post" role="form" data-action="<?php echo site_url('setting/update_registered_user_password') ?>" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Change Password</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 m-t-10">
+                            <label>Old Password:</label>
+                        </div>
+                        <div class="col-md-8 m-t-10">
+                            <input type="password" name="old_password" class="form-control col-md-10" />
+                        </div>
+                        <div class="col-md-4 m-t-10">
+                            <label>New Password:</label>
+                        </div>
+                        <div class="col-md-8 m-t-10">
+                            <input type="password" name="new_password" class="form-control col-md-10" />
+                        </div>
+                        <div class="col-md-4 m-t-10">
+                            <label>Re-Type Password:</label>
+                        </div>
+                        <div class="col-md-8 m-t-10">
+                            <input type="password" name="confirm_password" class="form-control col-md-10" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" id="update_password">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
             <!-- ============================================================== -->
 <!-- Page wrapper  -->
 <!-- ============================================================== -->

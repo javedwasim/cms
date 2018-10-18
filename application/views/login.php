@@ -11,6 +11,7 @@
   <title>CMS by TECHSOL</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/login_style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/dist/images/favicon.png" />
@@ -38,7 +39,7 @@
             </div>
         </div>
             <div class="auto-form-wrapper">
-              <label><center><h3>Login to CMS</h3></center></label>
+              <label><center><h3>SignIn</h3></center></label>
               <form action="<?php echo base_url(); ?>dashboard/login" method="post" >
                 <div class="form-group">
 
@@ -47,7 +48,7 @@
                     <input type="text" class="form-control" name="user_name" placeholder="Username">
                     <div class="input-group-append">
                       <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
+                        <i class="fa fa-user"></i>
                       </span>
                     </div>
                   </div>
@@ -58,7 +59,7 @@
                     <input type="password" class="form-control" name="password" placeholder="*********">
                     <div class="input-group-append">
                       <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
+                        <i class="fa fa-key"></i>
                       </span>
                     </div>
                   </div>

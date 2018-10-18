@@ -1,7 +1,7 @@
 <div class="research_modal_body">
 	<div class="modal-body">
         <div class="form-group">
-            <div><?php echo $description->description; ?></div>
+            <textarea rows="3" class="form-control" name="description" ><?php echo $description->description; ?></textarea>
         </div>
 	</div>
 </div>

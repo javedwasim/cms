@@ -1653,7 +1653,10 @@ $(document.body).on('click', '#register_new_user', function(){
         data:  $('#register_user_form').serialize(),
         cache: false,
         success: function(response) {
+            $('.user_table_content').remove();
+            $('#user_table_content').append(response.user_html);
             if (response.success) {
+                $("#register_user_form")[0].reset();
                 toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
@@ -2218,4 +2221,12 @@ $(document.body).on('click', '#save_investigation_category_description', functio
         }
     });
     return false;
+});
+
+$(document.body).on('click', '#ettcheckbox', function(){
+    if ($("#ettcheckbox").is(":checked")) {
+        $("#sig-ett").prop("disabled",false);    
+    }else{
+        $("#sig-ett").prop("disabled","disabled");    
+    }
 });

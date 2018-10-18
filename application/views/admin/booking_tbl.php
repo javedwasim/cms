@@ -53,8 +53,6 @@
                     $bkarray[$key['order_number']]['name_updated_by'] = $key['name_updated_by'] ;
                     $bkarray[$key['order_number']]['contact_updated_by'] = $key['contact_updated_by'] ;
                 }
-                    
-
                 for($i=1; $i<=5; $i++){
                     ?>
                 <tr class="gradeX colorchnage">
@@ -70,14 +68,14 @@
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover" 
                         title="<?php 
-                        if(isset($bkarray[$i]['name_updated_by'])){
+                        if(isset($bkarray[$i]['name_updated_by']) && $user_info['is_admin']==1){
                             echo $bkarray[$i]['name_updated_by'];
                         }else{
                             echo "";
                         }?>"
                     >
                         <input type="text" name="full_name" style="text-transform: capitalize;width:150px;" id="patient-name" onchange="consultant_booking(this)" autocomplete="off" class="dt-input" value="<?php 
-                        if(isset($bkarray[$i]['full_name'])){
+                        if(isset($bkarray[$i]['full_name']) && $user_info['is_admin']==1){
                             echo $bkarray[$i]['full_name'];
                         }else{
                             echo "";
@@ -88,7 +86,7 @@
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover" 
                         title="<?php 
-                        if(isset($bkarray[$i]['contact_updated_by'])){
+                        if(isset($bkarray[$i]['contact_updated_by']) && $user_info['is_admin']==1){
                             echo $bkarray[$i]['contact_updated_by'];
                         }else{
                             echo "";
@@ -117,7 +115,7 @@
 
                     <td data-toggle="tooltip" data-placement="top" data-trigger="hover" 
                         title="<?php 
-                        if(isset($bkarray[$i]['fee_collected_by'])){
+                        if(isset($bkarray[$i]['fee_collected_by']) && $user_info['is_admin']==1){
                             echo $bkarray[$i]['fee_collected_by'];
                         }else{
                             echo "";
@@ -132,7 +130,7 @@
                     <td
                             data-toggle="tooltip" data-placement="top"
                             title="<?php
-                            if(isset($bkarray[$i]['ett_fee_collected_by'])){
+                            if(isset($bkarray[$i]['ett_fee_collected_by']) && $user_info['is_admin']==1){
                                 echo $bkarray[$i]['ett_fee_collected_by'];
                             }else{
                                 echo "";
@@ -148,7 +146,7 @@
                     <td
                         data-toggle="tooltip" data-placement="top"
                         title="<?php
-                        if(isset($bkarray[$i]['echo_fee_collected_by'])){
+                        if(isset($bkarray[$i]['echo_fee_collected_by']) && $user_info['is_admin']==1){
                             echo $bkarray[$i]['echo_fee_collected_by'];
                         }else{
                             echo "";
@@ -283,7 +281,7 @@
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover" 
                         title="<?php 
-                        if(isset($details['fee_collected_by'])){
+                        if(isset($details['fee_collected_by']) && $user_info['is_admin']==1){
                             echo $details['fee_collected_by'];
                         }else{
                             echo "";
@@ -295,7 +293,7 @@
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover" 
                         title="<?php 
-                        if(isset($details['ett_fee_collected_by'])){
+                        if(isset($details['ett_fee_collected_by']) && $user_info['is_admin']==1){
                             echo $details['ett_fee_collected_by'];
                         }else{
                             echo "";
@@ -307,7 +305,7 @@
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover" 
                         title="<?php 
-                        if(isset($details['echo_fee_collected_by'])){
+                        if(isset($details['echo_fee_collected_by']) && $user_info['is_admin']==1){
                             echo $details['echo_fee_collected_by'];
                         }else{
                             echo "";
@@ -380,10 +378,22 @@
                     <td>
                         <?php echo $details['order_number']; ?>
                     </td>
-                    <td>
+                    <td data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                        title="<?php 
+                        if(isset($details['name_updated_by']) && $user_info['is_admin']==1){
+                            echo $details['name_updated_by'];
+                        }else{
+                            echo "";
+                        }?>">
                         <input type="text" name="full_name" style="text-transform: capitalize;width:150px;" id="input-name" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>">
                     </td>
-                    <td>
+                    <td data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                        title="<?php 
+                        if(isset($details['contact_updated_by']) && $user_info['is_admin']==1){
+                            echo $details['contact_updated_by'];
+                        }else{
+                            echo "";
+                        }?>">
                         <?php echo $details['contact_number'] ?>
                     </td>
                     <?php $datetime = date(' d-m-Y h:i a', strtotime($details['creation_time'])); ?>
@@ -393,7 +403,7 @@
                     <td
                     data-toggle="tooltip" data-placement="top" data-trigger="hover"
                     title="<?php
-                    if(isset($details['fee_collected_by'])){
+                    if(isset($details['fee_collected_by']) && $user_info['is_admin']==1){
                         echo $details['fee_collected_by'];
                     }else{
                         echo "";
@@ -404,7 +414,7 @@
                     </td>
                     <td data-toggle="tooltip" data-placement="top" data-trigger="hover"
                         title="<?php
-                        if(isset($details['ett_fee_collected_by'])){
+                        if(isset($details['ett_fee_collected_by']) && $user_info['is_admin']==1){
                             echo $details['ett_fee_collected_by'];
                         }else{
                             echo "";
@@ -415,7 +425,7 @@
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover"
                         title="<?php
-                        if(isset($details['echo_fee_collected_by'])){
+                        if(isset($details['echo_fee_collected_by']) && $user_info['is_admin']==1){
                             echo $details['echo_fee_collected_by'];
                         }else{
                             echo "";

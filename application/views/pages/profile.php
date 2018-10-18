@@ -2,7 +2,6 @@
 if(isset($rights[0]['user_rights']))
 {
     $appointment_rights = explode(',',$rights[0]['user_rights']);
-    //print_r($appointment_rights);
     $loggedin_user = $this->session->userdata('userdata');
 }
 ?>
