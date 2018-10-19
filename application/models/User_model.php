@@ -699,6 +699,42 @@ class User_model extends CI_Model {
         }
     }
 
+    public function vitals_insert($data){
+        $result = $this->db->insert('patient_vitals',$data);
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function get_patient_vitals($id){
+        $result = $this->db->select('*')
+                    ->where('patient_id',$id)
+                    ->get('patient_vitals');
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    public function delete_vials($id){
+        $result = $this->db->where('id',$id)->delete('patient_vitals');
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function vitals_update($data,$id){
+        $result = $this->db->where('id',$id)->update('patient_vitals',$data);
+        if($result){
+          return true;  
+        }else{
+            return false;
+        }
+    }
+
 
 }
 

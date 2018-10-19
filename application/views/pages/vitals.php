@@ -19,8 +19,11 @@
                 <div class="row">
                     <div class="col-md-4 m-t-10 m-b-10">
                         <form name="search-by-name" id="search-by-name" method="get" action="#">
-                            <select class="patName-select form-control" name="search_by_cnic"
-                                    style="width: 100%;" tabindex="4">
+                            <select class="form-control" name="pat_info" id="pat_info">
+                                <option value="">Select..</option>
+                                <?php foreach($profiles as $profile){?>
+                                <option value="<?php echo $profile['id']; ?>" ><?php echo $profile['pat_name']; ?></option>
+                                <?php }?>
                             </select>
                         </form>
                     </div>
@@ -41,88 +44,37 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12" >
-                        <table class="table table-bordered table-hover datatable">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="example2"
-                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                        aria-label="Rendering engine: activate to sort column descending">
+                                    <th>
                                         Serial#
                                     </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Platform(s): activate to sort column ascending">
+                                    <th>
                                         Date &amp; Time
                                     </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Platform(s): activate to sort column ascending">
-                                        B.P SYS
+                                    <th>
+                                        B.P
                                     </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Platform(s): activate to sort column ascending">
-                                        B.P DIA
+                                    <th>
+                                        Pulse
                                     </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Platform(s): activate to sort column ascending">
-                                        Pulse Rate
+                                    <th>
+                                        Temperature
                                     </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                        rowspan="1" colspan="1"
-                                        aria-label="CSS grade: activate to sort column ascending">
-                                        Body Temperature
+                                    <th>
+                                        INR
                                     </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                        rowspan="1" colspan="1"
-                                        aria-label="CSS grade: activate to sort column ascending">
+                                    <th>
                                         Resperatory Rate
                                     </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                        rowspan="1" colspan="1"
-                                        aria-label="CSS grade: activate to sort column ascending">
+                                    <th>
                                         Vitals Actions
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr >
-                                    <td contenteditable="true" >1</td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td style="display: inline-flex;">
-                                        <button class="btn btn-default delete-vital">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                        <br />
-                                        <button class="btn btn-default update-vital ">
-                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td contenteditable="true" >2</td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td contenteditable="true" ></td>
-                                    <td style="display: inline-flex;">
-                                        <button class="btn btn-default delete-vital">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                        <br />
-                                        <button class="btn btn-default update-vital ">
-                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                            <tbody id="vital_rows">
+                                
                             </tbody>
                         </table>
                     </div>

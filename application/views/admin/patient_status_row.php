@@ -6,7 +6,7 @@
     ?>
     <div class="row m-r-5">
         <div class="col-md-12" id="operations_panel">
-            <div class="card" style="box-shadow: none; margin-bottom: 0px;">
+            <div class="card p-t-20" style="box-shadow: none; margin-bottom: 0px;">
                 <div class="card-body p-b-0">
                     <div class="row">
                         <div class="col-lg-1">

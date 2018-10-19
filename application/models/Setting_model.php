@@ -612,6 +612,16 @@
                 return false;
             }
         }
+
+        public function change_user_password($data){
+            $password = password_hash($data['new_password'], PASSWORD_BCRYPT);
+            $result = $this->db->where('login_id',$data['userid'])->update('login',array('password'=>$password));
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
 	}
 
 ?>

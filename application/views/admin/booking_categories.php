@@ -6,7 +6,7 @@
     <div class="row" style="margin:0px;">
         <div class="col-lg-4 p-0">
             <div class="card p-0">
-                <div class="card-header" style="display: inline-flex;">
+                <div class="card-header myHeader" style="display: inline-flex;">
                     <button class="btn btn-block btn-success col-md-6" id="time_consultant">Time by Consultant</button>
                     <button class="btn btn-block btn-info col-md-6" id="print_vip">Print List</button>
                 </div>
@@ -156,7 +156,7 @@
         </div>
         <div class="col-lg-4 p-0">
             <div class="card p-0">
-                <div class="card-header" style="display: inline-flex;">
+                <div class="card-header myHeader" style="display: inline-flex;">
                     <button class="btn btn-block btn-info col-md-6" id="time_on_walk">Time on walk in</button>
                     <button class="btn btn-block btn-info col-md-6" id="print_onwalk">Print List</button>
                 </div>
@@ -219,7 +219,7 @@
             </div>
         <div class="col-lg-4 p-0">
             <div class="card p-0">
-                <div class="card-header" style="display: inline-flex;">
+                <div class="card-header myHeader" style="display: inline-flex;">
                     <button class="btn btn-block btn-warning col-md-6" id="time_on_call">Time on call</button>
                     <button class="btn btn-block btn-info col-md-6" id="print_oncall">Print List</button>
                 </div>
@@ -287,7 +287,7 @@
         <div class="row p-0 m-0">
             <div class="col-lg-4 p-0">
                 <div class="card p-0">
-                    <div class="card-header">
+                    <div class="card-header myHeader">
                         <button class="btn btn-block btn-success" id="time_consultant">Time by Consultant</button>
                     </div>
                     <div class="card-body p-t-0">
@@ -436,7 +436,7 @@
         </div>
         <div class="col-lg-4 p-0">
             <div class="card p-0">
-                <div class="card-header">
+                <div class="card-header myHeader">
                     <button class="btn btn-block btn-info" id="time_on_walk">Time on walk in</button>
                 </div>
                 <div class="card-body p-t-0">
@@ -497,7 +497,7 @@
             </div>
         <div class="col-lg-4 p-0">
             <div class="card p-0">
-                <div class="card-header">
+                <div class="card-header myHeader">
                     <button class="btn btn-block btn-warning" id="time_on_call">Time on call</button>
                 </div>
                 <div class="card-body p-t-0">
@@ -609,6 +609,15 @@ $(document).ready(function(){
             } 
           });
         });
+
+    });
+    $(window).scroll(function() {    // this will work when your window scrolled.
+        var height = $(window).scrollTop();  //getting the scrolling height of window
+        if(height  > 140) {
+            $('.card-header').addClass('sticky');
+        } else{
+            $('.card-header').removeClass('sticky');
+        }
     });
 
 </script>

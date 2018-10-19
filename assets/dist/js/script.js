@@ -2230,3 +2230,127 @@ $(document.body).on('click', '#ettcheckbox', function(){
         $("#sig-ett").prop("disabled","disabled");    
     }
 });
+
+$(document.body).on('click','#update_password',function(){
+    $.ajax({
+        url: $('#update_user_password').attr('data-action'),
+        type: 'post',
+        data: $('#update_user_password').serialize(),
+        cache: false,
+        success: function(response){
+            $('#passwordmodal').modal('hide');
+            if (response.success==true) {
+                toastr["success"](response.message);
+            }else{
+                toastr["error"](response.message);
+            }
+        }
+    });
+});
+
+$(document.body).on('click','.save_vitals',function(){
+    var tr = $(this).closest('tr');
+    var id = tr.find('.vital_id').text();
+    var date_time = tr.find('.vital_date_time').val();
+    var vital_bp = tr.find('.vital_bp').text();
+    var pulse = tr.find('.vital_pulse').text();
+    var temp = tr.find('.vital_temp').text();
+    var vital_inr = tr.find('.vital_inr').text();
+    var vital_rr = tr.find('.vital_rr').text();
+    var patid = $('#pat_info option:selected').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'user/save_vitals',
+        type: 'post',
+        data: {
+            patid:patid,
+            datetime:date_time,
+            bp:vital_bp,
+            pulse:pulse,
+            temp:temp,
+            inr:vital_inr,
+            rr:vital_rr
+        },
+        cache: false,
+        success: function(response){
+            $('#vital_rows').empty();
+            $('#vital_rows').append(response.vital_rows);
+            if (response.success==true) {
+                toastr["success"](response.message);
+            }else{
+                toastr["error"](response.message);
+            }
+        }
+    });
+});
+
+$(document.body).on('change','#pat_info',function(){
+    var patid = $(this).val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'user/get_patient_vitals',
+        type: 'post',
+        data: {
+            patid:patid
+        },
+        cache: false,
+        success: function(response){
+            $('#vital_rows').empty();
+            $('#vital_rows').append(response.vital_rows);
+        }
+    });
+});
+$(document.body).on('click', '.delete_vital', function () {
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: $(this).attr('data-href'),
+            cache: false,
+            success: function (response) {
+                $('#vital_rows').empty();
+                $('#vital_rows').append(response.vital_rows);
+                if (response.success == true) {
+                    toastr["error"](response.message);
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    } else {
+        return false;
+    }
+    return false;
+});
+
+$(document.body).on('click','.update_vital',function(){
+    var tr = $(this).closest('tr');
+    var vital_id = tr.find('.vital_id').val();
+    var date_time = tr.find('.vital_date_time').val();
+    var vital_bp = tr.find('.vital_bp').text();
+    var pulse = tr.find('.vital_pulse').text();
+    var temp = tr.find('.vital_temp').text();
+    var vital_inr = tr.find('.vital_inr').text();
+    var vital_rr = tr.find('.vital_rr').text();
+    var patid = $('#pat_info option:selected').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'user/update_vitals',
+        type: 'post',
+        data: {
+            patid:patid,
+            vitalid:vital_id,
+            datetime:date_time,
+            bp:vital_bp,
+            pulse:pulse,
+            temp:temp,
+            inr:vital_inr,
+            rr:vital_rr
+        },
+        cache: false,
+        success: function(response){
+            $('#vital_rows').empty();
+            $('#vital_rows').append(response.vital_rows);
+            if (response.success==true) {
+                toastr["success"](response.message);
+            }else{
+                toastr["error"](response.message);
+            }
+        }
+    });
+});

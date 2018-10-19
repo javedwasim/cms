@@ -32,6 +32,7 @@
     <!-- datepicker -->
     <script src="<?php echo base_url(); ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
     <script src="<?php echo base_url(); ?>/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
     <!-- DataTables -->
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.js"></script>

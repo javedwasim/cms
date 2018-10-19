@@ -15,7 +15,7 @@
         <?php  }?>
             <div class="row sticky-bar m-l-5 ">
                 <div class="col-md-12" id="appointment_sidebar">
-                    <div class="card">
+                    <div class="card p-t-20">
                         <div class="card-header">
                             <h4 class="pull-left">New Appointment</h4>
                         </div>

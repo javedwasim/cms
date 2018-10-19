@@ -19,6 +19,7 @@ $(document).ready(function () {
     $('.pat_search').datepicker({
         format: 'd-M-yyyy'
     });
+
 ////////////////////////////// initilize categories datatables ///////////////////////
     var btable = $('.booking_tables').DataTable({
         "scrollX": true,
@@ -1009,7 +1010,7 @@ $(document.body).on('click', '#book_appointment', function (e) {
                     toastr["warning"](data.message);
                 } else if (data.message == "Limit reached for bookings.") {
                     toastr["warning"](data.message);
-                } else if (data.message == "Please fill all the fields .") {
+                } else if (data.message == "Please fill all fields.") {
                     toastr["warning"](data.message);
                 } else {
                     toastr["success"](data.message);

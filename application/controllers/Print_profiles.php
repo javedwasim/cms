@@ -63,7 +63,7 @@ class Print_profiles extends CI_Controller {
         $data['endingtestreason'] = $this->Print_model->get_endingtestreason_name_by_id($endingtestreasonid);
 		$data['protocol_details'] = $this->Profile_model->get_update_protocol_details_by_id($protocolid,$testid);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
-		$json['ett_print_html'] = $this->load->view('profile_prints/print_ett',$data,true);
+		$json['ett_print_html'] = $this->load->view('profile_report/ett_report',$data,true);
 		if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

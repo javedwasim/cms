@@ -9,6 +9,7 @@ class User extends MY_Controller {
 
         $this->load->model('User_model');
         $this->load->model('Dashboard_model');
+        $this->load->model('Profile_model');
         $this->load->helper('content-type');
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -64,6 +65,7 @@ class User extends MY_Controller {
         $searchdate = date('Y-m-d',strtotime($this->input->post('searchdate')));
         $appdate = $this->input->post('appointmentDate');
         $date = date('Y-m-d', strtotime($appdate));
+        $appFee = $this->input->post('fee');
         $currentdate = date('Y-m-d');
         $collectedby = $this->session->userdata('username');
         $limiterexist = $this->User_model->check_limiter($date);
@@ -76,7 +78,6 @@ class User extends MY_Controller {
             if ($limit > $count) {
                 if ($bookingFlag == "vip") {
                     if (!empty($patName) && !empty($patCell) && !empty($appdate)) {
-                        $AppFee = $this->input->post('fee');
                         $get_last_orderno = $this->User_model->get_last_booking($date);
                         if ($get_last_orderno == false) {
                             $order_no = 6;
@@ -96,13 +97,13 @@ class User extends MY_Controller {
                         $app['datetime'] = $appdate . " " . date('H:i:s');
                         $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
                         $data = array();
-                        if ($AppFee == "") {
+                        if ($appFee == "") {
                             $data = array(
                                 'order_number' => $order_no,
                                 'full_name' => $patName,
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
+                                'consultant_fee' => $appFee,
                                 'booking_flag' => $bookingFlag,
                                 'name_updated_by' => $collectedby,
                                 'contact_updated_by' => $collectedby
@@ -113,7 +114,7 @@ class User extends MY_Controller {
                                 'full_name' => $patName,
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
+                                'consultant_fee' => $appFee,
                                 'fee_collected_by' => $collectedby,
                                 'fee_paid_at' => $bookingDatetime,
                                 'fee_paid_status' => '1',
@@ -138,11 +139,10 @@ class User extends MY_Controller {
                         $json['message'] = "Please fill all the fields .";
                     }
                 } else if ($bookingFlag == 'on_walk') {
-                    if (!empty($patName) && !empty($patCell)) {
+                    if (!empty($patName) && !empty($patCell) && !empty($appFee)) {
                         $appdate = $this->input->post('appointmentDate');
                         $app['datetime'] = $appdate . " " . date('H:i:s');
                         $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                        $AppFee = $this->input->post('fee');
                         $cur_date = date('Y-m-d');
                         $get_last_orderno = $this->User_model->get_last_booking($date);
                         if ($get_last_orderno == false) {
@@ -161,13 +161,13 @@ class User extends MY_Controller {
                             }
                         }
                         $data = array();
-                        if ($AppFee == "") {
+                        if ($appFee == "") {
                             $data = array(
                                 'order_number' => $order_no,
                                 'full_name' => $patName,
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
+                                'consultant_fee' => $appFee,
                                 'booking_flag' => $bookingFlag,
                                 'name_updated_by' => $collectedby,
                                 'contact_updated_by' => $collectedby
@@ -178,7 +178,7 @@ class User extends MY_Controller {
                                 'full_name' => $patName,
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
+                                'consultant_fee' => $appFee,
                                 'fee_collected_by' => $collectedby,
                                 'fee_paid_at' => $bookingDatetime,
                                 'fee_paid_status' => '1',
@@ -200,14 +200,13 @@ class User extends MY_Controller {
                     } else {
                         $data['booking_flag'] = $bookingFlag;
                         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
-                        $json['message'] = "Name and contact Number cannot be null.";
+                        $json['message'] = "Please fill all fields.";
                     }
                 } else if ($bookingFlag == 'on_call') {
                     if (!empty($patName) && !empty($patCell) && !empty($appdate)) {
                         $appdate = $this->input->post('appointmentDate');
                         $app['datetime'] = $appdate . " " . date('H:i:s');
                         $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                        $AppFee = $this->input->post('fee');
                         //calculating daily token number
                         $cur_date = date('Y-m-d');
                         $get_last_orderno = $this->User_model->get_last_booking($date);
@@ -228,13 +227,13 @@ class User extends MY_Controller {
                         }
                         $data = array();
                         $collectedby = $this->session->userdata('username');
-                        if ($AppFee == "") {
+                        if ($appFee == "") {
                             $data = array(
                                 'order_number' => $order_no,
                                 'full_name' => $patName,
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
+                                'consultant_fee' => $appFee,
                                 'booking_flag' => $bookingFlag,
                                 'name_updated_by' => $collectedby,
                                 'contact_updated_by' => $collectedby
@@ -245,7 +244,7 @@ class User extends MY_Controller {
                                 'full_name' => $patName,
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
+                                'consultant_fee' => $appFee,
                                 'fee_collected_by' => $collectedby,
                                 'fee_paid_at' => $bookingDatetime,
                                 'fee_paid_status' => '1',
@@ -274,7 +273,6 @@ class User extends MY_Controller {
                         $appdate = $this->input->post('appointmentDate');
                         $app['datetime'] = $appdate . " " . date('H:i:s');
                         $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                        $AppFee = $this->input->post('fee');
                         //calculating daily token number
                         $cur_date = date('Y-m-d');
                         $get_last_orderno = $this->User_model->get_last_booking($date);
@@ -294,13 +292,13 @@ class User extends MY_Controller {
                             }
                         }
                         $data = array();
-                        if ($AppFee == "") {
+                        if ($appFee == "") {
                             $data = array(
                                 'order_number' => $order_no,
                                 'full_name' => $patName,
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
+                                'consultant_fee' => $appFee,
                                 'name_updated_by' => $collectedby,
                                 'contact_updated_by' => $collectedby
                             );
@@ -310,7 +308,7 @@ class User extends MY_Controller {
                                 'full_name' => $patName,
                                 'contact_number' => $patCell,
                                 'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $AppFee,
+                                'consultant_fee' => $appFee,
                                 'fee_collected_by' => $collectedby,
                                 'fee_paid_at' => $bookingDatetime,
                                 'fee_paid_status' => '1',
@@ -342,7 +340,6 @@ class User extends MY_Controller {
         } else {
             if ($bookingFlag == "vip") {
                 if (!empty($patName) && !empty($patCell) && !empty($appdate)){
-                    $AppFee = $this->input->post('fee');
                     $get_last_orderno = $this->User_model->get_last_booking($date);
                     if ($get_last_orderno == false) {
                         $order_no = 6;
@@ -362,13 +359,13 @@ class User extends MY_Controller {
                     $app['datetime'] = $appdate . " " . date('H:i:s');
                     $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
                     $data = array();
-                    if ($AppFee == "") {
+                    if ($appFee == "") {
                         $data = array(
                             'order_number' => $order_no,
                             'full_name' => $patName,
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $AppFee,
+                            'consultant_fee' => $appFee,
                             'booking_flag' => $bookingFlag,
                             'name_updated_by' => $collectedby,
                             'contact_updated_by' => $collectedby
@@ -379,7 +376,7 @@ class User extends MY_Controller {
                             'full_name' => $patName,
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $AppFee,
+                            'consultant_fee' => $appFee,
                             'fee_collected_by' => $collectedby,
                             'fee_paid_at' => $bookingDatetime,
                             'fee_paid_status' => '1',
@@ -404,11 +401,10 @@ class User extends MY_Controller {
                     $json['message'] = "Please fill all the fields .";
                 }
             } else if ($bookingFlag == 'on_walk') {
-                if (!empty($patName) && !empty($patCell)) {
+                if (!empty($patName) && !empty($patCell) && !empty($appFee)) {
                     $appdate = $this->input->post('appointmentDate');
                     $app['datetime'] = $appdate . " " . date('H:i:s');
                     $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                    $AppFee = $this->input->post('fee');
                     //calculating daily token number
                     $cur_date = date('Y-m-d');
                     $get_last_orderno = $this->User_model->get_last_booking($date);
@@ -429,13 +425,13 @@ class User extends MY_Controller {
                     }
                     $data = array();
                     $collectedby = $this->session->userdata('username');
-                    if ($AppFee == "") {
+                    if ($appFee == "") {
                         $data = array(
                             'order_number' => $order_no,
                             'full_name' => $patName,
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $AppFee,
+                            'consultant_fee' => $appFee,
                             'booking_flag' => $bookingFlag,
                             'name_updated_by' => $collectedby,
                             'contact_updated_by' => $collectedby
@@ -446,7 +442,7 @@ class User extends MY_Controller {
                             'full_name' => $patName,
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $AppFee,
+                            'consultant_fee' => $appFee,
                             'fee_collected_by' => $collectedby,
                             'fee_paid_at' => $bookingDatetime,
                             'fee_paid_status' => '1',
@@ -468,14 +464,13 @@ class User extends MY_Controller {
                 } else {
                     $data['booking_flag'] = $bookingFlag;
                     $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
-                    $json['message'] = "Name and contact Number cannot be null.";
+                    $json['message'] = "Please fill all fields.";
                 }
             } else if ($bookingFlag == 'on_call') {
                 if (!empty($patName) && !empty($patCell) && !empty($appdate)) {
                     $appdate = $this->input->post('appointmentDate');
                     $app['datetime'] = $appdate . " " . date('H:i:s');
                     $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                    $AppFee = $this->input->post('fee');
                     //calculating daily token number
                     $cur_date = date('Y-m-d');
                     $get_last_orderno = $this->User_model->get_last_booking($date);
@@ -496,13 +491,13 @@ class User extends MY_Controller {
                     }
                     $data = array();
                     $collectedby = $this->session->userdata('username');
-                    if ($AppFee == "") {
+                    if ($appFee == "") {
                         $data = array(
                             'order_number' => $order_no,
                             'full_name' => $patName,
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $AppFee,
+                            'consultant_fee' => $appFee,
                             'booking_flag' => $bookingFlag,
                             'name_updated_by' => $collectedby,
                             'contact_updated_by' => $collectedby
@@ -513,7 +508,7 @@ class User extends MY_Controller {
                             'full_name' => $patName,
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $AppFee,
+                            'consultant_fee' => $appFee,
                             'fee_collected_by' => $collectedby,
                             'fee_paid_at' => $bookingDatetime,
                             'fee_paid_status' => '1',
@@ -542,7 +537,6 @@ class User extends MY_Controller {
                     $appdate = $this->input->post('appointmentDate');
                     $app['datetime'] = $appdate . " " . date('H:i:s');
                     $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
-                    $AppFee = $this->input->post('fee');
                     //calculating daily token number
                     $cur_date = date('Y-m-d');
                     $get_last_orderno = $this->User_model->get_last_booking($date);
@@ -563,13 +557,13 @@ class User extends MY_Controller {
                     }
                     $data = array();
                     $collectedby = $this->session->userdata('username');
-                    if ($AppFee == "") {
+                    if ($appFee == "") {
                         $data = array(
                             'order_number' => $order_no,
                             'full_name' => $patName,
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $AppFee,
+                            'consultant_fee' => $appFee,
                             'name_updated_by' => $collectedby,
                             'contact_updated_by' => $collectedby
                         );
@@ -579,7 +573,7 @@ class User extends MY_Controller {
                             'full_name' => $patName,
                             'contact_number' => $patCell,
                             'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $AppFee,
+                            'consultant_fee' => $appFee,
                             'fee_collected_by' => $collectedby,
                             'fee_paid_at' => $bookingDatetime,
                             'fee_paid_status' => '1',
@@ -960,7 +954,98 @@ class User extends MY_Controller {
 
     public function vital() {
         $data['rights'] = $this->session->userdata('other_rights');
+        $data['profiles'] = $this->Profile_model->get_profiles();
+        $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
         $json['result_html'] = $this->load->view('pages/vitals', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+    public function save_vitals(){
+        $patid = $this->input->post('patid');
+        $datetime = date("Y-m-d H:i:s",strtotime($this->input->post('datetime')));
+        $bp = $this->input->post('bp');
+        $pulse = $this->input->post('pulse');
+        $temp = $this->input->post('temp');
+        $inr = $this->input->post('inr');
+        $rr = $this->input->post('rr');
+        $data_array = array(
+            'patient_id' => $patid,
+            'vaital_datetime' => $datetime,
+            'vital_bp' => $bp,
+            'vital_pulse' => $pulse,
+            'vital_temp' => $temp,
+            'vital_inr' => $inr,
+            'vital_rr' => $rr
+        );
+        $result = $this->User_model->vitals_insert($data_array);
+        if ($result) {
+            $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
+            $json['success'] = true;
+            $json['message'] = 'Successfully Added!';
+        }else{
+            $json['error'] = false;
+            $json['message'] = 'Seems an error.';
+        }
+        $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_patient_vitals(){
+        $id = $this->input->post('patid');
+        $data['patient_vitals'] = $this->User_model->get_patient_vitals($id);
+        $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_vitals($vitalid,$patid){
+        $result = $this->User_model->delete_vials($vitalid);
+        if ($result) {
+            $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted!';
+        }else{
+            $json['error'] = false;
+            $json['message'] = 'Seems an error.';
+        }
+        $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function update_vitals(){
+        $patid = $this->input->post('patid');
+        $vitalid = $this->input->post('vitalid');
+        $datetime = date("Y-m-d H:i:s",strtotime($this->input->post('datetime')));
+        $bp = $this->input->post('bp');
+        $pulse = $this->input->post('pulse');
+        $temp = $this->input->post('temp');
+        $inr = $this->input->post('inr');
+        $rr = $this->input->post('rr');
+        $data_array = array(
+            'patient_id' => $patid,
+            'vaital_datetime' => $datetime,
+            'vital_bp' => $bp,
+            'vital_pulse' => $pulse,
+            'vital_temp' => $temp,
+            'vital_inr' => $inr,
+            'vital_rr' => $rr
+        );
+        $result = $this->User_model->vitals_update($data_array,$vitalid);
+        if ($result) {
+            $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
+            $json['success'] = true;
+            $json['message'] = 'Successfully Updated!';
+        }else{
+            $json['error'] = false;
+            $json['message'] = 'Seems an error.';
+        }
+        $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

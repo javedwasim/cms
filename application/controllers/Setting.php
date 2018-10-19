@@ -1543,6 +1543,27 @@ class Setting extends MY_Controller
         }
     }
 
+    public function update_registered_user_password(){
+        $data = $this->input->post();
+        $userdata = $this->Dashboard_model->get_user($data['username']);
+        if ($data['username']==$userdata['username']&& password_verify($data['old_password'], $userdata['password'])) {
+                $result = $this->Setting_model->change_user_password($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = 'Successfully Updated';
+                }else{
+                    $json['error'] =  false;
+                    $json['message'] = 'Could not be Updated.';
+                }
+        }else{
+            $json['error'] =  false;
+            $json['message'] = 'Username or Password Incorrect';
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
 
 }
 

@@ -81,6 +81,8 @@
     <div class="modal-dialog">
           <!-- Modal content-->
         <form id="update_user_password" method="post" role="form" data-action="<?php echo site_url('setting/update_registered_user_password') ?>" enctype="multipart/form-data">
+            <input type="hidden" name="username" value="<?php echo $this->session->userdata('username')?>" />
+            <input type="hidden" name="userid" value="<?php echo $this->session->userdata('login_id')?>" />
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Change Password</h4>

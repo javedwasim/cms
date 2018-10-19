@@ -81,12 +81,12 @@ class Dashboard extends CI_Controller {
                         $this->session->set_userdata('is_logged_in', '1');
                         redirect('/');
                     } else {
-                        $this->session->set_flashdata('error', "Wrong username or password.");
+                        $this->session->set_flashdata('error', "Wrong password.");
                         $this->load->view('login');
                     }
 
                 } else {
-                    $this->session->set_flashdata('error', "Wrong username or password.");
+                    $this->session->set_flashdata('error', "Wrong username.");
                     $this->load->view('login');
                 }
             } else {

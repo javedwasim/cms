@@ -156,7 +156,14 @@ li.paginate_button.page-item.active {
     position: -webkit-sticky;
     position: sticky;
     top:7.7%;
-    z-index: 99;
+    z-index: 9999;
+}
+.sticky {
+  position: fixed;
+  top: 9%;
+  width: 32.9%;
+  z-index:999;
+  background: #fff;
 }
 .dataTables_scrollHeadInner{
     width: 100% !important;
@@ -256,6 +263,9 @@ li#list_itmes_vital {
     padding-top:110%;/* takes width as reference, + 10% for faking some extra padding */
     display:inline-block;
     vertical-align:middle;
+}
+.report-font{
+    font-size: 14px;
 }
 /* ---------------------------------------------------
     SIDEBAR STYLE
