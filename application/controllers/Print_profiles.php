@@ -138,5 +138,26 @@ class Print_profiles extends CI_Controller {
         }
 	}
 
+	public function get_sp_details(){
+		$testid = $this->input->post('testid');
+		$patid = $this->input->post('patid');
+        $data['test_details'] = $this->Print_model->get_sp_inst_detail_by_ids($patid,$testid);
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
+        $json['sp_print_html'] = $this->load->view('profile_report/sp_report',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+	}
+	public function get_lab_details(){
+		$key = $this->input->post('testid');
+		$patid = $this->input->post('patid');
+		$data['items'] = $this->Profile_model->get_lab_test_unit($key);
+		$data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
+        $json['lab_print_html'] = $this->load->view('profile_report/lab_report',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+	}
+
 }
 ?>

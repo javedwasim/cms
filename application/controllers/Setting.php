@@ -1564,6 +1564,58 @@ class Setting extends MY_Controller
         }
     }
 
+    public function user_data_modal(){
+        $user_name = $this->input->post('username');
+        $data['user_data'] = $this->Dashboard_model->get_user($user_name);
+        $json['edit_modal'] = $this->load->view('pages/register-user_modal',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function update_registered_user(){
+        $data = $this->input->post();
+        $id = $data['user_id'];
+        $data_array=array(
+            'full_name' =>$data['full_name'],
+            'gender' =>$data['gender'],
+            'username' =>$data['username'],
+            'contact_no' =>$data['contact_no'],
+            'address' =>$data['address']
+        );
+        $result = $this->Setting_model->update_user_data($data_array,$id);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Updated Successfully!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['users'] = $this->Setting_model->get_users();
+        $json['user_html'] = $this->load->view('pages/register-user_table',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_user(){
+        $userid = $this->input->post('userid');
+        $username = $this->input->post('username');
+        $result = $this->Setting_model->user_delete($userid,$username);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Deleted Successfully!';
+        }else{
+            $json['error'] = false;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['users'] = $this->Setting_model->get_users();
+        $json['user_html'] = $this->load->view('pages/register-user_table',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
 
 }
 

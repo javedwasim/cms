@@ -229,7 +229,7 @@ class Profile_model extends CI_Model
             $where .= " AND (creation_date = '' OR DATE(creation_date) = '$registration_date')";
         }
         $sql = "SELECT patient_profile.* FROM patient_profile where $where";
-        $result = $query = $this->db->query($sql);
+        $result = $this->db->query($sql);
         if ($result) {
             return $result->result_array();
         } else {
@@ -648,8 +648,7 @@ class Profile_model extends CI_Model
 
     public function save_profile_examination_info($data)
     {
-        print_r($data);
-        die();
+        
         $patient_id = $data['patient_id'];
         $next_visit_date = $data['next_date_visit_form'];
         $this->db->insert('profile_examination_detail', array('patient_id' => $patient_id, 'next_visit_date'));

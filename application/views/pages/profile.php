@@ -179,10 +179,10 @@ if(isset($rights[0]['user_rights']))
 
                                     </div>
                                 </div>
-                                <div id="re2">
+                                <div id="re2" class="b-all" style="height:450px;">
                                     <div class="col-md-12 p-l-0">
                                     <h4 class="text-center">Report</h4>
-                                    <div class="b-all" style="height:450px;">  
+                                    <div class="report_view">  
                                     </div>
                                 </div>
                                 </div>

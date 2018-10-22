@@ -17,40 +17,40 @@
                                         <label>Name:</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" name="full_name" class="form-control col-md-10" />
+                                        <input type="text" name="full_name" autocomplete="off" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Sex:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
                                         <div class="form-group" >
-                                            <label class="radio-inline" style="color:#000 !important;margin-right: 15px;"><input type="radio" name="gender" checked>Male</label>
-                                            <label class="radio-inline" style="color:#000 !important;"><input type="radio" name="gender">Female</label>
+                                            <label class="radio-inline" style="color:#000 !important;margin-right: 15px;"><input type="radio" value="Male" name="gender" checked>Male</label>
+                                            <label class="radio-inline" style="color:#000 !important;"><input type="radio" value="Female" name="gender">Female</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Username:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="text" name="username" class="form-control col-md-10" />
+                                        <input type="text" name="username" autocomplete="off" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Password:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="password" name="password" class="form-control col-md-10" />
+                                        <input type="password" name="password" autocomplete="off" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Re-Type Password:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="password" name="confirm_password" class="form-control col-md-10" />
+                                        <input type="password" name="confirm_password" autocomplete="off" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Contact:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <input type="text" name="contact_no" class="form-control col-md-10" />
+                                        <input type="text" name="contact_no" autocomplete="off" class="form-control col-md-10" />
                                     </div>
                                     <div class="col-md-3 m-t-10">
                                         <label>Company:</label>
@@ -62,7 +62,7 @@
                                         <label>Address:</label>
                                     </div>
                                     <div class="col-md-9 m-t-10">
-                                        <textarea class="form-control col-md-10" name="address" rows="2"></textarea>
+                                        <textarea class="form-control col-md-10" autocomplete="off" name="address" rows="2"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -289,76 +289,8 @@
 
   <!-- Modal -->
 <div class="modal fade" id="useredit" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="user_moda_contnt">
           <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit User</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="update_registered_user_form" method="post" role="form"
-                          data-action="<?php echo site_url('setting/update_registered_user') ?>"
-                          enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>Name:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" name="full_name" class="form-control col-md-10" />
-                        </div>
-                        <div class="col-md-3 m-t-10">
-                            <label>Sex:</label>
-                        </div>
-                        <div class="col-md-9 m-t-10">
-                            <div class="form-group" >
-                                <label class="radio-inline" style="color:#000 !important;margin-right: 15px;"><input type="radio" name="gender" checked>Male</label>
-                                <label class="radio-inline" style="color:#000 !important;"><input type="radio" name="gender">Female</label>
-                            </div>
-                        </div>
-                        <div class="col-md-3 m-t-10">
-                            <label>Username:</label>
-                        </div>
-                        <div class="col-md-9 m-t-10">
-                            <input type="text" name="username" class="form-control col-md-10" />
-                        </div>
-                        <div class="col-md-3 m-t-10">
-                            <label>Password:</label>
-                        </div>
-                        <div class="col-md-9 m-t-10">
-                            <input type="password" name="password" class="form-control col-md-10" />
-                        </div>
-                        <div class="col-md-3 m-t-10">
-                            <label>Re-Type Password:</label>
-                        </div>
-                        <div class="col-md-9 m-t-10">
-                            <input type="password" name="confirm_password" class="form-control col-md-10" />
-                        </div>
-                        <div class="col-md-3 m-t-10">
-                            <label>Contact:</label>
-                        </div>
-                        <div class="col-md-9 m-t-10">
-                            <input type="text" name="contact_no" class="form-control col-md-10" />
-                        </div>
-                        <div class="col-md-3 m-t-10">
-                            <label>Company:</label>
-                        </div>
-                        <div class="col-md-9 m-t-10">
-                            <input type="text" name="company" value="Shahadat Clinic" readonly="readonly" class="form-control col-md-10"  />
-                        </div>
-                        <div class="col-md-3 m-t-10">
-                            <label>Address:</label>
-                        </div>
-                        <div class="col-md-9 m-t-10">
-                            <textarea class="form-control col-md-10" name="address" rows="2"></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Update</button>
-            </div>
-        </div> 
+        
     </div>
 </div>

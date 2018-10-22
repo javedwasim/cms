@@ -622,6 +622,37 @@
                 return false;
             }
         }
+
+        public function update_user_data($data,$id){
+            $result = $this->db->where('login_id',$id)->update('login',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+     
+        public function user_delete($id,$username){
+            $menu_group = $this->db->where('menu_group_name',$username)->get('menu_group');
+            $menu_group_id = $menu_group->row()->menu_group_id;
+            $other_rights_group = $this->db->where('other_rights_group_name',$username)->get('other_rights_group');
+            $other_rights_group_id = $other_rights_group->row()->other_rights_group_id;
+            $login_rights_group = $this->db->where('other_rights_group_id',$other_rights_group_id)->get('login_rights_group');
+            $login_rights_group_id = $login_rights_group->row()->login_rights_group_id;
+            $delete_from_login = $this->db->where('username',$username)->delete('login');
+            $delete_from_login_rights = $this->db->where('login_rights_group_id',$login_rights_group_id)->delete('login_rights_group');
+            $delete_from_other_rights_details = $this->db->where('other_rights_group_id',$other_rights_group_id)->delete('other_rights_group_detail');
+            $delete_from_other_rights_group = $this->db->where('other_rights_group_id',$other_rights_group_id)->delete('other_rights_group');
+            $delete_from_menu_group_details = $this->db->where('menu_id',$menu_group_id)->delete('menu_group_detail');
+            $delete_from_menu_group = $this->db->where('menu_group_id',$menu_group_id)->delete('menu_group');
+            if ($delete_from_menu_group) {
+                return true;
+            }else{
+                return false;
+            }
+
+
+        }
 	}
 
 ?>

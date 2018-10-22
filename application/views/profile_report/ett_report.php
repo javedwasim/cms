@@ -50,55 +50,55 @@
             </div>
             <div class="col-md-4 p-r-0">
                 <div class="border border-dark p-0" style="width: 99.5%; margin: 0 auto;">
-                    <div class="mb-1 border-bottom border-dark padding">Resting HR:</div>
-                    <div class="mb-1 border-bottom border-dark padding">Resting BP:</div>
-                    <div class="mb-1 border-bottom border-dark padding">Max Predicted Target HR:</div>
-                    <div class="mb-1 border-bottom border-dark padding">Max HR:</div>
-                    <div class="mb-1 border-bottom border-dark padding">Max Predicted HR Achived:</div>
-                    <div class="mb-1 border-bottom border-dark padding">Max BP:</div>
-                    <div class="mb-1 border-bottom border-dark padding">HR x BP:</div>
-                    <div class="mb-1 border-bottom border-dark padding">Total Exercise Time:</div>
+                    <div class="mb-1 border-bottom border-dark padding report-font">Resting HR:</div>
+                    <div class="mb-1 border-bottom border-dark padding report-font">Resting BP:</div>
+                    <div class="mb-1 border-bottom border-dark padding report-font">Max Predicted Target HR:</div>
+                    <div class="mb-1 border-bottom border-dark padding report-font">Max HR:</div>
+                    <div class="mb-1 border-bottom border-dark padding report-font">Max Predicted HR Achived:</div>
+                    <div class="mb-1 border-bottom border-dark padding report-font">Max BP:</div>
+                    <div class="mb-1 border-bottom border-dark padding report-font">HR x BP:</div>
+                    <div class="mb-1 border-bottom border-dark padding report-font">Total Exercise Time:</div>
                     <div class="padding">Mets:</div>
                 </div>
             </div>
             <div class="col-md-4 p-l-0">
                 <div class="border border-dark p-0" style="width: 99.5%; margin: 0 auto;">
-                    <div class="mb-1 border-bottom border-dark padding">
+                    <div class="mb-1 border-bottom border-dark padding report-font">
                         <?php foreach($test_details as $key){?>
                                 <strong><?php echo $key['resting_hr']; ?></strong>
                         <?php }?>(bpm)
                     </div>
-                    <div class="mb-1 border-bottom border-dark padding">
+                    <div class="mb-1 border-bottom border-dark padding report-font">
                         <?php foreach($test_details as $key){?>
                                 <strong><?php echo $key['resting_bp']; ?></strong>
                         <?php }?>(ml O2/kg/min)
                     </div>
-                    <div class="mb-1 border-bottom border-dark padding">
+                    <div class="mb-1 border-bottom border-dark padding report-font">
                         <?php foreach($test_details as $key){?>
                                 <strong><?php echo $key['max_pre_tar']; ?></strong>
                         <?php }?>(mmHg)
                     </div>
-                    <div class="mb-1 border-bottom border-dark padding">
+                    <div class="mb-1 border-bottom border-dark padding report-font">
                         <?php foreach($test_details as $key){?>
                                 <strong><?php echo $key['max_hr']; ?></strong>
                         <?php }?>(bpm)
                     </div>
-                    <div class="mb-1 border-bottom border-dark padding">
+                    <div class="mb-1 border-bottom border-dark padding report-font">
                         <?php foreach($test_details as $key){?>
                                 <strong><?php echo $key['max_pre_hr']; ?></strong>
                         <?php }?>(bpm)
                     </div>
-                    <div class="mb-1 border-bottom border-dark padding">
+                    <div class="mb-1 border-bottom border-dark padding report-font">
                         <?php foreach($test_details as $key){?>
                                 <strong><?php echo $key['max_bp']; ?></strong>
                         <?php }?>(%)
                     </div>
-                    <div class="mb-1 border-bottom border-dark padding">
+                    <div class="mb-1 border-bottom border-dark padding report-font">
                         <?php foreach($test_details as $key){?>
                                 <strong><?php echo $key['hr_bp']; ?></strong>
                         <?php }?>(mmHg)
                     </div>
-                    <div class="mb-1 border-bottom border-dark padding">
+                    <div class="mb-1 border-bottom border-dark padding report-font">
                         <?php foreach($test_details as $key){?>
                                 <strong><?php echo $key['exercise_time']; ?></strong>
                         <?php }?>(bpm x mmHg)
@@ -149,40 +149,37 @@
         <br>
         <div class="row" style="width: 100%;">
             <div class="col-md-12">
-                <h3>Description:</h3>
-                <p>
+                <h4>Description:</h4>
+                <p class="report-font">
                     <?php foreach($test_details as $key){
                          echo $key['description'];
                      }?>
                 </p>
             </div>
             <div class="col-md-12">
-                <h3>Conclution:</h3>
-                <p>
+                <h4>Conclution:</h4>
+                <p class="report-font">
                    <?php foreach($test_details as $key){
                          echo $key['conclusion'];
                     }?> 
                 </p>
             </div>
         </div>
-        <div class="row" >
-            <div class="row">
-                <div class="col-md-12 ">
-                    <div style="float: right;">
-                        <h3><i>Dr.Shahadat Hussain Ch.</i></h3>
-                        <label>MBBS, FCPS(Cardiology)</label><br>
-                        <label><i>Asst. Professor Cardiology/CCU</i></label><br>
-                        <label>QAMC/BVH Bahawalpur</label>
-                    </div>
-                    <br>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div style="float: right;">
+                    <strong><i>Dr.Shahadat Hussain Ch.</i></strong><br />
+                    <label class="report-font">MBBS, FCPS(Cardiology)</label><br>
+                    <label class="report-font"><i>Asst. Professor Cardiology/CCU</i></label><br>
+                    <label class="report-font">QAMC/BVH Bahawalpur</label>
                 </div>
+                <br>
             </div>
-
-            <div class="row" style="border-top:1px solid #ddd;">
-                <div class="col-md-12">
-                    <br>
-                    <p style="text-align: center;">Shahadat Clinic: 14-B Medical Colony Bahawalpur. Phone: 0322-6526467</p>
-                </div>
+        </div>
+        <div class="row" style="border-top:1px solid #ddd;">
+            <div class="col-md-12">
+                <br>
+                <p style="text-align: center;" class="report-font">Shahadat Clinic: 14-B Medical Colony Bahawalpur. Phone: 0322-6526467</p>
             </div>
         </div>
     </div>

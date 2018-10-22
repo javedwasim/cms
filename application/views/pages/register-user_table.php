@@ -34,10 +34,10 @@
     <tbody>
     <?php foreach ($users  as $user): $user_rights = explode(',',$user['user_rights']); //echo "<pre>"; print_r($user) ?>
         <tr style="text-align: center;">
-            <td><a class="btn btn-xs btn-danger" href="javascript:void(0)" ><i class="fa fa-trash"></i></a></td>
-            <td><a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#useredit"><i class="fa fa-edit"></i></a></td>
+            <td><a class="btn btn-xs btn-danger" onClick="deleteuser(this,'<?php echo $user['login_id']; ?>','<?php echo $user['username']; ?>');" href="javascript:void(0)" ><i class="fa fa-trash"></i></a></td>
+            <td><a class="btn btn-xs btn-primary edit_user"><i class="fa fa-edit"></i></a></td>
             <td><?php echo $user['full_name']; ?></td>
-            <td><?php echo $user['username']; ?></td>
+            <td class="username" ><?php echo $user['username']; ?></td>
             <td><input type="checkbox" value="<?php echo $user['login_id'].'-5'; ?>" class="user_permission"
                        name="appointment" <?php echo in_array("appointments-parent-1", $user_rights)?'checked':''; ?>></td>
             <td><input type="checkbox" value="<?php echo $user['login_id'].'-8'; ?>" class="user_permission"

@@ -2354,3 +2354,115 @@ $(document.body).on('click','.update_vital',function(){
         }
     });
 });
+
+$(document.body).on('click','.edit_user',function(){
+    var tr = $(this).closest('tr');
+    var username = tr.find('.username').text();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'setting/user_data_modal',
+        type: 'post',
+        data: {username:username},
+        cache: false,
+        success: function(response){
+            $('#user_moda_contnt').empty();
+            $('#user_moda_contnt').append(response.edit_modal);
+            $('#useredit').modal('show');
+        }
+    });
+});
+
+$(document.body).on('click','.edit_user_data',function(){
+     $.ajax({
+        url: $('#update_registered_user_form').attr('data-action'),
+        type: 'post',
+        data: $('#update_registered_user_form').serialize(),
+        cache: false,
+        success: function(response){
+            $('#useredit').modal('hide');
+            $('.user_table_content').remove();
+            $('#user_table_content').append(response.user_html);
+            if (response.success==true) {
+                toastr["success"](response.message);
+            }else{
+                toastr["error"](response.message);
+            }
+        }
+    });
+});
+
+function deleteuser(object,userid,username){
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'setting/delete_user',
+        type: 'post',
+        data: {
+            userid: userid,
+            username: username
+        },
+        cache: false,
+        success: function(response){
+            $('.user_table_content').remove();
+            $('#user_table_content').append(response.user_html);
+            if (response.success==true) {
+                toastr["success"](response.message);
+            }else{
+                toastr["error"](response.message);
+            }
+        }
+    });
+}
+
+$(document.body).on('click', '#ett_details_table tbody tr td:nth-child(4)', function () {
+    $('#ett_details_table tbody tr td:nth-child(4)').removeClass('row_selected');
+    $(this).addClass('row_selected');
+    var etttestid = $('#ett_details_table tbody tr td:nth-child(4).row_selected').siblings('.etttestid').text();
+    var patid = $('#ett_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
+    $.ajax({
+        url: '/cms/print_profiles/get_ett_details',
+        type: 'post',
+        data: {
+            testid:etttestid,
+            patid:patid
+        },
+        success: function(response){
+            $('.report_view').empty();
+            $('.report_view').append(response.ett_print_html);
+        }
+    });
+});
+
+$(document.body).on('click', '#sp_details_table tbody tr td:nth-child(4)', function (){
+    $('#sp_details_table tbody tr td:nth-child(4)').removeClass('row_selected');
+    $(this).addClass('row_selected');
+    var sptestid = $('#sp_details_table tbody tr td:nth-child(4).row_selected').siblings('.sptestid').text();
+    var patid = $('#sp_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
+    $.ajax({
+        url: '/cms/print_profiles/get_sp_details',
+        type: 'post',
+        data: {
+            testid:sptestid,
+            patid:patid
+        },
+        success: function(response){
+            $('.report_view').empty();
+            $('.report_view').append(response.sp_print_html);
+        }
+    });
+});
+$(document.body).on('click', '#lab_details_table tbody tr td:nth-child(4)', function (){
+    $('#lab_details_table tbody tr td:nth-child(4)').removeClass('row_selected');
+    $(this).addClass('row_selected');
+    var labtestid = $('#lab_details_table tbody tr td:nth-child(4).row_selected').siblings('.labtestid').text();
+    var patid = $('#lab_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
+    $.ajax({
+        url: '/cms/print_profiles/get_lab_details',
+        type: 'post',
+        data: {
+            testid:labtestid,
+            patid:patid
+        },
+        success: function(response){
+            $('.report_view').empty();
+            $('.report_view').append(response.lab_print_html);
+        }
+    });
+});
