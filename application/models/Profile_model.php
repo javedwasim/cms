@@ -648,28 +648,26 @@ class Profile_model extends CI_Model
 
     public function save_profile_examination_info($data)
     {
-        
         $patient_id = $data['patient_id'];
-        $next_visit_date = $data['next_date_visit_form'];
-        $this->db->insert('profile_examination_detail', array('patient_id' => $patient_id, 'next_visit_date'));
+        $next_visit_date = date('Y-m-d',strtotime($data['next_date_visit_form']));
+        $result = $this->db->insert('profile_examination_detail', array('patient_id' => $patient_id, 'next_visit_date' =>$next_visit_date));
         $examination_detail_id = $this->db->insert_id();
 
         if (isset($data['history_item'])) {
             $history_item = $data['history_item'];
-            $this->db->insert('profile_examination_history', array('examination_detail_id' => $examination_detail_id, 'patient_id' => $patient_id, 'history_value' => $history_item));
+            $result = $this->db->insert('profile_examination_history', array('examination_detail_id' => $examination_detail_id, 'patient_id' => $patient_id, 'history_value' => $history_item));
         }
 
         if (isset($data['examination_item'])) {
             $examination_item = $data['examination_item'];
-            $this->db->insert('profile_examination_info',
+            $result = $this->db->insert('profile_examination_info',
                 array('examination_detail_id' => $examination_detail_id,
                     'patient_id' => $patient_id, 'examination_value' => $examination_item));
         }
 
-
         if (isset($data['investigation_item'])) {
             $investigation_item = $data['investigation_item'];
-            $this->db->insert('examination_detail_id',
+            $result = $this->db->insert('profile_examination_investigation',
                 array('examination_detail_id' => $examination_detail_id,
                     'patient_id' => $patient_id, 'investigation_value' => $investigation_item));
         }
@@ -677,10 +675,27 @@ class Profile_model extends CI_Model
         if (isset($data['medicine_value']) && !empty($data['medicine_value'])) {
             $medicine_value = $data['medicine_value'];
             foreach ($medicine_value as $value) {
-                $this->db->insert('examination_detail_id',
-                    array('profile_examination_medicine' => $examination_detail_id,
-                        'patient_id' => $patient_id, 'medicine_value' => $value['medicine_value']));
+                $result =  $this->db->insert('profile_examination_medicine',
+                    array('examination_detail_id' => $examination_detail_id,
+                        'patient_id' => $patient_id, 'medicine_value' => $value));
             }
+        }
+        if (isset($data['instruction_item'])) {
+            $instruction_item = $data['instruction_item'];
+            $result = $this->db->insert('profile_examination_instruction',
+                array('examination_detail_id'=>$examination_detail_id,
+                    'patient_id' => $patient_id,'instruction_value'=>$instruction_item));
+        }
+        if (isset($data['advice_item'])) {
+            $advice_item = $data['advice_item'];
+            $result = $this->db->insert('profile_examination_advice',
+                array('examination_detail_id'=>$examination_detail_id,
+                    'patient_id' => $patient_id,'advice_value'=>$advice_item));
+        }
+        if ($result) {
+            return true;
+        }else{
+            return false;
         }
 
     }

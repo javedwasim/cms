@@ -869,11 +869,15 @@ class Profile extends MY_Controller
     public function save_profile_examination_info()
     {
         $data = $this->input->post();
-        $this->Profile_model->save_profile_examination_info($data);
-        $json['success'] = true;
-        $json['message'] = 'Information save successfully!';
-
-        if ($this->input->is_ajax_request()) {
+        $result = $this->Profile_model->save_profile_examination_info($data);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Information save successfully!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error!';
+        }
+        if ($this->input->is_ajax_request()){
             set_content_type($json);
         }
     }
