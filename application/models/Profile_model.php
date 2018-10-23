@@ -680,6 +680,15 @@ class Profile_model extends CI_Model
                         'patient_id' => $patient_id, 'medicine_value' => $value));
             }
         }
+        if (isset($data['dosage_value'])) {
+            $dosage_value = $data['dosage_value'];
+            foreach ($dosage_value as $value) {
+                $result =  $this->db->insert('profile_examination_dosage',
+                    array('examination_detail_id' => $examination_detail_id,
+                        'patient_id' => $patient_id, 'dosage_value' => $value));
+            }
+            
+        }
         if (isset($data['instruction_item'])) {
             $instruction_item = $data['instruction_item'];
             $result = $this->db->insert('profile_examination_instruction',
@@ -692,6 +701,21 @@ class Profile_model extends CI_Model
                 array('examination_detail_id'=>$examination_detail_id,
                     'patient_id' => $patient_id,'advice_value'=>$advice_item));
         }
+
+        if (isset($data['examination_info_pulse'])||isset($data['examination_info_volume'])||isset($data['examination_info_volume'])||isset($data['examination_info_bpa'])||isset($data['examination_info_bpb'])||isset($data['examination_resp_rate'])||isset($data['examination_info_temp'])) {
+            $data_array = array(
+            'examination_detail_id' => $examination_detail_id, 
+            'patient_id' => $patient_id, 
+            'pulse' => $data['examination_info_pulse'], 
+            'volume' => $data['examination_info_volume'], 
+            'bp_a' => $data['examination_info_bpa'], 
+            'bp_b' => $data['examination_info_bpb'], 
+            'rr' => $data['examination_resp_rate'], 
+            'temprature' => $data['examination_info_temp']
+            );
+            $result = $this->db->insert('profile_examination_measurements',$data_array);
+        }
+        
         if ($result) {
             return true;
         }else{
@@ -792,6 +816,142 @@ class Profile_model extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function get_examination_detail($patient_id)
+    {
+        $result = $this->db->select('*')->from('profile_examination_detail')->where('patient_id', $patient_id)->get();
+        if ($result) {
+            return $result->result_array();
+        } else {
+            return false;
+        }
+    }
+    public function delete_examination($testid,$patid){
+        $result = $this->db->where('id',$testid)->where('patient_id',$patid)->delete('profile_examination_detail');
+        $result = $this->db->where('examination_detail_id',$testid)->where('patient_id',$patid)->delete('profile_examination_info');
+        $result = $this->db->where('examination_detail_id',$testid)->where('patient_id',$patid)->delete('profile_examination_advice');
+        $result = $this->db->where('examination_detail_id',$testid)->where('patient_id',$patid)->delete('profile_examination_dosage');
+        $result = $this->db->where('examination_detail_id',$testid)->where('patient_id',$patid)->delete('profile_examination_history');
+        $result = $this->db->where('examination_detail_id',$testid)->where('patient_id',$patid)->delete('profile_examination_instruction');
+        $result = $this->db->where('examination_detail_id',$testid)->where('patient_id',$patid)->delete('profile_examination_investigation');
+        $result = $this->db->where('examination_detail_id',$testid)->where('patient_id',$patid)->delete('profile_examination_measurements');
+        $result = $this->db->where('examination_detail_id',$testid)->where('patient_id',$patid)->delete('profile_examination_medicine');
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function update_profile_examination_info($data)
+    {
+        $patient_id = $data['patient_id'];
+        $testid = $data['examination_testid'];
+        $next_visit_date = date('Y-m-d',strtotime($data['next_date_visit_form']));
+        $result = $this->db->set('next_visit_date',$next_visit_date)->where('id',$testid)->update('profile_examination_detail');
+
+        if (isset($data['exe_history_id']) && $data['exe_history_id']!="") {
+            $history_item = $data['history_item'];
+            $result = $this->db->set('history_value',$history_item)->where('id',$data['exe_history_id'])->update('profile_examination_history');
+        }else{
+            $history_item = $data['history_item'];
+            $result = $this->db->insert('profile_examination_history', array('examination_detail_id' => $testid, 'patient_id' => $patient_id, 'history_value' => $history_item));
+        }
+
+        if (isset($data['examination_id']) && $data['examination_id']) {
+            $examination_item = $data['examination_item'];
+            $result = $this->db->set('examination_value' , $examination_item)
+                            ->where('id',$data['examination_id'])->update('profile_examination_info');
+        }else{
+            $examination_item = $data['examination_item'];
+            $result = $this->db->insert('profile_examination_info',
+                array('examination_detail_id' => $testid,
+                    'patient_id' => $patient_id, 'examination_value' => $examination_item));
+        }
+
+        if (isset($data['investigation_id']) && $data['investigation_id']!="") {
+            $investigation_item = $data['investigation_item'];
+            $result = $this->db->set('investigation_value',$investigation_item)
+                            ->where('id',$data['investigation_id'])->update('profile_examination_investigation');
+        }else{
+            $investigation_item = $data['investigation_item'];
+            $result = $this->db->insert('profile_examination_investigation',
+                array('examination_detail_id' => $testid,
+                    'patient_id' => $patient_id, 'investigation_value' => $investigation_item));
+        }
+
+        if (isset($data['medicine_value']) && !empty($data['medicine_value'])) {
+            $medicine_value = $data['medicine_value'];
+            foreach ($medicine_value as $value) {
+                $result =  $this->db->insert('profile_examination_medicine',
+                    array('examination_detail_id' => $testid,
+                        'patient_id' => $patient_id, 'medicine_value' => $value));
+            }
+        }
+        if (isset($data['dosage_value'])) {
+            $dosage_value = $data['dosage_value'];
+            foreach ($dosage_value as $value) {
+                $result =  $this->db->insert('profile_examination_dosage',
+                    array('examination_detail_id' => $testid,
+                        'patient_id' => $patient_id, 'dosage_value' => $value));
+            }
+            
+        }
+        if (isset($data['instruction_id']) && $data['instruction_id']!= "") {
+            $instruction_item = $data['instruction_item'];
+            $result = $this->db->set('instruction_value',$instruction_item)->where('id',$data['instruction_id'])
+                                ->update('profile_examination_instruction');
+        }else{
+            $instruction_item = $data['instruction_item'];
+            $result = $this->db->insert('profile_examination_instruction',
+                array('examination_detail_id'=>$testid,
+                    'patient_id' => $patient_id,'instruction_value'=>$instruction_item));
+        }
+        if (isset($data['advice_id']) && $data['advice_id'] != "") {
+            $advice_item = $data['advice_item'];
+            $result = $this->db->set('advice_value',$advice_item)->where('id',$data['advice_id'])
+                            ->update('profile_examination_advice');
+        }else{
+            $advice_item = $data['advice_item'];
+            $result = $this->db->insert('profile_examination_advice',
+                array('examination_detail_id'=>$testid,
+                    'patient_id' => $patient_id,'advice_value'=>$advice_item));
+        }
+
+        if (isset($data['exem_measurement_id']) && $data['exem_measurement_id']!="") {
+            $data_array = array(
+            'examination_detail_id' => $testid, 
+            'patient_id' => $patient_id, 
+            'pulse' => $data['examination_info_pulse'], 
+            'volume' => $data['examination_info_volume'], 
+            'bp_a' => $data['examination_info_bpa'], 
+            'bp_b' => $data['examination_info_bpb'], 
+            'rr' => $data['examination_resp_rate'], 
+            'temprature' => $data['examination_info_temp']
+            );
+            $result = $this->db->where('id',$data['exem_measurement_id'])
+                                ->update('profile_examination_measurements',$data_array);
+        }else{
+            $data_array = array(
+            'examination_detail_id' => $testid, 
+            'patient_id' => $patient_id, 
+            'pulse' => $data['examination_info_pulse'], 
+            'volume' => $data['examination_info_volume'], 
+            'bp_a' => $data['examination_info_bpa'], 
+            'bp_b' => $data['examination_info_bpb'], 
+            'rr' => $data['examination_resp_rate'], 
+            'temprature' => $data['examination_info_temp']
+            );
+            $result = $this->db->insert('profile_examination_measurements',$data_array);
+        }
+        
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
 }

@@ -261,25 +261,25 @@ if(isset($rights[0]['user_rights']))
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Height:</label>
-	                        		<input type="text" class="form-control" onchange="calculateBmiBsa(this)" id="pat_profile_height" name="" placeholder="cm" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" required="required" maxlength="5">
+	                        		<input type="text" class="form-control pat_profile_height" onchange="calculateBmiBsa(this)" id="pat_profile_height" name="" placeholder="cm" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" required="required" maxlength="5">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BMI:</label>
-	                        		<input type="text" name=""  id="pat_profile_bmi" class="form-control" readonly>
+	                        		<input type="text" name=""  id="pat_profile_bmi" class="form-control pat_profile_bmi" readonly>
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Weight:</label>
-	                        		<input type="text" class="form-control" onchange="calculateBsaBmi(this)" name="" id="pat_profile_weight" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" placeholder="Kg" required="required" maxlength="5">
+	                        		<input type="text" class="form-control pat_profile_weight" onchange="calculateBsaBmi(this)" name="" id="pat_profile_weight" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" placeholder="Kg" required="required" maxlength="5">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BSA:</label>
-	                        		<input type="text" name="" id="pat_profile_bsa" class="form-control" readonly>
+	                        		<input type="text" name="" id="pat_profile_bsa" class="form-control pat_profile_bsa" readonly>
                         		</div>
                         	</div>
                         	<div class="col-md-4">

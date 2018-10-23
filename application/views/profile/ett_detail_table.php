@@ -22,23 +22,3 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-<script type="text/javascript">
-    // $(document.body).on('click', '#ett_details_table tbody tr td:nth-child(4)', function () {
-    //     $('#ett_details_table tbody tr td:nth-child(4)').removeClass('row_selected');
-    //     $(this).addClass('row_selected');
-    //     var etttestid = $('#ett_details_table tbody tr td:nth-child(4).row_selected').siblings('.etttestid').text();
-    //     var patid = $('#ett_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
-    //     $.ajax({
-    //         url: '/cms/print_profiles/get_ett_details',
-    //         type: 'post',
-    //         data: {
-    //             testid:etttestid,
-    //             patid:patid
-    //         },
-    //         success: function(response){
-    //             $('.b-all').empty();
-    //             $('.b-all').append(response.ett_print_html);
-    //         }
-    //     });
-    // });
-</script>

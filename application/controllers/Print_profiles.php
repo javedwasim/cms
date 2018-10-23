@@ -159,5 +159,40 @@ class Print_profiles extends CI_Controller {
         }
 	}
 
+	public function print_examination(){
+		$testid = $this->input->get('testid');
+		$patid = $this->input->get('patid');
+        $data['advice_details'] = $this->Print_model->get_advice_detail_by_ids($patid,$testid);
+        $data['dosage_details'] = $this->Print_model->get_dosage_detail_by_ids($patid,$testid);
+        $data['history_details'] = $this->Print_model->get_history_detail_by_ids($patid,$testid);
+        $data['instruction_details'] = $this->Print_model->get_instruction_detail_by_ids($patid,$testid);
+        $data['investigation_details'] = $this->Print_model->get_investigation_detail_by_ids($patid,$testid);
+        $data['measurement_details'] = $this->Print_model->get_measurement_detail_by_ids($patid,$testid);
+        $data['medicine_details'] = $this->Print_model->get_medicine_detail_by_ids($patid,$testid);
+        $data['examination_details'] = $this->Print_model->get_examination_detail_by_ids($patid,$testid);
+        $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
+		$this->load->view('profile_prints/print_prescription',$data);
+	}
+
+	public function get_examination_details(){
+		$testid = $this->input->post('testid');
+		$patid = $this->input->post('patid');
+		$data['advice_details'] = $this->Print_model->get_advice_detail_by_ids($patid,$testid);
+        $data['dosage_details'] = $this->Print_model->get_dosage_detail_by_ids($patid,$testid);
+        $data['history_details'] = $this->Print_model->get_history_detail_by_ids($patid,$testid);
+        $data['instruction_details'] = $this->Print_model->get_instruction_detail_by_ids($patid,$testid);
+        $data['investigation_details'] = $this->Print_model->get_investigation_detail_by_ids($patid,$testid);
+        $data['measurement_details'] = $this->Print_model->get_measurement_detail_by_ids($patid,$testid);
+        $data['medicine_details'] = $this->Print_model->get_medicine_detail_by_ids($patid,$testid);
+        $data['examination_details'] = $this->Print_model->get_examination_detail_by_ids($patid,$testid);
+        $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
+        $json['examination_print_html'] = $this->load->view('profile_report/prescription_report',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+	}
+
 }
 ?>

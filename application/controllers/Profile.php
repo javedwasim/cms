@@ -869,14 +869,27 @@ class Profile extends MY_Controller
     public function save_profile_examination_info()
     {
         $data = $this->input->post();
-        $result = $this->Profile_model->save_profile_examination_info($data);
-        if ($result) {
+        if (isset($data['examination_testid'])&& $data['examination_testid'] != '') {
+            $result = $this->Profile_model->update_profile_examination_info($data);
+            if ($result) {
             $json['success'] = true;
-            $json['message'] = 'Information save successfully!';
+            $json['message'] = 'Updated successfully!';
         }else{
             $json['error'] = true;
             $json['message'] = 'Seems an error!';
         }
+        }else{
+            $result = $this->Profile_model->save_profile_examination_info($data);
+            if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Saved successfully!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error!';
+        }
+        }
+        
+        
         if ($this->input->is_ajax_request()){
             set_content_type($json);
         }
@@ -894,6 +907,79 @@ class Profile extends MY_Controller
             $json['error'] = true;
             $json['message'] = "seem to be an error.";
         }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_examinations_tests(){
+        $patient_id = $this->input->post('patient_id');
+        $data['details'] = $this->Profile_model->get_examination_detail($patient_id);
+        //print_r($data['details']);
+        if ($data) {
+            $json['success'] = true;
+            $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
+
+        } else {
+            $json['error'] = true;
+            $json['message'] = "seem to be an error.";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_examination_test_details(){
+        $testid = $this->input->post('detail_id');
+        $patid = $this->input->post('patid');
+        $result = $this->Profile_model->delete_examination($testid,$patid);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Deleted Successfully!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['details'] = $this->Profile_model->get_examination_detail($patid);
+        $json['examination_details'] = $this->load->view('profile/examination-details_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function patient_examination_edit_detail(){
+        $testid = $this->input->post('detail_id');
+        $patid = $this->input->post('patid');
+        $instruction_category['category'] = 'special';
+        $data['examination_category'] = $this->Examination_model->get_examination_categories();
+        $data['items'] = $this->Examination_model->get_examination_items();
+        $data['history_category'] = $this->History_model->get_profile_history();
+        $data['history_items'] = $this->History_model->get_history_items();
+        $data['investigations'] = $this->Investigation_model->get_investigation_categories();
+        $data['investigation_items'] = $this->Investigation_model->get_investigation_items();
+        $data['advices'] = $this->Setting_model->get_advices();
+        $data['advice_items'] = $this->Setting_model->get_advice_items();
+        $data['instructions'] = $this->Instruction_model->get_instruction_categories($instruction_category);
+        $data['instruction_item'] = $this->Instruction_model->get_inst_items($instruction_category);
+        $data['medicines'] = $this->Medicine_model->get_medicine_categories();
+        $data['advice_details'] = $this->Print_model->get_advice_detail_by_ids($patid,$testid);
+        $data['dosage_details'] = $this->Print_model->get_dosage_detail_by_ids($patid,$testid);
+        $data['history_details'] = $this->Print_model->get_history_detail_by_ids($patid,$testid);
+        $data['instruction_details'] = $this->Print_model->get_instruction_detail_by_ids($patid,$testid);
+        $data['investigation_details'] = $this->Print_model->get_investigation_detail_by_ids($patid,$testid);
+        $data['measurement_details'] = $this->Print_model->get_measurement_detail_by_ids($patid,$testid);
+        $data['medicine_details'] = $this->Print_model->get_medicine_detail_by_ids($patid,$testid);
+        $data['examination_details'] = $this->Print_model->get_examination_detail_by_ids($patid,$testid);
+        $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
+        $json['medicine_html'] = $this->load->view('profile/medicine_category_table', $data, true);
+        $json['instruction_html'] = $this->load->view('profile/instruction_category_table', $data, true);
+        $json['advice_html'] = $this->load->view('profile/advice_category_table', $data, true);
+        $json['investigation_html'] = $this->load->view('profile/investigation_category_table', $data, true);
+        $json['history_table'] = $this->load->view('profile/profile_history_table', $data, true);
+        $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
+        $json['examination_table'] = $this->load->view('profile/profile_examination_table', $data, true);
+        $json['result_html'] = $this->load->view('pages/pat_examination', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

@@ -18,7 +18,7 @@
         body {
             margin: 0;
             font-family: Calibri;
-
+            font-size: 20px;
         }
         .sheet {
             margin: 0;
@@ -211,8 +211,12 @@
     }
     .footer-bottom{
         position: fixed;
-        bottom: 0px;
+        bottom: 40px;
 
+    }
+    .footer-top{
+        position: fixed;
+        bottom: 100px;
     }
     .mb-10{
         margin-bottom: 10px;
@@ -223,17 +227,22 @@
     <div class="row sheet">
         <div class="col-md-10 offset-1">
             <br>
-            <div class="row border border-dark">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row border border-dark" style="width: 100%;">
                 <div class="col-md-6">
                     <label>Ref.ID</label>
-                    <strong>12</strong>
+                    <strong><?php echo $patient_info->id ?></strong>
+                    <strong><?php echo $patient_info->pat_name ?></strong>
                 </div>
-                <div class="col-md-2">
-                    <label>23 Years</label>
-                    <label>Male</label>
-                </div>
-                <div class="col-md-2">
-                    
+                <div class="col-md-4">
+                    <label><?php echo $patient_info->pat_age ?></label>
+                    <label><?php echo $patient_info->pat_sex ?></label>
                 </div>
                 <div class="col-md-2">
                     <label><?php echo date('d-M-Y');?></label>
@@ -241,43 +250,55 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-3" style="padding-left: 0px;">
-                            <div class="mb-10">Resting HR:</div>
+                            <?php foreach($medicine_details as $med){?>
+                                <div class="mb-10"><?php echo $med['medicine_value']?></div>
+                            <?php }?>
                         </div>
                         <div class="col-md-4" style="padding-right: 0px;">
-                            <div class="mb-10">Resting HR:</div>
-                        </div>
-                        <div class="col-md-5" style="padding-right: 0px;">
-                            <div class="mb-10" style="width: 100%; word-break: break-all;">Resting HRslfjljfljsfjjsfjjsjfjsjjflsjfjHRslfjljfljsfjjsfjjsjfjsjjflsjfjsdfjjdfjldjfljjflsjdfljdfljdfljsdfjjdfjldjfljjflsjdfljdfljdflj:</div>
-                        </div>  
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3" style="padding-left: 0px;">
-                            <div class="mb-10">Resting HR:</div>
-                        </div>
-                        <div class="col-md-4" style="padding-right: 0px;">
-                            <div class="mb-10">Resting HR:</div>
-                        </div>
-                        <div class="col-md-5" style="padding-right: 0px;">
-                            <div class="mb-10" style="width: 100%; word-break: break-all;">Resting HRslfjljfljsfjjsfjjsjfjsjjflsjfjHRslfjljfljsfjjsfjjsjfjsjjflsjfjsdfjjdfjldjfljjflsjdfljdfljdfljsdfjjdfjldjfljjflsjdfljdfljdflj:</div>
+                            <?php foreach($dosage_details as $dos){?>
+                                <div class="mb-10"><?php echo $dos['dosage_value']?></div>
+                            <?php }?>
                         </div>  
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <?php foreach($history_details as $history){?>
+                        <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $history['history_value']; ?></div>
+                    <?php }?>
+                    <?php foreach($measurement_details as $measurment){?>
+                        <div class="mb-10" style="width: 100%; word-break: break-all;">Pulse:<?php echo $measurment['pulse']; ?>&nbsp;<?php echo $measurment['volume']; ?></div>
+                        <div class="mb-10" style="width: 100%; word-break: break-all;">BP.<?php echo $measurment['bp_a']; ?>/<?php echo $measurment['bp_b']; ?></div>
+                        <div class="mb-10" style="width: 100%; word-break: break-all;">Resp. Rate:<?php echo $measurment['rr']; ?>&nbsp;&nbsp;&nbsp;Temprature:<?php echo $measurment['temprature']; ?></div>
+                    <?php }?>
+                    <?php foreach($examination_details as $examination){?>
+                        <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $examination['examination_value']; ?></div>
+                    <?php }?>
+                    <?php foreach($investigation_details as $investigation){?>
+                        <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $investigation['investigation_value']; ?></div>
+                    <?php }?>
+                    <?php foreach($advice_details as $advice){?>
+                        <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $advice['advice_value']; ?></div>
+                    <?php }?>
+                </div>
             </div>
             <br>
+            <?php foreach($instruction_details as $instruction){?>
+                <div class="mb-10 footer-top" style="width: 100%; word-break: break-all;"><?php echo $instruction['instruction_value']; ?></div>
+            <?php }?>
             <div class="row footer-bottom" style="border-top:1px solid #ddd;">
                 <div class="col-md-12">
                     <br> 
-                    <p style="text-align: center; font-size: 16px; font-weight: bold;">پھر مورخہ کو چیک کرایں۔ چیک نہ ہونے کی صورت میں ادوایات جاری رکہیں۔ آنے سے ایک روز ‍قبل فون پر نام لیں۔</p>
+                    <p style="text-align: center; font-size: 16px; font-weight: bold;">پھر مورخہ <?php foreach($visit_date as $visit){echo " ";echo date('Y-m-d',strtotime($visit['next_visit_date']));echo " ";}?>کو چیک کرایں۔ چیک نہ ہونے کی صورت میں ادوایات جاری رکہیں۔ آنے سے ایک روز ‍قبل فون پر نام لیں۔</p>
                 </div>
             </div>
         </div>
     </div>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<!--     <script type="text/javascript">
+    <script type="text/javascript">
       window.onload = function() { window.print(); }
-    </script> -->
+    </script>
 </body>
 </html>

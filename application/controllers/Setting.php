@@ -294,8 +294,7 @@ class Setting extends MY_Controller
         }
     }
 
-    public function patient_exemination($patient_id)
-    {
+    public function patient_exemination($patient_id){
         $data['patient_id'] = $patient_id;
         $instruction_category['category'] = 'special';
         $data['examination_category'] = $this->Examination_model->get_examination_categories();

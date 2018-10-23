@@ -2108,7 +2108,8 @@ $(document.body).on('click', '#save_patient_examination_info', function(){
     $.ajax({
         url: window.location.origin+window.location.pathname+'profile/save_profile_examination_info',
         type: 'post',
-        data:  $("#history_profile_form").serialize() + "&" + $("#examination_profile_form").serialize()
+        data:  $("#history_profile_form").serialize() + "&" + $("#exem_measurement_form").serialize()
+                + "&" + $("#examination_profile_form").serialize()
                 + "&" +$("#investigation_profile_form").serialize() + "&" + $("#medicine_profile_form").serialize()
                 + "&" +$("#dosage_profile_form").serialize() + "&" + $("#advice_profile_form").serialize()
                 + "&" +$("#instruction_profile_form").serialize()+ "&" + $("#next_date_visit_form").serialize(),
@@ -2466,3 +2467,124 @@ $(document.body).on('click', '#lab_details_table tbody tr td:nth-child(4)', func
         }
     });
 });
+function exeminationpulse(val){
+    var pulse = val.value;
+    $('#examination_info_pulse').val(pulse);
+}
+function exeminationvolume(val){
+    var volume = val.value;
+    $('#examination_info_volume').val(volume);
+}
+function exeminationbpa(val){
+    var bpa = val.value;
+    $('#examination_info_bpa').val(bpa);
+}
+function exeminationbpb(val){
+    var bpb = val.value;
+    $('#examination_info_bpb').val(bpb);
+}
+function exeminationresp(val){
+    var rr = val.value;
+    $('#examination_resp_rate').val(rr);
+}
+function exeminationtemp(val){
+    var temp = val.value;
+    $('#examination_info_temp').val(temp);
+}
+function deleteExaminationDetail(editableObj,test_id,patient_id){
+    if (confirm('Are you sure to delete this record?')) {
+         $.ajax({
+            url: '/cms/profile/delete_examination_test_details',
+            type: 'post',
+            data: {detail_id:test_id,patid:patient_id},
+            cache: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#echo_detail_container').empty();
+                    $('#echo_detail_container').append(response.examination_details);
+                    if (response.success == true) {
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["error"](response.message);
+                    }
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    }else{
+        return false;
+    }
+}
+
+function printexamination(editableObj,test_id,patient_id) {
+    var win = window.open('/cms/print_profiles/print_examination/?testid=' + test_id +'&patid='+patient_id, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
+}
+
+$(document.body).on('click', '#examination_details_table tbody tr td:nth-child(4)', function (){
+    $('#examination_details_table tbody tr td:nth-child(4)').removeClass('row_selected');
+    $(this).addClass('row_selected');
+    var testid = $('#examination_details_table tbody tr td:nth-child(4).row_selected').siblings('.testid').text();
+    var patid = $('#examination_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
+    $.ajax({
+        url: '/cms/print_profiles/get_examination_details',
+        type: 'post',
+        data: {
+            testid:testid,
+            patid:patid
+        },
+        success: function(response){
+            $('.report_view').empty();
+            $('.report_view').append(response.examination_print_html);
+        }
+    });
+});
+
+function showEditexaminationDetail(editableObj,test_id,patient_id) {
+    $.ajax({
+        url: '/cms/profile/patient_examination_edit_detail',
+        type: 'post',
+        data: {detail_id:test_id,patid:patient_id},
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                ///////////////// initilize datatable //////////////
+                $('#permissions-table').DataTable({
+                    "scrollX": true
+                });
+                $('.app_date').datepicker({
+                    format: 'd-M-yyyy'
+                });
+
+                $('#profile_examination_container').empty();
+                $('#profile_examination_container').append(response.examination_table);
+
+                $('#profile_history_container').empty();
+                $('#profile_history_container').append(response.history_table);
+
+                $('#investigation_category_container').empty();
+                $('#investigation_category_container').append(response.investigation_html);
+
+                $('#advice_category_container').empty();
+                $('#advice_category_container').append(response.advice_html);
+
+                $('#instruction_category_container').empty();
+                $('#instruction_category_container').append(response.instruction_html);
+
+                $('#medicine_category_container').empty();
+                $('#medicine_category_container').append(response.medicine_html);
+
+                $('#pat_ett_information').empty();
+                $('#pat_ett_information').append(response.patient_information);
+            }
+        }
+    });
+}

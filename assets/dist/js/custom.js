@@ -2640,28 +2640,28 @@ $(document.body).on('click', '#save_new_profile', function () {
 
 function calculateBsaBmi(val){
     var weight = val.value;
-    var height = $('#pat_profile_height').val();
+    var height = $('.pat_profile_height').val();
     var height_m = height / 100;
     var height_m2 = Math.pow(height_m, 2);
     var bmi = weight/height_m2;
     var a = weight*height;
     var b = a/3600;
     var bsa = Math.sqrt(b);
-    var value_bmi = $('#pat_profile_bmi').val(bmi.toFixed(2));
-    var value_bsa = $('#pat_profile_bsa').val(bsa.toFixed(2));
+    var value_bmi = $('.pat_profile_bmi').val(bmi.toFixed(2));
+    var value_bsa = $('.pat_profile_bsa').val(bsa.toFixed(2));
 }
 
 function calculateBmiBsa(val){
     var height = val.value;
-    var weight = $('#pat_profile_weight').val();
+    var weight = $('.pat_profile_weight').val();
     var height_m = height / 100;
     var height_m2 = Math.pow(height_m, 2);
     var bmi = weight/height_m2;
     var a = weight*height;
     var b = a/3600;
     var bsa = Math.sqrt(b);
-    var value_bmi = $('#pat_profile_bmi').val(bmi.toFixed(2));
-    var value_bsa = $('#pat_profile_bsa').val(bsa.toFixed(2));
+    var value_bmi = $('.pat_profile_bmi').val(bmi.toFixed(2));
+    var value_bsa = $('.pat_profile_bsa').val(bsa.toFixed(2));
 }
 
 ////////////////////////////////////// Delete from profile page ////////////////////////////
@@ -3711,24 +3711,24 @@ function printlabtest(editableObj,key,patient_id) {
     }
 }
 
-// $(document.body).on('click', '#prescription_details', function () {
-//     var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
-//     $.ajax({
-//         url: window.location.origin+window.location.pathname+'profile/get_lab_test_detail',
-//         type: 'post',
-//         data:  {patient_id:patient_id},
-//         cache: false,
-//         success: function(response) {
-//             if (response.success) {
-//                 $('#echo_detail_container').empty();
-//                 $('#echo_detail_container').append(response.lab_detail);
-//             } else {
-//                 toastr["error"](response.message);
-//             }
-//         }
-//     });
+$(document.body).on('click', '#prescription_details', function () {
+    var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'profile/get_examinations_tests',
+        type: 'post',
+        data:  {patient_id:patient_id},
+        cache: false,
+        success: function(response) {
+            if (response.success) {
+                $('#echo_detail_container').empty();
+                $('#echo_detail_container').append(response.details);
+            } else {
+                toastr["error"](response.message);
+            }
+        }
+    });
 
-// });
+});
 
 function print_prescription(editableObj,test_id,patient_id) {
 
@@ -3771,69 +3771,81 @@ function printsp(editableObj,test_id,patient_id) {
 }
 
 function deleteEttDetail(editableObj,test_id,patient_id){
-     $.ajax({
-        url: '/cms/print_profiles/delete_ett_test_details',
-        type: 'post',
-        data: {detail_id:test_id,patid:patient_id},
-        cache: false,
-        success: function (response) {
-            if (response.success) {
-                $('#echo_detail_container').empty();
-                $('#echo_detail_container').append(response.ett_detail);
-                if (response.success == true) {
-                    toastr["success"](response.message);
-                }else{
+    if (confirm('Are you sure to delete this record?')) {
+         $.ajax({
+            url: '/cms/print_profiles/delete_ett_test_details',
+            type: 'post',
+            data: {detail_id:test_id,patid:patient_id},
+            cache: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#echo_detail_container').empty();
+                    $('#echo_detail_container').append(response.ett_detail);
+                    if (response.success == true) {
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["error"](response.message);
+                    }
+                } else {
                     toastr["error"](response.message);
                 }
-            } else {
-                toastr["error"](response.message);
             }
-        }
-    });
+        });
+    }else{
+        return false;
+    }
 }
 
 function deletespinstDetail(editableObj,test_id,patient_id){
-     $.ajax({
-        url: '/cms/print_profiles/delete_sp_isnt_test_details',
-        type: 'post',
-        data: {detail_id:test_id,patid:patient_id},
-        cache: false,
-        success: function (response) {
-            if (response.success) {
-                $('#echo_detail_container').empty();
-                $('#echo_detail_container').append(response.sp_inst_details);
-                if (response.success == true) {
-                    toastr["success"](response.message);
-                }else{
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: '/cms/print_profiles/delete_sp_isnt_test_details',
+            type: 'post',
+            data: {detail_id:test_id,patid:patient_id},
+            cache: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#echo_detail_container').empty();
+                    $('#echo_detail_container').append(response.sp_inst_details);
+                    if (response.success == true) {
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["error"](response.message);
+                    }
+                } else {
                     toastr["error"](response.message);
                 }
-            } else {
-                toastr["error"](response.message);
             }
-        }
-    });
+        });
+    }else{
+        return false;
+    }
 }
 
 function deletelabtestDetail(editableObj,key,patient_id){
-     $.ajax({
-        url: '/cms/print_profiles/delete_lab_test_test_details',
-        type: 'post',
-        data: {key:key,patid:patient_id},
-        cache: false,
-        success: function (response) {
-            if (response.success) {
-                $('#echo_detail_container').empty();
-                $('#echo_detail_container').append(response.lab_detail);
-                if (response.success == true) {
-                    toastr["success"](response.message);
-                }else{
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: '/cms/print_profiles/delete_lab_test_test_details',
+            type: 'post',
+            data: {key:key,patid:patient_id},
+            cache: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#echo_detail_container').empty();
+                    $('#echo_detail_container').append(response.lab_detail);
+                    if (response.success == true) {
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["error"](response.message);
+                    }
+                } else {
                     toastr["error"](response.message);
                 }
-            } else {
-                toastr["error"](response.message);
             }
-        }
-    });
+        });
+    }else{
+        return false;
+    }
 }
 
 $(document.body).on('click','#ett-details-pro',function(){

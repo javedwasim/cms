@@ -88,5 +88,112 @@
 	    		return false;
 	    	}
 	    }
+
+	    public function get_advice_detail_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+	    					->where('examination_detail_id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_advice');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
+
+	    public function get_dosage_detail_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+	    					->where('examination_detail_id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_dosage');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
+
+	    public function get_history_detail_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+	    					->where('examination_detail_id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_history');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
+
+	    public function get_instruction_detail_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+	    					->where('examination_detail_id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_instruction');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
+
+	    public function get_investigation_detail_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+	    					->where('examination_detail_id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_investigation');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
+
+	    public function get_measurement_detail_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+	    					->where('examination_detail_id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_measurements');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
+
+	    public function get_medicine_detail_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+	    					->where('examination_detail_id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_medicine');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
+
+	    public function get_examination_detail_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+	    					->where('examination_detail_id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_info');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
+	    public function get_visit_date_by_ids($patid,$testid){
+	    	$result = $this->db->select('*')
+	    					->where('id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_detail');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
 	}
 ?>
