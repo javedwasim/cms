@@ -2344,7 +2344,7 @@ $(document.body).on('click', '#pat-exemination', function () {
 
 /////////////////////////////////// load patient special instructions page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
-$(document.body).on('click', '#pat-spInstructions', function () {
+$(document.body).on('click', '.pat-spInstructions', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: '/cms/profile/patient_special_instructions',
@@ -2371,7 +2371,7 @@ $(document.body).on('click', '#pat-spInstructions', function () {
 /////////////////////////////////// load patient lab test page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-$(document.body).on('click', '#pat-labtest', function () {
+$(document.body).on('click', '.pat-labtest', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
         url: '/cms/profile/patient_lab_test',

@@ -1924,7 +1924,6 @@ $(document.body).on('click', '#pat-echo-test', function () {
 });
 
 $(document.body).on('click', '#echo_profile_form_btn', function () {
-
     $.ajax({
         url: $('#echo_profile_form').attr('data-action'),
         type: 'post',
@@ -1935,6 +1934,9 @@ $(document.body).on('click', '#echo_profile_form_btn', function () {
                 if(response.category_id=='mmode'){
                     $('#mmode_content').empty();
                     $('#mmode_content').append(response.result_html);
+                }else if(response.category_id=='color_dooplers'){
+                    $('#color-doppler-table').empty();
+                    $('#color-doppler-table').append(response.result_html);
                 }else{
                     $('#dooplers_content').empty();
                     $('#dooplers_content').append(response.result_html);
@@ -2035,28 +2037,28 @@ $(document.body).on('click', '#lab_test_detail', function () {
 });
 
 
-function showEditLabDetail(editableObj,echo_id,patient_id) {
-    $('.echo_detail_id').val(echo_id);
-    $.ajax({
-        url: '/cms/profile/patient_echo_lab_edit_detail',
-        type: 'post',
-        data: {detail_id:echo_id,patid:patient_id},
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.content-wrapper').remove();
-                $('#content-wrapper').append(response.result_html);
-                $('.patient_info').remove();
-                $('#pat_sp_information').append(response.patient_information);
-                $('.lab-date').datepicker({
-                    format: 'd-M-yyyy'
-                });
-                $('#lab_test_data_table').empty();
-                $('#lab_test_data_table').append(response.test_table);
-            }
-        }
-    });
-}
+// function showEditLabDetail(editableObj,echo_id,patient_id) {
+//     $('.echo_detail_id').val(echo_id);
+//     $.ajax({
+//         url: '/cms/profile/patient_echo_lab_edit_detail',
+//         type: 'post',
+//         data: {detail_id:echo_id,patid:patient_id},
+//         cache: false,
+//         success: function (response) {
+//             if (response.result_html != '') {
+//                 $('.content-wrapper').remove();
+//                 $('#content-wrapper').append(response.result_html);
+//                 $('.patient_info').remove();
+//                 $('#pat_sp_information').append(response.patient_information);
+//                 $('.lab-date').datepicker({
+//                     format: 'd-M-yyyy'
+//                 });
+//                 $('#lab_test_data_table').empty();
+//                 $('#lab_test_data_table').append(response.test_table);
+//             }
+//         }
+//     });
+// }
 $(document.body).on('click', '#ett_details', function () {
     var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
@@ -2116,6 +2118,35 @@ $(document.body).on('click', '#save_patient_examination_info', function(){
         cache: false,
         success: function(response) {
             $('#research_modal').modal('hide');
+            $('.content-wrapper').remove();
+            $('#content-wrapper').append(response.result_html);
+            $('.profile-table').remove();
+            $('#profile_table').append(response.profile_table);
+            ///////////////// initilize datatable //////////////
+            $('.profiletable').DataTable({
+                // "scrollX": true,
+                "initComplete": function (settings, json) {
+                    $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                }
+            });
+            $("#toggleresize1").click(function () {
+                var icon = $('#toggleresize1 > .arro');
+                icon.toggleClass('fa-arrow-left fa-arrow-right');
+                $('.resize1').toggleClass("active_resize1");
+                $('.resize2').toggleClass("inactive_resize2");
+
+            });
+            $("#toggleresize2").click(function () {
+                var icon = $('#toggleresize2 > .arro');
+                icon.toggleClass('fa-arrow-left fa-arrow-right');
+                $('.resize2').toggleClass("active_resize2");
+                $('.resize1').toggleClass("inactive_resize1");
+            });
+            $('#profiletable tbody tr:first').addClass('row_selected');
+            $("#profiletable tbody tr").click(function (e) {
+                $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
             if (response.success) {
                 toastr["success"](response.message);
             } else {

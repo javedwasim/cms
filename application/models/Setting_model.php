@@ -32,7 +32,6 @@
                 foreach ($result->result_array() as $right){
                     $other_rights[$right['other_rights_name']] = $right['other_rights'];
                 }
-
                 return $other_rights;
             } else {
                 return array();
@@ -398,6 +397,32 @@
                 return array();
             }
         }
+
+        public function get_user_by_id($id){
+            $sql = "Select login.*,lrg.other_rights_group_id,lrgd.rights,lrgd.user_rights
+                    FROM login
+                    LEFT JOIN login_rights_group lrg on lrg.login_rights_group_id = login.login_rights_group_id and lrg.other_rights_group_id > 0
+                    LEFT JOIN(
+                        SELECT other_rights_group_detail.*, GROUP_CONCAT(other_rights.class) as other_rights,
+                        GROUP_CONCAT(other_rights.status) as astatus,
+                        GROUP_CONCAT(CONCAT(other_rights.other_rights_name,'-',other_rights_group_detail.other_rights_id,'-',other_rights.class,'-',other_rights_group_detail.status)) as rights,
+                        GROUP_CONCAT(CONCAT(other_rights.other_rights_name,'-',other_rights.class,'-',other_rights_group_detail.status)) as user_rights
+                        FROM other_rights_group_detail
+                        LEFT JOIN other_rights ON other_rights.other_rights_id = other_rights_group_detail.other_rights_id
+                        LEFT JOIN other_rights_group org  ON org.other_rights_group_id = other_rights_group_detail.other_rights_group_id
+                        WHERE org.status = 1
+                        Group BY other_rights_group_id
+                    )lrgd ON lrgd.other_rights_group_id = lrg.other_rights_group_id
+                    WHERE login.login_id=$id";
+            $result = $query = $this->db->query($sql);
+            if ($result) {
+                return $result->result_array();
+            } else {
+                return array();
+            }
+        }
+
+
         public function assign_permission($data){
             $other_rights_group_id = $data[0];
             $other_rights_id = $data[1];

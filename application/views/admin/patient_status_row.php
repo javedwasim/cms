@@ -1,8 +1,9 @@
 <div class="status_row">
-    <?php
-        if(isset($rights[0]['rights'])):
+<?php
+        if(isset($rights[0]['rights']))://print_r($rights[0]['rights']);
             $permissions = explode(',',$rights[0]['rights']);
         endif;
+        $user_info = ($this->session->userdata('user_data_logged_in'));
     ?>
     <div class="row m-r-5">
         <div class="col-md-12" id="operations_panel">
@@ -13,15 +14,11 @@
                             <button type="button" id="sidebarCollapse" class=" round round-sm round-theme m-b-5">
                                 <i class="fas fa-arrow-left arro"></i>
                             </button>
-                        <?php $user_info = ($this->session->userdata('user_data_logged_in'));
-                        if($user_info['is_admin']==1){?>
-                            <div class="round round-sm align-self-center green m-b-10" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
+                        
+                            <div class="round round-sm align-self-center green m-b-10 <?php echo in_array("view_wallet-0", $permissions)?"op-hide":''; ?>" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
                                 <i class="fa fa-wallet"></i>
                             </div>
-                        <?php }else{
-                                echo "";
-                            }
-                            ?>
+                       
                         </div>
                         <!-- Column -->
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">

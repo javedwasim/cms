@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
     $(document).ready(function () {
         $('.item_table').DataTable({
             "info": true,
@@ -59,7 +59,7 @@
 
 
     });
-</script>
+</script> -->
 
 <script>
     function medicineItemEdit(editableObj,id,name) {

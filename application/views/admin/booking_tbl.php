@@ -8,7 +8,7 @@
     <table class="table table-bordered" cellspacing="0" id="editable-datatable" width="100%">
         <thead class="tb-bg white-text">
             <tr>
-                <th class="<?php echo !in_array("appointments-can_delete-0", $permissions)&&($user_info['is_admin']!=1)?"hide":''; ?>" >Action</th>
+                <th class="<?php echo in_array("can_delete-0", $permissions)?"hide":''; ?>" >Action</th>
                 <th>Sr</th>
                 <th>Order</th>
                 <th style="width:150px;">Name</th>
@@ -57,7 +57,7 @@
                     ?>
                 <tr class="gradeX colorchnage">
 
-                    <td class="<?php echo !in_array("appointments-can_delete-0", $permissions)&&($user_info['is_admin']!=1)?"hide":''; ?>">
+                    <td class="<?php echo in_array("can_delete-0", $permissions)?"hide":''; ?>">
                         <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
                             <i class="fa fa-trash"></i>
                         </a>
@@ -251,7 +251,7 @@
                 ?>
 
                 <tr class="gradeX colorchnage">
-                    <td class="<?php echo !in_array("appointments-can_delete-0", $permissions)&&($user_info['is_admin']!=1)?"hide":''; ?>">
+                    <td class="<?php echo in_array("can_delete-0", $permissions)?"hide":''; ?>">
                         <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
                             <i class="fa fa-trash"></i>
                         </a>
@@ -369,7 +369,7 @@
                 ?>
 
                 <tr class="gradeX colorchnage">
-                    <td class="<?php echo !in_array("appointments-can_delete-0", $permissions)&&($user_info['is_admin']!=1)?"hide":''; ?>">
+                    <td class="<?php echo in_array("can_delete-0", $permissions)?"hide":''; ?>">
                         <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
                             <i class="fa fa-trash"></i>
                         </a>

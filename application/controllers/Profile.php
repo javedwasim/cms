@@ -629,15 +629,19 @@ class Profile extends MY_Controller
             $json['message'] = 'Please enter item value';
 
         } else {
-            $patient_echo_id = $this->Profile_model->save_echo_profile_info($data);
+            $patient_echo_id = $this->Profile_model->save_echo_profile_info($data,$main_category);
+            if ($main_category['main_category']=='color_dooplers') {
+                $data['color_doppler'] = $this->Profile_model->get_patient_color_doppler($patient_echo_id);
+                $json['result_html'] = $this->load->view('profile/color_doppler_table', $data, true);
+            }else{
+                $data['measurements'] = $this->Profile_model->get_patient_measurement_by_category($patient_echo_id);
+                $json['result_html'] = $this->load->view('profile/profile_measurement_table', $data, true);
+            }
+            $data['active_tab'] = 'measurement';
             $json['success'] = true;
             $json['message'] = 'Information save successfully!';
             $json['category_id'] = $main_category['main_category'];
-
-            $data['measurements'] = $this->Profile_model->get_patient_measurement_by_category($patient_echo_id);
-            $data['active_tab'] = 'measurement';
             $data['rights'] = $this->session->userdata('other_rights');
-            $json['result_html'] = $this->load->view('profile/profile_measurement_table', $data, true);
 
         }
         if ($this->input->is_ajax_request()) {
@@ -872,24 +876,29 @@ class Profile extends MY_Controller
         if (isset($data['examination_testid'])&& $data['examination_testid'] != '') {
             $result = $this->Profile_model->update_profile_examination_info($data);
             if ($result) {
-            $json['success'] = true;
-            $json['message'] = 'Updated successfully!';
-        }else{
-            $json['error'] = true;
-            $json['message'] = 'Seems an error!';
-        }
+                $json['success'] = true;
+                $json['message'] = 'Updated successfully!';
+            }else{
+                $json['error'] = true;
+                $json['message'] = 'Seems an error!';
+            }
         }else{
             $result = $this->Profile_model->save_profile_examination_info($data);
             if ($result) {
-            $json['success'] = true;
-            $json['message'] = 'Saved successfully!';
-        }else{
-            $json['error'] = true;
-            $json['message'] = 'Seems an error!';
+                $json['success'] = true;
+                $json['message'] = 'Saved successfully!';
+            }else{
+                $json['error'] = true;
+                $json['message'] = 'Seems an error!';
+            }
         }
-        }
-        
-        
+        $data['professions'] = $this->Setting_model->get_professions();
+        $data['districts'] = $this->Setting_model->get_districts();
+        $data['profiles'] = $this->Profile_model->get_profiles();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+        $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+        $json['result_html'] = $this->load->view('pages/profile', $data, true);
         if ($this->input->is_ajax_request()){
             set_content_type($json);
         }

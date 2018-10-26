@@ -118,7 +118,7 @@ body {
     color: #000 !important; 
 }
 .op-hide{
-    display: none;
+    display: none !important;
 }
 
 .navbar .nav-item .nav-link {
@@ -266,6 +266,9 @@ li#list_itmes_vital {
 }
 .report-font{
     font-size: 14px;
+}
+.ribbon{
+    padding: 0px 5px;
 }
 /* ---------------------------------------------------
     SIDEBAR STYLE

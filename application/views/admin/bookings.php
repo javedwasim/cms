@@ -1,3 +1,9 @@
+<?php
+        if(isset($rights[0]['rights']))://print_r($rights[0]['rights']);
+            $permissions = explode(',',$rights[0]['rights']);
+        endif;
+        $user_info = ($this->session->userdata('user_data_logged_in'));
+    ?>
 <div class="content-wrapper" style="margin:0 .5%">
 	<div class="row page-titles" style="margin: 0px;">
         <div class="col-xs-12 col-md-4 col-sm-12" style="display: inline-flex;">
@@ -5,12 +11,12 @@
                 <div class="col-md-2">
                     <a class="btn btn-info" href="javascript:void(0)" onclick="bookings();" aria-expanded="false"> Refresh</a>
                 </div>
-                <div class="col-md-5 offset-1 p-r-0">
+                <div class="col-md-5 offset-1 p-r-0 <?php echo in_array("print-0", $permissions)?"op-hide":''; ?>">
                     <input type="text" name="" value="<?php echo date('d-M-Y') ?>" class="print_date form-control m-t-5" style="height:35px;" id="print_all">        
                 </div>
-                <div class="col-md-4 p-0">
+                <div class="col-md-4 p-0 <?php echo in_array("print-0", $permissions)?"op-hide":''; ?>">
                     <button class="btn btn-default" id="print_all_list">Print all</button> 
-                </div>
+                </div>    
             </div>
         </div>
         <div class="col-md-5 col-xs-12 col-sm-12">
@@ -19,7 +25,7 @@
                     <label class="m-t-10 m-r-5">Search</label>
                     <input type="text" name="" value="<?php echo date('d-M-Y') ?>" class="form-control m-t-5" id="search-all-cat" style="height:35px;">        
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 <?php echo in_array("view_wallet-0", $permissions)?"op-hide":''; ?>">
                     <div class="round round-sm align-self-center green m-b-10" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
                         <i class="fa fa-wallet"></i>
                     </div>

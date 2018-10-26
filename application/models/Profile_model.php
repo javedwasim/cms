@@ -399,32 +399,47 @@ class Profile_model extends CI_Model
     }
 
 
-    public function save_echo_profile_info($data)
+    public function save_echo_profile_info($data,$main_category)
     {
         $query = $this->db->select('*')->from('patient_echo')->limit(1)->get();
         $result = $query->row_array();
         $patient_echo_id = $result['id'];
-        $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_measurement');
+        if ($main_category['main_category']=='color_dooplers') {
+            $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_color_doppler');
+            $this->db->where('patient_id', $data['patient_id'])->delete('patient_echo');
+            $this->db->insert('patient_echo', array('patient_id' => $data['patient_id'], 'measurement_cate_id' => $data['measurement_cate_id']));
+            $patient_echo_id = $this->db->insert_id();
+            $data_array = array(
+                'mr' => $data['mr'], 
+                'ar' => $data['ar'], 
+                'pr' => $data['pr'], 
+                'tr' => $data['tr'],
+                'patient_echo_id' => $patient_echo_id
+            );
+            $this->db->insert('patient_echo_color_doppler',$data_array);
 
+        }else{
+            $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_measurement');
+            $this->db->where('patient_id', $data['patient_id'])->delete('patient_echo');
+            $this->db->insert('patient_echo', array('patient_id' => $data['patient_id'], 'measurement_cate_id' => $data['measurement_cate_id']));
+            $patient_echo_id = $this->db->insert_id();
 
-        $this->db->where('patient_id', $data['patient_id'])->delete('patient_echo');
-        $this->db->insert('patient_echo', array('patient_id' => $data['patient_id'], 'measurement_cate_id' => $data['measurement_cate_id']));
-        $patient_echo_id = $this->db->insert_id();
-
-        for ($i = 0; $i < count($data['item_id']); $i++) {
-            $item_id = $data['item_id'];
-            $item_value = $data['item_value'];
-            $measurement_value = $data['measurement_value'];
-            if (!empty($item_value[$i])) {
-                $this->db->insert('patient_echo_measurement',
-                    array(
-                        'patient_echo_id' => $patient_echo_id,
-                        'item_id' => $item_id[$i],
-                        'item_value' => $item_value[$i],
-                        'measurement_value' => $measurement_value[$i],
-                    ));
+            for ($i = 0; $i < count($data['item_id']); $i++) {
+                $item_id = $data['item_id'];
+                $item_value = $data['item_value'];
+                $measurement_value = $data['measurement_value'];
+                if (!empty($item_value[$i])) {
+                    $this->db->insert('patient_echo_measurement',
+                        array(
+                            'patient_echo_id' => $patient_echo_id,
+                            'item_id' => $item_id[$i],
+                            'item_value' => $item_value[$i],
+                            'measurement_value' => $measurement_value[$i],
+                        ));
+                }
             }
         }
+        
         return $patient_echo_id;
     }
 
@@ -440,6 +455,17 @@ class Profile_model extends CI_Model
             return array();
         }
     }
+
+    public function get_patient_color_doppler($id){
+        $result = $this->db->select('*')->from('patient_echo_color_doppler')
+                        ->where('patient_echo_id', "$id")->get();
+        if ($result) {
+            return $result->result_array();
+        } else {
+            return array();
+        }
+    }
+
 
     public function get_main_category($category_id)
     {
@@ -846,6 +872,7 @@ class Profile_model extends CI_Model
 
     public function update_profile_examination_info($data)
     {
+
         $patient_id = $data['patient_id'];
         $testid = $data['examination_testid'];
         $next_visit_date = date('Y-m-d',strtotime($data['next_date_visit_form']));
@@ -882,6 +909,8 @@ class Profile_model extends CI_Model
         }
 
         if (isset($data['medicine_value']) && !empty($data['medicine_value'])) {
+            $this->db->where('examination_detail_id',$testid)->where('patient_id',$patient_id)
+                            ->delete('profile_examination_medicine');
             $medicine_value = $data['medicine_value'];
             foreach ($medicine_value as $value) {
                 $result =  $this->db->insert('profile_examination_medicine',
@@ -889,7 +918,9 @@ class Profile_model extends CI_Model
                         'patient_id' => $patient_id, 'medicine_value' => $value));
             }
         }
-        if (isset($data['dosage_value'])) {
+        if (isset($data['dosage_value']) && !empty($data['dosage_value'])) {
+            $this->db->where('examination_detail_id',$testid)->where('patient_id',$patient_id)
+                            ->delete('profile_examination_dosage');
             $dosage_value = $data['dosage_value'];
             foreach ($dosage_value as $value) {
                 $result =  $this->db->insert('profile_examination_dosage',

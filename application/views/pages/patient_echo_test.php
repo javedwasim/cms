@@ -160,11 +160,8 @@
 		    								Color Doppler Flow
 		    							</div>
 		    							<div class="card-body p-0">
-		    								<ul class="list-group">
-				    							<li class="list-group-item">
-				    								MR ++
-				    							</li>
-				    							<li class="list-group-item">AR ++</li>
+		    								<ul class="list-group" id="color-doppler-table">
+				    							
 				    						</ul>	
 		    							</div>
 		    						</div>

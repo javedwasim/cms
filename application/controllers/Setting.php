@@ -1566,6 +1566,8 @@ class Setting extends MY_Controller
     public function user_data_modal(){
         $user_name = $this->input->post('username');
         $data['user_data'] = $this->Dashboard_model->get_user($user_name);
+        $userid = $data['user_data']['login_id'];        
+        $data['users'] = $this->Setting_model->get_user_by_id($userid);
         $json['edit_modal'] = $this->load->view('pages/register-user_modal',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

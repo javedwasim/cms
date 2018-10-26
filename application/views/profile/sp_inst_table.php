@@ -6,10 +6,11 @@
             <th>Dates</th>
         </thead>
         <tbody>
+
             <?php foreach($sp_info as $sp){?>
                 <tr>
                     <td class="hide pat_sp_id"><?php echo $sp['id'];?></td>
-                    <td><i class="fa fa-print"></i></td>
+                    <td><a class="btn btn-success btn-xs" onClick="printsp(this,'<?php echo $sp['id']; ?>','<?php echo $sp['patient_id']; ?>');" ><i class="fa fa-print"></i></td>
                     <td><?php echo date('Y-m-d', strtotime($sp['created_at'])) ?></td>
                 </tr>
             <?php }?>

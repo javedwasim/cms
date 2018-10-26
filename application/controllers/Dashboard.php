@@ -130,6 +130,7 @@ class Dashboard extends CI_Controller {
         $data['refund_count'] = $this->User_model->count_refund_rows($date);
         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
         $json['booking_cate'] = $this->load->view('admin/booking_categories', $data, true);
         $json['result_html'] = $this->load->view('admin/bookings', $data, true);

@@ -493,13 +493,16 @@
                                     <form id="medicine_profile_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                          <input type="hidden" name="patient_id" class="patient_id"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
                                                     <thead><tr><th>Medicine</th></tr></thead>
                                                     <tbody id="medicine_item"></tbody>
+                                                    <?php if(isset($medicine_details)){ foreach($medicine_details as $med){?>
+                                                    	<tr><td><input class="form-control" type="text" name="medicine_value[]" value="<?php echo $med['medicine_value']; ?>" ></td></tr>
+                                                    <?php } }?>
                                                 </table>
                                             </div>
                                         </div>
@@ -516,6 +519,9 @@
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
                                                     <thead><tr><th>Dosage</th></tr></thead>
                                                     <tbody id="dosage_item"></tbody>
+                                                    <?php if(isset($dosage_details)){ foreach($dosage_details as $dos){?>
+                                                    	<tr><td><input class="form-control" type="text" name="dosage_value[]" value="<?php echo $dos['dosage_value']; ?>" ></td></tr>
+                                                    <?php } }?>
                                                 </table>
                                             </div>
                                         </div>
@@ -527,7 +533,7 @@
                                     <form id="investigation_profile_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                          <input type="hidden" name="patient_id" class="patient_id"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
                                         <input type="hidden" name="investigation_id" value="<?php if(isset($investigation_details)){foreach($investigation_details as $key){echo $key['id'];}}?>" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
