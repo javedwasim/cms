@@ -160,9 +160,15 @@
 		    								Color Doppler Flow
 		    							</div>
 		    							<div class="card-body p-0">
+                                        <form id="echo_color_dooplers_content_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_echo_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="echo_detail_id_dooplers" class="echo_detail_id" value="<?php echo isset($measurements)?$measurements[0]['echo_detail_id']:''; ?>"/>
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
 		    								<ul class="list-group" id="color-doppler-table">
 				    							
-				    						</ul>	
+				    						</ul>
+                                        </form>	
 		    							</div>
 		    						</div>
 		    						<div>
@@ -179,9 +185,9 @@
     		<div class="card">
     			<div class="card-header">
     				<label>Report Finding / Feeding Section</label><br>
-    				<label class="radio-inline m-r-10"><input type="radio" name="optradio" checked>Report By Disease</label>
-					<label class="radio-inline m-r-10"><input type="radio" name="optradio">Finding By Structure</label>
-					<label class="radio-inline m-r-10"><input type="radio" name="optradio">Diagnosis By Structure</label>
+    				<label class="radio-inline m-r-10"><input type="radio" name="optradio" id="get_disease">Report By Disease</label>
+					<label class="radio-inline m-r-10"><input type="radio" name="optradio" id="get_structure_findings" >Finding By Structure</label>
+					<label class="radio-inline m-r-10"><input type="radio" name="optradio" id="get_structure_diagnosis">Diagnosis By Structure</label>
 					<button class="btn btn-success btn-sm pull-right">Uploads</button>
     			</div>
     			<div class="card-body">
@@ -189,20 +195,18 @@
     					<div class="col-md-2 p-r-0">
 	    					<div class="card">
 								<div class="card-header">
-									Select Disease
 								</div>
-								<div class="card-body p-0">
-                                    <?php $this->load->view('profile/disease_table'); ?>
+								<div class="card-body p-0 disease_structure_table ">
+                                    
 								</div>
 							</div>
 	    				</div>
 	    				<div class="col-md-3 p-r-0 p-l-0">
 	    					<div class="card">
 								<div class="card-header">
-                                    Select Structure
 								</div>
-								<div class="card-body p-0">
-                                    <?php $this->load->view('profile/structure_table'); ?>
+								<div class="card-body p-0 findings_diagnosis_table">
+                                    
 								</div>
 							</div>
 	    				</div>
@@ -215,7 +219,7 @@
                                 <input type="hidden" name="disease_id" id="disease_id" value="<?php echo isset($findings[0]['disease_id'])?$findings[0]['disease_id']:''; ?>"/>
                                 <div class="card">
                                     <div class="card-header">
-                                        Finding by Disease/Structure
+                                        
                                     </div>
                                     <div class="card-body p-0" id="disease_findings">
                                         <ul class="list-group">
@@ -240,7 +244,7 @@
                                 <input type="hidden" name="disease_id" id="disease_id" value="<?php echo isset($diagnosis[0]['disease_id'])?$diagnosis[0]['disease_id']:''; ?>"/>
                                 <div class="card">
                                     <div class="card-header">
-                                        Diagnosis by Disease/Structure
+                                       
                                     </div>
                                     <div class="card-body p-0" id="disease_diagnosis">
                                         <ul class="list-group">

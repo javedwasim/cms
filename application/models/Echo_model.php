@@ -341,6 +341,58 @@
                 return array();
             }
         }
+
+        public function save_st_finding($sId,$fId,$fname){
+            $result = $this->db->select('*')->where('structure_id',$sId)->get('echo_findings_by_structure');
+            if ($result->num_rows()>0) {
+                $data_array = array(
+                    'finding_id' => $fId,
+                    'finding_name' => $fname
+                );
+                $this->db->where('structure_id',$sId)->update('echo_findings_by_structure',$data_array);
+            }else{
+                $data_array = array(
+                    'finding_id' => $fId,
+                    'finding_name' => $fname,
+                    'structure_id' => $sId
+                );
+                $this->db->insert('echo_findings_by_structure',$data_array);
+            }
+
+            $findings_structure = $this->db->select('*')->from('echo_findings_by_structure')->get();
+            if ($findings_structure) {
+                return $findings_structure->result_array();
+            }else{
+                return array();
+            }
+
+        }
+
+        public function save_st_diagnosis($sId,$dId,$dname){
+            $result = $this->db->select('*')->where('structure_id',$sId)->get('echo_diagnosis_by_structure');
+            if ($result->num_rows()>0) {
+                $data_array = array(
+                    'diagnosis_id' => $dId,
+                    'diagnosis_name' => $dname
+                );
+                $this->db->where('structure_id',$sId)->update('echo_diagnosis_by_structure',$data_array);
+            }else{
+                $data_array = array(
+                    'diagnosis_id' => $dId,
+                    'diagnosis_name' => $dname,
+                    'structure_id' => $sId
+                );
+                $this->db->insert('echo_diagnosis_by_structure',$data_array);
+            }
+
+            $result = $this->db->select('*')->from('echo_diagnosis_by_structure')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+
+        }
 	}
 
 ?>

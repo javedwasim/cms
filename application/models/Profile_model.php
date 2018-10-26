@@ -498,7 +498,7 @@ class Profile_model extends CI_Model
 
     public function save_profile_echo_info($data)
     {
-        //print_r($data); die();
+        // print_r($data); die();
         $patient_echo_id = $data['patient_id'];
         $disease_id = $data['disease_id'];
         if (isset($data['echo_detail_id_mmode']) && !empty($data['echo_detail_id_mmode'])) {
@@ -537,8 +537,7 @@ class Profile_model extends CI_Model
                     'finding_id' => $disease_finding_id[$i],
                     'finding_value' => $disease_finding_value[$i],
                     'disease_id' => $disease_id,
-                    'disease_id' => $disease_id,
-                    'structure_id' => $finding_structure_id[$i],
+                    'structure_id' => $finding_structure_id[$i]
                 ));
         }
 
@@ -553,9 +552,19 @@ class Profile_model extends CI_Model
                     'diagnosis_id' => $disease_diagnosis_id[$i],
                     'diagnosis_value' => $disease_diagnosis_value[$i],
                     'disease_id' => $disease_id,
-                    'structure_id' => $diagnose_structure_id[$i],
+                    'structure_id' => $diagnose_structure_id[$i]
                 ));
         }
+
+        $data_array = array(
+            'echo_detail_id' => $echo_deatil_id,
+            'patient_id' => $patient_echo_id,
+            'doopler_mr' => $data['doopler_mr'],
+            'doopler_ar' => $data['doopler_ar'],
+            'doopler_pr' => $data['doopler_pr'],
+            'doopler_tr' => $data['doopler_tr']
+        );
+        $this->db->insert('profile_echo_color_doopler',$data_array);
 
         return $patient_echo_id;
     }
@@ -983,6 +992,41 @@ class Profile_model extends CI_Model
             return false;
         }
 
+    }
+
+    public function save_finding_diagnosis_by_structure($data_a,$data_b){
+
+        if (empty($data_a) && !empty($data_b)) {
+            $this->db->truncate('echo_findings_by_structure');
+            $this->db->truncate('echo_diagnosis_by_structure');
+            $this->db->insert_batch('echo_diagnosis_by_structure',$data_b);
+        }else if(empty($data_b) && !empty($data_a)){
+            $this->db->truncate('echo_findings_by_structure');
+            $this->db->truncate('echo_diagnosis_by_structure');
+            $this->db->insert_batch('echo_findings_by_structure',$data_a);
+        }else if(empty($data_a) && empty($data_b)){
+            $this->db->truncate('echo_findings_by_structure');
+            $this->db->truncate('echo_diagnosis_by_structure');
+        }else{
+            $this->db->truncate('echo_findings_by_structure');
+            $this->db->truncate('echo_diagnosis_by_structure');
+            $this->db->insert_batch('echo_findings_by_structure',$data_a);
+            $this->db->insert_batch('echo_diagnosis_by_structure',$data_b);
+        }
+       
+        $findings_structure = $this->db->select('*')->from('echo_findings_by_structure')->get();
+        $diagnosis_structure = $this->db->select('*')->from('echo_diagnosis_by_structure')->get();
+        if ($findings_structure) {
+            $data['findings'] = $findings_structure->result_array();
+        }else{
+            $data['findings'] = array();
+        }
+        if ($diagnosis_structure) {
+            $data['diagnosis'] = $diagnosis_structure->result_array();
+        }else{
+            $data['diagnosis'] = array();
+        }
+        return $data;
     }
 
 }

@@ -1956,7 +1956,8 @@ $(document.body).on('click', '#save_patient_echo_info', function(){
         url: window.location.origin+window.location.pathname+'profile/save_profile_echo_info',
         type: 'post',
         data:  $("#echo_mmode_content_form").serialize() + "&" + $("#echo_dooplers_content_form").serialize()
-               + "&" +$("#echo_finding_form").serialize() + "&" + $("#echo_diagnosis_form").serialize(),
+               + "&" +$("#echo_finding_form").serialize() + "&" + $("#echo_diagnosis_form").serialize() 
+               + "&" + $("#echo_color_dooplers_content_form").serialize(),
         cache: false,
         success: function(response) {
             $('#research_modal').modal('hide');
@@ -2619,3 +2620,116 @@ function showEditexaminationDetail(editableObj,test_id,patient_id) {
         }
     });
 }
+
+$(document.body).on('click','#get_disease', function(){
+    $.ajax({
+        url:window.location.origin+window.location.pathname+'echo_controller/get_echo_disease',
+        cache: false,
+        success:function(response){
+            $('.disease_structure_table').empty();
+            $('.disease_structure_table').append(response.disease_html);
+        }
+    });
+});
+$(document.body).on('click','#get_structure_findings', function(){
+    var flag = 'finding';
+    $.ajax({
+        url:window.location.origin+window.location.pathname+'echo_controller/get_echo_structure',
+        type: 'post',
+        data: {flag:flag},
+        cache: false,
+        success:function(response){
+            $('.disease_structure_table').empty();
+            $('.disease_structure_table').append(response.structure_html);
+            $('.findings_diagnosis_table').empty();
+        }
+    });
+});
+$(document.body).on('click','#get_structure_diagnosis', function(){
+    var flag = 'diagnosis';
+    $.ajax({
+        url:window.location.origin+window.location.pathname+'echo_controller/get_echo_structure',
+        type: 'post',
+        data: {flag:flag},
+        cache: false,
+        success:function(response){
+            $('.disease_structure_table').empty();
+            $('.disease_structure_table').append(response.structure_html);
+            $('.findings_diagnosis_table').empty();
+        }
+    });
+});
+
+$(document.body).on('click','#structure_finding_table tbody tr',function(){
+    $('#structure_finding_table tbody tr.row_selected').removeClass('row_selected');
+    $(this).addClass('row_selected');
+    var structureid =  $('#structure_finding_table tbody tr.row_selected').find('#structure_id').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/get_echo_findings/'+structureid,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.findings_diagnosis_table').empty();
+            $('.findings_diagnosis_table').append(response.findings_html);
+        }
+    });
+});
+
+$(document.body).on('click','#structure_diagnosis_table tbody tr',function(){
+    $('#structure_diagnosis_table tbody tr.row_selected').removeClass('row_selected');
+    $(this).addClass('row_selected');
+    var structureid =  $('#structure_diagnosis_table tbody tr.row_selected').find('#structure_diagnosis_id').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/get_echo_diagnosis/'+structureid,
+        type: 'get',
+        cache: false,
+        success: function(response) {
+            $('.findings_diagnosis_table').empty();
+            $('.findings_diagnosis_table').append(response.diagnosis_html);
+        }
+    });
+});
+
+$(document.body).on('click','#finding_by_structure_table tbody tr',function(){
+    $('#finding_by_structure_table tbody tr.row_selected').removeClass('row_selected');
+    $(this).addClass('row_selected');
+    var structureid =  $('#finding_by_structure_table tbody tr.row_selected').find('#finding_structure_id').val();
+    var findingid =  $('#finding_by_structure_table tbody tr.row_selected').find('#echo_finding_id').val();
+    var findingname =  $('#finding_by_structure_table tbody tr.row_selected').find('#echo_finding_name').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/save_finding_by_structure/',
+        type: 'post',
+        data: {
+            stId:structureid,
+            fId:findingid,
+            fName: findingname
+        },
+        cache: false,
+        success: function(response) {
+            $('#disease_findings').empty();
+            $('#disease_findings').append(response.result_html);
+        }
+    });
+});
+
+$(document.body).on('click','#diagnosis_by_structure_table tbody tr',function(){
+    $('#diagnosis_by_structure_table tbody tr.row_selected').removeClass('row_selected');
+    $(this).addClass('row_selected');
+    var structureid =  $('#diagnosis_by_structure_table tbody tr.row_selected').find('#diagnosis_structure_id').val();
+    var diagnosisid =  $('#diagnosis_by_structure_table tbody tr.row_selected').find('#echo_diagnosis_id').val();
+    var diagnosisname =  $('#diagnosis_by_structure_table tbody tr.row_selected').find('#echo_diagnosis_name').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'echo_controller/save_diagnosis_by_structure/',
+        type: 'post',
+        data: {
+            stId:structureid,
+            dId:diagnosisid,
+            dName: diagnosisname
+        },
+        cache: false,
+        success: function(response) {
+            $('#disease_diagnosis').empty();
+            $('#disease_diagnosis').append(response.result_html);
+        }
+    });
+});

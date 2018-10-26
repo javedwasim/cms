@@ -662,17 +662,44 @@ class Profile extends MY_Controller
 
     public function get_disease_findings_diagnosis($disease_id)
     {
-        $result = $this->Profile_model->get_disease_findings_diagnosis($disease_id);
+        $result_st = $this->Profile_model->get_disease_findings_diagnosis($disease_id);
+        $data_find['findings'] = $result_st['findings'];
+        $data_dia['diagnosis'] = $result_st['diagnosis'];
+        // print_r($data_find['findings']);
+        // print_r($data_dia['diagnosis']);die();
+        if ($data_find['findings']=="") {
+            $data_array_1 = array();
+        }else{
+            $data_array_1 = array();
+            foreach ($data_find['findings'] as $key) {
+                $data_array_1[]=array(
+                    'structure_id'=>$key['structure_id'],
+                    'finding_id'=>$key['finding_id'],
+                    'finding_name'=>$key['name'],
+                );
+            }
+        }
+        if($data_dia['diagnosis']==""){
+            $data_array_2 = array();
+        }else{
+            $data_array_2 = array();
+            foreach ($data_dia['diagnosis'] as $key) {
+                $data_array_2[]=array(
+                    'structure_id'=>$key['structure_id'],
+                    'diagnosis_id'=>$key['diagnosis_id'],
+                    'diagnosis_name'=>$key['name'],
+                );
+            }
+        }
+        $result = $this->Profile_model->save_finding_diagnosis_by_structure($data_array_1,$data_array_2);
         $data['findings'] = $result['findings'];
         $data['diagnosis'] = $result['diagnosis'];
         $json['success'] = true;
         $json['result_html'] = $this->load->view('profile/finding_table', $data, true);
         $json['diagnosis_html'] = $this->load->view('profile/profile_diagnosis_table', $data, true);
-
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-        // print_r($results); die('dfd');
 
     }
 

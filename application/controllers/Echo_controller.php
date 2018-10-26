@@ -659,6 +659,64 @@ class Echo_controller extends MY_Controller
         }
     }
 
+    public function get_echo_disease(){
+        $data['diseases'] = $this->Echo_model->get_disease_categories();
+        $json['disease_html'] = $this->load->view('profile/disease_table',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+    public function get_echo_structure(){
+        $flag = $this->input->post('flag');
+        $data['structures'] = $this->Echo_model->get_Structure_categories();
+        if ($flag == 'finding') {
+            $json['structure_html'] = $this->load->view('profile/structure_table',$data,true);
+        }else{
+            $json['structure_html'] = $this->load->view('profile/structure_table_diagnosis',$data,true);
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_echo_findings($id){
+        $data['findings'] = $this->Echo_model->get_structure_findings_by_id($id);
+        $json['findings_html'] = $this->load->view('profile/findings_by_structures_table',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_echo_diagnosis($id){
+        $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($id);
+        $json['diagnosis_html'] = $this->load->view('profile/diagnosis_by_structures_table',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function save_finding_by_structure(){
+        $sId = $this->input->post('stId');
+        $fId = $this->input->post('fId');
+        $fname = $this->input->post('fName');
+        $data['findings'] = $this->Echo_model->save_st_finding($sId,$fId,$fname);
+        $json['result_html'] = $this->load->view('profile/finding_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function save_diagnosis_by_structure(){
+        $sId = $this->input->post('stId');
+        $dId = $this->input->post('dId');
+        $dname = $this->input->post('dName');
+        $data['diagnosis'] = $this->Echo_model->save_st_diagnosis($sId,$dId,$dname);
+        $json['result_html'] = $this->load->view('profile/profile_diagnosis_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
 }
 
 ?>
