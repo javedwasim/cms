@@ -1073,7 +1073,7 @@ class Setting extends MY_Controller
     }
 
     public function import_history_items($id)
-    {
+    {   
         if (isset($_FILES['csv_file']['name'])) {
             // total files //
             $count = count($_FILES['csv_file']['name']);
@@ -1091,14 +1091,16 @@ class Setting extends MY_Controller
                     $json['message'] = 'Successfully Uploaded.';
                 } else {
                     $json['error'] = false;
-                    $json['message'] = 'Seems an error.';
+                    $json['message'] = 'Upload correct file.';
                 }
 
             } else {
-                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
             }
         } else {
-            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
         }
 
         if ($this->input->is_ajax_request()) {
@@ -1111,13 +1113,18 @@ class Setting extends MY_Controller
         $path = $this->config->item('file_upload_path') . $fname;
         if ($this->csvimport->get_array($path)) {
             $csv_array = $this->csvimport->get_array($path);
-            foreach ($csv_array as $row) {
-                $insert_data = array(
-                    'name' => $row['name'],
-                    'profile_history_id' => $id
-                );
-                $this->Setting_model->insert_csv_history($insert_data);
+            if (array_key_exists('name',$csv_array[0])) {
+                foreach ($csv_array as $row) {
+                    $insert_data = array(
+                        'name' => $row['name'],
+                        'profile_history_id' => $id
+                    );
+                    $this->Setting_model->insert_csv_history($insert_data);
+                }
+            }else{
+                return false;
             }
+            
             return true;
         } else {
             return false;
@@ -1180,10 +1187,12 @@ class Setting extends MY_Controller
                 }
 
             } else {
-                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
             }
         } else {
-            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
         }
 
         if ($this->input->is_ajax_request()) {
@@ -1196,14 +1205,19 @@ class Setting extends MY_Controller
         $path = $this->config->item('file_upload_path') . $fname;
         if ($this->csvimport->get_array($path)) {
             $csv_array = $this->csvimport->get_array($path);
-            foreach ($csv_array as $row) {
-                $insert_data = array(
-                    'name' => $row['Examination items'],
-                    'examination_id' => $id
-                );
-                $this->Setting_model->insert_csv_examination($insert_data);
+            if (array_key_exists('Examination items',$csv_array[0])) {
+                foreach ($csv_array as $row) {
+                    $insert_data = array(
+                        'name' => $row['Examination items'],
+                        'examination_id' => $id
+                    );
+                    $this->Setting_model->insert_csv_examination($insert_data);
+                }
+                return true;
+            }else{
+                return false;
             }
-            return true;
+            
         } else {
             return false;
         }
@@ -1265,10 +1279,12 @@ class Setting extends MY_Controller
                 }
 
             } else {
-                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
             }
         } else {
-            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
         }
 
         if ($this->input->is_ajax_request()) {
@@ -1281,14 +1297,19 @@ class Setting extends MY_Controller
         $path = $this->config->item('file_upload_path') . $fname;
         if ($this->csvimport->get_array($path)) {
             $csv_array = $this->csvimport->get_array($path);
-            foreach ($csv_array as $row) {
-                $insert_data = array(
-                    'name' => $row['Investigation items'],
-                    'investigation_id' => $id
-                );
-                $this->Setting_model->insert_csv_investigation($insert_data);
+            if (array_key_exists('Investigation items',$csv_array[0])) {
+                foreach ($csv_array as $row) {
+                    $insert_data = array(
+                        'name' => $row['Investigation items'],
+                        'investigation_id' => $id
+                    );
+                    $this->Setting_model->insert_csv_investigation($insert_data);
+                }
+                return true;
+            }else{
+                return false;
             }
-            return true;
+            
         } else {
             return false;
         }
@@ -1350,10 +1371,12 @@ class Setting extends MY_Controller
                 }
 
             } else {
-                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
             }
         } else {
-            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
         }
 
         if ($this->input->is_ajax_request()) {
@@ -1366,15 +1389,20 @@ class Setting extends MY_Controller
         $path = $this->config->item('file_upload_path') . $fname;
         if ($this->csvimport->get_array($path)) {
             $csv_array = $this->csvimport->get_array($path);
-            foreach ($csv_array as $row) {
-                $insert_data = array(
-                    'name' => $row['Instruction items'],
-                    'instruction_id' => $id,
-                    'category' => $pid
-                );
-                $this->Setting_model->insert_csv_instruction($insert_data);
+            if (array_key_exists('Instruction items',$csv_array[0])) {
+                foreach ($csv_array as $row) {
+                    $insert_data = array(
+                        'name' => $row['Instruction items'],
+                        'instruction_id' => $id,
+                        'category' => $pid
+                    );
+                    $this->Setting_model->insert_csv_instruction($insert_data);
+                }
+                return true;
+            }else{
+                return false;
             }
-            return true;
+            
         } else {
             return false;
         }
@@ -1434,10 +1462,12 @@ class Setting extends MY_Controller
                 }
      
             } else {
-                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
             }
         } else {
-            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
         }
 
         if ($this->input->is_ajax_request()) {
@@ -1449,14 +1479,19 @@ class Setting extends MY_Controller
         $path = $this->config->item('file_upload_path') . $fname;
             if ($this->csvimport->get_array($path)) {
                 $csv_array = $this->csvimport->get_array($path);
-                foreach ($csv_array as $row) {
-                    $insert_data = array(
-                        'name'=>$row['Medicine items'],
-                        'medicine_id' => $id
-                    );
-                    $this->Setting_model->insert_csv_medicine($insert_data);
+                if (array_key_exists('Medicine items',$csv_array[0])) {
+                   foreach ($csv_array as $row) {
+                        $insert_data = array(
+                            'name'=>$row['Medicine items'],
+                            'medicine_id' => $id
+                        );
+                        $this->Setting_model->insert_csv_medicine($insert_data);
+                    }
+                    return true;
+                }else{
+                    return false;
                 }
-            return true;
+                
         }else{
             return false;
         }
@@ -1514,10 +1549,12 @@ class Setting extends MY_Controller
                 }
      
             } else {
-                echo $error = "<ul class='message error'><li>File Format is wrong.</li></ul>";
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
             }
         } else {
-            echo $error = "<ul class='message error'><li>Please Select the file.</li></ul>";
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
         }
 
         if ($this->input->is_ajax_request()) {
@@ -1529,14 +1566,19 @@ class Setting extends MY_Controller
         $path = $this->config->item('file_upload_path') . $fname;
             if ($this->csvimport->get_array($path)) {
                 $csv_array = $this->csvimport->get_array($path);
-                foreach ($csv_array as $row) {
-                    $insert_data = array(
-                        'name'=>$row['Advice items'],
-                        'advice_id' => $id
-                    );
-                    $this->Setting_model->insert_csv_advice($insert_data);
+                if (array_key_exists('Advice items',$csv_array[0])) {
+                    foreach ($csv_array as $row) {
+                        $insert_data = array(
+                            'name'=>$row['Advice items'],
+                            'advice_id' => $id
+                        );
+                        $this->Setting_model->insert_csv_advice($insert_data);
+                    }
+                    return true;
+                }else{
+                    return false;
                 }
-            return true;
+                
         }else{
             return false;
         }

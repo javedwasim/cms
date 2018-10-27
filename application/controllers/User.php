@@ -127,6 +127,7 @@ class User extends MY_Controller {
                         if ($result) {
                             $data['booking_flag'] = $bookingFlag;
                             $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
+                            $json['success'] = true;
                             $json['message'] = "Booked successfully";
                         } else {
                             $data['booking_flag'] = $bookingFlag;
@@ -192,6 +193,7 @@ class User extends MY_Controller {
                             $data['booking_flag'] = $bookingFlag;
                             $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
                             $json['message'] = "Booked successfully";
+                            $json['success'] = true;
                         } else {
                             $data['booking_flag'] = $bookingFlag;
                             $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
@@ -258,6 +260,7 @@ class User extends MY_Controller {
                             $data['booking_flag'] = $bookingFlag;
                             $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
                             $json['message'] = "Booked successfully";
+                            $json['success'] = true;
                         } else {
                             $data['booking_flag'] = $bookingFlag;
                             $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
@@ -321,6 +324,7 @@ class User extends MY_Controller {
                             $data['booking_flag'] = $bookingFlag;
                             $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
                             $json['message'] = "Booked successfully";
+                            $json['success'] = true;
                         } else {
                             $data['booking_flag'] = $bookingFlag;
                             $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
@@ -390,6 +394,7 @@ class User extends MY_Controller {
                         $data['booking_flag'] = $bookingFlag;
                         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
                         $json['message'] = "Booked successfully";
+                        $json['success'] = true;
                     } else {
                         $data['booking_flag'] = $bookingFlag;
                         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
@@ -456,6 +461,7 @@ class User extends MY_Controller {
                         $data['booking_flag'] = $bookingFlag;
                         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
                         $json['message'] = "Booked successfully";
+                        $json['success'] = true;
                     } else {
                         $data['booking_flag'] = $bookingFlag;
                         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
@@ -522,6 +528,7 @@ class User extends MY_Controller {
                         $data['booking_flag'] = $bookingFlag;
                         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
                         $json['message'] = "Booked successfully";
+                        $json['success'] = true;
                     } else {
                         $data['booking_flag'] = $bookingFlag;
                         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
@@ -586,6 +593,7 @@ class User extends MY_Controller {
                         $data['booking_flag'] = $bookingFlag;
                         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
                         $json['message'] = "Booked successfully";
+                        $json['success'] = true;
                     } else {
                         $data['booking_flag'] = $bookingFlag;
                         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
@@ -1049,6 +1057,12 @@ class User extends MY_Controller {
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
+    }
+
+    public function print_vitals(){
+        $patid = $this->input->get('patid');
+        $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
+        $this->load->view('pages/vitals_print',$data);
     }
 
 }

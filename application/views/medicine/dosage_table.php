@@ -1,23 +1,23 @@
 <table class="table table-bordered nowrap responsive dosage-table dd" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%">Delete</th>
-        <th class="table-header">Category Name</th>
+        <th class="table-header" style="width: 95%" align="right">Dosage</th>
+        <th class="table-header" style="width: 5%" align="right">Delete</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($dosages as $dosage): ?>
         <tr class="table-row">
-            <td>
-                <a class="delete-dosage btn btn-danger btn-xs"
+            <td contenteditable="true"  align="right" class="dosage_category"
+                onBlur="saveDosage(this,'cate_name','<?php echo $dosage['id']; ?>')"
+                onClick="dosageEdit(this);">
+                <?php echo $dosage['name']; ?></td>
+                <td align="right">
+                <a class="delete-dosage btn btn-danger btn-xs" align="right"
                    href="javascript:void(0)" title="delete"
                    data-href="<?php echo site_url('medicine/delete_dosage_category/') . $dosage['id'] ?>">
                    <i class="fa fa-trash" title="Delete"></i></a>
             </td>
-            <td contenteditable="true" class="dosage_category"
-                onBlur="saveDosage(this,'cate_name','<?php echo $dosage['id']; ?>')"
-                onClick="dosageEdit(this);">
-                <?php echo $dosage['name']; ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

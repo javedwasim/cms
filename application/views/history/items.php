@@ -43,11 +43,10 @@
                         <div class="form-group">
                             <label>Category:</label>
                             <select class="form-control prof_his_id" id="profile_history_id" name="profile_history_id" >
-                                <option value="">Select</option>
-                                <?php foreach ($categories as $category): ?>
-                                    <option value="<?php echo $category['id']; ?>">
-                                        <?php echo $category['name']; ?></option>
-                                <?php endforeach; ?>
+                              <?php foreach ($categories as $category): ?>
+                                  <option value="<?php echo $category['id']; ?>">
+                                      <?php echo $category['name']; ?></option>
+                              <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -80,7 +79,7 @@
                     <label>Select Category:</label>
                     <select class="form-control" name="filter_history_category" onchange="filter_history_item_category(this.value)" id="history_items" required>
                         <option value="">Select</option>
-                        <option value="0">All</option>
+                        
                         <?php foreach ($categories as $category): ?>
                             <option value="<?php echo $category['id']; ?>"
                                 <?php echo isset($selected_category)&&($selected_category==$category['id'])?'selected':'' ?>>
@@ -96,7 +95,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body history_item_container">
+        <div class="card-body history_item_container" style="height: 400px; overflow-y: scroll;">
             <?php $this->load->view('history/item_table'); ?>
         </div>
     </div>

@@ -2,9 +2,9 @@
         foreach ($patient_vitals as $key) {
 ?>
 <tr >
-    <td>1<input type="hidden" value="<?php echo $key['id']; ?>" class="vital_id" /></td>
-    <td contenteditable="true">
-        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd MM yyyy HH:ii p"  value="<?php echo date('d-F-Y h:i a',strtotime($key['vaital_datetime'])); ?>" readonly style="border: transparent; width:67%;">
+    <td><?php echo $key['id']; ?><input type="hidden" value="<?php echo $key['id']; ?>" class="vital_id" /></td>
+    <td>
+        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd MM yyyy HH:ii p"  value="<?php echo date('d-F-Y h:i a',strtotime($key['vaital_datetime'])); ?>" readonly style="border: transparent; width:70%;">
     </td>
     <td contenteditable="true" class="vital_bp"><?php echo $key['vital_bp']; ?></td>
     <td contenteditable="true" class="vital_pulse"><?php echo $key['vital_pulse']; ?></td>
@@ -24,9 +24,9 @@
 <?php } 
  } ?>
 <tr >
-    <td contenteditable="true" class="vital_id">2</td>
-    <td contenteditable="true">
-        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd MM yyyy HH:ii p"  value="" placeholder="<?php echo date('d-F-Y h:i a'); ?>" readonly style="border: transparent; width:67%;">
+    <td class="vital_id"></td>
+    <td>
+        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd MM yyyy HH:ii p"  value="" placeholder="<?php echo date('d-F-Y h:i a'); ?>" readonly style="border: transparent; width:70%;">
     </td>
     <td contenteditable="true" class="vital_bp"></td>
     <td contenteditable="true" class="vital_pulse"></td>

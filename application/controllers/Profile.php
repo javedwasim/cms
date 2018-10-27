@@ -258,18 +258,23 @@ class Profile extends MY_Controller
         $usename = $this->input->post('username');
         $note = $this->input->post('note');
         $date = date('Y-m-d H:i:s');
-        $data_array = array(
-            'username' => $usename,
-            'note' => $note,
-            'updated_at' => $date
-        );
-        $result = $this->Profile_model->insert_notes($data_array);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Saved Successfully.";
-        } else {
+        if ($usename == 'Select...') {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = "Please select a user.";
+        }else{
+            $data_array = array(
+                'username' => $usename,
+                'note' => $note,
+                'updated_at' => $date
+            );
+            $result = $this->Profile_model->insert_notes($data_array);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Saved Successfully.";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         $data['note_details'] = $this->Profile_model->get_notes();
         $data['users'] = $this->Dashboard_model->get_all_user();
@@ -444,12 +449,20 @@ class Profile extends MY_Controller
     {
         $id = $this->input->post('id');
         $note = $this->input->post('note');
-        $result = $this->Profile_model->update_diary_note($id, $note);
-        if ($result) {
-            $json['success'] = true;
-        } else {
-            $json['error'] = true;
+        if (empty($id)) {
+           $json['error'] = true;
+           $json['message'] = 'Please select user and note.';
+        }else{
+            $result = $this->Profile_model->update_diary_note($id, $note);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = 'Successfully Updated.';
+            } else {
+                $json['error'] = true;
+                $json['message'] = 'Seems an error.';
+            }
         }
+        
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -644,6 +657,7 @@ class Profile extends MY_Controller
             $data['rights'] = $this->session->userdata('other_rights');
 
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -655,6 +669,13 @@ class Profile extends MY_Controller
         $this->Profile_model->save_profile_echo_info($data);
         $json['success'] = true;
         $json['message'] = 'Information save successfully!';
+        $data['professions'] = $this->Setting_model->get_professions();
+        $data['districts'] = $this->Setting_model->get_districts();
+        $data['profiles'] = $this->Profile_model->get_profiles();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+        $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+        $json['result_html'] = $this->load->view('pages/profile', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -727,14 +748,14 @@ class Profile extends MY_Controller
         $patient_id = $data['patid'];
         $detail_id = $data['detail_id'];
         $data['rights'] = $this->session->userdata('other_rights');
-        $id = $this->input->post('patid');
-        $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
         $data['diseases'] = $this->Echo_model->get_disease_categories();
         $data['structures'] = $this->Echo_model->get_Structure_categories();
         $data['measurements'] = $this->Profile_model->get_patient_measurement($patient_id, $detail_id);
         $data['findings'] = $this->Profile_model->get_patient_echo_findings($patient_id, $detail_id);
         $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id, $detail_id);
+        $data['color_doppler'] = $this->Profile_model->get_patient_echo_color_doopler($patient_id, $detail_id);
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
         $json['result_html'] = $this->load->view('pages/patient_echo_test', $data, true);
@@ -1016,6 +1037,24 @@ class Profile extends MY_Controller
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['examination_table'] = $this->load->view('profile/profile_examination_table', $data, true);
         $json['result_html'] = $this->load->view('pages/pat_examination', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_echo_test_details(){
+        $testid = $this->input->post('testid');
+        $patid = $this->input->post('patid');
+        $result = $this->Profile_model->delete_echo_test_details($testid,$patid);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = "seem to be an error.";
+        }
+        $data['details'] = $this->Profile_model->get_echo_detail($patid);
+        $json['echo_detail'] = $this->load->view('profile/echo_detail_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

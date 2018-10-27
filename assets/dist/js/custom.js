@@ -3,11 +3,13 @@ $(document).ready(function () {
     //////////////////////////////initilize datepicker///////////////////////
     $('.app_date').datepicker({
         format: 'd-M-yyyy',
+        startDate: date,
         autoclose: true
     });
-    $('#limiter_date').datepicker({
-        format: 'd-M-yyyy'
-    });
+    // $('#limiter_date').datepicker({
+    //     format: 'd-M-yyyy',
+    //     startDate: date
+    // });
     $('#clinic_time').timepicker();
 
     $('.pat_search_to').datepicker({
@@ -111,6 +113,10 @@ $(document).ready(function () {
         "info": false,
         "paging": false,
         "searching": false,
+        fixedHeader: {
+                        header: true,
+                        headerOffset: 100
+                    },
         "createdRow": function (row, data, dataIndex) {
             if (data[17] == "1") {
                 $(row).addClass('round-green');
@@ -199,6 +205,10 @@ $(document.body).on('click', '.feepaid', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                            fixedHeader: {
+                            header: true,
+                            headerOffset: 100
+                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -297,6 +307,10 @@ $(document.body).on('click', '.wecg', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                            fixedHeader: {
+                            header: true,
+                            headerOffset: 100
+                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -396,6 +410,10 @@ $(document.body).on('click', '.wett', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                            fixedHeader: {
+                            header: true,
+                            headerOffset: 100
+                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -493,6 +511,10 @@ $(document.body).on('click', '.wecho', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                            fixedHeader: {
+                            header: true,
+                            headerOffset: 100
+                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -591,6 +613,10 @@ $(document.body).on('click', '.investigation', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                            fixedHeader: {
+                            header: true,
+                            headerOffset: 100
+                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -688,6 +714,10 @@ $(document.body).on('click', '.checkup', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                            fixedHeader: {
+                            header: true,
+                            headerOffset: 100
+                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -786,6 +816,10 @@ $(document.body).on('click', '.complete', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                            fixedHeader: {
+                            header: true,
+                            headerOffset: 100
+                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -868,6 +902,10 @@ function appointments() {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    fixedHeader: {
+                        header: true,
+                        headerOffset: 100
+                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -946,7 +984,7 @@ $(document.body).on('click', '#book_appointment', function (e) {
             searchdate: tabledate
         },
         success: function (data) {
-            if (data.booking_table != '') {
+            if (data.success == true) {
                 $('.table-responsive').remove();
                 $('#table-booking').append(data.booking_table);
                 $('.wallet-modal-box').remove();
@@ -958,6 +996,10 @@ $(document.body).on('click', '#book_appointment', function (e) {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    fixedHeader: {
+                        header: true,
+                        headerOffset: 100
+                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1019,7 +1061,8 @@ $(document.body).on('click', '#book_appointment', function (e) {
                 document.getElementById('appointment_booking_form').reset();
 
             } else {
-                toastr["warning"]("Seems to an error while booking an appointment.");
+                $('#book_appointment').attr("disabled", false);
+                toastr["warning"]("Fill all fields.");
             }
 
         }
@@ -1058,6 +1101,10 @@ function valupdate(val) {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    fixedHeader: {
+                        header: true,
+                        headerOffset: 100
+                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1229,6 +1276,10 @@ $(document.body).on('click', '#time_consultant', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    fixedHeader: {
+                        header: true,
+                        headerOffset: 100
+                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1324,6 +1375,10 @@ $(document.body).on('click', '#time_on_walk', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    fixedHeader: {
+                        header: true,
+                        headerOffset: 100
+                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1417,6 +1472,10 @@ $(document.body).on('click', '#time_on_call', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    fixedHeader: {
+                        header: true,
+                        headerOffset: 100
+                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1497,6 +1556,11 @@ $(document.body).on('click', '#save_limiter', function () {
                 $('#limiter').val('');
                 $('#limiter_date').val('');
                 $('#example-time-input').val('');
+                $('#limiter_date').datepicker({
+                    format: 'd-M-yyyy',
+                    startDate: 'date',
+                    autoclose: true
+                });
                 toastr["success"](response.message);
             }else{
                 toastr["warning"](response.message);
@@ -1531,6 +1595,10 @@ $(document.body).on('click', '#delete_single_patient', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                            fixedHeader: {
+                            header: true,
+                            headerOffset: 100
+                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -1603,6 +1671,8 @@ $(document.body).on('click', '#pat_profile', function () {
         success: function (response) {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
+                $('.dashboard-content').remove();
+                $('#dashboard-content').remove();
                 $('#content-wrapper').append(response.result_html);
                 $('.profile-table').remove();
                 $('#profile_table').append(response.profile_table);
@@ -1875,7 +1945,9 @@ $(document.body).on('click', '#pat_research', function () {
 /////////////////////////////////// load profession page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-$(document.body).on('click', '#profes_add', function () {
+$(document.body).on('click', '#profes_add', function (e) {
+    e.preventDefault();
+    professionvalidate = $('#profession_form').validate();
     if (professionvalidate.form()) {
         var profession = $('#profession_add').val();
         $.ajax({
@@ -2454,6 +2526,10 @@ function consultant_booking(val) {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    fixedHeader: {
+                        header: true,
+                        headerOffset: 100
+                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -2662,6 +2738,32 @@ function calculateBmiBsa(val){
     var bsa = Math.sqrt(b);
     var value_bmi = $('.pat_profile_bmi').val(bmi.toFixed(2));
     var value_bsa = $('.pat_profile_bsa').val(bsa.toFixed(2));
+}
+
+function calculateBsaBmiedit(val){
+    var weight = val.value;
+    var height = $('.pat_profile_height_edit').val();
+    var height_m = height / 100;
+    var height_m2 = Math.pow(height_m, 2);
+    var bmi = weight/height_m2;
+    var a = weight*height;
+    var b = a/3600;
+    var bsa = Math.sqrt(b);
+    var value_bmi = $('.pat_profile_bmi_edit').val(bmi.toFixed(2));
+    var value_bsa = $('.pat_profile_bsa_edit').val(bsa.toFixed(2));
+}
+
+function calculateBmiBsaedit(val){
+    var height = val.value;
+    var weight = $('.pat_profile_weight_edit').val();
+    var height_m = height / 100;
+    var height_m2 = Math.pow(height_m, 2);
+    var bmi = weight/height_m2;
+    var a = weight*height;
+    var b = a/3600;
+    var bsa = Math.sqrt(b);
+    var value_bmi = $('.pat_profile_bmi_edit').val(bmi.toFixed(2));
+    var value_bsa = $('.pat_profile_bsa_edit').val(bsa.toFixed(2));
 }
 
 ////////////////////////////////////// Delete from profile page ////////////////////////////
@@ -3075,8 +3177,11 @@ function get_item_limiter(func_call) {
                 $('.limiter_table').remove();
                 $('#limiter_table').append(response.limiter_table);
                 $('#limiter_date').datepicker({
-                    format: 'd-M-yyyy'
+                    format: 'd-M-yyyy',
+                    startDate: 'date',
+                    autoclose: true
                 });
+
             }
         }
     });
@@ -3098,6 +3203,24 @@ function get_vitals(func_call) {
         }
     });
 }
+
+function get_patient_vitals(func_call) {
+    $.ajax({
+        url: '/cms/user/'+func_call,
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.datatable').DataTable({
+                    paging: false,
+                    info: false
+                });
+            }
+        }
+    });
+}
+
 
 function get_laboratory_test(func_call) {
     $.ajax({
@@ -3424,9 +3547,9 @@ $(document.body).on('click', '#update_note', function(){
         cache: false,
         success: function(response){
             if (response.success == true) {
-                toastr['success']('Updated Successfully.');
+                toastr['success'](response.message);
             }else{
-                toastr['error']('Could not be updated.');
+                toastr['error'](response.message);
             }
         }
     });

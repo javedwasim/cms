@@ -1960,6 +1960,35 @@ $(document.body).on('click', '#save_patient_echo_info', function(){
                + "&" + $("#echo_color_dooplers_content_form").serialize(),
         cache: false,
         success: function(response) {
+            $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.profile-table').remove();
+                $('#profile_table').append(response.profile_table);
+                ///////////////// initilize datatable //////////////
+                $('.profiletable').DataTable({
+                    // "scrollX": true,
+                    "initComplete": function (settings, json) {
+                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    }
+                });
+                $("#toggleresize1").click(function () {
+                    var icon = $('#toggleresize1 > .arro');
+                    icon.toggleClass('fa-arrow-left fa-arrow-right');
+                    $('.resize1').toggleClass("active_resize1");
+                    $('.resize2').toggleClass("inactive_resize2");
+
+                });
+                $("#toggleresize2").click(function () {
+                    var icon = $('#toggleresize2 > .arro');
+                    icon.toggleClass('fa-arrow-left fa-arrow-right');
+                    $('.resize2').toggleClass("active_resize2");
+                    $('.resize1').toggleClass("inactive_resize1");
+                });
+                $('#profiletable tbody tr:first').addClass('row_selected');
+                $("#profiletable tbody tr").click(function (e) {
+                    $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
             $('#research_modal').modal('hide');
             if (response.success) {
                 toastr["success"](response.message);
@@ -2732,4 +2761,205 @@ $(document.body).on('click','#diagnosis_by_structure_table tbody tr',function(){
             $('#disease_diagnosis').append(response.result_html);
         }
     });
+});
+
+function printechotest(editableObj,test_id,patient_id) {
+    var win = window.open('/cms/print_profiles/print_echo/?testid=' + test_id +'&patid='+patient_id, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
+}
+
+$(document.body).on('click', '#echo_details_table tbody tr td:nth-child(4)', function () {
+    $('#echo_details_table tbody tr td:nth-child(4)').removeClass('row_selected');
+    $(this).addClass('row_selected');
+    var testid = $('#echo_details_table tbody tr td:nth-child(4).row_selected').siblings('.echotestid').text();
+    var patid = $('#echo_details_table tbody tr td:nth-child(4).row_selected').siblings('.echopatid').text();
+    $.ajax({
+        url: '/cms/print_profiles/get_echo_details',
+        type: 'post',
+        data: {
+            testid:testid,
+            patid:patid
+        },
+        success: function(response){
+            $('.report_view').empty();
+            $('.report_view').append(response.echo_report);
+        }
+    });
+});
+
+function echotestDelete(editableObj,test_id,patient_id){
+    if (confirm('Are you sure to delete this record?')) {
+        $.ajax({
+            url: '/cms/profile/delete_echo_test_details',
+            type: 'post',
+            data: {testid:test_id,patid:patient_id},
+            cache: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#echo_detail_container').empty();
+                    $('#echo_detail_container').append(response.echo_detail);
+                    if (response.success == true) {
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["error"](response.message);
+                    }
+                } else {
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    }else{
+        return false;
+    }
+}
+
+function history_filter(val){
+    var filter = val.value;
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'manage_research/history_filter',
+        type: 'post',
+        data:{filter:filter},
+        cache: false,
+        success: function(response){
+            $('.manage_research_table').remove();
+            $('#manage_research_table').append(response.profile_table);
+            $('#research-table').DataTable({
+                "scrollX": true,
+                "scrollY": '50vh',
+                "scrollCollapse": true,
+                "paging": false,
+                "info": false,
+                "searching": false
+            });
+            $('#research-table tbody tr:first').addClass('row_selected');
+            $("#research-table tbody tr").click(function (e) {
+                $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+        }
+    });
+}
+
+function examination_filter(val){
+    var filter = val.value;
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'manage_research/examination_filter',
+        type: 'post',
+        data:{filter:filter},
+        cache: false,
+        success: function(response){
+            $('.manage_research_table').remove();
+            $('#manage_research_table').append(response.profile_table);
+            $('#research-table').DataTable({
+                "scrollX": true,
+                "scrollY": '50vh',
+                "scrollCollapse": true,
+                "paging": false,
+                "info": false,
+                "searching": false
+            });
+            $('#research-table tbody tr:first').addClass('row_selected');
+            $("#research-table tbody tr").click(function (e) {
+                $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+        }
+    });
+}
+
+function investigation_filter(val){
+    var filter = val.value;
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'manage_research/investigation_filter',
+        type: 'post',
+        data:{filter:filter},
+        cache: false,
+        success: function(response){
+            $('.manage_research_table').remove();
+            $('#manage_research_table').append(response.profile_table);
+            $('#research-table').DataTable({
+                "scrollX": true,
+                "scrollY": '50vh',
+                "scrollCollapse": true,
+                "paging": false,
+                "info": false,
+                "searching": false
+            });
+            $('#research-table tbody tr:first').addClass('row_selected');
+            $("#research-table tbody tr").click(function (e) {
+                $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+        }
+    });
+}
+
+function advice_filter(val){
+    var filter = val.value;
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'manage_research/advice_filter',
+        type: 'post',
+        data:{filter:filter},
+        cache: false,
+        success: function(response){
+            $('.manage_research_table').remove();
+            $('#manage_research_table').append(response.profile_table);
+            $('#research-table').DataTable({
+                "scrollX": true,
+                "scrollY": '50vh',
+                "scrollCollapse": true,
+                "paging": false,
+                "info": false,
+                "searching": false
+            });
+            $('#research-table tbody tr:first').addClass('row_selected');
+            $("#research-table tbody tr").click(function (e) {
+                $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+        }
+    });
+}
+
+function medicine_filter(val){
+    var filter = val.value;
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'manage_research/medicine_filter',
+        type: 'post',
+        data:{filter:filter},
+        cache: false,
+        success: function(response){
+            $('.manage_research_table').remove();
+            $('#manage_research_table').append(response.profile_table);
+            $('#research-table').DataTable({
+                "scrollX": true,
+                "scrollY": '50vh',
+                "scrollCollapse": true,
+                "paging": false,
+                "info": false,
+                "searching": false
+            });
+            $('#research-table tbody tr:first').addClass('row_selected');
+            $("#research-table tbody tr").click(function (e) {
+                $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+        }
+    });
+}
+
+$(document.body).on('click', '#btn-print-vital', function () {
+    var patid = $('#pat_info option:selected').val();
+    var win = window.open('/cms/user/print_vitals/?patid=' + patid, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
 });

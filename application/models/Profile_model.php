@@ -409,11 +409,31 @@ class Profile_model extends CI_Model
             $this->db->where('patient_id', $data['patient_id'])->delete('patient_echo');
             $this->db->insert('patient_echo', array('patient_id' => $data['patient_id'], 'measurement_cate_id' => $data['measurement_cate_id']));
             $patient_echo_id = $this->db->insert_id();
+            if (isset($data['mr'])) {
+                $mr = $data['mr'];
+            }else{
+                $mr = "";
+            }
+            if (isset($data['ar'])) {
+                $ar = $data['ar'];
+            }else{
+                $ar = "";
+            }
+            if (isset($data['pr'])) {
+                $pr = $data['pr'];
+            }else{
+                $pr = "";
+            }
+            if (isset($data['tr'])) {
+                $tr = $data['tr'];
+            }else{
+                $tr = "";
+            }
             $data_array = array(
-                'mr' => $data['mr'], 
-                'ar' => $data['ar'], 
-                'pr' => $data['pr'], 
-                'tr' => $data['tr'],
+                'mr' => $mr, 
+                'ar' => $ar, 
+                'pr' => $pr, 
+                'tr' => $tr,
                 'patient_echo_id' => $patient_echo_id
             );
             $this->db->insert('patient_echo_color_doppler',$data_array);
@@ -496,6 +516,7 @@ class Profile_model extends CI_Model
         return $data;
     }
 
+
     public function save_profile_echo_info($data)
     {
         // print_r($data); die();
@@ -555,14 +576,34 @@ class Profile_model extends CI_Model
                     'structure_id' => $diagnose_structure_id[$i]
                 ));
         }
-
+        $this->db->where('echo_detail_id',$echo_deatil_id)->where('patient_id',$patient_echo_id)->delete('profile_echo_color_doopler');
+        if (isset($data['doopler_mr'])) {
+                $mr = $data['doopler_mr'];
+            }else{
+                $mr = "";
+            }
+            if (isset($data['doopler_ar'])) {
+                $ar = $data['doopler_ar'];
+            }else{
+                $ar = "";
+            }
+            if (isset($data['doopler_pr'])) {
+                $pr = $data['doopler_pr'];
+            }else{
+                $pr = "";
+            }
+            if (isset($data['doopler_tr'])) {
+                $tr = $data['doopler_tr'];
+            }else{
+                $tr = "";
+            }
         $data_array = array(
             'echo_detail_id' => $echo_deatil_id,
             'patient_id' => $patient_echo_id,
-            'doopler_mr' => $data['doopler_mr'],
-            'doopler_ar' => $data['doopler_ar'],
-            'doopler_pr' => $data['doopler_pr'],
-            'doopler_tr' => $data['doopler_tr']
+            'doopler_mr' => $mr,
+            'doopler_ar' => $ar,
+            'doopler_pr' => $pr,
+            'doopler_tr' => $tr
         );
         $this->db->insert('profile_echo_color_doopler',$data_array);
 
@@ -640,9 +681,10 @@ class Profile_model extends CI_Model
     public function get_patient_echo_findings($patient_id, $detail_id)
     {
 
-        $result = $this->db->select('profile_echo_findings.*,structure_finding.name')
+        $result = $this->db->select('profile_echo_findings.*,structure_finding.name,structure.name')
             ->from('profile_echo_findings')
             ->join('structure_finding', 'structure_finding.id=profile_echo_findings.finding_id', 'left')
+            ->join('structure', 'structure.id=profile_echo_findings.structure_id', 'left')
             ->where('echo_detail_id', "$detail_id")
             ->where('patient_id', "$patient_id")
             ->get();
@@ -1027,6 +1069,136 @@ class Profile_model extends CI_Model
             $data['diagnosis'] = array();
         }
         return $data;
+    }
+
+    public function get_patient_echo_color_doopler($pId,$dId){
+        $result = $this->db->select('*')->where('echo_detail_id',$dId)->where('patient_id',$pId)
+                            ->get('profile_echo_color_doopler');
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    public function delete_echo_test_details($testid,$patid){
+        $result = $this->db->where('id',$testid)->where('patient_id',$patid)->delete('profile_echo_detail');
+        $result = $this->db->where('echo_detail_id',$testid)->where('patient_id',$patid)->delete('profile_echo_measurement');
+        $result = $this->db->where('echo_detail_id',$testid)->where('patient_id',$patid)->delete('profile_echo_findings');
+        $result = $this->db->where('echo_detail_id',$testid)->where('patient_id',$patid)->delete('profile_echo_diagnosis');
+        $result = $this->db->where('echo_detail_id',$testid)->where('patient_id',$patid)->delete('profile_echo_color_doopler');
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function get_patient_in_history($filter){
+        $result = $this->db->select('patient_id')->from('profile_examination_history')->like('history_value',$filter)->get();
+        if ($result->num_rows()>0) {
+            $ids = $result->result_array();
+            $data_array = array();
+            foreach ($ids as $id) {
+                $data_array[] = $id['patient_id'];
+            }
+            $patids = array_unique($data_array);
+            $patients = $this->db->select('*')->where_in('id',$patids)->get('patient_profile');
+            if ($patients) {
+                return $patients->result_array();
+            }else{
+                return array();
+            }
+        }else{
+            return array();
+        }
+        
+    }
+
+    public function get_patient_in_examination($filter){
+        $result = $this->db->select('patient_id')->from('profile_examination_info')->like('examination_value',$filter)->get();
+        if ($result->num_rows()>0) {
+            $ids = $result->result_array();
+            $data_array = array();
+            foreach ($ids as $id) {
+                $data_array[] = $id['patient_id'];
+            }
+            $patids = array_unique($data_array);
+            $patients = $this->db->select('*')->where_in('id',$patids)->get('patient_profile');
+            if ($patients) {
+                return $patients->result_array();
+            }else{
+                return array();
+            }
+        }else{
+            return array();
+        }
+        
+    }
+
+    public function get_patient_in_investigation($filter){
+        $result = $this->db->select('patient_id')->from('profile_examination_investigation')->like('investigation_value',$filter)->get();
+        if ($result->num_rows()>0) {
+            $ids = $result->result_array();
+            $data_array = array();
+            foreach ($ids as $id) {
+                $data_array[] = $id['patient_id'];
+            }
+            $patids = array_unique($data_array);
+            $patients = $this->db->select('*')->where_in('id',$patids)->get('patient_profile');
+            if ($patients) {
+                return $patients->result_array();
+            }else{
+                return array();
+            }
+        }else{
+            return array();
+        }
+        
+    }
+
+    public function get_patient_in_advice($filter){
+        $result = $this->db->select('patient_id')->from('profile_examination_advice')->like('advice_value',$filter)->get();
+        if ($result->num_rows()>0) {
+            $ids = $result->result_array();
+            $data_array = array();
+            foreach ($ids as $id) {
+                $data_array[] = $id['patient_id'];
+            }
+            $patids = array_unique($data_array);
+            $patients = $this->db->select('*')->where_in('id',$patids)->get('patient_profile');
+            if ($patients) {
+                return $patients->result_array();
+            }else{
+                return array();
+            }
+        }else{
+            return array();
+        }
+        
+    }
+
+    public function get_patient_in_medicine($filter){
+        $result = $this->db->select('patient_id')->from('profile_examination_medicine')
+                        ->like('medicine_value',$filter)->get();
+
+        if ($result->num_rows()>0) {
+            $ids = $result->result_array();
+            $data_array = array();
+            foreach ($ids as $id) {
+                $data_array[] = $id['patient_id'];
+            }
+            $patids = array_unique($data_array);
+            $patients = $this->db->select('*')->where_in('id',$patids)->get('patient_profile');
+            if ($patients) {
+                return $patients->result_array();
+            }else{
+                return array();
+            }
+        }else{
+            return array();
+        }
+        
     }
 
 }

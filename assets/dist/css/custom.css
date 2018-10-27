@@ -181,9 +181,9 @@ li.paginate_button.page-item.active {
     width: 20%;
     word-break: break-all;
 }
-#assign-dosage tr td,#assign-dosage tr th,#dosage tr th,#dosage tr td,.right-table tr th,.right-table tr td{
+/*#assign-dosage tr td,#assign-dosage tr th,#dosage tr th,#dosage tr td,.right-table tr th,.right-table tr td{
     text-align: left !important;
-}
+}*/
 
 #re1{
     width: 40%;

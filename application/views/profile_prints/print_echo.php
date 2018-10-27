@@ -191,6 +191,26 @@
         flex: 0 0 66.666667%;
         max-width: 66.666667%;
     }
+    .list-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.list-group-item {
+    padding: 5px;
+    font-size: 12px;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+}
 </style>
 </head>
 <body class="A4 " >
@@ -205,17 +225,15 @@
             <div class="row border border-dark" style="width: 100%;">
                 <div class="col-md-6">
                     <label>Ref.ID</label>
-                    <strong>1728</strong>
+                    <strong><?php echo $patient_info->id ?></strong>
+                    <strong><?php echo $patient_info->pat_name ?></strong>
+                </div>
+                <div class="col-md-4">
+                    <label><?php echo $patient_info->pat_age ?></label>
+                    <label><?php echo $patient_info->pat_sex ?></label>
                 </div>
                 <div class="col-md-2">
-                    <label>50 Years</label>
-                    <label>Male</label>
-                </div>
-                <div class="col-md-2">
-                    
-                </div>
-                <div class="col-md-2">
-                    <label>Thursday 27</label>
+                    <label><?php echo date('d-M-Y');?></label>
                 </div>
             </div>
             <br>
@@ -228,36 +246,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
+                            <?php if(isset($measurements)): ?>
+                                <?php foreach ($measurements as $measurement): if($measurement['main_category']=='mmode'): ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $measurement['item'] ?>
+                                            
+                                        </td>
+                                        <td>
+                                            <?php echo $measurement['item_value'] ?>
+                                            
+                                        </td>
+                                        <td>
+                                            <?php echo $measurement['measurement_value'] ?>
+                                            
+                                        </td>
+                                    </tr>
+                                <?php endif; endforeach; ?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
@@ -269,96 +275,93 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>IVRT</td>
-                                <td>34</td>
-                                <td>(ms)</td>
-                            </tr>
-                            <tr>
-                                <td>DT</td>
-                                <td>34</td>
-                                <td>(ms)</td>
-                            </tr>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
-                            <tr>
-                                <td>AO</td>
-                                <td>34</td>
-                                <td>(20-37mm)</td>
-                            </tr>
+                            <?php if(isset($measurements)): ?>
+                                <?php  foreach ($measurements as $measurement): if($measurement['main_category']=='dooplers'): ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $measurement['item'] ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $measurement['item_value'] ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $measurement['measurement_value'] ?>
+                                        </td>
+                                    </tr>
+                                <?php endif; endforeach; ?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
                 <div class="col-md-2">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Doppler Measurements</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Trivial PR</td>
-                            </tr>
-                            <tr>
-                                <td>Trivial TR</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Color Doppler</strong>
+                        </li>
+                        <?php if(isset($color_doppler)){
+                                foreach ($color_doppler as $dop) {
+                        ?>
+                        <li class="list-group-item">
+                            <?php echo $dop['doopler_mr']; ?>
+                        </li>
+                        <li class="list-group-item">
+                            <?php echo $dop['doopler_ar']; ?>
+                        </li>
+                        <li class="list-group-item">
+                            <?php echo $dop['doopler_pr']; ?>
+                        </li>
+                        <li class="list-group-item">
+                            <?php echo $dop['doopler_tr']; ?>
+                        </li>
+                        <?php } }?>
+                    </ul>
                 </div>
             </div>
             <br>
             <div class="row" style="width: 100%;">
                 <div class="col-md-12">
-                    <h3>Description:</h3>
-                    <div class="row">
-                        <div class="col-md-4">Situs</div>
-                        <div class="col-md-8">Something about situs</div>
-                    </div>
+                    <h3>Echocardiography Findings:</h3>
+                    <?php if(isset($findings)): ?>
+                        <?php foreach ($findings as $finding): ?>
+                        <div class="row">
+                            <div class="col-md-4"><?php echo $finding['name']; ?></div>
+                            <div class="col-md-8"><?php echo $finding['finding_value']; ?></div>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
                 <div class="col-md-12">
                     <h3>Conclution:</h3>
-                    <p>
-                        kjshdfljsdfjlsjdfljlfdjlksjdfljjdsfjsdlfkjlskdjfklsdjfljsdfjdsklfjdklfjlsdkjflksdjf
-                        jflsdfjlfjsdjfljsdflkjsdlfjskldfjlksdjflksdjfkljsdflkkjsdfkljsdlfjlksdjflksdjfsdflkjsdflkjjdf
-                        lsdjfljsdfljsdlfkjsdlkfjsldkfjlksdjflksdjfljsdflkjsdflkjsdlfsdlkjjdfjjsdfjlkjdflkjlsdjfsdhlk
-                    </p>
-                </div>
-            </div> 
-            <div class="row">
-                <div class="col-md-12 ">
-                    <div style="float: right;">
-                        <h3><i>Dr.Shahadat Hussain Ch.</i></h3>
-                        <label>MBBS, FCPS(Cardiology)</label><br>
-                        <label><i>Asst. Professor Cardiology/CCU</i></label><br>
-                        <label>QAMC/BVH Bahawalpur</label>
-                    </div>
+                    <?php if(isset($diagnosis)): ?>
+                        <?php foreach ($diagnosis as $diagnose): ?>
+                            <p><?php echo $diagnose['diagnosis_value']; ?></p>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
-            <hr size="10">
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="text-align: center;">Shahadat Clinic: 14-B Medical Colony Bahawalpur. Phone: 0322-6526467</p>
+            <div style="position: fixed;bottom: 0px;width: 100%;">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div style="float: right;">
+                            <h3><i>Dr.Shahadat Hussain Ch.</i></h3>
+                            <label>MBBS, FCPS(Cardiology)</label><br>
+                            <label><i>Asst. Professor Cardiology/CCU</i></label><br>
+                            <label>QAMC/BVH Bahawalpur</label>
+                        </div>
+                    </div>
+                </div>
+                <hr size="10">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="text-align: center;">Shahadat Clinic: 14-B Medical Colony Bahawalpur. Phone: 0322-6526467</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
       window.onload = function() { window.print(); }
-    </script> -->
+    </script>
 </body>
 </html>

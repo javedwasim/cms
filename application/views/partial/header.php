@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/fontawesome-free-5.1.1/css/all.css" >
    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/fixedHeader.dataTables.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/select.dataTables.min.css">
   <link href="<?php echo base_url(); ?>assets/plugins/css-chart/css-chart.css" rel="stylesheet">
   <!-- jquery-ui -->

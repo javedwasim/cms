@@ -12,7 +12,7 @@
                     </div>
                     <div class="form-group">
                         <div class='input-group mb-3'>
-                            <input type='text' class="form-control" id="limiter_date" autocomplete="off" />
+                            <input type='text' class="form-control app_date" value="<?php echo date('d-m-Y'); ?>" id="limiter_date" autocomplete="off" />
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <span class="ti-calendar"></span>

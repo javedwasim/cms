@@ -190,20 +190,27 @@ class Dashboard extends CI_Controller {
         $transferflag = $this->input->post('transferto');
         $transferid = $this->input->post('transferid');
         $date = date('Y-m-d');
-        $result = $this->Dashboard_model->transfer_patient($transferflag, $transferid);
-        if ($result) {
-            $vip = 'vip';
-            $oncall = 'on_call';
-            $onwalk = 'on_walk';
-            $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
-            $data['booking_vip'] = $this->User_model->get_bookings_vip($vip);
-            $data['booking_onwalk'] = $this->User_model->get_bookings_on_walk($onwalk);
-            $data['booking_oncall'] = $this->User_model->get_bookings_on_call($oncall);
-            $json['booking_cate'] = $this->load->view('admin/booking_categories', $data, true);
-            $json['message'] = 'Successfully transferd.';
-        } else {
-            $json['message'] = 'Cannot be transferd.';
+        if (!empty($transferflag) && !empty($transferid)) {
+          $result = $this->Dashboard_model->transfer_patient($transferflag, $transferid);
+          if ($result) {
+              $json['success'] = true;
+              $json['message'] = 'Successfully transferd.';
+          } else {
+              $json['error'] = false;
+              $json['message'] = 'Cannot be transferd.';
+          }
+        }else{
+          $json['error'] = false;
+          $json['message'] = 'Fields are empty.';
         }
+        $vip = 'vip';
+        $oncall = 'on_call';
+        $onwalk = 'on_walk';
+        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+        $data['booking_vip'] = $this->User_model->get_bookings_vip($vip);
+        $data['booking_onwalk'] = $this->User_model->get_bookings_on_walk($onwalk);
+        $data['booking_oncall'] = $this->User_model->get_bookings_on_call($oncall);
+        $json['booking_cate'] = $this->load->view('admin/booking_categories', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

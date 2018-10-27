@@ -82,6 +82,54 @@
 	            set_content_type($json);
 	        }
 		}
+
+		public function history_filter(){
+			$filter = $this->input->post('filter');
+			$data['profiles'] = $this->Profile_model->get_patient_in_history($filter);
+	        $json['profile_table'] = $this->load->view('manage_research/manage_research_table', $data, true);
+	        if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+		public function examination_filter(){
+			$filter = $this->input->post('filter');
+			$data['profiles'] = $this->Profile_model->get_patient_in_examination($filter);
+	        $json['profile_table'] = $this->load->view('manage_research/manage_research_table', $data, true);
+	        if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+		public function investigation_filter(){
+			$filter = $this->input->post('filter');
+			$data['profiles'] = $this->Profile_model->get_patient_in_investigation($filter);
+	        $json['profile_table'] = $this->load->view('manage_research/manage_research_table', $data, true);
+	        if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+		public function advice_filter(){
+			$filter = $this->input->post('filter');
+			$data['profiles'] = $this->Profile_model->get_patient_in_advice($filter);
+	        $json['profile_table'] = $this->load->view('manage_research/manage_research_table', $data, true);
+	        if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+		public function medicine_filter(){
+			$filter = $this->input->post('filter');
+			$data['profiles'] = $this->Profile_model->get_patient_in_medicine($filter);
+	        $json['profile_table'] = $this->load->view('manage_research/manage_research_table', $data, true);
+	        if ($this->input->is_ajax_request()) {
+	            set_content_type($json);
+	        }
+		}
+
+
+
 	}
 
 ?>

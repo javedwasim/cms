@@ -141,6 +141,10 @@
                             "info": false,
                             "paging": false,
                             "searching": false,
+                            fixedHeader: {
+                                header: true,
+                                headerOffset: 100
+                            },
                             "createdRow": function (row, data, dataIndex) {
                                 if (data[17] == "1") {
                                     $(row).addClass('round-green');

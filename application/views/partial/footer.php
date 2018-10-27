@@ -4,7 +4,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                © 2018 TechSol v2.2
+                © 2018 TechSol v2.3
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -38,6 +38,7 @@
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>    
     <!-- Bootstrap tether Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/plugins/popper/popper.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->

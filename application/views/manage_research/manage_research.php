@@ -151,32 +151,32 @@
                             <div class="col-md-3 col-lg-2">
                                 <div class="form-group">
                                     <label>In History</label>
-                                    <input type="text" name="" class="form-control">
+                                    <input type="text" name="pat_history" class="form-control" value="" onchange="history_filter(this)">
                                 </div>
                             </div>
                         
                             <div class="col-md-3 col-lg-2">
                                 <div class="form-group">
                                     <label>In Examination</label>
-                                    <input type="text" name="" class="form-control">
+                                    <input type="text" name="pat_examination" class="form-control" value="" onchange="examination_filter(this)">
                                 </div>
                             </div>
                             <div class="col-md-3 col-lg-2">
                                 <div class="form-group">
                                     <label>In Investigation</label>
-                                    <input type="text" name="" class="form-control">
+                                    <input type="text" name="pat_investigation" class="form-control" value="" onchange="investigation_filter(this)">
                                 </div>
                             </div>
                             <div class="col-md-3 col-lg-2">
                                 <div class="form-group">
                                     <label>In Advice</label>
-                                    <input type="text" name="" class="form-control">
+                                    <input type="text" name="pat_advice" class="form-control" value="" onchange="advice_filter(this)">
                                 </div>
                             </div>
                             <div class="col-md-3 col-lg-2">
                                 <div class="form-group">
                                     <label>In Medicine</label>
-                                    <input type="text" name="" class="form-control">
+                                    <input type="text" name="pat_medicine" class="form-control" value="" onchange="i=medicine_filter(this)">
                                 </div>
                             </div>
                             <div class="col-md-5 col-lg-4 m-t-20">

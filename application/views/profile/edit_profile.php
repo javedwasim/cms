@@ -76,25 +76,25 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Height:</label>
-                                    <input type="text" class="form-control" id="updat_pat_profile_height" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" value="<?php echo $profile_data->pat_height ; ?>" placeholder="cm" required="required" maxlength="5">
+                                    <input type="text" class="form-control pat_profile_height_edit"  onchange="calculateBmiBsaedit(this)" id="updat_pat_profile_height"  onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" value="<?php echo $profile_data->pat_height ; ?>" placeholder="cm" required="required" maxlength="5">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="m-l-10">BMI:</label>
-                                    <input type="text" value="<?php echo $profile_data->pat_bmi ; ?>"  id="updat_pat_profile_bmi" class="form-control" readonly >
+                                    <input type="text" value="<?php echo $profile_data->pat_bmi ; ?>"  id="updat_pat_profile_bmi" class="form-control pat_profile_bmi_edit" readonly >
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Weight:</label>
-                                    <input type="text" class="form-control" value="<?php echo $profile_data->pat_weight ; ?>" id="updat_pat_profile_weight" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" placeholder="Kg" required="required" maxlength="5">
+                                    <input type="text" class="form-control pat_profile_weight_edit" onchange="calculateBsaBmiedit(this)" value="<?php echo $profile_data->pat_weight ; ?>" id="updat_pat_profile_weight" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" placeholder="Kg" required="required" maxlength="5">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="m-l-10">BSA:</label>
-                                    <input type="text" value="<?php echo $profile_data->pat_bsa ; ?>" id="updat_pat_profile_bsa"  class="form-control" readonly>
+                                    <input type="text" value="<?php echo $profile_data->pat_bsa ; ?>" id="updat_pat_profile_bsa"  class="form-control pat_profile_bsa_edit" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">

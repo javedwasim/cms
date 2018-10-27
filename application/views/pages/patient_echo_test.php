@@ -166,7 +166,26 @@
                                         <input type="hidden" name="echo_detail_id_dooplers" class="echo_detail_id" value="<?php echo isset($measurements)?$measurements[0]['echo_detail_id']:''; ?>"/>
                                         <input type="hidden" name="patient_id" class="patient_id"/>
 		    								<ul class="list-group" id="color-doppler-table">
-				    							
+                                                <?php if(isset($color_doppler)){
+                                                        foreach ($color_doppler as $dop) {
+                                                ?>
+				    							<li class="list-group-item">
+                                                    <?php echo $dop['doopler_mr']; ?>
+                                                    <input type="hidden" name="doopler_mr" value="<?php echo $dop['doopler_mr']; ?>">
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <?php echo $dop['doopler_ar']; ?>
+                                                    <input type="hidden" name="doopler_ar" value="<?php echo $dop['doopler_ar']; ?>">
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <?php echo $dop['doopler_pr']; ?>
+                                                    <input type="hidden" name="doopler_pr" value="<?php echo $dop['doopler_pr']; ?>">
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <?php echo $dop['doopler_tr']; ?>
+                                                    <input type="hidden" name="doopler_tr" value="<?php echo $dop['doopler_tr']; ?>">
+                                                </li>
+                                                <?php } }?>
 				    						</ul>
                                         </form>	
 		    							</div>

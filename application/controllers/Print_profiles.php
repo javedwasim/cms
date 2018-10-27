@@ -29,9 +29,9 @@ class Print_profiles extends CI_Controller {
 		$this->load->view('profile_prints/print_ett',$data);
 	}
 
-	public function print_echo(){
-		$this->load->view('profile_prints/print_echo');
-	}
+	// public function print_echo(){
+	// 	$this->load->view('profile_prints/print_echo');
+	// }
 
 	public function print_lab_test(){
 		$key = $this->input->get('key');
@@ -189,6 +189,31 @@ class Print_profiles extends CI_Controller {
         $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
         $json['examination_print_html'] = $this->load->view('profile_report/prescription_report',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+	}
+
+	public function print_echo(){
+		$patient_id = $this->input->get('patid');
+		$detail_id = $this->input->get('testid');
+		$data['measurements'] = $this->Profile_model->get_patient_measurement($patient_id, $detail_id);
+        $data['findings'] = $this->Profile_model->get_patient_echo_findings($patient_id, $detail_id);
+        $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id, $detail_id);
+        $data['color_doppler'] = $this->Profile_model->get_patient_echo_color_doopler($patient_id, $detail_id);
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
+        $this->load->view('profile_prints/print_echo',$data);
+	}
+
+	public function get_echo_details(){
+		$patient_id = $this->input->post('patid');
+		$detail_id = $this->input->post('testid');
+		$data['measurements'] = $this->Profile_model->get_patient_measurement($patient_id, $detail_id);
+        $data['findings'] = $this->Profile_model->get_patient_echo_findings($patient_id, $detail_id);
+        $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id, $detail_id);
+        $data['color_doppler'] = $this->Profile_model->get_patient_echo_color_doopler($patient_id, $detail_id);
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
+        $json['echo_report'] = $this->load->view('profile_report/echo_report',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

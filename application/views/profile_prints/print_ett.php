@@ -253,6 +253,7 @@
                 <div class="col-md-6">
                     <label>Ref.ID</label>
                     <strong><?php echo $patient_info->id ?></strong>
+                    <strong><?php echo $patient_info->pat_name ?></strong>
                 </div>
                 <div class="col-md-4">
                     <label><?php echo $patient_info->pat_age ?></label>

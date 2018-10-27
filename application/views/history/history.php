@@ -9,7 +9,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body history_category_container">
+        <div class="card-body history_category_container" style="height: 400px; overflow-y: scroll;">
             <?php $this->load->view('history/history_table'); ?>
         </div>
     </div>

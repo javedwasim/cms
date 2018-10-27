@@ -16,7 +16,7 @@
                         <tr>
                             <th>Sr</th>
                             <th class="hide">Order</th>
-                            <th>Name</th>
+                            <th style="width: 150px;">Name</th>
                             <th>Contact</th>
                             <th>Appointment Taken</th>
                             <th>Shift</th>
@@ -52,7 +52,7 @@
                     <tr>
                         <td><?php echo $i?></td>
                         <td class="hide"><?php echo $i?></td>
-                        <td style="width:150px;">
+                        <td style="width:150px;text-transform: capitalize;">
                             <?php 
                                 if(isset($bkarray[$i]['full_name'])){
                                     echo $bkarray[$i]['full_name'];
@@ -92,7 +92,7 @@
                                 </select>
                             </div>
                         </td>
-                        <td class="hide">
+                        <td class="hide vip_trans">
                             <?php 
                                 if(isset($bkarray[$i]['appointment_booking_id'])){
                                     echo $bkarray[$i]['appointment_booking_id'];
@@ -122,7 +122,7 @@
                                 <td class="hide">
                                     <?php echo $details['order_number'];?>
                                 </td>
-                                <td style="width:150px;">
+                                <td style="width:150px; text-transform: capitalize;">
                                     <?php echo $details['full_name'] ?>
                                 </td>
                                 <td>
@@ -185,7 +185,7 @@
                                 <td>
                                     <?php echo $details['order_number'];?>
                                 </td>
-                                <td style="width:150px;">
+                                <td style="width:150px; text-transform: capitalize;">
                                     <?php echo $details['full_name'] ?>
                                 </td>
                                 <td>
@@ -248,7 +248,7 @@
                                 <td>
                                     <?php echo $details['order_number'];?>
                                 </td>
-                                <td style="width:150px;">
+                                <td style="width:150px; text-transform: capitalize;">
                                     <?php echo $details['full_name'] ?>
                                 </td>
                                 <td>
@@ -332,7 +332,7 @@
                                         <tr>
                                             <td><?php echo $i ?></td>
                                             <td class="hide"><?php echo $i ?></td>
-                                            <td style="width:150px;">
+                                            <td style="width:150px;text-transform: capitalize;">
                                                 <?php
                                                 if (isset($bkarray[$i]['full_name'])) {
                                                     echo $bkarray[$i]['full_name'];
@@ -402,7 +402,7 @@
                                             <td class="hide">
                                                 <?php echo $details['order_number']; ?>
                                             </td>
-                                            <td style="width:150px;">
+                                            <td style="width:150px;text-transform: capitalize;">
                                                 <?php echo $details['full_name'] ?>
                                             </td>
                                             <td>
@@ -464,7 +464,7 @@
                                 <td>
                                     <?php echo $details['order_number'];?>
                                 </td>
-                                <td style="width:150px;">
+                                <td style="width:150px;text-transform: capitalize;">
                                     <?php echo $details['full_name'] ?>
                                 </td>
                                 <td>
@@ -525,7 +525,7 @@
                                 <td>
                                     <?php echo $details['order_number'];?>
                                 </td>
-                                <td style="width:150px;">
+                                <td style="width:150px;text-transform: capitalize;">
                                     <?php echo $details['full_name'] ?>
                                 </td>
                                 <td>
@@ -602,14 +602,18 @@ $(document).ready(function(){
                             }
                         }
                     });
-                    toastr["success"](response.message);
+                    if (response.success==true) {
+                        toastr["success"](response.message);
+                    }else{
+                        toastr["error"](response.message);
+                    }
+                    
                 }else{
                     toastr["warning"](response.message);
                 }
             } 
           });
         });
-
     });
     $(window).scroll(function() {    // this will work when your window scrolled.
         var height = $(window).scrollTop();  //getting the scrolling height of window

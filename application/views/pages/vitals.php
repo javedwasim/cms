@@ -48,7 +48,7 @@
                             <thead>
                                 <tr role="row">
                                     <th>
-                                        Serial#
+                                        Vital ID
                                     </th>
                                     <th>
                                         Date &amp; Time
