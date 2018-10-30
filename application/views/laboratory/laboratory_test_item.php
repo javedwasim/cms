@@ -129,7 +129,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Risk Factor and Cardiac Problems</label>
+                        <label id="lab_test_item_name"></label>
                         <textarea class="form-control" rows="3" name="description" id="test_item_description"></textarea>
                     </div>
                 </div>

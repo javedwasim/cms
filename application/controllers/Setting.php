@@ -89,7 +89,7 @@ class Setting extends MY_Controller
             $json['message'] = "Updated successfully!";
         } else {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = "Could not be updated.";
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -309,6 +309,7 @@ class Setting extends MY_Controller
         $data['instruction_item'] = $this->Instruction_model->get_inst_items($instruction_category);
         $data['medicines'] = $this->Medicine_model->get_medicine_categories();
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
+        $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($patient_id);
         $json['medicine_html'] = $this->load->view('profile/medicine_category_table', $data, true);
         $json['instruction_html'] = $this->load->view('profile/instruction_category_table', $data, true);
         $json['advice_html'] = $this->load->view('profile/advice_category_table', $data, true);
@@ -541,6 +542,7 @@ class Setting extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -610,6 +612,7 @@ class Setting extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -785,6 +788,7 @@ class Setting extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -876,6 +880,7 @@ class Setting extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -1018,7 +1023,7 @@ class Setting extends MY_Controller
             $json['message'] = "Updated successfully!";
         } else {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = "Could not be updated.";
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

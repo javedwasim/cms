@@ -16,24 +16,3 @@
     <?php endforeach; ?>
     </tbody>
 </table>
-<script>
-    
-    // function showStructureDisease(editableObj,disease_id) {
-    //     $('td.structure_cate').css('background', '#FFF');
-    //     $('td.structure_cate').css('color', '#212529');
-    //     $(editableObj).css("background", "#1e88e5");
-    //     $(editableObj).css("color", "#FFF");
-    //     $.ajax({
-    //         url: window.location.origin+window.location.pathname+'profile/get_disease_findings_diagnosis/'+disease_id,
-    //         type: 'get',
-    //         cache: false,
-    //         success: function(response) {
-    //             $('#disease_findings').empty();
-    //             $('#disease_findings').append(response.result_html);
-    //             $('#disease_diagnosis').empty();
-    //             $('#disease_diagnosis').append(response.diagnosis_html);
-    //         }
-    //     });
-    //     return false;
-    // }
-</script>

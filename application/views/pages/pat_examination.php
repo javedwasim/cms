@@ -1,6 +1,6 @@
 <div class="content-wrapper">
     <div class="row p-t-10 m-0">
-    	<div class="col-md-5 col-lg-5 p-0">
+    	<div class="col-md-5 col-lg-5 p-r-0">
     		<div class="card">
                 <div class="card-body">
                     <!-- Nav tabs -->
@@ -404,7 +404,7 @@
                 </div>
             </div>
     	</div>
-    	<div class="col-md-7 col-lg-7">
+    	<div class="col-md-7 col-lg-7 p-l-0">
     		<div class="row">
                 <div class="col-md-12">
                     <div class="card" style="margin-bottom: 0px !important;">

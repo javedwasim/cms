@@ -144,6 +144,7 @@ class Investigation extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -227,6 +228,7 @@ class Investigation extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";

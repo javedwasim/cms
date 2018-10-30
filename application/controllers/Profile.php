@@ -44,6 +44,7 @@ class Profile extends MY_Controller
         $data['category'] = 'clinical';
         $id = $this->input->post('patid');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+        $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
         $data['sp_info'] = $this->Profile_model->get_sp_info($id);
         $json['sp_table'] = $this->load->view('profile/sp_inst_table', $data, true);
@@ -58,7 +59,7 @@ class Profile extends MY_Controller
     {
         $id = $this->input->post('patid');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
-
+        $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
         $data['categories'] = $this->Setting_model->get_lab_categories();
         $data['tests'] = $this->Setting_model->get_lab_tests();
         $data['items'] = $this->Setting_model->get_lab_test_items();
@@ -79,6 +80,7 @@ class Profile extends MY_Controller
         $data['rights'] = $this->session->userdata('other_rights');
         $id = $this->input->post('patid');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+        $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
         $data['diseases'] = $this->Echo_model->get_disease_categories();
         $data['structures'] = $this->Echo_model->get_Structure_categories();
@@ -100,6 +102,7 @@ class Profile extends MY_Controller
         $data['rights'] = $this->session->userdata('other_rights');
         $id = $this->input->post('patid');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+        $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['result_html'] = $this->load->view('pages/pat_ett_test', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -539,6 +542,7 @@ class Profile extends MY_Controller
     {
         $id = $this->input->post('patid');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+        $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1055,6 +1059,44 @@ class Profile extends MY_Controller
         }
         $data['details'] = $this->Profile_model->get_echo_detail($patid);
         $json['echo_detail'] = $this->load->view('profile/echo_detail_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function upload_files($patid,$category)
+    {   
+
+        if (isset($_FILES['profile_upload']['name'])) {
+            // total files //
+            $count = count($_FILES['profile_upload']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['profile_upload'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv' || $ext == 'jpg' || $ext == 'JPG' || $ext == 'png' || $ext == 'PNG' || $ext == 'txt' || $ext == 'TXT' || $ext == 'pdf' || $ext == 'PDF' || $ext == 'doc' || $ext == 'DOC' || $ext == 'docx' || $ext == 'DOCX') {
+                move_uploaded_file($_FILES['profile_upload']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                 $result = $this->Profile_model->save_file_profile($fname,$patid,$category);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = 'Successfully Uploaded.';
+                    $data['show_file'] = $this->Profile_model->get_file_name($patid);
+                } else {
+                    $json['error'] = false;
+                    $json['message'] = 'Upload correct file.';
+                }
+
+            } else {
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
+            }
+        } else {
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
+        }
+
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

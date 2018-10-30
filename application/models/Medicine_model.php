@@ -112,13 +112,27 @@
             return $this->db->affected_rows();
         }
 
-        public function get_medicine_item_description($id){
-            $result = $this->db->select('description')->from('medicine_item')->where('id',$id)->limit(1)->get();
+        public function get_medicine_category_description($id){
+            $result = $this->db->select('*')->from('medicine')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{
                 return array();
             }
+        }
+
+        public function get_medicine_item_description($id){
+            $result = $this->db->select('*')->from('medicine_item')->where('id',$id)->limit(1)->get();
+            if ($result) {
+                return $result->row_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function save_medicine_category_description($data){
+            $this->db->where('id',$data['medicine_cat_id'])->update('medicine',array('description'=>$data['description']));
+            return $this->db->affected_rows();
         }
 
         public function save_medicine_item_description($data){

@@ -3,13 +3,8 @@ $(document).ready(function () {
     //////////////////////////////initilize datepicker///////////////////////
     $('.app_date').datepicker({
         format: 'd-M-yyyy',
-        startDate: date,
         autoclose: true
     });
-    // $('#limiter_date').datepicker({
-    //     format: 'd-M-yyyy',
-    //     startDate: date
-    // });
     $('#clinic_time').timepicker();
 
     $('.pat_search_to').datepicker({
@@ -21,7 +16,6 @@ $(document).ready(function () {
     $('.pat_search').datepicker({
         format: 'd-M-yyyy'
     });
-
 ////////////////////////////// initilize categories datatables ///////////////////////
     var btable = $('.booking_tables').DataTable({
         "scrollX": true,
@@ -1062,7 +1056,12 @@ $(document.body).on('click', '#book_appointment', function (e) {
 
             } else {
                 $('#book_appointment').attr("disabled", false);
-                toastr["warning"]("Fill all fields.");
+                if (data.limit_error) {
+                    toastr["warning"](data.message);    
+                }else{
+                    toastr["warning"]("Fill all fields.");
+                }
+                
             }
 
         }
@@ -1576,89 +1575,97 @@ $(document.body).on('click', '#delete_single_patient', function () {
     var bookingid = $.trim($(this).closest('tr').find('.appointment_booking_id').text());
     var bookingflag = $('#booking_flag').val();
     var tabledate = $('.pat_search').val();
-    if (confirm('Are you sure you want to delete.')) {
-        $.ajax({
-            url: '/cms/dashboard/delete_single_patient',
-            type: 'post',
-            data: {
-                bkId: bookingid,
-                flag: bookingflag,
-                tabledate: tabledate
-            },
-            cache: false,
-            success: function (response) {
-                if (response.booking_table != "") {
-                    $('.table-responsive').remove();
-                    $('#table-booking').append(response.booking_table);
-                    //////// initilize datatable///////////////////
-                    var oTable = $('#editable-datatable').DataTable({
-                        "info": false,
-                        "paging": false,
-                        "searching": false,
-                            fixedHeader: {
-                            header: true,
-                            headerOffset: 100
-                        },
-                        "createdRow": function (row, data, dataIndex) {
-                            if (data[17] == "1") {
-                                $(row).addClass('round-green');
-                            }
-                            if (data[17] == "2") {
-                                $(row).addClass('round-blue');
-                            }
-                            if (data[17] == "3") {
-                                $(row).addClass('round-red');
-                            }
-                            if (data[17] == "4") {
-                                $(row).addClass('round-yellow');
-                            }
-                            if (data[17] == "5") {
-                                $(row).addClass('round-orange');
-                            }
-                            if (data[17] == "6") {
-                                $(row).addClass('round-lightGray');
-                            }
-                            if (data[17] == "7") {
-                                $(row).addClass('round-white');
-                            }
-                        },
-                        select: {
-                            style: 'single'
-                        },
-                        "scrollX": true,
-                        columnDefs: [
-                            {"type": "html-input", "targets": [3, 6, 7, 8]}
-                        ]
-                    });
-                    //// sidebar toggle code///////////////
-                    $('#sidebarCollapse').on('click', function () {
-                        var icon = $('#sidebarCollapse > .fas');
-                        icon.toggleClass('fa-arrow-left fa-arrow-right');
-                        $("#full_name").focus();
-                        $('#sidebar').toggleClass('active');
-                        $('#content').toggleClass('actv');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+               $.ajax({
+                    url: '/cms/dashboard/delete_single_patient',
+                    type: 'post',
+                    data: {
+                        bkId: bookingid,
+                        flag: bookingflag,
+                        tabledate: tabledate
+                    },
+                    cache: false,
+                    success: function (response) {
+                        if (response.booking_table != "") {
+                            $('.table-responsive').remove();
+                            $('#table-booking').append(response.booking_table);
+                            //////// initilize datatable///////////////////
+                            var oTable = $('#editable-datatable').DataTable({
+                                "info": false,
+                                "paging": false,
+                                "searching": false,
+                                    fixedHeader: {
+                                    header: true,
+                                    headerOffset: 100
+                                },
+                                "createdRow": function (row, data, dataIndex) {
+                                    if (data[17] == "1") {
+                                        $(row).addClass('round-green');
+                                    }
+                                    if (data[17] == "2") {
+                                        $(row).addClass('round-blue');
+                                    }
+                                    if (data[17] == "3") {
+                                        $(row).addClass('round-red');
+                                    }
+                                    if (data[17] == "4") {
+                                        $(row).addClass('round-yellow');
+                                    }
+                                    if (data[17] == "5") {
+                                        $(row).addClass('round-orange');
+                                    }
+                                    if (data[17] == "6") {
+                                        $(row).addClass('round-lightGray');
+                                    }
+                                    if (data[17] == "7") {
+                                        $(row).addClass('round-white');
+                                    }
+                                },
+                                select: {
+                                    style: 'single'
+                                },
+                                "scrollX": true,
+                                columnDefs: [
+                                    {"type": "html-input", "targets": [3, 6, 7, 8]}
+                                ]
+                            });
+                            //// sidebar toggle code///////////////
+                            $('#sidebarCollapse').on('click', function () {
+                                var icon = $('#sidebarCollapse > .fas');
+                                icon.toggleClass('fa-arrow-left fa-arrow-right');
+                                $("#full_name").focus();
+                                $('#sidebar').toggleClass('active');
+                                $('#content').toggleClass('actv');
 
-                    });
-                    $("#editable-datatable tbody tr").click(function (e) {
-                        if ($(this).hasClass('row_selected')) {
-                            $(this).removeClass('row_selected');
-                        } else {
-                            oTable.$('tr.row_selected').removeClass('row_selected');
-                            $(this).addClass('row_selected');
+                            });
+                            $("#editable-datatable tbody tr").click(function (e) {
+                                if ($(this).hasClass('row_selected')) {
+                                    $(this).removeClass('row_selected');
+                                } else {
+                                    oTable.$('tr.row_selected').removeClass('row_selected');
+                                    $(this).addClass('row_selected');
+                                }
+                            });
+                            if (response.message == "Deleted successfully") {
+                                toastr["error"](response.message);
+                            } else {
+                                toastr["warning"](response.message);
+                            }
+
                         }
-                    });
-                    if (response.message == "Deleted successfully") {
-                        toastr["success"](response.message);
-                    } else {
-                        toastr["warning"](response.message);
                     }
-
-                }
+                }); 
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
+    return false;
 });
 
 /////////////////////////////////// load profile page ///////////////////////////////////
@@ -1973,23 +1980,31 @@ $(document.body).on('click', '#profes_add', function (e) {
     }
 });
 $(document.body).on('click', '.delete_profession', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                $('.profession_table').remove();
-                $('#profession_table').append(response.profession_table);
-                if (response.success== true) {
-                    toastr["error"](response.message);
-                } else {
-                    toastr["error"](response.message);
-                }
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        $('.profession_table').remove();
+                        $('#profession_table').append(response.profession_table);
+                        if (response.success== true) {
+                            toastr["error"](response.message);
+                        } else {
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -2155,23 +2170,31 @@ $(document.body).on('click', '#add_ett_test_reason', function () {
 
 
 $(document.body).on('click', '.delete-test-reason', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                $('.ins_category_container').empty();
-                $('.ins_category_container').append(response.result_html);
-                if (response.success) {
-                    toastr["error"](response.message);
-                } else {
-                    toastr["error"](response.message);
-                }
+    var action_url = $(this).attr('data-href'); 
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        $('.ins_category_container').empty();
+                        $('.ins_category_container').append(response.result_html);
+                        if (response.success) {
+                            toastr["error"](response.message);
+                        } else {
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -2201,23 +2224,31 @@ $(document.body).on('click', '#add_ending_reason', function () {
 });
 
 $(document.body).on('click', '.delete-ending-reason', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                $('.ending_reason_table').empty();
-                $('.ending_reason_table').append(response.result_html);
-                if (response.message == "Updated successfully!") {
-                    toastr["error"](response.message);
-                } else {
-                    toastr["error"](response.message);
-                }
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        $('.ending_reason_table').empty();
+                        $('.ending_reason_table').append(response.result_html);
+                        if (response.message == "Updated successfully!") {
+                            toastr["error"](response.message);
+                        } else {
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -2246,23 +2277,31 @@ $(document.body).on('click', '#add_ett_discription', function () {
 });
 
 $(document.body).on('click', '.delete-description', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                $('.discription-table').empty();
-                $('.discription-table').append(response.result_html);
-                if (response.message == "Deleted Successfully.") {
-                    toastr["error"](response.message);
-                } else {
-                    toastr["error"](response.message);
-                }
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        $('.discription-table').empty();
+                        $('.discription-table').append(response.result_html);
+                        if (response.message == "Deleted Successfully.") {
+                            toastr["error"](response.message);
+                        } else {
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -2291,23 +2330,31 @@ $(document.body).on('click', '#add_conclusion', function () {
 });
 
 $(document.body).on('click', '.delete-conclusion', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                $('.conclusion_table_content').empty();
-                $('.conclusion_table_content').append(response.result_html);
-                if (response.message == "Deleted Successfully.") {
-                    toastr["error"](response.message);
-                } else {
-                    toastr["error"](response.message);
-                }
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        $('.conclusion_table_content').empty();
+                        $('.conclusion_table_content').append(response.result_html);
+                        if (response.message == "Deleted Successfully.") {
+                            toastr["error"](response.message);
+                        } else {
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -2344,23 +2391,31 @@ $(document.body).on('click', '#add_protocol', function () {
 });
 
 $(document.body).on('click', '.delete-protocol', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                $('.protocol_table_content').empty();
-                $('.protocol_table_content').append(response.result_html);
-                if (response.message == "Deleted Successfully.") {
-                    toastr["error"](response.message);
-                } else {
-                    toastr["error"](response.message);
-                }
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        $('.protocol_table_content').empty();
+                        $('.protocol_table_content').append(response.result_html);
+                        if (response.message == "Deleted Successfully.") {
+                            toastr["error"](response.message);
+                        } else {
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -2772,42 +2827,49 @@ function calculateBmiBsaedit(val){
 $(document.body).on('click', '#delete_profile', function () {
     var tr = $(this).closest('tr');
     var profileid = $.trim(tr.find('.profile_id').text());
-    if (confirm('Are you sure you want to delete.')) {
-        $.ajax({
-            url: '/cms/profile/delete_profile',
-            type: 'post',
-            data: {
-                id: profileid
-            },
-            cache: false,
-            success: function (response) {
-                if (response.profile_table != "") {
-                    $('.profile-table').remove();
-                    $('#profile_table').append(response.profile_table);
-                    ///////////////// initilize datatable //////////////
-                    $('.profiletable').DataTable({
-                        // "scrollX": true,
-                        "initComplete": function (settings, json) {
-                            $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                        }
-                    });
-                     $('#profiletable tbody tr:first').addClass('row_selected');
-                    $("#profiletable tbody tr").click(function (e) {
-                        $('#profiletable tbody tr.row_selected').removeClass('row_selected');
-                        $(this).addClass('row_selected');
-                    });
-                    if (response.message == "Deleted successfully.") {
-                        toastr["success"](response.message);
-                    } else {
-                        toastr["warning"](response.message);
-                    }
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: '/cms/profile/delete_profile',
+                    type: 'post',
+                    data: {
+                        id: profileid
+                    },
+                    cache: false,
+                    success: function (response) {
+                        if (response.profile_table != "") {
+                            $('.profile-table').remove();
+                            $('#profile_table').append(response.profile_table);
+                            ///////////////// initilize datatable //////////////
+                            $('.profiletable').DataTable({
+                                // "scrollX": true,
+                                "initComplete": function (settings, json) {
+                                    $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                                }
+                            });
+                             $('#profiletable tbody tr:first').addClass('row_selected');
+                            $("#profiletable tbody tr").click(function (e) {
+                                $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                                $(this).addClass('row_selected');
+                            });
+                            if (response.message == "Deleted successfully.") {
+                                toastr["success"](response.message);
+                            } else {
+                                toastr["warning"](response.message);
+                            }
 
-                }
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
 });
 
 ////////////////////////////////// load update profile modal //////////////////////////////////////////
@@ -3187,31 +3249,35 @@ function get_item_limiter(func_call) {
     });
 }
 
-function get_vitals(func_call) {
-    $.ajax({
-        url: '/cms/user/'+func_call,
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                $('.datatable').DataTable({
-                    paging: false,
-                    info: false
-                });
-            }
-        }
-    });
-}
+// function get_vitals(func_call) {
+//     $.ajax({
+//         url: '/cms/user/'+func_call,
+//         cache: false,
+//         success: function (response) {
+//             if (response.result_html != '') {
+//                 $('.dashboard-content').remove();
+//                 $('#dashboard-content').append(response.result_html);
+//                 $('.datatable').DataTable({
+//                     paging: false,
+//                     info: false
+//                 });
+//             }
+//         }
+//     });
+// }
 
-function get_patient_vitals(func_call) {
+function get_patient_vitals(patid,func_call) {
     $.ajax({
         url: '/cms/user/'+func_call,
+        type: 'post',
+        data:{patid:patid},
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
                 $('#content-wrapper').append(response.result_html);
+                $('#vital_rows').empty();
+                $('#vital_rows').append(response.vital_rows);
                 $('.datatable').DataTable({
                     paging: false,
                     info: false
@@ -3329,26 +3395,34 @@ function updateSignature(editableObj, column, id) {
 }
 
 $(document.body).on('click', '.delete-signature', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                if(response.signature_table != ''){
-                    $('.signature_table').remove();
-                    $('#signature_table').append(response.signature_table);
-                    if(response.success == true){
-                        toastr["error"](response.message);
-                    }else{
-                        toastr["error"](response.error);
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        if(response.signature_table != ''){
+                            $('.signature_table').remove();
+                            $('#signature_table').append(response.signature_table);
+                            if(response.success == true){
+                                toastr["error"](response.message);
+                            }else{
+                                toastr["error"](response.error);
+                            }
+                        
+                        }
                     }
-                
-                }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -3384,40 +3458,48 @@ function get_manage_reasearch(func_call) {
 }
 
 $(document.body).on('click', '.delete_research_profile', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                if(response.profile_table != ''){
-                    $('.manage_research_table').remove();
-                    $('#manage_research_table').append(response.profile_table);
-                    ///////////////// initilize datatable //////////////
-                    $('#research-table').DataTable({
-                        "scrollX": true,
-                        "scrollY": '50vh',
-                        "scrollCollapse": true,
-                        "paging": false,
-                        "info": false,
-                        "searching": false
-                    });
-                    $('#research-table tbody tr:first').addClass('row_selected');
-                    $("#research-table tbody tr").click(function (e) {
-                        $('#research-table tbody tr.row_selected').removeClass('row_selected');
-                        $(this).addClass('row_selected');
-                    });
-                    if(response.success == true){
-                        toastr["success"](response.message);
-                    }else{
-                        toastr["warning"](response.error);
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        if(response.profile_table != ''){
+                            $('.manage_research_table').remove();
+                            $('#manage_research_table').append(response.profile_table);
+                            ///////////////// initilize datatable //////////////
+                            $('#research-table').DataTable({
+                                "scrollX": true,
+                                "scrollY": '50vh',
+                                "scrollCollapse": true,
+                                "paging": false,
+                                "info": false,
+                                "searching": false
+                            });
+                            $('#research-table tbody tr:first').addClass('row_selected');
+                            $("#research-table tbody tr").click(function (e) {
+                                $('#research-table tbody tr.row_selected').removeClass('row_selected');
+                                $(this).addClass('row_selected');
+                            });
+                            if(response.success == true){
+                                toastr["success"](response.message);
+                            }else{
+                                toastr["warning"](response.error);
+                            }
+                        
+                        }
                     }
-                
-                }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -3476,27 +3558,35 @@ $(document.body).on('click', '#save_diary', function (){
 });
 
 $(document.body).on('click', '.delete-notes', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                $('.diary_sidebar').remove();
-                $('#diary_sidebar').append(response.diary_sidebar);
-                $("#diray_table tbody tr").click(function (e) {
-                    $('#diray_table tbody tr.row_selected').removeClass('row_selected');
-                    $(this).addClass('row_selected');
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        $('.diary_sidebar').remove();
+                        $('#diary_sidebar').append(response.diary_sidebar);
+                        $("#diray_table tbody tr").click(function (e) {
+                            $('#diray_table tbody tr.row_selected').removeClass('row_selected');
+                            $(this).addClass('row_selected');
+                        });
+                        if(response.success == true){
+                            toastr["error"](response.message);
+                        }else{
+                            toastr["error"](response.error);
+                        }
+                    }
                 });
-                if(response.success == true){
-                    toastr["error"](response.message);
-                }else{
-                    toastr["error"](response.error);
-                }
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -3714,44 +3804,60 @@ function profile_protocol_details(protocol_id){
 }
 
 $(document.body).on('click', '.delete_district', function () {
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function (response) {
-                $('.district_content').remove();
-                $('#district_content').append(response.district_table);
-                if (response.success == true) {
-                    toastr["error"](response.message);
-                } else {
-                    toastr["error"](response.message);
-                }
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function (response) {
+                        $('.district_content').remove();
+                        $('#district_content').append(response.district_table);
+                        if (response.success == true) {
+                            toastr["error"](response.message);
+                        } else {
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
 $(document.body).on('click', '.delete-history-item', function(){
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function(response) {
-                $('.history_item_container').empty();
-                $('.history_item_container').append(response.result_html);
-                if (response.success) {
-                    toastr["error"](response.message);
-                } else {
-                    toastr["error"](response.message);
-                }
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function(response) {
+                        $('.history_item_container').empty();
+                        $('.history_item_container').append(response.result_html);
+                        if (response.success) {
+                            toastr["error"](response.message);
+                        } else {
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -3771,23 +3877,31 @@ function filter_history_item_category(category) {
 }
 
 $(document.body).on('click', '.delete-limiter', function(){
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: $(this).attr('data-href'),
-            cache: false,
-            success: function(response) {
-                $('.limiter_table').remove();
-                $('#limiter_table').append(response.result_html);
-                if (response.success) {
-                    toastr["error"](response.message);
-                } else {
-                    toastr["error"](response.message);
-                }
+    var action_url = $(this).attr('data-href');
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: action_url,
+                    cache: false,
+                    success: function(response) {
+                        $('.limiter_table').remove();
+                        $('#limiter_table').append(response.result_html);
+                        if (response.success) {
+                            toastr["error"](response.message);
+                        } else {
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    } else {
-        return false;
-    }
+        }
+    });
     return false;
 });
 
@@ -3894,81 +4008,105 @@ function printsp(editableObj,test_id,patient_id) {
 }
 
 function deleteEttDetail(editableObj,test_id,patient_id){
-    if (confirm('Are you sure to delete this record?')) {
-         $.ajax({
-            url: '/cms/print_profiles/delete_ett_test_details',
-            type: 'post',
-            data: {detail_id:test_id,patid:patient_id},
-            cache: false,
-            success: function (response) {
-                if (response.success) {
-                    $('#echo_detail_container').empty();
-                    $('#echo_detail_container').append(response.ett_detail);
-                    if (response.success == true) {
-                        toastr["success"](response.message);
-                    }else{
-                        toastr["error"](response.message);
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: '/cms/print_profiles/delete_ett_test_details',
+                    type: 'post',
+                    data: {detail_id:test_id,patid:patient_id},
+                    cache: false,
+                    success: function (response) {
+                        if (response.success) {
+                            $('#echo_detail_container').empty();
+                            $('#echo_detail_container').append(response.ett_detail);
+                            if (response.success == true) {
+                                toastr["success"](response.message);
+                            }else{
+                                toastr["error"](response.message);
+                            }
+                        } else {
+                            toastr["error"](response.message);
+                        }
                     }
-                } else {
-                    toastr["error"](response.message);
-                }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    }else{
-        return false;
-    }
+        }
+    });
+    return false;
 }
 
 function deletespinstDetail(editableObj,test_id,patient_id){
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: '/cms/print_profiles/delete_sp_isnt_test_details',
-            type: 'post',
-            data: {detail_id:test_id,patid:patient_id},
-            cache: false,
-            success: function (response) {
-                if (response.success) {
-                    $('#echo_detail_container').empty();
-                    $('#echo_detail_container').append(response.sp_inst_details);
-                    if (response.success == true) {
-                        toastr["success"](response.message);
-                    }else{
-                        toastr["error"](response.message);
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: '/cms/print_profiles/delete_sp_isnt_test_details',
+                    type: 'post',
+                    data: {detail_id:test_id,patid:patient_id},
+                    cache: false,
+                    success: function (response) {
+                        if (response.success) {
+                            $('#echo_detail_container').empty();
+                            $('#echo_detail_container').append(response.sp_inst_details);
+                            if (response.success == true) {
+                                toastr["success"](response.message);
+                            }else{
+                                toastr["error"](response.message);
+                            }
+                        } else {
+                            toastr["error"](response.message);
+                        }
                     }
-                } else {
-                    toastr["error"](response.message);
-                }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    }else{
-        return false;
-    }
+        }
+    });
+    return false;
 }
 
 function deletelabtestDetail(editableObj,key,patient_id){
-    if (confirm('Are you sure to delete this record?')) {
-        $.ajax({
-            url: '/cms/print_profiles/delete_lab_test_test_details',
-            type: 'post',
-            data: {key:key,patid:patient_id},
-            cache: false,
-            success: function (response) {
-                if (response.success) {
-                    $('#echo_detail_container').empty();
-                    $('#echo_detail_container').append(response.lab_detail);
-                    if (response.success == true) {
-                        toastr["success"](response.message);
-                    }else{
-                        toastr["error"](response.message);
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: '/cms/print_profiles/delete_lab_test_test_details',
+                    type: 'post',
+                    data: {key:key,patid:patient_id},
+                    cache: false,
+                    success: function (response) {
+                        if (response.success) {
+                            $('#echo_detail_container').empty();
+                            $('#echo_detail_container').append(response.lab_detail);
+                            if (response.success == true) {
+                                toastr["success"](response.message);
+                            }else{
+                                toastr["error"](response.message);
+                            }
+                        } else {
+                            toastr["error"](response.message);
+                        }
                     }
-                } else {
-                    toastr["error"](response.message);
-                }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
-        });
-    }else{
-        return false;
-    }
+        }
+    });
+    return false;
 }
 
 $(document.body).on('click','#ett-details-pro',function(){

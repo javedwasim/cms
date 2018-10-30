@@ -96,10 +96,16 @@ class Profile_history extends MY_Controller
     {
         $data = $this->input->post();
         $result = $this->History_model->add_profile_history($data);
-        if ($result) {
+        if ($result=='updated') {
             $json['success'] = true;
-            $json['message'] = "history  save successfully!";
-        } else {
+            $json['message'] = "Updated successfully!";
+        } else if($result=='inserted'){
+            $json['success'] = true;
+            $json['message'] = "Saved Successfully.";
+        }else if($result == 'empty'){
+            $json['error'] = true;
+            $json['message'] = "Empty could not be update.";
+        }else{
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
@@ -150,6 +156,7 @@ class Profile_history extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -164,10 +171,10 @@ class Profile_history extends MY_Controller
         $data = $this->input->post();
         $id = $data['id'];
         $result = $this->History_model->get_profile_history_description($id);
-
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -233,10 +240,18 @@ class Profile_history extends MY_Controller
     {
         $data = $this->input->post();
         $result = $this->History_model->add_history_item($data);
-        if ($result) {
+
+        if ($result == 'empty') {
+            $json['error'] = true;
+            $json['message'] = "Could not update empty field.";
+        } else if($result == 'inserted' ){
             $json['success'] = true;
-            $json['message'] = "history item save successfully!";
-        } else {
+            $json['message'] = "Saved successfully!";
+        }else if($result == 'updated' ){
+            $json['success'] = true;
+            $json['message'] = "Updated successfully!";
+        }
+        else{
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
@@ -250,7 +265,7 @@ class Profile_history extends MY_Controller
         $result = $this->History_model->delete_history_item($id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = "history item successfully deleted.";
+            $json['message'] = "Successfully deleted.";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error.";

@@ -88,13 +88,15 @@ class Examination extends MY_Controller
     {
         $data = $this->input->post();
         $result = $this->Examination_model->add_examination_category($data);
-        if ($result) {
+        if($result == 'empty'){
+            $json['error'] = true;
+            $json['message'] = 'Could not update empty field.';
+        }else if ($result == 'updated') {
             $json['success'] = true;
-            if(isset($data['id'])){
-                $json['message'] = "Updated successfully!";
-            }else{
-                $json['message'] = "Created successfully!";
-            }
+            $json['message'] = "Updated successfully!";
+        }else if( $result == 'inserted'){  
+            $json['success'] = true;
+            $json['message'] = "Created successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -149,6 +151,7 @@ class Examination extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -188,13 +191,15 @@ class Examination extends MY_Controller
     {
         $data = $this->input->post();
         $result = $this->Examination_model->add_examination_item($data);
-        if ($result) {
+        if($result == 'empty'){
+            $json['error'] = true;
+            $json['message'] = 'Could not update empty field.';
+        }else if ($result == 'updated') {
             $json['success'] = true;
-            if(isset($data['id'])){
-                $json['message'] = "Updated successfully!";
-            }else{
-                $json['message'] = "Saved successfully!";
-            }
+            $json['message'] = "Updated successfully!";
+        }else if( $result == 'inserted'){  
+            $json['success'] = true;
+            $json['message'] = "Created successfully!";
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
@@ -233,6 +238,7 @@ class Examination extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";

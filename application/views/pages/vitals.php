@@ -13,25 +13,6 @@
     <section class="content">
         <div class="card">
             <div class="card-header">
-                Patient Name
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4 m-t-10 m-b-10">
-                        <form name="search-by-name" id="search-by-name" method="get" action="#">
-                            <select class="form-control" name="pat_info" id="pat_info">
-                                <option value="">Select..</option>
-                                <?php foreach($profiles as $profile){?>
-                                <option value="<?php echo $profile['id']; ?>" ><?php echo $profile['pat_name']; ?></option>
-                                <?php }?>
-                            </select>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
                 <div class="row">
                     <div class="col-md-4">
                         <h3 class="box-title">Vitals Chart</h3>

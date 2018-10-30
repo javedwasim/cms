@@ -146,7 +146,7 @@ if(isset($rights[0]['user_rights']))
                                     <button class="btn btn-danger waves-effect waves-light" id="pat-echo-test" style="padding: 7px 15px;" type="button">Echo</button>
                                     <button class="btn btn-danger waves-effect waves-light" id="pat-ett-test" style="padding: 7px 15px;" type="button">ETT</button>
                                     <button class="btn btn-success waves-effect waves-light"id="list_itmes_vital" data-func-call="vital" style="padding: 7px 15px;" type="button">Vitals</button>
-                                    <button class="btn btn-success btn-md waves-effect waves-light" data-toggle="modal" data-target="#myModal"   style="padding: 10px 15px;" type="button">Upload Files</button>
+                                    <button class="btn btn-success btn-md waves-effect waves-light" data-toggle="modal" data-target="#profile_upload_modal"   style="padding: 10px 15px;" type="button">Upload Files</button>
                                 </div>
                             </div>
                             <div class="row m-t-10">
@@ -172,12 +172,15 @@ if(isset($rights[0]['user_rights']))
                         <div class="card-body" style="height:533px;">
                             <div class="row">
                                 <div id="re1">
-                                    <div class="col-md-12 p-r-0">
+                                    <div class="col-md-12 p-r-0" style="height: 200px; overflow-y: scroll;">
                                         <h4 class="text-center"> Click to edit</h4>
                                         <div id="echo_detail_container">
 
                                         </div>
 
+                                    </div>
+                                    <div class="col-md-12">
+                                        
                                     </div>
                                 </div>
                                 <div id="re2" class="b-all" style="height:450px;">
@@ -194,36 +197,41 @@ if(isset($rights[0]['user_rights']))
             </div>
         </div>
     </div>
+
    <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">Select File</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <form action="/action_page.php">
-            <div class="modal-body">
-                <div class="form-group">
-                    <select class="form-control">
-                        <option value="CXR">CXR</option>
-                        <option value="ECG">ECG</option>
-                        <option value="ETT">ETT</option>
-                        <option value="Coronary Angio">Coronary Angio</option>
-                    </select>
+    <div class="modal fade" id="profile_upload_modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select File</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <select class="form-control" id="file_upload_category">
+                            <option value="CXR">CXR</option>
+                            <option value="ECG">ECG</option>
+                            <option value="ETT">ETT</option>
+                            <option value="Coronary Angio">Coronary Angio</option>
+                        </select>
+                    </div>
+                    <form id="upload_profile_files_form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="profile_upload">Choose File</label>
+                            <input type="file" class="form-control-file" name="profile_upload" id="profile_upload" required="required">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" id="upload_profile_files" value="upload" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </form>
-      </div>
-      
+        </div>
     </div>
-  </div>
-  
  <!-- sample modal content -->
     <div id="add-new-patient" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
@@ -359,9 +367,10 @@ if(isset($rights[0]['user_rights']))
 	            format: 'd-M-yyyy'
 	    });
         $('#list_itmes_vital').click(function(){
-               get_patient_vitals($(this).attr('data-func-call'));
-           });
-
+            var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+            var fun_call = $(this).attr('data-func-call');
+            get_patient_vitals(patid,fun_call);
+        });
         $('.resize1').resizable({
           handles: 'e',
           alsoResizeReverse: '#form'
@@ -456,8 +465,6 @@ if(isset($rights[0]['user_rights']))
                 $(this).removeData("ui-resizable-alsoresize-reverse");
             }
         });
-
-
 
 	});
 </script>

@@ -1201,6 +1201,40 @@ class Profile_model extends CI_Model
         
     }
 
+    public function save_file_profile($name,$patid,$category){
+        $data_array = array(
+            'patient_id' => $patid,
+            'category' => $category,
+            'file_name' => $name,
+        );
+        $result = $this->db->insert('patient_files',$data_array);
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    public function paitnet_vitals_by_id($id){
+        $result = $this->db->select('*')->where('patient_id',$id)->limit(1)->order_by('patient_id',"DESC")
+            ->get('patient_vitals');
+        if ($result) {
+            return $result->row();
+        } else {
+            return false;
+        }
+    }
+
+    public function get_file_name($id){
+        $result = $this->db->select('*')->from('patient_files')->where('patient_id',$id)->limit(1)->get();
+        if ($result) {
+            $result->row();
+        }else{
+            return row();
+        }
+    }
+
 }
 
 

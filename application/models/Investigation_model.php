@@ -68,7 +68,7 @@
         }
 
         public function get_investigation_item_description($id){
-            $result = $this->db->select('description')->from('investigation_item')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('investigation_item')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{
@@ -95,7 +95,7 @@
         }
 
         public function get_investigation_description($id){
-            $result = $this->db->select('description')->from('investigation')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('investigation')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{

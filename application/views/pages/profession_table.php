@@ -42,8 +42,10 @@
             data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
             success: function (response) {
                 $(editableObj).css("background", "#FDFDFD");
-                if (response.success) {
+                if (response.success==true) {
                     toastr["success"](response.message);
+                }else{
+                    toastr["error"](response.message);
                 }
             }
         });

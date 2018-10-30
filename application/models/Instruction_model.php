@@ -68,7 +68,7 @@
         }
 
         public function get_inst_item_description($id){
-            $result = $this->db->select('description')->from('instruction_item')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('instruction_item')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{
@@ -99,7 +99,7 @@
         }
 
         public function get_inst_description($id){
-            $result = $this->db->select('description')->from('instruction')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('instruction')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{

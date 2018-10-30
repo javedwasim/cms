@@ -40,7 +40,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Risk Factor and Cardiac Problems</label>
+                        <label id="history_item_name"></label>
                         <textarea class="form-control" rows="3" name="description" id="history_item_description"></textarea>
                     </div>
                 </div>
@@ -70,6 +70,9 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    toastr["error"](response.message);
+                    document.execCommand('undo');
                 }
             }
         });

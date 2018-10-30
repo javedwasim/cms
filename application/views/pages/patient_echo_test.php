@@ -203,11 +203,30 @@
     	<div class="col-md-12 p-l-0 p-r-0">
     		<div class="card">
     			<div class="card-header">
-    				<label>Report Finding / Feeding Section</label><br>
-    				<label class="radio-inline m-r-10"><input type="radio" name="optradio" id="get_disease">Report By Disease</label>
-					<label class="radio-inline m-r-10"><input type="radio" name="optradio" id="get_structure_findings" >Finding By Structure</label>
-					<label class="radio-inline m-r-10"><input type="radio" name="optradio" id="get_structure_diagnosis">Diagnosis By Structure</label>
-					<button class="btn btn-success btn-sm pull-right">Uploads</button>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label>Report Finding / Feeding Section</label><br>
+                            <label class="radio-inline m-r-10"><input type="radio" name="optradio" id="get_disease">Report By Disease</label>
+                            <label class="radio-inline m-r-10"><input type="radio" name="optradio" id="get_structure_findings" >Finding By Structure</label>
+                            <label class="radio-inline m-r-10"><input type="radio" name="optradio" id="get_structure_diagnosis">Diagnosis By Structure</label>
+                        </div>
+                        <div class="col-md-4">
+                            <form id="echo_upload_file_form" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-9 m-t-5 p-r-0">
+                                        <div class="form-group">
+                                                <input type="file" class="form-control-file" name="profile_upload" id="echo_upload_file" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 p-l-0">
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-success btn-sm" value="Uploads" id="echo_upload">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
     			</div>
     			<div class="card-body">
     				<div class="row">

@@ -30,7 +30,7 @@
                     <a class="nav-link" href="javascript:void(0)" id="diary" aria-expanded="false"><i class="ti-book"></i> Diary</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)"  aria-expanded="false"><i class="ti-info-alt"></i> About us</a>
+                    <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#aboutmodal"  aria-expanded="false"><i class="ti-info-alt"></i> About us</a>
                 </li>
               <!--   <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)" onclick="appointments();" aria-expanded="false"><i class="mdi mdi-bullseye"></i> Appointments</a>
@@ -118,6 +118,38 @@
         </form>
     </div>
 </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="aboutmodal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-10 offset-1" style="text-align: center;">
+                    <h3 style="text-align: center;">The TechSol.</h3>
+                    <i class="fa fa-home m-r-10"></i>
+                    <span class="contact-address">3rd Floor, Trade Center Bahawalpur, Bahawalpur, Punjab, Pakistan, 63100</span>
+                    <div class="contact-email"><span><i class="fa fa-envelope m-r-10"></i></span><a href="mailto:contact@thetechsol.com">contact@thetechsol.com</a></div>
+                    <div class="site-info container">
+                        <a href="https://thetechsol.com">All Rights Reserved by TechSol </a>
+                        <span class="sep"> | </span>
+                        <a href="https://www.thetechsol.com" rel="designer">© 2018</a>   
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
             <!-- ============================================================== -->
 <!-- Page wrapper  -->
 <!-- ============================================================== -->

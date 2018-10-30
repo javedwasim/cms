@@ -55,7 +55,6 @@ if(isset($rights[0]['user_rights']))
                 <td contenteditable="true" onClick="showError(this);">
                     <?php echo $category['name']; ?></td>
             <?php } ?>
-
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -74,6 +73,7 @@ if(isset($rights[0]['user_rights']))
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label id="exam_cat_name"></label>
                         <textarea class="form-control" rows="3" name="description" id="examination_cate_desc"></textarea>
                     </div>
                 </div>
@@ -106,6 +106,9 @@ if(isset($rights[0]['user_rights']))
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    toastr["error"](response.message);
+                    document.execCommand('undo');
                 }
             }
         });

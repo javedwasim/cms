@@ -339,6 +339,7 @@ class User extends MY_Controller {
             } else {
                 $data['booking_flag'] = $bookingFlag;
                 $data['booking_details'] = $this->User_model->getbookings_by_date_flag($searchdate,$bookingFlag);
+                $json['limit_error'] = true;
                 $json['message'] = "Limit reached for bookings.";
             }
         } else {
@@ -962,7 +963,9 @@ class User extends MY_Controller {
 
     public function vital() {
         $data['rights'] = $this->session->userdata('other_rights');
-        $data['profiles'] = $this->Profile_model->get_profiles();
+        $id = $this->input->post('patid');
+        $data['patient_vitals'] = $this->User_model->get_patient_vitals($id);
+        // print_r($data['patient_vitals']);die();
         $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
         $json['result_html'] = $this->load->view('pages/vitals', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -1001,14 +1004,14 @@ class User extends MY_Controller {
         }
     }
 
-    public function get_patient_vitals(){
-        $id = $this->input->post('patid');
-        $data['patient_vitals'] = $this->User_model->get_patient_vitals($id);
-        $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
+    // public function get_patient_vitals(){
+    //     $id = $this->input->post('patid');
+    //     $data['patient_vitals'] = $this->User_model->get_patient_vitals($id);
+    //     $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
+    //     if ($this->input->is_ajax_request()) {
+    //         set_content_type($json);
+    //     }
+    // }
 
     public function delete_vitals($vitalid,$patid){
         $result = $this->User_model->delete_vials($vitalid);

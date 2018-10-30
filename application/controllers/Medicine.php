@@ -150,6 +150,25 @@ class Medicine extends MY_Controller
         }
     }
 
+    public function get_medicine_category_description()
+    {
+        $data = $this->input->post();
+        $id = $data['id'];
+        $result = $this->Medicine_model->get_medicine_category_description($id);
+
+        if ($result) {
+            $json['success'] = true;
+            $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
     public function get_medicine_item_description()
     {
         $data = $this->input->post();
@@ -159,10 +178,37 @@ class Medicine extends MY_Controller
         if ($result) {
             $json['success'] = true;
             $json['description'] = $result['description'];
+            $json['category'] = $result['name'];
         } else {
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function save_medicine_category_description()
+    {
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('description', 'Description', 'required|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            $json['error'] = true;
+            $json['message'] = validation_errors();
+        } else {
+            $data = $this->input->post();
+            $result = $this->Medicine_model->save_medicine_category_description($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Added successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error while adding description";
+            }
+        }
+
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

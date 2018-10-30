@@ -32,28 +32,52 @@
 
         public function add_profile_history($data){
 		    if(isset($data['id'])){
-                $id = $data['id'];
-                $editval = trim($data['editval']);
-                $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('profile_history',array('name'=>$editval));
-                return $this->db->affected_rows();
+                if (empty($data['editval'])) {
+                    return 'empty';
+                }else{
+                    $id = $data['id'];
+                    $editval = trim($data['editval']);
+                    $editval = preg_replace('/(<br>)+$/', '', $editval);
+                    $result = $this->db->where('id',$id)->update('profile_history',array('name'=>$editval));
+                    if ($result) {
+                        return 'updated';
+                    }else{
+                        return false;
+                    }
+                }
             }else{
-                $this->db->insert('profile_history', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('profile_history', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
 
         public function add_history_item($data){
             if(isset($data['id'])){
-                $id = $data['id'];
-                $editval = trim($data['editval']);
-                $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('history_item',array('name'=>$editval));
-                return $this->db->affected_rows();
+                if (empty($data['editval'])) {
+                    return 'empty';
+                }else{
+                    $id = $data['id'];
+                    $editval = trim($data['editval']);
+                    $editval = preg_replace('/(<br>)+$/', '', $editval);
+                    $result = $this->db->where('id',$id)->update('history_item',array('name'=>$editval));
+                    if($result){
+                        return 'updated';
+                    }else{
+                        return false;
+                    }
+                }
             }else{
-                $this->db->insert('history_item', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('history_item', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -90,7 +114,7 @@
         }
 
         public function get_history_item_description($id){
-            $result = $this->db->select('description')->from('history_item')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('history_item')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{
@@ -99,7 +123,7 @@
         }
 
         public function get_profile_history_description($id){
-            $result = $this->db->select('description')->from('profile_history')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('profile_history')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{

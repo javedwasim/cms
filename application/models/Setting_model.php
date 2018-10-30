@@ -169,7 +169,7 @@
         }
 
         public function get_research_description($id){
-            $result = $this->db->select('description')->from('research')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('research')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{
@@ -207,7 +207,7 @@
         }
 
         public function get_lab_category_description($id){
-            $result = $this->db->select('description')->from('lab_category')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('lab_category')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{
@@ -259,7 +259,7 @@
         }
 
         public function get_lab_test_description($id){
-            $result = $this->db->select('description')->from('lab_test')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('lab_test')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{
@@ -314,7 +314,7 @@
         }
 
         public function get_lab_test_item_description($id){
-            $result = $this->db->select('description')->from('lab_test_item')->where('id',$id)->limit(1)->get();
+            $result = $this->db->select('*')->from('lab_test_item')->where('id',$id)->limit(1)->get();
             if ($result) {
                 return $result->row_array();
             }else{
@@ -463,15 +463,20 @@
         }
 
         public function update_profession($data){
-            $id = $data['id'];
-            $editval = trim($data['editval']);
-            $editval = preg_replace('/(<br>)+$/', '', $editval);
-            $result = $this->db->where('profession_id',$id)->update('profession_tbl',array('profession_name'=>$editval));
-            if ($result) {
-                return true;
-            }else{
+            if(empty($data['editval'])){
                 return false;
+            }else{
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $result = $this->db->where('profession_id',$id)->update('profession_tbl',array('profession_name'=>$editval));
+                if ($result) {
+                    return true;
+                }else{
+                    return false;
+                }
             }
+            
         }
 
         public function district_exist($district){
@@ -494,15 +499,20 @@
         }
 
         public function update_pat_district($data){
-            $id = $data['id'];
-            $editval = trim($data['editval']);
-            $editval = preg_replace('/(<br>)+$/', '', $editval);
-            $result = $this->db->where('district_id',$id)->update('districts_tbl',array('district_name'=>$editval));
-            if ($result) {
-                return true;
-            }else{
+            if(empty($data['editval'])){
                 return false;
+            }else{
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $result = $this->db->where('district_id',$id)->update('districts_tbl',array('district_name'=>$editval));
+                if ($result) {
+                    return true;
+                }else{
+                    return false;
+                }
             }
+            
         }
 
         public function get_advice_items_by_category($cate_id){

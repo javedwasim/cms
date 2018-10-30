@@ -13,7 +13,6 @@
            success:function(response)
            {
               document.getElementById("csv_file").value = "";
-              $('.prof_his_id').prop('selectedIndex',0);
                 $('#history_items').prop('selectedIndex',0);
                 if (response.success==true) {
                   toastr["success"](response.message);

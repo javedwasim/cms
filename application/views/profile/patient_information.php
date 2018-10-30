@@ -19,6 +19,18 @@
       <label><?php echo $patient_info->pat_bmi ?></label>
       <strong>BSA:</strong>
       <label><?php echo $patient_info->pat_bsa ?></label>
+      <?php if(isset($patient_vitals)){?>
+      <strong>BP:</strong>
+      <label><?php echo $patient_vitals->vital_bp ?></label>
+      <strong>Pulse:</strong>
+      <label><?php echo $patient_vitals->vital_pulse ?></label>
+      <strong>Temprature:</strong>
+      <label><?php echo $patient_vitals->vital_temp ?></label>
+      <strong>INR:</strong>
+      <label><?php echo $patient_vitals->vital_inr ?></label>
+      <strong>Resp. Rate:</strong>
+      <label><?php echo $patient_vitals->vital_rr ?></label>
+      <?php }?>
       <strong>Contact:</strong>
       <label><?php echo $patient_info->pat_contact ?></label>
       <strong>Email:</strong>

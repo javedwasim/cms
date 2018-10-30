@@ -63,6 +63,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                            <label id="research_description_name"></label>
                             <textarea class="form-control" rows="3" name="description" id="description"></textarea>
                         </div>
                     </div>
@@ -76,13 +77,6 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $('.datatables').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false
-        });
-    });
     function showEdit(editableObj) {
         $('td.research_cate').css('background', '#FFF');
         $('td.research_cate').css('color', '#212529');

@@ -70,7 +70,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Risk Factor and Cardiac Problems</label>
+                        <label id="instruction_cate_name"></label>
                         <textarea class="form-control" rows="3" name="description" id="inst_description"></textarea>
                     </div>
                 </div>

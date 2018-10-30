@@ -38,6 +38,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label id="investigation_cat_name"></label>
                         <textarea class="form-control" rows="3" name="description" id="investigation_cate_desc"></textarea>
                     </div>
                 </div>
