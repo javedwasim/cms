@@ -23,8 +23,8 @@ class Setting extends MY_Controller
 
     public function profession()
     {
-        $data['professions'] = $this->Setting_model->get_professions();
         $data['rights'] = $this->session->userdata('other_rights');
+        $data['professions'] = $this->Setting_model->get_professions();
         $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
         $json['result_html'] = $this->load->view('pages/profession', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -98,8 +98,8 @@ class Setting extends MY_Controller
 
     public function diestrict()
     {
-        $data['districts'] = $this->Setting_model->get_districts();
         $data['rights'] = $this->session->userdata('other_rights');
+        $data['districts'] = $this->Setting_model->get_districts();
         $json['district_table'] = $this->load->view('pages/district_table', $data, true);
         $json['result_html'] = $this->load->view('pages/district', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -133,55 +133,6 @@ class Setting extends MY_Controller
         }
         $data['districts'] = $this->Setting_model->get_districts();
         $json['district_table'] = $this->load->view('pages/district_table', $data, true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
-
-    // public function add_history_category()
-    // {
-    //     $category = $this->input->post('category');
-    //     $result = $this->Setting_model->save_history_category($category);
-    //     $data['rights'] = $this->session->userdata('other_rights');
-    //     if ($result) {
-    //         $data['history_categories'] = $this->Setting_model->get_history_categories();
-    //         $json['category_table'] = $this->load->view('pages/category_table', $data, true);
-    //         $json['message'] = "Added Successfully.";
-    //     } else {
-    //         $data['history_categories'] = $this->Setting_model->get_history_categories();
-    //         $json['category_table'] = $this->load->view('pages/category_table', $data, true);
-    //         $json['message'] = "Seems an error.";
-    //     }
-    // }
-
-
-    public function examination()
-    {
-        $json['result_html'] = $this->load->view('examination/examination', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
-
-    public function investigation()
-    {
-        $json['result_html'] = $this->load->view('investigation/investigation', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
-
-    public function angio_recommendation()
-    {
-        $json['result_html'] = $this->load->view('pages/angio-recommendation', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
-
-    public function medicine()
-    {
-        $json['result_html'] = $this->load->view('pages/medicine', "", true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -221,14 +172,6 @@ class Setting extends MY_Controller
         }
     }
 
-    public function special_instruction()
-    {
-        $json['result_html'] = $this->load->view('pages/special-instruction', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
-
     public function delete_patient()
     {
         $json['result_html'] = $this->load->view('pages/delete-patient', "", true);
@@ -261,14 +204,6 @@ class Setting extends MY_Controller
         }
     }
 
-    public function signature()
-    {
-        $json['result_html'] = $this->load->view('doctor_signature/doctor_signature', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
-
     public function permission()
     {
         $data['users'] = $this->Setting_model->get_users();
@@ -278,21 +213,6 @@ class Setting extends MY_Controller
         }
     }
 
-    public function echo_setting()
-    {
-        $json['result_html'] = $this->load->view('pages/echo_setting', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
-
-    public function ett_setting()
-    {
-        $json['result_html'] = $this->load->view('pages/ett_setting', "", true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
-    }
 
     public function patient_exemination($patient_id){
         $data['patient_id'] = $patient_id;
@@ -1060,7 +980,6 @@ class Setting extends MY_Controller
 
     public function export_history_items_csv($history_items)
     {
-
         // file name
         $filename = 'history_items_' . date('d-m-Y') . '.csv';
         header("Content-Description: File Transfer");
@@ -1664,6 +1583,283 @@ class Setting extends MY_Controller
         }
     }
 
+    public function export_professions(){
+        $professions = $this->Setting_model->export_professions();
+        if ($professions) {
+           $result = $this->export_profession_csv($professions);
+        }else{
+            $json['error']= true;
+            $json['message'] = 'No item found.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function export_profession_csv($professions){
+       $filename = 'professions.csv'; 
+       header("Content-Description: File Transfer"); 
+       header("Content-Disposition: attachment; filename=$filename"); 
+       header("Content-Type: application/csv; ");
+       // file creation 
+       $file = fopen('php://output', 'w');
+       $header = array('Professions'); 
+       fputcsv($file, $header);
+       foreach ($professions as $key=>$line){ 
+         fputcsv($file,$line); 
+       }
+       fclose($file); 
+       exit;
+    }
+
+    public function import_professions(){
+        if (isset($_FILES['csv_file']['name'])) {
+            // total files //
+            $count = count($_FILES['csv_file']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['csv_file'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv') {
+                move_uploaded_file($_FILES['csv_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_profession_file($fname,$date_f);
+                if ($result) {
+                    $json['success']=true;
+                    $json['message'] = 'Successfully Uploaded.';
+                }else{
+                    $json['error']=false;
+                    $json['message']='Seems an error.';
+                }
+     
+            } else {
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
+            }
+        } else {
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
+        }
+        $data['professions'] = $this->Setting_model->get_professions();
+        $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    function read_profession_file($fname, $date_f) {
+        $path = $this->config->item('file_upload_path') . $fname;
+            if ($this->csvimport->get_array($path)) {
+                $csv_array = $this->csvimport->get_array($path);
+                if (array_key_exists('Professions',$csv_array[0])) {
+                    foreach ($csv_array as $row) {
+                        $insert_data = array(
+                            'profession_name'=>$row['Professions']
+                        );
+                        $this->Setting_model->insert_csv_profession($insert_data);
+                    }
+                    return true;
+                }else{
+                    return false;
+                }
+                
+        }else{
+            return false;
+        }
+    }
+
+    public function export_district(){
+        $districts = $this->Setting_model->export_district();
+        if ($districts) {
+           $result = $this->export_district_csv($districts);
+        }else{
+            $json['error']= true;
+            $json['message'] = 'No item found.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function export_district_csv($districts){
+       $filename = 'districts.csv'; 
+       header("Content-Description: File Transfer"); 
+       header("Content-Disposition: attachment; filename=$filename"); 
+       header("Content-Type: application/csv; ");
+       // file creation 
+       $file = fopen('php://output', 'w');
+       $header = array('Districts'); 
+       fputcsv($file, $header);
+       foreach ($districts as $key=>$line){ 
+         fputcsv($file,$line); 
+       }
+       fclose($file); 
+       exit;
+    }
+
+     public function import_district(){
+        if (isset($_FILES['csv_file']['name'])) {
+            // total files //
+            $count = count($_FILES['csv_file']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['csv_file'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv') {
+                move_uploaded_file($_FILES['csv_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_district_file($fname,$date_f);
+                if ($result) {
+                    $json['success']=true;
+                    $json['message'] = 'Successfully Uploaded.';
+                }else{
+                    $json['error']=false;
+                    $json['message']='Seems an error.';
+                }
+     
+            } else {
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
+            }
+        } else {
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
+        }
+        $data['districts'] = $this->Setting_model->get_districts();
+        $json['district_table'] = $this->load->view('pages/district_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    function read_district_file($fname, $date_f) {
+        $path = $this->config->item('file_upload_path') . $fname;
+            if ($this->csvimport->get_array($path)) {
+                $csv_array = $this->csvimport->get_array($path);
+                if (array_key_exists('Districts',$csv_array[0])) {
+                    foreach ($csv_array as $row) {
+                        $insert_data = array(
+                            'district_name'=>$row['Districts']
+                        );
+                        $this->Setting_model->insert_csv_district($insert_data);
+                    }
+                    return true;
+                }else{
+                    return false;
+                }
+                
+        }else{
+            return false;
+        }
+    }
+
+     public function export_dosage(){
+        $dosages = $this->Setting_model->export_dosage();
+        if ($dosages) {
+           $result = $this->export_dosage_csv($dosages);
+        }else{
+            $json['error']= true;
+            $json['message'] = 'No item found.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function export_dosage_csv($dosages){
+       $filename = 'dosages.csv'; 
+       header("Content-Description: File Transfer");
+       header('Content-Encoding: UTF-8'); 
+       header("Content-Disposition: attachment; filename=$filename"); 
+       header("Content-Type: application/csv;charset=UTF-8");
+       // file creation 
+       $file = fopen('php://output', 'w');
+       $header = array('Dosages'); 
+       fputcsv($file, $header);
+       foreach ($dosages as $key=>$line){ 
+         fputcsv($file,$line); 
+       }
+       fclose($file); 
+       exit;
+    }
+
+     public function import_dosage(){
+        if (isset($_FILES['csv_file']['name'])) {
+            // total files //
+            $count = count($_FILES['csv_file']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['csv_file'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv') {
+                move_uploaded_file($_FILES['csv_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_dosage_file($fname,$date_f);
+                if ($result) {
+                    $json['success']=true;
+                    $json['message'] = 'Successfully Uploaded.';
+                }else{
+                    $json['error']=false;
+                    $json['message']='Seems an error.';
+                }
+     
+            } else {
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
+            }
+        } else {
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
+        }
+        $data['districts'] = $this->Setting_model->get_districts();
+        $json['district_table'] = $this->load->view('pages/district_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    function read_dosage_file($fname, $date_f) {
+        $path = $this->config->item('file_upload_path') . $fname;
+            if ($this->csvimport->get_array($path)) {
+                $csv_array = $this->csvimport->get_array($path);
+                if (array_key_exists('Dosages',$csv_array[0])) {
+                    foreach ($csv_array as $row) {
+                        $insert_data = array(
+                            'name'=>$row['Dosages']
+                        );
+                        $this->Setting_model->insert_csv_dosage($insert_data);
+                    }
+                    return true;
+                }else{
+                    return false;
+                }
+                
+        }else{
+            return false;
+        }
+    }
+
+    public function sort_table($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_data($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'done';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'not done';
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
 
 }
 

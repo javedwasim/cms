@@ -27,7 +27,7 @@
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
 
-        $('#advice_item').append(text+'\n');
+        $('#advice_item').append(text+',');
     }
 
 </script>

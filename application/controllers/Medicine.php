@@ -359,6 +359,14 @@ class Medicine extends MY_Controller
 
     }
 
+    public function get_dosages(){
+        $data['dosages'] = $this->Medicine_model->get_dosage_categories();
+        $json['dosage_html'] = $this->load->view('medicine/dosage_medicine_table',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
 }
 
 ?>

@@ -57,7 +57,7 @@
         $('td.p_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-        $('#special_instruction').append(description+"\n");
+        $('#special_instruction').append(description+",");
         $('#instruction_id').val(inst_id);
         $('#item_id').val(item_id);
 //        $.ajax({

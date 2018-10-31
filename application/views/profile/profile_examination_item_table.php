@@ -42,14 +42,17 @@
     </div>
 </div>
 <script>
+    var textarray = [];
     function addExaminationItem(editableObj,text) {
         var patient_id = $('#label_patient_id').text();
         $('td.exam_item').css('background', '#FFF');
         $('td.exam_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-
-        $('#examination_item').append(text+'\n');
+        if(textarray.includes(text) === false){
+            textarray.push(text);
+            $('#examination_item').append(text+','); 
+        } 
     }
 
 </script>

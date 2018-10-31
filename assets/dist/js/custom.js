@@ -2014,7 +2014,7 @@ $(document.body).on('click', '.delete_profession', function () {
 ////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#add_district', function () {
-    var district = $('#distrtict_add').val();
+    var district = $('#district_add').val();
     $.ajax({
         url: '/cms/setting/insert_district',
         type: 'post',
@@ -2024,7 +2024,7 @@ $(document.body).on('click', '#add_district', function () {
             if (response.district_table != '') {
                 $('.district_content').remove();
                 $('#district_content').append(response.district_table);
-                $('#distrtict_add').val('');
+                $('#district_add').val('');
                 if (response.success == true) {
                     toastr["success"](response.message);
                 } else {
@@ -3862,7 +3862,7 @@ $(document.body).on('click', '.delete-history-item', function(){
 });
 
 function filter_history_item_category(category) {
-    var nurl = window.location.origin+window.location.pathname+'/setting/export_history_items/'+category;
+    var nurl = window.location.origin+window.location.pathname+'setting/export_history_items/'+category;
     $("#export_history_items").attr("href", nurl);
     $.ajax({
         url: window.location.origin+window.location.pathname+'profile_history/get_history_item/'+category,

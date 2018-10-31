@@ -22,7 +22,7 @@
                                 <span class="hidden-xs-down">Dosage</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo  isset($active_tab)&&($active_tab=='ditems')?'active':''; ?>" data-toggle="tab" href="#assign-dosage" role="tab">
+                            <a class="nav-link <?php echo  isset($active_tab)&&($active_tab=='ditems')?'active':''; ?>" data-toggle="tab" href="#assign-dosage" role="tab" id="assign_dosage_table">
                                 <span class="hidden-sm-up"><i class="ti-user"></i></span>
                                 <span class="hidden-xs-down">Assign Dosage to Medicine</span></a> </li>
                     </ul>

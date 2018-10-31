@@ -2029,12 +2029,12 @@ $(document.body).on('click', '#pat-ett-test', function () {
 
 $(document.body).on('click','#profile_ett_desc_table tbody tr.row_selected',function(){
     var desc = $(this).find('.ett_pro_desc').text();
-    $('#ett_desc_pro').val($('#ett_desc_pro').val()+desc+'\n');
+    $('#ett_desc_pro').val($('#ett_desc_pro').val()+desc+',');
 });
 
 $(document.body).on('click','#profile_ett_conc_table tbody tr.row_selected',function(){
     var conc = $(this).find('.ett_pro_conc').text();
-    $('#ett_conc_pro').val($('#ett_conc_pro').val()+conc+'\n');
+    $('#ett_conc_pro').val($('#ett_conc_pro').val()+conc+',');
     
 });
 
@@ -3266,3 +3266,15 @@ $(document.body).on('click','#echo_upload', function(e){
        }
     });
 });
+
+$(document.body).on('click','#assign_dosage_table', function(){
+    $.ajax({
+        url: window.location.origin+window.location.pathname+"medicine/get_dosages/",
+        cache:false,
+        success: function(response){
+            $('.dosage_medicine_table').empty();
+            $('.dosage_medicine_table').append(response.dosage_html);
+        }
+    });
+});
+

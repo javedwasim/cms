@@ -13,8 +13,8 @@
 
 
 		public function get_districts(){
-			$result = $this->db->select('*')
-						->get('districts_tbl');
+			$result = $this->db->select('*')->from('districts_tbl')->order_by('district_name')
+						->get();
 			if ($result) {
 				return $result->result_array();
 			}else{
@@ -72,8 +72,8 @@
         }
 
 		public function get_professions(){
-			$result = $this->db->select('*')
-						->get('profession_tbl');
+			$result = $this->db->select('*')->from('profession_tbl')->order_by('sort_order')
+						->get();
 			if ($result) {
 				return $result->result_array();
 			}else{
@@ -688,6 +688,78 @@
 
 
         }
+
+        public function export_professions(){
+            $result = $this->db->select('profession_name')->from('profession_tbl')->order_by('profession_name')
+                        ->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return false;
+            }
+        }
+
+        public function insert_csv_profession($data){
+            $result = $this->db->insert('profession_tbl',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function export_district(){
+            $result = $this->db->select('district_name')->from('districts_tbl')->order_by('district_name')
+                        ->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return false;
+            }
+        }
+
+        public function insert_csv_district($data){
+            $result = $this->db->insert('districts_tbl',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function export_dosage(){
+            $result = $this->db->select('name')->from('dosage')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function insert_csv_dosage($data){
+            $result = $this->db->insert('dosage',$data);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function sort_data($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['prof_table']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['prof_table'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+
 	}
 
 ?>

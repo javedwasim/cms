@@ -43,6 +43,9 @@
     <script src="<?php echo base_url(); ?>assets/plugins/popper/popper.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="<?php echo base_url(); ?>assets/dist/js/jquery.slimscroll.js"></script>
+    <!-- sort able script -->
+    <!-- <script src="<?php echo base_url(); ?>assets/plugins/jquery-sortable/jquery-sortable-min.js"></script> -->
+    <script src="<?php echo base_url(); ?>assets/plugins/jquery-sortable/js/jquery.tablednd.js"></script>
     <!--Wave Effects -->
     <script src="<?php echo base_url(); ?>assets/dist/js/waves.js"></script>
     <!--Menu sidebar -->

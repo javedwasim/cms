@@ -44,13 +44,18 @@
     </div>
 </div>
 <script>
+    var textarray = [];
     function addHistoryItem(editableObj,text) {
         var patient_id = $('#label_patient_id').text();
         $('td.history_item').css('background', '#FFF');
         $('td.history_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-        $('#history_item').append(text+'\n');
+        if(textarray.includes(text) === false){
+            textarray.push(text);
+            $('#history_item').append(text+','); 
+        } 
+        
     }
 
 </script>
