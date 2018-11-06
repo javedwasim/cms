@@ -1,4 +1,4 @@
-<table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="investigation_item_tbl" width="100%" >
     <thead>
     <tr>
         <th class="table-header" style="width: 9%;">Action</th>
@@ -7,7 +7,7 @@
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
-        <tr class="table-row">
+        <tr class="table-row" id="<?php echo $item['id']; ?>">
             <td>
                 <a class="delete-investigation-item btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
@@ -18,10 +18,9 @@
                    data-investigation-item-id="<?php echo $item['id']; ?>">
                    <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true" class="investigation_item"
-                onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                onClick="showEdit(this);">
-                <?php echo $item['name']; ?></td>
+            <td class="investigation_item" onClick="showEdit(this);">
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" name="investigation_item" value="<?php echo $item['name']; ?>" onchange="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"   />
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -57,23 +56,47 @@
 
 <script>
     function showEdit(editableObj) {
-        $('td.investigation_item').css('background', '#FFF');
-        $('td.investigation_item').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#investigation_item_tbl tbody tr").click(function (e) {
+            $('#investigation_item_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveToDatabase(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'investigation/save_investigation_item' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
+
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#investigation_item_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'investigation_item';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_investigation_item_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 </script>

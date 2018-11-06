@@ -8,9 +8,9 @@
                         <label>New Disease</label>
                         <input type="text" class="form-control col-md-6" name="disease" id="disease" maxlength="50" required>
                         <?php if($loggedin_user['is_admin']==1){ ?>
-                            <button class="btn btn-primary add-disease-category">Add</button>
+                            <button class="btn btn-sm btn-primary add-disease-category">Add</button>
                         <?php } elseif(in_array("echos-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                            <button class="btn btn-primary add-disease-category">Add</button>
+                            <button class="btn btn-sm btn-primary add-disease-category">Add</button>
                         <?php } else{ ?>
                             <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
                         <?php } ?>
@@ -18,7 +18,7 @@
                 </form>
             </div>
         </div>
-        <div class="card-body disease_category_container">
+        <div class="card-body disease_category_container" style="height: 400px; overflow-y: scroll;">
             <?php $this->load->view('echo/disease_table'); ?>
         </div>
     </div>

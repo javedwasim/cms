@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/fixedHeader.dataTables.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/select.dataTables.min.css">
   <link href="<?php echo base_url(); ?>assets/plugins/css-chart/css-chart.css" rel="stylesheet">
+  <!-- Font nastalik -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/fonts/Nastaleeq/font.css">
   <!-- jquery-ui -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css">
   <!-- Select2 -->
@@ -40,6 +42,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css">
   <!-- grid stack  -->
   <link href="<?php echo base_url(); ?>assets/plugins/gridstack/gridstack.css" rel="stylesheet">
+  <!-- context menu  -->
+  <link href="<?php echo base_url(); ?>assets/plugins/jquery-contextmenu/dist/jquery.contextMenu.min.css" rel="stylesheet">
     <!-- toster alerts -->
   <link href="<?php echo base_url(); ?>assets/plugins/toster/build/toastr.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/plugins/jquery-validation/css/screen.css">

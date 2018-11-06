@@ -187,7 +187,7 @@
                         </div>
                     </form>
             	</div>
-                <div class="card-body" id="manage_research_table">
+                <div class="card-body" id="manage_research_table" >
                     
                 </div>
             </div>

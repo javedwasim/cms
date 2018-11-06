@@ -97,13 +97,21 @@ class Echo_controller extends MY_Controller
     public function save_disease_category()
     {
         $data = $this->input->post();
-        $result = $this->Echo_model->add_disease_category($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "disease  save successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Echo_model->add_disease_category($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -265,13 +273,21 @@ class Echo_controller extends MY_Controller
     public function save_structure_category()
     {
         $data = $this->input->post();
-        $result = $this->Echo_model->add_structure_category($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Structure  save successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Echo_model->add_structure_category($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -327,13 +343,21 @@ class Echo_controller extends MY_Controller
     public function save_structure_finding()
     {
         $data = $this->input->post();
-        $result = $this->Echo_model->add_structure_finding($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Finding save successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Echo_model->add_structure_finding($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -443,13 +467,21 @@ class Echo_controller extends MY_Controller
     public function save_structure_diagnosis()
     {
         $data = $this->input->post();
-        $result = $this->Echo_model->add_structure_diagnose($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Diagnosis save successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+           $result = $this->Echo_model->add_structure_diagnose($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -565,13 +597,21 @@ class Echo_controller extends MY_Controller
     public function save_main_category_item()
     {
         $data = $this->input->post();
-        $result = $this->Echo_model->add_main_category_item($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Categpru save successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Echo_model->add_main_category_item($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -628,13 +668,21 @@ class Echo_controller extends MY_Controller
     public function save_category_measurement()
     {
         $data = $this->input->post();
-        $result = $this->Echo_model->add_category_measurement($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Measurement save successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Echo_model->add_category_measurement($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

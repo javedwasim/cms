@@ -12,9 +12,9 @@
                 <div class="col-lg-2 col-md-4 p-0">
                     <div class="form-group m-t-25">
                         <?php if($loggedin_user['is_admin']==1){ ?>
-                            <button class="btn btn-primary add-structure-category">Add</button>
+                            <button class="btn btn-sm btn-primary add-structure-category">Add</button>
                         <?php } elseif(in_array("echos-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                            <button class="btn btn-primary add-structure-category">Add</button>
+                            <button class="btn btn-sm btn-primary add-structure-category">Add</button>
                         <?php } else{ ?>
                             <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
                         <?php } ?>
@@ -29,9 +29,9 @@
                 <div class="col-lg-2 col-md-4 p-0">
                     <div class="form-group m-t-25">
                         <?php if($loggedin_user['is_admin']==1){ ?>
-                            <button class="btn btn-primary add-structure-finding">Add</button>
+                            <button class="btn btn-sm btn-primary add-structure-finding">Add</button>
                         <?php } elseif(in_array("echos-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                            <button class="btn btn-primary add-structure-finding">Add</button>
+                            <button class="btn btn-sm btn-primary add-structure-finding">Add</button>
                         <?php } else{ ?>
                             <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
                         <?php } ?>
@@ -63,7 +63,7 @@
                         <div class="card-header">
                             Structure
                         </div>
-                        <div class="card-body structure_category_container">
+                        <div class="card-body structure_category_container" style="height: 500px; overflow-y: scroll;">
                             <?php $this->load->view('echo/structure_table'); ?>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         <div class="card-header">
                             Findings
                         </div>
-                        <div class="card-body structure_finding_container">
+                        <div class="card-body structure_finding_container" style="height: 400px; overflow-y: scroll;">
                             <?php $this->load->view('echo/finding_table'); ?>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                         <div class="card-header">
                             Diagnosis
                         </div>
-                        <div class="card-body structure_diagnosis_container">
+                        <div class="card-body structure_diagnosis_container" style="height: 400px; overflow-y: scroll;">
                             <?php $this->load->view('echo/diagnosis_table'); ?>
                         </div>
                     </div>

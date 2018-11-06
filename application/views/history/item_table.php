@@ -1,4 +1,4 @@
-<table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="history_item_tbl" width="100%" >
     <thead>
     <tr>
         <th class="table-header" style="width:100px;" >Action</th>
@@ -7,7 +7,7 @@
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
-        <tr class="table-row">
+        <tr class="table-row" id="<?php echo $item['id']; ?>" >
             <td style="width: 100px;">
                 <a class="delete-history-item btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
@@ -18,10 +18,9 @@
                    data-history-item-id="<?php echo $item['id']; ?>">
                    <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true"
-                onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                onClick="showEdit(this);">
-                <?php echo $item['name']; ?></td>
+            <td onClick="showEdit(this);" >
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" onchange="updatehistoryitem(this,'item_name','<?php echo $item['id']; ?>')" value="<?php echo $item['name']; ?>" style="background: transparent;" >
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -54,20 +53,21 @@
         </form>
     </div>
 </div>
-<script>
-    function showEdit(editableObj) {
-        $('td.exam_cate').css('background', '#FFF');
-        $('td.exam_cate').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
-    }
-    function saveToDatabase(editableObj, column, id) {
+<script >
+
+function showEdit(editableObj) {
+    $("#history_item_tbl tbody tr").click(function (e) {
+        $('#history_item_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+}
+    function updatehistoryitem(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'Profile_history/save_history_item' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
                 }else{
@@ -76,6 +76,29 @@
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
+
+$(document).ready(function () {
+    // Sortable rows
+    table1 = $("#history_item_tbl");
+    table1.tableDnD({
+        onDrop: function(table1, row) {
+            var rows = table1.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'history_item';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/history_item_sort_table/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+
+           });
+        }
+    });
+});
+
 </script>

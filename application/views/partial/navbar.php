@@ -131,9 +131,7 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-10 offset-1" style="text-align: center;">
-                    <h3 style="text-align: center;">The TechSol.</h3>
-                    <i class="fa fa-home m-r-10"></i>
-                    <span class="contact-address">3rd Floor, Trade Center Bahawalpur, Bahawalpur, Punjab, Pakistan, 63100</span>
+                    <h3 style="text-align: center;"><a href="https://www.thetechsol.com">TechSol</a></h3>
                     <div class="contact-email"><span><i class="fa fa-envelope m-r-10"></i></span><a href="mailto:contact@thetechsol.com">contact@thetechsol.com</a></div>
                     <div class="site-info container">
                         <a href="https://thetechsol.com">All Rights Reserved by TechSol </a>

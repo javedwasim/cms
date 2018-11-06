@@ -1,14 +1,14 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive" cellspacing="0" id="instruction_cat_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 9%">Delete</th>
+        <th class="table-header" style="width: 9%">Action</th>
         <th class="table-header">Category Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($categories as $category): ?>
-        <tr class="table-row">
+        <tr class="table-row" id="<?php echo $category['id']; ?>">
             <td>
                 <?php if($loggedin_user['is_admin']==1){ ?>
                     <a class="delete-inst btn btn-danger btn-xs"
@@ -38,17 +38,15 @@
                 <?php } ?>
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
-                <td contenteditable="true" class="inst_cate"
-                    onBlur="saveInstructionCategory(this,'<?php echo $category['category']; ?>','<?php echo $category['id']; ?>')"
-                    onClick="editInstructionCategory(this);">
-                    <?php echo $category['name']; ?></td>
+                <td class="inst_cate" onClick="editInstructionCategory(this);">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="inst_cat" value="<?php echo $category['name']; ?>" onchange="saveInstructionCategory(this,'<?php echo $category['category']; ?>','<?php echo $category['id']; ?>')" />
+                </td>
             <?php } elseif(in_array("special_instructions-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td contenteditable="true" class="inst_cate"
-                    onBlur="saveInstructionCategory(this,'<?php echo $category['category']; ?>','<?php echo $category['id']; ?>')"
-                    onClick="editInstructionCategory(this);">
-                    <?php echo $category['name']; ?></td>
+                <td class="inst_cate" onClick="editInstructionCategory(this);">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="inst_cat" value="<?php echo $category['name']; ?>" onchange="saveInstructionCategory(this,'<?php echo $category['category']; ?>','<?php echo $category['id']; ?>')" />
+                </td>
             <?php } else{ ?>
-                <td contenteditable="true" onClick="showError(this);">
+                <td onClick="showError(this);">
                     <?php echo $category['name']; ?></td>
             <?php } ?>
 
@@ -86,25 +84,46 @@
 </div>
 <script>
     function editInstructionCategory(editableObj) {
-        $('td.inst_cate').css('background', '#FFF');
-        $('td.inst_cate').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#instruction_cat_tbl tbody tr").click(function (e) {
+            $('#instruction_cat_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveInstructionCategory(editableObj, column, id) {
-        $(editableObj).css("background", "#FFF url(ajax-loader.gif) no-repeat right");
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'instruction/save_inst_category' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
-
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#instruction_cat_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'instruction';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_instruction_cat_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 </script>

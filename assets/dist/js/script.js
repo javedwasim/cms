@@ -2026,15 +2026,25 @@ $(document.body).on('click', '#pat-ett-test', function () {
         }
     });
 });
-
+var descarray = [];
 $(document.body).on('click','#profile_ett_desc_table tbody tr.row_selected',function(){
+    
     var desc = $(this).find('.ett_pro_desc').text();
-    $('#ett_desc_pro').val($('#ett_desc_pro').val()+desc+',');
+    if(descarray.includes(desc) === false){
+            descarray.push(desc);
+            $('#ett_desc_pro').val($('#ett_desc_pro').val()+desc+',');
+    }
+    
 });
-
+var concarray = [];
 $(document.body).on('click','#profile_ett_conc_table tbody tr.row_selected',function(){
+    
     var conc = $(this).find('.ett_pro_conc').text();
-    $('#ett_conc_pro').val($('#ett_conc_pro').val()+conc+',');
+    if(concarray.includes(conc) === false){
+            concarray.push(conc);
+            $('#ett_conc_pro').val($('#ett_conc_pro').val()+conc+',');
+    }
+    
     
 });
 
@@ -2425,6 +2435,7 @@ $(document.body).on('click', '#history_item_tab', function(){
             $('#history_items_content').append(response.result_html);
             $('.history_item_container').empty();
             $('.history_item_container').append(response.item_table);
+            table1 = $("#history_item_tbl");
         }
     });
 });
@@ -3232,8 +3243,11 @@ $(document.body).on('click','#upload_profile_files', function(e){
        processData:false,
        success:function(response)
        {
-          document.getElementById("profile_upload").value = "";
-          $('.file_upload_category').prop('selectedIndex',0);
+            document.getElementById("profile_upload").value = "";
+            $('.file_upload_category').prop('selectedIndex',0);
+            $('#files_content').empty();
+            $('#files_content').append(response.image_html);
+            $('#profile_upload_modal').modal('hide');
             if (response.success==true) {
               toastr["success"](response.message);
             }else{
@@ -3274,6 +3288,207 @@ $(document.body).on('click','#assign_dosage_table', function(){
         success: function(response){
             $('.dosage_medicine_table').empty();
             $('.dosage_medicine_table').append(response.dosage_html);
+        }
+    });
+});
+
+function last_visit_filter(val){
+    var ldate = val.value;
+    $.ajax({
+        url: window.location.origin+window.location.pathname+"profile/get_last_visit_patient/",
+        type: 'post',
+        data: {
+            ldate:ldate
+        },
+        cache: false,
+        success:function(response){
+            if(response.profile_table != ''){
+                $('.profile-table').remove();
+                $('#profile_table').append(response.profile_table);
+                ///////////////// initilize datatable //////////////
+                $('.profiletable').DataTable({
+                    // "scrollX": true,
+                    "initComplete": function (settings, json) {
+                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    }
+                });
+                $('#profiletable tbody tr:first').addClass('row_selected');
+                $("#profiletable tbody tr").click(function (e) {
+                    $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+            }
+        }
+    });
+}
+
+function profile_search_in(val){
+    var searchin = val.value;
+    $.ajax({
+        url: window.location.origin+window.location.pathname+"profile/profile_searchin",
+        type: 'post',
+        data: {searchin:searchin},
+        cache:false,
+        success:function(response){
+            if(response.profile_table != ''){
+                $('.profile-table').remove();
+                $('#profile_table').append(response.profile_table);
+                ///////////////// initilize datatable //////////////
+                $('.profiletable').DataTable({
+                    // "scrollX": true,
+                    "initComplete": function (settings, json) {
+                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    }
+                });
+                $('#profiletable tbody tr:first').addClass('row_selected');
+                $("#profiletable tbody tr").click(function (e) {
+                    $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+            }
+        }
+    });
+}
+
+$(document.body).on('click','#profiles_image_files',function(){
+    var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    $.ajax({
+        url: window.location.origin+window.location.pathname+"profile/get_image_files/",
+        type: 'post',
+        data: {
+            patid:patid
+        },
+        cache: false,
+        success: function(response){
+            $('#files_content').empty();
+            $('#files_content').append(response.image_html);
+        }
+    });
+});
+
+$(document.body).on('click','#profile_pdf_files',function(){
+    var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    $.ajax({
+        url: window.location.origin+window.location.pathname+"profile/get_pdf_files/",
+        type: 'post',
+        data: {
+            patid:patid
+        },
+        cache: false,
+        success: function(response){
+            $('#files_content').empty();
+            $('#files_content').append(response.image_html);
+        }
+    });
+});
+
+$(document.body).on('click','#profiel_text_files',function(){
+    var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    $.ajax({
+        url: window.location.origin+window.location.pathname+"profile/get_text_files/",
+        type: 'post',
+        data: {
+            patid:patid
+        },
+        cache: false,
+        success: function(response){
+            $('#files_content').empty();
+            $('#files_content').append(response.image_html);
+        }
+    });
+});
+
+$(function() {
+     
+        $.contextMenu({
+            selector: '.context-menu-one', 
+            callback: function(key, options) {
+               var val = $(this).text();
+               var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+               $.ajax({
+                    url:window.location.origin+window.location.pathname+"profile/delete_text",
+                    type: 'post',
+                    data: {
+                        val:val,
+                        patid:patid
+                    },
+                    cache:false,
+                    success:function(response){
+                        $('#files_content').empty();
+                        $('#files_content').append(response.image_html);
+                        if (response.success==true) {
+                          toastr["success"](response.message);
+                        }else{
+                          toastr["error"](response.message);
+                        }
+                    }
+               });
+                 
+            },
+            items: {
+                "delete": {name: "Delete", icon: "delete"}
+            }
+        });
+    });
+
+$(function() {
+        $.contextMenu({
+            selector: '.context-menu-two', 
+            callback: function(key, options) {
+               var val = $(this).attr("data-id");
+               var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+               $.ajax({
+                    url:window.location.origin+window.location.pathname+"profile/delete_image",
+                    type: 'post',
+                    data: {
+                        val:val,
+                        patid:patid
+                    },
+                    cache:false,
+                    success:function(response){
+                        $('#files_content').empty();
+                        $('#files_content').append(response.image_html);
+                        if (response.success==true) {
+                          toastr["success"](response.message);
+                        }else{
+                          toastr["error"](response.message);
+                        }
+                    }
+               });
+                 
+            },
+            items: {
+                "delete": {name: "Delete", icon: "delete"}
+            }
+        });
+    });
+$(function() {
+    $.contextMenu({
+        selector: '.context-menu-three', 
+        callback: function(key, options) {
+           var val = $(this).text();
+           var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+            $.ajax({
+                url:window.location.origin+window.location.pathname+"profile/delete_pdf",
+                type: 'post',
+                data: {
+                    val:val,
+                    patid:patid
+                },
+                cache:false,
+                success:function(response){
+                    $('#files_content').empty();
+                    $('#files_content').append(response.image_html);
+                    if (response.success==true) {
+                      toastr["success"](response.message);
+                    }else{
+                      toastr["error"](response.message);
+                    }
+                }
+           }); 
+        },
+        items: {
+            "delete": {name: "Delete", icon: "delete"}
         }
     });
 });

@@ -11,7 +11,7 @@
 
 		}
 		public function get_examination_categories(){
-            $result = $this->db->select('*')->from('examination')->get();
+            $result = $this->db->select('*')->from('examination')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -21,9 +21,6 @@
 
         public function add_examination_category($data){
 		    if(isset($data['id'])){
-                if (empty($data['editval'])) {
-                    return 'empty';
-                }
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
@@ -47,18 +44,14 @@
 
         public function add_examination_item($data){
             if(isset($data['id'])){
-                if (empty($data['editval'])) {
-                    return 'empty';
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $result = $this->db->where('id',$id)->update('examination_item',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
                 }else{
-                    $id = $data['id'];
-                    $editval = trim($data['editval']);
-                    $editval = preg_replace('/(<br>)+$/', '', $editval);
-                    $result = $this->db->where('id',$id)->update('examination_item',array('name'=>$editval));
-                    if ($result) {
-                        return 'updated';
-                    }else{
-                        return false;
-                    }
+                    return false;
                 }
             }else{
                 $result = $this->db->insert('examination_item', $data);
@@ -78,7 +71,7 @@
         }
 
         public function get_examination_items(){
-            $result = $this->db->select('*')->from('examination_item')->get();
+            $result = $this->db->select('*')->from('examination_item')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -107,9 +100,9 @@
 
         public function get_examination_items_by_category($cate_id){
             if($cate_id>0){
-                $result = $this->db->select('*')->from('examination_item')->where('examination_id',$cate_id)->get();
+                $result = $this->db->select('*')->from('examination_item')->where('examination_id',$cate_id)->order_by('sort_order')->get();
             }else{
-                $result = $this->db->select('*')->from('examination_item')->get();
+                $result = $this->db->select('*')->from('examination_item')->order_by('sort_order')->get();
             }
             if ($result) {
                 return $result->result_array();

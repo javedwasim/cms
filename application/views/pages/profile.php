@@ -6,7 +6,7 @@ if(isset($rights[0]['user_rights']))
 }
 ?>
 <div class="content-wrapper" style="margin: 0 .5%;">
-	<div class="row page-titles">
+	<div class="row page-titles" style="padding: 0px;">
 		<div class="col-md-5" style="display: inline-flex;">
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <button class="btn btn-success" data-toggle="modal"  data-target="#add-new-patient" id="addProfile">
@@ -87,21 +87,25 @@ if(isset($rights[0]['user_rights']))
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Registration</label>
-                                            <input type="text" name="creation_date" class="form-control profile_filter" autocomplete="off" required="required" autocomplete="off" onchange="profile_filter()" />
+                                            <input type="text" name="creation_date" class="form-control profile_filter" autocomplete="off" placeholder="<?php echo date('d-M-Y') ?>" required="required" autocomplete="off" onchange="profile_filter()" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <!-- <div class="form-group">
+                                        <div class="form-group">
                                             <label>Last Visit</label>
-                                            <input type="text" value="<?php echo date('d-M-Y') ?>" id="" class="form-control profile_filter" onchange="profile_filter()" autocomplete="off" required="required" />
-                                        </div> -->
-                                    </div><!-- 
+                                            <input type="text" value="<?php echo date('d-M-Y') ?>" id="" class="form-control profile_filter" onchange="last_visit_filter(this)" autocomplete="off" required="required" />
+                                        </div>
+                                    </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Search In:</label>
-                                            <input type="text" name="" class="form-control">
+                                            <select class="form-control" onchange="profile_search_in(this);">
+                                                <option value="">Select</option>
+                                                <option value="ett">ETT</option>
+                                                <option value="echo">ECHO</option>
+                                            </select>
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <div class="col-md-2">
                                         <div class="form-group m-t-15" style="display: inline-flex;">
                                             <button class="btn btn-info btn-sm" id="reset_profile_filter">Reset</button>
@@ -169,10 +173,10 @@ if(isset($rights[0]['user_rights']))
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body" style="height:533px;">
+                        <div class="card-body" style="height:625px;">
                             <div class="row">
                                 <div id="re1">
-                                    <div class="col-md-12 p-r-0" style="height: 200px; overflow-y: scroll;">
+                                    <div class="col-md-12 p-r-0" style="height: 180px; overflow-y: scroll;">
                                         <h4 class="text-center"> Click to edit</h4>
                                         <div id="echo_detail_container">
 
@@ -180,10 +184,27 @@ if(isset($rights[0]['user_rights']))
 
                                     </div>
                                     <div class="col-md-12">
-                                        
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <a href="javascript:void(0)" class="btn btn-info btn-xs" id="profiles_image_files">Images</a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a href="javascript:void(0)" class="btn btn-default btn-xs" id="profile_pdf_files">Pdf</a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" id="profiel_text_files">Text</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body" id="files_content" style="height: 370px; overflow-y: scroll;">
+                                                
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div id="re2" class="b-all" style="height:450px;">
+                                <div id="re2" class="b-all" style="height:600px;">
                                     <div class="col-md-12 p-l-0">
                                     <h4 class="text-center">Report</h4>
                                     <div class="report_view">  

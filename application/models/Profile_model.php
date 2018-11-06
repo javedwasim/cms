@@ -1226,14 +1226,87 @@ class Profile_model extends CI_Model
         }
     }
 
-    public function get_file_name($id){
-        $result = $this->db->select('*')->from('patient_files')->where('patient_id',$id)->limit(1)->get();
-        if ($result) {
-            $result->row();
+    public function get_last_visit_patient($date){
+        $visit_date = date('Y-m-d',strtotime($date));
+        $result = $this->db->select('patient_id')->from('profile_examination_detail')
+                        ->where('next_visit_date',$visit_date)->get();
+
+        if ($result->num_rows()>0) {
+            $ids = $result->result_array();
+            $data_array = array();
+            foreach ($ids as $id) {
+                $data_array[] = $id['patient_id'];
+            }
+            $patids = array_unique($data_array);
+            $patients = $this->db->select('*')->where_in('id',$patids)->get('patient_profile');
+            if ($patients) {
+                return $patients->result_array();
+            }else{
+                return array();
+            }
         }else{
-            return row();
+            return array();
         }
     }
+
+    public function profile_searchin($data){
+        if ($data == 'ett') {
+            $result = $this->db->select('patient_id')->from('patient_ett_test')->get();
+            if ($result->num_rows()>0) {
+                $ids = $result->result_array();
+                $data_array = array();
+                foreach ($ids as $id) {
+                    $data_array[] = $id['patient_id'];
+                }
+                $patids = array_unique($data_array);
+                $patients = $this->db->select('*')->where_in('id',$patids)->get('patient_profile');
+                if ($patients) {
+                    return $patients->result_array();
+                }else{
+                    return array();
+                }
+            }else{
+                return array();
+            }
+        }else{
+            $result = $this->db->select('patient_id')->from('profile_echo_detail')->get();
+            if ($result->num_rows()>0) {
+                $ids = $result->result_array();
+                $data_array = array();
+                foreach ($ids as $id) {
+                    $data_array[] = $id['patient_id'];
+                }
+                $patids = array_unique($data_array);
+                $patients = $this->db->select('*')->where_in('id',$patids)->get('patient_profile');
+                if ($patients) {
+                    return $patients->result_array();
+                }else{
+                    return array();
+                }
+            }else{
+                return array();
+            }
+        }
+    }
+
+    public function get_image_files($id){
+        $result = $this->db->select('*')->where('patient_id',$id)->get('patient_files');
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    public function delete_file($id){
+        $result = $this->db->where('id',$id)->delete('patient_files');
+        if ($result) {
+            return true;
+        }else{
+            return true;
+        }
+    }
+
 
 }
 

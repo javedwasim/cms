@@ -20,14 +20,18 @@
     </tbody>
 </table>
 <script>
+    var rowarray = [];
     function addAdviceItem(editableObj,text) {
         var patient_id = $('#label_patient_id').text();
         $('td.advice_item').css('background', '#FFF');
         $('td.advice_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-
-        $('#advice_item').append(text+',');
+        if(rowarray.includes(text) === false){
+            rowarray.push(text);
+            $('#advice_item').append(text+','); 
+        } 
+        
     }
 
 </script>

@@ -61,17 +61,16 @@
                                     </form>
                                 </div>
                                 <div class="card-body" id="advice_table_div" style="height:400px;overflow-y: scroll;">
-                                    <table class="table table-bordered nowrap responsive tbl-qa" cellspacing="0" id=""
-                                           width="100%">
+                                    <table class="table table-bordered nowrap responsive tbl-qa" cellspacing="0" id="advice_cat_tbl" width="100%">
                                         <thead>
                                         <tr>
-                                            <th class="table-header" style="width: 5%">Delete</th>
+                                            <th class="table-header" style="width: 5%">Action</th>
                                             <th class="table-header">Category Name</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php foreach ($advices as $advice): ?>
-                                            <tr class="table-row">
+                                            <tr class="table-row" id="<?php echo $advice['id']; ?>">
                                                 <td>
                                                     <a class="delete-advice btn btn-danger btn-xs"
                                                        href="javascript:void(0)" title="delete"
@@ -79,10 +78,9 @@
                                                         <i class="fa fa-trash" title="Delete"></i>
                                                     </a>
                                                 </td>
-                                                <td contenteditable="true" class="advice_cate"
-                                                    onBlur="saveToDatabase(this,'cate_name','<?php echo $advice['id']; ?>')"
-                                                    onClick="showAdvice(this);">
-                                                    <?php echo $advice['name']; ?></td>
+                                                <td class="advice_cate" onClick="showAdvice(this);">
+                                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="advice_cate" value="<?php echo $advice['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $advice['id']; ?>')">        
+                                                </td>
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
@@ -164,26 +162,25 @@
                                 </div>
                                 <div class="card-body" id="advice_item_table_container" style="height: 400px;overflow-y: scroll;">
                                     <table class="table table-bordered nowrap responsive tbl-qa"
-                                           cellspacing="0" id="" width="100%">
+                                           cellspacing="0" id="advice_item_tbl" width="100%">
                                         <thead>
                                         <tr>
-                                            <th class="table-header" style="width: 5%">Delete</th>
+                                            <th class="table-header" style="width: 5%">Action</th>
                                             <th class="table-header">Item Name</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($items as $item): ?>
-                                                <tr class="table-row">
+                                                <tr class="table-row" id="<?php echo $item['id']; ?>">
                                                     <td style="width: 5%">
                                                         <a class="delete-advice-item btn btn-danger btn-xs"
                                                            href="javascript:void(0)" title="delete"
                                                            data-href="<?php echo site_url('setting/delete_advice_item/') . $item['id'] ?>">
                                                             <i class="fa fa-trash" title="Delete"></i></a>
                                                     </td>
-                                                    <td contenteditable="true" class="advice_item"
-                                                        onBlur="saveAdviceItem(this,'item_name','<?php echo $item['id']; ?>')"
-                                                        onClick="showEdit(this);">
-                                                        <?php echo $item['name']; ?></td>
+                                                    <td class="advice_item" onClick="showEdit(this);">
+                                                        <input type="text" class="form-control border-0 bg-transparent shadow-none"  name="advice_item" value="<?php echo $item['name']; ?>" onchange="saveAdviceItem(this,'item_name','<?php echo $item['id']; ?>')" >
+                                                    </td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -201,16 +198,16 @@
 
 <script>
     function showAdvice(editableObj) {
-        $('td.advice_cate').css('background', '#FFF');
-        $('td.advice_cate').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#advice_cat_tbl tbody tr").click(function (e) {
+            $('#advice_cat_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function showEdit(editableObj) {
-        $('td.advice_item').css('background', '#FFF');
-        $('td.advice_item').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#advice_item_tbl tbody tr").click(function (e) {
+            $('#advice_item_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveToDatabase(editableObj, column, id) {
         $.ajax({
@@ -241,4 +238,45 @@
         });
         $(editableObj).css("color", "#212529");
     }
+
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#advice_cat_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'advice';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_advice_cat_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+
+    table1 = $("#advice_item_tbl");
+    table1.tableDnD({
+        onDrop: function(table1, row) {
+            var rows = table1.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'advice_item';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_advice_item_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 </script>

@@ -1,4 +1,4 @@
-<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive" cellspacing="0" id="medicine_cat_tbl" width="100%" >
     <thead>
     <tr>
         <th class="table-header" style="width:100px;">Action</th>
@@ -7,7 +7,7 @@
     </thead>
     <tbody>
     <?php foreach ($categories as $category): ?>
-        <tr class="table-row">
+        <tr class="table-row" id="<?php echo $category['id']; ?>">
             <td>
                 <a class="delete-medicine btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
@@ -17,10 +17,9 @@
                    data-medicine-cat-id="<?php echo $category['id']; ?>">
                    <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true" class="medicine_category"
-                onBlur="saveMedicineCategory(this,'cate_name','<?php echo $category['id']; ?>')"
-                onClick="editMedicineCategory(this);">
-                <?php echo $category['name']; ?></td>
+            <td class="medicine_category" onClick="editMedicineCategory(this);">
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" name="medicine_category" value="<?php echo $category['name']; ?>" onchange="saveMedicineCategory(this,'cate_name','<?php echo $category['id']; ?>')">
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -55,24 +54,48 @@
 </div>
 <script>
     function editMedicineCategory(editableObj) {
-        $('td.medicine_category').css('background', '#FFF');
-        $('td.medicine_category').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#medicine_cat_tbl tbody tr").click(function (e) {
+            $('#medicine_cat_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveMedicineCategory(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'medicine/save_medicine_category' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
+
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#medicine_cat_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'medicine';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_medicine_cat_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 
 </script>

@@ -11,7 +11,7 @@
 
 		}
 		public function get_instruction_categories(){
-            $result = $this->db->select('*')->from('instruction')->where()->get();
+            $result = $this->db->select('*')->from('instruction')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -24,11 +24,19 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('instruction',array('name'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('instruction',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('instruction', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('instruction', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -54,7 +62,7 @@
         }
 
         public function get_instruction_items(){
-            $result = $this->db->select('*')->from('instruction_item')->get();
+            $result = $this->db->select('*')->from('instruction_item')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -83,9 +91,10 @@
 
         public function get_instruction_items_by_category($cate_id){
             if($cate_id>0){
-                $result = $this->db->select('*')->from('instruction_item')->where('instruction_id',$cate_id)->get();
+                $result = $this->db->select('*')->from('instruction_item')->where('instruction_id',$cate_id)
+                ->order_by('sort_order')->get();
             }else{
-                $result = $this->db->select('*')->from('instruction_item')->get();
+                $result = $this->db->select('*')->from('instruction_item')->order_by('sort_order')->get();
             }
             if ($result) {
                 return $result->result_array();

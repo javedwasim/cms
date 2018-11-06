@@ -45,13 +45,17 @@
 </div>
 
 <script>
+    var rowarray = [];
     function medicineItemEdit(editableObj,id,name) {
         $('td.medicine_item').css('background', '#FFF');
         $('td.medicine_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-        var newRowContent = '<tr><td><input class="form-control" type="text" name="medicine_value[]" value="'+name+'" ></td></tr>';
-        $("#medicine_item").append(newRowContent);
+        if(rowarray.includes(name) === false){
+            rowarray.push(name);
+            var newRowContent = '<tr><td><input class="form-control" type="text" name="medicine_value[]" value="'+name+'" ></td></tr>';
+            $("#medicine_item").append(newRowContent); 
+        } 
 
         $.ajax({
             url: '/cms/profile/get_medicine_dosage/'+id,

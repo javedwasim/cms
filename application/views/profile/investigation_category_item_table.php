@@ -45,13 +45,17 @@
     </div>
 </div>
 <script>
+    var rowarray = [];
     function addInvestigationItem(editableObj,text) {
         $('td.investigation_item').css('background', '#FFF');
         $('td.investigation_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-
-        $('#investigation_item').append(text+',');
+        if(rowarray.includes(text) === false){
+            rowarray.push(text);
+            $('#investigation_item').append(text+','); 
+        } 
+        
     }
 
 </script>

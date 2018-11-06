@@ -17,12 +17,12 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
+        <div class="card-body" style="height: 400px; overflow-y: scroll;">
+            <table class="table table-bordered nowrap responsive" cellspacing="0" id="lab_cat_tbl"
                    width="100%">
                 <thead>
                 <tr>
-                    <th style="width:95px;"></th>
+                    <th style="width:95px;">Action</th>
                     <th>Category Name</th>
                 </tr>
                 </thead>
@@ -47,12 +47,11 @@
                             <?php } ?>
                         </td>
                         <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                            <td contenteditable="true" class="exam_cate" style="word-break: break-all;"
-                                onBlur="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')"
-                                onClick="showEdit(this);">
-                                <?php echo $category['name']; ?></td>
+                            <td class="exam_cate" style="word-break: break-all;" onClick="showEdit(this);">
+                                <input type="text" class="form-control border-0 bg-transparent shadow-none" name="lab_cat" value="<?php echo $category['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')" />
+                            </td>
                         <?php } else{ ?>
-                            <td contenteditable="true" class="exam_cate"  onClick="showError(this);">
+                            <td class="exam_cate"  onClick="showError(this);">
                                 <?php echo $category['name']; ?></td>
                         <?php } ?>
                     </tr>
@@ -92,10 +91,10 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $('td.exam_cate').css('background', '#FFF');
-        $('td.exam_cate').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#lab_cat_tbl tbody tr").click(function (e) {
+            $('#lab_cat_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveToDatabase(editableObj, column, id) {
         $.ajax({

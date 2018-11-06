@@ -11,7 +11,7 @@
 
 		}
 		public function get_medicine_categories(){
-            $result = $this->db->select('*')->from('medicine')->get();
+            $result = $this->db->select('*')->from('medicine')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -50,11 +50,19 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('medicine',array('name'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('medicine',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('medicine', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('medicine', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -64,11 +72,19 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('dosage',array('name'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('dosage',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('dosage', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('dosage', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -78,11 +94,19 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('medicine_item',array('name'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('medicine_item',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('medicine_item', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('medicine_item', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -94,7 +118,7 @@
         }
 
         public function get_medicine_items(){
-            $result = $this->db->select('*')->from('medicine_item')->get();
+            $result = $this->db->select('*')->from('medicine_item')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -142,9 +166,10 @@
 
         public function get_medicine_items_by_category($cate_id){
             if($cate_id>0){
-                $result = $this->db->select('*')->from('medicine_item')->where('medicine_id',$cate_id)->get();
+                $result = $this->db->select('*')->from('medicine_item')->where('medicine_id',$cate_id)
+                ->order_by('sort_order')->get();
             }else{
-                $result = $this->db->select('*')->from('medicine_item')->get();
+                $result = $this->db->select('*')->from('medicine_item')->order_by('sort_order')->get();
             }
             if ($result) {
                 return $result->result_array();

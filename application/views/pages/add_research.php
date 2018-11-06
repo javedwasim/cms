@@ -17,7 +17,7 @@
         				</div>
                     </form>
             	</div>
-                <div class="card-body" id="advice_item_table_container">
+                <div class="card-body" id="advice_item_table_container" style="height: 520px; overflow-y: scroll;">
                     <table class="table table-bordered nowrap responsive tbl-qa" cellspacing="0" width="100%" >
                        <thead>
                             <tr>

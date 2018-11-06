@@ -9,13 +9,13 @@
                                 <div class="form-group">
                                     <label>Recommendation</label>
                                     <textarea class="form-control" id="add_description"  name="description" rows="3" required></textarea>
-                                    <button class="btn btn-primary" id="add_recommendation">Add</button>
+                                    <button class="btn btn-sm btn-primary" id="add_recommendation">Add</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="card-body recommendation_container" >
+                <div class="card-body recommendation_container" style="height: 400px; overflow-y: scroll;">
                     <?php $this->load->view('angio/recommendation_table'); ?>
                 </div>
             </div>

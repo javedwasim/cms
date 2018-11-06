@@ -52,12 +52,17 @@
     </div>
 </div>
 <script>
+    var sparray = [];
     function showEdit(editableObj ,item_id, inst_id, description) {
         $('td.p_item').css('background', '#FFF');
         $('td.p_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-        $('#special_instruction').append(description+",");
+        
+        if(sparray.includes(description) === false){
+            sparray.push(description);
+            $('#special_instruction').append(description+",");
+        }
         $('#instruction_id').val(inst_id);
         $('#item_id').val(item_id);
 //        $.ajax({

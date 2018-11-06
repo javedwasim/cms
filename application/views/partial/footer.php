@@ -66,6 +66,9 @@
     <!-- Sweet-Alert  -->
     <script src="<?php echo base_url(); ?>/assets/plugins/sweetalert/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>/assets/plugins/sweetalert/jquery.sweet-alert.custom.js"></script>
+    <!-- jquery contextmenu -->
+    <script src="<?php echo base_url(); ?>/assets/plugins/jquery-contextmenu/dist/jquery.contextMenu.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/plugins/jquery-contextmenu/dist/jquery.ui.position.min.js"></script>
     <!-- jquery confirm  -->
     <script src="<?php echo base_url(); ?>/assets/plugins/jquery-confirm/jquery-confirm.min.js"></script>
     <!-- Draggable-portlet -->

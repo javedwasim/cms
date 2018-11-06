@@ -43,7 +43,8 @@
                             $bkarray[$key['order_number']]['echo_fee_paid_at'] = $key['echo_fee_paid_at'] ;
                             $bkarray[$key['order_number']]['echo_fee_collected_by'] = $key['echo_fee_collected_by'] ;
                             $bkarray[$key['order_number']]['refund'] = $key['refund'] ;
-                            $bkarray[$key['order_number']]['fee_paid_status'] = $key['fee_paid_status'] ;   
+                            $bkarray[$key['order_number']]['fee_paid_status'] = $key['fee_paid_status'] ;
+                            $bkarray[$key['order_number']]['creation_time'] = $key['creation_time'] ;   
                         }
                             
 
@@ -72,11 +73,11 @@
                         </td>
                         <td>
                             <?php
-                                if(isset($bkarray[$i]['appointment_date'])){
-                                        if ($bkarray[$i]['appointment_date'] == '0000-00-00 00:00:00') {
+                                if(isset($bkarray[$i]['creation_time'])){
+                                        if ($bkarray[$i]['creation_time'] == '0000-00-00 00:00:00') {
                                             echo "";
                                         } else {
-                                            echo date(' d-m-Y h:i a', strtotime($bkarray[$i]['appointment_date']));
+                                            echo date(' d-m-Y h:i a', strtotime($bkarray[$i]['creation_time']));
                                         }
                                 }else{
                                     echo "";
@@ -191,7 +192,7 @@
                                 <td>
                                     <?php echo $details['contact_number'] ?>
                                 </td>
-                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['creation_time'])); ?>
                                 <td class="center">
                                     <?php echo $datetime; ?>
                                 </td>
@@ -254,7 +255,7 @@
                                 <td>
                                     <?php echo $details['contact_number'] ?>
                                 </td>
-                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['creation_time'])); ?>
                                 <td class="center">
                                     <?php echo $datetime ?>
                                 </td>
@@ -582,6 +583,8 @@ $(document).ready(function(){
                         "info": false,
                         "paging": false,
                         "scrollX": true,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
                         "createdRow": function(row, data, dataIndex) {
                             if (data[7] == "1") {
                             $(row).addClass('round-green');

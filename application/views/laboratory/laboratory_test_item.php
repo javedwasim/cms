@@ -61,19 +61,19 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            <table class="table table-bordered responsive" cellspacing="0" id=""
+        <div class="card-body"  style="height: 400px; overflow-y: scroll;">
+            <table class="table table-bordered responsive" cellspacing="0" id="lab_test_item_tbl"
                    width="100%">
                 <thead>
                 <tr>
-                    <th style="width:95px;"></th>
+                    <th style="width:95px;">Action</th>
                     <th>Item Name</th>
                     <th>Units</th>
                 </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($items as $item): ?>
-                        <tr>
+                        <tr id="<?php echo $item['id']; ?>">
                             <td style="width:95px; word-break: break-all;" data-toggle="modal" data-target="#history-modal">
                                 <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
                                     <a class="delete-lab-test btn btn-danger btn-xs"
@@ -93,14 +93,12 @@
 
                             </td>
                             <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                                <td contenteditable="true" style="word-break: break-all; width: 42%;"class="exam_cate"
-                                    onBlur="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')"
-                                    onClick="showEdit(this);">
-                                    <?php echo $item['name']; ?></td>
-                                <td contenteditable="true" style="word-break: break-all;width: 50%;"class="exam_cate"
-                                    onBlur="saveTestItemDescription(this,'unit','<?php echo $item['id']; ?>')"
-                                    onClick="showEdit(this);">
-                                    <?php echo $item['units']; ?></td>
+                                <td style="word-break: break-all; width: 42%;"class="exam_cate" onClick="showEdit(this);">
+                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $item['name']; ?>" name="lab_test_item" onchange="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')">
+                                </td>
+                                <td style="word-break: break-all;width: 50%;"class="exam_cate" onClick="showEdit(this);">
+                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="lab_test_unit" value="<?php echo $item['units']; ?>" onchange="saveTestItemDescription(this,'unit','<?php echo $item['id']; ?>')">        
+                                </td>
                             <?php } else{ ?>
                                 <td  onClick="showError(this);">
                                     <?php echo $item['name']; ?></td>
@@ -145,10 +143,10 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $('td.exam_cate').css('background', '#FFF');
-        $('td.exam_cate').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#lab_test_item_tbl tbody tr").click(function (e) {
+            $('#lab_test_item_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveTestItemDescription(editableObj, column, id) {
         $.ajax({
@@ -164,4 +162,25 @@
         });
         $(editableObj).css("color", "#212529");
     }
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#lab_test_item_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'lab_test_item';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_lab_test_item_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 </script>

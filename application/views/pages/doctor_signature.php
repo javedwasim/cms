@@ -39,7 +39,7 @@
 				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
                    <thead>
                     <tr>
-                        <th style="width: 10%">Delete</th>
+                        <th style="width: 10%">Action</th>
                         <th >Name</th>
                         <th >Qualification</th>
                         <th>Designation</th>

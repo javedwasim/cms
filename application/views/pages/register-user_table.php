@@ -2,7 +2,7 @@
   <table class="table-bordered" cellspacing="0" id="permissions-table" width="100%" >
     <thead>
     <tr style="height: 200px;">
-        <th class="verticalTableHeader"><p>Delete</p></th>
+        <th class="verticalTableHeader"><p>Action</p></th>
         <th class="verticalTableHeader"><p>Edit</p></th>
         <th class="verticalTableHeader"><p>Name</p></th>
         <th class="verticalTableHeader"><p>Username</p></th>

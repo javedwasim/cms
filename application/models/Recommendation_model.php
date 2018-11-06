@@ -24,12 +24,21 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('recommendation',array('description'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('recommendation',array('description'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('recommendation', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('recommendation', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
+            return false;
 
         }
 

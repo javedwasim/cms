@@ -72,7 +72,7 @@
         }
 
 		public function get_professions(){
-			$result = $this->db->select('*')->from('profession_tbl')->order_by('sort_order')
+			$result = $this->db->select('*')->from('profession_tbl')->order_by('profession_name')
 						->get();
 			if ($result) {
 				return $result->result_array();
@@ -97,7 +97,7 @@
         }
 
         public function get_advices(){
-            $result = $this->db->select('*')->from('advice')->get();
+            $result = $this->db->select('*')->from('advice')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -127,7 +127,7 @@
         }
 
         public function get_advice_items(){
-            $result = $this->db->select('*')->from('advice_item')->get();
+            $result = $this->db->select('*')->from('advice_item')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -240,7 +240,7 @@
         }
 
         public function get_lab_tests(){
-            $result = $this->db->select('*')->from('lab_test')->get();
+            $result = $this->db->select('*')->from('lab_test')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -305,7 +305,7 @@
         }
 
         public function get_lab_test_items(){
-            $result = $this->db->select('*')->from('lab_test_item')->get();
+            $result = $this->db->select('*')->from('lab_test_item')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -328,7 +328,8 @@
         }
 
         public function get_lab_item_by_test_id($cate_id){
-            $result = $this->db->select('*')->from('lab_test_item')->where('lab_test_id',$cate_id)->get();
+            $result = $this->db->select('*')->from('lab_test_item')->where('lab_test_id',$cate_id)
+            ->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -463,20 +464,15 @@
         }
 
         public function update_profession($data){
-            if(empty($data['editval'])){
-                return false;
+            $id = $data['id'];
+            $editval = trim($data['editval']);
+            $editval = preg_replace('/(<br>)+$/', '', $editval);
+            $result = $this->db->where('profession_id',$id)->update('profession_tbl',array('profession_name'=>$editval));
+            if ($result) {
+                return true;
             }else{
-                $id = $data['id'];
-                $editval = trim($data['editval']);
-                $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $result = $this->db->where('profession_id',$id)->update('profession_tbl',array('profession_name'=>$editval));
-                if ($result) {
-                    return true;
-                }else{
-                    return false;
-                }
+                return false;
             }
-            
         }
 
         public function district_exist($district){
@@ -499,20 +495,15 @@
         }
 
         public function update_pat_district($data){
-            if(empty($data['editval'])){
-                return false;
+            $id = $data['id'];
+            $editval = trim($data['editval']);
+            $editval = preg_replace('/(<br>)+$/', '', $editval);
+            $result = $this->db->where('district_id',$id)->update('districts_tbl',array('district_name'=>$editval));
+            if ($result) {
+                return true;
             }else{
-                $id = $data['id'];
-                $editval = trim($data['editval']);
-                $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $result = $this->db->where('district_id',$id)->update('districts_tbl',array('district_name'=>$editval));
-                if ($result) {
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-            
+                return false;
+            }  
         }
 
         public function get_advice_items_by_category($cate_id){
@@ -531,6 +522,7 @@
         public function get_history_items($id){
             $result = $this->db->select('name')
                                 ->where('profile_history_id',$id)
+                                ->order_by('sort_order')
                                 ->get('history_item');
             if ($result){
                 return $result->result_array();
@@ -746,10 +738,325 @@
         }
         public function sort_data($data,$tablename,$id){
             $c= 0;
-            for($i=0;$i<count($data['prof_table']);$i++){
+            for($i=0;$i<count($data['history_tbl']);$i++){
                 $c += 1;
                 $result = $this->db->set('sort_order',$c)
-                            ->where($id,$data['prof_table'][$i])
+                            ->where($id,$data['history_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function history_item_sort_table($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['history_item_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['history_item_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_examination_table($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['examination_cat_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['examination_cat_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_examination_item_table($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['examination_item_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['examination_item_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_investigation_table($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['investigation_cat_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['investigation_cat_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_investigation_item_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['investigation_item_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['investigation_item_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_medicine_cat_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['medicine_cat_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['medicine_cat_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_medicine_item_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['medicine_item_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['medicine_item_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_instruction_cat_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['instruction_cat_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['instruction_cat_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_instruction_item_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['instruction_item_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['instruction_item_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_advice_cat_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['advice_cat_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['advice_cat_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_advice_item_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['advice_item_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['advice_item_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_lab_test_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['lab_test_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['lab_test_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_lab_test_item_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['lab_test_item_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['lab_test_item_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_echo_disease_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['echo_disease_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['echo_disease_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_echo_structure_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['echo_structure_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['echo_structure_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_echo_cat_meas_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['echo_cat_meas_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['echo_cat_meas_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_ett_test_reason_table($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['ett_test_reason_table']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['ett_test_reason_table'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_ending_reasons_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['ending_reasons_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['ending_reasons_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_ett_description_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['ett_description_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['ett_description_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_ett_conclusion_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['ett_conclusion_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['ett_conclusion_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_ett_protocol_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['ett_protocol_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['ett_protocol_tbl'][$i])
                             ->update($tablename);
             }
             if ($result) {

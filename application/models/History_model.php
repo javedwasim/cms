@@ -11,7 +11,7 @@
 
 		}
 		public function get_profile_history(){
-            $result = $this->db->select('*')->from('profile_history')->get();
+            $result = $this->db->select('*')->from('profile_history')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -32,18 +32,14 @@
 
         public function add_profile_history($data){
 		    if(isset($data['id'])){
-                if (empty($data['editval'])) {
-                    return 'empty';
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $result = $this->db->where('id',$id)->update('profile_history',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
                 }else{
-                    $id = $data['id'];
-                    $editval = trim($data['editval']);
-                    $editval = preg_replace('/(<br>)+$/', '', $editval);
-                    $result = $this->db->where('id',$id)->update('profile_history',array('name'=>$editval));
-                    if ($result) {
-                        return 'updated';
-                    }else{
-                        return false;
-                    }
+                    return false;
                 }
             }else{
                 $result = $this->db->insert('profile_history', $data);
@@ -58,18 +54,14 @@
 
         public function add_history_item($data){
             if(isset($data['id'])){
-                if (empty($data['editval'])) {
-                    return 'empty';
+                $id = $data['id'];
+                $editval = trim($data['editval']);
+                $editval = preg_replace('/(<br>)+$/', '', $editval);
+                $result = $this->db->where('id',$id)->update('history_item',array('name'=>$editval));
+                if($result){
+                    return 'updated';
                 }else{
-                    $id = $data['id'];
-                    $editval = trim($data['editval']);
-                    $editval = preg_replace('/(<br>)+$/', '', $editval);
-                    $result = $this->db->where('id',$id)->update('history_item',array('name'=>$editval));
-                    if($result){
-                        return 'updated';
-                    }else{
-                        return false;
-                    }
+                    return false;
                 }
             }else{
                 $result = $this->db->insert('history_item', $data);
@@ -79,6 +71,7 @@
                     return false;
                 }
             }
+            return false;
 
         }
 
@@ -89,7 +82,7 @@
         }
 
         public function get_history_items(){
-            $result = $this->db->select('*')->from('history_item')->get();
+            $result = $this->db->select('*')->from('history_item')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -138,9 +131,10 @@
 
         public function get_history_items_by_category($cate_id){
             if($cate_id>0){
-                $result = $this->db->select('*')->from('history_item')->where('profile_history_id',$cate_id)->get();
+                $result = $this->db->select('*')->from('history_item')->where('profile_history_id',$cate_id)
+                ->order_by('sort_order')->get();
             }else{
-                $result = $this->db->select('*')->from('history_item')->get();
+                $result = $this->db->select('*')->from('history_item')->order_by('sort_order')->get();
             }
             if ($result) {
                 return $result->result_array();

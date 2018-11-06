@@ -141,6 +141,8 @@
                             "info": false,
                             "paging": false,
                             "searching": false,
+                            "scrollY": "450px",
+                            "scrollCollapse": true,
                             fixedHeader: {
                                 header: true,
                                 headerOffset: 100

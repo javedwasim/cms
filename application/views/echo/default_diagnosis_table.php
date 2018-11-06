@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th class="table-header" style="width: 10%"></th>
-        <th class="table-header">Diagnosis</th>
+        <th class="table-header">Name</th>
     </tr>
     </thead>
     <tbody>

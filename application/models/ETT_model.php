@@ -16,17 +16,25 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('ett_test_reason',array('test_reason'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('ett_test_reason',array('test_reason'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
 				$this->db->set('test_reason', $data);
-				$this->db->insert('ett_test_reason');
-	            return $this->db->insert_id();
+				$result = $this->db->insert('ett_test_reason');
+	            if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
         	}
 		}
 
 		public function get_test_reasons(){
-            $result = $this->db->select('*')->from('ett_test_reason')->get();
+            $result = $this->db->select('*')->from('ett_test_reason')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -44,17 +52,24 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('ett_ending_reason',array('ending_reason'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('ett_ending_reason',array('ending_reason'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-				$this->db->set('ending_reason', $data);
-				$this->db->insert('ett_ending_reason');
-	            return $this->db->insert_id();
+				$result = $this->db->set('ending_reason', $data)->insert('ett_ending_reason');
+	            if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
         	}
 		}
 
 		public function get_ending_reasons(){
-        	$result = $this->db->select('*')->from('ett_ending_reason')->get();
+        	$result = $this->db->select('*')->from('ett_ending_reason')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -72,17 +87,24 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('ett_description',array('description'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('ett_description',array('description'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-				$this->db->set('description', $data);
-				$this->db->insert('ett_description');
-	            return $this->db->insert_id();
+				$result = $this->db->set('description', $data)->insert('ett_description');
+	            if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
         	}
 		}
 
         public function get_descriptions(){
-        	$result = $this->db->select('*')->from('ett_description')->get();
+        	$result = $this->db->select('*')->from('ett_description')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -100,16 +122,23 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('ett_conclusion',array('conclusion'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('ett_conclusion',array('conclusion'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-				$this->db->set('conclusion', $data);
-				$this->db->insert('ett_conclusion');
-	            return $this->db->insert_id();
+				$result = $this->db->set('conclusion', $data)->insert('ett_conclusion');
+	            if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
         	}
 		}
 		public function get_conclusions(){
-        	$result = $this->db->select('*')->from('ett_conclusion')->get();
+        	$result = $this->db->select('*')->from('ett_conclusion')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -154,7 +183,7 @@
         }
 
         public function get_protocol(){
-            $result = $this->db->select('*')->from('ett_protocols')->get();
+            $result = $this->db->select('*')->from('ett_protocols')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -172,8 +201,12 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('ett_protocols',array('protocol'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('ett_protocols',array('protocol'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
                 return false;
             }
@@ -198,8 +231,12 @@
                 $column = $data['column'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('ett_protocol_details',array($column=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('ett_protocol_details',array($column=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
                 return false;
             }

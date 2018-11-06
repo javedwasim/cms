@@ -543,6 +543,8 @@ class Profile extends MY_Controller
         $id = $this->input->post('patid');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
         $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
+        $data['details'] = $this->Profile_model->get_examination_detail($id);
+        $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -976,7 +978,6 @@ class Profile extends MY_Controller
     public function get_examinations_tests(){
         $patient_id = $this->input->post('patient_id');
         $data['details'] = $this->Profile_model->get_examination_detail($patient_id);
-        //print_r($data['details']);
         if ($data) {
             $json['success'] = true;
             $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
@@ -1076,13 +1077,13 @@ class Profile extends MY_Controller
             $fname = $uploads['name'];
             $exp = explode(".", $fname);
             $ext = end($exp);
-            if ($ext == 'CSV' || $ext == 'csv' || $ext == 'jpg' || $ext == 'JPG' || $ext == 'png' || $ext == 'PNG' || $ext == 'txt' || $ext == 'TXT' || $ext == 'pdf' || $ext == 'PDF' || $ext == 'doc' || $ext == 'DOC' || $ext == 'docx' || $ext == 'DOCX') {
+            if ($ext == 'jpg' || $ext == 'JPG' || $ext == 'png' || $ext == 'PNG' || $ext == 'txt' || $ext == 'TXT' || $ext == 'pdf' || $ext == 'PDF') {
                 move_uploaded_file($_FILES['profile_upload']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
                  $result = $this->Profile_model->save_file_profile($fname,$patid,$category);
                 if ($result) {
                     $json['success'] = true;
                     $json['message'] = 'Successfully Uploaded.';
-                    $data['show_file'] = $this->Profile_model->get_file_name($patid);
+                    $data['files'] = $this->Profile_model->get_image_files($patid);
                 } else {
                     $json['error'] = false;
                     $json['message'] = 'Upload correct file.';
@@ -1096,12 +1097,117 @@ class Profile extends MY_Controller
             $json['error'] = false;
             $json['message'] = "Please Select the file.";
         }
-
+        if ($ext == 'jpg' || $ext == 'JPG' || $ext == 'png' || $ext == 'PNG') {
+            $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
+        }else if($ext == 'txt' || $ext == 'TXT'){
+            $json['image_html'] = $this->load->view('profile/profile_txt_show_file',$data,true);
+        }else{
+            $json['image_html'] = $this->load->view('profile/profile_txt_show_file',$data,true);
+        }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
     }
 
+    public function get_last_visit_patient(){
+        $visit_date = $this->input->post('ldate');
+        $data['profiles']= $this->Profile_model->get_last_visit_patient($visit_date);
+        $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
+    public function profile_searchin(){
+        $val = $this->input->post('searchin');
+        $data['profiles']= $this->Profile_model->profile_searchin($val);
+        $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_image_files(){
+        $id = $this->input->post('patid');
+        $data['files'] = $this->Profile_model->get_image_files($id);
+        $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_pdf_files(){
+        $id = $this->input->post('patid');
+        $data['files'] = $this->Profile_model->get_image_files($id);
+        $json['image_html'] = $this->load->view('profile/profile_pdf',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function get_text_files(){
+        $id = $this->input->post('patid');
+        $data['files'] = $this->Profile_model->get_image_files($id);
+        $json['image_html'] = $this->load->view('profile/profile_txt_show_file',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_text(){
+        $id = $this->input->post('val');
+        $patid = $this->input->post('patid');
+        $result = $this->Profile_model->delete_file($id);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Deleted Successfully!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['files'] = $this->Profile_model->get_image_files($patid);
+        $json['image_html'] = $this->load->view('profile/profile_txt_show_file',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_image(){
+        $id = $this->input->post('val');
+        $patid = $this->input->post('patid');
+        $result = $this->Profile_model->delete_file($id);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Deleted Successfully!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['files'] = $this->Profile_model->get_image_files($patid);
+        $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_pdf(){
+        $id = $this->input->post('val');
+        $patid = $this->input->post('patid');
+        $result = $this->Profile_model->delete_file($id);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Deleted Successfully!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['files'] = $this->Profile_model->get_image_files($patid);
+        $json['image_html'] = $this->load->view('profile/profile_pdf',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
 
 }
 

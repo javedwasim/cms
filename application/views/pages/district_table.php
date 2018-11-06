@@ -1,8 +1,8 @@
 <div class="district_content">
-    <table class="table table-bordered nowrap responsive" cellspacing="0" width="100%" >
+    <table class="table table-bordered nowrap responsive" id="districts_tbl" cellspacing="0" width="100%" >
         <thead>
             <tr>
-                <th style="width:30px;"></th>
+                <th style="width:30px;">Action</th>
                 <th>Districts</th>
             </tr>
         </thead>
@@ -18,12 +18,9 @@
                         <i class="fa fa-trash" title="Delete"></i>
                     </a>
                 </td>
-                <td
-                    style="text-transform: capitalize;"
-                    contenteditable="true" class="exam_cate"
-                    onBlur="updatedistrict(this,'district_name','<?php echo $key['district_id']; ?>')"
-                    onClick="showExamination(this);"
-                ><?php echo $key['district_name']; ?></td>
+                <td class="exam_cate" onClick="showExamination(this);">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $key['district_name']; ?>"  onchange="updatedistrict(this,'district_name','<?php echo $key['district_id']; ?>')" style="text-transform: capitalize;" />
+                </td>
             </tr>
         <?php } ?>
         </tbody>
@@ -31,25 +28,25 @@
 </div>
 <script type="text/javascript">
     function showExamination(editableObj) {
-        $('td.exam_cate').css('background', '#FFF');
-        $('td.exam_cate').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#districts_tbl tbody tr").click(function (e) {
+            $('#districts_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function updatedistrict(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'setting/update_district' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success == true) {
                     toastr["success"](response.message);
                 }else{
+                     document.execCommand('undo');
                     toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
 </script>

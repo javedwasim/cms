@@ -95,19 +95,21 @@ class Profile_history extends MY_Controller
     public function save_profile_history()
     {
         $data = $this->input->post();
-        $result = $this->History_model->add_profile_history($data);
-        if ($result=='updated') {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else if($result=='inserted'){
-            $json['success'] = true;
-            $json['message'] = "Saved Successfully.";
-        }else if($result == 'empty'){
+        if (empty($data['editval'])) {
             $json['error'] = true;
             $json['message'] = "Empty could not be update.";
         }else{
-            $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $result = $this->History_model->add_profile_history($data);
+            if ($result=='updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            } else if($result=='inserted'){
+                $json['success'] = true;
+                $json['message'] = "Saved Successfully.";
+            }else{
+                $json['error'] = true;
+                $json['message'] = "Seems an error.";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -239,22 +241,24 @@ class Profile_history extends MY_Controller
     public function save_history_item()
     {
         $data = $this->input->post();
-        $result = $this->History_model->add_history_item($data);
-
-        if ($result == 'empty') {
+        if (empty($data['editval'])) {
             $json['error'] = true;
             $json['message'] = "Could not update empty field.";
-        } else if($result == 'inserted' ){
-            $json['success'] = true;
-            $json['message'] = "Saved successfully!";
-        }else if($result == 'updated' ){
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
+        }else{
+            $result = $this->History_model->add_history_item($data);
+            if($result == 'inserted' ){
+                $json['success'] = true;
+                $json['message'] = "Saved successfully!";
+            }else if($result == 'updated' ){
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }
+            else{
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
-        else{
-            $json['error'] = true;
-            $json['message'] = "Seems to an error";
-        }
+        
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

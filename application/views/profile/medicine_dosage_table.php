@@ -17,13 +17,18 @@
     </tbody>
 </table>
 <script>
+    var textarray = [];
     function editDosageCategory(editableObj,name,id) {
         $('td.medicine_category').css('background', '#FFF');
         $('td.medicine_category').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-        var newRowContent = '<tr><td><input class="form-control" type="text" name="dosage_value[]" value="'+name+'" ></td></tr>';
-        $("#dosage_item").append(newRowContent);
+        if(textarray.includes(name) === false){
+            textarray.push(name);
+            var newRowContent = '<tr><td><input class="form-control" type="text" name="dosage_value[]" value="'+name+'" ></td></tr>';
+            $("#dosage_item").append(newRowContent);
+        } 
+        
 
     }
 

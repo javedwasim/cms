@@ -1,13 +1,13 @@
-<table class="table table-bordered nowrap responsive history_table" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive history_table" cellspacing="0" id="history_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:100px;">Delete</th>
+        <th class="table-header" style="width:100px;">Action</th>
         <th class="table-header">Category Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($categories as $category): ?>
-        <tr class="table-row">
+        <tr class="table-row" id ="<?php echo $category['id']; ?>" data-table="profile_history">
             <td style="width:100px;">
                 <a class="delete-history btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
@@ -19,10 +19,10 @@
                    <i class="far fa-question-circle"></i>
                 </a>
             </td>
-            <td contenteditable="true" class="exam_cate"
-                onBlur="saveProfileHistory(this,'cate_name','<?php echo $category['id']; ?>')"
-                onClick="showEdit(this);">
-                <?php echo $category['name']; ?></td>
+            <td class="exam_cate">
+                <input type="text" class="form-control border-0 bg-transparent shadow-none"  value="<?php echo $category['name']; ?>" onchange="saveProfileHistory(this,'cate_name','<?php echo $category['id']; ?>')"
+                onClick="showEdit(this);" style="background: transparent;" >
+                
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -57,18 +57,18 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $('td.exam_cate').css('background', '#FFF');
-        $('td.exam_cate').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#history_tbl tbody tr").click(function (e) {
+            $('#history_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveProfileHistory(editableObj, column, id) {
+        var editableObj = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'Profile_history/save_profile_history' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + editableObj + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
                 }else{
@@ -77,7 +77,26 @@
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
-
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#history_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'profile_history';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_table/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 </script>

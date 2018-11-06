@@ -87,20 +87,23 @@ class Examination extends MY_Controller
     public function save_examination_category()
     {
         $data = $this->input->post();
-        $result = $this->Examination_model->add_examination_category($data);
-        if($result == 'empty'){
+        if (empty($data['editval'])) {
             $json['error'] = true;
             $json['message'] = 'Could not update empty field.';
-        }else if ($result == 'updated') {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        }else if( $result == 'inserted'){  
-            $json['success'] = true;
-            $json['message'] = "Created successfully!";
-        } else {
-            $json['error'] = true;
-            $json['message'] = "Seems to an error";
+        }else{
+            $result = $this->Examination_model->add_examination_category($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
+        
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -190,19 +193,21 @@ class Examination extends MY_Controller
     public function save_examination_item()
     {
         $data = $this->input->post();
-        $result = $this->Examination_model->add_examination_item($data);
-        if($result == 'empty'){
+        if (empty($data['editval'])) {
             $json['error'] = true;
             $json['message'] = 'Could not update empty field.';
-        }else if ($result == 'updated') {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        }else if( $result == 'inserted'){  
-            $json['success'] = true;
-            $json['message'] = "Created successfully!";
-        } else {
-            $json['error'] = true;
-            $json['message'] = "Seems to an error";
+        }else{
+            $result = $this->Examination_model->add_examination_item($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

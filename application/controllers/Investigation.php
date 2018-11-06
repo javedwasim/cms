@@ -84,17 +84,21 @@ class Investigation extends MY_Controller
     public function save_investigation_category()
     {
         $data = $this->input->post();
-        $result = $this->Investigation_model->add_investigation_category($data);
-        if ($result) {
-            $json['success'] = true;
-            if(isset($data['id'])){
-                $json['message'] = "Updated     successfully!";
-            }else{
-                $json['message'] = "Save successfully!";
-            }
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Investigation_model->add_investigation_category($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -183,17 +187,21 @@ class Investigation extends MY_Controller
     public function save_investigation_item()
     {
         $data = $this->input->post();
-        $result = $this->Investigation_model->add_investigation_item($data);
-        if ($result) {
-            $json['success'] = true;
-            if(isset($data['id'])){
-                $json['message'] = "Updated successfully!";
-            }else{
-                $json['message'] = "Saved successfully!";
-            }
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Investigation_model->add_investigation_item($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

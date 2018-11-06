@@ -2,8 +2,8 @@
 <table class="table table-bordered nowrap responsive structure_table" cellspacing="0" style="width: 100%">
     <thead>
     <tr>
-        <th class="table-header" style="width:5%;">Delete</th>
-        <th class="table-header">Structure</th>
+        <th class="table-header" style="width:5%;">Action</th>
+        <th class="table-header">Name</th>
     </tr>
     </thead>
     <tbody>
@@ -14,7 +14,7 @@
                     <i class="fa fa-trash" title="Delete"></i></a>
 
             </td>
-            <td contenteditable="true" class="default_structure_cate"
+            <td class="default_structure_cate"
                 onBlur="defaultsaveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
                 onClick="defaultstructureEdit(this,'<?php echo $structure['id']; ?>');"
                 id="<?php echo $structure['id']; ?>">

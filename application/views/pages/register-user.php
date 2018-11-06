@@ -284,7 +284,7 @@
                 <div class="card-header">
                     User Permissions
                 </div>
-                <div class="card-body" style="width:100%;" id="user_table_content">
+                <div class="card-body" style="width:100%; height: 300px; overflow-y: scroll;" id="user_table_content">
                     
                 </div>
             </div>

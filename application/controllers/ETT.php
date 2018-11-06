@@ -81,12 +81,21 @@ class ETT extends MY_Controller
     public function update_ett_test_reason()
     {
         $data = $this->input->post();
-        $result = $this->ETT_model->insert_test_reason($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->ETT_model->insert_test_reason($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -145,13 +154,21 @@ class ETT extends MY_Controller
     public function update_ett_ending_reason()
     {
         $data = $this->input->post();
-        $result = $this->ETT_model->insert_ending_reason($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->ETT_model->insert_ending_reason($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -210,13 +227,21 @@ class ETT extends MY_Controller
     public function update_ett_description()
     {
         $data = $this->input->post();
-        $result = $this->ETT_model->insert_description($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->ETT_model->insert_description($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -275,13 +300,21 @@ class ETT extends MY_Controller
     public function update_conclusion()
     {
         $data = $this->input->post();
-        $result = $this->ETT_model->insert_conclusions($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->ETT_model->insert_conclusions($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -342,13 +375,18 @@ class ETT extends MY_Controller
     public function update_protocol()
     {
         $data = $this->input->post();
-        $result = $this->ETT_model->update_protocol($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->ETT_model->update_protocol($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -370,13 +408,18 @@ class ETT extends MY_Controller
     public function update_protocol_details()
     {
         $data = $this->input->post();
-        $result = $this->ETT_model->update_protocol_details($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->ETT_model->update_protocol_details($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

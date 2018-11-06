@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body investigation_item_container">
+        <div class="card-body investigation_item_container" style="height: 400px; overflow-y: scroll;">
             <?php $this->load->view('investigation/item_table'); ?>
         </div>
     </div>

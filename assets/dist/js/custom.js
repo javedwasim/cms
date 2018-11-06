@@ -19,6 +19,8 @@ $(document).ready(function () {
 ////////////////////////////// initilize categories datatables ///////////////////////
     var btable = $('.booking_tables').DataTable({
         "scrollX": true,
+        "scrollY": "200px",
+        "scrollCollapse": true,
         "createdRow": function (row, data, dataIndex) {
             if (data[7] == "1") {
                 $(row).addClass('round-green');
@@ -199,6 +201,8 @@ $(document.body).on('click', '.feepaid', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
                             fixedHeader: {
                             header: true,
                             headerOffset: 100
@@ -301,6 +305,8 @@ $(document.body).on('click', '.wecg', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
                             fixedHeader: {
                             header: true,
                             headerOffset: 100
@@ -404,6 +410,8 @@ $(document.body).on('click', '.wett', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
                             fixedHeader: {
                             header: true,
                             headerOffset: 100
@@ -505,6 +513,8 @@ $(document.body).on('click', '.wecho', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
                             fixedHeader: {
                             header: true,
                             headerOffset: 100
@@ -607,6 +617,8 @@ $(document.body).on('click', '.investigation', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
                             fixedHeader: {
                             header: true,
                             headerOffset: 100
@@ -708,6 +720,8 @@ $(document.body).on('click', '.checkup', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
                             fixedHeader: {
                             header: true,
                             headerOffset: 100
@@ -810,6 +824,8 @@ $(document.body).on('click', '.complete', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
                             fixedHeader: {
                             header: true,
                             headerOffset: 100
@@ -896,6 +912,8 @@ function appointments() {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    "scrollY": "450px",
+                    "scrollCollapse": true,
                     fixedHeader: {
                         header: true,
                         headerOffset: 100
@@ -990,6 +1008,8 @@ $(document.body).on('click', '#book_appointment', function (e) {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    "scrollY": "450px",
+                    "scrollCollapse": true,
                     fixedHeader: {
                         header: true,
                         headerOffset: 100
@@ -1100,6 +1120,8 @@ function valupdate(val) {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    "scrollY": "450px",
+                    "scrollCollapse": true,
                     fixedHeader: {
                         header: true,
                         headerOffset: 100
@@ -1205,6 +1227,8 @@ function bookings() {
                     "paging": false,
                     "scrollX": true,
                     "searching": false,
+                    "scrollY": "450px",
+                    "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[7] == "1") {
                             $(row).addClass('round-green');
@@ -1275,6 +1299,8 @@ $(document.body).on('click', '#time_consultant', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    "scrollY": "450px",
+                    "scrollCollapse": true,
                     fixedHeader: {
                         header: true,
                         headerOffset: 100
@@ -1374,6 +1400,8 @@ $(document.body).on('click', '#time_on_walk', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    "scrollY": "450px",
+                    "scrollCollapse": true,
                     fixedHeader: {
                         header: true,
                         headerOffset: 100
@@ -1471,6 +1499,8 @@ $(document.body).on('click', '#time_on_call', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    "scrollY": "450px",
+                    "scrollCollapse": true,
                     fixedHeader: {
                         header: true,
                         headerOffset: 100
@@ -1536,36 +1566,40 @@ $(document.body).on('click', '#time_on_call', function () {
 ////////////////////////////////// save limiter settings ///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 $(document.body).on('click', '#save_limiter', function () {
-    var limiter = $('#limiter').val();
-    var limiterdate = $('#limiter_date').val();
-    var clinictime = $('#example-time-input').val();
-    $.ajax({
-        url: '/cms/dashboard/insert_limiter',
-        type: 'post',
-        data: {
-            limiter: limiter,
-            limiterDate: limiterdate,
-            clinicTime: clinictime
-        },
-        cache: false,
-        success: function (response) {
-            $('.limiter_table').remove();
-            $('#limiter_table').append(response.result_html);
-            if (response.success == true) {
-                $('#limiter').val('');
-                $('#limiter_date').val('');
-                $('#example-time-input').val('');
-                $('#limiter_date').datepicker({
-                    format: 'd-M-yyyy',
-                    startDate: 'date',
-                    autoclose: true
-                });
-                toastr["success"](response.message);
-            }else{
-                toastr["warning"](response.message);
+    var validate = $('#limiter_form').validate();
+    if (validate.form()) {
+        var limiter = $('#limiter').val();
+        var limiterdate = $('#limiter_date').val();
+        var clinictime = $('#example-time-input').val();
+        $.ajax({
+            url: '/cms/dashboard/insert_limiter',
+            type: 'post',
+            data: {
+                limiter: limiter,
+                limiterDate: limiterdate,
+                clinicTime: clinictime
+            },
+            cache: false,
+            success: function (response) {
+                $('.limiter_table').remove();
+                $('#limiter_table').append(response.result_html);
+                if (response.success == true) {
+                    $('#limiter').val('');
+                    $('#limiter_date').val('');
+                    $('#example-time-input').val('');
+                    $('#limiter_date').datepicker({
+                        format: 'd-M-yyyy',
+                        startDate: 'date',
+                        autoclose: true
+                    });
+                    toastr["success"](response.message);
+                }else{
+                    toastr["warning"](response.message);
+                }
             }
-        }
-    });
+        });
+    }
+    return false;
 });
 
 ////////////////////////////////////// Delete Single Patient ////////////////////////////
@@ -1598,6 +1632,8 @@ $(document.body).on('click', '#delete_single_patient', function () {
                                 "info": false,
                                 "paging": false,
                                 "searching": false,
+                                "scrollY": "450px",
+                                "scrollCollapse": true,
                                     fixedHeader: {
                                     header: true,
                                     headerOffset: 100
@@ -2049,8 +2085,8 @@ $(document.body).on('click', '#pat_delete', function () {
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,
-                    scrollY: '50vh',
-                    scrollCollapse: true,
+                    "scrollY": "350px",
+                    "scrollCollapse": true,
                     paging: false,
                     info: false
                 });
@@ -2078,7 +2114,9 @@ $(document.body).on('click', '#lab_test', function () {
                 $('#dashboard-content').append(response.result_html);
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
-                    "scrollX": true
+                    "scrollX": true,
+                    "scrollY": "350px",
+                    "scrollCollapse": true,
                 });
             }
         }
@@ -2581,6 +2619,8 @@ function consultant_booking(val) {
                     "info": false,
                     "paging": false,
                     "searching": false,
+                    "scrollY": "450px",
+                    "scrollCollapse": true,
                     fixedHeader: {
                         header: true,
                         headerOffset: 100
@@ -3211,8 +3251,8 @@ function get_delete_patients(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
-                    "scrollX": true,
-                    scrollY: '50vh',
+                    "scrollX" : true,
+                    "scrollY" : '350px',
                     scrollCollapse: true,
                     paging: false,
                     info: false
@@ -3441,7 +3481,7 @@ function get_manage_reasearch(func_call) {
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,
-                    "scrollY": '50vh',
+                    "scrollY": "350px",
                     "scrollCollapse": true,
                     "paging": false,
                     "info": false,
@@ -3474,7 +3514,7 @@ $(document.body).on('click', '.delete_research_profile', function () {
                             ///////////////// initilize datatable //////////////
                             $('#research-table').DataTable({
                                 "scrollX": true,
-                                "scrollY": '50vh',
+                                "scrollY": "350px",
                                 "scrollCollapse": true,
                                 "paging": false,
                                 "info": false,
@@ -3657,7 +3697,7 @@ function research_filters(){
                 $('#manage_research_table').append(response.profile_table);
                 $('#research-table').DataTable({
                     "scrollX": true,
-                    "scrollY": '50vh',
+                    "scrollY": "350px",
                     "scrollCollapse": true,
                     "paging": false,
                     "info": false,
@@ -3683,7 +3723,7 @@ $(document.body).on('click', '#reset_research', function () {
                 $('#manage_research_table').append(response.profile_table);
                 $('#research-table').DataTable({
                     "scrollX": true,
-                    "scrollY": '50vh',
+                    "scrollY": "350px",
                     "scrollCollapse": true,
                     "paging": false,
                     "info": false,
@@ -3756,6 +3796,10 @@ $(document.body).on('click', '#profiletable tbody tr.row_selected', function(){
         success: function(response){
             $('.patient_info').remove();
             $('#patient_info').append(response.patient_information);
+            $('#echo_detail_container').empty();
+            $('#echo_detail_container').append(response.details);
+            $("#prescription_details").prop("checked", true);
+
         }
     });
 });

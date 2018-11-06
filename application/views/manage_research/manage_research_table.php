@@ -2,7 +2,7 @@
     <table class="table table-bordered nowrap responsive" id="research-table" cellspacing="0" width="100%" >
        <thead>
             <tr>
-                <th style="width:30px"></th>
+                <th style="width:30px">Action</th>
                 <th>ProfileID</th>
                 <th>Patient Name</th>
                 <th>Father/Husband Name</th>

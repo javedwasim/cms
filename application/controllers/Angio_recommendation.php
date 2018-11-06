@@ -23,13 +23,21 @@ class Angio_recommendation extends MY_Controller
 
     public function save_recommendation(){
         $data = $this->input->post();
-        $result = $this->Recommendation_model->add_recommendation($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Recommendation_model->add_recommendation($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

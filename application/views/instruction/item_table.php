@@ -1,5 +1,5 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive" cellspacing="0" id="instruction_item_tbl" width="100%" >
     <thead>
     <tr>
         <th class="table-header" style="width: 9%">Action</th>
@@ -8,7 +8,7 @@
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
-        <tr class="table-row">
+        <tr class="table-row" id="<?php echo $item['id'] ?>">
             <td>
                 <?php if(($loggedin_user['is_admin']==1) || (in_array("special_instructions-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
                     <a class="delete-inst-item btn btn-danger btn-xs"
@@ -28,17 +28,15 @@
 
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
-                <td contenteditable="true" class="inst_item"
-                    onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                    onClick="showEdit(this);">
-                    <?php echo $item['name']; ?></td>
+                <td class="inst_item" onClick="showEdit(this);">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="inst_item" value="<?php echo $item['name']; ?>" onchange="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')" />        
+                </td>
             <?php } elseif(in_array("special_instructions-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td contenteditable="true" class="inst_item"
-                    onBlur="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"
-                    onClick="showEdit(this);">
-                    <?php echo $item['name']; ?></td>
+                <td class="inst_item" onClick="showEdit(this);">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="inst_item" value="<?php echo $item['name']; ?>" onchange="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')" />        
+                </td>
             <?php } else{ ?>
-                <td contenteditable="true" onClick="showError(this);">
+                <td onClick="showError(this);">
                     <?php echo $category['name']; ?></td>
             <?php } ?>
 
@@ -76,24 +74,46 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $('td.inst_item').css('background', '#FFF');
-        $('td.inst_item').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#instruction_item_tbl tbody tr").click(function (e) {
+            $('#instruction_item_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveToDatabase(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'instruction/save_inst_item' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
-
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#instruction_item_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'instruction_item';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_instruction_item_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 </script>

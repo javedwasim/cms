@@ -9,7 +9,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link <?php echo  isset($active_tab)&&($active_tab=='disease')?'active':''; ?>" data-toggle="tab" href="#tb1" role="tab">
+                            <a class="nav-link active" data-toggle="tab" href="#tb1" role="tab">
                                 <span class="hidden-sm-up"><i class="ti-home"></i></span>
                                 <span class="hidden-xs-down">Disease</span></a></li>
                         <li class="nav-item">

@@ -55,6 +55,9 @@
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success == true) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });

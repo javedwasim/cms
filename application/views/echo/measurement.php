@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div class="card-body category_measurement_container">
+        <div class="card-body category_measurement_container" style="height: 300px; overflow-y: scroll;">
             <?php $this->load->view('echo/category_measurement_table') ?>
         </div>
     </div>

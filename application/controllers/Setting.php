@@ -83,14 +83,20 @@ class Setting extends MY_Controller
     public function update_profession()
     {
         $data = $this->input->post();
-        $result = $this->Setting_model->update_profession($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Could not be updated.";
+            $json['message'] = "Could not update empty field.";
+        }else{
+            $result = $this->Setting_model->update_profession($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Could not be updated.";
+            }
         }
+        
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -937,13 +943,18 @@ class Setting extends MY_Controller
     public function update_district()
     {
         $data = $this->input->post();
-        $result = $this->Setting_model->update_pat_district($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Updated successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Could not be updated.";
+            $json['message'] = "Could not update empty field.";
+        }else{
+            $result = $this->Setting_model->update_pat_district($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Could not be updated.";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1850,10 +1861,302 @@ class Setting extends MY_Controller
         $result = $this->Setting_model->sort_data($data,$tablename,$id);
         if ($result) {
             $json['success'] = true;
-            $json['message'] = 'done';
         }else{
             $json['error'] = true;
-            $json['message'] = 'not done';
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function history_item_sort_table($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->history_item_sort_table($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_examination_table($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_examination_table($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_examination_item_table($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_examination_item_table($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_investigation_table($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_investigation_table($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_investigation_item_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_investigation_item_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_medicine_cat_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_medicine_cat_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_medicine_item_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_medicine_item_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_instruction_cat_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_instruction_cat_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_instruction_item_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_instruction_item_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_advice_cat_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_advice_cat_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_advice_item_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_advice_item_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_lab_test_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_lab_test_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_lab_test_item_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_lab_test_item_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_echo_disease_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_echo_disease_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_echo_structure_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_echo_structure_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_echo_cat_meas_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_echo_cat_meas_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_ett_test_reason_table($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_ett_test_reason_table($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_ending_reasons_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_ending_reasons_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_ett_description_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_ett_description_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_ett_conclusion_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_ett_conclusion_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_ett_protocol_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_ett_protocol_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

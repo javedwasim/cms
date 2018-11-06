@@ -1,7 +1,7 @@
-<table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="angio_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%">Delete</th>
+        <th class="table-header" style="width: 5%">Action</th>
         <th class="table-header">Recommendations</th>
     </tr>
     </thead>
@@ -14,34 +14,35 @@
                    data-href="<?php echo site_url('Angio_recommendation/delete_recommendation/') . $recommendation['id'] ?>">
                    <i class="fa fa-trash" title="Delete"></i></a>
             </td>
-            <td contenteditable="true" class="recommendation"
-                onBlur="saveToDatabase(this,'cate_name','<?php echo $recommendation['id']; ?>')"
-                onClick="showEdit(this);">
-                <?php echo $recommendation['description']; ?></td>
+            <td class="recommendation" onClick="showEdit(this);">
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $recommendation['description']; ?>"  onchange="saveToDatabase(this,'cate_name','<?php echo $recommendation['id']; ?>')">        
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <script>
     function showEdit(editableObj) {
-        $('td.recommendation').css('background', '#FFF');
-        $('td.recommendation').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#angio_tbl tbody tr").click(function (e) {
+            $('#angio_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveToDatabase(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'Angio_recommendation/save_recommendation' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
 
 </script>
