@@ -56,6 +56,7 @@ class Setting extends MY_Controller
                 }
             }
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['professions'] = $this->Setting_model->get_professions();
         $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -146,8 +147,10 @@ class Setting extends MY_Controller
 
     public function advice()
     {
+        $cat_id = 0;
         $data['advices'] = $this->Setting_model->get_advices();
-        $data['items'] = $this->Setting_model->get_advice_items();
+        $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
+        // $data['items'] = $this->Setting_model->get_advice_items();
         $data['active_tab'] = 'advice';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('pages/advice', $data, true);
@@ -198,10 +201,13 @@ class Setting extends MY_Controller
     }
 
     public function laboratory_test()
-    {
+    {   $cat_id = 0;
+        $test_id = 0;
         $data['categories'] = $this->Setting_model->get_lab_categories();
-        $data['tests'] = $this->Setting_model->get_lab_tests();
-        $data['items'] = $this->Setting_model->get_lab_test_items();
+        $data['tests'] = $this->Setting_model->get_lab_tests_by_category($cat_id);
+        $data['labtests'] = $this->Setting_model->get_lab_tests();
+        $data['items'] = $this->Setting_model->get_lab_item_by_test_id($test_id);
+        // $data['items'] = $this->Setting_model->get_lab_test_items();
         $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
@@ -861,7 +867,7 @@ class Setting extends MY_Controller
     public function get_lab_item_by_test_id($test_id)
     {
         $data['categories'] = $this->Setting_model->get_lab_categories();
-        $data['tests'] = $this->Setting_model->get_lab_tests();
+        $data['labtests'] = $this->Setting_model->get_lab_tests();
         $data['items'] = $this->Setting_model->get_lab_item_by_test_id($test_id);
         $data['active_tab'] = 'items';
         $data['selected_test_id'] = $test_id;

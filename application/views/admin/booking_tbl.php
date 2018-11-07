@@ -56,13 +56,11 @@
                 for($i=1; $i<=5; $i++){
                     ?>
                 <tr class="gradeX colorchnage">
-
                     <td class="<?php echo in_array("can_delete-0", $permissions)?"hide":''; ?>">
                         <a href="javascript:void(0)" id="delete_single_patient" class="btn btn-danger btn-block btn-xs">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>
-
                     <td ><?php echo $i?></td>
                     <td class="order-number" ><?php echo $i?></td>
                     <td

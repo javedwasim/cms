@@ -27,9 +27,11 @@ class Instruction extends MY_Controller
 
     public function special_instructions()
     {
+        $dataitem = 0;
         $data['category'] = 'special';
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
-        $data['items'] = $this->Instruction_model->get_inst_items($data);
+        // $data['items'] = $this->Instruction_model->get_inst_items_by_category($filters);
+        $data['items'] = $this->Instruction_model->get_inst_items($dataitem);
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/instruction', $data, true);
         if ($this->input->is_ajax_request()) {

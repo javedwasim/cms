@@ -6,36 +6,36 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                        	<a class="nav-link active" data-toggle="tab" href="#exe1" role="tab">
+                        	<a class="nav-link active p-10" data-toggle="tab" href="#exe1" role="tab">
                         		<span class="hidden-sm-up"><i class="ti-home"></i></span>
                         		<span class="hidden-xs-down">History</span>
                         	</a>
                         </li>
                         <li class="nav-item">
-                        	<a class="nav-link" data-toggle="tab" href="#exe2" role="tab">
+                        	<a class="nav-link p-10" data-toggle="tab" href="#exe2" role="tab">
                         		<span class="hidden-sm-up"><i class="ti-user"></i></span>
                         		<span class="hidden-xs-down">Examination</span>
                         	</a>
                         </li>
                         <li class="nav-item">
-                        	<a class="nav-link" data-toggle="tab" href="#exe3" role="tab">
+                        	<a class="nav-link p-10" data-toggle="tab" href="#exe3" role="tab">
                         		<span class="hidden-sm-up"><i class="ti-user"></i></span>
                         		<span class="hidden-xs-down">Investigation</span></a>
                         </li>
                         <li class="nav-item">
-                        	<a class="nav-link" data-toggle="tab" href="#exe4" role="tab">
+                        	<a class="nav-link p-10" data-toggle="tab" href="#exe4" role="tab">
                         		<span class="hidden-sm-up"><i class="ti-user"></i></span>
                         		<span class="hidden-xs-down">Medicine</span>
                         	</a>
                         </li>
                         <li class="nav-item">
-                        	<a class="nav-link" data-toggle="tab" href="#exe5" role="tab">
+                        	<a class="nav-link p-10" data-toggle="tab" href="#exe5" role="tab">
                         		<span class="hidden-sm-up"><i class="ti-user"></i></span>
                         		<span class="hidden-xs-down">Test Advice</span>
                         	</a>
                         </li>
                         <li class="nav-item">
-                        	<a class="nav-link" data-toggle="tab" href="#exe6" role="tab">
+                        	<a class="nav-link p-10" data-toggle="tab" href="#exe6" role="tab">
                         		<span class="hidden-sm-up"><i class="ti-user"></i></span>
                         		<span class="hidden-xs-down">Instructions</span>
                         	</a>
@@ -262,7 +262,6 @@
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>&nsbp;</td>
 						                            </tr>
-
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -301,7 +300,6 @@
 						                            <tr>
 						                                <td>CVS</td>
 						                            </tr>
-
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -615,9 +613,9 @@
                                     </form>
                                 </div>
                             	<div class="col-md-5">
-                            		<button class="btn btn-primary btn-md waves-effect waves-light" style="padding: 10px 15px;" type="button">Sp. Instructions</button>
-                                    <button class="btn btn-info btn-md waves-effect waves-light" style="padding: 10px 10px;" type="button">Lab. Test</button>
-                                    <button class="btn btn-primary btn-md waves-effect waves-light" id="save_patient_examination_info" style="padding: 10px 15px;" type="button">Save</button>
+                            		<button class="btn btn-primary btn-md waves-effect waves-light exa-pat-spInstructions" style="padding: 10px 15px;" type="button">Sp. Instructions</button>
+                                    <button class="btn btn-info btn-md waves-effect waves-light exa-pat-labtest" style="padding: 10px 10px;" type="button">Lab. Test</button>
+                                    <button class="btn btn-primary btn-md waves-effect waves-light " id="save_patient_examination_info" style="padding: 10px 15px;" type="button">Save</button>
                             	</div>
                             </div>
                     	</div>

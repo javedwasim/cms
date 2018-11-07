@@ -15,8 +15,10 @@ class Investigation extends MY_Controller
 
     public function investigation()
     {
+        $cat_id = 0;
         $data['categories'] = $this->Investigation_model->get_investigation_categories();
-        $data['items'] = $this->Investigation_model->get_investigation_items();
+        $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
+        // $data['items'] = $this->Investigation_model->get_investigation_items();
         $json['result_html'] = $this->load->view('investigation/investigation', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

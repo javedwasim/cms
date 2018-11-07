@@ -1,10 +1,10 @@
 <div class="status_row">
 <?php
-        if(isset($rights[0]['rights']))://print_r($rights[0]['rights']);
-            $permissions = explode(',',$rights[0]['rights']);
-        endif;
-        $user_info = ($this->session->userdata('user_data_logged_in'));
-    ?>
+    if(isset($rights[0]['rights']))://print_r($rights[0]['rights']);
+        $permissions = explode(',',$rights[0]['rights']);
+    endif;
+    $user_info = ($this->session->userdata('user_data_logged_in'));
+?>
     <div class="row m-r-5">
         <div class="col-md-12" id="operations_panel">
             <div class="card p-t-20" style="box-shadow: none; margin-bottom: 0px;">
@@ -19,6 +19,18 @@
                                 <i class="fa fa-wallet"></i>
                             </div>
                        
+                        </div>
+                        <!-- Column -->
+                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                            <a href="javascript:void(0)" class="appoint_revert">
+                                <div class="round round-sm round-appointment align-self-center m-b-10"><i class="fa fa-user"></i>
+                                </div>
+                            </a>
+                            <div class="m-l-10 align-self-center">
+                                <a href="#" class="appoint_revert">
+                                    <b class="m-b-0 font-lgiht">Appointment</b>
+                                </a>
+                            </div>      
                         </div>
                         <!-- Column -->
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
@@ -116,7 +128,7 @@
                                 </a>
                             </div>
                         <?php endif; ?>
-                        <div class="col-lg-4 col-md-5 ">
+                        <div class="col-lg-3 col-md-5 ">
                             <div class="row">
                                 <div class="col-md-12">
                                     <?php if($booking_flag == 'vip'){?>

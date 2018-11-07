@@ -507,11 +507,7 @@
         }
 
         public function get_advice_items_by_category($cate_id){
-            if($cate_id>0){
-                $result = $this->db->select('*')->from('advice_item')->where('advice_id',$cate_id)->get();
-            }else{
-                $result = $this->db->select('*')->from('advice_item')->get();
-            }
+            $result = $this->db->select('*')->from('advice_item')->where('advice_id',$cate_id)->get();
             if ($result) {
                 return $result->result_array();
             }else{

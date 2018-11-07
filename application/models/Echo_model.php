@@ -319,12 +319,7 @@
         }
 
         public function get_main_category_by_filter($category) {
-
-            if(($category=='dooplers') || ($category=='mmode')){
-                $result = $this->db->select('*')->from('echo_category')->where('main_category',"$category")->get();
-            }else{
-                $result = $this->db->select('*')->from('echo_category')->get();
-            }
+            $result = $this->db->select('*')->from('echo_category')->where('main_category',"$category")->get();
             if ($result) {
                 return $result->result_array();
             }else{
@@ -382,12 +377,8 @@
         }
 
         public function get_measurement_by_filter($category) {
-            if($category>0){
-                $result = $this->db->select('*')->from('category_measurement')->where('category_id',"$category")
+            $result = $this->db->select('*')->from('category_measurement')->where('category_id',"$category")
                 ->order_by('sort_order')->get();
-            }else{
-                $result = $this->db->select('*')->from('category_measurement')->order_by('sort_order')->get();
-            }
             if ($result) {
                 return $result->result_array();
             }else{

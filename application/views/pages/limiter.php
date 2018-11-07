@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                   <!--      <div class="form-group">
                             <div class='input-group mb-3'>
                              <input class="form-control" type="time"  id="example-time-input" autocomplete="off">
                              <div class="input-group-append">
@@ -30,7 +30,7 @@
                                 </span>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <button type="button" id="save_limiter" class="btn btn-danger waves-effect waves-light">Save</button>
                     </div>
                 </form>

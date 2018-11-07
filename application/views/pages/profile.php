@@ -141,19 +141,19 @@ if(isset($rights[0]['user_rights']))
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header" style="padding-top: 0px; padding-bottom: 0px;">
                             <div class="row">
                                 <div class="col-md-12 p-0">
-                                    <button class="btn btn-primary btn-md waves-effect waves-light" id="pat-exemination" style="padding: 10px 15px;" type="button">Examintation</button>
-                                    <button class="btn btn-info btn-md waves-effect waves-light pat-spInstructions"  style="padding: 10px 10px;" type="button">Sp. Instructions</button>
-                                    <button class="btn btn-primary btn-md waves-effect waves-light pat-labtest" style="padding: 10px 15px;" type="button">Lab. Test</button>
-                                    <button class="btn btn-danger waves-effect waves-light" id="pat-echo-test" style="padding: 7px 15px;" type="button">Echo</button>
-                                    <button class="btn btn-danger waves-effect waves-light" id="pat-ett-test" style="padding: 7px 15px;" type="button">ETT</button>
-                                    <button class="btn btn-success waves-effect waves-light"id="list_itmes_vital" data-func-call="vital" style="padding: 7px 15px;" type="button">Vitals</button>
-                                    <button class="btn btn-success btn-md waves-effect waves-light" data-toggle="modal" data-target="#profile_upload_modal"   style="padding: 10px 15px;" type="button">Upload Files</button>
+                                    <button class="btn btn-primary btn-sm waves-effect waves-light" id="pat-exemination" style="padding: 6px 15px;" type="button">Examintation</button>
+                                    <button class="btn btn-info btn-sm waves-effect waves-light pat-spInstructions"  style="padding: 6px 10px;" type="button">Sp. Instructions</button>
+                                    <button class="btn btn-primary btn-sm waves-effect waves-light pat-labtest" style="padding: 6px 15px;" type="button">Lab. Test</button>
+                                    <button class="btn btn-danger btn-sm waves-effect waves-light" id="pat-echo-test" style="padding: 6px 15px;" type="button">Echo</button>
+                                    <button class="btn btn-danger btn-sm waves-effect waves-light" id="pat-ett-test" style="padding: 6px 15px;" type="button">ETT</button>
+                                    <button class="btn btn-success btn-sm waves-effect waves-light"id="list_itmes_vital" data-func-call="vital" style="padding: 6px 15px;" type="button">Vitals</button>
+                                    <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#profile_upload_modal"   style="padding: 6px 15px;" type="button">Upload Files</button>
                                 </div>
                             </div>
-                            <div class="row m-t-10">
+                            <div class="row m-t-5">
                                 <div class="col-md-12">
                                     <label class="radio-inline">
                                       <input type="radio" name="optradio" id="prescription_details">Prescription
@@ -173,10 +173,10 @@ if(isset($rights[0]['user_rights']))
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body" style="height:625px;">
+                        <div class="card-body" style="height:520px;">
                             <div class="row">
                                 <div id="re1">
-                                    <div class="col-md-12 p-r-0" style="height: 180px; overflow-y: scroll;">
+                                    <div class="col-md-12 p-r-0" style="height: 150px; overflow-y: scroll;">
                                         <h4 class="text-center"> Click to edit</h4>
                                         <div id="echo_detail_container">
 
@@ -185,7 +185,7 @@ if(isset($rights[0]['user_rights']))
                                     </div>
                                     <div class="col-md-12">
                                         <div class="card">
-                                            <div class="card-header">
+                                            <div class="card-header" style="padding-top: 5px; padding-bottom: 5px;">
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <a href="javascript:void(0)" class="btn btn-info btn-xs" id="profiles_image_files">Images</a>
@@ -198,13 +198,13 @@ if(isset($rights[0]['user_rights']))
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-body" id="files_content" style="height: 370px; overflow-y: scroll;">
+                                            <div class="card-body" id="files_content" style="height:300px; overflow-y: scroll;">
                                                 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="re2" class="b-all" style="height:600px;">
+                                <div id="re2" class="b-all" style="height:500px; overflow-y: scroll; ">
                                     <div class="col-md-12 p-l-0">
                                     <h4 class="text-center">Report</h4>
                                     <div class="report_view">  
@@ -256,37 +256,37 @@ if(isset($rights[0]['user_rights']))
  <!-- sample modal content -->
     <div id="add-new-patient" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Add New Patient</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <form id="profile_form">
+            <form id="profile_form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Patient</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
                     	<div class="row">
                     		<div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Name</label>
-		                            <input type="text" class="form-control" id="pat_profile_name" placeholder="Enter Name" autocomplete="off" style="text-transform: capitalize;" minlength="3" maxlength="40" required>
+		                            <input type="text" name="patient_name" class="form-control required" id="pat_profile_name" placeholder="Enter Name"  style="text-transform: capitalize;" minlength="3" maxlength="40" required />
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Father/Wife Name:</label>
-		                            <input type="text" class="form-control" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" style="text-transform: capitalize;" maxlength="40" required>
+		                            <input type="text" name="pat_profile_relative_name" class="form-control required" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" style="text-transform: capitalize;" maxlength="40" required>
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 	                        	<label>Age</label>
 	                        	<div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" name="" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" class="form-control" id="pat_profile_age_digit" maxlength="3" required="required">    
+                                        <input type="text" name="pat_profile_age_digit" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" class="form-control required" id="pat_profile_age_digit" maxlength="3" required="required">    
                                     </div>
                                     <div class="col-md-6">
-                                        <select class="form-control" id="pat_profile_age">
-                                            <option>Years</option>
-                                            <option>Months</option>
-                                            <option>Days</option>
+                                        <select class="form-control required" name="pat_profile_age" id="pat_profile_age">
+                                            <option value="Years">Years</option>
+                                            <option value="Months">Months</option>
+                                            <option value="Days">Days</option>
                                         </select>
                                     </div>
                         		</div>
@@ -294,12 +294,12 @@ if(isset($rights[0]['user_rights']))
 	                        <div class="col-md-4">
                         		<div class="form-group">
                         			<label>Profession</label>
-                        			<select class="form-control" id="pat_profile_profession" required="required" style="text-transform: capitalize;" >
-                        				<option>Select</option>
+                        			<select class="form-control required" name="pat_profile_profession" id="pat_profile_profession" required="required" style="text-transform: capitalize;" >
+                        				<option value="">Select</option>
                         				<?php 
                                             foreach ($professions as $key) {
                                         ?>
-                                        <option value="<?php $key['profession_name'] ?>" style="text-transform: capitalize;"><?php echo $key['profession_name'] ?></option>
+                                        <option value="<?php echo $key['profession_name'] ?>" style="text-transform: capitalize;"><?php echo $key['profession_name'] ?></option>
                                         <?php } ?>
                         			</select>
                         		</div>
@@ -315,48 +315,48 @@ if(isset($rights[0]['user_rights']))
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Contact</label>
-                                    <input type="text" name="" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" id="pat_profile_contact" required="required" maxlength="11" class="form-control" />
+                                    <input type="text" name="pat_profile_contact" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" id="pat_profile_contact" required="required" maxlength="11" class="form-control required" />
                                 </div>
                             </div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Height:</label>
-	                        		<input type="text" class="form-control pat_profile_height" onchange="calculateBmiBsa(this)" id="pat_profile_height" name="" placeholder="cm" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" required="required" maxlength="5">
+	                        		<input type="text" name="pat_profile_height" class="form-control pat_profile_height required" onchange="calculateBmiBsa(this)" id="pat_profile_height" placeholder="cm" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" required="required" maxlength="5">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BMI:</label>
-	                        		<input type="text" name=""  id="pat_profile_bmi" class="form-control pat_profile_bmi" readonly>
+	                        		<input type="text" name="pat_profile_bmi"  id="pat_profile_bmi" class="form-control pat_profile_bmi" readonly>
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label>Weight:</label>
-	                        		<input type="text" class="form-control pat_profile_weight" onchange="calculateBsaBmi(this)" name="" id="pat_profile_weight" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" placeholder="Kg" required="required" maxlength="5">
+	                        		<input type="text" class="form-control pat_profile_weight required" onchange="calculateBsaBmi(this)" name="pat_profile_weight" id="pat_profile_weight" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" placeholder="Kg" required="required" maxlength="5">
                         		</div>
                         	</div>
                         	<div class="col-md-6">
                         		<div class="form-group">
 	                        		<label class="m-l-10">BSA:</label>
-	                        		<input type="text" name="" id="pat_profile_bsa" class="form-control pat_profile_bsa" readonly>
+	                        		<input type="text" name="pat_profile_bsa" id="pat_profile_bsa" class="form-control pat_profile_bsa" readonly>
                         		</div>
                         	</div>
                         	<div class="col-md-4">
                         		<div class="form-group">
                         			<label for="pat_profile_email" >Email</label>
-                        			<input type="email" name="" id="pat_profile_email" class="form-control" required="required" />
+                        			<input type="email" name="pat_profile_email" id="pat_profile_email" class="form-control" />
                         		</div>
                         	</div>
                         	<div class="col-md-4">
                         		<div class="form-group">
                         			<label>District</label>
-                        			<select class="form-control" id="pat_profile_district" style="text-transform: capitalize;">
-                        				<option>Select</option>
+                        			<select class="form-control required" name="pat_profile_district" id="pat_profile_district" style="text-transform: capitalize;">
+                        				<option value="">Select</option>
                         				<?php 
                                             foreach ($districts as $key) {
                                         ?>
-                                        <option value="<?php $key['district_name'] ?>" style="text-transform: capitalize;"><?php echo $key['district_name'] ?></option>
+                                        <option value="<?php echo $key['district_name'] ?>" style="text-transform: capitalize;"><?php echo $key['district_name'] ?></option>
                                         <?php } ?>
                         			</select>
                         		</div>
@@ -364,17 +364,17 @@ if(isset($rights[0]['user_rights']))
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <textarea class="form-control" id="pat_profile_address" required="required" rows="2"></textarea>
+                                    <textarea class="form-control required" name="pat_profile_address" id="pat_profile_address" required="required" rows="2"></textarea>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger waves-effect waves-light" id="save_new_profile">Save</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger waves-effect waves-light" id="save_new_profile">Save</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div id="edit_modal">

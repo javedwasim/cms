@@ -27,7 +27,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="full_name">Patient Name</label>
-                                                <input type="text" id="full_name" name="pat_name" placeholder="Full Name" style="text-transform: capitalize;" class="form-control" maxlength="60" autofocus required="required" autocomplete="off">
+                                                <input type="text" id="full_name" name="pat_name" placeholder="Full Name" style="text-transform: capitalize;" class="form-control sug_pat" maxlength="60" autofocus required="required">
 
                                             </div>
                                         </div>
@@ -116,10 +116,19 @@
 
 
 <script type="text/javascript">
+    // $( function() {
+    //         $("#full_name").autocomplete({  
+    //             source:window.location.origin+window.location.pathname+'profile/get_pat_name', 
+    //             select:function(event, ui){
+    //                 $(this).val(item.ui.name);
+    //             }
+    //         });
+    //     } );
     $(document).ready(function () {
         $('.pat_search').datepicker({
             format: 'd-M-yyyy'
         });
+        
         $(".pat_search").on("change", function () {
             var searchDate = $(this).val();
             var bookingflag = $('#booking_flag').val();

@@ -92,7 +92,10 @@ body {
 .colorchnage td{
     opacity: 0.5;
 }
-
+.round-appointment{
+    background: #ccc;
+    opacity: 0.5;
+}
 .dataTables_filter input[type="search"] {
     width: 100px !important;
 }
@@ -158,13 +161,13 @@ li.paginate_button.page-item.active {
     top:7.7%;
     z-index: 9999;
 }
-.sticky {
+/*.sticky {
   position: fixed;
   top: 9%;
   width: 32.9%;
   z-index:999;
   background: #fff;
-}
+}*/
 .dataTables_scrollHeadInner{
     width: 100% !important;
 }

@@ -77,7 +77,7 @@
                 <div class="form-group ">
                     <label>Select Category:</label>
                     <select class="form-control" name="filter_history_category" onchange="filter_history_item_category(this.value)" id="history_items" required>
-                        <option value="">Select</option>
+                        <option value="0">Select</option>
                         
                         <?php foreach ($categories as $category): ?>
                             <option value="<?php echo $category['id']; ?>"

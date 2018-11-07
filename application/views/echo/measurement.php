@@ -23,7 +23,7 @@
                             <label>Category:</label>
                             <select class="form-control" name="category_id" id="category_id">
                                 <option>Select</option>
-                                <?php foreach ($main_categories as $category): ?>
+                                <?php foreach ($main_cate as $category): ?>
                                     <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -48,9 +48,8 @@
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control" onchange="category_measurement_filter(this.value)">
-                            <option>Select</option>
-                            <option value="0">All</option>
-                            <?php foreach ($main_categories as $category): ?>
+                            <option value="0">Select</option>
+                            <?php foreach ($main_cate as $category): ?>
                                 <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
                             <?php endforeach; ?>
                         </select>

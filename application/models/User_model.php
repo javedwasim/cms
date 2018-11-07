@@ -67,7 +67,7 @@ class User_model extends CI_Model {
     }
     
 
-    public function update_value($value, $updateValue, $toupdate) {
+    public function update_value($value, $updateValue, $toupdate,$statusid) {
         $result = '';
         $date = date('Y-m-d H:i:s');
         //$collectedby = $this->session->userdata('username');
@@ -82,12 +82,20 @@ class User_model extends CI_Model {
                     ->where('appointment_booking_id', $toupdate)
                     ->update('appointment_booking',$data);
         } elseif ($updateValue == 'consultant_fee') {
-            $data = array(
-                'consultant_fee' => $value,
-                'fee_collected_by' => $collectedby,
-                'fee_paid_at' => $date,
-                'fee_paid_status' => '1'
-            );
+            if ($statusid == 7) {
+                $data = array(
+                    'consultant_fee' => $value,
+                    'fee_collected_by' => $collectedby,
+                    'fee_paid_at' => $date
+                );
+            }else{
+                $data = array(
+                    'consultant_fee' => $value,
+                    'fee_collected_by' => $collectedby,
+                    'fee_paid_at' => $date,
+                    'fee_paid_status' => '1'
+                );
+            }
             $result = $this->db
                     ->where('appointment_booking_id', $toupdate)
                     ->update('appointment_booking', $data);

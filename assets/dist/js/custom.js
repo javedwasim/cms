@@ -880,7 +880,109 @@ $(document.body).on('click', '.complete', function () {
 
 });
 
+$(document.body).on('click', '.appoint_revert', function () {
+    var tr = $('tr.row_selected');
+    var odata = $.trim(tr.find('.appointment_booking_id').text());
+    var status_id = $.trim(tr.find('.booking_status_id').text());
+    if (odata != "") {
+        var bookingflag = $('#booking_flag').val();
+        var tabledate = $('.pat_search').val();
+        $.ajax({
+            url: '/cms/user/update_fee',
+            type: 'post',
+            data: {
+                bkId: odata,
+                fee_status: '0',
+                flag: bookingflag,
+                tabledate: tabledate,
+                statusId: status_id
+            },
+            cache: false,
+            success: function (response) {
+                if (response.status_row != '') {
+                    $('.status_row').remove();
+                    $('#status_row').append(response.status_row);
+                    $('.table-responsive').remove();
+                    $('#table-booking').append(response.booking_table);
+                    $("#full_name").focus();
+                    $("#editable-datatable tbody tr").click(function (e) {
+                        if ($(this).hasClass('row_selected')) {
+                            $(this).removeClass('row_selected');
+                        } else {
+                            oTable.$('tr.row_selected').removeClass('row_selected');
+                            $(this).addClass('row_selected');
+                        }
+                    });
+                    $('.pat_search').datepicker({
+                        format: 'd-M-yyyy'
+                    });
+                    $('#sidebarCollapse').on('click', function () {
+                        var icon = $('#sidebarCollapse > .fas');
+                        icon.toggleClass('fa-arrow-left fa-arrow-right');
+                        $("#full_name").focus();
+                        $('#sidebar').toggleClass('active');
+                        $('#content').toggleClass('actv');
+                    });
+                    //////// initilize datatable///////////////////
+                    var oTable = $('#editable-datatable').DataTable({
+                        "info": false,
+                        "paging": false,
+                        "searching": false,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
+                            fixedHeader: {
+                            header: true,
+                            headerOffset: 100
+                        },
+                        "createdRow": function (row, data, dataIndex) {
+                            if (data[17] == "1") {
+                                $(row).addClass('round-green');
+                            }
+                            if (data[17] == "2") {
+                                $(row).addClass('round-blue');
+                            }
+                            if (data[17] == "3") {
+                                $(row).addClass('round-red');
+                            }
+                            if (data[17] == "4") {
+                                $(row).addClass('round-yellow');
+                            }
+                            if (data[17] == "5") {
+                                $(row).addClass('round-orange');
+                            }
+                            if (data[17] == "6") {
+                                $(row).addClass('round-lightGray');
+                            }
+                            if (data[17] == "7") {
+                                $(row).addClass('round-white');
+                            }
+                        },
+                        select: {
+                            style: 'single'
+                        },
+                        "scrollX": true,
+                        columnDefs: [
+                            {"type": "html-input", "targets": [3, 6, 7, 8]}
+                        ]
+                    });
+                    $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
+                        return $(value).val();
+                    };
+                    if (response.success == true) {
+                        toastr["success"](response.message);    
+                    }else{
+                        toastr["error"](response.message);    
+                    }
 
+                } else {
+                    console.log('not working');
+                }
+            }
+        });
+    } else {
+        toastr["warning"]('Please select the row.');
+    }
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// call appointment booking view ///////////////////////
@@ -1095,6 +1197,8 @@ $(document.body).on('click', '#book_appointment', function (e) {
 function valupdate(val) {
     var dataToupdate = val.name;
     var Toupdate = $(val).parent().parent().find('.appointment_booking_id').text();
+    var status_id = $(val).parent().parent().find('.booking_status_id').text();
+    var statusid = $.trim(status_id);
     var whereToupdate = $.trim(Toupdate);
     var apfee = val.value;
     var bookingflag = $('#booking_flag').val();
@@ -1107,7 +1211,8 @@ function valupdate(val) {
             valToUpdate: dataToupdate,
             whereToupdate: whereToupdate,
             flag: bookingflag,
-            tabledate: tabledate
+            tabledate: tabledate,
+            statusid: statusid
         }, success: function (response) {
             if (response.booking_table != '') {
                 $('.table-responsive').remove();
@@ -1721,7 +1826,11 @@ $(document.body).on('click', '#pat_profile', function () {
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
                 $('.profiletable').DataTable({
-                    // "scrollX": true,
+                    "info": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "scrollY": "400px",
+                    "scrollCollapse": true,
                     "initComplete": function (settings, json) {
                         $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                     }
@@ -1761,7 +1870,11 @@ function profile_filter(){
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
                 $('.profiletable').DataTable({
-                    // "scrollX": true,
+                    "info": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "scrollY": "400px",
+                    "scrollCollapse": true,
                     "initComplete": function (settings, json) {
                         $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                     }
@@ -2533,11 +2646,58 @@ $(document.body).on('click', '.pat-spInstructions', function () {
     });
 });
 
+$(document.body).on('click', '.exa-pat-spInstructions', function () {
+    var patid = $('#label_patient_id').text();
+    $.ajax({
+        url: '/cms/profile/patient_special_instructions',
+        type: 'post',
+        data: {patid:patid},
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pat_sp_information').append(response.patient_information);
+                $('.sp_data_table').remove();
+                $('#sp_data_table').append(response.sp_table);
+                $("#sp-ins-table tbody tr").click(function (e) {
+                    $('#sp-ins-table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
+            }
+        }
+    });
+});
+
 /////////////////////////////////// load patient lab test page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '.pat-labtest', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    $.ajax({
+        url: '/cms/profile/patient_lab_test',
+        type: 'post',
+        data: {patid:patid},
+        cache: false,
+        success: function (response) {
+            if (response.result_html != '') {
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.patient_info').remove();
+                $('#pat_sp_information').append(response.patient_information);
+                $('.lab-date').datepicker({
+                    format: 'd-M-yyyy'
+                });
+                $('#lab_test_data_table').empty();
+                $('#lab_test_data_table').append(response.test_table);
+            }
+        }
+    });
+});
+
+$(document.body).on('click', '.exa-pat-labtest', function () {
+   var patid = $('#label_patient_id').text();
     $.ajax({
         url: '/cms/profile/patient_lab_test',
         type: 'post',
@@ -2740,7 +2900,17 @@ $(document.body).on('click', '#print_all_list', function () {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#save_new_profile', function () {
-    var validate = $( "#profile_form" ).validate();
+    var validate = $( "#profile_form" ).validate({
+        rules:{
+            pat_profile_profession:{
+                required:true
+            },
+            pat_profile_district:{
+                required:true
+            }
+
+        }
+    });
     if (validate.form()) {
         var profilename = $('#pat_profile_name').val();
         var profilerelative = $('#pat_profile_relative_name').val();
@@ -2782,7 +2952,11 @@ $(document.body).on('click', '#save_new_profile', function () {
                     $('#profile_table').append(response.profile_table);
                     ///////////////// initilize datatable //////////////
                     $('.profiletable').DataTable({
-                        // "scrollX": true,
+                        "info": false,
+                        "searching": false,
+                        "bLengthChange": false,
+                        "scrollY": "400px",
+                        "scrollCollapse": true,
                         "initComplete": function (settings, json) {
                             $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                         }
@@ -2885,7 +3059,11 @@ $(document.body).on('click', '#delete_profile', function () {
                             $('#profile_table').append(response.profile_table);
                             ///////////////// initilize datatable //////////////
                             $('.profiletable').DataTable({
-                                // "scrollX": true,
+                                "info": false,
+                                "searching": false,
+                                "bLengthChange": false,
+                                "scrollY": "400px",
+                                "scrollCollapse": true,
                                 "initComplete": function (settings, json) {
                                     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                                 }
@@ -2977,7 +3155,11 @@ $(document.body).on('click', '#update_profile', function () {
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
                 $('.profiletable').DataTable({
-                    // "scrollX": true,
+                    "info": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "scrollY": "400px",
+                    "scrollCollapse": true,
                     "initComplete": function (settings, json) {
                         $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                     }
@@ -3815,7 +3997,11 @@ $(document.body).on('click', '#reset_profile_filter', function () {
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
                 $('.profiletable').DataTable({
-                    // "scrollX": true,
+                    "info": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "scrollY": "400px",
+                    "scrollCollapse": true,
                     "initComplete": function (settings, json) {
                         $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                     }

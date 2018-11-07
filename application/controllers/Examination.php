@@ -15,8 +15,10 @@ class Examination extends MY_Controller
 
     public function examination()
     {
+        $cat_id = 0;
         $data['categories'] = $this->Examination_model->get_examination_categories();
-        $data['items'] = $this->Examination_model->get_examination_items();
+        $data['items'] = $this->Examination_model->get_examination_items_by_category($cat_id);
+        // $data['items'] = $this->Examination_model->get_examination_items();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('examination/examination', $data, true);
         if ($this->input->is_ajax_request()) {

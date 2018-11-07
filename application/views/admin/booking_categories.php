@@ -18,7 +18,7 @@
                             <th class="hide">Order</th>
                             <th style="width: 150px;">Name</th>
                             <th>Contact</th>
-                            <th>Appointment Taken</th>
+                            <th>Fee Paid at</th>
                             <th>Shift</th>
                             <th class="hide"></th>
                             <th class="hide"></th>
@@ -73,11 +73,11 @@
                         </td>
                         <td>
                             <?php
-                                if(isset($bkarray[$i]['creation_time'])){
-                                        if ($bkarray[$i]['creation_time'] == '0000-00-00 00:00:00') {
+                                if(isset($bkarray[$i]['fee_paid_at'])){
+                                        if ($bkarray[$i]['fee_paid_at'] == '0000-00-00 00:00:00') {
                                             echo "";
                                         } else {
-                                            echo date(' d-m-Y h:i a', strtotime($bkarray[$i]['creation_time']));
+                                            echo date(' d-m-Y h:i a', strtotime($bkarray[$i]['fee_paid_at']));
                                         }
                                 }else{
                                     echo "";
@@ -129,9 +129,15 @@
                                 <td>
                                     <?php echo $details['contact_number'] ?>
                                 </td>
-                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['fee_paid_at'])); ?>
                                 <td class="center">
-                                    <?php echo $datetime ?>
+                                    <?php 
+                                        if ($details['fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
                                 </td>
                                 <td>
                                     <div class="form-group" >
@@ -169,7 +175,7 @@
                             <th>Order</th>
                             <th>Name</th>
                             <th>Contact</th>
-                            <th>Appointment Taken</th>
+                            <th>Fee Paid at</th>
                             <th>Shift</th>
                             <th class="hide"></th>
                             <th class="hide"></th>
@@ -192,9 +198,15 @@
                                 <td>
                                     <?php echo $details['contact_number'] ?>
                                 </td>
-                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['creation_time'])); ?>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['fee_paid_at'])); ?>
                                 <td class="center">
-                                    <?php echo $datetime; ?>
+                                    <?php 
+                                        if ($details['fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
                                 </td>
                                 <td>
                                     <div class="form-group" >
@@ -232,7 +244,7 @@
                             <th>Order</th>
                             <th style="width:150px;">Name</th>
                             <th>Contact</th>
-                            <th>Appointment Taken</th>
+                            <th>Fee Paid at</th>
                             <th>Shift</th>
                             <th class="hide"></th>
                             <th class="hide"></th>
@@ -255,9 +267,15 @@
                                 <td>
                                     <?php echo $details['contact_number'] ?>
                                 </td>
-                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['creation_time'])); ?>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['fee_paid_at'])); ?>
                                 <td class="center">
-                                    <?php echo $datetime ?>
+                                    <?php 
+                                        if ($details['fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
                                 </td>
                                 <td>
                                     <div class="form-group" >
@@ -299,7 +317,7 @@
                                         <th class="hide">Order</th>
                                         <th>Name</th>
                                         <th>Contact</th>
-                                        <th>Appointment Taken</th>
+                                        <th>Fee Paid at</th>
                                         <th class="hide">Shift</th>
                                         <th class="hide"></th>
                                         <th class="hide"></th>
@@ -353,11 +371,11 @@
                                             </td>
                                             <td>
                                                 <?php
-                                                if (isset($bkarray[$i]['appointment_date'])) {
-                                                    if ($bkarray[$i]['appointment_date'] == '0000-00-00 00:00:00') {
+                                                if (isset($bkarray[$i]['fee_paid_at'])) {
+                                                    if ($bkarray[$i]['fee_paid_at'] == '0000-00-00 00:00:00') {
                                                         echo "";
                                                     } else {
-                                                        echo date(' d-m-Y h:i a', strtotime($bkarray[$i]['appointment_date']));
+                                                        echo date(' d-m-Y h:i a', strtotime($bkarray[$i]['fee_paid_at']));
                                                     }
                                                 } else {
                                                     echo "";
@@ -409,9 +427,15 @@
                                             <td>
                                                 <?php echo $details['contact_number'] ?>
                                             </td>
-                                            <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                            <?php $datetime = date(' d-m-Y h:i a', strtotime($details['fee_paid_at'])); ?>
                                             <td class="center">
-                                                <?php echo $datetime ?>
+                                                <?php 
+                                                    if ($details['fee_paid_at'] == '0000-00-00 00:00:00') {
+                                                        echo "";
+                                                    }else{
+                                                        echo $datetime;
+                                                    }
+                                                ?>
                                             </td>
                                             <td>
                                                 <div class="form-group" >
@@ -448,7 +472,7 @@
                             <th>Order</th>
                             <th style="width:150px;">Name</th>
                             <th>Contact</th>
-                            <th>Appointment Taken</th>
+                            <th>Fee Paid at</th>
                             <th class="hide">Shift</th>
                             <th class="hide"></th>
                             <th class="hide"></th>
@@ -471,9 +495,15 @@
                                 <td>
                                     <?php echo $details['contact_number'] ?>
                                 </td>
-                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['fee_paid_at'])); ?>
                                 <td class="center">
-                                    <?php echo $datetime; ?>
+                                    <?php 
+                                        if ($details['fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
                                 </td>
                                 <td class="hide">
                                     <div class="form-group" >
@@ -509,7 +539,7 @@
                             <th>Order</th>
                             <th style="width:150px;">Name</th>
                             <th>Contact</th>
-                            <th>Appointment Taken</th>
+                            <th>Fee Paid at</th>
                             <th class="hide">Shift</th>
                             <th class="hide"></th>
                             <th class="hide"></th>
@@ -532,9 +562,15 @@
                                 <td>
                                     <?php echo $details['contact_number'] ?>
                                 </td>
-                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['appointment_date'])); ?>
+                                <?php $datetime = date(' d-m-Y h:i a', strtotime($details['fee_paid_at'])); ?>
                                 <td class="center">
-                                    <?php echo $datetime ?>
+                                    <?php 
+                                        if ($details['fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
                                 </td>
                                 <td class="hide">
                                     <div class="form-group" >

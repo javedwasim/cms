@@ -17,7 +17,7 @@
                             <label>Main Category:</label>
                             <select class="form-control" name="main_category" id="main_category">
                                 <option>Select</option>
-                                <option value="dooplers">Dooplers</option>
+                                <option value="dopplers">Dopplers</option>
                                 <option value="mmode">MMODE</option>
                             </select>
                         </div>
@@ -40,9 +40,8 @@
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control" name="main_category_filter" onchange="main_category_item_filter(this.value)">
-                            <option value="">Select</option>
-                            <option value="0">All</option>
-                            <option value="dooplers">Dooplers</option>
+                            <option value="0">Select</option>
+                            <option value="dopplers">Dopplers</option>
                             <option value="mmode">MMODE</option>
                         </select>
                     </div>

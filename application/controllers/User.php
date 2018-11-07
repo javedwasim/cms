@@ -691,9 +691,10 @@ class User extends MY_Controller {
         $whereToupdate = $this->input->post('whereToupdate');
         $bookingFlag = $this->input->post('flag');
         $tabledate = $this->input->post('tabledate');
+        $statusid = $this->input->post('statusid');
         $date = date('Y-m-d', strtotime($tabledate));
         if ($bookingFlag == 'vip') {
-            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate);
+            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
             if ($result) {
                 $data['booking_flag'] = $bookingFlag;
                 $json['success'] = true;
@@ -702,7 +703,7 @@ class User extends MY_Controller {
                 $json['error'] = true;
             }
         } else if ($bookingFlag == 'on_walk') {
-            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate);
+            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
             if ($result) {
                 $data['booking_flag'] = $bookingFlag;
                 $json['success'] = true;
@@ -711,7 +712,7 @@ class User extends MY_Controller {
                 $json['error'] = true;
             }
         } else if ($bookingFlag == 'on_call') {
-            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate);
+            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
             if ($result) {
                 $data['booking_flag'] = $bookingFlag;
                 $json['success'] = true;
@@ -720,7 +721,7 @@ class User extends MY_Controller {
                 $json['error'] = true;
             }
         } else {
-            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate);
+            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
             if ($result) {
                 $data['booking_flag'] = $bookingFlag;
                 $json['success'] = true;

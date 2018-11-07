@@ -15,8 +15,9 @@ class Profile_history extends MY_Controller
 
     public function history()
     {
+        $catid = 0;
         $data['categories'] = $this->History_model->get_profile_history();
-        $data['items'] = $this->History_model->get_history_items();
+        $data['items'] = $this->History_model->get_history_items_by_category($catid);
         $json['result_html'] = $this->load->view('history/profile_history', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -274,7 +275,7 @@ class Profile_history extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
-        $data['items'] = $this->History_model->get_history_items();
+        $data['items'] = $this->History_model->get_history_items_by_category($id);
         $data['active_tab'] = 'history_items_content';
         $json['result_html'] = $this->load->view('history/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -284,7 +285,8 @@ class Profile_history extends MY_Controller
     }
 
     public function get_item_tab(){
-        $data['items'] = $this->History_model->get_history_items();
+        $catid = 0;
+        $data['items'] = $this->History_model->get_history_items_by_category($catid);
         $data['categories'] = $this->History_model->get_profile_history();
         $data['active_tab'] = 'history_items_content';
         $json['result_html'] = $this->load->view('history/items', $data, true);

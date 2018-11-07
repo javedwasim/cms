@@ -1307,6 +1307,16 @@ class Profile_model extends CI_Model
         }
     }
 
+    // public function get_pt_name($name){
+    //     $this->db->like('pat_name', $name); 
+    //     $query = $this->db->get("patient_profile");
+    //     if ($query) {
+    //         return $query->result();
+    //     }else{
+    //         return array();
+    //     }
+    // }
+
 
 }
 

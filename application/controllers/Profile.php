@@ -927,32 +927,39 @@ class Profile extends MY_Controller
     public function save_profile_examination_info()
     {
         $data = $this->input->post();
-        if (isset($data['examination_testid'])&& $data['examination_testid'] != '') {
-            $result = $this->Profile_model->update_profile_examination_info($data);
-            if ($result) {
-                $json['success'] = true;
-                $json['message'] = 'Updated successfully!';
-            }else{
-                $json['error'] = true;
-                $json['message'] = 'Seems an error!';
-            }
+        $current_date = date('Y-m-d');
+        $next_visit_date = date('Y-m-d',strtotime($data['next_date_visit_form']));
+        if ($current_date>=$next_visit_date) {
+            $json['error'] = true;
+            $json['message'] = 'Please provide next visit date!';
         }else{
-            $result = $this->Profile_model->save_profile_examination_info($data);
-            if ($result) {
-                $json['success'] = true;
-                $json['message'] = 'Saved successfully!';
+            if (isset($data['examination_testid'])&& $data['examination_testid'] != '') {
+                $result = $this->Profile_model->update_profile_examination_info($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = 'Updated successfully!';
+                }else{
+                    $json['error'] = true;
+                    $json['message'] = 'Seems an error!';
+                }
             }else{
-                $json['error'] = true;
-                $json['message'] = 'Seems an error!';
+                $result = $this->Profile_model->save_profile_examination_info($data);
+                if ($result) {
+                    $json['success'] = true;
+                    $json['message'] = 'Saved successfully!';
+                }else{
+                    $json['error'] = true;
+                    $json['message'] = 'Seems an error!';
+                }
             }
+            $data['professions'] = $this->Setting_model->get_professions();
+            $data['districts'] = $this->Setting_model->get_districts();
+            $data['profiles'] = $this->Profile_model->get_profiles();
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+            $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+            $json['result_html'] = $this->load->view('pages/profile', $data, true);
         }
-        $data['professions'] = $this->Setting_model->get_professions();
-        $data['districts'] = $this->Setting_model->get_districts();
-        $data['profiles'] = $this->Profile_model->get_profiles();
-        $data['rights'] = $this->session->userdata('other_rights');
-        $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
-        $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
-        $json['result_html'] = $this->load->view('pages/profile', $data, true);
         if ($this->input->is_ajax_request()){
             set_content_type($json);
         }
@@ -1208,6 +1215,18 @@ class Profile extends MY_Controller
             set_content_type($json);
         }
     }
+
+    // public function get_pat_name() {
+    //     $name = $this->input->get('term'); 
+    //     $result = $this->Profile_model->get_pt_name($name);
+    //     $patname =  array();
+    //     foreach ($result as $d) {
+    //         $patname[]     = array(
+    //             'name' => $d->pat_name
+    //         );
+    //     }
+    //     echo json_encode($patname); 
+    // }
 
 }
 

@@ -106,7 +106,7 @@
                                                         <div class="form-group">
                                                             <label>Category:</label>
                                                             <select class="form-control" name="advice_id" id="advice_id" required>
-                                                                <option value="">Select</option>
+                                                                <option value="0">Select</option>
                                                                 <?php foreach ($advices as $advice): ?>
                                                                     <option value="<?php echo $advice['id']; ?>"><?php echo $advice['name']; ?></option>
                                                                 <?php endforeach; ?>
@@ -144,8 +144,7 @@
                                             <div class="form-group ">
                                                 <label>Select Category:</label>
                                                 <select class="form-control" name="filter_advice_category" onchange="filter_advice_item_category(this.value)">
-                                                    <option value="">Select</option>
-                                                    <option value="0">All</option>
+                                                    <option value="0">Select</option>
                                                     <?php foreach ($advices as $advice): ?>
                                                         <option value="<?php echo $advice['id']; ?>"
                                                             <?php echo isset($selected_category)&&($selected_category==$advice['id'])?'selected':'' ?>><?php echo $advice['name']; ?></option>

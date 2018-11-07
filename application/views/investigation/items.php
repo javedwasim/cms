@@ -78,7 +78,7 @@
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control" name="filter_investigation_category" onchange="filter_investigation_item_category(this.value)">
-                            <option value="">Select</option>
+                            <option value="0">Select</option>
                             <?php foreach ($categories as $category): ?>
                                 <option value="<?php echo $category['id']; ?>"
                                     <?php echo isset($selected_category)&&($selected_category==$category['id'])?'selected':'' ?>>

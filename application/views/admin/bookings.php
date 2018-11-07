@@ -101,24 +101,30 @@
                         "info": false,
                         "paging": false,
                         "scrollX": true,
+                        "scrollY": "450px",
+                        "scrollCollapse": true,
                         "searching": false,
+                        'aoColumnDefs': [{
+                           'bSortable': false,
+                           'aTargets': 0
+                        }],
                         "createdRow": function(row, data, dataIndex) {
                             if (data[7] == "1") {
-                            $(row).addClass('round-green');
+                                $(row).addClass('round-green');
                             }if(data[7] == "2"){
-                            $(row).addClass('round-blue');
+                                $(row).addClass('round-blue');
                             }
                             if (data[7] == "3") {
-                            $(row).addClass('round-red');
+                                $(row).addClass('round-red');
                             }if(data[7] == "4"){
-                            $(row).addClass('round-yellow');
+                                $(row).addClass('round-yellow');
                             }
                             if (data[7] == "5") {
-                            $(row).addClass('round-orange');
+                                $(row).addClass('round-orange');
                             }if(data[7] == "6"){
-                            $(row).addClass('round-lightGray');
+                                $(row).addClass('round-lightGray');
                             }if (data[7 ] == "7") {
-                            $(row).addClass('round-white');
+                                $(row).addClass('round-white');
                             }
                         }
                     });

@@ -2066,7 +2066,11 @@ $(document.body).on('click', '#save_ett_test', function(e){
             $('#profile_table').append(response.profile_table);
             ///////////////// initilize datatable //////////////
             $('.profiletable').DataTable({
-                // "scrollX": true,
+                "info": false,
+                "searching": false,
+                "bLengthChange": false,
+                "scrollY": "400px",
+                "scrollCollapse": true,
                 "initComplete": function (settings, json) {
                     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                 }
@@ -2204,7 +2208,11 @@ $(document.body).on('click', '#save_patient_echo_info', function(){
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
                 $('.profiletable').DataTable({
-                    // "scrollX": true,
+                    "info": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "scrollY": "400px",
+                    "scrollCollapse": true,
                     "initComplete": function (settings, json) {
                         $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                     }
@@ -2385,37 +2393,41 @@ $(document.body).on('click', '#save_patient_examination_info', function(){
                 + "&" +$("#instruction_profile_form").serialize()+ "&" + $("#next_date_visit_form").serialize(),
         cache: false,
         success: function(response) {
-            $('#research_modal').modal('hide');
-            $('.content-wrapper').remove();
-            $('#content-wrapper').append(response.result_html);
-            $('.profile-table').remove();
-            $('#profile_table').append(response.profile_table);
-            ///////////////// initilize datatable //////////////
-            $('.profiletable').DataTable({
-                // "scrollX": true,
-                "initComplete": function (settings, json) {
-                    $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                }
-            });
-            $("#toggleresize1").click(function () {
-                var icon = $('#toggleresize1 > .arro');
-                icon.toggleClass('fa-arrow-left fa-arrow-right');
-                $('.resize1').toggleClass("active_resize1");
-                $('.resize2').toggleClass("inactive_resize2");
-
-            });
-            $("#toggleresize2").click(function () {
-                var icon = $('#toggleresize2 > .arro');
-                icon.toggleClass('fa-arrow-left fa-arrow-right');
-                $('.resize2').toggleClass("active_resize2");
-                $('.resize1').toggleClass("inactive_resize1");
-            });
-            $('#profiletable tbody tr:first').addClass('row_selected');
-            $("#profiletable tbody tr").click(function (e) {
-                $('#profiletable tbody tr.row_selected').removeClass('row_selected');
-                $(this).addClass('row_selected');
-            });
             if (response.success) {
+                $('#research_modal').modal('hide');
+                $('.content-wrapper').remove();
+                $('#content-wrapper').append(response.result_html);
+                $('.profile-table').remove();
+                $('#profile_table').append(response.profile_table);
+                ///////////////// initilize datatable //////////////
+                $('.profiletable').DataTable({
+                    "info": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "scrollY": "400px",
+                    "scrollCollapse": true,
+                    "initComplete": function (settings, json) {
+                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    }
+                });
+                $("#toggleresize1").click(function () {
+                    var icon = $('#toggleresize1 > .arro');
+                    icon.toggleClass('fa-arrow-left fa-arrow-right');
+                    $('.resize1').toggleClass("active_resize1");
+                    $('.resize2').toggleClass("inactive_resize2");
+
+                });
+                $("#toggleresize2").click(function () {
+                    var icon = $('#toggleresize2 > .arro');
+                    icon.toggleClass('fa-arrow-left fa-arrow-right');
+                    $('.resize2').toggleClass("active_resize2");
+                    $('.resize1').toggleClass("inactive_resize1");
+                });
+                $('#profiletable tbody tr:first').addClass('row_selected');
+                $("#profiletable tbody tr").click(function (e) {
+                    $('#profiletable tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
                 toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
@@ -3307,7 +3319,11 @@ function last_visit_filter(val){
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
                 $('.profiletable').DataTable({
-                    // "scrollX": true,
+                    "info": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "scrollY": "400px",
+                    "scrollCollapse": true,
                     "initComplete": function (settings, json) {
                         $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                     }
@@ -3335,7 +3351,11 @@ function profile_search_in(val){
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
                 $('.profiletable').DataTable({
-                    // "scrollX": true,
+                    "info": false,
+                    "searching": false,
+                    "bLengthChange": false,
+                    "scrollY": "400px",
+                    "scrollCollapse": true,
                     "initComplete": function (settings, json) {
                         $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
                     }
@@ -3492,4 +3512,3 @@ $(function() {
         }
     });
 });
-

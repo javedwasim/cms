@@ -1,4 +1,4 @@
-<div class="patient_info">
+<div class="patient_info" style="font-size: 14px;">
       <strong>ID:</strong>
       <label id="label_patient_id"><?php echo $patient_info->id ?></label>
       <strong>Name:</strong>

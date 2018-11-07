@@ -24,7 +24,7 @@
                             <label>Test:</label>
                             <select class="form-control" name="lab_test_id">
                                 <option>Select</option>
-                                <?php foreach ($tests as $test): ?>
+                                <?php foreach ($labtests as $test): ?>
                                     <option value="<?php echo $test['id']; ?>"
                                         <?php echo isset($selected_category)&&($selected_category==$test['id'])?'selected':'' ?>>
                                         <?php echo $test['name']; ?></option>
@@ -50,8 +50,8 @@
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control" name="filter_test_id" onchange="filter_tests_item(this.value)">
-                            <option value="">Select</option>
-                            <?php foreach ($tests as $test): ?>
+                            <option value="0">Select</option>
+                            <?php foreach ($labtests as $test): ?>
                                 <option value="<?php echo $test['id']; ?>"
                                     <?php echo isset($selected_test_id)&&($selected_test_id==$test['id'])?'selected':'' ?>>
                                     <?php echo $test['name']; ?></option>
