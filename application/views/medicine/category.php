@@ -15,7 +15,7 @@
                 </div>
             </form>
         </div>
-        <div class="card-body medicine_category_container" style="height: 400px; overflow-y: scroll;">
+        <div class="card-body medicine_category_container">
             <?php $this->load->view('medicine/category_table'); ?>
         </div>
     </div>

@@ -6,21 +6,21 @@ if(isset($rights[0]['user_rights']))
     $loggedin_user = $this->session->userdata('userdata');
 }
 ?>
-<table class="table table-bordered nowrap responsive" cellspacing="0" id="examination_item_tbl" width="100%" >
+<table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="examination_item_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 9%;">Action</th>
-        <th class="table-header">Item Name</th>
+        <th style="width:100px;">Action</th>
+        <th>Item Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
         <tr class="table-row" id="<?php echo $item['id']; ?>">
-            <td>
+            <td style="width:100px;"> 
                 <?php if($loggedin_user['is_admin']==1){ ?>
                     <a class="delete-examination-item btn btn-danger btn-xs"
                        href="javascript:void(0)" title="delete"
-                       data-href="<?php echo site_url('examination/delete_examination_item/') . $item['id'] ?>">
+                       data-href="<?php echo site_url('examination/delete_examination_item/') . $item['id'].'/'.$item['examination_id'] ?>">
                         <i class="fa fa-trash" title="Delete"></i></a>
                     <a class="edit-examination-item-btn btn btn-info btn-xs"
                        href="javascript:void(0)"

@@ -44,7 +44,6 @@
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="<?php echo base_url(); ?>assets/dist/js/jquery.slimscroll.js"></script>
     <!-- sort able script -->
-    <!-- <script src="<?php echo base_url(); ?>assets/plugins/jquery-sortable/jquery-sortable-min.js"></script> -->
     <script src="<?php echo base_url(); ?>assets/plugins/jquery-sortable/js/jquery.tablednd.js"></script>
     <!--Wave Effects -->
     <script src="<?php echo base_url(); ?>assets/dist/js/waves.js"></script>
@@ -53,8 +52,6 @@
     <!--stickey kit -->
     <script src="<?php echo base_url(); ?>assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-     <!-- jQuery Custom Scroller -->
-    <!-- <script src="<?php echo base_url(); ?>assets/vendors/js/jquery.mCustomScrollbar.concat.min.js"></script> -->
     <!--c3 JavaScript -->
     <script src="<?php echo base_url(); ?>assets/plugins/d3/d3.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/c3-master/c3.min.js"></script>
@@ -88,21 +85,21 @@
     <script src="<?php echo base_url(); ?>assets/dist/js/custom.js"></script>
     <script src="<?php echo base_url(); ?>assets/dist/js/script.js"></script>
     <!-- End custom js-->
- <!--    <script>
+    <script>
         function showError() {
             toastr["error"]('You are not authorised for this action.');
         }
-        var $loading = $('.preloader').hide();
-        //Attach the event handler to any element
-        $(document).ajaxStart(function () {
-                //ajax request went so show the loading image
-                $loading.show();
-            })
-            .ajaxStop(function () {
-                //got response so hide the loading image
-                $loading.show();
-            });
-    </script> -->
+        // var $loading = $('.preloader').hide();
+        // //Attach the event handler to any element
+        // $(document).ajaxStart(function () {
+        //         //ajax request went so show the loading image
+        //         $loading.show();
+        //     })
+        //     .ajaxStop(function () {
+        //         //got response so hide the loading image
+        //         $loading.show();
+        //     });
+    </script>
 </body>
 
 </html>

@@ -68,6 +68,7 @@ class Examination extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
+            $eid = $data['examination_id'];
             $result = $this->Examination_model->add_examination_item($data);
             if ($result) {
                 $json['success'] = true;
@@ -77,7 +78,7 @@ class Examination extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
-        $data['items'] = $this->Examination_model->get_examination_items();
+        $data['items'] = $this->Examination_model->get_examination_items_by_category($eid);
         $data['active_tab'] = 'items';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('examination/item_table', $data, true);
@@ -216,7 +217,7 @@ class Examination extends MY_Controller
         }
     }
 
-    public function delete_examination_item($id)
+    public function delete_examination_item($id,$eid)
     {
         $result = $this->Examination_model->delete_examination_item($id);
         if ($result) {
@@ -226,7 +227,7 @@ class Examination extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
-        $data['items'] = $this->Examination_model->get_examination_items();
+        $data['items'] = $this->Examination_model->get_examination_items_by_category($eid);
         $data['active_tab'] = 'items';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('examination/item_table', $data, true);

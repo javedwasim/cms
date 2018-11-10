@@ -61,13 +61,18 @@
 
 		public function update_signature_details(){
 			$data = $this->input->post();
-	        $result = $this->Doctor_signature_model->update_details($data);
-	        if ($result) {
-	            $json['success'] = true;
-	            $json['message'] = "Updated successfully!";
-	        } else {
+	        if (empty($data['editval'])) {
 	            $json['error'] = true;
-	            $json['message'] = "Seems to an error";
+	            $json['message'] = 'Could not update empty field.';
+	        }else{
+	            $result = $this->Doctor_signature_model->update_details($data);
+	            if ($result) {
+	                $json['success'] = true;
+	                $json['message'] = "Updated successfully!";
+	            }else {
+	                $json['error'] = true;
+	                $json['message'] = "Seems to an error";
+	            }
 	        }
 	        if ($this->input->is_ajax_request()) {
 	            set_content_type($json);

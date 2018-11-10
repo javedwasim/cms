@@ -59,7 +59,7 @@ $(document.body).on('click','#import_dosage_btn', function(e){
                 </div>
             </div>
         </div>
-        <div class="card-body dosage_category_container" style="height: 400px; overflow-y: scroll;">
+        <div class="card-body dosage_category_container">
             <?php $this->load->view('medicine/dosage_table'); ?>
         </div>
     </div>

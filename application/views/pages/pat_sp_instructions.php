@@ -141,11 +141,11 @@
         $('td.p_category').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-        var category = 'clinical';
+        var category = 'special';
         $.ajax({
             url: '/cms/profile/get_inst_item',
             type: 'post',
-            data: {inst_id: id, category: category},
+            data: {instruction_id: id, category: category},
             cache: false,
             success: function (response) {
                 $('.dashboard-content').empty();

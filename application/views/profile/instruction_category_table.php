@@ -1,7 +1,7 @@
 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 9%">Delete</th>
+        <th class="table-header" style="width: 9%">Action</th>
         <th class="table-header">Category Name</th>
     </tr>
     </thead>

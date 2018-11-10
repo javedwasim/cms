@@ -155,17 +155,17 @@ if(isset($rights[0]['user_rights']))
                             </div>
                             <div class="row m-t-5">
                                 <div class="col-md-12">
-                                    <label class="radio-inline">
+                                    <label class="radio-inline m-r-10">
                                       <input type="radio" name="optradio" id="prescription_details">Prescription
                                     </label>
-                                    <label class="radio-inline">
+                                    <label class="radio-inline m-r-10">
                                       <input type="radio" name="optradio" id="echo_detail">Echo
                                     </label>
-                                    <label class="radio-inline">
+                                    <label class="radio-inline m-r-10">
                                       <input type="radio" name="optradio" id="ett_details">ETT
                                     </label>
-                                    <label class="radio-inline">
-                                      <input type="radio" name="optradio" id="sp_inst_details">Special
+                                    <label class="radio-inline m-r-10">
+                                      <input type="radio" name="optradio" id="sp_inst_details">Special Instructions
                                     </label>
                                     <label class="radio-inline">
                                       <input type="radio" name="optradio" id="lab_test_detail">Lab Test

@@ -78,7 +78,7 @@
                                 <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
                                     <a class="delete-lab-test btn btn-danger btn-xs"
                                        href="javascript:void(0)" title="delete"
-                                       data-href="<?php echo site_url('setting/delete_lab_test_item/') . $item['id'] ?>">
+                                       data-href="<?php echo site_url('setting/delete_lab_test_item/') . $item['id'].'/'.$item['lab_test_id'] ?>">
                                         <i class="fa fa-trash" title="Delete"></i></a>
                                     <a class="edit-lab-test-item-btn btn btn-info btn-xs"
                                        href="javascript:void(0)"
@@ -93,10 +93,10 @@
 
                             </td>
                             <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                                <td style="word-break: break-all; width: 42%;"class="exam_cate" onClick="showEdit(this);">
+                                <td style="word-break: break-all; width: 42%;"class="exam_cate" >
                                     <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $item['name']; ?>" name="lab_test_item" onchange="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')">
                                 </td>
-                                <td style="word-break: break-all;width: 50%;"class="exam_cate" onClick="showEdit(this);">
+                                <td style="word-break: break-all;width: 50%;"class="exam_cate">
                                     <input type="text" class="form-control border-0 bg-transparent shadow-none" name="lab_test_unit" value="<?php echo $item['units']; ?>" onchange="saveTestItemDescription(this,'unit','<?php echo $item['id']; ?>')">        
                                 </td>
                             <?php } else{ ?>
@@ -142,25 +142,27 @@
     </div>
 </div>
 <script>
-    function showEdit(editableObj) {
-        $("#lab_test_item_tbl tbody tr").click(function (e) {
-            $('#lab_test_item_tbl tbody tr.row_selected').removeClass('row_selected');
-            $(this).addClass('row_selected');
-        });
-    }
+  
+    $("#lab_test_item_tbl tbody tr").click(function (e) {
+        $('#lab_test_item_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+
     function saveTestItemDescription(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'setting/save_lab_test_item' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
 $(document).ready(function () {
     // Sortable rows

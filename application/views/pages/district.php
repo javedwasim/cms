@@ -59,7 +59,7 @@ $(document.body).on('click','#import_district_btn', function(e){
                         </div>
                     </div>
                 </div>
-                <div class="card-body" style="overflow-y:auto; height:400px">
+                <div class="card-body" style="overflow-y:auto; height:510px">
                     <div id="district_content">
                         
                     </div>

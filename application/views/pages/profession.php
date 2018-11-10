@@ -66,7 +66,7 @@ $(document.body).on('click','#import_profession_btn', function(e){
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
-                <div class="card-body" style="overflow-y:auto; height:400px">
+                <div class="card-body" style="overflow-y:auto; height:510px">
                     <div id="profession_table">
                         
                     </div>

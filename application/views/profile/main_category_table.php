@@ -7,12 +7,17 @@
     <tbody>
     <?php foreach ($main_categories as $category): ?>
         <tr class="table-row">
-            <td contenteditable="true" class="2d_echo_cate"
+            <td class="2d_echo_cate"
                 onClick="showEditMainCategory(this,'<?php echo $category['id']; ?>');">
                 <?php echo $category['name']; ?></td>
 
         </tr>
     <?php endforeach; ?>
+        <tr class="table-row">
+            <td class="2d_echo_cate"
+                onClick="showEditMainCategory(this,'9');">
+                Color Doppler Flow</td>            
+        </tr>
     </tbody>
 </table>
 <script>
@@ -21,7 +26,6 @@
         $('td.2d_echo_cate').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-
         var patient_id = $('#label_patient_id').text();
         var measurement_cate_id = $('#measurement_cate_id').val(category_id);
         var patient_id = $('#patient_id').val(patient_id);

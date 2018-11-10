@@ -70,6 +70,7 @@ class Profile_history extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
+            $pid = $data['profile_history_id'];
             $itemexits = $this->History_model->history_item_exits($data);
             if ($itemexits) {
                 $json['error'] = true;
@@ -85,7 +86,7 @@ class Profile_history extends MY_Controller
                 }
             }
         }
-        $data['items'] = $this->History_model->get_history_items();
+        $data['items'] = $this->History_model->get_history_items_by_category($pid);
         $data['active_tab'] = 'items';
         $json['result_html'] = $this->load->view('history/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -265,7 +266,7 @@ class Profile_history extends MY_Controller
         }
     }
 
-    public function delete_history_item($id)
+    public function delete_history_item($id,$cid)
     {
         $result = $this->History_model->delete_history_item($id);
         if ($result) {
@@ -275,7 +276,7 @@ class Profile_history extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
-        $data['items'] = $this->History_model->get_history_items_by_category($id);
+        $data['items'] = $this->History_model->get_history_items_by_category($cid);
         $data['active_tab'] = 'history_items_content';
         $json['result_html'] = $this->load->view('history/item_table', $data, true);
         if ($this->input->is_ajax_request()) {

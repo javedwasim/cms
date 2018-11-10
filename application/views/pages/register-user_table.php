@@ -7,7 +7,7 @@
         <th class="verticalTableHeader"><p>Name</p></th>
         <th class="verticalTableHeader"><p>Username</p></th>
         <th class="verticalTableHeader"><p>Appointments</p></th>
-        <th class="verticalTableHeader"><p>Printing</p></th>
+        <th class="verticalTableHeader"><p>Appointment Printing</p></th>
         <th class="verticalTableHeader"><p>Profile View</p></th>
         <th class="verticalTableHeader"><p>Profile Add</p></th>
         <th class="verticalTableHeader"><p>Profile Edit</p></th>

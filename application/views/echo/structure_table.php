@@ -1,15 +1,15 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive structure_table" id="echo_structure_tbl" cellspacing="0" style="width: 100%">
+<table class="table table-bordered nowrap responsive structure_table tbl_header_fix" id="echo_structure_tbl" cellspacing="0" style="width: 100%;">
     <thead>
-    <tr>
-        <th class="table-header" style="width:5%;">Action</th>
-        <th class="table-header">Structure</th>
-    </tr>
+        <tr>
+            <th  style="width:50px;">Action</th>
+            <th >Structure</th>
+        </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 800px;">
     <?php foreach ($structures as $structure): ?>
         <tr class="table-row" id="<?php echo $structure['id']; ?>">
-            <td>
+            <td style="width:50px;">
                 <?php if($loggedin_user['is_admin']==1){ ?>
                     <a class="delete-structure btn btn-danger btn-xs"
                        href="javascript:void(0)" title="delete"

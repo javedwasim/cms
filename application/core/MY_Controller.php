@@ -7,7 +7,7 @@ class MY_Controller extends CI_Controller {
 	    print_r($this->uri->rsegment(1));
 	    die();*/
 	    if(!$this->session->userdata('is_logged_in')) {
-	        redirect('/');
+	        // redirect('/');
 	    }
 	   
 		}

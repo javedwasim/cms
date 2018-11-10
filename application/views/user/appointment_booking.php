@@ -13,7 +13,7 @@
         <?php }else{?>
         <nav id="sidebar" >
         <?php  }?>
-            <div class="row sticky-bar m-l-5 ">
+            <div class="row m-l-5 ">
                 <div class="col-md-12" id="appointment_sidebar">
                     <div class="card p-t-20">
                         <div class="card-header">
@@ -152,10 +152,6 @@
                             "searching": false,
                             "scrollY": "450px",
                             "scrollCollapse": true,
-                            fixedHeader: {
-                                header: true,
-                                headerOffset: 100
-                            },
                             "createdRow": function (row, data, dataIndex) {
                                 if (data[17] == "1") {
                                     $(row).addClass('round-green');
@@ -186,7 +182,21 @@
                             columnDefs: [
                                 {"type": "html-input", "targets": [3, 6, 7, 8]},
                                 {"targets": 1, "orderable": false}
-                            ]
+                            ],
+                            "fnDrawCallback": function ( oSettings ) {
+                                /* Need to redo the counters if filtered or sorted */
+                                if ( oSettings.bSorted || oSettings.bFiltered )
+                                {
+                                    for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                    {
+                                        $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                    }
+                                }
+                            },
+                            "aoColumnDefs": [
+                                { "bSortable": false, "aTargets": [ 1 ] }
+                            ],
+                            "aaSorting": [[ 1, 'asc' ]]
                         });
                         $("#full_name").focus();
                         $("#editable-datatable tbody tr").click(function (e) {

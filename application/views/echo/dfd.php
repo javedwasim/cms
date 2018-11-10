@@ -5,7 +5,7 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="card">
                         <div class="card-header">Disease</div>
-                        <div class="card-body" style="height: 300px; overflow-y: scroll;">
+                        <div class="card-body" >
                             <?php $this->load->view('echo/default_disease_table'); ?>
                             <input type="hidden" id="assign_disease_id" value="" />
                         </div>
@@ -14,7 +14,7 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="card-header ">Structure</div>
                     <div class="card">
-                        <div class="card-body structure_category_container" id="dfd_structure" style="height: 300px; overflow-y: scroll;">
+                        <div class="card-body structure_category_container" id="dfd_structure" >
                             <?php $this->load->view('echo/default_structure_table'); ?>
                             <input type="hidden" id="assign_structure_id" value="" />
                         </div>
@@ -23,7 +23,7 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="card">
                         <div class="card-header">Finding</div>
-                        <div class="card-body default_finding_container" style="height: 300px; overflow-y: scroll;">
+                        <div class="card-body default_finding_container" >
                             <?php $this->load->view('echo/default_finding_table'); ?>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
 
                 <div class="col-lg-12 col-md-8">
                     <div class="card">
-                        <div class="card-body default_diagnosis_container" style="height: 300px; overflow-y: scroll;">
+                        <div class="card-body default_diagnosis_container">
                             <?php $this->load->view('echo/default_diagnosis_table'); ?>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
         </div>
     </div>
 </div>
-<script>
+<!-- <script>
     $(document).ready(function () {
         $('.structure_table').DataTable({
             "info": false,
@@ -115,4 +115,4 @@
         $("#dfd_structure table tbody tr:first td:nth-child(2)").trigger("click");
 
     });
-</script>
+</script> -->

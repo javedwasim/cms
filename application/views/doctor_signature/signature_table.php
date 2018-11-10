@@ -1,5 +1,5 @@
 <div class="signature_table">
-    <table class="table table-bordered" cellspacing="0" >
+    <table class="table table-bordered" id="doc_sig_tbl" cellspacing="0" >
        <thead>
         <tr>
             <th style="width: 10%">Delete</th>
@@ -44,3 +44,9 @@
         </tbody>
     </table>
 </div>
+<script type="text/javascript">
+    $("#doc_sig_tbl tbody tr").click(function () {
+        $('#doc_sig_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+</script>

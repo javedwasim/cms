@@ -142,7 +142,21 @@ $(document).ready(function () {
         "scrollX": true,
         columnDefs: [
             {"type": "html-input", "targets": [3, 6, 7, 8]}
-        ]
+        ],
+        "fnDrawCallback": function ( oSettings ) {
+            /* Need to redo the counters if filtered or sorted */
+            if ( oSettings.bSorted || oSettings.bFiltered )
+            {
+                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                {
+                    $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                }
+            }
+        },
+        "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 1 ] }
+        ],
+        "aaSorting": [[ 1, 'asc' ]]
     });
     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
         return $(value).val();
@@ -203,10 +217,6 @@ $(document.body).on('click', '.feepaid', function () {
                         "searching": false,
                         "scrollY": "450px",
                         "scrollCollapse": true,
-                            fixedHeader: {
-                            header: true,
-                            headerOffset: 100
-                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -236,7 +246,21 @@ $(document.body).on('click', '.feepaid', function () {
                         "scrollX": true,
                         columnDefs: [
                             {"type": "html-input", "targets": [3, 6, 7, 8]}
-                        ]
+                        ],
+                        "fnDrawCallback": function ( oSettings ) {
+                            /* Need to redo the counters if filtered or sorted */
+                            if ( oSettings.bSorted || oSettings.bFiltered )
+                            {
+                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                {
+                                    $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                }
+                            }
+                        },
+                        "aoColumnDefs": [
+                            { "bSortable": false, "aTargets": [ 1 ] }
+                        ],
+                        "aaSorting": [[ 1, 'asc' ]]
                     });
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
@@ -307,10 +331,6 @@ $(document.body).on('click', '.wecg', function () {
                         "searching": false,
                         "scrollY": "450px",
                         "scrollCollapse": true,
-                            fixedHeader: {
-                            header: true,
-                            headerOffset: 100
-                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -340,7 +360,21 @@ $(document.body).on('click', '.wecg', function () {
                         "scrollX": true,
                         columnDefs: [
                             {"type": "html-input", "targets": [3, 6, 7, 8]}
-                        ]
+                        ],
+                        "fnDrawCallback": function ( oSettings ) {
+                            /* Need to redo the counters if filtered or sorted */
+                            if ( oSettings.bSorted || oSettings.bFiltered )
+                            {
+                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                {
+                                    $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                }
+                            }
+                        },
+                        "aoColumnDefs": [
+                            { "bSortable": false, "aTargets": [ 1 ] }
+                        ],
+                        "aaSorting": [[ 1, 'asc' ]]
                     });
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
@@ -412,10 +446,6 @@ $(document.body).on('click', '.wett', function () {
                         "searching": false,
                         "scrollY": "450px",
                         "scrollCollapse": true,
-                            fixedHeader: {
-                            header: true,
-                            headerOffset: 100
-                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -445,7 +475,21 @@ $(document.body).on('click', '.wett', function () {
                         "scrollX": true,
                         columnDefs: [
                             {"type": "html-input", "targets": [3, 6, 7, 8]}
-                        ]
+                        ],
+                        "fnDrawCallback": function ( oSettings ) {
+                            /* Need to redo the counters if filtered or sorted */
+                            if ( oSettings.bSorted || oSettings.bFiltered )
+                            {
+                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                {
+                                    $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                }
+                            }
+                        },
+                        "aoColumnDefs": [
+                            { "bSortable": false, "aTargets": [ 1 ] }
+                        ],
+                        "aaSorting": [[ 1, 'asc' ]]
                     });
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
@@ -515,10 +559,6 @@ $(document.body).on('click', '.wecho', function () {
                         "searching": false,
                         "scrollY": "450px",
                         "scrollCollapse": true,
-                            fixedHeader: {
-                            header: true,
-                            headerOffset: 100
-                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -548,7 +588,21 @@ $(document.body).on('click', '.wecho', function () {
                         "scrollX": true,
                         columnDefs: [
                             {"type": "html-input", "targets": [3, 6, 7, 8]}
-                        ]
+                        ],
+                        "fnDrawCallback": function ( oSettings ) {
+                            /* Need to redo the counters if filtered or sorted */
+                            if ( oSettings.bSorted || oSettings.bFiltered )
+                            {
+                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                {
+                                    $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                }
+                            }
+                        },
+                        "aoColumnDefs": [
+                            { "bSortable": false, "aTargets": [ 1 ] }
+                        ],
+                        "aaSorting": [[ 1, 'asc' ]]
                     });
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
@@ -619,10 +673,6 @@ $(document.body).on('click', '.investigation', function () {
                         "searching": false,
                         "scrollY": "450px",
                         "scrollCollapse": true,
-                            fixedHeader: {
-                            header: true,
-                            headerOffset: 100
-                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -652,7 +702,21 @@ $(document.body).on('click', '.investigation', function () {
                         "scrollX": true,
                         columnDefs: [
                             {"type": "html-input", "targets": [3, 6, 7, 8]}
-                        ]
+                        ],
+                        "fnDrawCallback": function ( oSettings ) {
+                            /* Need to redo the counters if filtered or sorted */
+                            if ( oSettings.bSorted || oSettings.bFiltered )
+                            {
+                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                {
+                                    $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                }
+                            }
+                        },
+                        "aoColumnDefs": [
+                            { "bSortable": false, "aTargets": [ 1 ] }
+                        ],
+                        "aaSorting": [[ 1, 'asc' ]]
                     });
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
@@ -722,10 +786,6 @@ $(document.body).on('click', '.checkup', function () {
                         "searching": false,
                         "scrollY": "450px",
                         "scrollCollapse": true,
-                            fixedHeader: {
-                            header: true,
-                            headerOffset: 100
-                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -755,7 +815,21 @@ $(document.body).on('click', '.checkup', function () {
                         "scrollX": true,
                         columnDefs: [
                             {"type": "html-input", "targets": [3, 6, 7, 8]}
-                        ]
+                        ],
+                        "fnDrawCallback": function ( oSettings ) {
+                            /* Need to redo the counters if filtered or sorted */
+                            if ( oSettings.bSorted || oSettings.bFiltered )
+                            {
+                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                {
+                                    $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                }
+                            }
+                        },
+                        "aoColumnDefs": [
+                            { "bSortable": false, "aTargets": [ 1 ] }
+                        ],
+                        "aaSorting": [[ 1, 'asc' ]]
                     });
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
@@ -826,10 +900,6 @@ $(document.body).on('click', '.complete', function () {
                         "searching": false,
                         "scrollY": "450px",
                         "scrollCollapse": true,
-                            fixedHeader: {
-                            header: true,
-                            headerOffset: 100
-                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -859,7 +929,21 @@ $(document.body).on('click', '.complete', function () {
                         "scrollX": true,
                         columnDefs: [
                             {"type": "html-input", "targets": [3, 6, 7, 8]}
-                        ]
+                        ],
+                        "fnDrawCallback": function ( oSettings ) {
+                            /* Need to redo the counters if filtered or sorted */
+                            if ( oSettings.bSorted || oSettings.bFiltered )
+                            {
+                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                {
+                                    $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                }
+                            }
+                        },
+                        "aoColumnDefs": [
+                            { "bSortable": false, "aTargets": [ 1 ] }
+                        ],
+                        "aaSorting": [[ 1, 'asc' ]]
                     });
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
@@ -930,10 +1014,6 @@ $(document.body).on('click', '.appoint_revert', function () {
                         "searching": false,
                         "scrollY": "450px",
                         "scrollCollapse": true,
-                            fixedHeader: {
-                            header: true,
-                            headerOffset: 100
-                        },
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
                                 $(row).addClass('round-green');
@@ -963,7 +1043,21 @@ $(document.body).on('click', '.appoint_revert', function () {
                         "scrollX": true,
                         columnDefs: [
                             {"type": "html-input", "targets": [3, 6, 7, 8]}
-                        ]
+                        ],
+                        "fnDrawCallback": function ( oSettings ) {
+                            /* Need to redo the counters if filtered or sorted */
+                            if ( oSettings.bSorted || oSettings.bFiltered )
+                            {
+                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                {
+                                    $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                }
+                            }
+                        },
+                        "aoColumnDefs": [
+                            { "bSortable": false, "aTargets": [ 1 ] }
+                        ],
+                        "aaSorting": [[ 1, 'asc' ]]
                     });
                     $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                         return $(value).val();
@@ -1016,10 +1110,6 @@ function appointments() {
                     "searching": false,
                     "scrollY": "450px",
                     "scrollCollapse": true,
-                    fixedHeader: {
-                        header: true,
-                        headerOffset: 100
-                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1049,7 +1139,21 @@ function appointments() {
                     "scrollX": true,
                     columnDefs: [
                         {"type": "html-input", "targets": [3, 6, 7, 8]}
-                    ]
+                    ],
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                            {
+                                $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                            }
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 1 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
                 });
                 $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                     return $(value).val();
@@ -1112,10 +1216,6 @@ $(document.body).on('click', '#book_appointment', function (e) {
                     "searching": false,
                     "scrollY": "450px",
                     "scrollCollapse": true,
-                    fixedHeader: {
-                        header: true,
-                        headerOffset: 100
-                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1145,7 +1245,21 @@ $(document.body).on('click', '#book_appointment', function (e) {
                     "scrollX": true,
                     columnDefs: [
                         {"type": "html-input", "targets": [3, 6, 7, 8]}
-                    ]
+                    ],
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                            {
+                                $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                            }
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 1 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
                 });
                 $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                     return $(value).val();
@@ -1227,10 +1341,6 @@ function valupdate(val) {
                     "searching": false,
                     "scrollY": "450px",
                     "scrollCollapse": true,
-                    fixedHeader: {
-                        header: true,
-                        headerOffset: 100
-                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1260,7 +1370,21 @@ function valupdate(val) {
                     "scrollX": true,
                     columnDefs: [
                         {"type": "html-input", "targets": [3, 6, 7, 8]}
-                    ]
+                    ],
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                            {
+                                $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                            }
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 1 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
                 });
                 $("#editable-datatable tbody tr").click(function (e) {
                     if ($(this).hasClass('row_selected')) {
@@ -1356,7 +1480,21 @@ function bookings() {
                         if (data[7 ] == "7") {
                             $(row).addClass('round-white');
                         }
-                    }
+                    },
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                            {
+                                $('td:eq(0)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                            }
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 0 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
                 });
                 $('.app_date').datepicker({
                     format: 'd-M-yyyy',
@@ -1406,10 +1544,6 @@ $(document.body).on('click', '#time_consultant', function () {
                     "searching": false,
                     "scrollY": "450px",
                     "scrollCollapse": true,
-                    fixedHeader: {
-                        header: true,
-                        headerOffset: 100
-                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1439,7 +1573,21 @@ $(document.body).on('click', '#time_consultant', function () {
                     "scrollX": true,
                     columnDefs: [
                         {"type": "html-input", "targets": [3, 6, 7, 8]}
-                    ]
+                    ],
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                            {
+                                $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                            }
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 1 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
                 });
                 $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                     return $(value).val();
@@ -1507,10 +1655,6 @@ $(document.body).on('click', '#time_on_walk', function () {
                     "searching": false,
                     "scrollY": "450px",
                     "scrollCollapse": true,
-                    fixedHeader: {
-                        header: true,
-                        headerOffset: 100
-                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1540,7 +1684,21 @@ $(document.body).on('click', '#time_on_walk', function () {
                     "scrollX": true,
                     columnDefs: [
                         {"type": "html-input", "targets": [3, 6, 7, 8]}
-                    ]
+                    ],
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                            {
+                                $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                            }
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 1 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
                 });
                 $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                     return $(value).val();
@@ -1606,10 +1764,6 @@ $(document.body).on('click', '#time_on_call', function () {
                     "searching": false,
                     "scrollY": "450px",
                     "scrollCollapse": true,
-                    fixedHeader: {
-                        header: true,
-                        headerOffset: 100
-                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -1639,7 +1793,21 @@ $(document.body).on('click', '#time_on_call', function () {
                     "scrollX": true,
                     columnDefs: [
                         {"type": "html-input", "targets": [3, 6, 7, 8]}
-                    ]
+                    ],
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                            {
+                                $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                            }
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 1 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
                 });
                 $.fn.dataTableExt.ofnSearch['html-input'] = function (value) {
                     return $(value).val();
@@ -1739,10 +1907,6 @@ $(document.body).on('click', '#delete_single_patient', function () {
                                 "searching": false,
                                 "scrollY": "450px",
                                 "scrollCollapse": true,
-                                    fixedHeader: {
-                                    header: true,
-                                    headerOffset: 100
-                                },
                                 "createdRow": function (row, data, dataIndex) {
                                     if (data[17] == "1") {
                                         $(row).addClass('round-green');
@@ -1772,7 +1936,21 @@ $(document.body).on('click', '#delete_single_patient', function () {
                                 "scrollX": true,
                                 columnDefs: [
                                     {"type": "html-input", "targets": [3, 6, 7, 8]}
-                                ]
+                                ],
+                                "fnDrawCallback": function ( oSettings ) {
+                                    /* Need to redo the counters if filtered or sorted */
+                                    if ( oSettings.bSorted || oSettings.bFiltered )
+                                    {
+                                        for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                        {
+                                            $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                        }
+                                    }
+                                },
+                                "aoColumnDefs": [
+                                    { "bSortable": false, "aTargets": [ 1 ] }
+                                ],
+                                "aaSorting": [[ 1, 'asc' ]]
                             });
                             //// sidebar toggle code///////////////
                             $('#sidebarCollapse').on('click', function () {
@@ -2781,10 +2959,6 @@ function consultant_booking(val) {
                     "searching": false,
                     "scrollY": "450px",
                     "scrollCollapse": true,
-                    fixedHeader: {
-                        header: true,
-                        headerOffset: 100
-                    },
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
                             $(row).addClass('round-green');
@@ -2814,7 +2988,21 @@ function consultant_booking(val) {
                     "scrollX": true,
                     columnDefs: [
                         {"type": "html-input", "targets": [3, 6, 7, 8]}
-                    ]
+                    ],
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                            {
+                                $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                            }
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 1 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
                 });
                 $("#editable-datatable tbody tr").click(function (e) {
                     if ($(this).hasClass('row_selected')) {
@@ -3599,18 +3787,17 @@ $(document.body).on('click', '#save_signature',function(e){
     }
 });
 
-function showEdit(editableObj) {
-            $(editableObj).css("background", "#FFF");
-        }
 function updateSignature(editableObj, column, id) {
     $.ajax({
         url: "/cms/doctor_signature/update_signature_details",
         type: "POST",
         data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
         success: function (response) {
-            $(editableObj).css("background", "#FDFDFD");
             if (response.success) {
                 toastr["success"](response.message);
+            }else{
+                document.execCommand('undo');
+                toastr["error"](response.message);
             }
         }
     });
@@ -3772,6 +3959,12 @@ $(document.body).on('click', '#save_diary', function (){
             if(response.success == true){
                 toastr["success"](response.message);
                 $('#diary_conent').text('');
+                $('.diary_sidebar').remove();
+                $('#diary_sidebar').append(response.diary_sidebar);
+                $("#diray_table tbody tr").click(function (e) {
+                    $('#diray_table tbody tr.row_selected').removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                });
             }else{
                 toastr["warning"](response.message);
             }

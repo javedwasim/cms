@@ -1,17 +1,17 @@
-<table class="table table-bordered nowrap responsive dosage-table dd" cellspacing="0" id="dosage_tbl" width="100%" >
+<table class="table table-bordered nowrap responsive dosage-table dd tbl_header_fix_350" cellspacing="0" id="dosage_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 95%" align="right">Dosage</th>
-        <th class="table-header" style="width: 5%" align="right">Action</th>
+        <th align="right">Dosage</th>
+        <th style="width:40px" align="right">Action</th>
     </tr>
     </thead>
     <tbody>
-    <?php foreach ($dosages as $dosage): ?>
+    <?php foreach ($med_dosages as $dosage): ?>
         <tr class="table-row">
             <td  align="right" class="dosage_category" onClick="dosageEdit(this);">
                 <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $dosage['name']; ?>" onchange="saveDosage(this,'cate_name','<?php echo $dosage['id']; ?>')" style="text-align: right;" />
             </td>
-            <td align="right">
+            <td style="width:40px" align="right">
                 <a class="delete-dosage btn btn-danger btn-xs" align="right"
                    href="javascript:void(0)" title="delete"
                    data-href="<?php echo site_url('medicine/delete_dosage_category/') . $dosage['id'] ?>">

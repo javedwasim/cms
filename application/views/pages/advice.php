@@ -174,7 +174,7 @@
                                                     <td style="width: 5%">
                                                         <a class="delete-advice-item btn btn-danger btn-xs"
                                                            href="javascript:void(0)" title="delete"
-                                                           data-href="<?php echo site_url('setting/delete_advice_item/') . $item['id'] ?>">
+                                                           data-href="<?php echo site_url('setting/delete_advice_item/') . $item['id'] . '/' . $item['advice_id'] ?>">
                                                             <i class="fa fa-trash" title="Delete"></i></a>
                                                     </td>
                                                     <td class="advice_item" onClick="showEdit(this);">
@@ -209,33 +209,37 @@
         });
     }
     function saveToDatabase(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'setting/save_advice' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
 
     function saveAdviceItem(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'setting/save_advice_item' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
 
 $(document).ready(function () {

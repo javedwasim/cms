@@ -15,9 +15,10 @@ class Medicine extends MY_Controller
 
     public function medicine()
     {
-        $data['dosages'] = $this->Medicine_model->get_dosage_categories();
+        $data['dosages'] = array();
+        $data['med_dosages'] = $this->Medicine_model->get_dosage_categories();
         $data['categories'] = $this->Medicine_model->get_medicine_categories();
-        $data['items'] = $this->Medicine_model->get_medicine_items();
+        $data['items'] = array();
         $json['result_html'] = $this->load->view('medicine/medicine', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -66,6 +67,7 @@ class Medicine extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
+            $cat_id = $data['medicine_id'];
             $result = $this->Medicine_model->add_medicine_item($data);
             if ($result) {
                 $json['success'] = true;
@@ -75,7 +77,8 @@ class Medicine extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
-        $data['items'] = $this->Medicine_model->get_medicine_items();
+        $data['items'] = $this->Medicine_model->get_medicine_items_by_category($cat_id);
+        // $data['items'] = $this->Medicine_model->get_medicine_items();
         $data['active_tab'] = 'items';
         $json['result_html'] = $this->load->view('medicine/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -281,7 +284,7 @@ class Medicine extends MY_Controller
         }
     }
 
-    public function delete_medicine_item($id)
+    public function delete_medicine_item($id,$cat_id)
     {
         $result = $this->Medicine_model->delete_medicine_item($id);
         if ($result) {
@@ -291,7 +294,7 @@ class Medicine extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
-        $data['items'] = $this->Medicine_model->get_medicine_items();
+        $data['items'] = $this->Medicine_model->get_medicine_items_by_category($cat_id);
         $data['active_tab'] = 'items';
         $json['result_html'] = $this->load->view('medicine/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -310,7 +313,7 @@ class Medicine extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
-        $data['dosages'] = $this->Medicine_model->get_dosage_categories();
+        $data['med_dosages'] = $this->Medicine_model->get_dosage_categories();
         $data['active_tab'] = 'dosage';
         $json['result_html'] = $this->load->view('medicine/dosage_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -339,7 +342,7 @@ class Medicine extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
-        $data['dosages'] = $this->Medicine_model->get_dosage_categories();
+        $data['med_dosages'] = $this->Medicine_model->get_dosage_categories();
         $data['active_tab'] = 'dosage';
         $json['result_html'] = $this->load->view('medicine/dosage_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -385,7 +388,7 @@ class Medicine extends MY_Controller
     }
 
     public function get_dosages(){
-        $data['dosages'] = $this->Medicine_model->get_dosage_categories();
+        $data['dosages'] = array();
         $json['dosage_html'] = $this->load->view('medicine/dosage_medicine_table',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

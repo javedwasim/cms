@@ -302,10 +302,12 @@
     			</div>
     		</div>
     		<div class="col-lg-4 col-md-6 pull-right" style="display: inline-flex;">
-    			<label class="checkbox-inline m-r-10 m-t-15"><input type="checkbox" value="">Change Signature ?</label>
-    			<select class="form-control col-md-6 m-t-10">
-    				<option>Select</option>
-    				<option></option>
+    			<label class="checkbox-inline m-r-10 m-t-15"><input type="checkbox" value="" id="echosig">Change Signature ?</label>
+    			<select class="form-control col-md-6 m-t-10" id="sig-echo" disabled="disabled">
+    				<option value="">Select</option>
+                    <?php foreach ($users as $user) { ?>
+                        <option value="username"><?php echo $user['username']; ?> </option>
+                    <?php } ?>
     			</select>
     			<button class="btn btn-primary" id="save_patient_echo_info">Save</button>
     		</div>

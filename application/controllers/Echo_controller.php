@@ -19,8 +19,8 @@ class Echo_controller extends MY_Controller
         $category = 0;
         $data['categories'] = $this->Echo_model->get_disease_categories();
         $data['structures'] = $this->Echo_model->get_Structure_categories();
-        $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
-        $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
+        $data['findings'] = array();
+        $data['diagnosis'] = array();
         $data['main_categories'] = $this->Echo_model->get_main_category_by_filter($category);
         $data['main_cate'] = $this->Echo_model->get_echo_main_categories();
         $data['measurements'] = $this->Echo_model->get_measurement_by_filter($category);

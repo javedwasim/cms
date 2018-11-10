@@ -78,7 +78,7 @@
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control" name="filter_medicine_category" onchange="filter_medicine_item_category(this.value)">
-                            <option value="">Select</option>
+                            <option value="0">Select</option>
                             <?php foreach ($categories as $category): ?>
                                 <option value="<?php echo $category['id']; ?>"
                                     <?php echo isset($selected_category)&&($selected_category==$category['id'])?'selected':'' ?>>
@@ -94,7 +94,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body medicine_item_container" style="height: 400px; overflow-y: scroll;">
+        <div class="card-body medicine_item_container">
             <?php $this->load->view('medicine/item_table'); ?>
         </div>
     </div>

@@ -2,7 +2,7 @@
     <table class="table table-bordered nowrap responsive" cellspacing="0" id="sp-ins-table" width="100%">
         <thead>
             <th class="hide"></th>
-            <th style="width: 20px"></th>
+            <th style="width: 20px">Action</th>
             <th>Dates</th>
         </thead>
         <tbody>

@@ -86,12 +86,19 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('advice',array('name'=>$editval));
-                //echo $this->db->last_query(); die();
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('advice',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('advice', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('advice', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -116,12 +123,19 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('advice_item',array('name'=>$editval));
-                //echo $this->db->last_query(); die();
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('advice_item',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('advice_item', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('advice_item', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -145,11 +159,19 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('research',array('name'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('research',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('research', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('research', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -187,12 +209,19 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('lab_category',array('name'=>$editval));
-                //echo $this->db->last_query(); die();
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('lab_category',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('lab_category', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('lab_category', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -230,11 +259,19 @@
                 $id = $data['id'];
                 $editval = trim($data['editval']);
                 $editval = preg_replace('/(<br>)+$/', '', $editval);
-                $this->db->where('id',$id)->update('lab_test',array('name'=>$editval));
-                return $this->db->affected_rows();
+                $result = $this->db->where('id',$id)->update('lab_test',array('name'=>$editval));
+                if ($result) {
+                    return 'updated';
+                }else{
+                    return false;
+                }
             }else{
-                $this->db->insert('lab_test', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('lab_test', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -288,18 +325,30 @@
                 if(isset($data['column'])&&($data['column'] == 'name')){
                     $editval = trim($data['editval']);
                     $editval = preg_replace('/(<br>)+$/', '', $editval);
-                    $this->db->where('id',$id)->update('lab_test_item',array('name'=>$editval));
-                    return $this->db->affected_rows();
+                    $result = $this->db->where('id',$id)->update('lab_test_item',array('name'=>$editval));
+                    if ($result) {
+                        return 'updated';
+                    }else{
+                        return false;
+                    }
                 }else{
                     $editval = trim($data['editval']);
                     $editval = preg_replace('/(<br>)+$/', '', $editval);
-                    $this->db->where('id',$id)->update('lab_test_item',array('units'=>$editval));
-                    return $this->db->affected_rows();
+                    $result = $this->db->where('id',$id)->update('lab_test_item',array('units'=>$editval));
+                    if ($result) {
+                        return 'updated';
+                    }else{
+                        return false;
+                    }
                 }
 
             }else{
-                $this->db->insert('lab_test_item', $data);
-                return $this->db->insert_id();
+                $result = $this->db->insert('lab_test_item', $data);
+                if ($result) {
+                    return 'inserted';
+                }else{
+                    return false;
+                }
             }
 
         }
@@ -1055,6 +1104,37 @@
                             ->where($id,$data['ett_protocol_tbl'][$i])
                             ->update($tablename);
             }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid){
+            if (empty($id)) {
+                $result = $this->db->select($cname)->where($cname,$cdata)->get($tbl);
+            }else{
+                $result = $this->db->select($cname)->where($cname,$cdata)->where($cid,$id)->get($tbl);    
+            }
+            if ($result->num_rows()>0) {
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+
+        public function export_angio(){
+            $result = $this->db->select('description')->from('recommendation')->order_by('description')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
+        public function insert_csv_angio($data){
+            $result = $this->db->insert('recommendation',$data);
             if ($result) {
                 return true;
             }else{

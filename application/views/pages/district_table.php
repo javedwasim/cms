@@ -1,8 +1,8 @@
 <div class="district_content">
-    <table class="table table-bordered nowrap responsive" id="districts_tbl" cellspacing="0" width="100%" >
+    <table class="table table-bordered nowrap responsive tbl_header_fix" id="districts_tbl" cellspacing="0" width="100%" >
         <thead>
             <tr>
-                <th style="width:30px;">Action</th>
+                <th style="width:50px;">Action</th>
                 <th>Districts</th>
             </tr>
         </thead>
@@ -11,7 +11,7 @@
                 foreach ($districts as $key) {
             ?>
             <tr>
-                <td >
+                <td style="width:50px;">
                     <a class="delete_district btn btn-danger btn-xs"
                        href="javascript:void(0)" title="delete"
                        data-href="<?php echo site_url('setting/delete_district/') . $key['district_id'] ?>">

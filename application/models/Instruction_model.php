@@ -100,16 +100,13 @@
         }
 
         public function get_inst_items_by_category($data){
-            $cate_id = $data['inst_id'];
+            $cate_id = $data['instruction_id'];
             $category = $data['category'];
-            if($cate_id>0){
-                $result = $this->db->select('*')->from('instruction_item')
+
+            $result = $this->db->select('*')->from('instruction_item')
                             ->where('instruction_id',$cate_id)
                             ->where('category',$category)->order_by('sort_order')->get();
-            }else{
-                $result = $this->db->select('*')->from('instruction_item')->where('category',$category)
-                ->order_by('sort_order')->get();
-            }
+
             if ($result) {
                 return $result->result_array();
             }else{

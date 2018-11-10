@@ -1,16 +1,12 @@
 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%"></th>
-        <th class="table-header">Investigations</th>
+        <th>Investigations</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($investigations as $investigation): ?>
         <tr class="table-row">
-            <td>
-                &nbsp;
-            </td>
             <td contenteditable="true" class="invest_cate"
                 onClick="editInvestigationCategory(this,'<?php echo $investigation['id']; ?>');">
                 <?php echo $investigation['name']; ?></td>

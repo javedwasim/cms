@@ -18,7 +18,7 @@
                     </form>
             	</div>
                 <div class="card-body" id="advice_item_table_container" style="height: 520px; overflow-y: scroll;">
-                    <table class="table table-bordered nowrap responsive tbl-qa" cellspacing="0" width="100%" >
+                    <table class="table table-bordered nowrap responsive tbl-qa" id="research_tbl" cellspacing="0" width="100%" >
                        <thead>
                             <tr>
                                 <th style="width: 100px;">Action</th>
@@ -37,10 +37,9 @@
                                            data-research-id="<?php echo $research['id']; ?>"><i class="far fa-question-circle"></i></a>
 
                                     </td>
-                                    <td contenteditable="true" class="research_cate"
-                                        onBlur="saveToDatabase(this,'research_name','<?php echo $research['id']; ?>')"
-                                        onClick="showEdit(this);">
-                                        <?php echo $research['name']; ?></td>
+                                    <td class="research_cate" onClick="showEdit(this);">
+                                        <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $research['name']; ?>" onchange="saveToDatabase(this,'research_name','<?php echo $research['id']; ?>')">        
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -78,23 +77,25 @@
 </div>
 <script>
     function showEdit(editableObj) {
-        $('td.research_cate').css('background', '#FFF');
-        $('td.research_cate').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#research_tbl tbody tr").click(function (e) {
+            $('#research_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function saveToDatabase(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'setting/save_research' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
 </script>

@@ -1,6 +1,6 @@
 <div class="content-wrapper">
     <div class="row p-t-10 m-0">
-    	<div class="col-md-5 col-lg-5 p-r-0">
+    	<div class="col-md-6 col-lg-6 p-r-0">
     		<div class="card">
                 <div class="card-body">
                     <!-- Nav tabs -->
@@ -402,7 +402,7 @@
                 </div>
             </div>
     	</div>
-    	<div class="col-md-7 col-lg-7 p-l-0">
+    	<div class="col-md-6 col-lg-6 p-l-0">
     		<div class="row">
                 <div class="col-md-12">
                     <div class="card" style="margin-bottom: 0px !important;">
@@ -601,7 +601,7 @@
                     <div class="card">
                     	<div class="card-body">
                     		<div class="row">
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                 	<form id="next_date_visit_form" method="post" role="form"
                                   data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                   enctype="multipart/form-data">
@@ -612,7 +612,7 @@
                                     </div>
                                     </form>
                                 </div>
-                            	<div class="col-md-5">
+                            	<div class="col-md-6">
                             		<button class="btn btn-primary btn-md waves-effect waves-light exa-pat-spInstructions" style="padding: 10px 15px;" type="button">Sp. Instructions</button>
                                     <button class="btn btn-info btn-md waves-effect waves-light exa-pat-labtest" style="padding: 10px 10px;" type="button">Lab. Test</button>
                                     <button class="btn btn-primary btn-md waves-effect waves-light " id="save_patient_examination_info" style="padding: 10px 15px;" type="button">Save</button>

@@ -6,11 +6,11 @@ if(isset($rights[0]['user_rights']))
     $loggedin_user = $this->session->userdata('userdata');
 }
 ?>
-<table class="table table-bordered nowrap responsive" cellspacing="0" id="examination_cat_tbl" width="100%" >
+<table class="table table-bordered nowrap responsive tbl_header_fix_350" cellspacing="0" id="examination_cat_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:100px;">Action</th>
-        <th class="table-header">Category Name</th>
+        <th  style="width:100px;">Action</th>
+        <th >Category Name</th>
     </tr>
     </thead>
     <tbody>

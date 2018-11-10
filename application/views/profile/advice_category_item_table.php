@@ -2,7 +2,7 @@
        cellspacing="0" id="" width="100%">
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%">Delete</th>
+        <th class="table-header" style="width: 5%">Action</th>
         <th class="table-header">Item Name</th>
     </tr>
     </thead>

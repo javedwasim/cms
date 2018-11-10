@@ -1,8 +1,8 @@
 <div class="profession_table">
-    <table class="table table-bordered nowrap responsive" id="profession_tbl" cellspacing="0" width="100%" >
+    <table class="table table-bordered nowrap responsive tbl_header_fix" id="profession_tbl" cellspacing="0" width="100%" >
         <thead>
             <tr>
-                <th style="width:30px;">Action</th>
+                <th style="width:50px;">Action</th>
                 <th>Profession</th>
             </tr>
         </thead>
@@ -12,7 +12,7 @@
                     foreach ($professions as $key) {
                 ?>
                 <tr>
-                    <td>
+                    <td style="width:50px;">
                         <a class="delete_profession btn btn-danger btn-xs"
                            href="javascript:void(0)" title="delete"
                            data-href="<?php echo site_url('setting/delete_profession/') . $key['profession_id'] ?>">

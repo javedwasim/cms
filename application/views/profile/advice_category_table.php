@@ -2,7 +2,7 @@
        width="100%">
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%"></th>
+        <th class="table-header" style="width: 5%">Action</th>
         <th class="table-header">Advices</th>
     </tr>
     </thead>

@@ -404,7 +404,7 @@ class Profile_model extends CI_Model
         $query = $this->db->select('*')->from('patient_echo')->limit(1)->get();
         $result = $query->row_array();
         $patient_echo_id = $result['id'];
-        if ($main_category['main_category']=='color_dooplers') {
+        if ($main_category==9) {
             $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_color_doppler');
             $this->db->where('patient_id', $data['patient_id'])->delete('patient_echo');
             $this->db->insert('patient_echo', array('patient_id' => $data['patient_id'], 'measurement_cate_id' => $data['measurement_cate_id']));
@@ -887,7 +887,8 @@ class Profile_model extends CI_Model
 
     public function get_sp_inst_detail($patient_id)
     {
-        $result = $this->db->select('*')->from('patient_special_instruction')->where('patient_id', $patient_id)->get();
+        $result = $this->db->select('*')->from('patient_special_instruction')->where('patient_id', $patient_id)
+                    ->limit(1)->order_by('id','DESC')->get();
         if ($result) {
             return $result->result_array();
         } else {

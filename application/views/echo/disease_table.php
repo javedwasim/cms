@@ -1,15 +1,15 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive disease_table" cellspacing="0" id="echo_disease_tbl" width="100%" >
+<table class="table table-bordered nowrap responsive disease_table tbl_header_fix_350" cellspacing="0" id="echo_disease_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%">Action</th>
-        <th class="table-header">Name</th>
+        <th style="width: 50px;">Action</th>
+        <th >Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($categories as $category): ?>
         <tr class="table-row" id="<?php echo $category['id']; ?>" >
-            <td>
+            <td style="width: 50px;">
                 <?php if($loggedin_user['is_admin']==1){ ?>
                     <a class="delete-disease btn btn-danger btn-xs"
                        href="javascript:void(0)" title="delete"

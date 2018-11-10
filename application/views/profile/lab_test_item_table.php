@@ -2,7 +2,7 @@
        width="100%">
     <thead>
     <tr>
-        <th style="width: 10%"></th>
+        <th style="width: 10%">Action</th>
         <th>Item Name</th>
         <th>Value</th>
         <th>Units</th>

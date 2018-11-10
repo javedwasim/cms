@@ -1,14 +1,14 @@
-<table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="angio_tbl" width="100%" >
+<table class="table table-bordered nowrap responsive datatables tbl_header_fix" cellspacing="0" id="angio_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%">Action</th>
-        <th class="table-header">Recommendations</th>
+        <th style="width:50px;">Action</th>
+        <th>Recommendations</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($recommendations as $recommendation): ?>
         <tr class="table-row">
-            <td>
+            <td style="width:50px;">
                 <a class="delete-recommendation btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
                    data-href="<?php echo site_url('Angio_recommendation/delete_recommendation/') . $recommendation['id'] ?>">

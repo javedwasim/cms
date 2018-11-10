@@ -19,6 +19,7 @@ class Setting extends MY_Controller
         $this->load->model('Instruction_model');
         $this->load->model('Medicine_model');
         $this->load->model('Profile_model');
+        $this->load->model('Recommendation_model');
     }
 
     public function profession()
@@ -228,7 +229,7 @@ class Setting extends MY_Controller
 
     public function patient_exemination($patient_id){
         $data['patient_id'] = $patient_id;
-        $instruction_category['category'] = 'special';
+        $instruction_category['category'] = 'clinical';
         $data['examination_category'] = $this->Examination_model->get_examination_categories();
         $data['items'] = $this->Examination_model->get_examination_items();
         $data['history_category'] = $this->History_model->get_profile_history();
@@ -288,13 +289,21 @@ class Setting extends MY_Controller
     public function save_advice()
     {
         $data = $this->input->post();
-        $result = $this->Setting_model->add_advice($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Successfully Updated!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error while saving advice";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Setting_model->add_advice($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -337,6 +346,7 @@ class Setting extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
+            $cat_id = $data['advice_id'];
             $result = $this->Setting_model->add_advice_item($data);
             if ($result) {
                 $json['success'] = true;
@@ -347,7 +357,8 @@ class Setting extends MY_Controller
             }
         }
         $data['advices'] = $this->Setting_model->get_advices();
-        $data['items'] = $this->Setting_model->get_advice_items();
+        $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
+        // $data['items'] = $this->Setting_model->get_advice_items();
         $data['active_tab'] = 'advice_item';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('pages/advice', $data, true);
@@ -357,7 +368,7 @@ class Setting extends MY_Controller
     }
 
 
-    public function delete_advice_item($id)
+    public function delete_advice_item($id,$cat_id)
     {
         $result = $this->Setting_model->delete_advice_item($id);
         if ($result) {
@@ -368,7 +379,7 @@ class Setting extends MY_Controller
             $json['message'] = "Seems to an error in deleting advice record.";
         }
         $data['advices'] = $this->Setting_model->get_advices();
-        $data['items'] = $this->Setting_model->get_advice_items();
+        $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
         $data['active_tab'] = 'advice_item';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('pages/advice', $data, true);
@@ -382,13 +393,21 @@ class Setting extends MY_Controller
     public function save_advice_item()
     {
         $data = $this->input->post();
-        $result = $this->Setting_model->add_advice_item($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Successfully Updated!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error while saving advice item";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Setting_model->add_advice_item($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -426,13 +445,21 @@ class Setting extends MY_Controller
     public function save_research()
     {
         $data = $this->input->post();
-        $result = $this->Setting_model->add_research($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Successfully Updated!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error while saving research name";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Setting_model->add_research($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -605,13 +632,21 @@ class Setting extends MY_Controller
     public function save_lab_category()
     {
         $data = $this->input->post();
-        $result = $this->Setting_model->add_lab_category($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Advice save successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error while saving advice";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Setting_model->add_lab_category($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -631,6 +666,7 @@ class Setting extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
+            $cat_id = $data['lab_category_id'];
             $result = $this->Setting_model->add_lab_test($data);
             if ($result) {
                 $json['success'] = true;
@@ -641,8 +677,10 @@ class Setting extends MY_Controller
             }
         }
         $data['categories'] = $this->Setting_model->get_lab_categories();
-        $data['tests'] = $this->Setting_model->get_lab_tests();
-        $data['items'] = $this->Setting_model->get_lab_test_items();
+        $data['tests'] = $this->Setting_model->get_lab_tests_by_category($cat_id);
+        $data['labtests'] = $this->Setting_model->get_lab_tests();
+        // $data['tests'] = $this->Setting_model->get_lab_tests();
+        $data['items'] = array();
         $data['active_tab'] = 'tests';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
@@ -654,20 +692,28 @@ class Setting extends MY_Controller
     public function save_lab_test()
     {
         $data = $this->input->post();
-        $result = $this->Setting_model->add_lab_test($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Advice save successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error while saving advice";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Setting_model->add_lab_test($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
     }
 
-    public function delete_lab_test($id)
+    public function delete_lab_test($id,$cat_id)
     {
         $result = $this->Setting_model->delete_lab_test($id);
         if ($result) {
@@ -678,8 +724,9 @@ class Setting extends MY_Controller
             $json['message'] = "Seems to an error in deleting record.";
         }
         $data['categories'] = $this->Setting_model->get_lab_categories();
-        $data['tests'] = $this->Setting_model->get_lab_tests();
-        $data['items'] = $this->Setting_model->get_lab_test_items();
+        $data['labtests'] = $this->Setting_model->get_lab_tests();
+        $data['tests'] = $this->Setting_model->get_lab_tests_by_category($cat_id);
+        $data['items'] = array();
         $data['active_tab'] = 'tests';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
@@ -689,7 +736,7 @@ class Setting extends MY_Controller
 
     }
 
-    public function delete_lab_test_item($id)
+    public function delete_lab_test_item($id,$test_id)
     {
         $result = $this->Setting_model->delete_lab_test_item($id);
         if ($result) {
@@ -700,8 +747,9 @@ class Setting extends MY_Controller
             $json['message'] = "Seems to an error.";
         }
         $data['categories'] = $this->Setting_model->get_lab_categories();
+        $data['labtests'] = $this->Setting_model->get_lab_tests();
         $data['tests'] = $this->Setting_model->get_lab_tests();
-        $data['items'] = $this->Setting_model->get_lab_test_items();
+        $data['items'] = $this->Setting_model->get_lab_item_by_test_id($test_id);
         $data['active_tab'] = 'items';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
@@ -783,6 +831,7 @@ class Setting extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
+            $test_id = $data['lab_test_id'];
             $result = $this->Setting_model->add_lab_test_item($data);
             if ($result) {
                 $json['success'] = true;
@@ -793,8 +842,9 @@ class Setting extends MY_Controller
             }
         }
         $data['categories'] = $this->Setting_model->get_lab_categories();
+        $data['labtests'] = $this->Setting_model->get_lab_tests();
         $data['tests'] = $this->Setting_model->get_lab_tests();
-        $data['items'] = $this->Setting_model->get_lab_test_items();
+        $data['items'] = $this->Setting_model->get_lab_item_by_test_id($test_id);
         $data['active_tab'] = 'items';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
@@ -851,13 +901,21 @@ class Setting extends MY_Controller
     public function save_lab_test_item()
     {
         $data = $this->input->post();
-        $result = $this->Setting_model->add_lab_test_item($data);
-        if ($result) {
-            $json['success'] = true;
-            $json['message'] = "Advice save successfully!";
-        } else {
+        if (empty($data['editval'])) {
             $json['error'] = true;
-            $json['message'] = "Seems to an error while saving advice";
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Setting_model->add_lab_test_item($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
         }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1052,10 +1110,18 @@ class Setting extends MY_Controller
     function read_item_csv_file($fname, $date_f, $id)
     {
         $path = $this->config->item('file_upload_path') . $fname;
+        $tbl = 'history_item';
+        $cname = 'name';
+        $cid = 'profile_history_id';
         if ($this->csvimport->get_array($path)) {
             $csv_array = $this->csvimport->get_array($path);
             if (array_key_exists('name',$csv_array[0])) {
                 foreach ($csv_array as $row) {
+                    $cdata = $row['name'];
+                    $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                    if ($result > 0) {
+                        continue;
+                    }
                     $insert_data = array(
                         'name' => $row['name'],
                         'profile_history_id' => $id
@@ -1144,10 +1210,18 @@ class Setting extends MY_Controller
     function read_item_examination_file($fname, $date_f, $id)
     {
         $path = $this->config->item('file_upload_path') . $fname;
+        $cname = 'name';
+        $tbl = 'examination_item';
+        $cid = 'examination_id';
         if ($this->csvimport->get_array($path)) {
             $csv_array = $this->csvimport->get_array($path);
             if (array_key_exists('Examination items',$csv_array[0])) {
                 foreach ($csv_array as $row) {
+                    $cdata = $row['Examination items'];
+                    $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                    if ($result > 0) {
+                        continue;
+                    }
                     $insert_data = array(
                         'name' => $row['Examination items'],
                         'examination_id' => $id
@@ -1235,11 +1309,19 @@ class Setting extends MY_Controller
 
     function read_item_investigation_file($fname, $date_f, $id)
     {
+        $cname = 'name';
+        $tbl = 'investigation_item';
+        $cid = 'investigation_id';
         $path = $this->config->item('file_upload_path') . $fname;
         if ($this->csvimport->get_array($path)) {
             $csv_array = $this->csvimport->get_array($path);
             if (array_key_exists('Investigation items',$csv_array[0])) {
                 foreach ($csv_array as $row) {
+                    $cdata = $row['Investigation items'];
+                    $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                    if ($result > 0) {
+                        continue;
+                    }
                     $insert_data = array(
                         'name' => $row['Investigation items'],
                         'investigation_id' => $id
@@ -1328,10 +1410,18 @@ class Setting extends MY_Controller
     function read_item_instruction_file($fname, $date_f, $id,$pid)
     {
         $path = $this->config->item('file_upload_path') . $fname;
+        $cname = 'name';
+        $tbl = 'instruction_item';
+        $cid = 'instruction_id';
         if ($this->csvimport->get_array($path)) {
             $csv_array = $this->csvimport->get_array($path);
             if (array_key_exists('Instruction items',$csv_array[0])) {
                 foreach ($csv_array as $row) {
+                    $cdata = $row['Instruction items'];
+                    $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                    if ($result > 0) {
+                        continue;
+                    }
                     $insert_data = array(
                         'name' => $row['Instruction items'],
                         'instruction_id' => $id,
@@ -1418,15 +1508,23 @@ class Setting extends MY_Controller
 
     function read_item_medicine_file($fname, $date_f,$id) {
         $path = $this->config->item('file_upload_path') . $fname;
+        $cname = 'name';
+        $tbl = 'medicine_item';
+        $cid = 'medicine_id';
             if ($this->csvimport->get_array($path)) {
                 $csv_array = $this->csvimport->get_array($path);
                 if (array_key_exists('Medicine items',$csv_array[0])) {
                    foreach ($csv_array as $row) {
-                        $insert_data = array(
-                            'name'=>$row['Medicine items'],
-                            'medicine_id' => $id
-                        );
-                        $this->Setting_model->insert_csv_medicine($insert_data);
+                    $cdata = $row['Medicine items'];
+                    $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                    if ($result > 0) {
+                        continue;
+                    }
+                    $insert_data = array(
+                        'name'=>$row['Medicine items'],
+                        'medicine_id' => $id
+                    );
+                    $this->Setting_model->insert_csv_medicine($insert_data);
                     }
                     return true;
                 }else{
@@ -1505,10 +1603,18 @@ class Setting extends MY_Controller
 
     function read_item_advice_file($fname, $date_f,$id) {
         $path = $this->config->item('file_upload_path') . $fname;
+        $cname = 'name';
+        $tbl = 'advice_item';
+        $cid = 'advice_id';
             if ($this->csvimport->get_array($path)) {
                 $csv_array = $this->csvimport->get_array($path);
                 if (array_key_exists('Advice items',$csv_array[0])) {
                     foreach ($csv_array as $row) {
+                        $cdata = $row['Advice items'];
+                        $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                        if ($result > 0) {
+                            continue;
+                        }
                         $insert_data = array(
                             'name'=>$row['Advice items'],
                             'advice_id' => $id
@@ -1668,10 +1774,19 @@ class Setting extends MY_Controller
 
     function read_profession_file($fname, $date_f) {
         $path = $this->config->item('file_upload_path') . $fname;
+        $cname = 'profession_name';
+        $tbl = 'profession_tbl';
+        $id = '';
+        $cid = '';
             if ($this->csvimport->get_array($path)) {
                 $csv_array = $this->csvimport->get_array($path);
                 if (array_key_exists('Professions',$csv_array[0])) {
                     foreach ($csv_array as $row) {
+                        $cdata = $row['Professions'];
+                        $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                        if ($result > 0) {
+                            continue;
+                        }
                         $insert_data = array(
                             'profession_name'=>$row['Professions']
                         );
@@ -1755,10 +1870,19 @@ class Setting extends MY_Controller
 
     function read_district_file($fname, $date_f) {
         $path = $this->config->item('file_upload_path') . $fname;
+        $cname = 'district_name';
+        $tbl = 'districts_tbl';
+        $id = '';
+        $cid = '';
             if ($this->csvimport->get_array($path)) {
                 $csv_array = $this->csvimport->get_array($path);
                 if (array_key_exists('Districts',$csv_array[0])) {
                     foreach ($csv_array as $row) {
+                        $cdata = $row['Districts'];
+                        $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                        if ($result > 0) {
+                            continue;
+                        }
                         $insert_data = array(
                             'district_name'=>$row['Districts']
                         );
@@ -1843,6 +1967,10 @@ class Setting extends MY_Controller
 
     function read_dosage_file($fname, $date_f) {
         $path = $this->config->item('file_upload_path') . $fname;
+        $cname = 'name';
+        $tbl = 'dosage';
+        $id = '';
+        $cid = '';
             if ($this->csvimport->get_array($path)) {
                 $csv_array = $this->csvimport->get_array($path);
                 if (array_key_exists('Dosages',$csv_array[0])) {
@@ -1852,6 +1980,7 @@ class Setting extends MY_Controller
                         );
                         $this->Setting_model->insert_csv_dosage($insert_data);
                     }
+                    die();
                     return true;
                 }else{
                     return false;
@@ -1861,6 +1990,33 @@ class Setting extends MY_Controller
             return false;
         }
     }
+
+    // function read_dosage_file($fname, $date_f) {
+    //     $fname = $this->config->item('file_upload_path') . $fname;
+    //     $count=0;
+    //     $fp = fopen($fname,'r') or die("can't open file");
+    //     while($csv_line = fgetcsv($fp,1024))
+    //     {
+    //         $count++;
+    //         if($count == 1)
+    //         {
+    //             continue;
+    //         }//keep this if condition if you want to remove the first row
+    //         for($i = 0, $j = count($csv_line); $i < $j; $i++)
+    //         {
+    //             echo utf8_encode($csv_line[0]);//remove if you want to have primary key,
+
+    //         }
+    //         $i++;
+    //     }
+    //         fclose($fp) or die("can't close file");
+    //         die();
+    //     }
+                
+        // }else{
+        //     return false;
+        // }
+    // }
 
     public function sort_table($tablename,$id){
         $data = $this->input->post();
@@ -2168,6 +2324,102 @@ class Setting extends MY_Controller
             set_content_type($json);
         }
        
+    }
+
+    public function export_angio(){
+        $recommendations = $this->Setting_model->export_angio();
+        if ($recommendations) {
+           $result = $this->export_angio_csv($recommendations);
+        }else{
+            $json['error']= true;
+            $json['message'] = 'No item found.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function export_angio_csv($recommendations){
+       $filename = 'recommendations.csv'; 
+       header("Content-Description: File Transfer"); 
+       header("Content-Disposition: attachment; filename=$filename"); 
+       header("Content-Type: application/csv; ");
+       // file creation 
+       $file = fopen('php://output', 'w');
+       $header = array('Angio Recommendations'); 
+       fputcsv($file, $header);
+       foreach ($recommendations as $key=>$line){ 
+         fputcsv($file,$line); 
+       }
+       fclose($file); 
+       exit;
+    }
+
+    public function import_angio(){
+        if (isset($_FILES['csv_file']['name'])) {
+            // total files //
+            $count = count($_FILES['csv_file']['name']);
+            $today = date("Y-m-d H:i:s");
+            $date_f = date('Y-m-d', strtotime($today));
+            $uploads = $_FILES['csv_file'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'CSV' || $ext == 'csv') {
+                move_uploaded_file($_FILES['csv_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $result = $this->read_angio_file($fname,$date_f);
+                if ($result) {
+                    $json['success']=true;
+                    $json['message'] = 'Successfully Uploaded.';
+                }else{
+                    $json['error']=false;
+                    $json['message']='Seems an error.';
+                }
+     
+            } else {
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
+            }
+        } else {
+            $json['error'] = false;
+            $json['message'] = "Please Select the file.";
+        }
+        $data['recommendations'] = $this->Recommendation_model->get_recommendations();
+        $json['result_html'] = $this->load->view('angio/recommendation_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    function read_angio_file($fname, $date_f) {
+        $path = $this->config->item('file_upload_path') . $fname;
+        $cname = 'description';
+        $tbl = 'recommendation';
+        $id = '';
+        $cid = '';
+            if ($this->csvimport->get_array($path)) {
+                $csv_array = $this->csvimport->get_array($path);
+                if (array_key_exists('Angio Recommendations',$csv_array[0])) {
+                    foreach ($csv_array as $row) {
+                        $cdata = $row['Angio Recommendations'];
+                        $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                        if ($result > 0) {
+                            continue;
+                        }
+                        $insert_data = array(
+                            'description'=>$row['Angio Recommendations']
+                        );
+                        $this->Setting_model->insert_csv_angio($insert_data);
+                    }
+                    return true;
+                }else{
+                    return false;
+                }
+                
+        }else{
+            return false;
+        }
     }
 
 }

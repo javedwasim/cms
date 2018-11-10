@@ -1,4 +1,4 @@
-<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%">
+<table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" style="height: 340px;" width="100%">
     <thead>
     <tr>
         <th align="right">Select Dosage</th>

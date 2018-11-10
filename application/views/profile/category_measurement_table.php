@@ -10,15 +10,15 @@
     <tbody>
     <?php  foreach ($measurements as $measurement): ?>
         <tr class="table-row">
-            <td contenteditable="true" class="measurement_care"
+            <td  class="measurement_care"
                 onBlur="saveItemMeasurement(this,'item','<?php echo $measurement['id']; ?>')"
                 onClick="showEdit(this);">
                 <?php echo $measurement['item']; ?></td>
             <input type="hidden" name="item_id[]" value="<?php echo $measurement['id']; ?>">
             <td style="text-align: center">
-                <input type="text" name="item_value[]" value="<?php echo isset($measurement['item_value'])?$measurement['item_value']:''; ?>"  class="form-control">
+                <input type="text" name="item_value[]" value="<?php echo isset($measurement['item_value'])?$measurement['item_value']:''; ?>"  class="form-control border-0 no-shadow">
             </td>
-            <td contenteditable="true" class="measurement_care"
+            <td class="measurement_care"
                 onBlur="saveValueMeasurement(this,'value','<?php echo $measurement['id']; ?>')"
                 onClick="showEditMeasurement(this);">
                 <?php echo $measurement['value']; ?></td>

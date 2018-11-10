@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Print_profiles extends CI_Controller {
+class Print_profiles extends MY_Controller {
 
 	function __construct()
 		{

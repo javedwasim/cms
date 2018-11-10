@@ -1,4 +1,4 @@
-<table class="table table-bordered nowrap responsive category-measurement-table" cellspacing="0" id="finding_by_structure_table" width="100%" >
+<table class="table table-bordered nowrap responsive category-measurement-table tbl_header_fix_350" cellspacing="0" id="finding_by_structure_table" width="100%" >
     <thead>
     <tr>
         <th class="table-header">Findings</th>

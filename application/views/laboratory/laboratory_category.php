@@ -47,7 +47,7 @@
                             <?php } ?>
                         </td>
                         <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                            <td class="exam_cate" style="word-break: break-all;" onClick="showEdit(this);">
+                            <td class="exam_cate" style="word-break: break-all;">
                                 <input type="text" class="form-control border-0 bg-transparent shadow-none" name="lab_cat" value="<?php echo $category['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')" />
                             </td>
                         <?php } else{ ?>
@@ -90,24 +90,25 @@
     </div>
 </div>
 <script>
-    function showEdit(editableObj) {
-        $("#lab_cat_tbl tbody tr").click(function (e) {
-            $('#lab_cat_tbl tbody tr.row_selected').removeClass('row_selected');
-            $(this).addClass('row_selected');
-        });
-    }
+    $("#lab_cat_tbl tbody tr").click(function (e) {
+        $('#lab_cat_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+  
     function saveToDatabase(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'setting/save_lab_category' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
-                $(editableObj).css("background", "#FDFDFD");
                 if (response.success) {
                     toastr["success"](response.message);
+                }else{
+                    document.execCommand('undo');
+                    toastr["error"](response.message);
                 }
             }
         });
-        $(editableObj).css("color", "#212529");
     }
 </script>

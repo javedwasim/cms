@@ -27,7 +27,7 @@ if(isset($rights[0]['user_rights']))
                 </div>
             </form>
         </div>
-        <div class="card-body ins_category_container" style="overflow-y:auto; height:400px">
+        <div class="card-body ins_category_container">
             <?php $this->load->view('examination/category_table'); ?>
         </div>
     </div>

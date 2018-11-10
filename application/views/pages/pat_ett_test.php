@@ -268,7 +268,10 @@
     				    			<label class="checkbox-inline m-r-10 m-t-15"><input type="checkbox" value="" class="m-r-10" id="ettcheckbox">Change Signature ?</label>
     				    			<select class="form-control col-md-6 m-t-10" name="doc_sig" disabled="disabled" id="sig-ett">
     				    				<option value="">Select</option>
-    				    				<option value="admin">admin</option>
+    				    				<option>Select</option>
+                                        <?php foreach ($users as $user) { ?>
+                                            <option value="username"><?php echo $user['username']?> </option>
+                                        <?php } ?>
     				    			</select>
     				    			<button class="btn btn-primary" id="save_ett_test">Save</button>
     				    		</div>

@@ -1,7 +1,7 @@
 <table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:100px;" ></th>
+        <th class="table-header" style="width:100px;" >Action</th>
         <th class="table-header">Items</th>
     </tr>
     </thead>

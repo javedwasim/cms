@@ -1,14 +1,14 @@
-<table class="table table-bordered nowrap responsive" cellspacing="0" id="medicine_cat_tbl" width="100%" >
+<table class="table table-bordered nowrap responsive tbl_header_fix_350" cellspacing="0" id="medicine_cat_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:100px;">Action</th>
-        <th class="table-header">Category Name</th>
+        <th  style="width:100px;">Action</th>
+        <th >Category Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($categories as $category): ?>
         <tr class="table-row" id="<?php echo $category['id']; ?>">
-            <td>
+            <td style="width:100px;">
                 <a class="delete-medicine btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
                    data-href="<?php echo site_url('medicine/delete_medicine_category/') . $category['id'] ?>">

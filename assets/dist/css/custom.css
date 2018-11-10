@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
 body {
     font-family: 'Roboto Condensed', san-serif;
-    background: #16A085;
+    background: #1e88e5;
 }
 .board {
     width: 100%;
@@ -176,7 +176,9 @@ li.paginate_button.page-item.active {
     padding-bottom: 0px !important;
     padding-top: 5px !important;
 }
-
+.table{
+    word-break: break-all;
+}
 .profile_radio .custom-radio .custom-control-label{
     font-size: 15px;
 }
@@ -274,6 +276,71 @@ li#list_itmes_vital {
     padding: 0px 5px;
 }
 
+/* ---------------------------------------------------
+    fix header style
+----------------------------------------------------- */
+table.tbl_header_fix {
+    table-layout:fixed;
+}
+.tbl_header_fix>thead{
+    display:table;
+    width:100%;
+    width:calc(100% - 18px);
+}
+.tbl_header_fix>tbody {
+    height:430px;
+    overflow:auto;
+    overflow-x:hidden;
+    display:block;
+    width:100%;
+}
+.tbl_header_fix>tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+table.tbl_header_fix_history {
+    table-layout:fixed;
+}
+.tbl_header_fix_history>thead{
+    display:table;
+    width:100%;
+    width:calc(100% - 18px);
+}
+.tbl_header_fix_history>tbody {
+    height:280px;
+    overflow:auto;
+    overflow-x:hidden;
+    display:block;
+    width:100%;
+}
+.tbl_header_fix_history>tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+table.tbl_header_fix_350 {
+    table-layout:fixed;
+}
+.tbl_header_fix_350>thead{
+    display:table;
+    width:100%;
+    width:calc(100% - 18px);
+}
+.tbl_header_fix_350>tbody {
+    height:350px;
+    overflow:auto;
+    overflow-x:hidden;
+    display:block;
+    width:100%;
+}
+.tbl_header_fix_350>tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */

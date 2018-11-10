@@ -165,12 +165,8 @@
         }
 
         public function get_medicine_items_by_category($cate_id){
-            if($cate_id>0){
-                $result = $this->db->select('*')->from('medicine_item')->where('medicine_id',$cate_id)
+            $result = $this->db->select('*')->from('medicine_item')->where('medicine_id',$cate_id)
                 ->order_by('sort_order')->get();
-            }else{
-                $result = $this->db->select('*')->from('medicine_item')->order_by('sort_order')->get();
-            }
             if ($result) {
                 return $result->result_array();
             }else{

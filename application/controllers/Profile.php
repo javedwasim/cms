@@ -41,7 +41,7 @@ class Profile extends MY_Controller
     public function patient_special_instructions()
     {
         $data['rights'] = $this->session->userdata('other_rights');
-        $data['category'] = 'clinical';
+        $data['category'] = 'special';
         $id = $this->input->post('patid');
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
         $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
@@ -84,6 +84,7 @@ class Profile extends MY_Controller
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
         $data['diseases'] = $this->Echo_model->get_disease_categories();
         $data['structures'] = $this->Echo_model->get_Structure_categories();
+        $data['users'] = $this->Dashboard_model->get_all_user();
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
         $json['result_html'] = $this->load->view('pages/patient_echo_test', $data, true);
@@ -101,6 +102,7 @@ class Profile extends MY_Controller
         $data['protocols'] = $this->ETT_model->get_protocol();
         $data['rights'] = $this->session->userdata('other_rights');
         $id = $this->input->post('patid');
+        $data['users'] = $this->Dashboard_model->get_all_user();
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
         $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
@@ -281,12 +283,13 @@ class Profile extends MY_Controller
         }
         $data['note_details'] = $this->Profile_model->get_notes();
         $data['users'] = $this->Dashboard_model->get_all_user();
+        $data['notes_record'] = $this->Profile_model->notes_record($usename);
+        $json['diary_sidebar'] = $this->load->view('diary/diary_sidebar', $data, true);
         $json['diary_update'] = $this->load->view('diary/diary_update', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
     }
-
 
     public function save_ett_test(){
         $data = $this->input->post();
@@ -475,7 +478,7 @@ class Profile extends MY_Controller
     public function get_inst_item()
     {
         $filters = $this->input->post();
-        $cat_id = $filters['inst_id'];
+        $cat_id = $filters['instruction_id'];
         $data['items'] = $this->Instruction_model->get_inst_items_by_category($filters);
         $data['selected_category'] = $cat_id;
         $data['active_tab'] = 'tests';
@@ -641,7 +644,11 @@ class Profile extends MY_Controller
     {
         $data = $this->input->post();
         $category_id = $data['measurement_cate_id'];
-        $main_category = $this->Profile_model->get_main_category($category_id);
+        if ($category_id == 9) {
+            $main_category = 9;
+        }else{
+            $main_category = $this->Profile_model->get_main_category($category_id);    
+        }
         //echo "<pre>"; print_r($data['item_value']);
         if (isset($data['item_value']) && (empty($data['item_value']))) {
             $json['error'] = true;
@@ -649,7 +656,7 @@ class Profile extends MY_Controller
 
         } else {
             $patient_echo_id = $this->Profile_model->save_echo_profile_info($data,$main_category);
-            if ($main_category['main_category']=='color_dooplers') {
+            if ($category_id==9) {
                 $data['color_doppler'] = $this->Profile_model->get_patient_color_doppler($patient_echo_id);
                 $json['result_html'] = $this->load->view('profile/color_doppler_table', $data, true);
             }else{
@@ -659,7 +666,11 @@ class Profile extends MY_Controller
             $data['active_tab'] = 'measurement';
             $json['success'] = true;
             $json['message'] = 'Information save successfully!';
-            $json['category_id'] = $main_category['main_category'];
+            if ($main_category == 9) {
+                $json['category_id'] = 9;
+            }else{
+                $json['category_id'] = $main_category['main_category'];
+            }
             $data['rights'] = $this->session->userdata('other_rights');
 
         }
@@ -845,8 +856,8 @@ class Profile extends MY_Controller
     }
 
     public function get_instruction_item($cat_id){
-        $data['inst_id']=$cat_id;
-        $data['category']='special';
+        $data['instruction_id']=$cat_id;
+        $data['category']='clinical';
 
         $data['items'] = $this->Instruction_model->get_inst_items_by_category($data);
         $json['result_html'] = $this->load->view('profile/instruction_category_item_table', $data, true);

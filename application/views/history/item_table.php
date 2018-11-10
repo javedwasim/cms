@@ -1,4 +1,4 @@
-<table class="table table-bordered nowrap responsive item_table" cellspacing="0" id="history_item_tbl" width="100%" >
+<table class="table table-bordered nowrap responsive item_table tbl_header_fix_history" cellspacing="0" id="history_item_tbl" width="100%" >
     <thead>
     <tr>
         <th class="table-header" style="width:100px;" >Action</th>
@@ -11,7 +11,7 @@
             <td style="width: 100px;">
                 <a class="delete-history-item btn btn-danger btn-xs"
                    href="javascript:void(0)" title="delete"
-                   data-href="<?php echo site_url('Profile_history/delete_history_item/') . $item['id'] ?>">
+                   data-href="<?php echo site_url().'Profile_history/delete_history_item/'. $item['id'].'/'.$item['profile_history_id'] ?>">
                     <i class="fa fa-trash" title="Delete"></i></a>
                 <a class="edit-history-item-btn btn btn-info btn-xs"
                    href="javascript:void(0)"

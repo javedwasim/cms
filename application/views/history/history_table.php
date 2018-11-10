@@ -1,4 +1,4 @@
-<table class="table table-bordered nowrap responsive history_table" cellspacing="0" id="history_tbl" width="100%" >
+<table class="table table-bordered nowrap responsive history_table tbl_header_fix" cellspacing="0" id="history_tbl" width="100%" >
     <thead>
     <tr>
         <th class="table-header" style="width:100px;">Action</th>

@@ -1,20 +1,21 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive" cellspacing="0" id="instruction_item_tbl" width="100%" >
+<table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="instruction_item_tbl" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 9%">Action</th>
-        <th class="table-header">Item Name</th>
+        <th style="width: 100px;">Action</th>
+        <th >Item Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
         <tr class="table-row" id="<?php echo $item['id'] ?>">
-            <td>
+            <td style="width: 100px;">
                 <?php if(($loggedin_user['is_admin']==1) || (in_array("special_instructions-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
                     <a class="delete-inst-item btn btn-danger btn-xs"
                        href="javascript:void(0)" title="delete"
                        data-category = '<?php echo $item['category'] ?>'
                        data-category-id = '<?php echo $item['id'] ?>'
+                       data-item-id = '<?php echo $item['instruction_id']; ?>'
                        data-href="<?php echo site_url('instruction/delete_inst_item') ?>">
                         <i class="fa fa-trash" title="Delete"></i></a>
                     <a class="edit-inst-item-btn btn btn-info btn-xs"

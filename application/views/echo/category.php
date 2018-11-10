@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body main_category_container" style="height: 400px; overflow-y: scroll;">
+        <div class="card-body main_category_container">
             <?php $this->load->view('echo/main_category_table'); ?>
         </div>
     </div>

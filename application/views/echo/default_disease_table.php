@@ -1,15 +1,15 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive disease_table" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive disease_table tbl_header_fix_350" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%">Action</th>
-        <th class="table-header">Name</th>
+        <th style="width: 50px;">Action</th>
+        <th>Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($categories as $category): ?>
         <tr class="table-row">
-            <td>
+            <td style="width: 50px;">
                 <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
                     <i class="fa fa-trash" title="Delete"></i></a>
 
@@ -29,6 +29,11 @@
     function defaultDiseaseEdit(editableObj,id) {
         $(".default_disease_cate").css("background-color", "");
         $(".default_disease_cate").css("color", "black");
+        $(".default_structure_cate").css("background-color", "");
+        $(".default_structure_cate").css("color", "black");
+        $('.structure_diagnosis_container').empty();
+        $('.default_finding_container').empty();
+        $('.default_diagnosis_container').empty();
         $(editableObj).css("background-color", "#1e88e5");
         $(editableObj).css("color", "#FFF");
         $('#assign_disease_id').val(id);

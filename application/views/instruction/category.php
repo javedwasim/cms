@@ -24,7 +24,7 @@
                 </div>
             </form>
         </div>
-        <div class="card-body ins_category_container" style="height: 400px; overflow-y: scroll;">
+        <div class="card-body ins_category_container" >
             <?php $this->load->view('instruction/category_table'); ?>
         </div>
     </div>

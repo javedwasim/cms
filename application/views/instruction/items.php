@@ -34,7 +34,7 @@
                             <div class="col-lg-5 col-md-5">
                                 <div class="form-group">
                                     <label>Item Name:</label>
-                                    <input type="text" class="form-control" name="name" required maxlength="50">
+                                    <input type="text" class="form-control" id="inst_item" name="name" required maxlength="50">
                                     <input type="hidden" name="category" id="category"
                                            value="<?php $scategory = $category; echo $scategory; ?>">
                                 </div>
@@ -90,8 +90,7 @@
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control" name="filter_inst_category" onchange="filter_inst_item_category(this.value,'<?php echo $scategory; ?>')">
-                            <option value="">Select</option>
-                            <option value="0">All</option>
+                            <option value="0">Select</option>
                             <?php foreach ($categories as $category): ?>
                                 <option value="<?php echo $category['id']; ?>"
                                     <?php echo isset($selected_category)&&($selected_category==$category['id'])?'selected':'' ?>>
@@ -107,7 +106,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body ins_item_container" style="height: 400px; overflow-y: scroll;">
+        <div class="card-body ins_item_container">
             <?php $this->load->view('instruction/item_table'); ?>
         </div>
     </div>

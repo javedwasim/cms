@@ -15,9 +15,10 @@ class Instruction extends MY_Controller
 
     public function instruction()
     {
+        $dataitem = 0;
         $data['category'] = 'clinical';
         $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
-        $data['items'] = $this->Instruction_model->get_inst_items($data);
+        $data['items'] = $this->Instruction_model->get_inst_items($dataitem);
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/instruction', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -126,11 +127,10 @@ class Instruction extends MY_Controller
         $this->load->helper('security');
         $this->form_validation->set_rules('name', 'Laboratory Name', 'required|xss_clean');
         $this->form_validation->set_rules('instruction_id', 'Instruction Category', 'required|xss_clean');
-
         if ($this->form_validation->run() == FALSE) {
             $json['error'] = true;
             $json['message'] = validation_errors();
-        } else {
+        }else {
             $data = $this->input->post();
             $result = $this->Instruction_model->add_instruction_item($data);
             if ($result) {
@@ -141,7 +141,8 @@ class Instruction extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
-        $data['items'] = $this->Instruction_model->get_inst_items($data);
+        $data['items'] = $this->Instruction_model->get_inst_items_by_category($data);
+        // $data['items'] = $this->Instruction_model->get_inst_items($data);
         $data['active_tab'] = 'items';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
@@ -153,7 +154,7 @@ class Instruction extends MY_Controller
     public function get_inst_item()
     {
         $filters = $this->input->post();
-        $cat_id = $filters['inst_id'];
+        $cat_id = $filters['instruction_id'];
         $data['items'] = $this->Instruction_model->get_inst_items_by_category($filters);
         $data['selected_category'] = $cat_id;
         $data['active_tab'] = 'tests';
@@ -238,7 +239,6 @@ class Instruction extends MY_Controller
         $data = $this->input->post();
         $id = $data['id'];
         $category['category'] = $data['category'];
-
         $result = $this->Instruction_model->delete_inst_item($id);
         if ($result) {
             $json['success'] = true;
@@ -247,7 +247,7 @@ class Instruction extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
-        $data['items'] = $this->Instruction_model->get_inst_items($category);
+        $data['items'] = $this->Instruction_model->get_inst_items_by_category($data);
         $data['active_tab'] = 'items';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/item_table', $data, true);

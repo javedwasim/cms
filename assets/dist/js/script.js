@@ -68,7 +68,6 @@ $(document.body).on('click', '#advice_item_btn', function(){
                 } else {
                     toastr["error"](response.message);
                 }
-                $('#advice_item_form')[0].reset();
             }
         });
 
@@ -540,12 +539,12 @@ $(document.body).on('click', '.delete-inst', function(){
 });
 
 function filter_inst_item_category(inst_id,category) {
-    var nurl = window.location.origin+window.location.pathname+'/setting/export_instruction_items/'+inst_id;
+    var nurl = window.location.origin+window.location.pathname+'/setting/export_instruction_items/'+instruction_id;
     $("#export_instruction_items").attr("href", nurl);
     $.ajax({
         url: '/cms/instruction/get_inst_item',
         type: 'post',
-        data: {inst_id:inst_id,category:category},
+        data: {instruction_id:inst_id,category:category},
         cache: false,
         success: function(response) {
             $('.ins_item_container').empty();
@@ -568,6 +567,7 @@ $(document.body).on('click', '#inst_item_btn', function(){
                 $('.ins_item_container').empty();
                 $('.ins_item_container').append(response.result_html);
                 if (response.success) {
+                    $('#inst_item').val('');
                     toastr["success"](response.message);
                 } else {
                     toastr["error"](response.message);
@@ -626,6 +626,7 @@ $(document.body).on('click', '.delete-inst-item', function(){
     var category = $(this).attr('data-category');
     var id = $(this).attr('data-category-id');
     var action_url = $(this).attr('data-href');
+    var inst_id = $(this).attr('data-item-id');
     $.confirm({
         title: 'Confirm!',
         content: 'Are you sure you want to delete?',
@@ -634,7 +635,7 @@ $(document.body).on('click', '.delete-inst-item', function(){
                 $.ajax({
                     url: action_url,
                     type: 'post',
-                    data: {category:category,id:id},
+                    data: {category:category,id:id,instruction_id:inst_id},
                     cache: false,
                     success: function(response) {
                         $('.ins_item_container').empty();
@@ -1386,7 +1387,7 @@ $(document.body).on('click', '.add-structure-category', function(){
                 toastr["success"](response.message);
                 $('.structure_category_container').empty();
                 $('.structure_category_container').append(response.result_html);
-
+                $('#structure').val('');
             } else {
                 toastr["error"](response.message);
             }
@@ -1438,6 +1439,7 @@ $(document.body).on('click', '.add-structure-finding', function(){
                 toastr["success"](response.message);
                 $('.structure_finding_container').empty();
                 $('.structure_finding_container').append(response.result_html);
+                $('#structure_finding').val('');
             } else {
                 toastr["error"](response.message);
             }
@@ -1492,6 +1494,7 @@ $(document.body).on('click', '.add-structure-diagnosis', function(){
             $('.structure_diagnosis_container').append(response.result_html);
             if (response.success) {
                 toastr["success"](response.message);
+                $('#structure_diagnosis').val('');
             } else {
                 toastr["error"](response.message);
             }
@@ -1767,7 +1770,6 @@ $(document.body).on('click', '#history_item_btn', function(){
             $('.history_item_container').empty();
             $('.history_item_container').append(response.result_html);
             $('#history_items_name').val('');
-            $('#profile_history_id').val("");
             if (response.success) {
                 toastr["success"](response.message);
             } else {
@@ -2176,7 +2178,7 @@ $(document.body).on('click', '#echo_profile_form_btn', function () {
                 if(response.category_id=='mmode'){
                     $('#mmode_content').empty();
                     $('#mmode_content').append(response.result_html);
-                }else if(response.category_id=='color_dooplers'){
+                }else if(response.category_id==9){
                     $('#color-doppler-table').empty();
                     $('#color-doppler-table').append(response.result_html);
                 }else{
@@ -2383,6 +2385,7 @@ function showEditEttDetail(editableObj,ett_id,patient_id) {
 $(document.body).on('click', '#save_patient_examination_info', function(){
     var patient_id = $('#label_patient_id').text();
     var sd = $('.patient_id').val(patient_id);
+    $(this).attr("disabled", true);
     $.ajax({
         url: window.location.origin+window.location.pathname+'profile/save_profile_examination_info',
         type: 'post',
@@ -2429,6 +2432,7 @@ $(document.body).on('click', '#save_patient_examination_info', function(){
                     $(this).addClass('row_selected');
                 });
                 toastr["success"](response.message);
+                $('#save_patient_examination_info').attr("disabled", false);
             } else {
                 toastr["error"](response.message);
             }
@@ -3511,4 +3515,12 @@ $(function() {
             "delete": {name: "Delete", icon: "delete"}
         }
     });
+});
+
+$(document.body).on('click', '#echosig', function(){
+    if ($("#echosig").is(":checked")) {
+        $("#sig-echo").prop("disabled",false);    
+    }else{
+        $("#sig-echo").prop("disabled","disabled");    
+    }
 });

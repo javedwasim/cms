@@ -66,6 +66,7 @@ class Investigation extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
+            $cat_id = $data['investigation_id'];
             $result = $this->Investigation_model->add_investigation_item($data);
             if ($result) {
                 $json['success'] = true;
@@ -75,7 +76,7 @@ class Investigation extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
-        $data['items'] = $this->Investigation_model->get_investigation_items();
+        $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
         $data['active_tab'] = 'items';
         $json['result_html'] = $this->load->view('investigation/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -210,7 +211,7 @@ class Investigation extends MY_Controller
         }
     }
 
-    public function delete_investigation_item($id)
+    public function delete_investigation_item($id,$cat_id)
     {
         $result = $this->Investigation_model->delete_investigation_item($id);
         if ($result) {
@@ -220,7 +221,7 @@ class Investigation extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
-        $data['items'] = $this->Investigation_model->get_investigation_items();
+        $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
         $data['active_tab'] = 'items';
         $json['result_html'] = $this->load->view('investigation/item_table', $data, true);
         if ($this->input->is_ajax_request()) {

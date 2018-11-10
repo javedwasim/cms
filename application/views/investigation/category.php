@@ -13,12 +13,12 @@
                 </div>
             </form>
         </div>
-        <div class="card-body investigation_category_container" style="height: 400px; overflow-y: scroll;">
+        <div class="card-body investigation_category_container">
             <?php $this->load->view('investigation/category_table'); ?>
         </div>
     </div>
 </div>
-<style>
+<!-- <style>
     body {
         width: 100%;
     }
@@ -49,4 +49,4 @@
         padding: 10px;
         background-color: #FDFDFD;
     }
-</style>
+</style> -->

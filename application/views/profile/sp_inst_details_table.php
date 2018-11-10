@@ -4,7 +4,7 @@
         <th style="width: 20px"></th>
         <th style="width: 20px"></th>
         <th style="width: 20px"></th>
-        <th style="width: 50px;">Test Date</th>
+        <th style="width: 50px;">Special Inst. Date</th>
     </tr>
     </thead>
         <tbody>

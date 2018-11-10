@@ -20,7 +20,7 @@
         <form id="update_dosage_medicine_form" method="post" role="form"
                   data-action="<?php echo site_url('medicine/update_dosage_medicine') ?>"
                   enctype="multipart/form-data">
-            <div class="card-body" style="height: 400px; overflow-y: scroll;">
+            <div class="card-body">
                 <input type="hidden" name="medicine_category" value="" id="medicine_category">
                     <div class="dosage_medicine_table">
                         <?php $this->load->view('medicine/dosage_medicine_table'); ?>

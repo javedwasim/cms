@@ -1,18 +1,21 @@
 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
+        <th style="width:30px;">Action</th>
         <th class="table-header">Item</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($items as $item): ?>
         <tr class="table-row">
-                <td contenteditable="true" class="exam_item"
-                    onClick="addExaminationItem(this,'<?php echo $item['name']; ?>');">
+                <td style="width: 30px;">
                     <a class="edit-examination-item-btn btn btn-info btn-xs"
                        href="javascript:void(0)"
                        data-examination-item-id="<?php echo $item['id']; ?>">
                         <i class="far fa-question-circle"></i></a>
+                </td>
+                <td contenteditable="true" class="exam_item"
+                    onClick="addExaminationItem(this,'<?php echo $item['name']; ?>');">
                     <?php echo $item['name']; ?>
                 </td>
         </tr>
