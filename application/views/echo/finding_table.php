@@ -28,11 +28,11 @@
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <td class="finding_cate" onClick="findingEdit(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $finding['name']; ?>" onchange="saveFinding(this,'cate_name','<?php echo $finding['id']; ?>')">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $finding['name']; ?>" onchange="saveFinding(this,'cate_name','<?php echo $finding['id']; ?>')">
                 </td>
             <?php } elseif(in_array("echos-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                 <td class="finding_cate" onClick="findingEdit(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $finding['name']; ?>" onchange="saveFinding(this,'cate_name','<?php echo $finding['id']; ?>')">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $finding['name']; ?>" onchange="saveFinding(this,'cate_name','<?php echo $finding['id']; ?>')">
                 </td>
             <?php } else{ ?>
                 <td contenteditable="true" onClick="showError(this);">

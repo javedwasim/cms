@@ -386,6 +386,15 @@
             }
         }
 
+        public function get_echo_category_by_id($cat_id){
+            $result = $this->db->select('main_category')->where('id',$cat_id)->get('echo_category');
+            if ($result) {
+                return $result->row();
+            }else{
+                return row();
+            }
+        }
+
         public function save_st_finding($sId,$fId,$fname){
             $result = $this->db->select('*')->where('structure_id',$sId)->get('echo_findings_by_structure');
             if ($result->num_rows()>0) {

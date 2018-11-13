@@ -1,5 +1,5 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="ett_test_reason_table" width="100%" >
+<table class="table table-bordered nowrap responsive datatables tbl_header_fix_350" cellspacing="0" id="ett_test_reason_table" width="100%" >
    <thead>
     <tr>
         <th style="width:30px;">Action</th>
@@ -27,11 +27,11 @@
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <td class="exam_cate" onClick="showExamination(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="test_reason" value="<?php echo $reason['test_reason']; ?>" onchange="saveettreason(this,'test_reason','<?php echo $reason['id']; ?>')">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="test_reason" value="<?php echo $reason['test_reason']; ?>" onchange="saveettreason(this,'test_reason','<?php echo $reason['id']; ?>')">
                 </td>
             <?php } elseif(in_array("ett-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                 <td class="exam_cate" onClick="showExamination(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="test_reason" value="<?php echo $reason['test_reason']; ?>" onchange="saveettreason(this,'test_reason','<?php echo $reason['id']; ?>')">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="test_reason" value="<?php echo $reason['test_reason']; ?>" onchange="saveettreason(this,'test_reason','<?php echo $reason['id']; ?>')">
                 </td>
             <?php } else{ ?>
                 <td contenteditable="true" onClick="showError(this);">

@@ -3,22 +3,49 @@
         event.preventDefault();
         var itemfile = new FormData($('#import_csv_advice')[0]);
         var catid = $('#advice_id option:selected').val();
-        $.ajax({
-           url:"<?php echo base_url(); ?>setting/import_advice_items/"+catid,
-           method:"POST",
-           data: itemfile,
-           contentType:false,
-           cache:false,
-           processData:false,
-           success:function(response)
-           {
-              document.getElementById("csv_advice_file").value = "";
-                if (response.success==true) {
-                  toastr["success"](response.message);
-                }else{
-                  toastr["error"](response.message);
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+            buttons: {
+                Yes: function () {
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_advice_items/"+catid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_advice_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
+                },
+                No: function (){
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_advice_items/"+catid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_advice_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
                 }
-           }
+            }
         });
     });
 </script>
@@ -60,18 +87,18 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="card-body" id="advice_table_div" style="height:400px;overflow-y: scroll;">
-                                    <table class="table table-bordered nowrap responsive tbl-qa" cellspacing="0" id="advice_cat_tbl" width="100%">
+                                <div class="card-body" id="advice_table_div">
+                                    <table class="table table-bordered nowrap responsive tbl-qa tbl_header_fix_350" cellspacing="0" id="advice_cat_tbl" width="100%">
                                         <thead>
                                         <tr>
-                                            <th class="table-header" style="width: 5%">Action</th>
+                                            <th class="table-header" style="width:55px;">Action</th>
                                             <th class="table-header">Category Name</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php foreach ($advices as $advice): ?>
                                             <tr class="table-row" id="<?php echo $advice['id']; ?>">
-                                                <td>
+                                                <td style="width:50px;">
                                                     <a class="delete-advice btn btn-danger btn-xs"
                                                        href="javascript:void(0)" title="delete"
                                                        data-href="<?php echo site_url('setting/delete_advice/') . $advice['id'] ?>">
@@ -79,7 +106,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="advice_cate" onClick="showAdvice(this);">
-                                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="advice_cate" value="<?php echo $advice['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $advice['id']; ?>')">        
+                                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="advice_cate" value="<?php echo $advice['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $advice['id']; ?>')">        
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -106,7 +133,7 @@
                                                         <div class="form-group">
                                                             <label>Category:</label>
                                                             <select class="form-control" name="advice_id" id="advice_id" required>
-                                                                <option value="0">Select</option>
+                                                                <option value="">Select</option>
                                                                 <?php foreach ($advices as $advice): ?>
                                                                     <option value="<?php echo $advice['id']; ?>"><?php echo $advice['name']; ?></option>
                                                                 <?php endforeach; ?>
@@ -159,26 +186,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body" id="advice_item_table_container" style="height: 400px;overflow-y: scroll;">
-                                    <table class="table table-bordered nowrap responsive tbl-qa"
+                                <div class="card-body" id="advice_item_table_container">
+                                    <table class="table table-bordered nowrap responsive tbl-qa tbl_header_fix_history"
                                            cellspacing="0" id="advice_item_tbl" width="100%">
                                         <thead>
                                         <tr>
-                                            <th class="table-header" style="width: 5%">Action</th>
+                                            <th class="table-header" style="width: 55px;">Action</th>
                                             <th class="table-header">Item Name</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($items as $item): ?>
                                                 <tr class="table-row" id="<?php echo $item['id']; ?>">
-                                                    <td style="width: 5%">
+                                                    <td style="width: 50px;">
                                                         <a class="delete-advice-item btn btn-danger btn-xs"
                                                            href="javascript:void(0)" title="delete"
                                                            data-href="<?php echo site_url('setting/delete_advice_item/') . $item['id'] . '/' . $item['advice_id'] ?>">
                                                             <i class="fa fa-trash" title="Delete"></i></a>
                                                     </td>
                                                     <td class="advice_item" onClick="showEdit(this);">
-                                                        <input type="text" class="form-control border-0 bg-transparent shadow-none"  name="advice_item" value="<?php echo $item['name']; ?>" onchange="saveAdviceItem(this,'item_name','<?php echo $item['id']; ?>')" >
+                                                        <input type="text" class="form-control border-0 bg-transparent shadow-none"  readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="advice_item" value="<?php echo $item['name']; ?>" onchange="saveAdviceItem(this,'item_name','<?php echo $item['id']; ?>')" >
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>

@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             <?php foreach($profiles as $key){ ?>
-            <tr>
+            <tr id="patid<?php echo $key['id']; ?>">
                 <td style="width: 20px">
                     <button class="btn btn-danger btn-xs" id="delete_profile">
                         <i class="fa fa-trash"></i>

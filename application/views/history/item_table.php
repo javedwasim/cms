@@ -19,7 +19,7 @@
                    <i class="far fa-question-circle"></i></a>
             </td>
             <td onClick="showEdit(this);" >
-                <input type="text" class="form-control border-0 bg-transparent shadow-none" onchange="updatehistoryitem(this,'item_name','<?php echo $item['id']; ?>')" value="<?php echo $item['name']; ?>" style="background: transparent;" >
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" onchange="updatehistoryitem(this,'item_name','<?php echo $item['id']; ?>')" value="<?php echo $item['name']; ?>" style="background: transparent;" >
             </td>
         </tr>
     <?php endforeach; ?>

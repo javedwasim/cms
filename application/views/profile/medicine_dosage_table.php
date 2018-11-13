@@ -7,7 +7,7 @@
     <tbody>
     <?php foreach ($dosages as $dosage):?>
         <tr class="table-row">
-            <td contenteditable="true" class="medicine_category"
+            <td class="medicine_category"
                 onClick="editDosageCategory(this,'<?php echo $dosage['dosage_name']; ?>','<?php echo $dosage['dosage_id']; ?>');">
                 <?php echo $dosage['dosage_name']; ?></td>
         </tr>

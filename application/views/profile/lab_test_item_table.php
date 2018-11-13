@@ -1,29 +1,29 @@
-<table class="table table-bordered nowrap responsive datatables" cellspacing="0" id=""
+<table class="table table-bordered nowrap responsive datatables tbl_header_fix_history" cellspacing="0" id=""
        width="100%">
     <thead>
     <tr>
-        <th style="width: 10%">Action</th>
-        <th>Item Name</th>
-        <th>Value</th>
-        <th>Units</th>
+        <th style="width:13%">Action</th>
+        <th style="width:29%">Item Name</th>
+        <th style="width:29%">Value</th>
+        <th style="width:29%">Units</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 430px;">
     <?php foreach ($items as $item): ?>
         <tr>
-            <td style="width: 5%" data-toggle="modal" data-target="#history-modal">
+            <td style="width:13%;" data-toggle="modal" data-target="#history-modal">
                 <a class="info-lab-test-item-btn btn btn-info btn-xs"
                    href="javascript:void(0)"
                    data-lab-test-item-id="<?php echo $item['id']; ?>">
                    <i class="far fa-question-circle"></i>
                </a>
             </td>
-            <td contenteditable="true">
+            <td>
                 <?php echo $item['name']; ?>
                 <input type="hidden" name="item_id[]" value="<?php echo $item['id']; ?>">
             </td>
-            <td><input type="text" name="item_value[]" value="" style="width: 100%;"></td>
-            <td contenteditable="true">
+            <td><input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="item_value[]" value="" style="width: 100%;"></td>
+            <td>
                 <?php echo $item['units']; ?>
                 <input type="hidden" name="item_units[]" value="<?php echo $item['units']; ?>">
             </td>

@@ -9,13 +9,13 @@
                     <div class="col-lg-2 col-md-3">
                         <div class="form-group">
                             <label>New Item:</label>
-                            <input type="text" class="form-control" name="item" id="measurement_item">
+                            <input type="text" class="form-control" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="item" id="measurement_item">
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3">
                         <div class="form-group">
                             <label>Normal Value:</label>
-                            <input type="text" class="form-control" name="value" id="normal_value">
+                            <input type="text" class="form-control" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="value" id="normal_value">
                         </div>
                     </div>
                     <div class=" col-lg-3 col-md-4">

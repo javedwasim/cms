@@ -13,7 +13,7 @@
                     <input type="radio" name="rs" class="diagnose_radio"
                            data-diagnose-id="<?php echo $diagnose['id']; ?>"
                            data-structure-id="<?php echo $diagnose['structure_id']; ?>"
-                           value="<?php echo $diagnose['id']; ?>"
+                           value="<?php echo $diagnose['id']; ?>" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
                            autocomplete="off" <?php echo $diagnose['disease_id']>0?'checked':''; ?>>
                 </label>
             </td>

@@ -1,14 +1,14 @@
-<table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive datatables tbl_header_fix_history" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:1px !important;">Action</th>
+        <th class="table-header" style="width:55px !important;">Action</th>
         <th class="table-header">Item Name</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 500px;">
     <?php foreach ($tests as $test): ?>
         <tr class="table-row">
-            <td>
+            <td style="width: 50px;">
                 <a class="info-lab-test-btn btn btn-info btn-xs"
                    href="javascript:void(0)"
                    data-lab-test-id="<?php echo $test['id']; ?>"><i
@@ -22,7 +22,6 @@
     <?php endforeach; ?>
     </tbody>
 </table>
-
 <div id="lab_test_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true" style="display: none;">
     <div class="modal-dialog">

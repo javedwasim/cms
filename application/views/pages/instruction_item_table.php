@@ -1,12 +1,12 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive datatables" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive datatables tbl_header_fix_history" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
         <th class="table-header" style="width:1px !important;">Action</th>
         <th class="table-header">Item Name</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 500px;">
     <?php foreach ($items as $item): ?>
         <tr class="table-row">
             <td>

@@ -2,17 +2,17 @@
        width="100%">
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%">Action</th>
+        <!-- <th class="table-header" style="width: 5%">Action</th> -->
         <th class="table-header">Advices</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($advices as $advice): ?>
         <tr class="table-row">
-            <td>
+            <!-- <td>
                 &nbsp;
-            </td>
-            <td contenteditable="true" class="advice_cate"
+            </td> -->
+            <td class="advice_cate"
                 onClick="loadAdviceCategory(this,'<?php echo $advice['id']; ?>');">
                 <?php echo $advice['name']; ?></td>
         </tr>

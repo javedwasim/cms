@@ -17,7 +17,7 @@
                 </a>
             </td>
             <td class="invest_cate" onClick="editInvestigationCategory(this);">
-                <input type="text" class="form-control border-0 bg-transparent shadow-none" name="invest_cate" value="<?php echo $category['name']; ?>" onchange="saveInvestigationCateGOry(this,'cate_name','<?php echo $category['id']; ?>')" >        
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="invest_cate" value="<?php echo $category['name']; ?>" onchange="saveInvestigationCateGOry(this,'cate_name','<?php echo $category['id']; ?>')" >        
             </td>
         </tr>
     <?php endforeach; ?>

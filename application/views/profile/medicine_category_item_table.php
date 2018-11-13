@@ -14,7 +14,7 @@
                    data-medicine-item-id="<?php echo $item['id']; ?>">
                    <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true" class="medicine_item"
+            <td class="medicine_item"
                 onClick="medicineItemEdit(this,'<?php echo $item['medicine_id']; ?>','<?php echo $item['name']; ?>');">
                 <?php echo $item['name']; ?></td>
         </tr>

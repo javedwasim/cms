@@ -7,13 +7,27 @@
         <input type="hidden" name="pat_id" id="patientid" value="<?php echo $key['patient_id']; ?>">
     </td>
     <td>
-        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd-MM-yyyy HH:ii p"  value="<?php echo date('d-F-Y h:i a',strtotime($key['vaital_datetime'])); ?>" readonly style="border: transparent; width:70%;">
+        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd-MM-yyyy HH:ii p"  value="<?php echo date('d-F-Y h:i a',strtotime($key['vaital_datetime'])); ?>" readonly style="border: transparent; width:100%;">
     </td>
     <td contenteditable="true" class="vital_bp"><?php echo $key['vital_bp']; ?></td>
     <td contenteditable="true" class="vital_pulse"><?php echo $key['vital_pulse']; ?></td>
     <td contenteditable="true" class="vital_temp"><?php echo $key['vital_temp']; ?></td>
     <td contenteditable="true" class="vital_inr"><?php echo $key['vital_inr']; ?></td>
     <td contenteditable="true" class="vital_rr"><?php echo $key['vital_rr']; ?></td>
+    <td class="vital_volume">
+        <select class="form-control">
+            <option value="<?php echo $key['vital_volume']; ?>"><?php echo $key['vital_volume']; ?></option>
+            <option value="Normal Volume">Normal Volume</option>
+            <option value="Low Volume">Low Volume</option>
+            <option value="High Volume">High Volume</option>
+            <option value="Irregularly Volume">Irregularly Volume</option>
+            <option value="With pauses">With pauses</option>
+        </select>
+    </td>
+    <td contenteditable="true" class="vital_height"><?php echo $key['vital_height']; ?></td>
+    <td contenteditable="true" class="vital_weight"><?php echo $key['vital_weight']; ?></td>
+    <td  class="vital_bmi"><?php echo $key['vital_bmi']; ?></td>
+    <td  class="vital_bsa"><?php echo $key['vital_bsa']; ?></td>
     <td style="display: inline-flex;">
         <a class="btn btn-sm btn-danger delete_vital" href="javascript:void(0)" data-href="<?php echo site_url('user/delete_vitals/'. $key["id"].'/'.$key["patient_id"]) ?>">
             <i class="fa fa-trash" aria-hidden="true"></i>
@@ -29,13 +43,27 @@
 <tr >
     <td class="vital_id"></td>
     <td>
-        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd MM yyyy HH:ii p"  value="" placeholder="<?php echo date('d-F-Y h:i a'); ?>" readonly style="border: transparent; width:70%;">
+        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd MM yyyy HH:ii p"  value="" placeholder="<?php echo date('d-F-Y h:i a'); ?>" readonly style="border: transparent; width:100%;">
     </td>
     <td contenteditable="true" class="vital_bp"></td>
     <td contenteditable="true" class="vital_pulse"></td>
     <td contenteditable="true" class="vital_temp"></td>
     <td contenteditable="true" class="vital_inr"></td>
     <td contenteditable="true" class="vital_rr"></td>
+    <td class="">
+        <select class="form-control vital_volume">
+            <option value="">Select</option>
+            <option value="Normal Volume">Normal Volume</option>
+            <option value="Low Volume">Low Volume</option>
+            <option value="High Volume">High Volume</option>
+            <option value="Irregularly Volume">Irregularly Volume</option>
+            <option value="With pauses">With pauses</option>
+        </select>
+    </td>
+    <td contenteditable="true" class="vital_height"></td>
+    <td contenteditable="true" class="vital_weight"></td>
+    <td contenteditable="true" class="vital_bmi"></td>
+    <td contenteditable="true" class="vital_bsa"></td>
     <td style="display: inline-flex;">
         <a class="btn btn-default btn-sm save_vitals" href="javascript:void(0)">
             <i class="fa fa-save" aria-hidden="true"></i>

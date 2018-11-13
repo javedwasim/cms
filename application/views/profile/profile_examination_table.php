@@ -7,7 +7,7 @@
     <tbody>
     <?php foreach ($examination_category as $category): ?>
         <tr>
-            <td contenteditable="true" class="profile_history_info"
+            <td class="profile_history_info"
                 onClick="loadExaminationItem(this,'<?php echo $category['id']; ?>');">
                 <?php echo $category['name']; ?></td>
         </tr>

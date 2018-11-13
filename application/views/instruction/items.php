@@ -5,22 +5,49 @@
         var itemfile = new FormData($('#import_csv_instruction')[0]);
         var catid = $('#instruction_id option:selected').val();
         var pgcatid = $('#page_cat_id').val();
-        $.ajax({
-           url:"<?php echo base_url(); ?>setting/import_instruction_items/"+catid+"/"+pgcatid,
-           method:"POST",
-           data: itemfile,
-           contentType:false,
-           cache:false,
-           processData:false,
-           success:function(response)
-           {
-              document.getElementById("csv_instruction_file").value = "";
-                if (response.success==true) {
-                  toastr["success"](response.message);
-                }else{
-                  toastr["error"](response.message);
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+            buttons: {
+                Yes: function () {
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_instruction_items/"+catid+"/"+pgcatid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_instruction_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
+                },
+                No: function (){
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_instruction_items/"+catid+"/"+pgcatid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_instruction_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
                 }
-           }
+            }
         });
     });
 </script>

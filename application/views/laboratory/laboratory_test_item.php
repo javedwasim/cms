@@ -61,12 +61,12 @@
                 </div>
             </div>
         </div>
-        <div class="card-body"  style="height: 400px; overflow-y: scroll;">
-            <table class="table table-bordered responsive" cellspacing="0" id="lab_test_item_tbl"
+        <div class="card-body" >
+            <table class="table table-bordered responsive tbl_header_fix_history" cellspacing="0" id="lab_test_item_tbl"
                    width="100%">
                 <thead>
                 <tr>
-                    <th style="width:95px;">Action</th>
+                    <th style="width:100px;">Action</th>
                     <th>Item Name</th>
                     <th>Units</th>
                 </tr>
@@ -94,10 +94,10 @@
                             </td>
                             <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
                                 <td style="word-break: break-all; width: 42%;"class="exam_cate" >
-                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $item['name']; ?>" name="lab_test_item" onchange="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')">
+                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $item['name']; ?>" name="lab_test_item" onchange="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')">
                                 </td>
                                 <td style="word-break: break-all;width: 50%;"class="exam_cate">
-                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="lab_test_unit" value="<?php echo $item['units']; ?>" onchange="saveTestItemDescription(this,'unit','<?php echo $item['id']; ?>')">        
+                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="lab_test_unit" value="<?php echo $item['units']; ?>" onchange="saveTestItemDescription(this,'unit','<?php echo $item['id']; ?>')">        
                                 </td>
                             <?php } else{ ?>
                                 <td  onClick="showError(this);">

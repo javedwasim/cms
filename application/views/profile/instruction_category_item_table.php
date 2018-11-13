@@ -14,7 +14,7 @@
                    data-inst-item-id="<?php echo $item['id']; ?>"><i
                    class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true" class="inst_item"
+            <td class="inst_item"
                 onClick="showEdit(this,'<?php echo $item['name']; ?>');">
                 <?php echo $item['name']; ?></td>
         </tr>

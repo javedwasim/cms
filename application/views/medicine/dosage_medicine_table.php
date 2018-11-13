@@ -11,7 +11,7 @@
         <tr>
             <td align="right"><?php echo $dosage['name']; ?></td>
             <td style="width:50px;">
-                <input type="checkbox" name="dosage[]" value="<?php echo $dosage['id']; ?>"
+                <input type="checkbox" name="dosage[]" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $dosage['id']; ?>"
                     <?php echo isset($dosage['medicine_category_id'])&&($dosage['medicine_category_id'] > 0)?'checked':''; ?>>
             </td>
         </tr>

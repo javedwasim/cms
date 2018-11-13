@@ -2,24 +2,51 @@
 $(document.body).on('click','#import_profession_btn', function(e){
         event.preventDefault();
         var itemfile = new FormData($('#import_csv_profession')[0]);
-        $.ajax({
-           url:"<?php echo base_url(); ?>setting/import_professions/",
-           method:"POST",
-           data: itemfile,
-           contentType:false,
-           cache:false,
-           processData:false,
-           success:function(response)
-           {
-                $('.profession_table').remove();
-                $('#profession_table').append(response.profession_table);
-                document.getElementById("profession_csv_file").value = "";
-                if (response.success==true) {
-                  toastr["success"](response.message);
-                }else{
-                  toastr["error"](response.message);
-                }
-           }
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+            buttons: {
+                Yes: function () {
+                    $.ajax({
+                      url:"<?php echo base_url(); ?>setting/import_professions/",
+                      method:"POST",
+                      data: itemfile,
+                      contentType:false,
+                      cache:false,
+                      processData:false,
+                      success:function(response){
+                        $('.profession_table').remove();
+                        $('#profession_table').append(response.profession_table);
+                        document.getElementById("profession_csv_file").value = "";
+                        if (response.success==true) {
+                          toastr["success"](response.message);
+                        }else{
+                          toastr["error"](response.message);
+                        }
+                    }
+                  });
+                },
+                No: function (){
+                  $.ajax({
+                    url:"<?php echo base_url(); ?>setting/import_professions/",
+                    method:"POST",
+                    data: itemfile,
+                    contentType:false,
+                    cache:false,
+                    processData:false,
+                    success:function(response){
+                      $('.profession_table').remove();
+                      $('#profession_table').append(response.profession_table);
+                      document.getElementById("profession_csv_file").value = "";
+                      if (response.success==true) {
+                        toastr["success"](response.message);
+                      }else{
+                        toastr["error"](response.message);
+                      }
+                  }
+                });
+              }
+            }
         });
     });
 </script>

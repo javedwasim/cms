@@ -399,65 +399,149 @@ class Profile_model extends CI_Model
     }
 
 
-    public function save_echo_profile_info($data,$main_category)
-    {
-        $query = $this->db->select('*')->from('patient_echo')->limit(1)->get();
-        $result = $query->row_array();
-        $patient_echo_id = $result['id'];
+    public function save_echo_profile_info($data,$main_category){
         if ($main_category==9) {
-            $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_color_doppler');
-            $this->db->where('patient_id', $data['patient_id'])->delete('patient_echo');
-            $this->db->insert('patient_echo', array('patient_id' => $data['patient_id'], 'measurement_cate_id' => $data['measurement_cate_id']));
-            $patient_echo_id = $this->db->insert_id();
-            if (isset($data['mr'])) {
-                $mr = $data['mr'];
+            $query = $this->db->select('*')->from('patient_echo')->limit(1)->get();
+            $result = $query->row_array();
+            if ($result) {
+                $patient_echo_id = $result['id'];
+                $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_color_doppler');
+                if (isset($data['mr'])) {
+                    $mr = $data['mr'];
+                }else{
+                    $mr = "";
+                }
+                if (isset($data['ar'])) {
+                    $ar = $data['ar'];
+                }else{
+                    $ar = "";
+                }
+                if (isset($data['pr'])) {
+                    $pr = $data['pr'];
+                }else{
+                    $pr = "";
+                }
+                if (isset($data['tr'])) {
+                    $tr = $data['tr'];
+                }else{
+                    $tr = "";
+                }
+                $data_array = array(
+                    'mr' => $mr, 
+                    'ar' => $ar, 
+                    'pr' => $pr, 
+                    'tr' => $tr,
+                    'patient_echo_id' => $patient_echo_id
+                );
+                $this->db->insert('patient_echo_color_doppler',$data_array);
             }else{
-                $mr = "";
+                $this->db->insert('patient_echo', array('patient_id' => $data['patient_id'], 'measurement_cate_id' => $data['measurement_cate_id']));
+                $patient_echo_id = $this->db->insert_id();
+                $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_color_doppler');
+                if (isset($data['mr'])) {
+                    $mr = $data['mr'];
+                }else{
+                    $mr = "";
+                }
+                if (isset($data['ar'])) {
+                    $ar = $data['ar'];
+                }else{
+                    $ar = "";
+                }
+                if (isset($data['pr'])) {
+                    $pr = $data['pr'];
+                }else{
+                    $pr = "";
+                }
+                if (isset($data['tr'])) {
+                    $tr = $data['tr'];
+                }else{
+                    $tr = "";
+                }
+                $data_array = array(
+                    'mr' => $mr, 
+                    'ar' => $ar, 
+                    'pr' => $pr, 
+                    'tr' => $tr,
+                    'patient_echo_id' => $patient_echo_id
+                );
+                $this->db->insert('patient_echo_color_doppler',$data_array);
             }
-            if (isset($data['ar'])) {
-                $ar = $data['ar'];
-            }else{
-                $ar = "";
-            }
-            if (isset($data['pr'])) {
-                $pr = $data['pr'];
-            }else{
-                $pr = "";
-            }
-            if (isset($data['tr'])) {
-                $tr = $data['tr'];
-            }else{
-                $tr = "";
-            }
-            $data_array = array(
-                'mr' => $mr, 
-                'ar' => $ar, 
-                'pr' => $pr, 
-                'tr' => $tr,
-                'patient_echo_id' => $patient_echo_id
-            );
-            $this->db->insert('patient_echo_color_doppler',$data_array);
 
         }else{
-            $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_measurement');
-            $this->db->where('patient_id', $data['patient_id'])->delete('patient_echo');
-            $this->db->insert('patient_echo', array('patient_id' => $data['patient_id'], 'measurement_cate_id' => $data['measurement_cate_id']));
-            $patient_echo_id = $this->db->insert_id();
-
-            for ($i = 0; $i < count($data['item_id']); $i++) {
-                $item_id = $data['item_id'];
-                $item_value = $data['item_value'];
-                $measurement_value = $data['measurement_value'];
-                if (!empty($item_value[$i])) {
-                    $this->db->insert('patient_echo_measurement',
-                        array(
-                            'patient_echo_id' => $patient_echo_id,
-                            'item_id' => $item_id[$i],
-                            'item_value' => $item_value[$i],
-                            'measurement_value' => $measurement_value[$i],
-                        ));
+            $query = $this->db->select('*')->from('patient_echo')->limit(1)->get();
+            $result = $query->row_array();
+            if ($result) {
+                $patient_echo_id = $result['id'];
+                if ($data['main_category']=='mmode') {
+                    for ($i = 0; $i < count($data['item_id']); $i++) {
+                    $item_id = $data['item_id'];
+                    $item_value = $data['item_value'];
+                    $measurement_value = $data['measurement_value'];
+                    if (!empty($item_value[$i])) {
+                        $this->db->insert('patient_echo_measurment_mmod',
+                            array(
+                                'patient_echo_id' => $patient_echo_id,
+                                'item_id' => $item_id[$i],
+                                'item_value' => $item_value[$i],
+                                'measurement_value' => $measurement_value[$i],
+                            ));
+                        }
+                    }
+                }else{
+                    for ($i = 0; $i < count($data['item_id']); $i++) {
+                    $item_id = $data['item_id'];
+                    $item_value = $data['item_value'];
+                    $measurement_value = $data['measurement_value'];
+                    if (!empty($item_value[$i])) {
+                        $this->db->insert('patient_echo_measurement',
+                            array(
+                                'patient_echo_id' => $patient_echo_id,
+                                'item_id' => $item_id[$i],
+                                'item_value' => $item_value[$i],
+                                'measurement_value' => $measurement_value[$i],
+                            ));
+                        }
+                    }
+                }
+            }else{
+                // $this->db->where('patient_echo_id', $patient_echo_id)->delete('patient_echo_measurement');
+                // $this->db->where('patient_id', $data['patient_id'])->delete('patient_echo');
+                $this->db->insert('patient_echo', array('patient_id' => $data['patient_id'], 'measurement_cate_id' => $data['measurement_cate_id']));
+                $patient_echo_id = $this->db->insert_id();
+                if ($data['main_category']=='mmode') {
+                    for ($i = 0; $i < count($data['item_id']); $i++) {
+                    $item_id = $data['item_id'];
+                    $item_value = $data['item_value'];
+                    $measurement_value = $data['measurement_value'];
+                    if (!empty($item_value[$i])) {
+                        $this->db->insert('patient_echo_measurment_mmod',
+                            array(
+                                'patient_echo_id' => $patient_echo_id,
+                                'item_id' => $item_id[$i],
+                                'item_value' => $item_value[$i],
+                                'measurement_value' => $measurement_value[$i],
+                            ));
+                        }
+                    }
+                }else{
+                    for ($i = 0; $i < count($data['item_id']); $i++) {
+                    $item_id = $data['item_id'];
+                    $item_value = $data['item_value'];
+                    $measurement_value = $data['measurement_value'];
+                    if (!empty($item_value[$i])) {
+                        $this->db->insert('patient_echo_measurement',
+                            array(
+                                'patient_echo_id' => $patient_echo_id,
+                                'item_id' => $item_id[$i],
+                                'item_value' => $item_value[$i],
+                                'measurement_value' => $measurement_value[$i],
+                            ));
+                        }
+                    }
                 }
             }
+            
         }
         
         return $patient_echo_id;
@@ -467,6 +551,19 @@ class Profile_model extends CI_Model
     {
         $result = $this->db->select('patient_echo_measurement.*,category_measurement.item')->from('patient_echo_measurement')
             ->join('category_measurement', 'category_measurement.id=patient_echo_measurement.item_id', 'left')
+            ->where('patient_echo_id', "$category_id")->get();
+        //echo $this->db->last_query(); die();
+        if ($result) {
+            return $result->result_array();
+        } else {
+            return array();
+        }
+    }
+
+    public function get_patient_measurement_by_mmode($category_id)
+    {
+        $result = $this->db->select('patient_echo_measurment_mmod.*,category_measurement.item')->from('patient_echo_measurment_mmod')
+            ->join('category_measurement', 'category_measurement.id=patient_echo_measurment_mmod.item_id', 'left')
             ->where('patient_echo_id', "$category_id")->get();
         //echo $this->db->last_query(); die();
         if ($result) {
@@ -536,7 +633,6 @@ class Profile_model extends CI_Model
             $item_id = $data['item_id'];
             $item_value = $data['item_value'];
             $measurement_value = $data['measurement_value'];
-
             $this->db->insert('profile_echo_measurement',
                 array(
                     'echo_detail_id' => $echo_deatil_id,
@@ -606,7 +702,10 @@ class Profile_model extends CI_Model
             'doopler_tr' => $tr
         );
         $this->db->insert('profile_echo_color_doopler',$data_array);
-
+        $this->db->truncate('patient_echo_measurement');
+        $this->db->truncate('patient_echo_measurment_mmod');
+        $this->db->truncate('patient_echo_color_doppler');
+        $this->db->truncate('patient_echo');
         return $patient_echo_id;
     }
 

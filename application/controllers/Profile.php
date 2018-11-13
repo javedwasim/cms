@@ -293,6 +293,7 @@ class Profile extends MY_Controller
 
     public function save_ett_test(){
         $data = $this->input->post();
+        $patientid = $data['pat_id'];
         if ($data['details_id']=='') {
             $patientid = $data['pat_id'];
             $testreason = $data['test_reason'];
@@ -406,6 +407,7 @@ class Profile extends MY_Controller
         $data['districts'] = $this->Setting_model->get_districts();
         $data['profiles'] = $this->Profile_model->get_profiles();
         $data['rights'] = $this->session->userdata('other_rights');
+        $json['patid'] = 'patid'.$patientid;
         $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
         $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
         $json['result_html'] = $this->load->view('pages/profile', $data, true);
@@ -632,6 +634,10 @@ class Profile extends MY_Controller
     public function get_measurement_by_filter($category)
     {
         $data['measurements'] = $this->Echo_model->get_measurement_by_filter($category);
+        foreach ($data['measurements'] as  $value) {
+            $cat_id = $value['category_id'];
+        }
+        $data['echo_category'] = $this->Echo_model->get_echo_category_by_id($cat_id);
         $data['active_tab'] = 'measurement';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('profile/category_measurement_table', $data, true);
@@ -660,7 +666,11 @@ class Profile extends MY_Controller
                 $data['color_doppler'] = $this->Profile_model->get_patient_color_doppler($patient_echo_id);
                 $json['result_html'] = $this->load->view('profile/color_doppler_table', $data, true);
             }else{
-                $data['measurements'] = $this->Profile_model->get_patient_measurement_by_category($patient_echo_id);
+                if ($data['main_category']=='mmode') {
+                    $data['measurements'] = $this->Profile_model->get_patient_measurement_by_mmode($patient_echo_id);
+                }else{
+                    $data['measurements'] = $this->Profile_model->get_patient_measurement_by_category($patient_echo_id);
+                }
                 $json['result_html'] = $this->load->view('profile/profile_measurement_table', $data, true);
             }
             $data['active_tab'] = 'measurement';
@@ -683,9 +693,16 @@ class Profile extends MY_Controller
     public function save_profile_echo_info()
     {
         $data = $this->input->post();
-        $this->Profile_model->save_profile_echo_info($data);
-        $json['success'] = true;
-        $json['message'] = 'Information save successfully!';
+        $patient_echo_id = $data['patient_id'];
+        if (isset($data['disease_finding_id']) && isset($data['disease_diagnosis_id'])) {
+            $this->Profile_model->save_profile_echo_info($data);
+            $json['success'] = true;
+            $json['message'] = 'Information save successfully!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Please provide complete information.';
+        }
+        $json['patid'] = 'patid'.$patient_echo_id;
         $data['professions'] = $this->Setting_model->get_professions();
         $data['districts'] = $this->Setting_model->get_districts();
         $data['profiles'] = $this->Profile_model->get_profiles();
@@ -938,6 +955,7 @@ class Profile extends MY_Controller
     public function save_profile_examination_info()
     {
         $data = $this->input->post();
+        $patient_id = $data['patient_id'];
         $current_date = date('Y-m-d');
         $next_visit_date = date('Y-m-d',strtotime($data['next_date_visit_form']));
         if ($current_date>=$next_visit_date) {
@@ -967,6 +985,7 @@ class Profile extends MY_Controller
             $data['districts'] = $this->Setting_model->get_districts();
             $data['profiles'] = $this->Profile_model->get_profiles();
             $data['rights'] = $this->session->userdata('other_rights');
+            $json['patid'] = "patid".$patient_id;
             $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
             $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
             $json['result_html'] = $this->load->view('pages/profile', $data, true);

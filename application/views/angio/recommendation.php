@@ -2,25 +2,54 @@
   $('#import_csv_angio').submit(function(event){
         event.preventDefault();
         var itemfile = new FormData($('#import_csv_angio')[0]);
-        $.ajax({
-           url:"<?php echo base_url(); ?>setting/import_angio/",
-           method:"POST",
-           data: itemfile,
-           contentType:false,
-           cache:false,
-           processData:false,
-           success:function(response)
-           {
-            document.getElementById("csv_angio_file").value = "";
-            if (response.success==true) {
-                toastr["success"](response.message);
-                $('.recommendation_container').empty();
-                $('.recommendation_container').append(response.result_html);
-            }else{
-              toastr["error"](response.message);
-            }
-           }
-        });
+         $.confirm({
+          title: 'Confirm!',
+          content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+          buttons: {
+              Yes: function () {
+                $.ajax({
+                   url:"<?php echo base_url(); ?>setting/import_angio/",
+                   method:"POST",
+                   data: itemfile,
+                   contentType:false,
+                   cache:false,
+                   processData:false,
+                   success:function(response)
+                   {
+                    document.getElementById("csv_angio_file").value = "";
+                    if (response.success==true) {
+                        toastr["success"](response.message);
+                        $('.recommendation_container').empty();
+                        $('.recommendation_container').append(response.result_html);
+                    }else{
+                      toastr["error"](response.message);
+                    }
+                   }
+                });
+              },
+              No: function () {
+                $.ajax({
+                   url:"<?php echo base_url(); ?>setting/import_angio/",
+                   method:"POST",
+                   data: itemfile,
+                   contentType:false,
+                   cache:false,
+                   processData:false,
+                   success:function(response)
+                   {
+                    document.getElementById("csv_angio_file").value = "";
+                    if (response.success==true) {
+                        toastr["success"](response.message);
+                        $('.recommendation_container').empty();
+                        $('.recommendation_container').append(response.result_html);
+                    }else{
+                      toastr["error"](response.message);
+                    }
+                   }
+                });
+              }
+          }
+      });
     });
 </script>
 <div class="dashboard-content">

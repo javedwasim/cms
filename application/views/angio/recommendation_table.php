@@ -15,7 +15,7 @@
                    <i class="fa fa-trash" title="Delete"></i></a>
             </td>
             <td class="recommendation" onClick="showEdit(this);">
-                <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $recommendation['description']; ?>"  onchange="saveToDatabase(this,'cate_name','<?php echo $recommendation['id']; ?>')">        
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $recommendation['description']; ?>"  onchange="saveToDatabase(this,'cate_name','<?php echo $recommendation['id']; ?>')">        
             </td>
         </tr>
     <?php endforeach; ?>

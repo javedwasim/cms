@@ -20,7 +20,7 @@
                         </a>
                     </td>
                     <td class="exam_cate" onClick="showExamination(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $key['profession_name']; ?>" onchange="updateprofession(this,'profession_name','<?php echo $key['profession_id']; ?>')" style="text-transform: capitalize;" /> 
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $key['profession_name']; ?>" onchange="updateprofession(this,'profession_name','<?php echo $key['profession_id']; ?>')" style="text-transform: capitalize;" /> 
                     </td>
                 </tr>
             <?php } ?>
@@ -51,5 +51,14 @@
             }
         });
     }
+    // $(document).ready(function () {
+    //     // $('input.dbedit').attr('readonly','readonly');
+    //     $('input.dbedit').on('blur',function(){
+    //         $(this).attr('readonly','readonly'); //or use readonly
+    //     });
+    //     $('input.dbedit').dblclick(function(){
+    //         $(this).removeAttr('readonly'); //or use readonly attribute
+    //     });
+    // });
 </script>
     

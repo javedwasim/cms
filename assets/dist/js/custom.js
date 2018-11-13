@@ -101,7 +101,6 @@ $(document).ready(function () {
             $(this).addClass('row_selected');
         }
     });
-
     /////////////////// initilize booking datatable///////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -4531,7 +4530,6 @@ function deletelabtestDetail(editableObj,key,patient_id){
     });
     return false;
 }
-
 $(document.body).on('click','#ett-details-pro',function(){
     $.ajax({
         url: window.location.origin+window.location.pathname+'ett/get_protocol_detail_content',

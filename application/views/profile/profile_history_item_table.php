@@ -14,7 +14,7 @@
                    data-history-item-id="<?php echo $item['id']; ?>">
                     <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true" class="history_item"
+            <td class="history_item"
                 onClick="addHistoryItem(this,'<?php echo $item['name']; ?>');">
                 <?php echo $item['name']; ?></td>
         </tr>

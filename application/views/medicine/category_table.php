@@ -18,7 +18,7 @@
                    <i class="far fa-question-circle"></i></a>
             </td>
             <td class="medicine_category" onClick="editMedicineCategory(this);">
-                <input type="text" class="form-control border-0 bg-transparent shadow-none" name="medicine_category" value="<?php echo $category['name']; ?>" onchange="saveMedicineCategory(this,'cate_name','<?php echo $category['id']; ?>')">
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="medicine_category" value="<?php echo $category['name']; ?>" onchange="saveMedicineCategory(this,'cate_name','<?php echo $category['id']; ?>')">
             </td>
         </tr>
     <?php endforeach; ?>

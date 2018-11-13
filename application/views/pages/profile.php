@@ -254,7 +254,7 @@ if(isset($rights[0]['user_rights']))
         </div>
     </div>
  <!-- sample modal content -->
-    <div id="add-new-patient" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div id="add-new-patient" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
             <form id="profile_form">
                 <div class="modal-content">

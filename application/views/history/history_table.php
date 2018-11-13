@@ -20,7 +20,7 @@
                 </a>
             </td>
             <td class="exam_cate">
-                <input type="text" class="form-control border-0 bg-transparent shadow-none"  value="<?php echo $category['name']; ?>" onchange="saveProfileHistory(this,'cate_name','<?php echo $category['id']; ?>')"
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"  value="<?php echo $category['name']; ?>" onchange="saveProfileHistory(this,'cate_name','<?php echo $category['id']; ?>')"
                 onClick="showEdit(this);" style="background: transparent;" >
                 
         </tr>

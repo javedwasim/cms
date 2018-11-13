@@ -27,10 +27,10 @@
 
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
-                <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>"><input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">        
+                <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>"><input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">        
                 </td>
             <?php } elseif(in_array("echos-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>"><input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">        
+                <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>"><input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">        
                 </td>
             <?php } else{ ?>
                 <td contenteditable="true" onClick="showError(this);">

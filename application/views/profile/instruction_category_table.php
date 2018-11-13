@@ -14,7 +14,7 @@
                    data-inst-id="<?php echo $category['id']; ?>"><i
                    class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true" class="inst_cate"
+            <td class="inst_cate"
                 onClick="editInstructionCategory(this,'<?php echo $category['id']; ?>');">
                 <?php echo $category['name']; ?></td>
         </tr>

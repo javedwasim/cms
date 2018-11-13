@@ -14,7 +14,7 @@
                            data-finding-id="<?php echo $finding['id']; ?>"
                            data-structure-id="<?php echo $finding['structure_id']; ?>"
                            value="<?php echo $finding['id']; ?>"
-                           autocomplete="off"
+                           autocomplete="off" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
                            <?php echo $finding['disease_id']>0?'checked':''; ?>>
                 </label>
             </td>

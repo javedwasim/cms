@@ -2,17 +2,17 @@
        cellspacing="0" id="" width="100%">
     <thead>
     <tr>
-        <th class="table-header" style="width: 5%">Action</th>
+       <!--  <th class="table-header" style="width: 5%">Action</th> -->
         <th class="table-header">Item Name</th>
     </tr>
     </thead>
     <tbody>
         <?php foreach ($items as $item): ?>
             <tr class="table-row">
-                <td style="width: 5%">
+                <!-- <td style="width: 5%">
                     &nbsp;
-                </td>
-                <td contenteditable="true" class="advice_item"
+                </td> -->
+                <td class="advice_item"
                     onClick="addAdviceItem(this,'<?php echo $item['name']; ?>');">
                     <?php echo $item['name']; ?></td>
             </tr>

@@ -14,7 +14,7 @@
                        data-examination-item-id="<?php echo $item['id']; ?>">
                         <i class="far fa-question-circle"></i></a>
                 </td>
-                <td contenteditable="true" class="exam_item"
+                <td class="exam_item"
                     onClick="addExaminationItem(this,'<?php echo $item['name']; ?>');">
                     <?php echo $item['name']; ?>
                 </td>
