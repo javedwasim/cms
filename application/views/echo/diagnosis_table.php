@@ -6,7 +6,7 @@
         <th >diagnosis</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 250px;">
     <?php foreach ($diagnosis as $diagnose): ?>
         <tr class="table-row">
             <td style="width: 50px;">
@@ -28,11 +28,11 @@
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <td class="diagnosis_cate" onClick="diagnosisEdit(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $diagnose['name']; ?>" onchange="savediagnosis(this,'cate_name','<?php echo $diagnose['id']; ?>')">        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $diagnose['name']; ?>" onchange="savediagnosis(this,'cate_name','<?php echo $diagnose['id']; ?>')">        
                 </td>
             <?php } elseif(in_array("echos-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                 <td class="diagnosis_cate" onClick="diagnosisEdit(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $diagnose['name']; ?>" onchange="savediagnosis(this,'cate_name','<?php echo $diagnose['id']; ?>')">        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $diagnose['name']; ?>" onchange="savediagnosis(this,'cate_name','<?php echo $diagnose['id']; ?>')">        
                 </td>
             <?php } else{ ?>
                 <td onClick="showError(this);">

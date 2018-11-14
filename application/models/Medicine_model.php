@@ -29,20 +29,22 @@
         }
 
         public function get_dosage_medicine_category($medicine_id){
-            $sql = "SELECT dosage.*, medicine_dosage.medicine_id as medicine_category_id 
+            if ($medicine_id==0) {
+                return array();
+            }else{
+                $sql = "SELECT dosage.*, medicine_dosage.medicine_id as medicine_category_id 
                     FROM dosage 
                     LEFT JOIN medicine_dosage ON medicine_dosage.dosage_id = dosage.id 
                     and medicine_dosage.medicine_id = $medicine_id
                     order by dosage.id;
                     ";
-
-            $result = $query = $this->db->query($sql);
-            if ($result) {
-                return $result->result_array();
-            }else{
-                return array();
+                $result = $query = $this->db->query($sql);
+                if ($result) {
+                    return $result->result_array();
+                }else{
+                    return array();
+                }
             }
-
         }
 
         public function add_medicine_category($data){

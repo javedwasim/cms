@@ -14,7 +14,7 @@
                    data-profile-history-id="<?php echo $category['id']; ?>">
                     <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true" class="exam_cate"
+            <td class="exam_cate"
                 onClick="loadHistoryItem(this,'<?php echo $category['id']; ?>');">
                 <?php echo $category['name']; ?></td>
         </tr>

@@ -216,7 +216,7 @@
                 <div class="col-md-12">
                     <h1 style="text-align: center;">Shahadat Clinic</h1>
                     <hr>
-                    <h4 style="text-align: center;">Lab Test Repot</h4>
+                    <h4 style="text-align: center;">Lab Test Report</h4>
                 </div>
             </div>
             <br>

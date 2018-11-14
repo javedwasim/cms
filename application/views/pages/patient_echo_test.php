@@ -47,11 +47,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td>Urea</td>
-                                                    <td></td>
-                                                    <td>mg/dl</td>
-                                                </tr>
+                                
                                                 </tbody>
                                             </table>
                                         </div>

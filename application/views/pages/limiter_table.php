@@ -1,21 +1,21 @@
 <div class="limiter_table">
-	<table class="responsive table table-bordered">
+	<table class="responsive table table-bordered tbl_header_fix_history">
 		<thead>
-			<th>Action</th>
-			<th>Date</th>
-			<th>MaxAllowd</th>
+			<th style="width: 35%">Action</th>
+			<th style="width: 33%">Date</th>
+			<th style="width: 31%">MaxAllowd</th>
 		</thead>
 		<tbody>
 			<?php foreach($limiter_details as $row){?>
 				<tr>
-					<td>
+					<td style="width: 33%">
 						<a class="delete-limiter btn btn-danger btn-xs"
                        href="javascript:void(0)" title="delete"
                        data-href="<?php echo site_url('dashboard/limiter_delete/') . $row->limiter_id ?>">
                         <i class="fa fa-trash" title="Delete"></i></a>
 					</td>
-					<td><?php  echo date('d-M-Y',strtotime($row->limiter_date)); ?></td>
-					<td contenteditable="true" class="exam_cate"
+					<td style="width: 33%"><?php  echo date('d-M-Y',strtotime($row->limiter_date)); ?></td>
+					<td style="width: 33%" contenteditable="true" class="exam_cate"
                     onBlur="updatelimiter(this,'limiter','<?php echo $row->limiter_id; ?>')"
                     onClick="showrow(this);" ><?php echo $row->limiter ?></td>
 				</tr>

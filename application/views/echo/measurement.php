@@ -2,27 +2,27 @@
 <div class="tab-pane" id="tb5" role="tabpanel">
     <div class="card">
         <div class="card-header" style="display: inline-flex;">
-            <form id="2d_echo_category_item_form" method="post" role="form"
+            <form id="2d_echo_category_measurment_form" method="post" role="form"
                   data-action="<?php echo site_url('Echo_controller/add_category_measurement') ?>"
                   enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-2 col-md-3">
                         <div class="form-group">
                             <label>New Item:</label>
-                            <input type="text" class="form-control" name="item" id="measurement_item">
+                            <input type="text" class="form-control"  name="item" id="measurement_item" required="required">
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3">
                         <div class="form-group">
                             <label>Normal Value:</label>
-                            <input type="text" class="form-control" name="value" id="normal_value">
+                            <input type="text" class="form-control" name="value" id="normal_value" required="required">
                         </div>
                     </div>
                     <div class=" col-lg-3 col-md-4">
                         <div class="form-group">
                             <label>Category:</label>
-                            <select class="form-control" name="category_id" id="category_id">
-                                <option>Select</option>
+                            <select class="form-control" name="category_id" id="category_id" required="required">
+                                <option value="">Select</option>
                                 <?php foreach ($main_cate as $category): ?>
                                     <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
                                 <?php endforeach; ?>

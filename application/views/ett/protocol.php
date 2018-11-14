@@ -6,15 +6,15 @@
                 <div class="row">
                     <div class="col-md-3 col-lg-3">
                         <label>New Protocol</label>
-                        <input type="text" class="form-control" name="new_protocol" id="new_protocol" required>
+                        <input type="text" class="form-control" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="new_protocol" id="new_protocol" required>
                     </div>
                     <div class="col-md-1 col-lg-1">
                         <label>Stages</label>
-                        <input type="text" class="form-control" name="protocol_stages" id="protocol_stages" required>
+                        <input type="text" class="form-control" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="protocol_stages" id="protocol_stages" required>
                     </div>
                     <div class="col-md-1 col-lg-1">
-                        <label>Recovery</label>
-                        <input type="text" class="form-control" name=" protocol_recovery" id="protocol_recovery" required>
+                        <label>Recovery</label> 
+                        <input type="text" class="form-control" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name=" protocol_recovery" id="protocol_recovery" required>
                     </div>
                     <div class="col-md-2 col-lg-1 m-t-25">
                         <?php if($loggedin_user['is_admin']==1){ ?>
@@ -28,7 +28,7 @@
                 </div>
             </form>
         </div>
-        <div class="card-body protocol_table_content" style="height: 60vh; overflow-x: scroll;">
+        <div class="card-body protocol_table_content">
             <?php $this->load->view('ett/protocol_table'); ?>
         </div>
     </div>

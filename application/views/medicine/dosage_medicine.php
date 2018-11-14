@@ -7,7 +7,7 @@
                         <div class="form-group">
                             <label>Select Category:</label>
                             <select class="form-control" onchange="assign_medicine_category(this.value)">
-                                <option>Select</option>
+                                <option value="0">Select</option>
                                 <?php foreach ($categories as $category): ?>
                                     <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
                                 <?php endforeach; ?>

@@ -14,7 +14,7 @@
                     <i class="fa fa-trash" title="Delete"></i></a>
 
             </td>
-            <td class="default_disease_cate"
+            <td class="default_disease_cate" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
                 data-disease-id = "<?php echo $category['id']; ?>"
                 id = "<?php echo "d".$category['id']; ?>"
                 onClick="defaultDiseaseEdit(this,'<?php echo $category['id']; ?>');">

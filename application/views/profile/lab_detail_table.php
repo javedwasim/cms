@@ -12,7 +12,7 @@
                 <tr style="cursor: pointer;">
                     <td style="width: 20px"><a href="javascript:void(0)" class="btn btn-danger btn-xs"  onClick="deletelabtestDetail(this,'<?php echo $detail['info_key']; ?>','<?php echo $detail['patient_id']; ?>');"><i class="fa fa-trash"></i></a></td>
                     <td>
-                        <a href="javascript:void(0)" class="btn btn-success btn-xs pat-labtest" contenteditable="true"><i class="fa fa-edit" ></i></a>
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs pat-labtest"><i class="fa fa-edit" ></i></a>
                     </td>
                     <td style="width: 20px;"><a class="btn btn-success btn-xs" onClick="printlabtest(this,'<?php echo $detail['info_key']; ?>','<?php echo $detail['patient_id']; ?>');" style="margin: 0px;" href="javascript:void(0)"><i class="fa fa-print"></i></a></td>
                     <td style="width: 100px;"><?php echo date('Y-m-d',strtotime($detail['created_at'])) ?></td>

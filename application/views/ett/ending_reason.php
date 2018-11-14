@@ -20,7 +20,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="card-body ending_reason_table" style="height: 60vh; overflow-x: scroll;">
+		<div class="card-body ending_reason_table">
 			<?php $this->load->view('ett/ending_reason_table'); ?>
 		</div>
 	</div>

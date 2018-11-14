@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-3" >
                     <div class="form-group">
-                        <label>New Disease</label>
+                        <label>New Structure:</label>
                         <input type="text" class="form-control" name="structure" id="structure" required >
                     </div>
                 </div>

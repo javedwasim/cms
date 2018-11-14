@@ -981,6 +981,11 @@ class User extends MY_Controller {
         $temp = $this->input->post('temp');
         $inr = $this->input->post('inr');
         $rr = $this->input->post('rr');
+        $volume = $this->input->post('volume');
+        $height = $this->input->post('height');
+        $weight = $this->input->post('weight');
+        $bmi = $this->input->post('bmi');
+        $bsa = $this->input->post('bsa');
         $data_array = array(
             'patient_id' => $patid,
             'vaital_datetime' => $datetime,
@@ -988,7 +993,12 @@ class User extends MY_Controller {
             'vital_pulse' => $pulse,
             'vital_temp' => $temp,
             'vital_inr' => $inr,
-            'vital_rr' => $rr
+            'vital_rr' => $rr,
+            'vital_volume' => $volume,
+            'vital_height' => $height,
+            'vital_weight' => $weight,
+            'vital_bmi' => $bmi,
+            'vital_bsa' => $bsa
         );
         $result = $this->User_model->vitals_insert($data_array);
         if ($result) {
@@ -1039,6 +1049,11 @@ class User extends MY_Controller {
         $temp = $this->input->post('temp');
         $inr = $this->input->post('inr');
         $rr = $this->input->post('rr');
+        $volume = $this->input->post('volume');
+        $height = $this->input->post('height');
+        $weight = $this->input->post('weight');
+        $bmi = $this->input->post('bmi');
+        $bsa = $this->input->post('bsa');
         $data_array = array(
             'patient_id' => $patid,
             'vaital_datetime' => $datetime,
@@ -1046,7 +1061,12 @@ class User extends MY_Controller {
             'vital_pulse' => $pulse,
             'vital_temp' => $temp,
             'vital_inr' => $inr,
-            'vital_rr' => $rr
+            'vital_rr' => $rr,
+            'vital_volume' => $volume,
+            'vital_height' => $height,
+            'vital_weight' => $weight,
+            'vital_bmi' => $bmi,
+            'vital_bsa' => $bsa
         );
         $result = $this->User_model->vitals_update($data_array,$vitalid);
         if ($result) {

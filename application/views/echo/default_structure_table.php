@@ -14,7 +14,7 @@
                     <i class="fa fa-trash" title="Delete"></i></a>
 
             </td>
-            <td class="default_structure_cate"
+            <td class="default_structure_cate" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
                 onBlur="defaultsaveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
                 onClick="defaultstructureEdit(this,'<?php echo $structure['id']; ?>');"
                 id="<?php echo $structure['id']; ?>">

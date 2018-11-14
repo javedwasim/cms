@@ -17,8 +17,8 @@
         				</div>
                     </form>
             	</div>
-                <div class="card-body" id="advice_item_table_container" style="height: 520px; overflow-y: scroll;">
-                    <table class="table table-bordered nowrap responsive tbl-qa" id="research_tbl" cellspacing="0" width="100%" >
+                <div class="card-body" id="advice_item_table_container">
+                    <table class="table table-bordered nowrap responsive tbl-qa tbl_header_fix" id="research_tbl" cellspacing="0" width="100%" >
                        <thead>
                             <tr>
                                 <th style="width: 100px;">Action</th>
@@ -38,7 +38,7 @@
 
                                     </td>
                                     <td class="research_cate" onClick="showEdit(this);">
-                                        <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $research['name']; ?>" onchange="saveToDatabase(this,'research_name','<?php echo $research['id']; ?>')">        
+                                        <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $research['name']; ?>" onchange="saveToDatabase(this,'research_name','<?php echo $research['id']; ?>')">        
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

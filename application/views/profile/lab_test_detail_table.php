@@ -1,28 +1,29 @@
-<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="lab_test_details_table" width="100%" >
     <thead>
     <tr>
         <th>Test Name</th>
         <th>Test Date</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 450px;">
     <?php foreach($tests as $test):?>
-        <tr>
-            <td contenteditable="true" class="lab_test_info"
-                onClick="loadLabtestUnit(this,'<?php echo $test['info_key']; ?>');">
+        <tr style="cursor: pointer;">
+            <td class="lab_test_info"
+                onClick="loadLabtestUnit(this,'<?php echo $test['info_key']; ?>');"
+                ondblclick="printlabtest(this,'<?php echo $test['info_key']; ?>','<?php echo $test['patient_id']; ?>');"
+            >
                 <?php echo $test['name']; ?></td>
-            <td><?php echo date('Y-m-d', strtotime($test['test_date'])) ?></td>
+            <td onClick="loadLabtestUnit(this,'<?php echo $test['info_key']; ?>');"><?php echo date('Y-m-d', strtotime($test['test_date'])) ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <script>
+    $("#lab_test_details_table tbody tr").click(function (e) {
+        $('#lab_test_details_table tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
     function loadLabtestUnit(editableObj, key) {
-        $('td.lab_test_info').css('background', '#FFF');
-        $('td.lab_test_info').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
-
         $.ajax({
             url: '/cms/profile/get_lab_test_unit/'+key,
             type: 'get',

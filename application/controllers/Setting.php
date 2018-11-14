@@ -926,6 +926,7 @@ class Setting extends MY_Controller
     {
         $data['categories'] = $this->Setting_model->get_lab_categories();
         $data['labtests'] = $this->Setting_model->get_lab_tests();
+        $data['tests'] = $this->Setting_model->get_lab_tests();
         $data['items'] = $this->Setting_model->get_lab_item_by_test_id($test_id);
         $data['active_tab'] = 'items';
         $data['selected_test_id'] = $test_id;
@@ -1353,13 +1354,13 @@ class Setting extends MY_Controller
             set_content_type($json);
         }
     }
-
     public function export_instruction_items_csv($instruction_items)
     {
         $filename = 'instruction_items_' . date('d-m-Y') . '.csv';
         header("Content-Description: File Transfer");
+        header('Content-Encoding: UTF-8'); 
         header("Content-Disposition: attachment; filename=$filename");
-        header("Content-Type: application/csv; ");
+        header("Content-Type: application/csv;charset=UTF-8 ");
         // file creation
         $file = fopen('php://output', 'w');
         $header = array('Instruction items');
@@ -1417,13 +1418,13 @@ class Setting extends MY_Controller
             $csv_array = $this->csvimport->get_array($path);
             if (array_key_exists('Instruction items',$csv_array[0])) {
                 foreach ($csv_array as $row) {
-                    $cdata = $row['Instruction items'];
+                    $cdata = utf8_decode($row['Instruction items']);
                     $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
                     if ($result > 0) {
                         continue;
                     }
                     $insert_data = array(
-                        'name' => $row['Instruction items'],
+                        'name' =>  utf8_decode($row['Instruction items']),
                         'instruction_id' => $id,
                         'category' => $pid
                     );
@@ -1975,12 +1976,16 @@ class Setting extends MY_Controller
                 $csv_array = $this->csvimport->get_array($path);
                 if (array_key_exists('Dosages',$csv_array[0])) {
                     foreach ($csv_array as $row) {
+                        $cdata = utf8_decode($row['Dosages']);
+                        $result = $this->Setting_model->check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid);
+                        if ($result > 0) {
+                            continue;
+                        }
                         $insert_data = array(
-                            'name'=>$row['Dosages']
+                            'name'=>utf8_decode($row['Dosages'])
                         );
                         $this->Setting_model->insert_csv_dosage($insert_data);
                     }
-                    die();
                     return true;
                 }else{
                     return false;

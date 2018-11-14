@@ -1,4 +1,18 @@
 <div class="content-wrapper" style="margin: 0% 0.5%;">
+    <div class="row page-titles" style="padding-bottom: 0px;">
+        <div class="col-md-5">
+        
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb pull-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" id="sp_to_profile">profile</a></li>
+                <li class="breadcrumb-item active">lab test</li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb -->
+    <!-- ============================================================== -->
     <div class="row p-t-10 m-0">
         <div class="card" style="margin-bottom:0px !important; ">
             <div class="card-body">
@@ -14,18 +28,18 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 p-r-0">
-                            <table class="table table-bordered nowrap responsive" cellspacing="0" id=""
+                            <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id=""
                                    width="100%">
                                 <thead>
                                 <tr>
-                                    <th style="width: 10%"></th>
+                                    <th style="width:55px;">Action</th>
                                     <th>Category</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style="height: 500px;">
                                 <?php foreach ($categories as $category): ?>
                                     <tr>
-                                        <td style="width: 10%" data-toggle="modal" data-target="#history-modal">
+                                        <td style="width: 50px;" data-toggle="modal" data-target="#history-modal">
                                             <a class="edit-inst-profile-btn btn btn-info btn-xs"
                                                href="javascript:void(0)"
                                                data-inst-id="<?php echo $category['id']; ?>"><i
@@ -51,7 +65,7 @@
                     <input type="hidden" name="patient_id" id="patient_id" value="1">
                     <input type="hidden" name="sp_inst_id" id="sp_inst_id" value="">
                     <div class="col-md-12">
-                        <div class="card" style="height:80vh;">
+                        <div class="card" style="height:71vh;">
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-9">
@@ -69,7 +83,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="description" id="special_instruction" rows="20"></textarea>
+                                            <textarea class="form-control" name="description" id="special_instruction" rows="19"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +96,7 @@
         <div class="col-md-5 col-lg-5 p-0">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card" style="height:80vh;">
+                    <div class="card" style="height:71vh;">
                         <div class="card-header">
                             Previous Instructions<br/>
                             Print size:<label class="radio-inline"><input type="radio" name="optradio"
@@ -100,7 +114,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <textarea class="form-control" rows="20" readonly="readonly" id="sp-instruction-noneditable"></textarea>
+                                                <textarea class="form-control" rows="19" readonly="readonly" id="sp-instruction-noneditable"></textarea>
                                             </div>
                                         </div>
                                     </div>

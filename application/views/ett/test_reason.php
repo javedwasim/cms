@@ -6,7 +6,7 @@
 				<div class="row">
 					<div class="col-md-6 col-lg-4">
 						<label>New Reason</label>
-						<input type="text" class="form-control" name="ett_test_reason" id="ett_test_reason" required="required">
+						<input type="text" class="form-control" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="ett_test_reason" id="ett_test_reason" required="required">
 					</div>
 					<div class="col-md-2 col-lg-1 m-t-25">
 						<?php if($loggedin_user['is_admin']==1){ ?>
@@ -20,7 +20,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="card-body ins_category_container" style="height: 60vh; overflow-x: scroll;">
+		<div class="card-body ins_category_container">
 			<?php $this->load->view('ett/test_reason_table'); ?>
 		</div>
 	</div>

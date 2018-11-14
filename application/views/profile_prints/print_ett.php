@@ -316,12 +316,12 @@
                                 <div class="mb-1 border-bottom border-dark padding">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['resting_bp']; ?></strong>
-                                    <?php }?>(ml O2/kg/min)
+                                    <?php }?>(mmHg)
                                 </div>
                                 <div class="mb-1 border-bottom border-dark padding">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['max_pre_tar']; ?></strong>
-                                    <?php }?>(mmHg)
+                                    <?php }?>(bpm)
                                 </div>
                                 <div class="mb-1 border-bottom border-dark padding">
                                     <?php foreach($test_details as $key){?>
@@ -331,27 +331,28 @@
                                 <div class="mb-1 border-bottom border-dark padding">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['max_pre_hr']; ?></strong>
-                                    <?php }?>(bpm)
-                                </div>
-                                <div class="mb-1 border-bottom border-dark padding">
-                                    <?php foreach($test_details as $key){?>
-                                            <strong><?php echo $key['max_bp']; ?></strong>
                                     <?php }?>(%)
                                 </div>
                                 <div class="mb-1 border-bottom border-dark padding">
                                     <?php foreach($test_details as $key){?>
-                                            <strong><?php echo $key['hr_bp']; ?></strong>
+                                            <strong><?php echo $key['max_bp']; ?></strong>
                                     <?php }?>(mmHg)
                                 </div>
                                 <div class="mb-1 border-bottom border-dark padding">
                                     <?php foreach($test_details as $key){?>
-                                            <strong><?php echo $key['exercise_time']; ?></strong>
+                                            <strong><?php echo $key['hr_bp']; ?></strong>
                                     <?php }?>(bpm x mmHg)
+                                </div>
+                                <div class="mb-1 border-bottom border-dark padding">
+                                    <?php foreach($test_details as $key){?>
+                                            <strong><?php echo $key['exercise_time']; ?></strong>
+                                    <?php }?>(minuts)
                                 </div>
                                 <div class="padding">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['mets']; ?></strong>
-                                    <?php }?>(minuts)
+                                    <?php }?>(ml O2/kg/min)
+
                                 </div>
                             </div>
                         </div>

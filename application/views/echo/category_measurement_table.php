@@ -14,12 +14,12 @@
                 <?php if($loggedin_user['is_admin']==1){ ?>
                     <a class="delete-main-measurement btn btn-danger btn-xs"
                        href="javascript:void(0)" title="delete"
-                       data-href="<?php echo site_url('Echo_controller/delete_category_measurement/') . $measurement['id'] ?>">
+                       data-href="<?php echo site_url('Echo_controller/delete_category_measurement/') . $measurement['id'].'/'.$measurement['category_id'] ?>">
                         <i class="fa fa-trash" title="Delete"></i></a>
                 <?php } elseif(in_array("echos-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                     <a class="delete-main-measurement btn btn-danger btn-xs"
                        href="javascript:void(0)" title="delete"
-                       data-href="<?php echo site_url('Echo_controller/delete_category_measurement/') . $measurement['id'] ?>">
+                       data-href="<?php echo site_url('Echo_controller/delete_category_measurement/') . $measurement['id'].'/'.$measurement['category_id'] ?>">
                         <i class="fa fa-trash" title="Delete"></i></a>
                 <?php } else{ ?>
                     <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
@@ -29,17 +29,17 @@
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <td class="measurement_care" style="width: 50%;" onClick="showEditMeasurement(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="measurement_item" value="<?php echo $measurement['item']; ?>" onchange="saveItemMeasurement(this,'item','<?php echo $measurement['id']; ?>')">        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="measurement_item" value="<?php echo $measurement['item']; ?>" onchange="saveItemMeasurement(this,'item','<?php echo $measurement['id']; ?>')">        
                 </td>
                 <td class="measurement_care" style="width: 50%;" onClick="showEditMeasurement(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="measurement_val" value="<?php echo $measurement['value']; ?>" onchange="saveValueMeasurement(this,'value','<?php echo $measurement['id']; ?>')" />        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="measurement_val" value="<?php echo $measurement['value']; ?>" onchange="saveValueMeasurement(this,'value','<?php echo $measurement['id']; ?>')" />        
                 </td>
             <?php } elseif(in_array("echos-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                 <td class="measurement_care" style="width: 50%;" onClick="showEditMeasurement(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="measurement_item" value="<?php echo $measurement['item']; ?>" onchange="saveItemMeasurement(this,'item','<?php echo $measurement['id']; ?>')">        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="measurement_item" value="<?php echo $measurement['item']; ?>" onchange="saveItemMeasurement(this,'item','<?php echo $measurement['id']; ?>')">        
                 </td>
                 <td class="measurement_care" style="width: 50%;" onClick="showEditMeasurement(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="measurement_val" value="<?php echo $measurement['value']; ?>" onchange="saveValueMeasurement(this,'value','<?php echo $measurement['id']; ?>')" />        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="measurement_val" value="<?php echo $measurement['value']; ?>" onchange="saveValueMeasurement(this,'value','<?php echo $measurement['id']; ?>')" />        
                 </td>
             <?php } else{ ?>
                 <td style="width: 50%;" onClick="showError(this);">

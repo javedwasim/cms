@@ -59,9 +59,9 @@ class Echo_controller extends MY_Controller
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
         $data['measurements'] = $this->Echo_model->get_category_measurement();
         $data['rights'] = $this->session->userdata('other_rights');
-        $data['active_tab'] = 'category';
+        $data['active_tab'] = '';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('echo/echo', $data, true);
+        $json['result_html'] = $this->load->view('echo/disease_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -141,7 +141,7 @@ class Echo_controller extends MY_Controller
         $data['rights'] = $this->session->userdata('other_rights');
         $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('echo/echo', $data, true);
+        $json['result_html'] = $this->load->view('echo/disease_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -337,9 +337,17 @@ class Echo_controller extends MY_Controller
             }
         } else {
             $data = $this->input->post();
-            $result = $this->Echo_model->add_structure_finding($data);
-            $message = "Structure finding successfully created.";
-            $this->get_structure_finding_by_id($data['structure_id'],$result,$message);
+            if (empty($data['structure_id'])) {
+                $json['error'] = true;
+                $json['message'] = 'Please select the structure.';
+                if ($this->input->is_ajax_request()) {
+                    set_content_type($json);
+                }
+            }else{
+                $result = $this->Echo_model->add_structure_finding($data);
+                $message = "Finding saved successfully.";
+                $this->get_structure_finding_by_id($data['structure_id'],$result,$message);
+            }
         }
     }
 
@@ -397,7 +405,8 @@ class Echo_controller extends MY_Controller
     public function get_findings_by_id($id){
         $result = true;
         $message = '';
-        $this->get_structure_finding_by_id($id,$result,$message);
+        $disease_id = '';
+        $this->get_structure_finding_by_id($id,$result,$message,$disease_id);
     }
 
     public function get_default_findings_by_id(){
@@ -406,10 +415,10 @@ class Echo_controller extends MY_Controller
         $disease_id = $data['disease_id'];
         $result = true;
         $message = '';
-        $this->get_structure_finding_by_id($id,$result,$message);
+        $this->get_structure_finding_by_id($id,$result,$message,$disease_id);
     }
 
-    public function get_structure_finding_by_id($id,$result,$message){
+    public function get_structure_finding_by_id($id,$result,$message,$disease_id){
         if ($result) {
             $json['success'] = true;
             $json['message'] = $message;
@@ -417,15 +426,23 @@ class Echo_controller extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
-        $data['findings'] = $this->Echo_model->get_structure_findings_by_id($id);
-        $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($id);
-        $data['active_tab'] = 'structure';
-        $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('echo/finding_table', $data, true);
-        $json['diagnosis_html'] = $this->load->view('echo/diagnosis_table', $data, true);
-        $json['dfinding_html'] = $this->load->view('echo/default_finding_table', $data, true);
-        $json['ddiagnose_html'] = $this->load->view('echo/default_diagnosis_table', $data, true);
-
+        if (empty($disease_id)) {
+           $data['findings'] = $this->Echo_model->get_structure_findings_by_id($id);
+            $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($id);
+            $data['active_tab'] = 'structure';
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['result_html'] = $this->load->view('echo/finding_table', $data, true);
+            $json['diagnosis_html'] = $this->load->view('echo/diagnosis_table', $data, true);
+        }else{
+            $data['findings'] = $this->Echo_model->get_structure_findings_by_id($id);
+            $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($id);
+            $data['active_tab'] = 'structure';
+            $data['rights'] = $this->session->userdata('other_rights');
+            $json['result_html'] = $this->load->view('echo/finding_table', $data, true);
+            $json['diagnosis_html'] = $this->load->view('echo/diagnosis_table', $data, true);
+            $json['dfinding_html'] = $this->load->view('echo/default_finding_table', $data, true);
+            $json['ddiagnose_html'] = $this->load->view('echo/default_diagnosis_table', $data, true);
+        }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -459,9 +476,17 @@ class Echo_controller extends MY_Controller
             $json['message'] = validation_errors();
         } else {
             $data = $this->input->post();
-            $result = $this->Echo_model->add_structure_diagnose($data);
-            $message = "Structure diagnosis successfully created.";
-            $this->get_structure_diagnosis_by_id($data['structure_id'],$result,$message);
+            if (empty($data['structure_id'])) {
+                $json['error'] = true;
+                $json['message'] = 'Please select the structure.';
+                if ($this->input->is_ajax_request()) {
+                    set_content_type($json);
+                }
+            }else{
+                $result = $this->Echo_model->add_structure_diagnose($data);
+                $message = "Diagnosis saved successfully.";
+                $this->get_structure_diagnosis_by_id($data['structure_id'],$result,$message);
+            }
         }
 
     }
@@ -563,7 +588,7 @@ class Echo_controller extends MY_Controller
             $data['measurements'] = $this->Echo_model->get_category_measurement();
             $data['rights'] = $this->session->userdata('other_rights');
             $data['active_tab'] = 'category';
-            $json['result_html'] = $this->load->view('echo/echo', $data, true);
+            $json['result_html'] = $this->load->view('echo/main_category_table', $data, true);
 
         }
         if ($this->input->is_ajax_request()) {
@@ -645,11 +670,28 @@ class Echo_controller extends MY_Controller
         } else {
             $result = $this->Echo_model->add_category_measurement($data);
             $message = "Measurement successfully created.";
-            $this->get_category_measurement($result,$message);
+            $category_id = $data['category_id'];
+            $this->get_category_measurement_by_cat_id($result,$message,$category_id);
         }
 
     }
 
+    public function get_category_measurement_by_cat_id($result,$message,$category_id){
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = $message;
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        $data['measurements'] = $this->Echo_model->get_category_measurement_by_id($category_id);
+        $data['active_tab'] = 'measurement';
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('echo/category_measurement_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
 
     public function get_category_measurement($result,$message){
         if ($result) {
@@ -692,11 +734,11 @@ class Echo_controller extends MY_Controller
         }
     }
 
-    public function delete_category_measurement($id)
+    public function delete_category_measurement($id,$category_id)
     {
         $result = $this->Echo_model->delete_category_measurement($id);
         $message = "Measurement successfully deleted.";
-        $this->get_category_measurement($result,$message);
+        $this->get_category_measurement_by_cat_id($result,$message,$category_id);
 
     }
 

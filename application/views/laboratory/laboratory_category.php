@@ -17,8 +17,8 @@
                 </div>
             </div>
         </div>
-        <div class="card-body" style="height: 400px; overflow-y: scroll;">
-            <table class="table table-bordered nowrap responsive" cellspacing="0" id="lab_cat_tbl"
+        <div class="card-body">
+            <table class="table table-bordered nowrap responsive tbl_header_fix_350" cellspacing="0" id="lab_cat_tbl"
                    width="100%">
                 <thead>
                 <tr>
@@ -48,7 +48,7 @@
                         </td>
                         <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
                             <td class="exam_cate" style="word-break: break-all;">
-                                <input type="text" class="form-control border-0 bg-transparent shadow-none" name="lab_cat" value="<?php echo $category['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')" />
+                                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="lab_cat" value="<?php echo $category['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')" />
                             </td>
                         <?php } else{ ?>
                             <td class="exam_cate"  onClick="showError(this);">

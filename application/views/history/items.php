@@ -3,24 +3,52 @@
         event.preventDefault();
         var itemfile = new FormData($('#import_csv_history')[0]);
         var catid = $('.prof_his_id option:selected').val();
-        $.ajax({
-           url:"<?php echo base_url(); ?>setting/import_history_items/"+catid,
-           method:"POST",
-           data: itemfile,
-           contentType:false,
-           cache:false,
-           processData:false,
-           success:function(response)
-           {
-              document.getElementById("csv_file").value = "";
-                $('#history_items').prop('selectedIndex',0);
-                if (response.success==true) {
-                  toastr["success"](response.message);
-                }else{
-                  toastr["error"](response.message);
-                }
-           }
-        });
+        $.confirm({
+          title: 'Confirm!',
+          content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+          buttons: {
+            Yes: function () {
+                $.ajax({
+                 url:"<?php echo base_url(); ?>setting/import_history_items/"+catid,
+                 method:"POST",
+                 data: itemfile,
+                 contentType:false,
+                 cache:false,
+                 processData:false,
+                 success:function(response)
+                 {
+                    document.getElementById("csv_file").value = "";
+                      $('#history_items').prop('selectedIndex',0);
+                      if (response.success==true) {
+                        toastr["success"](response.message);
+                      }else{
+                        toastr["error"](response.message);
+                      }
+                  }
+              });
+            },
+            No: function () {
+                $.ajax({
+                 url:"<?php echo base_url(); ?>setting/import_history_items/"+catid,
+                 method:"POST",
+                 data: itemfile,
+                 contentType:false,
+                 cache:false,
+                 processData:false,
+                 success:function(response)
+                 {
+                    document.getElementById("csv_file").value = "";
+                      $('#history_items').prop('selectedIndex',0);
+                      if (response.success==true) {
+                        toastr["success"](response.message);
+                      }else{
+                        toastr["error"](response.message);
+                      }
+                 }
+              });
+            }
+        }
+      });   
     });
 </script>
 

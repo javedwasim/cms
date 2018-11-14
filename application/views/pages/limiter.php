@@ -36,7 +36,7 @@
                 </form>
             </div>
             <div class="card">
-                <div class="card-body" id="limiter_table"  style="height: 300px; overflow-y: scroll;">
+                <div class="card-body" id="limiter_table" >
                     
                 </div>
             </div>

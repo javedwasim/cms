@@ -29,12 +29,12 @@
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <td data-disease-id = "<?php echo $category['id']; ?>" id = "<?php echo "d".$category['id']; ?>"
                     onClick="showEdit(this,'<?php echo $category['id']; ?>');">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="dis_id" value="<?php echo $category['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')">        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="dis_id" value="<?php echo $category['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')">        
                 </td>
             <?php } elseif(in_array("echos-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                 <td data-disease-id = "<?php echo $category['id']; ?>" id = "<?php echo "d".$category['id']; ?>"
                     onClick="showEdit(this,'<?php echo $category['id']; ?>');">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="dis_id" value="<?php echo $category['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')">        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="dis_id" value="<?php echo $category['name']; ?>" onchange="saveToDatabase(this,'cate_name','<?php echo $category['id']; ?>')">        
                 </td>
             <?php } else{ ?>
                 <td contenteditable="true" onClick="showError(this);">

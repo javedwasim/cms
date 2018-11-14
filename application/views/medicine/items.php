@@ -3,22 +3,49 @@
         event.preventDefault();
         var itemfile = new FormData($('#import_csv_medicine')[0]);
         var catid = $('#medicine_id option:selected').val();
-        $.ajax({
-           url:"<?php echo base_url(); ?>setting/import_medicine_items/"+catid,
-           method:"POST",
-           data: itemfile,
-           contentType:false,
-           cache:false,
-           processData:false,
-           success:function(response)
-           {
-              document.getElementById("csv_medicine_file").value = "";
-                if (response.success==true) {
-                  toastr["success"](response.message);
-                }else{
-                  toastr["error"](response.message);
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+            buttons: {
+                Yes: function () {
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_medicine_items/"+catid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_medicine_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
+                },
+                No: function (){
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_medicine_items/"+catid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_medicine_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
                 }
-           }
+            }
         });
     });
 </script>
@@ -32,7 +59,7 @@
                             <div class="col-lg-5 col-md-5">
                                 <div class="form-group">
                                     <label>Item Name:</label>
-                                    <input type="text" class="form-control" name="name" maxlength="50" required>
+                                    <input type="text" class="form-control" id="med_item_name" name="name" maxlength="50" required>
                                 </div>
                             </div>
                             <div class=" col-lg-5 col-md-5">

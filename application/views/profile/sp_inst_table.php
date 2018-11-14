@@ -1,11 +1,11 @@
-<div class="sp_data_table" style="height: 60vh; overflow-y: scroll;">
-    <table class="table table-bordered nowrap responsive" cellspacing="0" id="sp-ins-table" width="100%">
+<div class="sp_data_table">
+    <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="sp-ins-table" width="100%">
         <thead>
             <th class="hide"></th>
             <th style="width: 20px">Action</th>
             <th>Dates</th>
         </thead>
-        <tbody>
+        <tbody style="height: 430px;">
 
             <?php foreach($sp_info as $sp){?>
                 <tr>

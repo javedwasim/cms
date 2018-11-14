@@ -1,1 +1,96 @@
-<?php eval("?>".base64_decode("PD9waHANCmRlZmluZWQoJ0JBU0VQQVRIJykgT1IgZXhpdCgnTm8gZGlyZWN0IHNjcmlwdCBhY2Nlc3MgYWxsb3dlZCcpOw0KDQpjbGFzcyBBbmdpb19yZWNvbW1lbmRhdGlvbiBleHRlbmRzIE1ZX0NvbnRyb2xsZXINCnsNCg0KICAgIGZ1bmN0aW9uIF9fY29uc3RydWN0KCkNCiAgICB7DQogICAgICAgIHBhcmVudDo6IF9fY29uc3RydWN0KCk7DQogICAgICAgICR0aGlzLT5sb2FkLT5oZWxwZXIoJ2NvbnRlbnQtdHlwZScpOw0KICAgICAgICAkdGhpcy0+bG9hZC0+bW9kZWwoJ0Rhc2hib2FyZF9tb2RlbCcpOw0KICAgICAgICAkdGhpcy0+bG9hZC0+bW9kZWwoJ1JlY29tbWVuZGF0aW9uX21vZGVsJyk7DQoNCiAgICB9DQoNCiAgICBwdWJsaWMgZnVuY3Rpb24gcmVjb21tZW5kYXRpb24oKXsNCiAgICAgICAgJGRhdGFbJ3JlY29tbWVuZGF0aW9ucyddID0gJHRoaXMtPlJlY29tbWVuZGF0aW9uX21vZGVsLT5nZXRfcmVjb21tZW5kYXRpb25zKCk7DQogICAgICAgICRqc29uWydyZXN1bHRfaHRtbCddID0gJHRoaXMtPmxvYWQtPnZpZXcoJ2FuZ2lvL3JlY29tbWVuZGF0aW9uJywgJGRhdGEsIHRydWUpOw0KICAgICAgICBpZiAoJHRoaXMtPmlucHV0LT5pc19hamF4X3JlcXVlc3QoKSkgew0KICAgICAgICAgICAgc2V0X2NvbnRlbnRfdHlwZSgkanNvbik7DQogICAgICAgIH0NCiAgICB9DQoNCiAgICBwdWJsaWMgZnVuY3Rpb24gc2F2ZV9yZWNvbW1lbmRhdGlvbigpew0KICAgICAgICAkZGF0YSA9ICR0aGlzLT5pbnB1dC0+cG9zdCgpOw0KICAgICAgICBpZiAoZW1wdHkoJGRhdGFbJ2VkaXR2YWwnXSkpIHsNCiAgICAgICAgICAgICRqc29uWydlcnJvciddID0gdHJ1ZTsNCiAgICAgICAgICAgICRqc29uWydtZXNzYWdlJ10gPSAnQ291bGQgbm90IHVwZGF0ZSBlbXB0eSBmaWVsZC4nOw0KICAgICAgICB9ZWxzZXsNCiAgICAgICAgICAgICRyZXN1bHQgPSAkdGhpcy0+UmVjb21tZW5kYXRpb25fbW9kZWwtPmFkZF9yZWNvbW1lbmRhdGlvbigkZGF0YSk7DQogICAgICAgICAgICBpZiAoJHJlc3VsdCA9PSAndXBkYXRlZCcpIHsNCiAgICAgICAgICAgICAgICAkanNvblsnc3VjY2VzcyddID0gdHJ1ZTsNCiAgICAgICAgICAgICAgICAkanNvblsnbWVzc2FnZSddID0gIlVwZGF0ZWQgc3VjY2Vzc2Z1bGx5ISI7DQogICAgICAgICAgICB9ZWxzZSBpZiggJHJlc3VsdCA9PSAnaW5zZXJ0ZWQnKXsgIA0KICAgICAgICAgICAgICAgICRqc29uWydzdWNjZXNzJ10gPSB0cnVlOw0KICAgICAgICAgICAgICAgICRqc29uWydtZXNzYWdlJ10gPSAiQ3JlYXRlZCBzdWNjZXNzZnVsbHkhIjsNCiAgICAgICAgICAgIH0gZWxzZSB7DQogICAgICAgICAgICAgICAgJGpzb25bJ2Vycm9yJ10gPSB0cnVlOw0KICAgICAgICAgICAgICAgICRqc29uWydtZXNzYWdlJ10gPSAiU2VlbXMgdG8gYW4gZXJyb3IiOw0KICAgICAgICAgICAgfQ0KICAgICAgICB9DQogICAgICAgIGlmICgkdGhpcy0+aW5wdXQtPmlzX2FqYXhfcmVxdWVzdCgpKSB7DQogICAgICAgICAgICBzZXRfY29udGVudF90eXBlKCRqc29uKTsNCiAgICAgICAgfQ0KICAgIH0NCg0KICAgIHB1YmxpYyBmdW5jdGlvbiBhZGRfcmVjb21tZW5kYXRpb24oKXsNCiAgICAgICAgJHRoaXMtPmxvYWQtPmxpYnJhcnkoJ2Zvcm1fdmFsaWRhdGlvbicpOw0KICAgICAgICAkdGhpcy0+bG9hZC0+aGVscGVyKCdzZWN1cml0eScpOw0KICAgICAgICAkdGhpcy0+Zm9ybV92YWxpZGF0aW9uLT5zZXRfcnVsZXMoJ2Rlc2NyaXB0aW9uJywgJ0ludmVzdGlnYXRpb24gTmFtZScsICdyZXF1aXJlZHx4c3NfY2xlYW4nKTsNCg0KICAgICAgICBpZiAoJHRoaXMtPmZvcm1fdmFsaWRhdGlvbi0+cnVuKCkgPT0gRkFMU0UpIHsNCiAgICAgICAgICAgICRqc29uWydlcnJvciddID0gdHJ1ZTsNCiAgICAgICAgICAgICRqc29uWydtZXNzYWdlJ10gPSB2YWxpZGF0aW9uX2Vycm9ycygpOw0KICAgICAgICB9IGVsc2Ugew0KICAgICAgICAgICAgJGRhdGEgPSAkdGhpcy0+aW5wdXQtPnBvc3QoKTsNCiAgICAgICAgICAgICRyZXN1bHQgPSAkdGhpcy0+UmVjb21tZW5kYXRpb25fbW9kZWwtPmFkZF9yZWNvbW1lbmRhdGlvbigkZGF0YSk7DQogICAgICAgICAgICBpZiAoJHJlc3VsdCkgew0KICAgICAgICAgICAgICAgICRqc29uWydzdWNjZXNzJ10gPSB0cnVlOw0KICAgICAgICAgICAgICAgICRqc29uWydtZXNzYWdlJ10gPSAiQ3JlYXRlZCBzdWNjZXNzZnVsbHkhIjsNCiAgICAgICAgICAgIH0gZWxzZSB7DQogICAgICAgICAgICAgICAgJGpzb25bJ2Vycm9yJ10gPSB0cnVlOw0KICAgICAgICAgICAgICAgICRqc29uWydtZXNzYWdlJ10gPSAiU2VlbXMgdG8gYW4gZXJyb3IiOw0KICAgICAgICAgICAgfQ0KICAgICAgICB9DQogICAgICAgICRkYXRhWydyZWNvbW1lbmRhdGlvbnMnXSA9ICR0aGlzLT5SZWNvbW1lbmRhdGlvbl9tb2RlbC0+Z2V0X3JlY29tbWVuZGF0aW9ucygpOw0KICAgICAgICAkanNvblsncmVzdWx0X2h0bWwnXSA9ICR0aGlzLT5sb2FkLT52aWV3KCdhbmdpby9yZWNvbW1lbmRhdGlvbl90YWJsZScsICRkYXRhLCB0cnVlKTsNCiAgICAgICAgaWYgKCR0aGlzLT5pbnB1dC0+aXNfYWpheF9yZXF1ZXN0KCkpIHsNCiAgICAgICAgICAgIHNldF9jb250ZW50X3R5cGUoJGpzb24pOw0KICAgICAgICB9DQogICAgfQ0KDQogICAgcHVibGljIGZ1bmN0aW9uIGRlbGV0ZV9yZWNvbW1lbmRhdGlvbigkaWQpew0KICAgICAgICAkcmVzdWx0ID0gJHRoaXMtPlJlY29tbWVuZGF0aW9uX21vZGVsLT5kZWxldGVfcmVjb21tZW5kYXRpb24oJGlkKTsNCiAgICAgICAgaWYgKCRyZXN1bHQpIHsNCiAgICAgICAgICAgICRqc29uWydzdWNjZXNzJ10gPSB0cnVlOw0KICAgICAgICAgICAgJGpzb25bJ21lc3NhZ2UnXSA9ICJEZWxldGVkIHN1Y2Nlc3NmdWxseS4iOw0KICAgICAgICB9IGVsc2Ugew0KICAgICAgICAgICAgJGpzb25bJ2Vycm9yJ10gPSB0cnVlOw0KICAgICAgICAgICAgJGpzb25bJ21lc3NhZ2UnXSA9ICJTZWVtcyB0byBhbiBlcnJvciI7DQogICAgICAgIH0NCiAgICAgICAgJGRhdGFbJ3JlY29tbWVuZGF0aW9ucyddID0gJHRoaXMtPlJlY29tbWVuZGF0aW9uX21vZGVsLT5nZXRfcmVjb21tZW5kYXRpb25zKCk7DQogICAgICAgICRqc29uWydyZXN1bHRfaHRtbCddID0gJHRoaXMtPmxvYWQtPnZpZXcoJ2FuZ2lvL3JlY29tbWVuZGF0aW9uX3RhYmxlJywgJGRhdGEsIHRydWUpOw0KICAgICAgICBpZiAoJHRoaXMtPmlucHV0LT5pc19hamF4X3JlcXVlc3QoKSkgew0KICAgICAgICAgICAgc2V0X2NvbnRlbnRfdHlwZSgkanNvbik7DQogICAgICAgIH0NCiAgICAgICAgaWYgKCR0aGlzLT5pbnB1dC0+aXNfYWpheF9yZXF1ZXN0KCkpIHsNCiAgICAgICAgICAgIHNldF9jb250ZW50X3R5cGUoJGpzb24pOw0KICAgICAgICB9DQoNCiAgICB9DQoNCg0KfQ0KDQo/Pg==")); ?>
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Angio_recommendation extends MY_Controller
+{
+
+    function __construct()
+    {
+        parent:: __construct();
+        $this->load->helper('content-type');
+        $this->load->model('Dashboard_model');
+        $this->load->model('Recommendation_model');
+
+    }
+
+    public function recommendation(){
+        $data['recommendations'] = $this->Recommendation_model->get_recommendations();
+        $json['result_html'] = $this->load->view('angio/recommendation', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function save_recommendation(){
+        $data = $this->input->post();
+        if (empty($data['editval'])) {
+            $json['error'] = true;
+            $json['message'] = 'Could not update empty field.';
+        }else{
+            $result = $this->Recommendation_model->add_recommendation($data);
+            if ($result == 'updated') {
+                $json['success'] = true;
+                $json['message'] = "Updated successfully!";
+            }else if( $result == 'inserted'){  
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function add_recommendation(){
+        $this->load->library('form_validation');
+        $this->load->helper('security');
+        $this->form_validation->set_rules('description', 'Investigation Name', 'required|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            $json['error'] = true;
+            $json['message'] = validation_errors();
+        } else {
+            $data = $this->input->post();
+            $result = $this->Recommendation_model->add_recommendation($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = "Created successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "Seems to an error";
+            }
+        }
+        $data['recommendations'] = $this->Recommendation_model->get_recommendations();
+        $json['result_html'] = $this->load->view('angio/recommendation_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_recommendation($id){
+        $result = $this->Recommendation_model->delete_recommendation($id);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = "Deleted successfully.";
+        } else {
+            $json['error'] = true;
+            $json['message'] = "Seems to an error";
+        }
+        $data['recommendations'] = $this->Recommendation_model->get_recommendations();
+        $json['result_html'] = $this->load->view('angio/recommendation_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
+
+}
+
+?>

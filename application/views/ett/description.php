@@ -22,7 +22,7 @@
                 </div>
             </form>
         </div>
-        <div class="card-body discription-table" style="height: 60vh; overflow-x: scroll;">
+        <div class="card-body discription-table">
             <?php $this->load->view('ett/description_table'); ?>
         </div>
     </div>

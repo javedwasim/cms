@@ -9,14 +9,14 @@
                     <div class="col-lg-2 col-md-3">
                         <div class="form-group">
                             <label>Item Name:</label>
-                            <input type="text" class="form-control" name="main_category_name" id="main_category_name">
+                            <input type="text" class="form-control" name="main_category_name" id="main_category_name" required="required">
                         </div>
                     </div>
                     <div class=" col-lg-3 col-md-4">
                         <div class="form-group">
                             <label>Main Category:</label>
-                            <select class="form-control" name="main_category" id="main_category">
-                                <option>Select</option>
+                            <select class="form-control" name="main_category" id="main_category" required="required">
+                                <option value="">Select</option>
                                 <option value="dopplers">Dopplers</option>
                                 <option value="mmode">MMODE</option>
                             </select>

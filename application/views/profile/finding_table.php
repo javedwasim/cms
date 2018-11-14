@@ -9,7 +9,7 @@
     <?php  foreach ($findings as $finding):  ?>
         <tr class="table-row" id="<?php echo $finding['finding_id']; ?>">
             <td contenteditable="true" class=disease_cate">
-                <input type="text" name="disease_finding_value[]" class="form-control border-0" value="<?php echo $finding['finding_name']; ?>">
+                <input type="text" name="disease_finding_value[]" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $finding['finding_name']; ?>">
                 <input type="hidden" name="disease_finding_id[]" id="disease_finding_id" value="<?php echo $finding['finding_id']; ?>">
                 <input type="hidden" name="finding_structure_id[]" id="finding_structure_id" value="<?php echo $finding['structure_id']; ?>">
             </td>

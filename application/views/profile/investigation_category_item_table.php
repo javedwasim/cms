@@ -14,7 +14,7 @@
                    data-investigation-item-id="<?php echo $item['id']; ?>">
                     <i class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true" class="investigation_item"
+            <td class="investigation_item"
                 onClick="addInvestigationItem(this,'<?php echo $item['name']; ?>');">
                 <?php echo $item['name']; ?></td>
         </tr>

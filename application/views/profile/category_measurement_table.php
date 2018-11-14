@@ -1,5 +1,6 @@
 <input type="hidden" name="item_category_id" id="item_category_id" value="<?php echo isset($measurements[0]['category_id'])?$measurements[0]['category_id']:''; ?>"/>
-<table class="table table-bordered nowrap responsive category-measurement-table" cellspacing="0" id="" width="100%" >
+<input type="hidden" name="main_category" id="main_category" value="<?php echo isset($echo_category)?$echo_category->main_category:''; ?>"/>
+<table class="table table-bordered nowrap responsive category-measurement-table tbl_header_fix_history" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
         <th class="table-header">Item</th>

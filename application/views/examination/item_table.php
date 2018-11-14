@@ -44,11 +44,11 @@ if(isset($rights[0]['user_rights']))
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <td class="exam_item" onClick="showEdit(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="exam_item" value="<?php echo $item['name']; ?>" onchange="updatexaminationitem(this,'item_name','<?php echo $item['id']; ?>')" >        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="exam_item" value="<?php echo $item['name']; ?>" onchange="updatexaminationitem(this,'item_name','<?php echo $item['id']; ?>')" >        
                 </td>
             <?php } elseif(in_array("examinations-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                 <td class="exam_item" onClick="showEdit(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="exam_item" value="<?php echo $item['name']; ?>" onchange="updatexaminationitem(this,'item_name','<?php echo $item['id']; ?>')" >        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="exam_item" value="<?php echo $item['name']; ?>" onchange="updatexaminationitem(this,'item_name','<?php echo $item['id']; ?>')" >        
                 </td>
             <?php } else{ ?>
                 <td contenteditable="true" onClick="showError(this);">

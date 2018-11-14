@@ -11,23 +11,50 @@ if(isset($rights[0]['user_rights']))
         event.preventDefault();
         var itemfile = new FormData($('#import_csv_examination')[0]);
         var catid = $('#prof_id option:selected').val();
-        $.ajax({
-           url:"<?php echo base_url(); ?>setting/import_examination_items/"+catid,
-           method:"POST",
-           data: itemfile,
-           contentType:false,
-           cache:false,
-           processData:false,
-           success:function(response)
-           {
-              document.getElementById("csv_exami_file").value = "";
-                if (response.success==true) {
-                  toastr["success"](response.message);
-                }else{
-                  toastr["error"](response.message);
-                }
-           }
-        });
+        $.confirm({
+              title: 'Confirm!',
+              content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+              buttons: {
+                  Yes: function () {
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_examination_items/"+catid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_exami_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
+                  },
+                  No: function () {
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_examination_items/"+catid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_exami_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
+                  }
+              }
+          });
     });
 </script>
 <div class="tab-pane" id="items" role="tabpanel">

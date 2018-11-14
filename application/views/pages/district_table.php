@@ -19,7 +19,7 @@
                     </a>
                 </td>
                 <td class="exam_cate" onClick="showExamination(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $key['district_name']; ?>"  onchange="updatedistrict(this,'district_name','<?php echo $key['district_id']; ?>')" style="text-transform: capitalize;" />
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $key['district_name']; ?>"  onchange="updatedistrict(this,'district_name','<?php echo $key['district_id']; ?>')" style="text-transform: capitalize;" />
                 </td>
             </tr>
         <?php } ?>

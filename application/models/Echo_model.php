@@ -371,6 +371,15 @@
             }
         }
 
+        public function get_category_measurement_by_id($category_id){
+            $result = $this->db->select('*')->from('category_measurement')->where('category_id',$category_id)->order_by('sort_order')->get();
+            if ($result) {
+                return $result->result_array();
+            }else{
+                return array();
+            }
+        }
+
         public function delete_category_measurement($id) {
             $this->db->where('id', $id)->delete('category_measurement');
             return $this->db->affected_rows();
@@ -383,6 +392,15 @@
                 return $result->result_array();
             }else{
                 return array();
+            }
+        }
+
+        public function get_echo_category_by_id($cat_id){
+            $result = $this->db->select('main_category')->where('id',$cat_id)->get('echo_category');
+            if ($result) {
+                return $result->row();
+            }else{
+                return row();
             }
         }
 

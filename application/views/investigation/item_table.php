@@ -19,7 +19,7 @@
                    <i class="far fa-question-circle"></i></a>
             </td>
             <td class="investigation_item" onClick="showEdit(this);">
-                <input type="text" class="form-control border-0 bg-transparent shadow-none" name="investigation_item" value="<?php echo $item['name']; ?>" onchange="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"   />
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="investigation_item" value="<?php echo $item['name']; ?>" onchange="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')"   />
             </td>
         </tr>
     <?php endforeach; ?>

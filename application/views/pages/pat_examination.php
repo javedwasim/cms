@@ -78,10 +78,10 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
+						                           <!-- <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>&nbsp;</td>
-						                            </tr>
+						                            </tr> -->
 
 							                    </tbody>
 							                </table>
@@ -187,10 +187,10 @@
 								                        </tr>
 									                    </thead>
 									                    <tbody>
-								                            <tr>
+								                          <!-- <tr>
 								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 								                                <td>&nbsp;</td>
-								                            </tr>
+								                            </tr> -->
 									                    </tbody>
 									                </table>
 							    				</div>
@@ -213,10 +213,10 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
+						                           <!-- <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>&nbsp;</td>
-						                            </tr>
+						                            </tr> -->
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -233,10 +233,10 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
+						                           <!-- <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>CVS</td>
-						                            </tr>
+						                            </tr> -->
 
 							                    </tbody>
 							                </table>
@@ -278,10 +278,10 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
+						                           <!-- <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>CVS</td>
-						                            </tr>
+						                            </tr> -->
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -297,9 +297,9 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
+						                            <!-- <tr>
 						                                <td>CVS</td>
-						                            </tr>
+						                            </tr> -->
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -320,11 +320,10 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
+						                           <!-- <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>&nbsp;</td>
-						                            </tr>
-
+						                            </tr> -->
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -341,11 +340,10 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
+						                           <!-- <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>&nbsp;</td>
-						                            </tr>
-
+						                            </tr> -->
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -366,11 +364,10 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
+						                           <!-- <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>&nbsp;</td>
-						                            </tr>
-
+						                            </tr> -->
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -387,10 +384,10 @@
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <tr>
+						                            <!-- <tr>
 						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
 						                                <td>&nbsp;</td>
-						                            </tr>
+						                            </tr> -->
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -495,9 +492,9 @@
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
                                                     <thead><tr><th>Medicine</th></tr></thead>
-                                                    <tbody id="medicine_item"></tbody>
+                                                    <tbody id="medicine_item" style="height: 200px;"></tbody>
                                                     <?php if(isset($medicine_details)){ foreach($medicine_details as $med){?>
                                                     	<tr><td><input class="form-control" type="text" name="medicine_value[]" value="<?php echo $med['medicine_value']; ?>" ></td></tr>
                                                     <?php } }?>
@@ -514,9 +511,9 @@
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
                                                     <thead><tr><th>Dosage</th></tr></thead>
-                                                    <tbody id="dosage_item"></tbody>
+                                                    <tbody id="dosage_item" style="height: 200px;"></tbody>
                                                     <?php if(isset($dosage_details)){ foreach($dosage_details as $dos){?>
                                                     	<tr><td><input class="form-control" type="text" name="dosage_value[]" value="<?php echo $dos['dosage_value']; ?>" ></td></tr>
                                                     <?php } }?>

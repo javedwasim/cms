@@ -10,9 +10,9 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <style type="text/css">
-    .tg  {border-collapse:collapse;border-spacing:0;width:90%;}
-    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 15px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-    .tg th{font-size:14px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+    .tg  {border-collapse:collapse;border-spacing:0;width:100%;}
+    .tg td{font-family:Arial, sans-serif;font-size:12px;padding:10px 15px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+    .tg th{font-size:12px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
     .tg .tg-baqh{text-align:center;vertical-align:top}
     .tg .tg-yw4l{vertical-align:top; text-align: center; width: 2%;}
       @page {
@@ -111,6 +111,11 @@
                 box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
                 margin: 5mm auto;
             }
+
+            .dark{
+                background: #000;
+                color: #fff;
+            }
         }
 
         /** Fix for Chrome issue #273306 **/
@@ -143,6 +148,11 @@
 
             body.legal.landscape {
                 width: 357mm
+            }
+            .tg th{font-size:12px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+            .dark{
+                background: #000;
+                color: #fff;
             }
         }
 
@@ -195,7 +205,7 @@
     </div>
         <table class="tg" style="display: -webkit-box;margin: 0 auto;">
             <thead>
-                 <tr>
+                 <tr style="color: #fff; background: #000;">
                    <th class="tg-yw4l dark">Order</th>
                    <th class="tg-yw4l dark" >Date & Time</th>
                    <th class="tg-yw4l dark">B.P</th>
@@ -203,6 +213,11 @@
                    <th class="tg-yw4l dark">Temperature</th>
                    <th class="tg-yw4l dark">INR</th>
                    <th class="tg-yw4l dark">Resperatory Rate</th>
+                   <th class="tg-yw4l dark">Volume</th>
+                   <th class="tg-yw4l dark">Height</th>
+                   <th class="tg-yw4l dark">Weight</th>
+                   <th class="tg-yw4l dark">BMI</th>
+                   <th class="tg-yw4l dark">BSA</th>
                  </tr>
              </thead>
              <tbody>
@@ -218,6 +233,11 @@
                    <td class="tg-yw4l"><?php echo $key['vital_temp']; ?></td>
                    <td class="tg-yw4l"><?php echo $key['vital_inr']; ?></td>
                    <td class="tg-yw4l"><?php echo $key['vital_rr']; ?></td>
+                   <td class="tg-yw4l"><?php echo $key['vital_volume']; ?></td>
+                   <td class="tg-yw4l"><?php echo $key['vital_height']; ?></td>
+                   <td class="tg-yw4l"><?php echo $key['vital_weight']; ?></td>
+                   <td class="tg-yw4l"><?php echo $key['vital_bmi']; ?></td>
+                   <td class="tg-yw4l"><?php echo $key['vital_bsa']; ?></td>
                 </tr>
                 <?php
                     $counter++;
@@ -226,8 +246,8 @@
              </tbody>
         </table>
     </section>
-  <!--   <script type="text/javascript">
+    <script type="text/javascript">
       window.onload = function() { window.print(); }
-    </script> -->
+    </script>
 </body>
 </html>

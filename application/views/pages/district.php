@@ -2,24 +2,53 @@
 $(document.body).on('click','#import_district_btn', function(e){
         event.preventDefault();
         var itemfile = new FormData($('#import_csv_district')[0]);
-        $.ajax({
-           url:"<?php echo base_url(); ?>setting/import_district/",
-           method:"POST",
-           data: itemfile,
-           contentType:false,
-           cache:false,
-           processData:false,
-           success:function(response)
-           {
-                $('.district_content').remove();
-                $('#district_content').append(response.district_table);
-                document.getElementById("district_csv_file").value = "";
-                if (response.success==true) {
-                  toastr["success"](response.message);
-                }else{
-                  toastr["error"](response.message);
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+            buttons: {
+                Yes: function () {
+                    $.ajax({
+                      url:"<?php echo base_url(); ?>setting/import_district/",
+                      method:"POST",
+                      data: itemfile,
+                      contentType:false,
+                      cache:false,
+                      processData:false,
+                      success:function(response)
+                      {
+                        $('.district_content').remove();
+                        $('#district_content').append(response.district_table);
+                        document.getElementById("district_csv_file").value = "";
+                        if (response.success==true) {
+                          toastr["success"](response.message);
+                        }else{
+                          toastr["error"](response.message);
+                        }
+                      }
+                  });
+                },
+                No: function (){
+                    $.ajax({
+                      url:"<?php echo base_url(); ?>setting/import_district/",
+                      method:"POST",
+                      data: itemfile,
+                      contentType:false,
+                      cache:false,
+                      processData:false,
+                      success:function(response)
+                      {
+                        $('.district_content').remove();
+                        $('#district_content').append(response.district_table);
+                        document.getElementById("district_csv_file").value = "";
+                        if (response.success==true) {
+                          toastr["success"](response.message);
+                        }else{
+                          toastr["error"](response.message);
+                        }
+                      }
+                  });
                 }
-           }
+            }
         });
     });
 </script>

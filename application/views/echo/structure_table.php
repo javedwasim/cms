@@ -6,7 +6,7 @@
             <th >Structure</th>
         </tr>
     </thead>
-    <tbody style="height: 800px;">
+    <tbody style="height: 620px;">
     <?php foreach ($structures as $structure): ?>
         <tr class="table-row" id="<?php echo $structure['id']; ?>">
             <td style="width:50px;">
@@ -27,13 +27,13 @@
 
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
-                <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>"><input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">        
+                <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>"><input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">        
                 </td>
             <?php } elseif(in_array("echos-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>"><input type="text" class="form-control border-0 bg-transparent shadow-none" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">        
+                <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>"><input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">        
                 </td>
             <?php } else{ ?>
-                <td contenteditable="true" onClick="showError(this);">
+                <td onClick="showError(this);">
                     <?php echo $structure['name']; ?></td>
             <?php } ?>
 
@@ -46,14 +46,7 @@
 <script>
 
     function structureEdit(editableObj,id) {
-        //remove background and color on all elements and remove color
-        $(".structure_table td").css("background-color", "#FFF");
-        $(".structure_table td").css("color", "#1b1a1a");
-
-
         $('#structure_id').val(id);
-        $(editableObj).css("background", "#3300FF");
-        $(editableObj).css("color", "#FFF");
         //load structure findings
         $.ajax({
             url: "<?php echo base_url() . 'Echo_controller/get_findings_by_id/'?>"+id,
@@ -90,11 +83,16 @@
             }
         });
     }
+ 
+    $("#echo_structure_tbl tbody tr").click(function (e) {
+        $('#echo_structure_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
 
     $(document.body).on('click', '#structure_finding', function(){
         //remove background and color on all elements and remove color
         $(".structure_table td").css("background-color", "#FFF");
-        $(".structure_table td").css("color", "#1b1a1a");
+        $(".structure_table td").css("color", "#000");
 
         var structure_id = $('#structure_id').val();
         $('#'+structure_id).css("background", "#3300FF");

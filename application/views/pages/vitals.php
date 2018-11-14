@@ -35,7 +35,7 @@
                                         Date &amp; Time
                                     </th>
                                     <th>
-                                        B.P
+                                        B.P 120/80
                                     </th>
                                     <th>
                                         Pulse
@@ -49,6 +49,11 @@
                                     <th>
                                         Resperatory Rate
                                     </th>
+                                    <th>Volume</th>
+                                    <th>Height</th>
+                                    <th>Weight</th>
+                                    <th>BMI</th>
+                                    <th>BSA</th>
                                     <th>
                                         Vitals Actions
                                     </th>

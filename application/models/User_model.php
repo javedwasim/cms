@@ -715,6 +715,7 @@ class User_model extends CI_Model {
             return false;
         }
     }
+    
     public function get_patient_vitals($id){
         $result = $this->db->select('*')
                     ->where('patient_id',$id)

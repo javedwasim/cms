@@ -30,11 +30,11 @@
             </td>
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <td class="inst_item" onClick="showEdit(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="inst_item" value="<?php echo $item['name']; ?>" onchange="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')" />        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="inst_item" value="<?php echo $item['name']; ?>" onchange="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')" />        
                 </td>
             <?php } elseif(in_array("special_instructions-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                 <td class="inst_item" onClick="showEdit(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="inst_item" value="<?php echo $item['name']; ?>" onchange="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')" />        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="inst_item" value="<?php echo $item['name']; ?>" onchange="saveToDatabase(this,'item_name','<?php echo $item['id']; ?>')" />        
                 </td>
             <?php } else{ ?>
                 <td onClick="showError(this);">

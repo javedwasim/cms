@@ -43,11 +43,11 @@ if(isset($rights[0]['user_rights']))
 
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <td class="exam_cate" onClick="showExamination(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="exam_cate" value="<?php echo $category['name']; ?>" onchange="saveExamination(this,'cate_name','<?php echo $category['id']; ?>')" >        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="exam_cate" value="<?php echo $category['name']; ?>" onchange="saveExamination(this,'cate_name','<?php echo $category['id']; ?>')" >        
                 </td>
             <?php } elseif(in_array("examinations-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                 <td class="exam_cate" onClick="showExamination(this);">
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" name="exam_cate" value="<?php echo $category['name']; ?>" onchange="saveExamination(this,'cate_name','<?php echo $category['id']; ?>')" >        
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="exam_cate" value="<?php echo $category['name']; ?>" onchange="saveExamination(this,'cate_name','<?php echo $category['id']; ?>')" >        
                 </td>
             <?php } else{ ?>
                 <td onClick="showError(this);">
