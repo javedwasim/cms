@@ -58,7 +58,10 @@
 		                            <th>Test Name</th>
 		                        </tr>
 			                    </thead>
+
 			                    <tbody style="height: 500px;">
+			                    <tbody>
+
                                   <!--   <tr>
                                         <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
                                         <td></td>
@@ -117,7 +120,7 @@
     			</div>
     			<div class="card-body">
     				<div class="row">
-    					<div class="col-md-5 p-r-0" id="lab_test_data_table">
+    					<div class="col-md-4 p-r-0" id="lab_test_data_table">
     						<table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
 		                       <thead>
 		                        <tr>
@@ -133,7 +136,7 @@
 			                    </tbody>
 			                </table>
     					</div>
-    					<div class="col-md-7 p-l-0 laboratory-test-unit-content">
+    					<div class="col-md-8 p-l-0 laboratory-test-unit-content">
     						<table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
 		                       	<thead>
 		                        <tr>
