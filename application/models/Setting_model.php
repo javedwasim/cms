@@ -715,15 +715,13 @@
             $delete_from_login_rights = $this->db->where('login_rights_group_id',$login_rights_group_id)->delete('login_rights_group');
             $delete_from_other_rights_details = $this->db->where('other_rights_group_id',$other_rights_group_id)->delete('other_rights_group_detail');
             $delete_from_other_rights_group = $this->db->where('other_rights_group_id',$other_rights_group_id)->delete('other_rights_group');
-            $delete_from_menu_group_details = $this->db->where('menu_id',$menu_group_id)->delete('menu_group_detail');
+            $delete_from_menu_group_details = $this->db->where('menu_group_id',$menu_group_id)->delete('menu_group_detail');
             $delete_from_menu_group = $this->db->where('menu_group_id',$menu_group_id)->delete('menu_group');
             if ($delete_from_menu_group) {
                 return true;
             }else{
                 return false;
             }
-
-
         }
 
         public function export_professions(){

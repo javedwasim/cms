@@ -201,48 +201,58 @@
                         	</div>
                         </div>
                         <div class="tab-pane pro-div" id="exe3" role="tabpanel">
-                        	<div class="row m-0">
-                        		<div class="col-md-5 p-0">
-	                        		<div class="card">
-						    			<div class="card-body" id="investigation_category_container">
-						    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-						                       <thead>
-						                        <tr>
-						                            <th style="width: 5%"></th>
-						                            <th>Investigations</th>
-						                        </tr>
-							                    </thead>
-							                    <tbody>
-						                           <!-- <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>&nbsp;</td>
-						                            </tr> -->
-							                    </tbody>
-							                </table>
-						    			</div>
-		    						</div>
-	                        	</div>
-	                        	<div class="col-md-7 p-0">
-	                        		<div class="card">
-	                        			<div class="card-body" id="investigation_category_item_container">
-	                        				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-						                       <thead>
-						                        <tr>
-						                            <th style="width: 10%"></th>
-						                            <th>Items</th>
-						                        </tr>
-							                    </thead>
-							                    <tbody>
-						                           <!-- <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
-						                            </tr> -->
+                        	<div class="card">
+                        		<div class="card-header">
+			    					<div class="form-group">
+	                                    <label class="radio-inline"><input type="radio" name="inclinic"  value="" class="" checked="checked">In Clinic</label>
+	                                    <label class="radio-inline"><input type="radio" name="inclinic"  value="" class="">Outsite Clinic</label>
+	                                </div>
+			    				</div>
+                        		<div class="card-body">
+                        			<div class="row m-0">
+		                        		<div class="col-md-5 p-0">
+			                        		<div class="card">
+								    			<div class="card-body" id="investigation_category_container">
+								    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+								                       <thead>
+								                        <tr>
+								                            <th style="width: 5%"></th>
+								                            <th>Investigations</th>
+								                        </tr>
+									                    </thead>
+									                    <tbody>
+								                           <!-- <tr>
+								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
+								                                <td>&nbsp;</td>
+								                            </tr> -->
+									                    </tbody>
+									                </table>
+								    			</div>
+				    						</div>
+			                        	</div>
+			                        	<div class="col-md-7 p-0">
+			                        		<div class="card">
+			                        			<div class="card-body" id="investigation_category_item_container">
+			                        				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+								                       <thead>
+								                        <tr>
+								                            <th style="width: 10%"></th>
+								                            <th>Items</th>
+								                        </tr>
+									                    </thead>
+									                    <tbody>
+								                           <!-- <tr>
+								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
+								                                <td>CVS</td>
+								                            </tr> -->
 
-							                    </tbody>
-							                </table>
-	                        			</div>
-	                        		</div>
-	                        	</div>
+									                    </tbody>
+									                </table>
+			                        			</div>
+			                        		</div>
+			                        	</div>
+		                        	</div>	
+                        		</div>
                         	</div>
                         </div>
                         <div class="tab-pane pro-div" id="exe4" role="tabpanel">

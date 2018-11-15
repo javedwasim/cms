@@ -1356,11 +1356,11 @@ class Setting extends MY_Controller
     }
     public function export_instruction_items_csv($instruction_items)
     {
-        $filename = 'instruction_items_' . date('d-m-Y') . '.csv';
+        $filename = 'instruction_items_' . date('d-m-Y') . '.txt';
         header("Content-Description: File Transfer");
         header('Content-Encoding: UTF-8'); 
         header("Content-Disposition: attachment; filename=$filename");
-        header("Content-Type: application/csv;charset=UTF-8 ");
+        header("Content-Type: application/txt;charset=UTF-8 ");
         // file creation
         $file = fopen('php://output', 'w');
         $header = array('Instruction items');
@@ -1383,7 +1383,7 @@ class Setting extends MY_Controller
             $fname = $uploads['name'];
             $exp = explode(".", $fname);
             $ext = end($exp);
-            if ($ext == 'CSV' || $ext == 'csv') {
+            if ($ext == 'TXT' || $ext == 'txt') {
                 move_uploaded_file($_FILES['csv_instruction_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
                 $result = $this->read_item_instruction_file($fname, $date_f, $id,$pid);
                 if ($result) {
@@ -1658,6 +1658,7 @@ class Setting extends MY_Controller
         $data['user_data'] = $this->Dashboard_model->get_user($user_name);
         $userid = $data['user_data']['login_id'];        
         $data['users'] = $this->Setting_model->get_user_by_id($userid);
+        // print_r($data['users']); die();
         $json['edit_modal'] = $this->load->view('pages/register-user_modal',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1667,12 +1668,14 @@ class Setting extends MY_Controller
     public function update_registered_user(){
         $data = $this->input->post();
         $id = $data['user_id'];
+        $password = password_hash($data['password'], PASSWORD_BCRYPT);
         $data_array=array(
             'full_name' =>$data['full_name'],
             'gender' =>$data['gender'],
             'username' =>$data['username'],
             'contact_no' =>$data['contact_no'],
-            'address' =>$data['address']
+            'address' =>$data['address'],
+            'password' => $password
         );
         $result = $this->Setting_model->update_user_data($data_array,$id);
         if ($result) {
@@ -1914,11 +1917,11 @@ class Setting extends MY_Controller
     }
 
     public function export_dosage_csv($dosages){
-       $filename = 'dosages.csv'; 
+       $filename = 'dosages.txt'; 
        header("Content-Description: File Transfer");
        header('Content-Encoding: UTF-8'); 
        header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/csv;charset=UTF-8");
+       header("Content-Type: application/txt;charset=UTF-8");
        // file creation 
        $file = fopen('php://output', 'w');
        $header = array('Dosages'); 
@@ -1940,7 +1943,7 @@ class Setting extends MY_Controller
             $fname = $uploads['name'];
             $exp = explode(".", $fname);
             $ext = end($exp);
-            if ($ext == 'CSV' || $ext == 'csv') {
+            if ($ext == 'TXT' || $ext == 'txt') {
                 move_uploaded_file($_FILES['csv_file']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
                 $result = $this->read_dosage_file($fname,$date_f);
                 if ($result) {
@@ -2000,7 +2003,7 @@ class Setting extends MY_Controller
     //     $fname = $this->config->item('file_upload_path') . $fname;
     //     $count=0;
     //     $fp = fopen($fname,'r') or die("can't open file");
-    //     while($csv_line = fgetcsv($fp,1024))
+    //     while($csv_line = fgets($fp,1024))
     //     {
     //         $count++;
     //         if($count == 1)
@@ -2009,18 +2012,18 @@ class Setting extends MY_Controller
     //         }//keep this if condition if you want to remove the first row
     //         for($i = 0, $j = count($csv_line); $i < $j; $i++)
     //         {
-    //             echo utf8_encode($csv_line[0]);//remove if you want to have primary key,
+    //             echo $csv_line[0];//remove if you want to have primary key,
 
     //         }
     //         $i++;
     //     }
     //         fclose($fp) or die("can't close file");
     //         die();
-    //     }
+    //     // }
                 
-        // }else{
-        //     return false;
-        // }
+    //     // }else{
+    //     //     return false;
+    //     // }
     // }
 
     public function sort_table($tablename,$id){
@@ -2424,6 +2427,17 @@ class Setting extends MY_Controller
                 
         }else{
             return false;
+        }
+    }
+
+
+    public function get_new_user_register_modal(){
+        $data['other_rights'] = $this->Setting_model->get_other_rights();
+        $data['userdata'] = $this->session->userdata('userdata');
+        $data['users'] = $this->Setting_model->get_users();
+        $json['user_modal'] = $this->load->view('pages/register_new_user_modal',$data,true);
+        if($this->input->is_ajax_request()){
+            set_content_type($json);
         }
     }
 

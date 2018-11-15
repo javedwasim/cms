@@ -35,9 +35,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Risk Factor and Cardiac Problems</label>
+                        <label id="medicine_item_name"></label>
                         <textarea class="form-control" rows="3" name="description" id="medicine_item_description"></textarea>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger waves-effect waves-light"
+                            id="save_medicine_item_description">Update
+                    </button>
                 </div>
             </div>
         </form>

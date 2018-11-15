@@ -4419,8 +4419,8 @@ $(document.body).on('click', '#sp_inst_details', function () {
 });
 
 function printsp(editableObj,test_id,patient_id) {
-
-    var win = window.open('/cms/print_profiles/print_sp_inst/?testid=' + test_id +'&patid='+patient_id, '_blank');
+    var printsize = $('input[name=print_sp_size]:checked').val();
+    var win = window.open('/cms/print_profiles/print_sp_inst/?testid=' + test_id +'&patid='+patient_id+'&size='+printsize, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();

@@ -116,14 +116,14 @@
 
 
 <script type="text/javascript">
-    // $( function() {
-    //         $("#full_name").autocomplete({  
-    //             source:window.location.origin+window.location.pathname+'profile/get_pat_name', 
-    //             select:function(event, ui){
-    //                 $(this).val(item.ui.name);
-    //             }
-    //         });
-    //     } );
+    $( function() {
+            $("#full_name").autocomplete({  
+                source:window.location.origin+window.location.pathname+'profile/get_pat_name', 
+                select:function(event, ui){
+                    $(this).val(ui.value);
+                }
+            });
+        } );
     $(document).ready(function () {
         $('.pat_search').datepicker({
             format: 'd-M-yyyy'

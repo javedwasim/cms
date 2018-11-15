@@ -14,7 +14,7 @@
                     <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >
                        <thead>
                         <tr>
-                            <th>Sr</th>
+                            <th>Sr No.</th>
                             <th class="hide">Order</th>
                             <th style="width: 150px;">Name</th>
                             <th>Contact</th>
@@ -171,7 +171,7 @@
                     <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >
                        <thead>
                         <tr>
-                            <th>Sr</th>
+                            <th>Sr No.</th>
                             <th>Order</th>
                             <th>Name</th>
                             <th>Contact</th>
@@ -240,7 +240,7 @@
                     <table class="table table-bordered responsive booking_tables" cellspacing="0" width="100%" >
                        <thead>
                         <tr>
-                            <th>Sr</th>
+                            <th>Sr No.</th>
                             <th>Order</th>
                             <th style="width:150px;">Name</th>
                             <th>Contact</th>

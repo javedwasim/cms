@@ -129,7 +129,7 @@
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $info['max_hr']?>"
                                                                 <?php } }?>
-                                                         id="max_hr" class="form-control">
+                                                         id="max_hr" onchange="calculate_pre_hr(this)" class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>Max BP:</label>
@@ -141,7 +141,7 @@
                                                                     ?>
                                                                     value="<?php echo $mbp[0]?>"
                                                                 <?php } }?>
-                                                             id="max_bp_a" class="form-control col-md-5">
+                                                             id="max_bp_a" onchange="calculate_hr_bp(this)" class="form-control col-md-5">
                                                             <label class="">/</label>
                                                             <input type="text" name="max_bp_b" autocomplete="off"
                                                             <?php if(isset($details)){
@@ -163,7 +163,7 @@
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $info['max_pre_tar']?>"
                                                                 <?php } }?>
-                                                             id="max_pre_tar" class="form-control">
+                                                             id="max_pre_tar" onchange="calculate_max_pre_hr(this)" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -175,7 +175,7 @@
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $info['max_pre_hr']?>"
                                                                 <?php } }?>
-                                                                 id="max_pre_hr" class="form-control">
+                                                                 id="max_pre_hr" class="form-control" readonly />
                                                                 <label>%</label>
                                                             </div>
                                                         </div>
@@ -184,7 +184,7 @@
         									</div>
         									<div class="col-md-12 m-t-10" style="display: inline-flex;">
         										<label class="m-r-10">HR X BP:</label>
-        										<input type="text" name="hr_bp" autocomplete="off"
+        										<input type="text" name="hr_bp" autocomplete="off" readonly="readonly"
                                                 <?php if(isset($details)){
                                                                 foreach($details as $info){ ?>
                                                                     value="<?php echo $info['hr_bp']?>"

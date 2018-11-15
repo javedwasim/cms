@@ -40,7 +40,7 @@
                                 <label>Password:</label>
                             </div>
                             <div class="col-md-9 m-t-10">
-                                <input type="password" name="password" value="<?php echo $user_data['password']; ?>" class="form-control col-md-10" readonly="readonly" />
+                                <input type="password" name="password" value="******" class="form-control col-md-10" />
                             </div>
                             <div class="col-md-3 m-t-10">
                                 <label>Contact:</label>
@@ -71,6 +71,8 @@
                                     <div class="ribbon ribbon-info">Appointments</div>
                                     <p class="ribbon-content m-t-10">
                                         <label class="checkbox-inline m-l-10">
+                                            <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-5'; ?>" <?php echo in_array("appointments-parent-1", $user_rights)?'checked':''; ?>>Appointment</label>
+                                        <label class="checkbox-inline m-l-10">
                                             <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-15'; ?>" <?php echo in_array("appointments-can_add-1", $user_rights)?'checked':''; ?>>Add</label>
                                         <label class="checkbox-inline m-l-10">
                                             <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-11'; ?>" <?php echo in_array("appointments-can_edit-1", $user_rights)?'checked':''; ?>>Edit</label>
@@ -80,8 +82,10 @@
                                             <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-9'; ?>" <?php echo in_array("appointments-mark_status-1", $user_rights)?'checked':''; ?>>Change Complete</label>
                                         <label class="checkbox-inline m-l-10">
                                             <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-10'; ?>" <?php echo in_array("appointments-view_wallet-1", $user_rights)?'checked':''; ?>>View Wallet</label>
-                                            <label class="checkbox-inline m-l-10">
+                                        <label class="checkbox-inline m-l-10">
                                             <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-14'; ?>" <?php echo in_array("appointments-can_complete-1", $user_rights)?'checked':''; ?>>Can Mark Complete</label>
+                                        <label class="checkbox-inline m-l-10">
+                                            <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-8'; ?>" <?php echo in_array("appointments-print-1", $user_rights)?'checked':''; ?>>Appointment Print</label>
                                     </p>
                                 </div>
                             </div>
@@ -111,6 +115,8 @@
                                     <div class="ribbon-wrapper card">
                                         <div class="ribbon ribbon-info">Profile</div>
                                         <p class="ribbon-content m-t-10">
+                                            <label class="checkbox-inline m-l-10">
+                                                <input type="checkbox" value="<?php echo $user['other_rights_group_id'].'-1'; ?>" class="user_permission" name="profile_view" <?php echo in_array("profile-parent-1", $user_rights)?'checked':''; ?>>View</label>
                                             <label class="checkbox-inline m-l-10">
                                                 <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-2'; ?>" <?php echo in_array("profile-create_new_profile-1", $user_rights)?'checked':''; ?>>Add</label>
                                             <label class="checkbox-inline m-l-10">

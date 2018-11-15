@@ -21,7 +21,7 @@
     <?php endforeach; ?>
     </tbody>
 </table>
-<div id="investigation_item_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<!-- <div id="investigation_item_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <form id="investigation_item_form_modal" method="post" role="form"
@@ -40,6 +40,34 @@
                     </div>
                 </div>
 
+            </div>
+        </form>
+    </div>
+</div> -->
+<div id="investigation_item_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <form id="investigation_item_form_modal" method="post" role="form"
+              data-action="<?php echo site_url('investigation/save_investigation_item_description') ?>"
+              enctype="multipart/form-data">
+            <input type="hidden" name="investigation_item_id" id="investigation_item_id">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Description</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label id="investigation_item_name"></label>
+                        <textarea class="form-control" rows="3" name="description" id="investigation_item_description"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger waves-effect waves-light"
+                            id="save_investigation_item_description">Update
+                    </button>
+                </div>
             </div>
         </form>
     </div>

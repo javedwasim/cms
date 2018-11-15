@@ -72,9 +72,15 @@ class Print_profiles extends MY_Controller {
 	public function print_sp_inst(){
 		$testid = $this->input->get('testid');
 		$patid = $this->input->get('patid');
-        $data['test_details'] = $this->Print_model->get_sp_inst_detail_by_ids($patid,$testid);
+		$size = $this->input->get('size');
+		$data['test_details'] = $this->Print_model->get_sp_inst_detail_by_ids($patid,$testid);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
-		$this->load->view('profile_prints/print_special_inst',$data);
+		if ($size=='a4') {
+			$this->load->view('profile_prints/print_special_inst',$data);
+			
+		}else{
+			$this->load->view('profile_prints/print_sp_a5',$data);
+		}
 	}
 
 	public function delete_ett_test_details(){

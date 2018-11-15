@@ -99,10 +99,9 @@
                     <div class="card" style="height:71vh;">
                         <div class="card-header">
                             Previous Instructions<br/>
-                            Print size:<label class="radio-inline"><input type="radio" name="optradio"
+                            Print size:<label class="radio-inline"><input type="radio" value="a4" name="print_sp_size"
                                                                           checked>A4</label>
-                            <label class="radio-inline m-r-30"><input type="radio" name="optradio">Half
-                                A4</label>
+                            <label class="radio-inline m-r-30"><input type="radio" value="a5" name="print_sp_size">A5</label>
                             <label class="m-r-20">Click to View/edit</label>
                         </div>
                         <div class="card-body">

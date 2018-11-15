@@ -1887,6 +1887,7 @@ $(document).ready(function () {
 });
 
 $(document.body).on('click', '#register_new_user', function(){
+    $(this).attr('disabled',true);
     $.ajax({
         url: $('#register_user_form').attr('data-action'),
         type: 'post',
@@ -1895,9 +1896,11 @@ $(document.body).on('click', '#register_new_user', function(){
         success: function(response) {
             $('.user_table_content').remove();
             $('#user_table_content').append(response.user_html);
+            $('#register_new_user').attr('disabled',false);
             if (response.success) {
                 $("#register_user_form")[0].reset();
                 toastr["success"](response.message);
+                $('#new_user_modal').modal('hide');
             } else {
                 toastr["error"](response.message);
             }
@@ -2792,21 +2795,32 @@ $(document.body).on('click','.edit_user_data',function(){
 });
 
 function deleteuser(object,userid,username){
-    $.ajax({
-        url: window.location.origin+window.location.pathname+'setting/delete_user',
-        type: 'post',
-        data: {
-            userid: userid,
-            username: username
-        },
-        cache: false,
-        success: function(response){
-            $('.user_table_content').remove();
-            $('#user_table_content').append(response.user_html);
-            if (response.success==true) {
-                toastr["success"](response.message);
-            }else{
-                toastr["error"](response.message);
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: window.location.origin+window.location.pathname+'setting/delete_user',
+                    type: 'post',
+                    data: {
+                        userid: userid,
+                        username: username
+                    },
+                    cache: false,
+                    success: function(response){
+                        $('.user_table_content').remove();
+                        $('#user_table_content').append(response.user_html);
+                        if (response.success==true) {
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
             }
         }
     });
@@ -3709,13 +3723,55 @@ $(document.body).on('click','#lab_to_profile',function(){
     });
     
 });
+function calculate_max_pre_hr(val){
+    var max_pre = val.value;
+    var max_hr = $('#max_hr').val();
+    if (max_hr=='') {
+        $('#max_hr').val('');
+    }else{
+        var percentage = (max_hr/max_pre)*100;
+        $('#max_pre_hr').val(percentage.toFixed(0));
+    }
+    
+}
 
-// $(document).ready(function () {
-//     $('input.dbedit').attr('readonly','readonly');
-//     $('input.dbedit').on('blur',function(){
-//         $(this).attr('readonly','readonly'); //or use readonly
-//     });
-//     $('input.dbedit').on('dbclick',function(){
-//         $(this).removeAttr('readonly'); //or use readonly attribute
-//     });
-// });
+function calculate_pre_hr(val){
+    var max_hr = val.value;
+    var max_pre = $('#max_pre_tar').val();
+    if (max_pre=='') {
+        $('#max_pre_tar').val('');
+    }else{
+        var percentage = (max_hr/max_pre)*100;
+        $('#max_pre_hr').val(percentage.toFixed(0));
+    }
+
+    var max_bp = $('#max_bp_a').val();
+    if (max_bp==0) {
+        $('#max_bp_a').val('');
+    }else{
+        var bp_hr = max_hr * max_bp
+        $('#hr_bp').val(bp_hr);
+    }
+}
+
+function calculate_hr_bp(val){
+    var max_bp = val.value;
+    var max_hr = $('#max_hr').val();
+    if (max_hr=='') {
+        $('#max_hr').val('');
+    }else{
+        var bp_hr = max_hr * max_bp
+        $('#hr_bp').val(bp_hr);
+    }
+}
+
+$(document.body).on('click','#add_new_user_btn',function(){
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'setting/get_new_user_register_modal',
+        success:function(response){
+            $('#new_user_modal_content').empty();
+            $('#new_user_modal_content').append(response.user_modal);
+            $('#new_user_modal').modal('show');
+        }
+    });
+});

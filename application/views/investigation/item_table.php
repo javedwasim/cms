@@ -55,28 +55,28 @@
 </div>
 
 <script>
-    function showEdit(editableObj) {
-        $("#investigation_item_tbl tbody tr").click(function (e) {
-            $('#investigation_item_tbl tbody tr.row_selected').removeClass('row_selected');
-            $(this).addClass('row_selected');
-        });
-    }
-    function saveToDatabase(editableObj, column, id) {
-        var val = editableObj.value;
-        $.ajax({
-            url: "<?php echo base_url() . 'investigation/save_investigation_item' ?>",
-            type: "POST",
-            data: 'column=' + column + '&editval=' + val + '&id=' + id,
-            success: function (response) {
-                if (response.success) {
-                    toastr["success"](response.message);
-                }else{
-                    document.execCommand('undo');
-                    toastr["error"](response.message);
-                }
+function showEdit(editableObj) {
+    $("#investigation_item_tbl tbody tr").click(function (e) {
+        $('#investigation_item_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+}
+function saveToDatabase(editableObj, column, id) {
+    var val = editableObj.value;
+    $.ajax({
+        url: "<?php echo base_url() . 'investigation/save_investigation_item' ?>",
+        type: "POST",
+        data: 'column=' + column + '&editval=' + val + '&id=' + id,
+        success: function (response) {
+            if (response.success) {
+                toastr["success"](response.message);
+            }else{
+                document.execCommand('undo');
+                toastr["error"](response.message);
             }
-        });
-    }
+        }
+    });
+}
 
 $(document).ready(function () {
     // Sortable rows

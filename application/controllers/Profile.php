@@ -1315,17 +1315,17 @@ class Profile extends MY_Controller
         }
     }
 
-    // public function get_pat_name() {
-    //     $name = $this->input->get('term'); 
-    //     $result = $this->Profile_model->get_pt_name($name);
-    //     $patname =  array();
-    //     foreach ($result as $d) {
-    //         $patname[]     = array(
-    //             'name' => $d->pat_name
-    //         );
-    //     }
-    //     echo json_encode($patname); 
-    // }
+    public function get_pat_name() {
+        $name = $this->input->get('term'); 
+        $result = $this->Profile_model->get_pt_name($name);
+        $patname =  array();
+        foreach ($result as $d) {
+            $patname[]     = array(
+                'value' => $d->pat_name
+            );
+        }
+        echo json_encode($patname); 
+    }
 
 }
 

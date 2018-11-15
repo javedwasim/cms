@@ -87,13 +87,13 @@ if(isset($rights[0]['user_rights']))
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Registration</label>
-                                            <input type="text" name="creation_date" class="form-control profile_filter" autocomplete="off" placeholder="<?php echo date('d-M-Y') ?>" required="required" autocomplete="off" onchange="profile_filter()" />
+                                            <input type="text" name="creation_date" class="form-control profile_filter" autocomplete="off" placeholder="Enter date" required="required" autocomplete="off" onchange="profile_filter()" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Last Visit</label>
-                                            <input type="text" value="<?php echo date('d-M-Y') ?>" id="" class="form-control profile_filter" onchange="last_visit_filter(this)" autocomplete="off" required="required" />
+                                            <input type="text" id="" placeholder="Enter date" class="form-control profile_filter" onchange="last_visit_filter(this)" autocomplete="off" required="required" />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -262,7 +262,7 @@ if(isset($rights[0]['user_rights']))
                         <h4 class="modal-title">Add New Patient</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body ui-front">
                     	<div class="row">
                     		<div class="col-md-4">
 		                        <div class="form-group">
@@ -382,7 +382,17 @@ if(isset($rights[0]['user_rights']))
     </div>
 </div>
 <script type="text/javascript">
+    
 	$(document).ready(function() {
+        $( function() {
+            $("#pat_profile_name").autocomplete({  
+                source:window.location.origin+window.location.pathname+'profile/get_pat_name', 
+                select:function(event, ui){
+                    $(this).val(ui.value);
+                }
+            });
+            // $( "#pat_profile_name" ).autocomplete( "option", "appendTo", "#profile_form" );
+        } );
     //////////////////////////////initilize datepicker///////////////////////
 	    $('.profile_filter').datepicker({
 	            format: 'd-M-yyyy'
