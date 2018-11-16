@@ -54,11 +54,22 @@
             $other_rights_group_id =  $this->db->insert_id();
 
             //other rights group detail
-            $other_rights = $user['user_rights'];
+           $rights = $this->db->get('other_rights');
+            $other_rights = $rights->result_array();
             foreach ($other_rights as $right){
-                $this->db->insert('other_rights_group_detail', array('other_rights_group_id'=>$other_rights_group_id,'other_rights_id'=>$right,'status'=>1));
+                $this->db->insert('other_rights_group_detail', array('other_rights_group_id'=>$other_rights_group_id,'other_rights_id'=>$right['other_rights_id'],'status'=>0));
             }
-
+            if (!empty($user['user_rights'])) {
+               $other_rights = $user['user_rights'];
+                // foreach ($other_rights as $right){
+                //     $this->db->insert('other_rights_group_detail', array('other_rights_group_id'=>$other_rights_group_id,'other_rights_id'=>$right,'status'=>1));
+                // }
+                foreach ($other_rights as $right){
+                    $this->db->set('status','1')->where('other_rights_group_id',$other_rights_group_id)
+                                ->where('other_rights_id',$right)->update('other_rights_group_detail');
+                }
+            }
+            
             //login rights group
             $this->db->insert('login_rights_group', array('menu_group_id'=>$menu_group_id,'other_rights_group_id'=>$other_rights_group_id));
             $login_rights_group_id =  $this->db->insert_id();

@@ -1,7 +1,9 @@
     <?php
-        if(isset($rights[0]['rights']))://print_r($rights[0]['rights']);
+        if(isset($rights[0]['rights'])){//print_r($rights[0]['rights']);
             $permissions = explode(',',$rights[0]['rights']);
-        endif;
+        }else{
+            $permissions = array();
+        }
         $user_info = ($this->session->userdata('user_data_logged_in'));
     ?>
     <div class="content-wrapper">

@@ -19,6 +19,7 @@ class Investigation extends MY_Controller
         $data['categories'] = $this->Investigation_model->get_investigation_categories();
         $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
         // $data['items'] = $this->Investigation_model->get_investigation_items();
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('investigation/investigation', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -45,6 +46,7 @@ class Investigation extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['categories'] = $this->Investigation_model->get_investigation_categories();
         $data['items'] = $this->Investigation_model->get_investigation_items();
         $data['active_tab'] = 'category';
@@ -76,6 +78,7 @@ class Investigation extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
         $data['active_tab'] = 'items';
         $json['result_html'] = $this->load->view('investigation/item_table', $data, true);
@@ -118,6 +121,7 @@ class Investigation extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['categories'] = $this->Investigation_model->get_investigation_categories();
         $data['items'] = $this->Investigation_model->get_investigation_items();
         $data['active_tab'] = 'category';

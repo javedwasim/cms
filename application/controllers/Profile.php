@@ -63,6 +63,7 @@ class Profile extends MY_Controller
         $data['categories'] = $this->Setting_model->get_lab_categories();
         $data['tests'] = $this->Setting_model->get_lab_tests();
         $data['items'] = $this->Setting_model->get_lab_test_items();
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['laboratory_html'] = $this->load->view('laboratory/laboratory', $data, true);
         $data['tests'] = $this->Profile_model->get_lab_test_info($id);
         $json['test_table'] = $this->load->view('profile/lab_test_detail_table', $data, true);
@@ -549,6 +550,7 @@ class Profile extends MY_Controller
         $filters = $this->input->post();
         $data['profiles'] = $this->Profile_model->get_profiles_by_filters($filters);
         $data['filters'] = $filters;
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -561,6 +563,7 @@ class Profile extends MY_Controller
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
         $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
         $data['details'] = $this->Profile_model->get_examination_detail($id);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -572,6 +575,7 @@ class Profile extends MY_Controller
     public function reset_profile_table()
     {
         $data['profiles'] = $this->Profile_model->get_profiles();
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -582,6 +586,7 @@ class Profile extends MY_Controller
     {
         $spid = $this->input->post('spid');
         $data['sp_inst'] = $this->Profile_model->get_special_instructions_by_id($spid);
+        $data['rights'] = $this->session->userdata('other_rights');
         $description = $data['sp_inst']->description;
         $json['special_instructions'] = $description;
         if ($this->input->is_ajax_request()) {
@@ -780,6 +785,7 @@ class Profile extends MY_Controller
         $data['details'] = $this->Profile_model->get_echo_detail($patient_id);
         //print_r($data['details']);
         if ($data) {
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['success'] = true;
             $json['echo_detail'] = $this->load->view('profile/echo_detail_table', $data, true);
 
@@ -806,6 +812,7 @@ class Profile extends MY_Controller
         $data['findings'] = $this->Profile_model->get_patient_echo_findings($patient_id, $detail_id);
         $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id, $detail_id);
         $data['color_doppler'] = $this->Profile_model->get_patient_echo_color_doopler($patient_id, $detail_id);
+        $data['users'] = $this->Dashboard_model->get_all_user();
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
         $json['result_html'] = $this->load->view('pages/patient_echo_test', $data, true);
@@ -820,6 +827,7 @@ class Profile extends MY_Controller
         $data['details'] = $this->Profile_model->get_lab_test_detail($patient_id);
         //print_r($data['details']);
         if ($data) {
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['success'] = true;
             $json['lab_detail'] = $this->load->view('profile/lab_detail_table', $data, true);
 
@@ -927,6 +935,7 @@ class Profile extends MY_Controller
         $data['details'] = $this->Profile_model->get_ett_detail($patient_id);
         //print_r($data['details']);
         if ($data) {
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['success'] = true;
             $json['ett_detail'] = $this->load->view('profile/ett_detail_table', $data, true);
 
@@ -1021,6 +1030,7 @@ class Profile extends MY_Controller
         $data['details'] = $this->Profile_model->get_sp_inst_detail($patient_id);
         //print_r($data['details']);
         if ($data) {
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['success'] = true;
             $json['sp_inst_details'] = $this->load->view('profile/sp_inst_details_table', $data, true);
 
@@ -1037,6 +1047,7 @@ class Profile extends MY_Controller
         $patient_id = $this->input->post('patient_id');
         $data['details'] = $this->Profile_model->get_examination_detail($patient_id);
         if ($data) {
+            $data['rights'] = $this->session->userdata('other_rights');
             $json['success'] = true;
             $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
 
@@ -1061,6 +1072,7 @@ class Profile extends MY_Controller
             $json['message'] = 'Seems an error.';
         }
         $data['details'] = $this->Profile_model->get_examination_detail($patid);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['examination_details'] = $this->load->view('profile/examination-details_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1117,6 +1129,7 @@ class Profile extends MY_Controller
             $json['message'] = "seem to be an error.";
         }
         $data['details'] = $this->Profile_model->get_echo_detail($patid);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['echo_detail'] = $this->load->view('profile/echo_detail_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1170,6 +1183,7 @@ class Profile extends MY_Controller
     public function get_last_visit_patient(){
         $visit_date = $this->input->post('ldate');
         $data['profiles']= $this->Profile_model->get_last_visit_patient($visit_date);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1180,6 +1194,7 @@ class Profile extends MY_Controller
     public function profile_searchin(){
         $val = $this->input->post('searchin');
         $data['profiles']= $this->Profile_model->profile_searchin($val);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1306,6 +1321,7 @@ class Profile extends MY_Controller
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
         $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($patid);
         $json['patid'] = 'patid'.$patid;
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
         $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);

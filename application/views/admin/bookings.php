@@ -1,6 +1,6 @@
 <?php
-        if(isset($rights[0]['rights']))://print_r($rights[0]['rights']);
-            $permissions = explode(',',$rights[0]['rights']);
+        if(isset($rights[0]['user_rights']))://print_r($rights[0]['rights']);
+            $permissions = explode(',',$rights[0]['user_rights']);
         endif;
         $user_info = ($this->session->userdata('user_data_logged_in'));
     ?>
@@ -11,10 +11,10 @@
                 <div class="col-md-2">
                     <a class="btn btn-info" href="javascript:void(0)" onclick="bookings();" aria-expanded="false"> Refresh</a>
                 </div>
-                <div class="col-md-5 offset-1 p-r-0 <?php echo in_array("print-0", $permissions)?"op-hide":''; ?>">
+                <div class="col-md-5 offset-1 p-r-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
                     <input type="text" name="" value="<?php echo date('d-M-Y') ?>" class="print_date form-control m-t-5" style="height:35px;" id="print_all">        
                 </div>
-                <div class="col-md-4 p-0 <?php echo in_array("print-0", $permissions)?"op-hide":''; ?>">
+                <div class="col-md-4 p-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
                     <button class="btn btn-default" id="print_all_list">Print all</button> 
                 </div>    
             </div>

@@ -426,6 +426,7 @@ class ETT extends MY_Controller
         }
     }
     public function get_protocol_detail_content(){
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['protocols'] = $this->ETT_model->get_protocol();
         $json['result_html'] = $this->load->view('ett/protocol_details', $data, true);
         if ($this->input->is_ajax_request()) {

@@ -41,6 +41,7 @@ class User extends MY_Controller {
         $data['refund_count'] = $this->User_model->count_refund_rows($date);
         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
         $data['fee_paid'] = $this->User_model->count_fee_paid();
         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
         $data['ett_count'] = $this->User_model->count_ett_waiting();
@@ -62,6 +63,7 @@ class User extends MY_Controller {
         $patName = $this->input->post('patName');
         $patCell = $this->input->post('cellNo');
         $bookingFlag = $this->input->post('bookingflag');
+        $feetype = $this->input->post('feetype');
         $searchdate = date('Y-m-d',strtotime($this->input->post('searchdate')));
         $appdate = $this->input->post('appointmentDate');
         $date = date('Y-m-d', strtotime($appdate));
@@ -140,7 +142,7 @@ class User extends MY_Controller {
                         $json['message'] = "Please fill all the fields .";
                     }
                 } else if ($bookingFlag == 'on_walk') {
-                    if (!empty($patName) && !empty($patCell) && !empty($appFee)) {
+                    if (!empty($patName) && !empty($patCell) && !empty($appFee) && !empty($feetype)) {
                         $appdate = $this->input->post('appointmentDate');
                         $app['datetime'] = $appdate . " " . date('H:i:s');
                         $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
@@ -162,18 +164,7 @@ class User extends MY_Controller {
                             }
                         }
                         $data = array();
-                        if ($appFee == "") {
-                            $data = array(
-                                'order_number' => $order_no,
-                                'full_name' => $patName,
-                                'contact_number' => $patCell,
-                                'appointment_date' => $bookingDatetime,
-                                'consultant_fee' => $appFee,
-                                'booking_flag' => $bookingFlag,
-                                'name_updated_by' => $collectedby,
-                                'contact_updated_by' => $collectedby
-                            );
-                        } else {
+                        if ($feetype=='consultant') {
                             $data = array(
                                 'order_number' => $order_no,
                                 'full_name' => $patName,
@@ -183,6 +174,34 @@ class User extends MY_Controller {
                                 'fee_collected_by' => $collectedby,
                                 'fee_paid_at' => $bookingDatetime,
                                 'fee_paid_status' => '1',
+                                'booking_flag' => $bookingFlag,
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
+                            );
+                        }else if($feetype=='ett'){
+                            $data = array(
+                                'order_number' => $order_no,
+                                'full_name' => $patName,
+                                'contact_number' => $patCell,
+                                'appointment_date' => $bookingDatetime,
+                                'ett_fee' => $appFee,
+                                'ett_fee_collected_by' => $collectedby,
+                                'ett_fee_paid_at' => $bookingDatetime,
+                                'fee_paid_status' => '3',
+                                'booking_flag' => $bookingFlag,
+                                'name_updated_by' => $collectedby,
+                                'contact_updated_by' => $collectedby
+                            );
+                        }else if($feetype=='echo'){
+                            $data = array(
+                                'order_number' => $order_no,
+                                'full_name' => $patName,
+                                'contact_number' => $patCell,
+                                'appointment_date' => $bookingDatetime,
+                                'echo_fee' => $appFee,
+                                'echo_fee_collected_by' => $collectedby,
+                                'echo_fee_paid_at' => $bookingDatetime,
+                                'fee_paid_status' => '4',
                                 'booking_flag' => $bookingFlag,
                                 'name_updated_by' => $collectedby,
                                 'contact_updated_by' => $collectedby
@@ -407,7 +426,7 @@ class User extends MY_Controller {
                     $json['message'] = "Please fill all the fields .";
                 }
             } else if ($bookingFlag == 'on_walk') {
-                if (!empty($patName) && !empty($patCell) && !empty($appFee)) {
+                if (!empty($patName) && !empty($patCell) && !empty($appFee) && !empty($feetype)) {
                     $appdate = $this->input->post('appointmentDate');
                     $app['datetime'] = $appdate . " " . date('H:i:s');
                     $bookingDatetime = date('Y-m-d H:i:s', strtotime($app['datetime']));
@@ -431,18 +450,7 @@ class User extends MY_Controller {
                     }
                     $data = array();
                     $collectedby = $this->session->userdata('username');
-                    if ($appFee == "") {
-                        $data = array(
-                            'order_number' => $order_no,
-                            'full_name' => $patName,
-                            'contact_number' => $patCell,
-                            'appointment_date' => $bookingDatetime,
-                            'consultant_fee' => $appFee,
-                            'booking_flag' => $bookingFlag,
-                            'name_updated_by' => $collectedby,
-                            'contact_updated_by' => $collectedby
-                        );
-                    } else {
+                    if ($feetype=='consultant') {
                         $data = array(
                             'order_number' => $order_no,
                             'full_name' => $patName,
@@ -452,6 +460,34 @@ class User extends MY_Controller {
                             'fee_collected_by' => $collectedby,
                             'fee_paid_at' => $bookingDatetime,
                             'fee_paid_status' => '1',
+                            'booking_flag' => $bookingFlag,
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
+                        );
+                    }else if($feetype=='ett'){
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'ett_fee' => $appFee,
+                            'ett_fee_collected_by' => $collectedby,
+                            'ett_fee_paid_at' => $bookingDatetime,
+                            'fee_paid_status' => '3',
+                            'booking_flag' => $bookingFlag,
+                            'name_updated_by' => $collectedby,
+                            'contact_updated_by' => $collectedby
+                        );
+                    }else if($feetype=='echo'){
+                        $data = array(
+                            'order_number' => $order_no,
+                            'full_name' => $patName,
+                            'contact_number' => $patCell,
+                            'appointment_date' => $bookingDatetime,
+                            'echo_fee' => $appFee,
+                            'echo_fee_collected_by' => $collectedby,
+                            'echo_fee_paid_at' => $bookingDatetime,
+                            'fee_paid_status' => '4',
                             'booking_flag' => $bookingFlag,
                             'name_updated_by' => $collectedby,
                             'contact_updated_by' => $collectedby
@@ -625,6 +661,7 @@ class User extends MY_Controller {
         $data['investigation_count'] = $this->User_model->count_investigation_waiting();
         $data['checkup_count'] = $this->User_model->count_checkup_waiting();
         $data['count_complete'] = $this->User_model->count_complete();
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
         $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
@@ -641,20 +678,30 @@ class User extends MY_Controller {
         $statusid = $this->input->post('statusId');
         $searchdate = date('Y-m-d', strtotime($this->input->post('tabledate')));
         $user = $this->session->userdata('user_data_logged_in');
-        if ($statusid == 6 && $user['is_admin'] != 1 ) {
-            $data['booking_flag'] = $flag;
-            $json['error'] = true;
-            $json['message'] = 'Can not change the status.';
-        }else{
-            $result = $this->User_model->update_fee_paid($status, $bkId);
-            if ($result) {
-                $data['booking_flag'] = $flag;
-                $json['success'] = true;
-                $json['message'] = 'Status Update';
-            } else {
+        $feestatus = $this->User_model->get_all_fee($bkId);
+        // print_r($feestatus);die();
+        if($feestatus[0]['echo_fee'] == 0 && $feestatus[0]['ett_fee'] == 0){
+            if (empty($feestatus[0]['consultant_fee'])|| $feestatus[0]['consultant_fee']==0) {
                 $data['booking_flag'] = $flag;
                 $json['error'] = true;
-                $json['message'] = 'Seems an error.';
+                $json['message'] = 'Can not change status.';
+            }
+        }else{
+            if ($statusid == 7 && $user['is_admin'] != 1 ) {
+                $data['booking_flag'] = $flag;
+                $json['error'] = true;
+                $json['message'] = 'Fee not paid.';
+            }else{
+                $result = $this->User_model->update_fee_paid($status, $bkId);
+                if ($result) {
+                    $data['booking_flag'] = $flag;
+                    $json['success'] = true;
+                    $json['message'] = 'Status Update';
+                } else {
+                    $data['booking_flag'] = $flag;
+                    $json['error'] = true;
+                    $json['message'] = 'Seems an error.';
+                }
             }
         }
         $data['consultant_booking'] = $this->User_model->get_first_five_rows($searchdate);
@@ -676,6 +723,7 @@ class User extends MY_Controller {
         $data['refund_count'] = $this->User_model->count_refund_rows($searchdate);
         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($searchdate);
         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($searchdate);
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
         $json['status_row'] = $this->load->view('admin/patient_status_row', $data, true);
@@ -749,6 +797,7 @@ class User extends MY_Controller {
         $data['refund_count'] = $this->User_model->count_refund_rows($tabledate);
         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($tabledate);
         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($tabledate);
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
         $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
@@ -795,6 +844,7 @@ class User extends MY_Controller {
         $data['refund_count'] = $this->User_model->count_refund_rows($searchdate);
         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($searchdate);
         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($searchdate);
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
         $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
@@ -876,6 +926,7 @@ class User extends MY_Controller {
         $data['refund_count'] = $this->User_model->count_refund_rows($searchdate);
         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($searchdate);
         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($searchdate);
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
         $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
@@ -935,6 +986,7 @@ class User extends MY_Controller {
         $data['booking_onwalk'] = $this->User_model->getbookings_by_date_flag($searchdate, $onwalk );
         $data['booking_oncall'] = $this->User_model->getbookings_by_date_flag($searchdate, $oncall);
         $data['consultant_booking'] = $this->User_model->get_first_five_rows($searchdate);
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
         $json['result_html'] = $this->load->view('admin/booking_categories', $data, true);
@@ -955,6 +1007,7 @@ class User extends MY_Controller {
         $data['refund_count'] = $this->User_model->count_refund_rows($walletdate);
         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($walletdate);
         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($walletdate);
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
         if ($this->input->is_ajax_request()) {

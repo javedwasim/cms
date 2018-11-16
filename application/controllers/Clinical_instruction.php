@@ -15,6 +15,7 @@ class Clinical_instruction extends MY_Controller
 
     public function instruction()
     {
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['categories'] = $this->Clinical_instruction_model->get_instruction_categories();
         $data['items'] = $this->Clinical_instruction_model->get_instruction_items();
         $json['result_html'] = $this->load->view('instruction/instruction', $data, true);
@@ -43,6 +44,7 @@ class Clinical_instruction extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['categories'] = $this->Clinical_instruction_model->get_instruction_categories();
         $data['active_tab'] = 'category';
         $json['result_html'] = $this->load->view('instruction/category_table', $data, true);
@@ -72,6 +74,7 @@ class Clinical_instruction extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['items'] = $this->Clinical_instruction_model->get_instruction_items();
         $data['active_tab'] = 'items';
         $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
@@ -106,6 +109,7 @@ class Clinical_instruction extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['categories'] = $this->Clinical_instruction_model->get_instruction_categories();
         $data['active_tab'] = 'category';
         $json['result_html'] = $this->load->view('instruction/category_table', $data, true);
@@ -123,6 +127,7 @@ class Clinical_instruction extends MY_Controller
         $data['items'] = $this->Clinical_instruction_model->get_instruction_items_by_category($cat_id);
         $data['selected_category'] = $cat_id;
         $data['active_tab'] = 'tests';
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('instruction/item_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -199,6 +204,7 @@ class Clinical_instruction extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['items'] = $this->Clinical_instruction_model->get_instruction_items();
         $data['active_tab'] = 'items';
         $json['result_html'] = $this->load->view('instruction/item_table', $data, true);

@@ -37,10 +37,10 @@ class Dashboard extends MY_Controller {
           $data['echo_fee'] = $this->User_model->get_todays_echo_fee_paid($date);
           $data['fee_refund'] = $this->User_model->get_todays_total_refund($date);
           $data['rights'] = $this->session->userdata('other_rights');
-          $this->load->view('partial/header');
-          $this->load->view('partial/navbar');
-         $this->load->view('admin/dashboard',$data);
-         $this->load->view('partial/footer');
+          $this->load->view('partial/header',$data);
+          $this->load->view('partial/navbar',$data);
+          $this->load->view('admin/dashboard',$data);
+          $this->load->view('partial/footer',$data);
         }else {
           $data['total_attended'] = $this->User_model->count_total_attendent($date);
           $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
@@ -55,10 +55,10 @@ class Dashboard extends MY_Controller {
           $data['checkup_count'] = $this->User_model->count_checkup_waiting();
           $data['count_complete'] = $this->User_model->count_complete();
           $data['rights'] = $this->session->userdata('other_rights');
-          $this->load->view('partial/header');
-          $this->load->view('partial/navbar');
+          $this->load->view('partial/header',$data);
+          $this->load->view('partial/navbar',$data);
           $this->load->view('admin/dashboard',$data);
-          $this->load->view('partial/footer');
+          $this->load->view('partial/footer',$data);
         }
 	     		
 	    }
@@ -157,6 +157,7 @@ class Dashboard extends MY_Controller {
             $json['error'] = true;
             $json['message'] = 'Seems an error';
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
         $json['result_html'] = $this->load->view('pages/limiter_table',$data,true);
         if ($this->input->is_ajax_request()) {
@@ -207,6 +208,7 @@ class Dashboard extends MY_Controller {
         $vip = 'vip';
         $oncall = 'on_call';
         $onwalk = 'on_walk';
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
         $data['booking_vip'] = $this->User_model->get_bookings_vip($vip);
         $data['booking_onwalk'] = $this->User_model->get_bookings_on_walk($onwalk);
@@ -220,6 +222,7 @@ class Dashboard extends MY_Controller {
     public function diary()
     {
       $data['users'] = $this->Dashboard_model->get_all_user();
+      $data['rights'] = $this->session->userdata('other_rights');
       $json['result_html'] = $this->load->view('pages/diary', $data, true);
       if ($this->input->is_ajax_request()) {
           set_content_type($json);
@@ -230,6 +233,7 @@ class Dashboard extends MY_Controller {
         $this->load->model('model_menu');
         $menus_array = $this->model_menu->fetch_menu();
         $this->load->helper('menu');
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['menu_result'] = print_menu(0, $menus_array);
         $data['user_data'] = $this->session->userdata('userdata');
         $this->load->view('pages/menu', $data);

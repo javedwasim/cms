@@ -1,4 +1,4 @@
-<?php if(isset($rights[0]['user_rights'])){$appointment_rights = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
+<?php if(isset($rights[0]['user_rights'])){$permissions = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
 <div class="content-wrapper">
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
@@ -11,7 +11,7 @@
         <?php if($loggedin_user['is_admin']!=1 && $booking_flag == 'vip'){   ?>
         <nav id="sidebar" style="display:none;">
         <?php }else{?>
-        <nav id="sidebar" >
+        <nav id="sidebar" class="<?php echo in_array("appointments-can_add-0", $permissions)?"op-hide":''; ?>" >
         <?php  }?>
             <div class="row m-l-5 ">
                 <div class="col-md-12" id="appointment_sidebar">
@@ -51,22 +51,34 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="consultant_fee"> Consultation Fee</label>
+                                                <label for="consultant_fee">Fee</label>
                                                 <input type="text" id="consultant_fee" name="consultant_fee" placeholder="Enter Fee" class="form-control" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" maxlength="4" autocomplete="off">
                                                 <input type="hidden" id="booking_flag" name="booking_flag" value="<?php echo $booking_flag; ?>"  />
                                             </div>
                                         </div>
+                                        <div class="col-md-7 <?php if($booking_flag == 'on_walk'){echo '';}else{echo 'op-hide';}?>">
+                                            <div class="form-group">
+                                                <label>Fee Type</label>
+                                                <select class="form-control" id="booking_fee_type" >
+                                                    <option value="">Select Fee Type</option>
+                                                    <option value="consultant">Consultant</option>
+                                                    <option value="ett">ETT</option>
+                                                    <option value="echo">ECHO</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <?php if($loggedin_user['is_admin']==1){   ?>
-                                        <button type="button" name="book_appointment"
+                                    <button type="button" name="book_appointment"
                                                 id="book_appointment" class="btn btn-primary">Save</button>
+                                    <!-- <?php if($loggedin_user['is_admin']==1){   ?>
+                                        
                                     <?php } elseif(in_array("appointments-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
                                         <button type="button" name="book_appointment"
                                                 id="book_appointment" class="btn btn-primary">Save</button>
                                     <?php } else{ ?>
                                         <button class="btn btn-primary" style="opacity: 0.5;">
                                             <i class="fas fa-user-plus"></i>Save</button>
-                                    <?php } ?>
+                                    <?php } ?> -->
                                 </form>
                             </div>
                         </div>
@@ -78,7 +90,7 @@
         <?php if($loggedin_user['is_admin']!=1 && $booking_flag == 'vip'){   ?>
         <div id="content" style="width: 100%;">
         <?php }else{?>
-        <div id="content">
+        <div id="content" <?php echo in_array("appointments-can_add-0", $permissions)?"style='width:100%;'":''; ?>>
         <?php  }?>
             <div id="status_row" class="sticky-bar">
 

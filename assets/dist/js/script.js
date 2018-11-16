@@ -2776,22 +2776,25 @@ $(document.body).on('click','.edit_user',function(){
 });
 
 $(document.body).on('click','.edit_user_data',function(){
-     $.ajax({
-        url: $('#update_registered_user_form').attr('data-action'),
-        type: 'post',
-        data: $('#update_registered_user_form').serialize(),
-        cache: false,
-        success: function(response){
-            $('#useredit').modal('hide');
-            $('.user_table_content').remove();
-            $('#user_table_content').append(response.user_html);
-            if (response.success==true) {
-                toastr["success"](response.message);
-            }else{
-                toastr["error"](response.message);
+    var validater = $('#update_registered_user_form').validate();
+    if (validater.form()) {
+         $.ajax({
+            url: $('#update_registered_user_form').attr('data-action'),
+            type: 'post',
+            data: $('#update_registered_user_form').serialize(),
+            cache: false,
+            success: function(response){
+                $('#useredit').modal('hide');
+                $('.user_table_content').remove();
+                $('#user_table_content').append(response.user_html);
+                if (response.success==true) {
+                    toastr["success"](response.message);
+                }else{
+                    toastr["error"](response.message);
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 function deleteuser(object,userid,username){

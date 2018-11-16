@@ -122,6 +122,12 @@ class User_model extends CI_Model {
                     ->set('refund', $value)
                     ->where('appointment_booking_id', $toupdate)
                     ->update('appointment_booking');
+        }elseif ($updateValue == 'contact_number') {
+            $result = $this->db
+                    ->set('contact_number', $value)
+                    ->set('contact_updated_by',$collectedby)
+                    ->where('appointment_booking_id', $toupdate)
+                    ->update('appointment_booking');
         } else {
             return false;
         }
@@ -741,6 +747,16 @@ class User_model extends CI_Model {
           return true;  
         }else{
             return false;
+        }
+    }
+
+    public  function get_all_fee($id)
+    {
+        $result = $this->db->select('consultant_fee,ett_fee,echo_fee')->where('appointment_booking_id',$id)->get('appointment_booking');
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return array();
         }
     }
 

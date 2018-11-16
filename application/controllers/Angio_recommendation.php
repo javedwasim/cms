@@ -14,6 +14,7 @@ class Angio_recommendation extends MY_Controller
     }
 
     public function recommendation(){
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['recommendations'] = $this->Recommendation_model->get_recommendations();
         $json['result_html'] = $this->load->view('angio/recommendation', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -63,6 +64,7 @@ class Angio_recommendation extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['recommendations'] = $this->Recommendation_model->get_recommendations();
         $json['result_html'] = $this->load->view('angio/recommendation_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -79,6 +81,7 @@ class Angio_recommendation extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['recommendations'] = $this->Recommendation_model->get_recommendations();
         $json['result_html'] = $this->load->view('angio/recommendation_table', $data, true);
         if ($this->input->is_ajax_request()) {

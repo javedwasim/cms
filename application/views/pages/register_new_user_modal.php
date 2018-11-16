@@ -72,14 +72,12 @@
                                         <?php $appointment_rights = explode(',',$other_rights['appointments']) ?>
                                         <p class="ribbon-content m-t-10">
                                             <?php foreach ($appointment_rights as $a): $right_name = explode('-',$a); ?>
-                                                <?php if(($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add') || ($right_name[0]=='view_wallet') || ($right_name[0]=='mark_status') || ($right_name[0]=='can_complete') || ($right_name[0]=='print') || ($right_name[0]=='parent')){ ?>
+                                                <?php if(($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add') || ($right_name[0]=='view_wallet') || ($right_name[0]=='can_complete') || ($right_name[0]=='print') || ($right_name[0]=='parent')){ ?>
                                                     <label class="checkbox-inline m-l-10">
                                                         <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
                                                         <?php
                                                             if($right_name[0]=='view_wallet'){
                                                                 echo "View Wallet";
-                                                            }elseif($right_name[0]=='mark_status'){
-                                                                echo "Change Complete";
                                                             }elseif($right_name[0]=='can_add'){
                                                                 echo "Add";
                                                             }elseif($right_name[0]=='can_edit'){

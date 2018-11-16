@@ -18,11 +18,7 @@ if(isset($rights[0]['user_rights']))
                         </div>
                     </div>
                     <div class="col-md-2 col-lg-1 m-t-25">
-                    <?php  if(($loggedin_user['is_admin']==1) || (in_array("examinations-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
                         <button class="btn btn-primary btn-sm add-examination-category">Add</button>
-                    <?php } else{ ?>
-                        <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
-                    <?php } ?>
                     </div>
                 </div>
             </form>

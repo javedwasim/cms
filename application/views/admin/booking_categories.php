@@ -1,5 +1,8 @@
 <?php
-    $user_info = ($this->session->userdata('user_data_logged_in'));
+if(isset($rights[0]['user_rights']))://print_r($rights[0]['rights']);
+    $permissions = explode(',',$rights[0]['user_rights']);
+endif;
+$user_info = ($this->session->userdata('user_data_logged_in'));
     if($user_info['is_admin']==1){
 ?>
 <div class="booking_category_tables">
@@ -16,8 +19,8 @@
                         <tr>
                             <th>Sr No.</th>
                             <th class="hide">Order</th>
-                            <th style="width: 150px;">Name</th>
-                            <th>Contact</th>
+                            <th>Patient Name</th>
+                            <th>Contact No.</th>
                             <th>Fee Paid at</th>
                             <th>Shift</th>
                             <th class="hide"></th>
@@ -173,8 +176,8 @@
                         <tr>
                             <th>Sr No.</th>
                             <th>Order</th>
-                            <th>Name</th>
-                            <th>Contact</th>
+                            <th>Patient Name</th>
+                            <th>Contact No.</th>
                             <th>Fee Paid at</th>
                             <th>Shift</th>
                             <th class="hide"></th>
@@ -242,8 +245,8 @@
                         <tr>
                             <th>Sr No.</th>
                             <th>Order</th>
-                            <th style="width:150px;">Name</th>
-                            <th>Contact</th>
+                            <th>Patient Name</th>
+                            <th>Contact No.</th>
                             <th>Fee Paid at</th>
                             <th>Shift</th>
                             <th class="hide"></th>
@@ -306,8 +309,9 @@
         <div class="row p-0 m-0">
             <div class="col-lg-4 p-0">
                 <div class="card p-0">
-                    <div class="card-header myHeader">
-                        <button class="btn btn-block btn-success" id="time_consultant">Time by Consultant</button>
+                    <div class="card-header myHeader" style="display: inline-flex;">
+                        <button class="btn btn-block btn-success <?php echo in_array("appointments-print-0", $permissions)?"":'col-md-6'; ?>" id="time_consultant">Time by Consultant</button>
+                        <button class="btn btn-block btn-info col-md-6 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>" id="print_vip">Print List</button>
                     </div>
                     <div class="card-body p-t-0">
                         <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >
@@ -315,8 +319,8 @@
                                     <tr>
                                         <th>Sr</th>
                                         <th class="hide">Order</th>
-                                        <th>Name</th>
-                                        <th>Contact</th>
+                                        <th>Patient Name</th>
+                                        <th>Contact No.</th>
                                         <th>Fee Paid at</th>
                                         <th class="hide">Shift</th>
                                         <th class="hide"></th>
@@ -384,7 +388,7 @@
                                             </td>
                                             <td class="hide">
                                                 <div class="form-group" >
-                                                    <select class="form-control transfer_patient">
+                                                    <select class="form-control transfer_patient hide">
                                                         <option>Select</option>
                                                         <option value="on_walk">On Walk IN</option>
                                                         <option value="on_call">On Call</option>
@@ -437,7 +441,7 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <td class="hide">
                                                 <div class="form-group" >
                                                     <select class="form-control transfer_patient">
                                                         <option>Select</option>
@@ -461,8 +465,9 @@
         </div>
         <div class="col-lg-4 p-0">
             <div class="card p-0">
-                <div class="card-header myHeader">
-                    <button class="btn btn-block btn-info" id="time_on_walk">Time on walk in</button>
+                <div class="card-header myHeader" style="display: inline-flex;">
+                    <button class="btn btn-block btn-info <?php echo in_array("appointments-print-0", $permissions)?"":'col-md-6'; ?>" id="time_on_walk">Time on walk in</button>
+                    <button class="btn btn-block btn-info col-md-6 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>" id="print_onwalk">Print List</button>
                 </div>
                 <div class="card-body p-t-0">
                     <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" id="" width="100%" >
@@ -470,8 +475,8 @@
                         <tr>
                             <th>Sr</th>
                             <th>Order</th>
-                            <th style="width:150px;">Name</th>
-                            <th>Contact</th>
+                            <th>Patient Name</th>
+                            <th>Contact No.</th>
                             <th>Fee Paid at</th>
                             <th class="hide">Shift</th>
                             <th class="hide"></th>
@@ -528,8 +533,9 @@
             </div>
         <div class="col-lg-4 p-0">
             <div class="card p-0">
-                <div class="card-header myHeader">
-                    <button class="btn btn-block btn-warning" id="time_on_call">Time on call</button>
+                <div class="card-header myHeader" style="display: inline-flex;">
+                    <button class="btn btn-block btn-warning <?php echo in_array("appointments-print-0", $permissions)?"":'col-md-6'; ?>" id="time_on_call">Time on call</button>
+                    <button class="btn btn-block btn-info col-md-6 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>" id="print_oncall">Print List</button>
                 </div>
                 <div class="card-body p-t-0">
                     <table class="table table-bordered responsive booking_tables" cellspacing="0" width="100%" >
@@ -537,8 +543,8 @@
                         <tr>
                             <th>Sr</th>
                             <th>Order</th>
-                            <th style="width:150px;">Name</th>
-                            <th>Contact</th>
+                            <th>Patient Name</th>
+                            <th>Contact No.</th>
                             <th>Fee Paid at</th>
                             <th class="hide">Shift</th>
                             <th class="hide"></th>
@@ -668,13 +674,13 @@ $(document).ready(function(){
           });
         });
     });
-    $(window).scroll(function() {    // this will work when your window scrolled.
-        var height = $(window).scrollTop();  //getting the scrolling height of window
-        if(height  > 140) {
-            $('.card-header').addClass('sticky');
-        } else{
-            $('.card-header').removeClass('sticky');
-        }
-    });
+    // $(window).scroll(function() {    // this will work when your window scrolled.
+    //     var height = $(window).scrollTop();  //getting the scrolling height of window
+    //     if(height  > 140) {
+    //         $('.card-header').addClass('sticky');
+    //     } else{
+    //         $('.card-header').removeClass('sticky');
+    //     }
+    // });
 
 </script>

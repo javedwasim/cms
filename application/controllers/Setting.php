@@ -243,6 +243,7 @@ class Setting extends MY_Controller
         $data['medicines'] = $this->Medicine_model->get_medicine_categories();
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
         $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($patient_id);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['medicine_html'] = $this->load->view('profile/medicine_category_table', $data, true);
         $json['instruction_html'] = $this->load->view('profile/instruction_category_table', $data, true);
         $json['advice_html'] = $this->load->view('profile/advice_category_table', $data, true);
@@ -998,6 +999,7 @@ class Setting extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error";
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['districts'] = $this->Setting_model->get_districts();
         $json['district_table'] = $this->load->view('pages/district_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -1668,15 +1670,25 @@ class Setting extends MY_Controller
     public function update_registered_user(){
         $data = $this->input->post();
         $id = $data['user_id'];
-        $password = password_hash($data['password'], PASSWORD_BCRYPT);
-        $data_array=array(
-            'full_name' =>$data['full_name'],
-            'gender' =>$data['gender'],
-            'username' =>$data['username'],
-            'contact_no' =>$data['contact_no'],
-            'address' =>$data['address'],
-            'password' => $password
-        );
+        if (empty($data['password'])) {
+            $data_array=array(
+                'full_name' =>$data['full_name'],
+                'gender' =>$data['gender'],
+                'username' =>$data['username'],
+                'contact_no' =>$data['contact_no'],
+                'address' =>$data['address']
+            );
+        }else{
+            $password = password_hash($data['password'], PASSWORD_BCRYPT);
+            $data_array=array(
+                'full_name' =>$data['full_name'],
+                'gender' =>$data['gender'],
+                'username' =>$data['username'],
+                'contact_no' =>$data['contact_no'],
+                'address' =>$data['address'],
+                'password' => $password
+            ); 
+        }
         $result = $this->Setting_model->update_user_data($data_array,$id);
         if ($result) {
             $json['success'] = true;

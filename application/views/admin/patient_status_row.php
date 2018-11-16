@@ -1,7 +1,7 @@
 <div class="status_row">
 <?php
-    if(isset($rights[0]['rights']))://print_r($rights[0]['rights']);
-        $permissions = explode(',',$rights[0]['rights']);
+    if(isset($rights[0]['user_rights']))://print_r($rights[0]['rights']);
+        $permissions = explode(',',$rights[0]['user_rights']);
     endif;
     $user_info = ($this->session->userdata('user_data_logged_in'));
 ?>
@@ -15,7 +15,7 @@
                                 <i class="fas fa-arrow-left arro"></i>
                             </button>
                         
-                            <div class="round round-sm align-self-center green m-b-10 <?php echo in_array("view_wallet-0", $permissions)?"op-hide":''; ?>" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
+                            <div class="round round-sm align-self-center green m-b-10 <?php echo in_array("appointments-view_wallet-0", $permissions)?"op-hide":''; ?>" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
                                 <i class="fa fa-wallet"></i>
                             </div>
                        
@@ -29,6 +29,7 @@
                             <div class="m-l-10 align-self-center">
                                 <a href="#" class="appoint_revert">
                                     <b class="m-b-0 font-lgiht">Appointment</b>
+                                    <p class="m-b-0 text-muted">(<?php echo $total_appointment; ?>)</p>
                                 </a>
                             </div>      
                         </div>
@@ -115,7 +116,7 @@
                         <!-- Column -->
                         <!-- Column -->
 
-                        <?php  if(!in_array("can_complete-0", $permissions)): ?>
+                        <?php  if(!in_array("appointments-can_complete-0", $permissions)): ?>
                             <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                                 <a href="javascript:void(0)" class="complete">
                                     <div class="round round-sm align-self-center m-b-10" style="border:1px solid #006400; background: none;"><i class="ti-thumb-up" style="color: #006400;"></i></div>

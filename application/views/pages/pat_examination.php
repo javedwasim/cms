@@ -1,3 +1,10 @@
+<?php
+if(isset($rights[0]['user_rights']))
+{
+    $permissions = explode(',',$rights[0]['user_rights']);
+    $loggedin_user = $this->session->userdata('userdata');
+}
+?>
 <div class="content-wrapper">
     <div class="row p-t-10 m-0">
     	<div class="col-md-6 col-lg-6 p-r-0">
@@ -620,8 +627,8 @@
                                     </form>
                                 </div>
                             	<div class="col-md-6">
-                            		<button class="btn btn-primary btn-md waves-effect waves-light exa-pat-spInstructions" style="padding: 10px 15px;" type="button">Sp. Instructions</button>
-                                    <button class="btn btn-info btn-md waves-effect waves-light exa-pat-labtest" style="padding: 10px 10px;" type="button">Lab. Test</button>
+                            		<button class="btn btn-primary btn-md waves-effect waves-light exa-pat-spInstructions" <?php echo in_array("special_instructions-can_add-0", $permissions)?"disabled":''; ?> style="padding: 10px 15px;" type="button">Sp. Instructions</button>
+                                    <button class="btn btn-info btn-md waves-effect waves-light exa-pat-labtest" style="padding: 10px 10px;" <?php echo in_array("lab_tests-can_add-0", $permissions)?"disabled":''; ?> type="button">Lab. Test</button>
                                     <button class="btn btn-primary btn-md waves-effect waves-light " id="save_patient_examination_info" style="padding: 10px 15px;" type="button">Save</button>
                             	</div>
                             </div>

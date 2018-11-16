@@ -15,6 +15,7 @@
 		}
 
 		public function signature(){
+			$data['rights'] = $this->session->userdata('other_rights');
 			$data['sig_details'] = $this->Doctor_signature_model->get_signature_details();
             $json['signature_table'] = $this->load->view('doctor_signature/signature_table', $data, true);
 			$json['result_html'] = $this->load->view('doctor_signature/doctor_signature', "", true);
@@ -44,10 +45,12 @@
 				);
 				$result = $this->Doctor_signature_model->save_doc_signature($data_array);
 				if($result){
+					$data['rights'] = $this->session->userdata('other_rights');
 					$data['sig_details'] = $this->Doctor_signature_model->get_signature_details();
 					$json['signature_table'] = $this->load->view('doctor_signature/signature_table', $data, true);
 					$json['message'] = 'Successfully Added.';
 				}else{
+					$data['rights'] = $this->session->userdata('other_rights');
 					$data['sig_details'] = $this->Doctor_signature_model->get_signature_details();
 					$json['signature_table'] = $this->load->view('doctor_signature/signature_table', $data, true);
 					$json['error'] = 'There is an issue while adding.';
@@ -88,6 +91,7 @@
 	            $json['error'] = true;
 	            $json['message'] = "Seems to an error";
 	        }
+	        $data['rights'] = $this->session->userdata('other_rights');
 	        $data['sig_details'] = $this->Doctor_signature_model->get_signature_details();
 	        $json['signature_table'] = $this->load->view('doctor_signature/signature_table', $data, true);
 	        if ($this->input->is_ajax_request()) {

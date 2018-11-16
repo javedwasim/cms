@@ -14,7 +14,7 @@
                             </div>
                             <div class="col-md-9">
                                 <input type="hidden" name="user_id" value="<?php echo $user_data['login_id']; ?>">
-                                <input type="text" name="full_name" value="<?php echo $user_data['full_name']; ?>" class="form-control col-md-10" />
+                                <input type="text" name="full_name" value="<?php echo $user_data['full_name']; ?>" class="form-control col-md-10" required />
                             </div>
                             <div class="col-md-3 m-t-10">
                                 <label>Sex:</label>
@@ -34,31 +34,31 @@
                                 <label>Username:</label>
                             </div>
                             <div class="col-md-9 m-t-10">
-                                <input type="text" name="username" value="<?php echo $user_data['username']; ?>" class="form-control col-md-10" />
+                                <input type="text" name="username" value="<?php echo $user_data['username']; ?>" class="form-control col-md-10" required />
                             </div>
                             <div class="col-md-3 m-t-10">
                                 <label>Password:</label>
                             </div>
                             <div class="col-md-9 m-t-10">
-                                <input type="password" name="password" value="******" class="form-control col-md-10" />
+                                <input type="password" name="password" placeholder="*****"  class="form-control col-md-10" />
                             </div>
                             <div class="col-md-3 m-t-10">
                                 <label>Contact:</label>
                             </div>
                             <div class="col-md-9 m-t-10">
-                                <input type="text" name="contact_no" class="form-control col-md-10" value="<?php echo $user_data['contact_no']; ?>" />
+                                <input type="text" name="contact_no" class="form-control col-md-10" value="<?php echo $user_data['contact_no']; ?>" required />
                             </div>
                             <div class="col-md-3 m-t-10">
                                 <label>Company:</label>
                             </div>
                             <div class="col-md-9 m-t-10">
-                                <input type="text" name="company" value="Shahadat Clinic" readonly="readonly" class="form-control col-md-10"  />
+                                <input type="text" name="company" value="Shahadat Clinic" readonly="readonly" class="form-control col-md-10"   />
                             </div>
                             <div class="col-md-3 m-t-10">
                                 <label>Address:</label>
                             </div>
                             <div class="col-md-9 m-t-10">
-                                <textarea class="form-control col-md-10" name="address"  rows="2"><?php echo $user_data['address']; ?></textarea>
+                                <textarea class="form-control col-md-10" name="address" required rows="2"><?php echo $user_data['address']; ?></textarea>
                             </div>
                         </div>
                         <?php }?>
@@ -78,12 +78,12 @@
                                             <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-11'; ?>" <?php echo in_array("appointments-can_edit-1", $user_rights)?'checked':''; ?>>Edit</label>
                                         <label class="checkbox-inline m-l-10">
                                             <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-12'; ?>" <?php echo in_array("appointments-can_delete-1", $user_rights)?'checked':''; ?>>Delete</label>
-                                        <label class="checkbox-inline m-l-10">
-                                            <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-9'; ?>" <?php echo in_array("appointments-mark_status-1", $user_rights)?'checked':''; ?>>Change Complete</label>
+                                        <!-- <label class="checkbox-inline m-l-10">
+                                            <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-9'; ?>" <?php echo in_array("appointments-mark_status-1", $user_rights)?'checked':''; ?>>Change Complete</label> -->
                                         <label class="checkbox-inline m-l-10">
                                             <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-10'; ?>" <?php echo in_array("appointments-view_wallet-1", $user_rights)?'checked':''; ?>>View Wallet</label>
                                         <label class="checkbox-inline m-l-10">
-                                            <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-14'; ?>" <?php echo in_array("appointments-can_complete-1", $user_rights)?'checked':''; ?>>Can Mark Complete</label>
+                                            <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-14'; ?>" <?php echo in_array("appointments-can_complete-1", $user_rights)?'checked':''; ?>>Mark Complete</label>
                                         <label class="checkbox-inline m-l-10">
                                             <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-8'; ?>" <?php echo in_array("appointments-print-1", $user_rights)?'checked':''; ?>>Appointment Print</label>
                                     </p>

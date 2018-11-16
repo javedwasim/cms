@@ -1,7 +1,7 @@
 <?php
 if(isset($rights[0]['user_rights']))
 {
-    $appointment_rights = explode(',',$rights[0]['user_rights']);
+    $permissions = explode(',',$rights[0]['user_rights']);
     $loggedin_user = $this->session->userdata('userdata');
 }
 ?>
@@ -11,7 +11,7 @@ if(isset($rights[0]['user_rights']))
             <?php if($loggedin_user['is_admin']==1){ ?>
                 <button class="btn btn-success" data-toggle="modal"  data-target="#add-new-patient" id="addProfile">
                     <i class="fas fa-user-plus"></i> Add New</button>
-            <?php } elseif(in_array("profile-create_new_profile-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
+            <?php } elseif(in_array("profile-create_new_profile-1", $permissions)) { ?>
                 <button class="btn btn-success" data-toggle="modal"  data-target="#add-new-patient" id="addProfile">
                     <i class="fas fa-user-plus"></i> Add New</button>
             <?php } else{ ?>
@@ -144,11 +144,17 @@ if(isset($rights[0]['user_rights']))
                         <div class="card-header" style="padding-top: 0px; padding-bottom: 0px;">
                             <div class="row">
                                 <div class="col-md-12 p-0">
-                                    <button class="btn btn-primary btn-sm waves-effect waves-light" id="pat-exemination" style="padding: 6px 15px;" type="button">Examintation</button>
-                                    <button class="btn btn-info btn-sm waves-effect waves-light pat-spInstructions"  style="padding: 6px 10px;" type="button">Sp. Instructions</button>
-                                    <button class="btn btn-primary btn-sm waves-effect waves-light pat-labtest" style="padding: 6px 15px;" type="button">Lab. Test</button>
-                                    <button class="btn btn-danger btn-sm waves-effect waves-light" id="pat-echo-test" style="padding: 6px 15px;" type="button">Echo</button>
-                                    <button class="btn btn-danger btn-sm waves-effect waves-light" id="pat-ett-test" style="padding: 6px 15px;" type="button">ETT</button>
+                                    <button class="btn btn-primary btn-sm waves-effect waves-light" 
+                                        id="pat-exemination" <?php echo in_array("examinations-can_add-0", $permissions)?"disabled":''; ?> style="padding: 6px 15px;" type="button">
+                                        Examintation
+                                    </button>
+                                    <button class="btn btn-info btn-sm waves-effect waves-light pat-spInstructions"  style="padding: 6px 10px;" type="button" 
+                                    <?php echo in_array("special_instructions-can_add-0", $permissions)?"disabled":''; ?>>
+                                    Sp. Instructions</button>
+                                    <button class="btn btn-primary btn-sm waves-effect waves-light pat-labtest" style="padding: 6px 15px;" type="button" <?php echo in_array("lab_tests-can_add-0", $permissions)?"disabled":''; ?>>
+                                        Lab. Test</button>
+                                    <button class="btn btn-danger btn-sm waves-effect waves-light" id="pat-echo-test" style="padding: 6px 15px;" type="button" <?php echo in_array("echos-can_add-0", $permissions)?"disabled":''; ?>>Echo</button>
+                                    <button class="btn btn-danger btn-sm waves-effect waves-light" id="pat-ett-test" style="padding: 6px 15px;" type="button" <?php echo in_array("ett-can_add-0", $permissions)?"disabled":''; ?>>ETT</button>
                                     <button class="btn btn-success btn-sm waves-effect waves-light"id="list_itmes_vital" data-func-call="vital" style="padding: 6px 15px;" type="button">Vitals</button>
                                     <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#profile_upload_modal"   style="padding: 6px 15px;" type="button">Upload Files</button>
                                 </div>

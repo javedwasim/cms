@@ -19,7 +19,7 @@ class Profile_model extends CI_Model
 
     public function get_profiles()
     {
-        $result = $this->db->get('patient_profile');
+        $result = $this->db->select('*')->order_by('id','DESC')->get('patient_profile');
         if ($result) {
             return $result->result_array();
         } else {

@@ -1,3 +1,11 @@
+<?php
+    if(isset($rights[0]['user_rights'])){//print_r($rights[0]['rights']);
+        $permissions = explode(',',$rights[0]['user_rights']);
+    }else{
+        $permissions = array();
+    }
+    $user_info = ($this->session->userdata('user_data_logged_in'));
+?>
 <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -10,34 +18,26 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <?php
-                if($this->session->userdata('username')=='test'){
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)" onclick="bookings();" aria-expanded="false"><i class="mdi mdi-bullseye"></i> Appointment</a>
-                    </li>
-                <?php }else{ ?>
-                <li class="nav-item active_nav">
+                <li class="nav-item active_nav <?php echo in_array("setting-menu-0", $permissions)?"op-hide":''; ?>">
                     <a class="nav-link" href="<?php echo base_url(); ?>" ><i class="mdi mdi-gauge"></i> Settings</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?php echo in_array("appointments-parent-0", $permissions)?"op-hide":''; ?>">
                     <a class="nav-link" href="javascript:void(0)" onclick="bookings();" aria-expanded="false"><i class="mdi mdi-bullseye"></i> Appointment</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?php echo in_array("profile-parent-0", $permissions)?"op-hide":''; ?>">
                     <a class="nav-link" href="javascript:void(0)" id="pat_profile" aria-expanded="false"><i class="fas fa-portrait"></i> Profile</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)" id="diary" aria-expanded="false"><i class="ti-book"></i> Diary</a>
-                </li>
+                <?php if($user_info['login_id']==1){?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)" id="diary" aria-expanded="false"><i class="ti-book"></i> Diary</a>
+                    </li>
+                <?php }?>
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#aboutmodal"  aria-expanded="false"><i class="ti-info-alt"></i> About us</a>
                 </li>
               <!--   <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)" onclick="appointments();" aria-expanded="false"><i class="mdi mdi-bullseye"></i> Appointments</a>
                 </li> -->
-                
-
-            <?php }?>
         </ul>
         <ul class="navbar-nav my-lg-0">
             <!-- ============================================================== -->
