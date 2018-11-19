@@ -148,15 +148,6 @@
    });
 
 </script>
-
-<?php echo $menu_result;
-
-$rights = $this->session->userdata('other_rights');
-$user_role = $rights[0]['is_admin'];
-$user_rights = explode(',',$rights[0]['user_rights']);
-if((!in_array("setting-menu-1", $user_rights) && $user_role==0)){  ?>
-    <script>
-        $("li").addClass("disable_menu");
-        $('li').attr('onclick', 'showError()');
-    </script>
-<?php } ?>
+<?php 
+   echo $menu_result;
+?>

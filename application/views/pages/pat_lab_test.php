@@ -59,7 +59,7 @@
 		                        </tr>
 			                    </thead>
 
-			                    <tbody style="height: 500px;">
+			                    <tbody style="height: 230px;">
 			                    <tbody>
 
                                   <!--   <tr>
@@ -84,7 +84,7 @@
                     <div class="card-header" style="display: inline-flex;">
                         <div class="form-group">
                             <label class="m-t-10">Test Date</label>
-                            <input type="text"  class="form-control lab-date col-md-7" name="test_date">
+                            <input type="text" value="<?php echo date('d-M-Y'); ?>" class="form-control lab-date col-md-7" name="test_date">
                         </div>
                         <button class="btn btn-primary btn-sm" id="save_lab_test">Save</button>
                     </div>

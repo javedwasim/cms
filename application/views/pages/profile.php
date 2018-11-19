@@ -155,8 +155,8 @@ if(isset($rights[0]['user_rights']))
                                         Lab. Test</button>
                                     <button class="btn btn-danger btn-sm waves-effect waves-light" id="pat-echo-test" style="padding: 6px 15px;" type="button" <?php echo in_array("echos-can_add-0", $permissions)?"disabled":''; ?>>Echo</button>
                                     <button class="btn btn-danger btn-sm waves-effect waves-light" id="pat-ett-test" style="padding: 6px 15px;" type="button" <?php echo in_array("ett-can_add-0", $permissions)?"disabled":''; ?>>ETT</button>
-                                    <button class="btn btn-success btn-sm waves-effect waves-light"id="list_itmes_vital" data-func-call="vital" style="padding: 6px 15px;" type="button">Vitals</button>
-                                    <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#profile_upload_modal"   style="padding: 6px 15px;" type="button">Upload Files</button>
+                                    <button class="btn btn-success btn-sm waves-effect waves-light"id="list_itmes_vital" <?php echo in_array("vitals-can_add-0", $permissions)?"disabled":''; ?> data-func-call="vital" style="padding: 6px 15px;" type="button">Vitals</button>
+                                    <button class="btn btn-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#profile_upload_modal" <?php echo in_array("add_upload-can_add-0", $permissions)?"disabled":''; ?>  style="padding: 6px 15px;" type="button">Upload Files</button>
                                 </div>
                             </div>
                             <div class="row m-t-5">
@@ -410,21 +410,25 @@ if(isset($rights[0]['user_rights']))
         });
         $('.resize1').resizable({
           handles: 'e',
-          alsoResizeReverse: '#form'
+          alsoResizeReverse: '#form',
+          minWidth: 500
         });
         $('.resize2').resizable({
           handles: 'e',
-          alsoResizeReverse: '#form'
+          alsoResizeReverse: '#form',
+          minWidth: 600
         });
 
-        $('#re1').resizable({
-          handles: 'e',
-          alsoResizeReverse: '#form'
-        });
-        $('#re2').resizable({
-          handles: 'e',
-          alsoResizeReverse: '#form'
-        });
+        // $('#re1').resizable({
+        //   handles: 'e',
+        //   alsoResizeReverse: '#form',
+        //   minWidth: 200
+        // });
+        // $('#re2').resizable({
+        //   handles: 'e',
+        //   alsoResizeReverse: '#form',
+        //   minWidth: 200
+        // });
         $.ui.plugin.add("resizable", "alsoResizeReverse", {
             start: function (event, ui) {
                 var self = $(this).data("ui-resizable"), o = self.options,

@@ -622,7 +622,7 @@ class Profile_model extends CI_Model
         if (isset($data['echo_detail_id_mmode']) && !empty($data['echo_detail_id_mmode'])) {
             $echo_deatil_id = $data['echo_detail_id_mmode'];
         } else {
-            $this->db->insert('profile_echo_detail', array('patient_id' => $patient_echo_id));
+            $this->db->insert('profile_echo_detail', array('patient_id' => $patient_echo_id,'doc_sig'=> $data['sig-echo']));
             $echo_deatil_id = $this->db->insert_id();
         }
         $this->db->delete('profile_echo_measurement', array('patient_id' => $patient_echo_id, 'echo_detail_id' => $echo_deatil_id));
@@ -1424,6 +1424,16 @@ class Profile_model extends CI_Model
         $query = $this->db->get("patient_profile");
         if ($query) {
             return $query->result();
+        }else{
+            return array();
+        }
+    }
+
+    public function get_echo_doc_sig($patient_id, $detail_id){
+        $result = $this->db->select('doc_sig')->where('patient_id',$patient_id)->where('id',$detail_id)
+                ->limit(1)->get('profile_echo_detail');
+        if ($result) {
+            return $result->row();            
         }else{
             return array();
         }

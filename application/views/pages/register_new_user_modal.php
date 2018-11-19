@@ -105,6 +105,10 @@
                                     <div class="ribbon-wrapper card">
                                         <div class="ribbon ribbon-info">Uploads</div>
                                         <p class="ribbon-content m-t-10">
+                                            <?php $add_uploads = explode('-',$other_rights['add_upload']) ?>
+                                            <label class="checkbox-inline m-l-10">
+                                              <input type="checkbox" name="user_rights[]" value="<?php echo $add_uploads[1]; ?>"> Add
+                                            </label>
                                            <?php $uploads = explode('-',$other_rights['delete_uploads']) ?>
                                             <label class="checkbox-inline m-l-10">
                                               <input type="checkbox" name="user_rights[]" value="<?php echo $uploads[1]; ?>"> Delete
@@ -119,10 +123,6 @@
                                             <label class="checkbox-inline m-l-10">
                                               <?php $setting_id = explode('-',$other_rights['setting']) ?>
                                               <input type="checkbox" name="user_rights[]" value="<?php echo $setting_id[1]; ?>"> Settings
-                                            </label>
-                                            <label class="checkbox-inline m-l-10">
-                                                <?php $backup = explode('-',$other_rights['backup']) ?>
-                                                <input type="checkbox" name="user_rights[]" value="<?php echo $backup[1]; ?>"> Backup
                                             </label>
                                         </p>
                                     </div>
@@ -264,6 +264,56 @@
                                                         if($right_name[0]=='can_delete'){
                                                             echo "Delete";
                                                         } elseif($right_name[0]=='can_edit'){
+                                                            echo "Edit";
+                                                        }elseif($right_name[0]=='can_add'){
+                                                            echo "Add";
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                <?php } ?>
+                                            <?php endforeach; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 p-r-0">
+                                    <div class="ribbon-wrapper card">
+                                        <div class="ribbon ribbon-info">Vitals</div>
+                                        <?php $vitals = explode(',',$other_rights['vitals']) ?>
+                                        <p class="ribbon-content m-t-10">
+                                            <?php foreach ($vitals as $vital): $right_name = explode('-',$vital); ?>
+                                                <?php if(($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add')){ ?>
+                                                    <label class="checkbox-inline m-l-10">
+                                                        <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
+                                                        <?php
+                                                        if($right_name[0]=='can_delete'){
+                                                            echo "Delete";
+                                                        } elseif($right_name[0]=='can_edit'){
+                                                            echo "Edit";
+                                                        }elseif($right_name[0]=='can_add'){
+                                                            echo "Add";
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                <?php } ?>
+                                            <?php endforeach; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 p-l-0">
+                                    <div class="ribbon-wrapper card">
+                                        <div class="ribbon ribbon-info">Diary</div>
+                                        <?php $diary = explode(',',$other_rights['diary']) ?>
+                                        <p class="ribbon-content m-t-10">
+                                            <?php foreach ($diary as $d): $right_name = explode('-',$d); ?>
+                                                <?php if(($right_name[0]=='can_view') || ($right_name[0]=='can_delete') || ($right_name[0]=='can_edit') || ($right_name[0]=='can_add')){ ?>
+                                                    <label class="checkbox-inline m-l-10">
+                                                        <input type="checkbox" name="user_rights[]" value="<?php echo $right_name[1]; ?>">
+                                                        <?php
+                                                        if($right_name[0]=='can_delete'){
+                                                            echo "Delete";
+                                                        } elseif($right_name[0]=='can_view'){
+                                                            echo "View";
+                                                        }elseif($right_name[0]=='can_edit'){
                                                             echo "Edit";
                                                         }elseif($right_name[0]=='can_add'){
                                                             echo "Add";

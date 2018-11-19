@@ -1,4 +1,4 @@
-<div class="dashboard-content" style="width: 100%;">
+<div class="dashboard-content" style="width: 88%;">
     <div class="row p-t-10 m-r-10 m-l-10">
         <div class="col-md-12">
             <!-- Modal -->
@@ -16,7 +16,7 @@
                 <div class="card-header">
                     User Permissions  
                 </div>
-                <div class="card-body" style="width:100%; overflow-x: scroll;" id="user_table_content">
+                <div class="card-body" style="overflow-x: scroll;" id="user_table_content">
                     
                 </div>
             </div>

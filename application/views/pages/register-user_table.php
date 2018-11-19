@@ -1,5 +1,5 @@
-<div class="user_table_content">
-  <table class="table-bordered" cellspacing="0" id="permissions-table" width="100%" >
+<div class="user_table_content" >
+  <table class="table-bordered" cellspacing="0" id="permissions-table"  >
     <thead>
     <tr style="height: 200px;">
         <th class="verticalTableHeader"><p>Action</p></th>
@@ -14,6 +14,7 @@
         <th class="verticalTableHeader"><p>Profile Delete</p></th>
         <th class="verticalTableHeader"><p>Examination Edit</p></th>
         <th class="verticalTableHeader"><p>Examination New</p></th>
+        <th class="verticalTableHeader"><p>Add Uploads</p></th>
         <th class="verticalTableHeader"><p>Delete Uploads</p></th>
         <th class="verticalTableHeader"><p>Echo Add</p></th>
         <th class="verticalTableHeader"><p>Echo edit</p></th>
@@ -27,8 +28,14 @@
         <th class="verticalTableHeader"><p>Special Inst. Add</p></th>
         <th class="verticalTableHeader"><p>Special Inst. Edit</p></th>
         <th class="verticalTableHeader"><p>Special Inst. Delete</p></th>
+        <th class="verticalTableHeader"><p>Vitals Add</p></th>
+        <th class="verticalTableHeader"><p>Vitals Edit</p></th>
+        <th class="verticalTableHeader"><p>Vitals Delete</p></th>
+        <th class="verticalTableHeader"><p>Diary View</p></th>
+        <th class="verticalTableHeader"><p>Diary Add</p></th>
+        <th class="verticalTableHeader"><p>Diary Edit</p></th>
+        <th class="verticalTableHeader"><p>Diary Delete</p></th>
         <th class="verticalTableHeader"><p>Settings</p></th>
-        <th class="verticalTableHeader"><p>Backup</p></th>
     </tr>
     </thead>
     <tbody>
@@ -55,6 +62,8 @@
                        name="examination_edit" <?php echo in_array("examinations-can_edit-1", $user_rights)?'checked':''; ?>> </td>
             <td><input type="checkbox" value="<?php echo $user['other_rights_group_id'].'-17'; ?>" class="user_permission"
                        name="examination_add" <?php echo in_array("examinations-can_add-1", $user_rights)?'checked':''; ?>> </td>
+            <td><input type="checkbox" value="<?php echo $user['other_rights_group_id'].'-39'; ?>" class="user_permission"
+                       name="setting" <?php echo in_array("add_upload-can_add-1", $user_rights)?'checked':''; ?>> </td>
             <td><input type="checkbox" value="<?php echo $user['other_rights_group_id'].'-37'; ?>" class="user_permission"
                        name="delete_uploads" <?php echo in_array("delete_uploads-parent-1", $user_rights)?'checked':''; ?>> </td>
             <td><input type="checkbox" value="<?php echo $user['other_rights_group_id'].'-21'; ?>" class="user_permission"
@@ -81,10 +90,15 @@
                        name="special_inst_edit" <?php echo in_array("special_instructions-can_edit-1", $user_rights)?'checked':''; ?>> </td>
             <td><input type="checkbox" value="<?php echo $user['other_rights_group_id'].'-35'; ?>" class="user_permission"
                        name="special_inst_delete" <?php echo in_array("special_instructions-can_delete-1", $user_rights)?'checked':''; ?>> </td>
+            <td><input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-45'; ?>" <?php echo in_array("vitals-can_add-1", $user_rights)?'checked':''; ?>> </td>
+            <td><input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-46'; ?>" <?php echo in_array("vitals-can_edit-1", $user_rights)?'checked':''; ?>> </td>
+            <td><input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-47'; ?>" <?php echo in_array("vitals-can_delete-1", $user_rights)?'checked':''; ?>></td>
+            <td><input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-40'; ?>" <?php echo in_array("diary-can_view-1", $user_rights)?'checked':''; ?>></td>
+            <td><input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-41'; ?>" <?php echo in_array("diary-can_add-1", $user_rights)?'checked':''; ?>></td>
+            <td><input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-43'; ?>" <?php echo in_array("diary-can_edit-1", $user_rights)?'checked':''; ?>></td>
+            <td><input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-42'; ?>" <?php echo in_array("diary-can_delete-1", $user_rights)?'checked':''; ?>></td>
             <td><input type="checkbox" value="<?php echo $user['other_rights_group_id'].'-36'; ?>" class="user_permission"
                        name="setting" <?php echo in_array("setting-menu-1", $user_rights)?'checked':''; ?>> </td>
-            <td><input type="checkbox" value="<?php echo $user['other_rights_group_id'].'-38'; ?>" class="user_permission"
-                       name="backup" <?php echo in_array("backup-parent-1", $user_rights)?'checked':''; ?>> </td>
 
         </tr>
     <?php endforeach; ?>

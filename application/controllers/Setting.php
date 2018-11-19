@@ -799,7 +799,6 @@ class Setting extends MY_Controller
                 $json['message'] = "Seems to an error while adding description";
             }
         }
-
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -809,7 +808,8 @@ class Setting extends MY_Controller
     {
         $data['categories'] = $this->Setting_model->get_lab_categories();
         $data['tests'] = $this->Setting_model->get_lab_tests_by_category($cat_id);
-        $data['items'] = $this->Setting_model->get_lab_test_items();
+        $data['items'] = array();
+        $data['labtests'] = $this->Setting_model->get_lab_tests();
         $data['active_tab'] = 'tests';
         $data['selected_category'] = $cat_id;
         $data['rights'] = $this->session->userdata('other_rights');

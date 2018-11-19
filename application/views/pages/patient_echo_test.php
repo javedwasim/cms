@@ -187,7 +187,7 @@
 		    							</div>
 		    						</div>
 		    						<div>
-		    							<button class="btn btn-default btn-xs pull-right">Reset Color Doppler</button>
+		    							<button class="btn btn-default btn-xs pull-right">Reset Color Doppler Flow</button>
 		    						</div>
 		    					</div>
 		    				</div>
@@ -299,11 +299,14 @@
     		</div>
     		<div class="col-lg-4 col-md-6 pull-right" style="display: inline-flex;">
     			<label class="checkbox-inline m-r-10 m-t-15"><input type="checkbox" value="" id="echosig">Change Signature ?</label>
-    			<select class="form-control col-md-6 m-t-10" id="sig-echo" disabled="disabled">
-                    <?php foreach ($users as $user) { ?>
-                        <option value="username"><?php echo $user['username']; ?> </option>
-                    <?php } ?>
-    			</select>
+                <form id="echo_sig_form" style="width:200px;">
+                    <select class="form-control col-md-6 m-t-10" name="sig-echo" id="sig-echo" disabled="disabled">
+                        <option value="<?php  echo  $doc_sig->doc_sig; ?>"><?php  echo  $doc_sig->doc_sig ?></option>
+                        <?php foreach ($users as $user) { ?>
+                            <option value="<?php echo $user['username']; ?>"><?php echo $user['username']; ?></option>
+                        <?php } ?>
+                    </select>
+                </form>
     			<button class="btn btn-primary" id="save_patient_echo_info">Save</button>
     		</div>
     	</div>   	

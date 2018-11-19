@@ -280,6 +280,7 @@ class Profile extends MY_Controller
                 $json['message'] = "Seems to an error";
             }
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['note_details'] = $this->Profile_model->get_notes();
         $data['users'] = $this->Dashboard_model->get_all_user();
         $data['notes_record'] = $this->Profile_model->notes_record($usename);
@@ -439,6 +440,7 @@ class Profile extends MY_Controller
             $json['error'] = true;
             $json['message'] = "Seems to an error.";
         }
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['notes_record'] = $this->Profile_model->notes_record($name);
         $json['diary_sidebar'] = $this->load->view('diary/diary_sidebar', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -449,6 +451,7 @@ class Profile extends MY_Controller
     public function get_notes_record()
     {
         $name = $this->input->post('username');
+        $data['rights'] = $this->session->userdata('other_rights');
         $data['notes_record'] = $this->Profile_model->notes_record($name);
         $json['diary_sidebar'] = $this->load->view('diary/diary_sidebar', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -460,6 +463,7 @@ class Profile extends MY_Controller
     {
         $id = $this->input->post('id');
         $data['note'] = $this->Profile_model->selectd_note($id);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['update_note'] = $this->load->view('diary/diary_update', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -812,6 +816,8 @@ class Profile extends MY_Controller
         $data['findings'] = $this->Profile_model->get_patient_echo_findings($patient_id, $detail_id);
         $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id, $detail_id);
         $data['color_doppler'] = $this->Profile_model->get_patient_echo_color_doopler($patient_id, $detail_id);
+        $data['doc_sig'] = $this->Profile_model->get_echo_doc_sig($patient_id, $detail_id);
+        // print_r($data['doc_sig']); die();
         $data['users'] = $this->Dashboard_model->get_all_user();
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
@@ -1104,6 +1110,7 @@ class Profile extends MY_Controller
         $data['examination_details'] = $this->Print_model->get_examination_detail_by_ids($patid,$testid);
         $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
+        $data['rights'] = $this->session->userdata('other_rights');
         $json['medicine_html'] = $this->load->view('profile/medicine_category_table', $data, true);
         $json['instruction_html'] = $this->load->view('profile/instruction_category_table', $data, true);
         $json['advice_html'] = $this->load->view('profile/advice_category_table', $data, true);

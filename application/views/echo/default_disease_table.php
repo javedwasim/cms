@@ -10,7 +10,7 @@
     <?php foreach ($categories as $category): ?>
         <tr class="table-row">
             <td style="width: 50px;">
-                <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
+                <a class="btn btn-danger btn-xs">
                     <i class="fa fa-trash" title="Delete"></i></a>
 
             </td>

@@ -70,6 +70,7 @@
                         <div class="form-group">
                             <label>Category:</label>
                             <select class="form-control prof_his_id" id="profile_history_id" name="profile_history_id" >
+                              <option value="0">Select</option>
                               <?php foreach ($categories as $category): ?>
                                   <option value="<?php echo $category['id']; ?>">
                                       <?php echo $category['name']; ?></option>

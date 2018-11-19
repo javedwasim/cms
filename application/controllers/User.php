@@ -1019,6 +1019,7 @@ class User extends MY_Controller {
         $data['rights'] = $this->session->userdata('other_rights');
         $id = $this->input->post('patid');
         $data['patient_vitals'] = $this->User_model->get_patient_vitals($id);
+        $data['patient_id'] = $id;
         // print_r($data['patient_vitals']);die();
         $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
         $json['result_html'] = $this->load->view('pages/vitals', $data, true);
@@ -1055,6 +1056,8 @@ class User extends MY_Controller {
         );
         $result = $this->User_model->vitals_insert($data_array);
         if ($result) {
+            $data['patient_id'] = $patid;
+            $data['rights'] = $this->session->userdata('other_rights');
             $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
             $json['success'] = true;
             $json['message'] = 'Successfully Added!';
@@ -1080,6 +1083,7 @@ class User extends MY_Controller {
     public function delete_vitals($vitalid,$patid){
         $result = $this->User_model->delete_vials($vitalid);
         if ($result) {
+            $data['rights'] = $this->session->userdata('other_rights');
             $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
             $json['success'] = true;
             $json['message'] = 'Successfully Deleted!';
@@ -1123,6 +1127,7 @@ class User extends MY_Controller {
         );
         $result = $this->User_model->vitals_update($data_array,$vitalid);
         if ($result) {
+            $data['rights'] = $this->session->userdata('other_rights');
             $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
             $json['success'] = true;
             $json['message'] = 'Successfully Updated!';

@@ -94,6 +94,9 @@
                                     <div class="ribbon ribbon-info">Uploads</div>
                                         <p class="ribbon-content m-t-10">
                                             <label class="checkbox-inline m-l-10">
+                                              <input type="checkbox" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-39'; ?>" <?php echo in_array("add_upload-can_add-1", $user_rights)?'checked':''; ?>> Add
+                                            </label>
+                                            <label class="checkbox-inline m-l-10">
                                               <input type="checkbox" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-37'; ?>" <?php echo in_array("delete_uploads-parent-1", $user_rights)?'checked':''; ?>> Delete
                                             </label>
                                         </p>
@@ -105,9 +108,6 @@
                                         <p class="ribbon-content m-t-10">
                                             <label class="checkbox-inline m-l-10">
                                                 <input type="checkbox" class="user_permission" name="user_rights[]" value="<?php echo $user['other_rights_group_id'].'-36'; ?>" <?php echo in_array("setting-menu-1", $user_rights)?'checked':''; ?>> Settings</label>
-                                            <label class="checkbox-inline m-l-10">
-                                                <input type="checkbox" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-38'; ?>"  <?php echo in_array("backup-parent-1", $user_rights)?'checked':''; ?>> Backup
-                                            </label>
                                         </p>
                                     </div>
                                 </div>
@@ -174,8 +174,8 @@
                                             <label class="checkbox-inline m-l-10">
                                                 <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-30'; ?>" <?php echo in_array("lab_tests-can_edit-1", $user_rights)?'checked':''; ?>>Edit</label>
                                             <label class="checkbox-inline m-l-10">
-                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-31'; ?>" <?php echo in_array("lab_tests-can_delete-1", $user_rights)?'checked':''; ?>>Delete</label>
-                                            
+                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-31'; ?>" <?php echo in_array("lab_tests-can_delete-1", $user_rights)?'checked':''; ?>>Delete
+                                            </label>
                                         </p>
                                     </div>
                                 </div>
@@ -188,7 +188,38 @@
                                             <label class="checkbox-inline m-l-10">
                                                 <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-34'; ?>" <?php echo in_array("special_instructions-can_edit-1", $user_rights)?'checked':''; ?>>Edit</label>
                                             <label class="checkbox-inline m-l-10">
-                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-35'; ?>" <?php echo in_array("special_instructions-can_delete-1", $user_rights)?'checked':''; ?>>Delete</label>
+                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-35'; ?>" <?php echo in_array("special_instructions-can_delete-1", $user_rights)?'checked':''; ?>>Delete
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="ribbon-wrapper card">
+                                        <div class="ribbon ribbon-info">Vitals</div>
+                                        <p class="ribbon-content m-t-10">
+                                            <label class="checkbox-inline m-l-10">
+                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-45'; ?>" <?php echo in_array("vitals-can_add-1", $user_rights)?'checked':''; ?>>Add</label>
+                                            <label class="checkbox-inline m-l-10">
+                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-46'; ?>" <?php echo in_array("vitals-can_edit-1", $user_rights)?'checked':''; ?>>Edit</label>
+                                            <label class="checkbox-inline m-l-10">
+                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-47'; ?>" <?php echo in_array("vitals-can_delete-1", $user_rights)?'checked':''; ?>>Delete
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 p-0">
+                                    <div class="ribbon-wrapper card">
+                                        <div class="ribbon ribbon-info">Diary</div>
+                                        <p class="ribbon-content m-t-10">
+                                            <label class="checkbox-inline m-l-10">
+                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-40'; ?>" <?php echo in_array("diary-can_view-1", $user_rights)?'checked':''; ?>>View</label>
+                                            <label class="checkbox-inline m-l-10">
+                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-41'; ?>" <?php echo in_array("diary-can_add-1", $user_rights)?'checked':''; ?>>Add</label>
+                                            <label class="checkbox-inline m-l-10">
+                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-43'; ?>" <?php echo in_array("diary-can_edit-1", $user_rights)?'checked':''; ?>>Edit</label>
+                                            <label class="checkbox-inline m-l-10">
+                                                <input type="checkbox" name="user_rights[]" class="user_permission" value="<?php echo $user['other_rights_group_id'].'-42'; ?>" <?php echo in_array("diary-can_delete-1", $user_rights)?'checked':''; ?>>Delete
+                                            </label>
                                         </p>
                                     </div>
                                 </div>

@@ -1,3 +1,11 @@
+<?php
+    if(isset($rights[0]['user_rights'])){//print_r($rights[0]['rights']);
+        $permissions = explode(',',$rights[0]['user_rights']);
+    }else{
+        $permissions = array();
+    }
+    $user_info = ($this->session->userdata('user_data_logged_in'));
+?>
 <div class="content-wrapper" style="margin: 0% 0.5%;">
     <div class="row p-t-10 m-0">
     	<div class="col-md-12 p-l-0 p-r-0">
@@ -41,7 +49,7 @@
                                     	<div class="col-md-9 p-l-0">
                                     		<div class="card" id="diary_note_update">
                                     			<div class="card-header">
-                                                    <button class="btn btn-default btn-md pull-right hide" id="update_note">Update</button>
+                                                    <button class="btn btn-default btn-md pull-right hide" <?php echo in_array("diary-can_edit-0", $permissions)?"disabled":''; ?> id="update_note">Update</button>
                                                 </div>
                                     		</div>
                                     	</div>
@@ -66,7 +74,7 @@
 	                                					</div>
 	                                					<div class="col-md-7"></div>
 	                                					<div class="col-md-2">
-	                                						<button class="btn btn-default btn-block pull-right" id="save_diary">Save</button>
+	                                						<button class="btn btn-default btn-block pull-right" id="save_diary" <?php echo in_array("diary-can_add-0", $permissions)?"disabled":''; ?>>Save</button>
 	                                					</div>
 	                                				</div>
 	                                			</div>

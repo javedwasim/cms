@@ -27,11 +27,9 @@
                 <li class="nav-item <?php echo in_array("profile-parent-0", $permissions)?"op-hide":''; ?>">
                     <a class="nav-link" href="javascript:void(0)" id="pat_profile" aria-expanded="false"><i class="fas fa-portrait"></i> Profile</a>
                 </li>
-                <?php if($user_info['login_id']==1){?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)" id="diary" aria-expanded="false"><i class="ti-book"></i> Diary</a>
-                    </li>
-                <?php }?>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo in_array("diary-can_view-0", $permissions)?"op-hide":''; ?>" href="javascript:void(0)" id="diary" aria-expanded="false"><i class="ti-book"></i> Diary</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#aboutmodal"  aria-expanded="false"><i class="ti-info-alt"></i> About us</a>
                 </li>

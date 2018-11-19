@@ -7,10 +7,10 @@ class Dashboard extends MY_Controller {
 		{
 			parent::__construct();
 			$this->load->model('Dashboard_model');
-      $this->load->helper('content-type');
-      $this->load->model('User_model');
-      $this->load->model('Profile_model');
-      date_default_timezone_set("Asia/Karachi");
+            $this->load->helper('content-type');
+            $this->load->model('User_model');
+            $this->load->model('Profile_model');
+            date_default_timezone_set("Asia/Karachi");
 		}
 
 	public function index()
@@ -19,48 +19,23 @@ class Dashboard extends MY_Controller {
 		 if(!$this->session->userdata('is_logged_in')){
        		$this->load->view('login');
 	     } else{
-        if($this->session->userdata('username')=='test'){
-          $data['total_attended'] = $this->User_model->count_total_attendent($date);
-          $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
-          $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
-          $data['remaining_patient'] = $this->Dashboard_model->get_total_checked();
-          $data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
-          $data['fee_paid'] = $this->User_model->count_fee_paid();
-          $data['ecg_count'] = $this->User_model->count_ecg_waiting();
-          $data['ett_count'] = $this->User_model->count_ett_waiting();
-          $data['echo_count'] = $this->User_model->count_echo_waiting();
-          $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-          $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-          $data['count_complete'] = $this->User_model->count_complete();
-          $data['fee_count'] = $this->User_model->get_todays_fee_paid($date);
-          $data['ett_fee'] = $this->User_model->get_todays_ett_fee_paid($date);
-          $data['echo_fee'] = $this->User_model->get_todays_echo_fee_paid($date);
-          $data['fee_refund'] = $this->User_model->get_todays_total_refund($date);
-          $data['rights'] = $this->session->userdata('other_rights');
-          $this->load->view('partial/header',$data);
-          $this->load->view('partial/navbar',$data);
-          $this->load->view('admin/dashboard',$data);
-          $this->load->view('partial/footer',$data);
-        }else {
-          $data['total_attended'] = $this->User_model->count_total_attendent($date);
-          $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
-          $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
-          $data['remaining_patient'] = $this->Dashboard_model->get_total_checked();
-          $data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
-          $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
-          $data['ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
-          $data['echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
-          $data['refund_count'] = $this->User_model->count_refund_rows($date);
-          $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-          $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-          $data['count_complete'] = $this->User_model->count_complete();
-          $data['rights'] = $this->session->userdata('other_rights');
-          $this->load->view('partial/header',$data);
-          $this->load->view('partial/navbar',$data);
-          $this->load->view('admin/dashboard',$data);
-          $this->load->view('partial/footer',$data);
-        }
-	     		
+        $data['total_attended'] = $this->User_model->count_total_attendent($date);
+        $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
+        $data['remaining_patient'] = $this->Dashboard_model->get_total_checked();
+        $data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
+        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
+        $data['ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
+        $data['echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
+        $data['refund_count'] = $this->User_model->count_refund_rows($date);
+        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
+        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
+        $data['count_complete'] = $this->User_model->count_complete();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $this->load->view('partial/header',$data);
+        $this->load->view('partial/navbar',$data);
+        $this->load->view('admin/dashboard',$data);
+        $this->load->view('partial/footer',$data);
 	    }
 	}
 
@@ -222,6 +197,7 @@ class Dashboard extends MY_Controller {
     public function diary()
     {
       $data['users'] = $this->Dashboard_model->get_all_user();
+      $data['rights'] = $this->session->userdata('other_rights');
       $data['rights'] = $this->session->userdata('other_rights');
       $json['result_html'] = $this->load->view('pages/diary', $data, true);
       if ($this->input->is_ajax_request()) {

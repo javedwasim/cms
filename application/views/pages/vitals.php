@@ -28,33 +28,33 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr role="row">
-                                    <th>
+                                    <th style="width: 4%">
                                         Vital ID
                                     </th>
-                                    <th>
+                                    <th style="width: 25%">
                                         Date &amp; Time
                                     </th>
-                                    <th>
+                                    <th style="width: 7%">
                                         B.P 120/80
                                     </th>
-                                    <th>
+                                    <th style="width: 5%">
                                         Pulse
                                     </th>
-                                    <th>
+                                    <th style="width: 5%">
                                         Temperature
                                     </th>
-                                    <th>
+                                    <th style="width: 5%">
                                         INR
                                     </th>
-                                    <th>
-                                        Resperatory Rate
+                                    <th style="width: 5%">
+                                        Resp. Rate
                                     </th>
-                                    <th>Volume</th>
-                                    <th>Height</th>
-                                    <th>Weight</th>
-                                    <th>BMI</th>
-                                    <th>BSA</th>
-                                    <th>
+                                    <th style="width: 20%">Volume</th>
+                                    <th style="width: 10%">Height</th>
+                                    <th style="width: 10%">Weight</th>
+                                    <th style="width: 10%">BMI</th>
+                                    <th style="width: 10%">BSA</th>
+                                    <th style="width: 20%">
                                         Vitals Actions
                                     </th>
                                 </tr>

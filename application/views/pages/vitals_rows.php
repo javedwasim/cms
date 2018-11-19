@@ -1,20 +1,26 @@
-<?php if(isset($patient_vitals)){
+<?php 
+if(isset($rights[0]['user_rights']))
+{
+    $permissions = explode(',',$rights[0]['user_rights']);
+    $loggedin_user = $this->session->userdata('userdata');
+}
+if(isset($patient_vitals)){
         foreach ($patient_vitals as $key) {
 ?>
-<tr >
-    <td>
+<tr>
+    <td style="white-space: nowrap; word-break: break-all;">
         <?php echo $key['id']; ?><input type="hidden" value="<?php echo $key['id']; ?>" class="vital_id" />
         <input type="hidden" name="pat_id" id="patientid" value="<?php echo $key['patient_id']; ?>">
     </td>
-    <td>
+    <td style="white-space: nowrap; word-break: break-all;">
         <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd-MM-yyyy HH:ii p"  value="<?php echo date('d-F-Y h:i a',strtotime($key['vaital_datetime'])); ?>" readonly style="border: transparent; width:100%;">
-    </td>
-    <td contenteditable="true" class="vital_bp"><?php echo $key['vital_bp']; ?></td>
-    <td contenteditable="true" class="vital_pulse"><?php echo $key['vital_pulse']; ?></td>
-    <td contenteditable="true" class="vital_temp"><?php echo $key['vital_temp']; ?></td>
-    <td contenteditable="true" class="vital_inr"><?php echo $key['vital_inr']; ?></td>
-    <td contenteditable="true" class="vital_rr"><?php echo $key['vital_rr']; ?></td>
-    <td class="vital_volume">
+    </td style="white-space: nowrap; word-break: break-all;">
+    <td contenteditable="true" class="vital_bp" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_bp']; ?></td>
+    <td contenteditable="true" class="vital_pulse" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_pulse']; ?></td>
+    <td contenteditable="true" class="vital_temp" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_temp']; ?></td>
+    <td contenteditable="true" class="vital_inr" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_inr']; ?></td>
+    <td contenteditable="true" class="vital_rr" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_rr']; ?></td>
+    <td class="vital_volume" >
         <select class="form-control">
             <option value="<?php echo $key['vital_volume']; ?>"><?php echo $key['vital_volume']; ?></option>
             <option value="Normal Volume">Normal Volume</option>
@@ -24,16 +30,20 @@
             <option value="With pauses">With pauses</option>
         </select>
     </td>
-    <td contenteditable="true" class="vital_height"><?php echo $key['vital_height']; ?></td>
-    <td contenteditable="true" class="vital_weight"><?php echo $key['vital_weight']; ?></td>
-    <td  class="vital_bmi"><?php echo $key['vital_bmi']; ?></td>
-    <td  class="vital_bsa"><?php echo $key['vital_bsa']; ?></td>
+    <td style="white-space: nowrap; word-break: break-all;">
+        <input type="text" class="shadow-none border-0 vital_height" onchange="vitalBmiBsa(this)" value="<?php echo $key['vital_height']; ?>">
+    </td>
+    <td style="white-space: nowrap; word-break: break-all;">
+        <input type="text" class="shadow-none border-0 vital_weight" onchange="vitalBsaBmi(this)" value="<?php echo $key['vital_weight']; ?>">
+    </td>
+    <td  class="vital_bmi" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_bmi']; ?></td>
+    <td  class="vital_bsa" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_bsa']; ?></td>
     <td style="display: inline-flex;">
-        <a class="btn btn-sm btn-danger delete_vital" href="javascript:void(0)" data-href="<?php echo site_url('user/delete_vitals/'. $key["id"].'/'.$key["patient_id"]) ?>">
+        <a class="btn btn-sm btn-danger delete_vital" href="javascript:void(0)" data-href="<?php echo site_url('user/delete_vitals/'. $key["id"].'/'.$key["patient_id"]) ?>" <?php echo in_array("vitals-can_delete-0", $permissions)?"disabled":''; ?> >
             <i class="fa fa-trash" aria-hidden="true"></i>
         </a>
         &nbsp;
-        <a class="btn btn-sm btn-info update_vital" href="javascript:void(0)" >
+        <a class="btn btn-sm btn-info update_vital" <?php echo in_array("vitals-can_edit-0", $permissions)?"disabled":''; ?> href="javascript:void(0)" >
             <i class="fa fa-edit" aria-hidden="true"></i>
         </a>
     </td>
@@ -41,15 +51,16 @@
 <?php } 
  } ?>
 <tr >
-    <td class="vital_id"></td>
-    <td>
-        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd MM yyyy HH:ii p"  value="" placeholder="<?php echo date('d-F-Y h:i a'); ?>" readonly style="border: transparent; width:100%;">
+    <td class="vital_id" style="white-space: nowrap; word-break: break-all;"></td>
+    <td style="white-space: nowrap; word-break: break-all;">
+        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd MM yyyy HH:ii p" value="<?php echo date('d-F-Y h:i a'); ?>" readonly style="border: transparent; width:100%;">
+        <input type="hidden" name="pat_id" id="patient_id" value="<?php if(isset($patient_id)){ echo $patient_id; }?>">
     </td>
-    <td contenteditable="true" class="vital_bp"></td>
-    <td contenteditable="true" class="vital_pulse"></td>
-    <td contenteditable="true" class="vital_temp"></td>
-    <td contenteditable="true" class="vital_inr"></td>
-    <td contenteditable="true" class="vital_rr"></td>
+    <td contenteditable="true" class="vital_bp" style="white-space: nowrap; word-break: break-all;"></td>
+    <td contenteditable="true" class="vital_pulse" style="white-space: nowrap; word-break: break-all;"></td>
+    <td contenteditable="true" class="vital_temp" style="white-space: nowrap; word-break: break-all;"></td>
+    <td contenteditable="true" class="vital_inr" style="white-space: nowrap; word-break: break-all;"></td>
+    <td contenteditable="true" class="vital_rr" style="white-space: nowrap; word-break: break-all;"></td>
     <td class="">
         <select class="form-control vital_volume">
             <option value="">Select</option>
@@ -60,10 +71,14 @@
             <option value="With pauses">With pauses</option>
         </select>
     </td>
-    <td contenteditable="true" class="vital_height"></td>
-    <td contenteditable="true" class="vital_weight"></td>
-    <td contenteditable="true" class="vital_bmi"></td>
-    <td contenteditable="true" class="vital_bsa"></td>
+    <td style="white-space: nowrap; word-break: break-all;">
+        <input type="text" class="shadow-none border-0 vital_height" onchange="vitalBmiBsa(this)" value="0">
+    </td>
+    <td style="white-space: nowrap; word-break: break-all;">
+        <input type="text" class="shadow-none border-0 vital_weight" onchange="vitalBsaBmi(this)" value="0">
+    </td>
+    <td class="vital_bmi" style="white-space: nowrap; word-break: break-all;">0</td>
+    <td class="vital_bsa" style="white-space: nowrap; word-break: break-all;">0</td>
     <td style="display: inline-flex;">
         <a class="btn btn-default btn-sm save_vitals" href="javascript:void(0)">
             <i class="fa fa-save" aria-hidden="true"></i>
@@ -83,4 +98,6 @@
             showMeridian: 1
         });
     });
+
+
 </script>

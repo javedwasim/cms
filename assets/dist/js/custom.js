@@ -1446,6 +1446,7 @@ function bookings() {
         success: function (response) {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
+                $('.dashboard-content').remove();
                 $('#content-wrapper').append(response.result_html);
                 $('.booking_category_tables').remove();
                 $('#booking_category_tables').append(response.booking_cate);
@@ -2004,15 +2005,20 @@ $(document.body).on('click', '#pat_profile', function () {
                 $('.profile-table').remove();
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
+                $('#profiletable').DataTable({
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
                     "scrollY": "400px",
+                    "scrollX": true,
                     "scrollCollapse": true,
-                    "initComplete": function (settings, json) {
-                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                    }
+                    "pageLength": 250,
+                    // "initComplete": function (settings, json) {
+                    //     $("#profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    // },
+                    select: {
+                        style: 'single'
+                    },
                 });
                 $("#toggleresize1").click(function () {
                     var icon = $('#toggleresize1 > .arro');
@@ -2048,15 +2054,17 @@ function profile_filter(){
                 $('.profile-table').remove();
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
+                $('#profiletable').DataTable({
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
                     "scrollY": "400px",
                     "scrollCollapse": true,
-                    "initComplete": function (settings, json) {
-                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                    }
+                    "pageLength": 250,
+                    // "initComplete": function (settings, json) {
+                    //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    // }
+                    "scrollX": true,
                 });
                 $('#profiletable tbody tr:first').addClass('row_selected');
                 $("#profiletable tbody tr").click(function (e) {
@@ -2078,10 +2086,6 @@ $(document.body).on('click', '#pat_history', function () {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2098,10 +2102,6 @@ $(document.body).on('click', '#add_history_category', function () {
             if (response.category_table != '') {
                 $('.history_category_content').empty();
                 $('.history_category_content').append(response.category_table);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2120,10 +2120,6 @@ $(document.body).on('click', '#pat_examination', function () {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2144,10 +2140,6 @@ $(document.body).on('click', '#pat_investigation', function () {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2164,10 +2156,6 @@ $(document.body).on('click', '#angio_recommendation', function () {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2184,10 +2172,6 @@ $(document.body).on('click', '#pat_instruction', function () {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2204,10 +2188,6 @@ $(document.body).on('click', '#pat_medicine', function () {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2224,10 +2204,6 @@ $(document.body).on('click', '#pat_advice', function () {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2244,10 +2220,6 @@ $(document.body).on('click', '#pat_research', function () {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -2915,6 +2887,7 @@ $(document.body).on('click', '#diary', function () {
         success: function (response) {
             if (response.result_html != '') {
                 $('.content-wrapper').remove();
+                $('.dashboard-content').remove();
                 $('#content-wrapper').append(response.result_html);
                 $('.lab-date').datepicker({
                     format: 'd-M-yyyy'
@@ -3140,15 +3113,17 @@ $(document.body).on('click', '#save_new_profile', function () {
                     $('.profile-table').remove();
                     $('#profile_table').append(response.profile_table);
                     ///////////////// initilize datatable //////////////
-                    $('.profiletable').DataTable({
+                    $('#profiletable').DataTable({
                         "info": false,
                         "searching": false,
                         "bLengthChange": false,
                         "scrollY": "400px",
                         "scrollCollapse": true,
-                        "initComplete": function (settings, json) {
-                            $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                        }
+                        "pageLength": 250,
+                        // "initComplete": function (settings, json) {
+                        //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                        // }
+                        "scrollX": true,
                     });
                      $('#profiletable tbody tr:first').addClass('row_selected');
                     $("#profiletable tbody tr").click(function (e) {
@@ -3247,15 +3222,17 @@ $(document.body).on('click', '#delete_profile', function () {
                             $('.profile-table').remove();
                             $('#profile_table').append(response.profile_table);
                             ///////////////// initilize datatable //////////////
-                            $('.profiletable').DataTable({
+                            $('#profiletable').DataTable({
                                 "info": false,
                                 "searching": false,
                                 "bLengthChange": false,
                                 "scrollY": "400px",
                                 "scrollCollapse": true,
-                                "initComplete": function (settings, json) {
-                                    $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                                }
+                                "scrollX": true,
+                                "pageLength": 250,
+                                // "initComplete": function (settings, json) {
+                                //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                                // }
                             });
                              $('#profiletable tbody tr:first').addClass('row_selected');
                             $("#profiletable tbody tr").click(function (e) {
@@ -3345,15 +3322,17 @@ $(document.body).on('click', '#update_profile', function () {
                     $('.profile-table').remove();
                     $('#profile_table').append(response.profile_table);
                     ///////////////// initilize datatable //////////////
-                    $('.profiletable').DataTable({
+                    $('#profiletable').DataTable({
                         "info": false,
                         "searching": false,
                         "bLengthChange": false,
                         "scrollY": "400px",
                         "scrollCollapse": true,
-                        "initComplete": function (settings, json) {
-                            $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                        }
+                        "scrollX": true,
+                        "pageLength": 250,
+                        // "initComplete": function (settings, json) {
+                        //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                        // }
                     });
                     $('#profiletable tbody tr:first').addClass('row_selected');
                     $("#profiletable tbody tr").click(function (e) {
@@ -3420,10 +3399,6 @@ function get_history(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -3450,10 +3425,6 @@ function get_investigations(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -3469,10 +3440,6 @@ function get_recommendations(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -3487,10 +3454,6 @@ function get_instructions(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -3504,10 +3467,6 @@ function get_medicine(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -3554,10 +3513,6 @@ function get_advice(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -3572,10 +3527,6 @@ function get_research(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -4193,15 +4144,17 @@ $(document.body).on('click', '#reset_profile_filter', function () {
                 $('.profile-table').remove();
                 $('#profile_table').append(response.profile_table);
                 ///////////////// initilize datatable //////////////
-                $('.profiletable').DataTable({
+                $('#profiletable').DataTable({
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
                     "scrollY": "400px",
                     "scrollCollapse": true,
-                    "initComplete": function (settings, json) {
-                        $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                    }
+                    "scrollX": true,
+                    "pageLength": 250,
+                    // "initComplete": function (settings, json) {
+                    //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                    // }
                 });
                 $('#profiletable tbody tr:first').addClass('row_selected');
                 $("#profiletable tbody tr").click(function (e) {

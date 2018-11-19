@@ -1,4 +1,3 @@
-<?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
 <table class="table table-bordered nowrap responsive structure_table tbl_header_fix_350" cellspacing="0" style="width: 100%">
     <thead>
     <tr>
@@ -10,9 +9,9 @@
     <?php foreach ($structures as $structure): ?>
         <tr class="table-row">
             <td style="width:50px;">
-                <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
-                    <i class="fa fa-trash" title="Delete"></i></a>
-
+                <a class="btn btn-danger btn-xs">
+                    <i class="fa fa-trash" title="Delete"></i>
+                </a>
             </td>
             <td class="default_structure_cate" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
                 onBlur="defaultsaveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"

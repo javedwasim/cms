@@ -1,4 +1,3 @@
-<?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
 <div class="tab-pane <?php echo isset($active_tab) && ($active_tab == 'items') ? 'active' : ''; ?>"
      id="tests-items" role="tabpanel">
     <div class="card">
@@ -23,7 +22,7 @@
                         <div class="form-group">
                             <label>Test:</label>
                             <select class="form-control" name="lab_test_id">
-                                <option>Select</option>
+                                <option value="">Select</option>
                                 <?php foreach ($labtests as $test): ?>
                                     <option value="<?php echo $test['id']; ?>"
                                         <?php echo isset($selected_category)&&($selected_category==$test['id'])?'selected':'' ?>>
@@ -34,13 +33,7 @@
                     </div>
                     <div class="col-lg-2 col-md-4 p-0">
                         <div class="form-group m-t-25" style="display: inline-flex;">
-                            <?php if($loggedin_user['is_admin']==1){ ?>
-                                <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item_btn">Add</button>
-                            <?php } elseif(in_array("lab_tests-can_add-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                                <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item_btn">Add</button>
-                            <?php } else{ ?>
-                                <button type= "button" class="btn btn-sm btn-primary"  style="opacity: 0.5;" onclick="showError()">Add</button>
-                            <?php } ?>
+                            <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item_btn">Add</button>
                         </div>
                     </div>
                 </div>
@@ -75,37 +68,23 @@
                     <?php foreach ($items as $item): ?>
                         <tr id="<?php echo $item['id']; ?>">
                             <td style="width:95px; word-break: break-all;" data-toggle="modal" data-target="#history-modal">
-                                <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_delete-1", $appointment_rights)&&($loggedin_user['is_admin']==0))) { ?>
-                                    <a class="delete-lab-test btn btn-danger btn-xs"
+                                <a class="delete-lab-test btn btn-danger btn-xs"
                                        href="javascript:void(0)" title="delete"
                                        data-href="<?php echo site_url('setting/delete_lab_test_item/') . $item['id'].'/'.$item['lab_test_id'] ?>">
-                                        <i class="fa fa-trash" title="Delete"></i></a>
-                                    <a class="edit-lab-test-item-btn btn btn-info btn-xs"
+                                        <i class="fa fa-trash" title="Delete"></i>
+                                </a>
+                                <a class="edit-lab-test-item-btn btn btn-info btn-xs"
                                        href="javascript:void(0)"
-                                       data-lab-test-item-id="<?php echo $item['id']; ?>"><i
-                                       class="far fa-question-circle"></i></a>
-                                <?php } else{ ?>
-                                    <a class="btn btn-danger btn-xs" style="opacity: 0.5;" onclick="showError()">
-                                        <i class="fa fa-trash" title="Delete"></i></a>
-                                    <a class="btn btn-info btn-xs" style="opacity: 0.5;" onclick="showError()">
-                                        <i class="far fa-question-circle" title="Delete"></i></a>
-                                <?php } ?>
-
+                                       data-lab-test-item-id="<?php echo $item['id']; ?>">
+                                       <i class="far fa-question-circle"></i>
+                                </a>
                             </td>
-                            <?php if(($loggedin_user['is_admin']==1) || (in_array("lab_tests-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0))){ ?>
-                                <td style="word-break: break-all; width: 42%;"class="exam_cate" >
-                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $item['name']; ?>" name="lab_test_item" onchange="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')">
-                                </td>
-                                <td style="word-break: break-all;width: 50%;"class="exam_cate">
-                                    <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="lab_test_unit" value="<?php echo $item['units']; ?>" onchange="saveTestItemDescription(this,'unit','<?php echo $item['id']; ?>')">        
-                                </td>
-                            <?php } else{ ?>
-                                <td  onClick="showError(this);">
-                                    <?php echo $item['name']; ?></td>
-                                <td  onClick="showError(this);">
-                                    <?php echo $item['units']; ?></td>
-                            <?php } ?>
-
+                            <td style="word-break: break-all; width: 42%;"class="exam_cate" >
+                                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $item['name']; ?>" name="lab_test_item" onchange="saveTestItemDescription(this,'name','<?php echo $item['id']; ?>')">
+                            </td>
+                            <td style="word-break: break-all;width: 50%;"class="exam_cate">
+                                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="lab_test_unit" value="<?php echo $item['units']; ?>" onchange="saveTestItemDescription(this,'unit','<?php echo $item['id']; ?>')">        
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
