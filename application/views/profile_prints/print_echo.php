@@ -192,25 +192,25 @@
         max-width: 66.666667%;
     }
     .list-group {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    padding-left: 0;
-    margin-bottom: 0;
-}
-.list-group-item {
-    padding: 5px;
-    font-size: 12px;
-}
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: .75rem 1.25rem;
-    margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid rgba(0,0,0,.125);
-}
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+    .list-group-item {
+        padding: 5px;
+        font-size: 12px;
+    }
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: .75rem 1.25rem;
+        margin-bottom: -1px;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,.125);
+    }
 </style>
 </head>
 <body class="A4 " >
@@ -222,15 +222,20 @@
                 </div>
             </div>
             <br>
-            <div class="row border border-dark" style="width: 100%;">
+            <div class="row" style="width: 100%; background: #90addd; border-top: 2px solid #000; border-bottom: 2px solid #000; border-left: 2px dotted #000; border-right: 2px dotted #000; padding-top: 10px;">
                 <div class="col-md-6">
-                    <label>Ref.ID</label>
-                    <strong><?php echo $patient_info->id ?></strong>
-                    <strong><?php echo $patient_info->pat_name ?></strong>
+                    <strong>Ref.ID</strong>
+                    <i><?php echo $patient_info->id ?></i>
+                    <strong style="margin-left: 10px"><?php echo $patient_info->pat_name ?></strong>
                 </div>
                 <div class="col-md-4">
-                    <label><?php echo $patient_info->pat_age ?></label>
-                    <label><?php echo $patient_info->pat_sex ?></label>
+                    <strong>
+                        <?php $age = preg_split('#(?<=\d)(?=[a-z])#i', $patient_info->pat_age); echo $age[0]; 
+                            echo " ";
+                        ?>
+                    </strong>
+                    <label><?php echo $age[1]; ?></label>
+                    <label style="margin-right: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
                 </div>
                 <div class="col-md-2">
                     <label><?php echo date('d-M-Y');?></label>
@@ -240,7 +245,7 @@
             <div class="row" style="width: 100%;">
                 <div class="col-md-5">
                     <table class="table table-bordered">
-                        <thead>
+                        <thead style="background: #90addd;">
                             <tr>
                                 <th colspan="3">2D / M-MODE Measurements</th>
                             </tr>
@@ -269,14 +274,14 @@
                 </div>
                 <div class="col-md-5">
                     <table class="table table-bordered">
-                        <thead>
+                        <thead style="background: #90addd;">
                             <tr>
                                 <th colspan="3">Doppler Measurements</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if(isset($measurements)): ?>
-                                <?php  foreach ($measurements as $measurement): if($measurement['main_category']=='dooplers'): ?>
+                                <?php  foreach ($measurements as $measurement): if($measurement['main_category']=='dopplers'): ?>
                                     <tr>
                                         <td>
                                             <?php echo $measurement['item'] ?>
@@ -295,7 +300,7 @@
                 </div>
                 <div class="col-md-2">
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item" style="background: #90addd;">
                             <strong>Color Doppler</strong>
                         </li>
                         <?php if(isset($color_doppler)){
@@ -320,26 +325,26 @@
             <br>
             <div class="row" style="width: 100%;">
                 <div class="col-md-12">
-                    <h3>Echocardiography Findings:</h3>
+                    <h3><i>Echocardiography Findings:</i></h3>
                     <?php if(isset($findings)): ?>
                         <?php foreach ($findings as $finding): ?>
-                        <div class="row">
+                        <div class="row" style="margin-left: 10px;">
                             <div class="col-md-4"><?php echo $finding['name']; ?></div>
                             <div class="col-md-8"><?php echo $finding['finding_value']; ?></div>
                         </div>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
-                <div class="col-md-12">
-                    <h3>Conclution:</h3>
+                <div class="col-md-12" style="margin-top: 20px;">
+                    <h3><i>Conclution:</i></h3>
                     <?php if(isset($diagnosis)): ?>
                         <?php foreach ($diagnosis as $diagnose): ?>
-                            <p><?php echo $diagnose['diagnosis_value']; ?></p>
+                            <strong style="margin-left: 10px;"><?php echo $diagnose['diagnosis_value']; ?></strong>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
             </div>
-            <div style="position: fixed;bottom: 0px;width: 100%;">
+            <div style="position: fixed;bottom: 0px;width: 96%; right: 20px;">
                 <div class="row">
                     <div class="col-md-12 ">
                         <div style="float: right;">

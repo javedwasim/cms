@@ -19,26 +19,21 @@
                        <i class="fa fa-trash" title="Delete"></i>
                     </a>
                 </td>
-                <td
-                contenteditable="true" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
-                onBlur="updateSignature(this,'name','<?php echo $details['id']; ?>')"
-                onClick="showEdit(this);"
-                ><?php echo $details['name']; ?></td>
-                <td
-                contenteditable="true" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
-                onBlur="updateSignature(this,'qualifications','<?php echo $details['id']; ?>')"
-                onClick="showEdit(this);"
-                ><?php echo $details['qualifications']; ?></td>
-                <td
-                contenteditable="true" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
-                onBlur="updateSignature(this,'institute','<?php echo $details['id']; ?>')"
-                onClick="showEdit(this);"
-                ><?php echo $details['institute']; ?></td>
-                <td
-                contenteditable="true" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
-                onBlur="updateSignature(this,'designation','<?php echo $details['id']; ?>')"
-                onClick="showEdit(this);"
-                ><?php echo $details['designation']; ?></td>
+                <td onClick="showEdit(this);">
+                    <input type="text" readonly="true" class="form-control border-0 bg-transparent shadow-none" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $details['name']; ?>" onchange="updateSignature(this,'name','<?php echo $details['id']; ?>')">
+                </td>
+                <td onClick="showEdit(this);">
+                <input type="text" readonly="true" class="form-control border-0 bg-transparent shadow-none" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $details['qualifications']; ?>"
+                onchange="updateSignature(this,'qualifications','<?php echo $details['id']; ?>')">
+                </td>
+                <td onClick="showEdit(this);">
+                    <input type="text" readonly="true" class="form-control border-0 bg-transparent shadow-none" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $details['institute']; ?>"
+                onchange="updateSignature(this,'institute','<?php echo $details['id']; ?>')">        
+                </td>
+                <td  onClick="showEdit(this);" >
+                    <input type="text" readonly="true" class="form-control border-0 bg-transparent shadow-none" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $details['designation']; ?>"
+                onchange="updateSignature(this,'designation','<?php echo $details['id']; ?>')">
+                </td>
             </tr>
             <?php }?>
         </tbody>

@@ -4,7 +4,7 @@
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb pull-right">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)" id="vitals_to_profile">profile</a></li>
                 <li class="breadcrumb-item active">vitals</li>
             </ol>
         </div>

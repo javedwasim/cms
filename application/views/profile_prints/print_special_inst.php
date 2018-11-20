@@ -202,21 +202,23 @@
 </style>
 </head>
 <body class="A4" >
-    <div class="row sheet">
+    <div class="row">
         <div class="col-md-10 offset-1">
-            <br>
-            <div class="row border border-dark">
+            <br> <br>  <br>  <br>  <br>  <br>  <br>  <br>  <br>
+            <div class="row border-dark" style="width: 100%; border-bottom:3px solid #000;">
                 <div class="col-md-6">
-                    <label>Ref.ID:</label>
-                    <strong><?php echo $patient_info->id ?></strong>
-                    <strong><?php echo $patient_info->pat_name ?></strong>
+                    <strong>Ref.ID</strong>
+                    <i><?php echo $patient_info->id ?></i>
+                    <strong style="margin-left: 10px"><?php echo $patient_info->pat_name ?></strong>
                 </div>
-                <div class="col-md-2">
-                    <label><?php echo $patient_info->pat_age ?></label>
-                    <label><?php echo $patient_info->pat_sex ?></label>
-                </div>
-                <div class="col-md-2">
-                    
+                <div class="col-md-4">
+                    <strong>
+                        <?php $age = preg_split('#(?<=\d)(?=[a-z])#i', $patient_info->pat_age); echo $age[0]; 
+                            echo " ";
+                        ?>
+                    </strong>
+                    <label><?php echo $age[1]; ?></label>
+                    <label style="margin-right: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
                 </div>
                 <div class="col-md-2">
                     <label><?php echo date('d-M-Y');?></label>

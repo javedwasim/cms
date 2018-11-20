@@ -1716,7 +1716,8 @@ $(document.body).on('click', '#time_on_walk', function () {
 
                 });
                 $('.app_date').datepicker({
-                    format: 'd-M-yyyy'
+                    format: 'd-M-yyyy',
+                    autoclose: true
                 });
                 $("#divCollapse").click(function () {
                     $("#full_name").focus();
@@ -1826,7 +1827,8 @@ $(document.body).on('click', '#time_on_call', function () {
                 });
                 $('.app_date').datepicker({
                     format: 'd-M-yyyy',
-                    startDate: 'date'
+                    startDate: 'date',
+                    autoclose: true
                 });
                 $("#divCollapse").click(function () {
                     $("#full_name").focus();
@@ -2033,7 +2035,7 @@ $(document.body).on('click', '#pat_profile', function () {
                     $('.resize2').toggleClass("active_resize2");
                     $('.resize1').toggleClass("inactive_resize1");
                 });
-                $('#profiletable tbody tr:first').addClass('row_selected');
+                // $('#profiletable tbody tr:first').addClass('row_selected');
                 $("#profiletable tbody tr").click(function (e) {
                     $('#profiletable tbody tr.row_selected').removeClass('row_selected');
                     $(this).addClass('row_selected');
@@ -2726,75 +2728,84 @@ $(document.body).on('click', '.delete-protocol', function () {
 
 $(document.body).on('click', '#pat-exemination', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
-    $.ajax({
-        url: '/cms/setting/patient_exemination/'+patid,
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.content-wrapper').remove();
-                $('#content-wrapper').append(response.result_html);
-                // $('.datatables').DataTable({
-                //     "info": true,
-                //     "paging": false,
-                //     "searching": false
-                // });
-                ///////////////// initilize datatable //////////////
-                $('#permissions-table').DataTable({
-                    "scrollX": true
-                });
-                $('.app_date').datepicker({
-                    format: 'd-M-yyyy'
-                });
+    if (patid=='') {
+         toastr["warning"]('Please select a patient first.');
+    }else{
+        $.ajax({
+            url: '/cms/setting/patient_exemination/'+patid,
+            cache: false,
+            success: function (response) {
+                if (response.result_html != '') {
+                    $('.content-wrapper').remove();
+                    $('#content-wrapper').append(response.result_html);
+                    // $('.datatables').DataTable({
+                    //     "info": true,
+                    //     "paging": false,
+                    //     "searching": false
+                    // });
+                    ///////////////// initilize datatable //////////////
+                    $('#permissions-table').DataTable({
+                        "scrollX": true
+                    });
+                    $('.app_date').datepicker({
+                        format: 'd-M-yyyy',
+                        autoclose: true
+                    });
 
-                $('#profile_examination_container').empty();
-                $('#profile_examination_container').append(response.examination_table);
+                    $('#profile_examination_container').empty();
+                    $('#profile_examination_container').append(response.examination_table);
 
-                $('#profile_history_container').empty();
-                $('#profile_history_container').append(response.history_table);
+                    $('#profile_history_container').empty();
+                    $('#profile_history_container').append(response.history_table);
 
-                $('#investigation_category_container').empty();
-                $('#investigation_category_container').append(response.investigation_html);
+                    $('#investigation_category_container').empty();
+                    $('#investigation_category_container').append(response.investigation_html);
 
-                $('#advice_category_container').empty();
-                $('#advice_category_container').append(response.advice_html);
+                    $('#advice_category_container').empty();
+                    $('#advice_category_container').append(response.advice_html);
 
-                $('#instruction_category_container').empty();
-                $('#instruction_category_container').append(response.instruction_html);
+                    $('#instruction_category_container').empty();
+                    $('#instruction_category_container').append(response.instruction_html);
 
-                $('#medicine_category_container').empty();
-                $('#medicine_category_container').append(response.medicine_html);
+                    $('#medicine_category_container').empty();
+                    $('#medicine_category_container').append(response.medicine_html);
 
-                $('#pat_ett_information').empty();
-                $('#pat_ett_information').append(response.patient_information);
+                    $('#pat_ett_information').empty();
+                    $('#pat_ett_information').append(response.patient_information);
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 /////////////////////////////////// load patient special instructions page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 $(document.body).on('click', '.pat-spInstructions', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
-    $.ajax({
-        url: '/cms/profile/patient_special_instructions',
-        type: 'post',
-        data: {patid:patid},
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.content-wrapper').remove();
-                $('#content-wrapper').append(response.result_html);
-                $('.patient_info').remove();
-                $('#pat_sp_information').append(response.patient_information);
-                $('.sp_data_table').remove();
-                $('#sp_data_table').append(response.sp_table);
-                $("#sp-ins-table tbody tr").click(function (e) {
-                    $('#sp-ins-table tbody tr.row_selected').removeClass('row_selected');
-                    $(this).addClass('row_selected');
-                });
+    if (patid=='') {
+         toastr["warning"]('Please select a patient first.');
+    }else{
+        $.ajax({
+            url: '/cms/profile/patient_special_instructions',
+            type: 'post',
+            data: {patid:patid},
+            cache: false,
+            success: function (response) {
+                if (response.result_html != '') {
+                    $('.content-wrapper').remove();
+                    $('#content-wrapper').append(response.result_html);
+                    $('.patient_info').remove();
+                    $('#pat_sp_information').append(response.patient_information);
+                    $('.sp_data_table').remove();
+                    $('#sp_data_table').append(response.sp_table);
+                    $("#sp-ins-table tbody tr").click(function (e) {
+                        $('#sp-ins-table tbody tr.row_selected').removeClass('row_selected');
+                        $(this).addClass('row_selected');
+                    });
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 $(document.body).on('click', '.exa-pat-spInstructions', function () {
@@ -2826,25 +2837,29 @@ $(document.body).on('click', '.exa-pat-spInstructions', function () {
 
 $(document.body).on('click', '.pat-labtest', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
-    $.ajax({
-        url: '/cms/profile/patient_lab_test',
-        type: 'post',
-        data: {patid:patid},
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.content-wrapper').remove();
-                $('#content-wrapper').append(response.result_html);
-                $('.patient_info').remove();
-                $('#pat_sp_information').append(response.patient_information);
-                $('.lab-date').datepicker({
-                    format: 'd-M-yyyy'
-                });
-                $('#lab_test_data_table').empty();
-                $('#lab_test_data_table').append(response.test_table);
+    if (patid=='') {
+         toastr["warning"]('Please select a patient first.');
+    }else{
+        $.ajax({
+            url: '/cms/profile/patient_lab_test',
+            type: 'post',
+            data: {patid:patid},
+            cache: false,
+            success: function (response) {
+                if (response.result_html != '') {
+                    $('.content-wrapper').remove();
+                    $('#content-wrapper').append(response.result_html);
+                    $('.patient_info').remove();
+                    $('#pat_sp_information').append(response.patient_information);
+                    $('.lab-date').datepicker({
+                        format: 'd-M-yyyy'
+                    });
+                    $('#lab_test_data_table').empty();
+                    $('#lab_test_data_table').append(response.test_table);
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 $(document.body).on('click', '.exa-pat-labtest', function () {

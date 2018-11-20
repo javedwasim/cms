@@ -241,23 +241,27 @@
 </style>
 </head>
 <body class="A4 " >
-    <div class="row sheet">
-        <div class="col-md-10 offset-1">
+    <div class="row">
+        <div class="col-md-11 offset-1">
             <div class="row">
                 <div class="col-md-12">
                     <h1 style="text-align: center;">Exercise Tolerance Test</h1>
                 </div>
             </div>
-            <br>
-            <div class="row border border-dark" style="width: 100%;">
+            <div class="row" style="width: 99%; background: #90addd; border-top: 2px solid #000; border-bottom: 2px solid #000; border-left: 2px dotted #000; border-right: 2px dotted #000; padding-top: 10px; padding-left: 10px; padding-bottom: 10px;">
                 <div class="col-md-6">
-                    <label>Ref.ID</label>
-                    <strong><?php echo $patient_info->id ?></strong>
-                    <strong><?php echo $patient_info->pat_name ?></strong>
+                    <strong>Ref.ID</strong>
+                    <i><?php echo $patient_info->id ?></i>
+                    <strong style="margin-left: 10px"><?php echo $patient_info->pat_name ?></strong>
                 </div>
                 <div class="col-md-4">
-                    <label><?php echo $patient_info->pat_age ?></label>
-                    <label><?php echo $patient_info->pat_sex ?></label>
+                    <strong>
+                        <?php $age = preg_split('#(?<=\d)(?=[a-z])#i', $patient_info->pat_age); echo $age[0]; 
+                            echo " ";
+                        ?>
+                    </strong>
+                    <label><?php echo $age[1]; ?></label>
+                    <label style="margin-right: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
                 </div>
                 <div class="col-md-2">
                     <label><?php echo date('d-M-Y');?></label>
@@ -266,26 +270,34 @@
             <br>
             <div class="row" style="width: 100%;">
                 <div class="col-md-6">
-                    <div>
-                        <h3><u>Indication of Exercise:</u></h3>
+                    <div style="height: 100px;">
+                        <div style="width: 98%; margin-bottom: 5px; border-bottom: 1px solid #000;">
+                            <h3 style="margin: 0px;">Indication of Exercise:</h3>
+                        </div>
                         <?php if(isset($testreason)){?>
                             <strong><?php echo $testreason; ?></strong>
                         <?php }?>
                     </div>
-                    <div class="">
-                        <h3><u>Medication</u></h3>
+                    <div style="height: 100px;">
+                        <div style="width: 98%; margin-bottom: 5px; border-bottom: 1px solid #000;">
+                            <h3 style="margin: 0px;">Medication</h3>
+                        </div>
                         <?php foreach($test_details as $key){?>
                             <strong><?php echo $key['medication']; ?></strong>
                         <?php }?>
                     </div>
-                    <div class="">
-                        <h3><u>Reason for Ending Test</u></h3>
+                    <div style="height: 100px;">
+                        <div style="width: 98%; margin-bottom: 5px; border-bottom: 1px solid #000;">
+                            <h3 style="margin: 0px;">Reason for Ending Test</h3>
+                        </div>
                         <?php if(isset($endingtestreason)){?>
                             <strong><?php echo $endingtestreason; ?></strong>
                         <?php }?>
                     </div>
-                    <div >
-                        <h3><u>Protocol:</u></h3>
+                    <div style="height: 100px;">
+                        <div style="width: 98%; margin-bottom: 5px; border-bottom: 1px solid #000;">
+                            <h3 style="margin: 0px;">Protocol:</h3>
+                        </div>
                         <?php if(isset($protocol)){?>
                             <strong><?php echo $protocol; ?></strong>
                         <?php }?>
@@ -294,61 +306,61 @@
                 <div class="col-md-6">
                     <div class="row" style="margin: 0px;">
                         <div class="col-md-6">
-                            <div class="border border-dark p-0" style="width: 99.5%; margin: 0 auto;">
-                                <div class="mb-1 border-bottom border-dark padding">Resting HR:</div>
-                                <div class="mb-1 border-bottom border-dark padding">Resting BP:</div>
-                                <div class="mb-1 border-bottom border-dark padding">Max Predicted Target HR:</div>
-                                <div class="mb-1 border-bottom border-dark padding">Max HR:</div>
-                                <div class="mb-1 border-bottom border-dark padding">Max Predicted HR Achived:</div>
-                                <div class="mb-1 border-bottom border-dark padding">Max BP:</div>
-                                <div class="mb-1 border-bottom border-dark padding">HR x BP:</div>
-                                <div class="mb-1 border-bottom border-dark padding">Total Exercise Time:</div>
-                                <div class="padding">Mets:</div>
+                            <div class="border border-dark p-0" style="width: 100%; margin: 0 auto;">
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">Resting HR:</div>
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">Resting BP:</div>
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">Max Predicted Target HR:</div>
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">Max HR:</div>
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">Max Predicted HR Achived:</div>
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">Max BP:</div>
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">HR x BP:</div>
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">Total Exercise Time:</div>
+                                <div class="padding" style="padding: 10px 3px;">Mets:</div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="border border-dark p-0" style="width: 99.5%; margin: 0 auto;">
-                                <div class="mb-1 border-bottom border-dark padding">
+                            <div class="border border-dark p-0" style="width: 100%; margin: 0 auto;">
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['resting_hr']; ?></strong>
                                     <?php }?>(bpm)
                                 </div>
-                                <div class="mb-1 border-bottom border-dark padding">
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['resting_bp']; ?></strong>
                                     <?php }?>(mmHg)
                                 </div>
-                                <div class="mb-1 border-bottom border-dark padding">
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['max_pre_tar']; ?></strong>
                                     <?php }?>(bpm)
                                 </div>
-                                <div class="mb-1 border-bottom border-dark padding">
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['max_hr']; ?></strong>
                                     <?php }?>(bpm)
                                 </div>
-                                <div class="mb-1 border-bottom border-dark padding">
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['max_pre_hr']; ?></strong>
                                     <?php }?>(%)
                                 </div>
-                                <div class="mb-1 border-bottom border-dark padding">
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['max_bp']; ?></strong>
                                     <?php }?>(mmHg)
                                 </div>
-                                <div class="mb-1 border-bottom border-dark padding">
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['hr_bp']; ?></strong>
                                     <?php }?>(bpm x mmHg)
                                 </div>
-                                <div class="mb-1 border-bottom border-dark padding">
+                                <div class="mb-1 border-bottom border-dark padding" style="padding: 10px 3px;">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['exercise_time']; ?></strong>
                                     <?php }?>(minuts)
                                 </div>
-                                <div class="padding">
+                                <div class="padding" style="padding: 10px 3px;">
                                     <?php foreach($test_details as $key){?>
                                             <strong><?php echo $key['mets']; ?></strong>
                                     <?php }?>(ml O2/kg/min)
@@ -359,7 +371,6 @@
                     </div>
                 </div>
             </div>
-            <br>
             <div class="row" style="width: 100%;">
                 <div class="col-md-12 p-0">
                     <table class="table table-bordered">
@@ -394,7 +405,6 @@
                     </table>
                 </div>
             </div>
-            <br>
             <div class="row" style="width: 100%;">
                 <div class="col-md-12">
                     <h3>Description:</h3>
@@ -413,7 +423,7 @@
                     </p>
                 </div>
             </div>
-            <div class="row" style=" position: fixed;bottom: 0px;">
+            <div class="row" style=" position: fixed;bottom: 0px; right: 20px; width: 96%;">
                 <div class="row">
                     <div class="col-md-12 ">
                         <div style="float: right;">

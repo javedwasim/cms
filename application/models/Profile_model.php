@@ -621,7 +621,7 @@ class Profile_model extends CI_Model
         $disease_id = $data['disease_id'];
         if (isset($data['echo_detail_id_mmode']) && !empty($data['echo_detail_id_mmode'])) {
             $echo_deatil_id = $data['echo_detail_id_mmode'];
-        } else {
+        }else {
             $this->db->insert('profile_echo_detail', array('patient_id' => $patient_echo_id,'doc_sig'=> $data['sig-echo']));
             $echo_deatil_id = $this->db->insert_id();
         }

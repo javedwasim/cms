@@ -1,0 +1,7 @@
+Names
+test
+"Test is negative for Exercise induced ishchemia at Low Cardiac Work load."
+"Test is negative for Exercise induced ishchemia at Maximum Cardiac Work load."
+"Test is negative for Exercise induced ishchemia at Moderate Cardiac Work load."
+"Test is positive for Exercise induced ishchemia at Low Cardiac Work load."
+"Test is positive for Exercise induced ishchemia at Moderate Cardiac Work load."

@@ -6,6 +6,20 @@ if(isset($rights[0]['user_rights']))
 }
 ?>
 <div class="content-wrapper">
+	<div class="row page-titles" style="padding-bottom: 0px;">
+        <div class="col-md-5">
+        
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb pull-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" id="examination_to_profile">profile</a></li>
+                <li class="breadcrumb-item active">examination</li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb -->
+    <!-- ============================================================== -->
     <div class="row p-t-10 m-0">
     	<div class="col-md-6 col-lg-6 p-r-0">
     		<div class="card">
@@ -509,9 +523,9 @@ if(isset($rights[0]['user_rights']))
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
                                                     <thead><tr><th>Medicine</th></tr></thead>
-                                                    <tbody id="medicine_item" style="height: 200px;"></tbody>
+                                                    <tbody id="medicine_item"></tbody>
                                                     <?php if(isset($medicine_details)){ foreach($medicine_details as $med){?>
                                                     	<tr><td><input class="form-control" type="text" name="medicine_value[]" value="<?php echo $med['medicine_value']; ?>" ></td></tr>
                                                     <?php } }?>
@@ -528,9 +542,9 @@ if(isset($rights[0]['user_rights']))
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
                                                     <thead><tr><th>Dosage</th></tr></thead>
-                                                    <tbody id="dosage_item" style="height: 200px;"></tbody>
+                                                    <tbody id="dosage_item"></tbody>
                                                     <?php if(isset($dosage_details)){ foreach($dosage_details as $dos){?>
                                                     	<tr><td><input class="form-control" type="text" name="dosage_value[]" value="<?php echo $dos['dosage_value']; ?>" ></td></tr>
                                                     <?php } }?>

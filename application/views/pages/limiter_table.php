@@ -1,5 +1,5 @@
 <div class="limiter_table">
-	<table class="responsive table table-bordered tbl_header_fix_history">
+	<table class="responsive table table-bordered tbl_header_fix_history" id="limiter_tbl">
 		<thead>
 			<th style="width: 35%">Action</th>
 			<th style="width: 33%">Date</th>
@@ -15,9 +15,10 @@
                         <i class="fa fa-trash" title="Delete"></i></a>
 					</td>
 					<td style="width: 33%"><?php  echo date('d-M-Y',strtotime($row->limiter_date)); ?></td>
-					<td style="width: 33%" contenteditable="true" class="exam_cate"
-                    onBlur="updatelimiter(this,'limiter','<?php echo $row->limiter_id; ?>')"
-                    onClick="showrow(this);" ><?php echo $row->limiter ?></td>
+					<td style="width: 33%" class="exam_cate" >
+                    <input type="text" value="<?php echo $row->limiter ?>" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" onchange="updatelimiter(this,'limiter','<?php echo $row->limiter_id; ?>')"
+                    onClick="showrow(this);">
+                    </td>
 				</tr>
 			<?php } ?>
 		</tbody>
@@ -25,16 +26,17 @@
 </div>
 <script type="text/javascript">
     function showrow(editableObj) {
-        $('td.exam_cate').css('background', '#FFF');
-        $('td.exam_cate').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
+        $("#limiter_tbl tbody tr").click(function (e) {
+            $('#limiter_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
     function updatelimiter(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'dashboard/update_limiter' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success == true) {

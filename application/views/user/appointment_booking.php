@@ -1,9 +1,6 @@
 <?php if(isset($rights[0]['user_rights'])){$permissions = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
 <div class="content-wrapper">
     <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="wrapper">
@@ -138,7 +135,8 @@
         } );
     $(document).ready(function () {
         $('.pat_search').datepicker({
-            format: 'd-M-yyyy'
+            format: 'd-M-yyyy',
+            autoclose: true
         });
         
         $(".pat_search").on("change", function () {
@@ -221,7 +219,8 @@
                         });
 
                         $('.app_date').datepicker({
-                            format: 'd-M-yyyy'
+                            format: 'd-M-yyyy',
+                            autoclose: true
                         });
                     }
                 }

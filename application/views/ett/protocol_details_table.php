@@ -1,5 +1,4 @@
-<?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']);  $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive tbl_header_fix_350" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive tbl_header_fix_350" cellspacing="0" id="proto_details_tabl" width="100%" >
    <thead>
         <tr>
             <th style="width: 21%">Stage Name</th>
@@ -12,45 +11,47 @@
     <tbody>
         <?php foreach($protocol_details as $key){?>
         <tr>
-            <?php if(($loggedin_user['is_admin']==1) || in_array("ett-can_edit-1", $appointment_rights)&&($loggedin_user['is_admin']==0)) { ?>
-                <td style="width: 20%" contenteditable="true" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" class="exam_cate word_break"
-                    onBlur="saveToDatabase(this,'stage_name','<?php echo $key['id']; ?>')"
-                    onClick="showExamination(this);"><?php echo $key['stage_name']; ?></td>
-                <td style="width: 20%" contenteditable="true" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" class="exam_cate word_break" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"
-                    onBlur="saveToDatabase(this,'speed_mph','<?php echo $key['id']; ?>')"
-                    onClick="showExamination(this);"><?php echo $key['speed_mph']; ?></td>
-                <td style="width: 20%" contenteditable="true" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" class="exam_cate word_break" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"
-                    onBlur="saveToDatabase(this,'grade','<?php echo $key['id']; ?>')"
-                    onClick="showExamination(this);"><?php echo $key['grade']; ?></td>
-                <td style="width: 20%" contenteditable="true" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" class="exam_cate word_break" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"
-                    onBlur="saveToDatabase(this,'stage_time','<?php echo $key['id']; ?>')"
-                    onClick="showExamination(this);"><?php echo date('h:i', strtotime($key['stage_time'])) ?></td>
-                <td style="width: 20%" contenteditable="true" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"  class="exam_cate word_break" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"
-                    onBlur="saveToDatabase(this,'mets','<?php echo $key['id']; ?>')"
-                    onClick="showExamination(this);"><?php echo $key['mets']; ?></td>
-            <?php } else{ ?>
-                <td contenteditable="true" onClick="showError(this);">
-                    <?php echo $key['stage_name']; ?></td>
-                <td contenteditable="true" onClick="showError(this);">
-                    <?php echo $key['speed_mph']; ?></td>
-                <td contenteditable="true" onClick="showError(this);">
-                    <?php echo $key['grade']; ?></td>
-                <td contenteditable="true" onClick="showError(this);">
-                    <?php echo $key['stage_time']; ?></td>
-                <td contenteditable="true" onClick="showError(this);">
-                    <?php echo $key['mets']; ?></td>
-            <?php } ?>
-
+            <td style="width: 20%" class="exam_cate word_break">
+                    <input type="text" value="<?php echo $key['stage_name']; ?>" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" onClick="showExamination(this);" 
+                        onchange="saveToDatabase(this,'stage_name','<?php echo $key['id']; ?>')"
+                        class="form-control border-0 shadow-none bg-transparent">
+                </td>
+            <td style="width: 20%"  class="exam_cate word_break">
+                <input type="text" readonly="true" ondblclick="this.readOnly='';" 
+                    onfocusout="this.readOnly='readonly';" onClick="showExamination(this);" 
+                    value="<?php echo $key['speed_mph']; ?>" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" 
+                    onchange="saveToDatabase(this,'speed_mph','<?php echo $key['id']; ?>')" 
+                    class="form-control border-0 shadow-none bg-transparent">        
+            </td>
+            <td style="width: 20%" class="exam_cate word_break" >
+                <input type="text" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" onchange="saveToDatabase(this,'grade','<?php echo $key['id']; ?>')" onClick="showExamination(this);" value="<?php echo $key['grade']; ?>"
+                    class="form-control border-0 shadow-none bg-transparent">        
+            </td>
+            <td style="width: 20%" class="exam_cate word_break">
+                <input type="text" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo date('h:i', strtotime($key['stage_time'])) ?>" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" class="form-control border-0 shadow-none bg-transparent"
+                onchange="saveToDatabase(this,'stage_time','<?php echo $key['id']; ?>')"
+                onClick="showExamination(this);">    
+            </td>
+            <td style="width: 20%" class="exam_cate word_break">
+                <input type="text" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" value="<?php echo $key['mets']; ?>"
+                onchange="saveToDatabase(this,'mets','<?php echo $key['id']; ?>')"
+                onClick="showExamination(this);" class="form-control border-0 shadow-none bg-transparent">        
+            </td>
         </tr>
     <?php }?>
     </tbody>
 </table>
 <script type="text/javascript">
+    $("#proto_details_tabl tbody tr").click(function () {
+            $('#proto_details_tabl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+    });
     function saveToDatabase(editableObj, column, id) {
+        var val = editableObj.value;
         $.ajax({
             url: "<?php echo base_url() . 'ett/update_protocol_details' ?>",
             type: "POST",
-            data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
+            data: 'column=' + column + '&editval=' + val + '&id=' + id,
             success: function (response) {
                 $(editableObj).css("background", "#FDFDFD");
                 if (response.success == true) {

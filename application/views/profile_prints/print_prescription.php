@@ -148,7 +148,7 @@
             padding-bottom: 5px;
         }
         .mb-10{
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 </style>
 <style type="text/css" media="print">
@@ -184,6 +184,11 @@
         float: left;    
         max-width: 41.666667%;
     }
+    .col-md-7 {
+        float: left;
+        max-width: 58.333333%;
+    }
+
     .col-md-10 {
         -ms-flex: 0 0 83.333333%;
         flex: 0 0 83.333333%;
@@ -199,6 +204,11 @@
         flex: 0 0 33.333333%;
         max-width: 33.333333%;
     }
+    .col-md-7 {
+        -ms-flex: 0 0 58.333333%;
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%;
+      }
     .col-md-8 {
         -ms-flex: 0 0 66.666667%;
         flex: 0 0 66.666667%;
@@ -212,14 +222,15 @@
     .footer-bottom{
         position: fixed;
         bottom: 40px;
-
+        right: 35px;
     }
     .footer-top{
         position: fixed;
         bottom: 100px;
+        left: 330px;
     }
     .mb-10{
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 </style>
 </head>
@@ -234,15 +245,20 @@
             <br>
             <br>
             <br>
-            <div class="row border border-dark" style="width: 100%;">
+            <div class="row border-dark" style="width: 100%; border-bottom:3px solid #000;">
                 <div class="col-md-6">
-                    <label>Ref.ID</label>
-                    <strong><?php echo $patient_info->id ?></strong>
-                    <strong><?php echo $patient_info->pat_name ?></strong>
+                    <strong>Ref.ID</strong>
+                    <i><?php echo $patient_info->id ?></i>
+                    <strong style="margin-left: 10px"><?php echo $patient_info->pat_name ?></strong>
                 </div>
                 <div class="col-md-4">
-                    <label><?php echo $patient_info->pat_age ?></label>
-                    <label><?php echo $patient_info->pat_sex ?></label>
+                    <strong>
+                        <?php $age = preg_split('#(?<=\d)(?=[a-z])#i', $patient_info->pat_age); echo $age[0]; 
+                            echo " ";
+                        ?>
+                    </strong>
+                    <label><?php echo $age[1]; ?></label>
+                    <label style="margin-right: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
                 </div>
                 <div class="col-md-2">
                     <label><?php echo date('d-M-Y');?></label>
@@ -250,28 +266,28 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="row">
-                        <div class="col-md-3" style="padding-left: 0px;">
+                        <div class="col-md-5" style="padding-left: 0px;">
                             <?php foreach($medicine_details as $med){?>
                                 <div class="mb-10"><?php echo $med['medicine_value']?></div>
                             <?php }?>
                         </div>
-                        <div class="col-md-4" style="padding-right: 0px;">
+                        <div class="col-md-6" style="padding-right: 0px;direction:rtl; text-align: right;">
                             <?php foreach($dosage_details as $dos){?>
                                 <div class="mb-10"><?php echo $dos['dosage_value']?></div>
                             <?php }?>
                         </div>  
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <?php foreach($history_details as $history){?>
                         <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $history['history_value']; ?></div>
                     <?php }?>
                     <?php foreach($measurement_details as $measurment){?>
-                        <div class="mb-10" style="width: 100%; word-break: break-all;">Pulse:<?php echo $measurment['pulse']; ?>&nbsp;<?php echo $measurment['volume']; ?></div>
-                        <div class="mb-10" style="width: 100%; word-break: break-all;">BP.<?php echo $measurment['bp_a']; ?>/<?php echo $measurment['bp_b']; ?></div>
-                        <div class="mb-10" style="width: 100%; word-break: break-all;">Resp. Rate:<?php echo $measurment['rr']; ?>&nbsp;&nbsp;&nbsp;Temprature:<?php echo $measurment['temprature']; ?></div>
+                        <div style="width: 100%; word-break: break-all;">Pulse:<?php echo $measurment['pulse']; ?>&nbsp;<?php echo $measurment['volume']; ?></div>
+                        <div style="width: 100%; word-break: break-all;">BP.<?php echo $measurment['bp_a']; ?>/<?php echo $measurment['bp_b']; ?></div>
+                        <div style="width: 100%; word-break: break-all;">Resp. Rate:<?php echo $measurment['rr']; ?>&nbsp;&nbsp;&nbsp;Temprature:<?php echo $measurment['temprature']; ?></div>
                     <?php }?>
                     <?php foreach($examination_details as $examination){?>
                         <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $examination['examination_value']; ?></div>
@@ -286,12 +302,18 @@
             </div>
             <br>
             <?php foreach($instruction_details as $instruction){?>
-                <div class="mb-10 footer-top" style="width: 100%; word-break: break-all;"><?php echo $instruction['instruction_value']; ?></div>
+                <div class="mb-10 row footer-top" style="word-break: break-all; text-align: right;">
+                    <?php $instructions = explode(",",$instruction['instruction_value']); 
+                        foreach ($instructions as $value) {
+                            echo $value; echo '<br />';
+                        }
+                    ?>
+                </div>
             <?php }?>
-            <div class="row footer-bottom" style="border-top:1px solid #ddd;">
+            <div class="row footer-bottom">
                 <div class="col-md-12">
                     <br> 
-                    <p style="text-align: center; font-size: 16px; font-weight: bold;">پھر مورخہ <?php foreach($visit_date as $visit){echo " ";echo date('Y-m-d',strtotime($visit['next_visit_date']));echo " ";}?>کو چیک کرایں۔ چیک نہ ہونے کی صورت میں ادوایات جاری رکہیں۔ آنے سے ایک روز ‍قبل فون پر نام لیں۔</p>
+                    <p style="text-align: right; font-size: 16px; direction:rtl; font-weight: bold;">پھر مورخہ <?php foreach($visit_date as $visit){echo " ";echo date('Y-m-d',strtotime($visit['next_visit_date']));echo " ";}?>کو چیک کرایں۔ چیک نہ ہونے کی صورت میں ادوایات جاری رکہیں۔ آنے سے ایک روز ‍قبل فون پر نام لیں۔</p>
                 </div>
             </div>
         </div>

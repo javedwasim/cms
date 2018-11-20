@@ -74,10 +74,12 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('.print_date').datepicker({
-            format: 'd-M-yyyy'
+            format: 'd-M-yyyy',
+            autoclose: true
         });
         $('#search-all-cat').datepicker({
-            format: 'd-M-yyyy'
+            format: 'd-M-yyyy',
+            autoclose: true
         });
     });
     //////////////////////////////////////////////// search all categories ///////////////////////////////////////////

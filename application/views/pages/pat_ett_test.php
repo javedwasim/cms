@@ -1,4 +1,18 @@
 <div class="content-wrapper" style="margin: 0% 0.5%;">
+    <div class="row page-titles" style="padding-bottom: 0px;">
+        <div class="col-md-5">
+        
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb pull-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" id="ett_to_profile">profile</a></li>
+                <li class="breadcrumb-item active">ett</li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb -->
+    <!-- ============================================================== -->
     <div class="row p-t-10 m-0">
         <form id="ett_protocol_form">
             <input type="hidden" name="pat_id" value="" id="ett_pat_id">
@@ -81,7 +95,7 @@
         							</div>
         						</div>
         					</div>
-        					<div class="col-md-4 p-l-0 p-r-0">
+        					<div class="col-md-3 p-l-0 p-r-0">
         						<div class="card">
         							<div class="card-body">
         								<div class="row">
@@ -232,7 +246,7 @@
         							</div>
         						</div>
         					</div>
-        					<div class="col-md-5 p-l-0">
+        					<div class="col-md-6 p-l-0">
         						<div class="card">
         							<div class="card-header" style="display: inline-flex;">
         								<label class="m-t-10">Select Protocol:</label>
@@ -244,14 +258,14 @@
                                         </select>
         							</div>
         							<div class="card-body" style="height: 60vh;">
-        								<table class="table table-bordered responsive">
+        								<table class="table table-bordered responsive" id="ett_protocol_tbl">
         									<thead>
         										<tr>
         											<th>Stage Name</th>
-    	    										<th>Speed</th>
+    	    										<th>Speed </th>
     	    										<th>Grade %</th>
     	    										<th>Stage Time</th>
-    	    										<th>Mets</th>
+    	    										<th>Mets </th>
     	    										<th>HR</th>
     	    										<th>SBP</th>
     	    										<th>DBP</th>
@@ -283,3 +297,9 @@
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    $("#ett_protocol_tbl tbody tr").click(function (e) {
+        $('#ett_protocol_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+</script>

@@ -34,6 +34,7 @@
 
                 <div class="col-lg-12 col-md-8">
                     <div class="card">
+                        <div class="card-header">Diagnosis</div>
                         <div class="card-body default_diagnosis_container">
                             <?php $this->load->view('echo/default_diagnosis_table'); ?>
                         </div>

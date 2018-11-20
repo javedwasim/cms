@@ -624,6 +624,12 @@ table.table th {
     background: #1e88e5;
     width: 100%;
 }
+
+.form-control:disabled,.form-control[readonly]{opacity:1 !important; color: #000;}
+.table tr td .form-control{
+     padding: .05rem .75rem !important;
+     color: #000;
+}
 /* ---------------------------------------------------
     sidebar style
 ----------------------------------------------------- */

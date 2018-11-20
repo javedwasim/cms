@@ -75,11 +75,10 @@ class Print_profiles extends MY_Controller {
 		$size = $this->input->get('size');
 		$data['test_details'] = $this->Print_model->get_sp_inst_detail_by_ids($patid,$testid);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
-		if ($size=='a4') {
-			$this->load->view('profile_prints/print_special_inst',$data);
-			
-		}else{
+		if ($size=='a5') {
 			$this->load->view('profile_prints/print_sp_a5',$data);
+		}else{
+			$this->load->view('profile_prints/print_special_inst',$data);
 		}
 	}
 

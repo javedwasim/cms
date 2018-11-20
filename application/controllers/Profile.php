@@ -989,19 +989,19 @@ class Profile extends MY_Controller
         $patient_id = $data['patient_id'];
         $current_date = date('Y-m-d');
         $next_visit_date = date('Y-m-d',strtotime($data['next_date_visit_form']));
-        if ($current_date>=$next_visit_date) {
-            $json['error'] = true;
-            $json['message'] = 'Please provide next visit date!';
+        if (isset($data['examination_testid'])&& $data['examination_testid'] != '') {
+            $result = $this->Profile_model->update_profile_examination_info($data);
+            if ($result) {
+                $json['success'] = true;
+                $json['message'] = 'Updated successfully!';
+            }else{
+                $json['error'] = true;
+                $json['message'] = 'Seems an error!';
+            }
         }else{
-            if (isset($data['examination_testid'])&& $data['examination_testid'] != '') {
-                $result = $this->Profile_model->update_profile_examination_info($data);
-                if ($result) {
-                    $json['success'] = true;
-                    $json['message'] = 'Updated successfully!';
-                }else{
-                    $json['error'] = true;
-                    $json['message'] = 'Seems an error!';
-                }
+            if ($current_date>=$next_visit_date) {
+                $json['error'] = true;
+                $json['message'] = 'Please provide next visit date!';
             }else{
                 $result = $this->Profile_model->save_profile_examination_info($data);
                 if ($result) {
@@ -1012,20 +1012,21 @@ class Profile extends MY_Controller
                     $json['message'] = 'Seems an error!';
                 }
             }
-            $data['professions'] = $this->Setting_model->get_professions();
-            $data['districts'] = $this->Setting_model->get_districts();
-            $data['profiles'] = $this->Profile_model->get_profiles();
-            $data['rights'] = $this->session->userdata('other_rights');
-            $json['patid'] = "patid".$patient_id;
-            $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
-            $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($patient_id);
-            $data['details'] = $this->Profile_model->get_examination_detail($patient_id);
-            $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
-            $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
-            $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
-            $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
-            $json['result_html'] = $this->load->view('pages/profile', $data, true);
+            
         }
+        $data['professions'] = $this->Setting_model->get_professions();
+        $data['districts'] = $this->Setting_model->get_districts();
+        $data['profiles'] = $this->Profile_model->get_profiles();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['patid'] = "patid".$patient_id;
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
+        $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($patient_id);
+        $data['details'] = $this->Profile_model->get_examination_detail($patient_id);
+        $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
+        $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
+        $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+        $json['profile_table'] = $this->load->view('profile/profile_table', $data, true);
+        $json['result_html'] = $this->load->view('pages/profile', $data, true);
         if ($this->input->is_ajax_request()){
             set_content_type($json);
         }
@@ -1088,7 +1089,7 @@ class Profile extends MY_Controller
     public function patient_examination_edit_detail(){
         $testid = $this->input->post('detail_id');
         $patid = $this->input->post('patid');
-        $instruction_category['category'] = 'special';
+        $instruction_category['category'] = 'clinical';
         $data['examination_category'] = $this->Examination_model->get_examination_categories();
         $data['items'] = $this->Examination_model->get_examination_items();
         $data['history_category'] = $this->History_model->get_profile_history();
@@ -1317,8 +1318,19 @@ class Profile extends MY_Controller
         if ($test=='sp') {
             $data['details'] = $this->Profile_model->get_sp_inst_detail($patid);
             $json['sp_inst_details'] = $this->load->view('profile/sp_inst_details_table', $data, true);
+        }else if($test == 'examination'){
+            $data['details'] = $this->Profile_model->get_examination_detail($patid);
+            $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
+        }else if($test == 'echo'){
+            $data['details'] = $this->Profile_model->get_echo_detail($patid);
+            $json['echo_detail'] = $this->load->view('profile/echo_detail_table', $data, true);
+        }else if($test == 'ett'){
+            $data['details'] = $this->Profile_model->get_ett_detail($patid);
+            $json['ett_detail'] = $this->load->view('profile/ett_detail_table', $data, true);
+        }else if($test == 'vitals'){
+            echo '';
         }else{
-            $data['details'] = $this->Profile_model->get_lab_test_detail($patid);
+             $data['details'] = $this->Profile_model->get_lab_test_detail($patid);
             $json['lab_detail'] = $this->load->view('profile/lab_detail_table', $data, true);
         }
         $data['professions'] = $this->Setting_model->get_professions();

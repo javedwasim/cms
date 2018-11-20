@@ -60,10 +60,17 @@
   <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>assets/dist/js/jquery.waypoints.min.js"></script>
 <style>
-    .row_selected,.row_selected td, .row_selected td input{
+    .row_selected,.row_selected td{
     background: #3300FF;
     color:#fff !important;
     opacity: 1;
+}
+.row_selected input{
+  color: #fff !important; 
+}
+.row_selected input:read-write{
+  color: #000 !important;
+  background: #fff !important;
 }
 </style>
     

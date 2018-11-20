@@ -206,17 +206,22 @@
 <body class="A5" >
     <div class="sheet padding-5mm">
         <div class="col-md-10">
-            <div class="border border-dark" style="width: 90%; height: 50px; padding: 10px; margin: 0 auto;">
-                <div style="float: left;">
-                    <label>Ref.ID:</label>
-                    <strong><?php echo $patient_info->id ?></strong>
-                    <strong><?php echo $patient_info->pat_name ?></strong>
+            <div class="row border-dark" style="width: 100%; border-bottom:3px solid #000;">
+                <div class="col-md-6">
+                    <strong>Ref.ID</strong>
+                    <i><?php echo $patient_info->id ?></i>
+                    <strong style="margin-left: 10px"><?php echo $patient_info->pat_name ?></strong>
                 </div>
-                <div style="float: left; margin-right:25px; margin-left: 25px;">
-                    <label><?php echo $patient_info->pat_age ?></label>
-                    <label><?php echo $patient_info->pat_sex ?></label>
+                <div class="col-md-4">
+                    <strong>
+                        <?php $age = preg_split('#(?<=\d)(?=[a-z])#i', $patient_info->pat_age); echo $age[0]; 
+                            echo " ";
+                        ?>
+                    </strong>
+                    <label><?php echo $age[1]; ?></label>
+                    <label style="margin-right: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
                 </div>
-                <div style="float: right;">
+                <div class="col-md-2">
                     <label><?php echo date('d-M-Y');?></label>
                 </div>
             </div>

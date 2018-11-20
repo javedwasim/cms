@@ -58,7 +58,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <form id="angio_form">
                                 <div class="form-group">
                                     <label>Recommendation</label>
@@ -69,7 +69,7 @@
                         <div class="col-md-1 p-l-0" style="margin-top: 25px;">
                             <button class="btn btn-sm btn-primary" id="add_recommendation">Add</button>
                         </div>
-                        <div class="col-md-2 p-l-0" style="margin-top: 25px;">
+                        <div class="col-md-3 p-l-0" style="margin-top: 25px;">
                             <div class="form-group">
                                 <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_angio" id="angio_export">Export Recommendations</a>
                             </div>
@@ -77,7 +77,7 @@
                         <div class="col-md-5">
                             <form id="import_csv_angio" enctype="multipart/form-data">
                                 <div class="row">
-                                  <div class="col-md-7">
+                                  <div class="col-md-8">
                                     <div class="form-group m-t-30">
                                       <input type="file" name="csv_file" id="csv_angio_file" required accept=".csv" />
                                     </div>

@@ -1,4 +1,18 @@
 <div class="content-wrapper" style="margin: 0% 0.5%;">
+    <div class="row page-titles" style="padding-bottom: 0px;">
+        <div class="col-md-5">
+        
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb pull-right">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" id="echo_to_profile">profile</a></li>
+                <li class="breadcrumb-item active">echo</li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb -->
+    <!-- ============================================================== -->
     <div class="row p-t-10 m-0">
     	<div class="col-md-12 p-l-0 p-r-0">
     		<div class="card" style="margin-bottom:0px !important; ">
@@ -125,7 +139,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php if(isset($measurements)): ?>
-                                                        <?php  foreach ($measurements as $measurement): if($measurement['main_category']=='dooplers'): ?>
+                                                        <?php  foreach ($measurements as $measurement): if($measurement['main_category']=='dopplers'): ?>
                                                             <tr>
                                                                 <td>
                                                                     <?php echo $measurement['item'] ?>
@@ -301,7 +315,9 @@
     			<label class="checkbox-inline m-r-10 m-t-15"><input type="checkbox" value="" id="echosig">Change Signature ?</label>
                 <form id="echo_sig_form" style="width:200px;">
                     <select class="form-control col-md-6 m-t-10" name="sig-echo" id="sig-echo" disabled="disabled">
-                        <option value="<?php  echo  $doc_sig->doc_sig; ?>"><?php  echo  $doc_sig->doc_sig ?></option>
+                        <?php if(isset($doc_sig->doc_sig)){?>
+                            <option value="<?php  echo  $doc_sig->doc_sig; ?>"><?php  echo  $doc_sig->doc_sig ?></option>
+                        <?php } ?>
                         <?php foreach ($users as $user) { ?>
                             <option value="<?php echo $user['username']; ?>"><?php echo $user['username']; ?></option>
                         <?php } ?>

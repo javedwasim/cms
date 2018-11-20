@@ -1,0 +1,6 @@
+Names
+"Normal CXR"
+Cardiomagely
+"Upper Lobe Diversion"
+"Lobar Pneumonia"
+"Cystic Changed"

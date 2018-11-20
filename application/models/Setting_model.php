@@ -587,15 +587,6 @@
             }
         }
 
-        public function insert_csv_history($data){
-            $result = $this->db->insert('history_item',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
-            }
-        }
-
         public function get_examination_items($id){
             $result = $this->db->select('name')
                                 ->where('examination_id',$id)
@@ -604,15 +595,6 @@
                 return $result->result_array();
             }else{
                 return array();
-            }
-        }
-
-        public function insert_csv_examination($data){
-            $result = $this->db->insert('examination_item',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
             }
         }
 
@@ -627,15 +609,6 @@
             }
         }
 
-        public function insert_csv_investigation($data){
-            $result = $this->db->insert('investigation_item',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
-            }
-        }
-
         public function get_instruction_items($id){
             $result = $this->db->select('name')
                                 ->where('instruction_id',$id)
@@ -644,15 +617,6 @@
                 return $result->result_array();
             }else{
                 return array();
-            }
-        }
-
-        public function insert_csv_instruction($data){
-            $result = $this->db->insert('instruction_item',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
             }
         }
 
@@ -667,15 +631,6 @@
             }
         }
 
-        public function insert_csv_medicine($data){
-            $result = $this->db->insert('medicine_item',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
-            }
-        }
-
         public function get_advice_items_csv($id){
             $result = $this->db->select('name')
                                 ->where('advice_id',$id)
@@ -684,15 +639,6 @@
                 return $result->result_array();
             }else{
                 return array();
-            }
-        }
-
-        public function insert_csv_advice($data){
-            $result = $this->db->insert('advice_item',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
             }
         }
 
@@ -735,61 +681,6 @@
             }
         }
 
-        public function export_professions(){
-            $result = $this->db->select('profession_name')->from('profession_tbl')->order_by('profession_name')
-                        ->get();
-            if ($result) {
-                return $result->result_array();
-            }else{
-                return false;
-            }
-        }
-
-        public function insert_csv_profession($data){
-            $result = $this->db->insert('profession_tbl',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        public function export_district(){
-            $result = $this->db->select('district_name')->from('districts_tbl')->order_by('district_name')
-                        ->get();
-            if ($result) {
-                return $result->result_array();
-            }else{
-                return false;
-            }
-        }
-
-        public function insert_csv_district($data){
-            $result = $this->db->insert('districts_tbl',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        public function export_dosage(){
-            $result = $this->db->select('name')->from('dosage')->get();
-            if ($result) {
-                return $result->result_array();
-            }else{
-                return array();
-            }
-        }
-
-        public function insert_csv_dosage($data){
-            $result = $this->db->insert('dosage',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
-            }
-        }
         public function sort_data($data,$tablename,$id){
             $c= 0;
             for($i=0;$i<count($data['history_tbl']);$i++){
@@ -1142,16 +1033,167 @@
             }
         }
 
-        public function insert_csv_angio($data){
-            $result = $this->db->insert('recommendation',$data);
-            if ($result) {
-                return true;
-            }else{
-                return false;
-            }
+    //////////////////////////// file insert ////////////////////////////////////////////////////////////////
+    public function insert_file_data($data,$tbl){
+        $result = $this->db->insert($tbl,$data);
+        if ($result) {
+            return true;
+        }else{
+            return false;
         }
+    }
+
+    public function export_professions(){
+        $result = $this->db->select('profession_name')->from('profession_tbl')->order_by('profession_name','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
 
 
-	}
+    public function export_district(){
+        $result = $this->db->select('district_name')->from('districts_tbl')->order_by('district_name','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
+
+    public function export_dosage(){
+        $result = $this->db->select('name')->from('dosage')->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    public function export_test_reasons(){
+        $result = $this->db->select('test_reason')->from('ett_test_reason')->order_by('test_reason','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
+
+    public function export_ending_reasons(){
+        $result = $this->db->select('ending_reason')->from('ett_ending_reason')->order_by('ending_reason','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
+
+    public function export_ett_descriptions(){
+        $result = $this->db->select('description')->from('ett_description')->order_by('description','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
+
+    public function export_ett_conclusions(){
+        $result = $this->db->select('conclusion')->from('ett_conclusion')->order_by('conclusion','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
+    // public function insert_csv_district($data){
+    //     $result = $this->db->insert('districts_tbl',$data);
+    //     if ($result) {
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+    // public function insert_csv_history($data){
+    //     $result = $this->db->insert('history_item',$data);
+    //     if ($result) {
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+    // public function insert_csv_examination($data){
+    //     $result = $this->db->insert('examination_item',$data);
+    //     if ($result) {
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+    // public function insert_csv_investigation($data){
+    //     $result = $this->db->insert('investigation_item',$data);
+    //     if ($result) {
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+    // public function insert_csv_instruction($data){
+    //     $result = $this->db->insert('instruction_item',$data);
+    //     if ($result) {
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+    // public function insert_csv_medicine($data){
+    //     $result = $this->db->insert('medicine_item',$data);
+    //     if ($result) {
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+    // public function insert_csv_advice($data){
+    //     $result = $this->db->insert('advice_item',$data);
+    //     if ($result) {
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+    // public function insert_csv_dosage($data){
+    //     $result = $this->db->insert('dosage',$data);
+    //     if ($result) {
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+    // public function insert_csv_angio($data){
+    //     $result = $this->db->insert('recommendation',$data);
+    //     if ($result) {
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+
+}
 
 ?>
