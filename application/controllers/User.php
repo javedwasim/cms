@@ -1143,6 +1143,7 @@ class User extends MY_Controller {
 
     public function print_vitals(){
         $patid = $this->input->get('patid');
+        $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
         $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
         $this->load->view('pages/vitals_print',$data);
     }

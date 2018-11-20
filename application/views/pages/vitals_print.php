@@ -193,15 +193,33 @@
         
 </style>
 </head>
-<body class="A4 " >
+<body class="A4 ">
     <section class="sheet padding-10mm">
         <div class="header center">
         <!-- <img src="" style="position: absolute; top: 0.2in; left: 0.79in; height: 100px"> -->
         <h1>Dr. Shahadat Clinic</h1>
         <h3 style="margin-top: 0 !important;">Vitals List</h3>
         <br>
-        <h4 style="margin-top: 0 !important;">Date:<?php echo date('d-M-Y'); ?></h4>
-        <br>
+        <div style="width: 100%; border-bottom:3px solid #000; height: 23px;
+    margin-bottom: 10px;">
+            <div style="width: 45%; float:left; text-align: left;">
+                <strong>Ref.ID</strong>
+                <i><?php echo $patient_info->id ?></i>
+                <strong style="margin-left: 10px"><?php echo $patient_info->pat_name ?></strong>
+            </div>
+            <div style="width: 35%; float:left; text-align: left;">
+                <strong>
+                    <?php $age = preg_split('#(?<=\d)(?=[a-z])#i', $patient_info->pat_age); echo $age[0]; 
+                        echo " ";
+                    ?>
+                </strong>
+                <label><?php echo $age[1]; ?></label>
+                <label style="margin-right: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
+            </div>
+            <div style="width: 20%; float:left;">
+                <label><?php echo date('d-M-Y');?></label>
+            </div>
+        </div>
     </div>
         <table class="tg" style="display: -webkit-box;margin: 0 auto;">
             <thead>
