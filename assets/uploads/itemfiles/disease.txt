@@ -1,0 +1,19 @@
+Names
+"Anterior Wall MI"
+AR
+AS
+ASD/VSD
+Cor-Pulmonale
+DCMP
+Degenerative
+Diagnosis
+"Diastolic Dysfunction I"
+"Inferior Wall MI"
+LVH/Diastolicdysfunction
+MR
+MS
+"Normal Adult"
+"Normal Peads"
+TOF
+"Transposition Of Great Vessel"
+"test"

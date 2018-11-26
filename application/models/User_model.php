@@ -113,6 +113,13 @@ class User_model extends CI_Model {
                         'fee_paid_at' => $date,
                         'fee_paid_status' => '4'
                     );
+                }else if($value==0 && $ettFee == 0 && $echoFee == 0){
+                    $data = array(
+                        'consultant_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date,
+                        'fee_paid_status' => '0'
+                    );
                 }else{
                     $data = array(
                         'consultant_fee' => $value,

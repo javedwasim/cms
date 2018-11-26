@@ -1334,6 +1334,8 @@ function valupdate(val) {
                 $('#table-booking').append(response.booking_table);
                 $('.wallet-modal-box').remove();
                 $('#wallet-modal-box').append(response.wallet_count);
+                $('.status_row').remove();
+                $('#status_row').append(response.status_row);
                 $("#full_name").focus();
                 //////////////// datatable initilization//////////////
                 var oTable = $('#editable-datatable').DataTable({
@@ -4514,4 +4516,24 @@ $(document.body).on('click','#ett-details-pro',function(){
 
         }
     });
+});
+
+$(document.body).on('click','#echo_structure_tbl tbody tr.row_selected',function(){
+    var structure_id = $.trim($('#echo_structure_tbl tbody tr.row_selected').find('#structure_selected_id').val());
+    var nurl = window.location.origin+window.location.pathname+'setting/export_findings/'+structure_id;
+    $("#export_findings").attr("href", nurl);
+    var nurl = window.location.origin+window.location.pathname+'setting/export_diagnosis/'+structure_id;
+    $("#export_diagnosis").attr("href", nurl);
+});
+
+$(document.body).on('click','#export_findings',function(){
+    if ($(this).attr('href') == '#') {
+        toastr['warning']('Please select structure.');
+    }
+});
+
+$(document.body).on('click','#export_diagnosis',function(){
+    if ($(this).attr('href') == '#') {
+        toastr['warning']('Please select structure.');
+    }
 });

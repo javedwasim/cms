@@ -399,7 +399,8 @@ class Echo_controller extends MY_Controller
         $structure_id = $structure['structure_id'];
         $result = $this->Echo_model->delete_structure_finding($id);
         $message = "Finding successfully deleted";
-        $this->get_structure_finding_by_id($structure_id,$result,$message);
+        $disease_id = '';
+        $this->get_structure_finding_by_id($structure_id,$result,$message,$disease_id);
     }
 
     public function get_findings_by_id($id){
@@ -429,7 +430,7 @@ class Echo_controller extends MY_Controller
             $json['message'] = "Seems to an error";
         }
         if (empty($disease_id)) {
-           $data['findings'] = $this->Echo_model->get_structure_findings_by_id($id);
+            $data['findings'] = $this->Echo_model->get_structure_findings_by_id($id);
             $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($id);
             $data['active_tab'] = 'structure';
             $data['rights'] = $this->session->userdata('other_rights');
@@ -524,7 +525,8 @@ class Echo_controller extends MY_Controller
         $structure_id = $structure['structure_id'];
         $result = $this->Echo_model->delete_structure_diagnosis($id);
         $message = "Diagnosis successfully deleted";
-        $this->get_structure_diagnosis_by_id($structure_id,$result,$message);
+        $disease_id = '';
+        $this->get_structure_diagnosis_by_id($structure_id,$result,$message,$disease_id);
     }
 
     public function assign_finding_to_disease(){

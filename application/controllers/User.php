@@ -770,6 +770,7 @@ class User extends MY_Controller {
         $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
+        $json['status_row'] = $this->load->view('admin/patient_status_row', $data, true);
         $json['result_html'] = $this->load->view('user/appointment_booking', $data, true);
         $json['booking_table'] = $this->load->view('admin/booking_tbl', $data, true);
         if ($this->input->is_ajax_request()) {

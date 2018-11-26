@@ -14,7 +14,9 @@
                     <i class="fa fa-trash" title="Delete"></i>
                 </a>
             </td>
-            <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>">      <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">
+            <td onClick="structureEdit(this,'<?php echo $structure['id']; ?>');" id="<?php echo $structure['id']; ?>">      
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $structure['name']; ?>" name="echo_structure" onchange="saveStructure(this,'cate_name','<?php echo $structure['id']; ?>')">
+                <input type="hidden" id="structure_selected_id" value="<?php echo $structure['id']; ?>">
             </td>
         </tr>
     <?php endforeach; ?>

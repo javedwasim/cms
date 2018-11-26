@@ -16,6 +16,7 @@
             </td>
             <td class="finding_cate" onClick="findingEdit(this);">
                 <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $finding['name']; ?>" onchange="saveFinding(this,'cate_name','<?php echo $finding['id']; ?>')">
+                <input type="hidden" id="finding_selected_id" value="<?php echo $finding['id']; ?>">
             </td>
         </tr>
     <?php endforeach; ?>

@@ -1,35 +1,104 @@
+<script type="text/javascript">
+  $('#import_lab_test').submit(function(event){
+        event.preventDefault();
+        var itemfile = new FormData($('#import_lab_test')[0]);
+        var catid = $('#lab_test_category_id option:selected').val();
+        $.confirm({
+              title: 'Confirm!',
+              content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+              buttons: {
+                  Yes: function () {
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_lab_test/"+catid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_lab_test_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
+                  },
+                  No: function () {
+                    $.ajax({
+                       url:"<?php echo base_url(); ?>setting/import_lab_test/"+catid,
+                       method:"POST",
+                       data: itemfile,
+                       contentType:false,
+                       cache:false,
+                       processData:false,
+                       success:function(response)
+                       {
+                          document.getElementById("csv_lab_test_file").value = "";
+                            if (response.success==true) {
+                              toastr["success"](response.message);
+                            }else{
+                              toastr["error"](response.message);
+                            }
+                       }
+                    });
+                  }
+              }
+          });
+    });
+</script>
 <div class="tab-pane <?php echo isset($active_tab) && ($active_tab == 'tests') ? 'active' : ''; ?>"
      id="tests" role="tabpanel">
     <div class="card">
         <div class="card-header">
-            <form id="lab_test_form" method="post" role="form"
-                  data-action="<?php echo site_url('setting/add_lab_test') ?>"
-                  enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-lg-2 col-md-3">
-                        <div class="form-group">
-                            <label>Test Name:</label>
-                            <input type="text" class="form-control" name="name">
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="lab_test_form" method="post" role="form" data-action="<?php echo site_url('setting/add_lab_test') ?>" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5">
+                                <div class="form-group">
+                                    <label>Item Name:</label>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
+                            </div>
+                            <div class=" col-lg-5 col-md-5">
+                                <div class="form-group">
+                                    <label>Category:</label>
+                                    <select class="form-control" id="lab_test_category_id" name="lab_category_id">
+                                        <option value="">Select</option>
+                                        <?php foreach ($categories as $category): ?>
+                                            <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 p-0">
+                                <div class="form-group m-t-25" style="display: inline-flex;">
+                                    <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item">Add</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class=" col-lg-3 col-md-4">
-                        <div class="form-group">
-                            <label>Category:</label>
-                            <select class="form-control" name="lab_category_id">
-                                <option value="">Select</option>
-                                <?php foreach ($categories as $category): ?>
-                                    <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 p-0">
-                        <div class="form-group m-t-25" style="display: inline-flex;">
-                            <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item">Add</button>
-                        </div>
-                    </div>
+                    </form> 
                 </div>
-            </form>
+                <div class="col-md-6">
+                    <form id="import_lab_test" enctype="multipart/form-data">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group m-t-30">
+                              <input type="file" name="csv_file" id="csv_lab_test_file" required />
+                            </div>
+                          </div>
+                          <div  class="col-md-4">
+                            <div class="form-group m-t-25">
+                                <input type="submit" class="btn btn-sm btn-info" id="import_lab_test_btn" value="Import Tests">
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-3 col-md-4">
                     <div class="form-group ">
@@ -44,9 +113,14 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group m-t-25">
+                        <a class="btn btn-sm btn-info" href="#" id="export_lab_items" >Export items</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card-body" >
+        <div class="card-body labtest_content" >
             <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="lab_test_tbl"
                    width="100%">
                 <thead>
@@ -109,7 +183,7 @@
     </div>
 </div>
 <script>
-  
+ 
     $("#lab_test_tbl tbody tr").click(function (e) {
         $('#lab_test_tbl tbody tr.row_selected').removeClass('row_selected');
         $(this).addClass('row_selected');

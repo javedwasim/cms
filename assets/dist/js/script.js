@@ -392,13 +392,15 @@ $(document.body).on('click', '#save_lab_test_description', function(){
 });
 
 function filter_tests(cat_id) {
+    var nurl = window.location.origin+window.location.pathname+'setting/export_lab_items/'+cat_id;
+    $("#export_lab_items").attr("href", nurl);
     $.ajax({
         url: '/cms/setting/get_lab_test_by_category/'+cat_id,
         type: 'get',
         cache: false,
         success: function(response) {
-            $('.dashboard-content').empty();
-            $('.dashboard-content').append(response.result_html);
+            $('.labtest_content').empty();
+            $('.labtest_content').append(response.result_html);
         }
     });
     return false;

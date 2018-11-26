@@ -1025,30 +1025,22 @@
                 return false;
             }
         }
+        
 
-        public function check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid){
-            if (empty($id)) {
-                $result = $this->db->select($cname)->where($cname,$cdata)->get($tbl);
-            }else{
-                $result = $this->db->select($cname)->where($cname,$cdata)->where($cid,$id)->get($tbl);    
-            }
-            if ($result->num_rows()>0) {
-                return 1;
-            }else{
-                return 0;
-            }
+///////////////////////////////////// file import export module /////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+    public function check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid){
+        if (empty($id)) {
+            $result = $this->db->select($cname)->where($cname,$cdata)->get($tbl);
+        }else{
+            $result = $this->db->select($cname)->where($cname,$cdata)->where($cid,$id)->get($tbl);    
         }
-
-        public function export_angio(){
-            $result = $this->db->select('description')->from('recommendation')->order_by('description')->get();
-            if ($result) {
-                return $result->result_array();
-            }else{
-                return array();
-            }
+        if ($result->num_rows()>0) {
+            return 1;
+        }else{
+            return 0;
         }
-
-    //////////////////////////// file insert ////////////////////////////////////////////////////////////////
+    }
     public function insert_file_data($data,$tbl){
         $result = $this->db->insert($tbl,$data);
         if ($result) {
@@ -1079,8 +1071,80 @@
         }
     }
 
+    public function export_history_items($id){
+        $result = $this->db->select('name')
+                            ->where('profile_history_id',$id)
+                            ->order_by('name','ASC')
+                            ->get('history_item');
+        if ($result){
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    public function export_examination_items($id){
+        $result = $this->db->select('name')
+                            ->where('examination_id',$id)
+                            ->order_by('name','ASC')
+                            ->get('examination_item');
+        if ($result){
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    public function export_investigation_items($id){
+        $result = $this->db->select('name')
+                            ->where('investigation_id',$id)
+                            ->order_by('name','ASC')
+                            ->get('investigation_item');
+        if ($result){
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    public function export_instruction_items($id){
+        $result = $this->db->select('name')
+                            ->where('instruction_id',$id)
+                            ->order_by('name','ASC')
+                            ->get('instruction_item');
+        if ($result){
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    public function export_medicine_items($id){
+        $result = $this->db->select('name')
+                            ->where('medicine_id',$id)
+                            ->order_by('name','ASC')
+                            ->get('medicine_item');
+        if ($result){
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    public function export_advice_items($id){
+        $result = $this->db->select('name')
+                            ->where('advice_id',$id)
+                            ->order_by('name','ASC')
+                            ->get('advice_item');
+        if ($result){
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
+
     public function export_dosage(){
-        $result = $this->db->select('name')->from('dosage')->get();
+        $result = $this->db->select('name')->from('dosage')->order_by('name','ASC')->get();
         if ($result) {
             return $result->result_array();
         }else{
@@ -1127,87 +1191,81 @@
             return false;
         }
     }
-    // public function insert_csv_district($data){
-    //     $result = $this->db->insert('districts_tbl',$data);
-    //     if ($result) {
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
 
-    // public function insert_csv_history($data){
-    //     $result = $this->db->insert('history_item',$data);
-    //     if ($result) {
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
+    public function export_angio(){
+        $result = $this->db->select('description')->from('recommendation')->order_by('description','ASC')->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
 
-    // public function insert_csv_examination($data){
-    //     $result = $this->db->insert('examination_item',$data);
-    //     if ($result) {
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
+    public function export_diseases(){
+        $result = $this->db->select('name')->from('disease')->order_by('name','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
 
-    // public function insert_csv_investigation($data){
-    //     $result = $this->db->insert('investigation_item',$data);
-    //     if ($result) {
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
+    public function export_structure(){
+        $result = $this->db->select('name')->from('structure')->order_by('name','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
 
-    // public function insert_csv_instruction($data){
-    //     $result = $this->db->insert('instruction_item',$data);
-    //     if ($result) {
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
+    public function export_structure_findings_by_id($id){
+        $result = $this->db->select('name')
+                    ->from('structure_finding')
+                    ->where('structure_id',$id)
+                    ->order_by('name','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
 
-    // public function insert_csv_medicine($data){
-    //     $result = $this->db->insert('medicine_item',$data);
-    //     if ($result) {
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
+    public function export_structure_diagnosis_by_id($id){
+        $result = $this->db->select('name')
+                    ->from('diagnosis')
+                    ->where('structure_id',$id)
+                    ->order_by('name','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
 
-    // public function insert_csv_advice($data){
-    //     $result = $this->db->insert('advice_item',$data);
-    //     if ($result) {
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
+    public function export_lab_cat(){
+        $result = $this->db->select('name')->from('lab_category')->order_by('name','ASC')
+                    ->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
 
-    // public function insert_csv_dosage($data){
-    //     $result = $this->db->insert('dosage',$data);
-    //     if ($result) {
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
-
-    // public function insert_csv_angio($data){
-    //     $result = $this->db->insert('recommendation',$data);
-    //     if ($result) {
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-    // }
-
+    public function export_lab_tests_by_category($id){
+        $result = $this->db->select('name')->from('lab_test')
+                    ->where('lab_category_id',$id)->order_by('name','ASC')->get();
+        if ($result) {
+            return $result->result_array();
+        }else{
+            return array();
+        }
+    }
 
 }
 

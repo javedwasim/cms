@@ -15,7 +15,8 @@
                 </a>
             </td>
             <td class="diagnosis_cate" onClick="diagnosisEdit(this);">
-                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $diagnose['name']; ?>" onchange="savediagnosis(this,'cate_name','<?php echo $diagnose['id']; ?>')">        
+                <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $diagnose['name']; ?>" onchange="savediagnosis(this,'cate_name','<?php echo $diagnose['id']; ?>')">
+                <input type="hidden" id="diagnosis_selected_id" value="<?php echo $diagnose['id']; ?>"> 
             </td>
         </tr>
     <?php endforeach; ?>

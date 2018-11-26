@@ -1,12 +1,37 @@
 <div class="tab-pane <?php echo isset($active_tab) && ($active_tab == 'category') ? 'active' : ''; ?>"
      id="category" role="tabpanel">
     <div class="card">
-        <div class="card-header" style="display: inline-flex;">
+        <div class="card-header">
             <div class="row">
-                <div class="col-md-12">
-                    <label>New Category</label>
-                    <input type="text" class="form-control col-md-6" name="" id="lab_category">
+                <div class="col-md-4">
+                    <form id="lab_cat_form">
+                        <div class="form-group">
+                            <label>New Category</label>
+                            <input type="text" class="form-control" name="" id="lab_category">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-1 p-l-0" style="margin-top: 25px;">
                     <button class="btn btn-primary btn-sm add-lab-category">Add</button>
+                </div>
+                <div class="col-md-2 p-l-0" style="margin-top: 25px;">
+                    <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_lab_cat" id="lab_cat_export">Export Category</a>
+                </div>
+                <div class="col-md-5">
+                    <form id="import_csv_lab_cat" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group m-t-30">
+                                <input type="file" name="csv_file" id="lab_cat_csv_file" required="required" />
+                                </div>
+                            </div>
+                            <div  class="col-md-4">
+                            <div class="form-group m-t-25">
+                                <button type="submit" name="import_csv" class="btn btn-sm btn-info" id="import_lab_cat_btn">Import Category</button>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -73,6 +98,61 @@
     </div>
 </div>
 <script>
+$(document.body).on('click','#import_lab_cat_btn', function(e){
+    event.preventDefault();
+    var itemfile = new FormData($('#import_csv_lab_cat')[0]);
+    var fileName = $('#lab_cat_csv_file').val();
+    if (fileName == '') {
+        toastr["warning"]('Choose file.');
+    }else{
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Replace all or Add new <br> Yes: Replace <br> No: Add with previous',
+            buttons: {
+                Yes: function () {
+                    $.ajax({
+                      url:"<?php echo base_url(); ?>setting/import_lab_cat/",
+                      method:"POST",
+                      data: itemfile,
+                      contentType:false,
+                      cache:false,
+                      processData:false,
+                      success:function(response){
+                        $('.profession_table').remove();
+                        $('#profession_table').append(response.profession_table);
+                        document.getElementById("lab_cat_csv_file").value = "";
+                        if (response.success==true) {
+                          toastr["success"](response.message);
+                        }else{
+                          toastr["error"](response.message);
+                        }
+                    }
+                  });
+                },
+                No: function (){
+                  $.ajax({
+                    url:"<?php echo base_url(); ?>setting/import_lab_cat/",
+                    method:"POST",
+                    data: itemfile,
+                    contentType:false,
+                    cache:false,
+                    processData:false,
+                    success:function(response){
+                      $('.profession_table').remove();
+                      $('#profession_table').append(response.profession_table);
+                      document.getElementById("lab_cat_csv_file").value = "";
+                      if (response.success==true) {
+                        toastr["success"](response.message);
+                      }else{
+                        toastr["error"](response.message);
+                      }
+                  }
+                });
+              }
+            }
+        });
+    }
+});
     $("#lab_cat_tbl tbody tr").click(function (e) {
         $('#lab_cat_tbl tbody tr.row_selected').removeClass('row_selected');
         $(this).addClass('row_selected');
