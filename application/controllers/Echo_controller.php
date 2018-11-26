@@ -18,7 +18,7 @@ class Echo_controller extends MY_Controller
     {
         $category = 0;
         $data['categories'] = $this->Echo_model->get_disease_categories();
-        $data['structures'] = $this->Echo_model->get_Structure_categories();
+        $data['structures'] = $this->Echo_model->get_structure_categories();
         $data['findings'] = array();
         $data['diagnosis'] = array();
         $data['main_categories'] = $this->Echo_model->get_main_category_by_filter($category);
@@ -53,7 +53,7 @@ class Echo_controller extends MY_Controller
             }
         }
         $data['categories'] = $this->Echo_model->get_disease_categories();
-        $data['structures'] = $this->Echo_model->get_Structure_categories();
+        $data['structures'] = $this->Echo_model->get_structure_categories();
         $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
         $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
@@ -133,7 +133,7 @@ class Echo_controller extends MY_Controller
         }
 
         $data['categories'] = $this->Echo_model->get_disease_categories();
-        $data['structures'] = $this->Echo_model->get_Structure_categories();
+        $data['structures'] = $this->Echo_model->get_structure_categories();
         $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
         $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
         $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
@@ -255,7 +255,7 @@ class Echo_controller extends MY_Controller
             $data = $this->input->post();
             $result = $this->Echo_model->add_structure_category($data);
             if($result){
-                $data['structures'] = $this->Echo_model->get_Structure_categories();
+                $data['structures'] = $this->Echo_model->get_structure_categories();
                 $json['success'] = true;
                 $json['message'] = "Structure Category successfully created.";
                 $data['active_tab'] = 'structure';
@@ -314,7 +314,7 @@ class Echo_controller extends MY_Controller
             $json['message'] = "Seems to an error";
         }
 
-        $data['structures'] = $this->Echo_model->get_Structure_categories();
+        $data['structures'] = $this->Echo_model->get_structure_categories();
         $data['active_tab'] = 'structure';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/structure_table', $data, true);
@@ -413,6 +413,8 @@ class Echo_controller extends MY_Controller
         $data = $this->input->post();
         $id = $data['id'];
         $disease_id = $data['disease_id'];
+        // echo $id; 
+        // echo '-'.$disease_id;die();
         $result = true;
         $message = '';
         $this->get_structure_finding_by_id($id,$result,$message,$disease_id);
@@ -581,7 +583,7 @@ class Echo_controller extends MY_Controller
             $json['success'] = true;
             $json['message'] = "Category successfully created.";
             $data['categories'] = $this->Echo_model->get_disease_categories();
-            $data['structures'] = $this->Echo_model->get_Structure_categories();
+            $data['structures'] = $this->Echo_model->get_structure_categories();
             $data['findings'] = $this->Echo_model->get_structure_findings_by_id(1,'','');
             $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id(1,'','');
             $data['main_categories'] = $this->Echo_model->get_echo_main_categories();
@@ -761,7 +763,7 @@ class Echo_controller extends MY_Controller
     }
     public function get_echo_structure(){
         $flag = $this->input->post('flag');
-        $data['structures'] = $this->Echo_model->get_Structure_categories();
+        $data['structures'] = $this->Echo_model->get_structure_categories();
         if ($flag == 'finding') {
             $json['structure_html'] = $this->load->view('profile/structure_table',$data,true);
         }else{

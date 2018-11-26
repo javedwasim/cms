@@ -19,7 +19,6 @@
                 id = "<?php echo "d".$category['id']; ?>"
                 onClick="defaultDiseaseEdit(this,'<?php echo $category['id']; ?>');">
                 <?php echo $category['name']; ?></td>
-
         </tr>
     <?php endforeach; ?>
     </tbody>

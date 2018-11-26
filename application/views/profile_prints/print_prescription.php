@@ -148,8 +148,13 @@
             padding-bottom: 5px;
         }
         .mb-10{
-        margin-bottom: 20px;
-    }
+            margin-bottom: 20px;
+        }
+        .footer-top{
+            position: fixed;
+            bottom: 100px;
+            left: 90%;
+        }
 </style>
 <style type="text/css" media="print">
     .row {
@@ -227,7 +232,7 @@
     .footer-top{
         position: fixed;
         bottom: 100px;
-        left: 330px;
+        left: 40%;
     }
     .mb-10{
         margin-bottom: 20px;

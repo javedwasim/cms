@@ -20,7 +20,7 @@
         }
 
         public function get_dosage_categories(){
-            $result = $this->db->select('*')->from('dosage')->get();
+            $result = $this->db->select('*')->from('dosage')->order_by('sort_order')->get();
             if ($result) {
                 return $result->result_array();
             }else{

@@ -4,6 +4,13 @@ body {
     font-family: 'Roboto Condensed', san-serif;
     background: #1e88e5;
 }
+
+@-moz-document domain(plus.google.com) {
+  div[dir="rtl"], span[dir="rtl"].zj {
+    font-family: 'Jameel Noori Nastaleeq','Alvi Nastaleeq','Pak Nastaleeq','Nafees Web Naskh','Urdu Naskh Asiatype',Tahoma,'Lucida Grande',Verdana,Arial,Sans-Serif;
+    font-size: 130%;
+  }
+}
 .board {
     width: 100%;
     height: auto;
@@ -288,7 +295,7 @@ table.tbl_header_fix {
     width:calc(100% - 18px);
 }
 .tbl_header_fix>tbody {
-    height:430px;
+    height:59vh;
     overflow:auto;
     overflow-x:hidden;
     display:block;
@@ -309,7 +316,7 @@ table.tbl_header_fix_history {
     width:calc(100% - 18px);
 }
 .tbl_header_fix_history>tbody {
-    height:280px;
+    height:33vh;
     overflow:auto;
     overflow-x:hidden;
     display:block;
@@ -330,7 +337,7 @@ table.tbl_header_fix_350 {
     width:calc(100% - 18px);
 }
 .tbl_header_fix_350>tbody {
-    height:350px;
+    height:46vh;
     overflow:auto;
     overflow-x:hidden;
     display:block;
@@ -629,6 +636,10 @@ table.table th {
 .table tr td .form-control{
      padding: .05rem .75rem !important;
      color: #000;
+}
+.page-wrapper{padding-bottom:20px !important;padding-top:0px !important;}
+.footer{
+    padding: 7px 15px;
 }
 /* ---------------------------------------------------
     sidebar style

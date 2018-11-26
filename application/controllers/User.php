@@ -680,15 +680,14 @@ class User extends MY_Controller {
         $user = $this->session->userdata('user_data_logged_in');
         $feestatus = $this->User_model->get_all_fee($bkId);
         // print_r($feestatus);die();
-        if($feestatus[0]['echo_fee'] == 0 && $feestatus[0]['ett_fee'] == 0){
-            if (empty($feestatus[0]['consultant_fee'])|| $feestatus[0]['consultant_fee']==0) {
-                $data['booking_flag'] = $flag;
-                $json['error'] = true;
-                $json['message'] = 'Can not change status.';
-            }
+        if($feestatus[0]['consultant_fee'] == 0 && $feestatus[0]['echo_fee'] == 0 && $feestatus[0]['ett_fee'] == 0){
+            $data['booking_flag'] = $flag;
+            $json['error'] = true;
+            $json['message'] = 'Can not change status.';
         }else{
             if ($statusid == 7 && $user['is_admin'] != 1 ) {
                 $data['booking_flag'] = $flag;
+                echo $data['booking_flag'];die();
                 $json['error'] = true;
                 $json['message'] = 'Fee not paid.';
             }else{
@@ -702,7 +701,7 @@ class User extends MY_Controller {
                     $json['error'] = true;
                     $json['message'] = 'Seems an error.';
                 }
-            }
+            } 
         }
         $data['consultant_booking'] = $this->User_model->get_first_five_rows($searchdate);
         $data['booking_details'] = $this->User_model->search_by_date($searchdate, $flag);
@@ -741,42 +740,13 @@ class User extends MY_Controller {
         $tabledate = $this->input->post('tabledate');
         $statusid = $this->input->post('statusid');
         $date = date('Y-m-d', strtotime($tabledate));
-        if ($bookingFlag == 'vip') {
-            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
-            if ($result) {
-                $data['booking_flag'] = $bookingFlag;
-                $json['success'] = true;
-            } else {
-                $data['booking_flag'] = $bookingFlag;
-                $json['error'] = true;
-            }
-        } else if ($bookingFlag == 'on_walk') {
-            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
-            if ($result) {
-                $data['booking_flag'] = $bookingFlag;
-                $json['success'] = true;
-            } else {
-                $data['booking_flag'] = $bookingFlag;
-                $json['error'] = true;
-            }
-        } else if ($bookingFlag == 'on_call') {
-            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
-            if ($result) {
-                $data['booking_flag'] = $bookingFlag;
-                $json['success'] = true;
-            } else {
-                $data['booking_flag'] = $bookingFlag;
-                $json['error'] = true;
-            }
+        $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
+        if ($result) {
+            $data['booking_flag'] = $bookingFlag;
+            $json['success'] = true;
         } else {
-            $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
-            if ($result) {
-                $data['booking_flag'] = $bookingFlag;
-                $json['success'] = true;
-            } else {
-                $data['booking_flag'] = $bookingFlag;
-                $json['error'] = true;
-            }
+            $data['booking_flag'] = $bookingFlag;
+            $json['error'] = true;
         }
         $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
         $data['booking_details'] = $this->User_model->getbookings_by_date_flag($date, $bookingFlag);
@@ -1127,6 +1097,7 @@ class User extends MY_Controller {
         );
         $result = $this->User_model->vitals_update($data_array,$vitalid);
         if ($result) {
+            $data['patient_id'] = $patid;
             $data['rights'] = $this->session->userdata('other_rights');
             $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
             $json['success'] = true;

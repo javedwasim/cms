@@ -1011,6 +1011,21 @@
             }
         }
 
+        public function sort_dosage($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['dosage_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['dosage_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         public function check_if_csv_data_exist($cname,$cdata,$tbl,$id,$cid){
             if (empty($id)) {
                 $result = $this->db->select($cname)->where($cname,$cdata)->get($tbl);

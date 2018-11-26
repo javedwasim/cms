@@ -1,7 +1,7 @@
 <table class="table table-bordered nowrap responsive structure_table tbl_header_fix_350" cellspacing="0" style="width: 100%">
     <thead>
     <tr>
-        <th  style="width:50px;">Action</th>
+        <th style="width:50px;">Action</th>
         <th >Name</th>
     </tr>
     </thead>
@@ -17,7 +17,8 @@
                 onBlur="defaultsaveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
                 onClick="defaultstructureEdit(this,'<?php echo $structure['id']; ?>');"
                 id="<?php echo $structure['id']; ?>">
-                <?php echo $structure['name']; ?></td>
+                <?php echo $structure['name']; ?>
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>

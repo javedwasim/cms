@@ -5,7 +5,7 @@
         <th class="table-header">Name</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 30vh">
     <?php foreach ($diagnosis as $diagnose): ?>
         <tr class="table-row">
             <td style="width: 80px;">

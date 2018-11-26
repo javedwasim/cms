@@ -70,9 +70,12 @@ class User_model extends CI_Model {
     public function update_value($value, $updateValue, $toupdate,$statusid) {
         $result = '';
         $date = date('Y-m-d H:i:s');
-        //$collectedby = $this->session->userdata('username');
         $collectedby = $this->session->userdata('user_data_logged_in');
         $collectedby = $collectedby['username'];
+        $fee = $this->getFeeamount($toupdate);
+        $consFee = $fee->consultant_fee;
+        $ettFee = $fee->ett_fee;
+        $echoFee = $fee->echo_fee;
         if ($updateValue == 'full_name') {
             $data = array(
                 'full_name' => $value,
@@ -89,31 +92,142 @@ class User_model extends CI_Model {
                     'fee_paid_at' => $date
                 );
             }else{
-                $data = array(
-                    'consultant_fee' => $value,
-                    'fee_collected_by' => $collectedby,
-                    'fee_paid_at' => $date,
-                    'fee_paid_status' => '1'
-                );
+                if($value > 0 && $consFee == 0){
+                    $data = array(
+                        'consultant_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date,
+                        'fee_paid_status' => '1'
+                    );
+                }else if($value==0 && $ettFee > 0){
+                    $data = array(
+                        'consultant_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date,
+                        'fee_paid_status' => '3'
+                    );
+                }else if($value==0 && $ettFee == 0 && $echoFee > 0){
+                    $data = array(
+                        'consultant_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date,
+                        'fee_paid_status' => '4'
+                    );
+                }else{
+                    $data = array(
+                        'consultant_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date
+                    );
+                }
             }
             $result = $this->db
                     ->where('appointment_booking_id', $toupdate)
                     ->update('appointment_booking', $data);
         } elseif ($updateValue == 'ett_fee') {
-            $data = array(
-                'ett_fee' => $value,
-                'ett_fee_collected_by' => $collectedby,
-                'ett_fee_paid_at' => $date
-            );
+            if ($statusid == 7) {
+                $data = array(
+                    'ett_fee' => $value,
+                    'fee_collected_by' => $collectedby,
+                    'fee_paid_at' => $date
+                );
+            }else{
+                if($value > 0 && $ettFee == 0){
+                    $data = array(
+                        'ett_fee' => $value,
+                        'ett_fee_collected_by' => $collectedby,
+                        'ett_fee_paid_at' => $date,
+                        'fee_paid_status' => '3'
+                    );
+                }else if($value > 0 && $ettFee > 0){
+                    $data = array(
+                        'ett_fee' => $value,
+                        'ett_fee_collected_by' => $collectedby,
+                        'ett_fee_paid_at' => $date
+                    );
+                }else if($consFee == 0 && $echoFee == 0 && $value == 0){
+                    $data = array(
+                        'ett_fee' => $value,
+                        'ett_fee_collected_by' => $collectedby,
+                        'ett_fee_paid_at' => $date,
+                        'fee_paid_status' => '0'
+                    );
+                }else if($consFee == 0 && $value == 0 && $echoFee > 0 ){
+                    $data = array(
+                        'ett_fee' => $value,
+                        'ett_fee_collected_by' => $collectedby,
+                        'ett_fee_paid_at' => $date,
+                        'fee_paid_status' => '4'
+                    );
+                }else if($consFee > 0 && $value == 0 && $echoFee == 0 ){
+                    $data = array(
+                        'ett_fee' => $value,
+                        'ett_fee_collected_by' => $collectedby,
+                        'ett_fee_paid_at' => $date,
+                        'fee_paid_status' => '1'
+                    );
+                }else{
+                    $data = array(
+                        'ett_fee' => $value,
+                        'ett_fee_collected_by' => $collectedby,
+                        'ett_fee_paid_at' => $date
+                    );
+                }
+            }
             $result = $this->db
                     ->where('appointment_booking_id', $toupdate)
                     ->update('appointment_booking', $data);
         } elseif ($updateValue == 'echo_fee') {
-            $data = array(
-                'echo_fee' => $value,
-                'echo_fee_collected_by' => $collectedby,
-                'echo_fee_paid_at' => $date
-            );
+            if ($statusid == 7) {
+                $data = array(
+                    'echo_fee' => $value,
+                    'fee_collected_by' => $collectedby,
+                    'fee_paid_at' => $date
+                );
+            }else{
+                if($value > 0 && $echoFee == 0){
+                    $data = array(
+                        'echo_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date,
+                        'fee_paid_status' => '4'
+                    );
+                }else if($value > 0 && $echoFee > 0){
+                    $data = array(
+                        'ett_fee' => $value,
+                        'ett_fee_collected_by' => $collectedby,
+                        'ett_fee_paid_at' => $date
+                    );
+                }else if($consFee == 0 && $ettFee == 0 && $value == 0){
+                    $data = array(
+                        'echo_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date,
+                        'fee_paid_status' => '0'
+                    );
+                }else if($consFee == 0 && $value == 0 && $ettFee > 0 ){
+                    $data = array(
+                        'echo_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date,
+                        'fee_paid_status' => '3'
+                    );
+                }else if($consFee > 0 && $value == 0 && $ettFee == 0 ){
+                    $data = array(
+                        'echo_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date,
+                        'fee_paid_status' => '1'
+                    );
+                }else if($consFee > 0 && $value == 0 && $ettFee > 0 ){
+                    $data = array(
+                        'echo_fee' => $value,
+                        'fee_collected_by' => $collectedby,
+                        'fee_paid_at' => $date,
+                        'fee_paid_status' => '3'
+                    );
+                }
+            }
             $result = $this->db
                     ->where('appointment_booking_id', $toupdate)
                     ->update('appointment_booking', $data);
@@ -725,6 +839,7 @@ class User_model extends CI_Model {
     public function get_patient_vitals($id){
         $result = $this->db->select('*')
                     ->where('patient_id',$id)
+                    ->order_by('id','DESC')
                     ->get('patient_vitals');
         if ($result) {
             return $result->result_array();
@@ -757,6 +872,16 @@ class User_model extends CI_Model {
             return $result->result_array();
         }else{
             return array();
+        }
+    }
+
+    public function getFeeamount($id){
+        $result = $this->db->select('consultant_fee,ett_fee,echo_fee')->from('appointment_booking')
+                    ->where('appointment_booking_id',$id)->get();
+        if ($result) {
+            return $result->row();
+        }else{
+            return false;
         }
     }
 

@@ -6,7 +6,7 @@
         <th style="width: 47%">Normal Value</th>
     </tr>
     </thead>
-    <tbody style="height: 400px;">
+    <tbody style="height: 45vh;">
     <?php foreach ($measurements as $measurement): ?>
         <tr class="table-row" id="<?php echo $measurement['id']; ?>">
             <td style="width: 50px;">

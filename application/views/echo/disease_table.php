@@ -5,7 +5,7 @@
         <th >Name</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody >
     <?php foreach ($categories as $category): ?>
         <tr class="table-row" id="<?php echo $category['id']; ?>" >
             <td style="width: 50px;">

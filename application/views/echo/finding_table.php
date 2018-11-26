@@ -5,7 +5,7 @@
         <th>finding</th>
     </tr>
     </thead>
-    <tbody style="height: 250px;">
+    <tbody style="height: 25vh;">
     <?php foreach ($findings as $finding): ?>
         <tr class="table-row">
             <td style="width: 50px;">

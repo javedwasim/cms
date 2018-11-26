@@ -16,7 +16,7 @@ $(document).ready(function () {
     $('.pat_search').datepicker({
         format: 'd-M-yyyy'
     });
-////////////////////////////// initilize categories datatables ///////////////////////
+////////////////////////////// initilize categories datatables //////////////////////
     var btable = $('.booking_tables').DataTable({
         "scrollX": true,
         "scrollY": "200px",
@@ -214,7 +214,7 @@ $(document.body).on('click', '.feepaid', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "450px",
+                        "scrollY": "62vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -328,7 +328,7 @@ $(document.body).on('click', '.wecg', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "450px",
+                        "scrollY": "62vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -443,7 +443,7 @@ $(document.body).on('click', '.wett', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "450px",
+                        "scrollY": "62vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -556,7 +556,7 @@ $(document.body).on('click', '.wecho', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "450px",
+                        "scrollY": "62vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -670,7 +670,7 @@ $(document.body).on('click', '.investigation', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "450px",
+                        "scrollY": "62vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -783,7 +783,7 @@ $(document.body).on('click', '.checkup', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "450px",
+                        "scrollY": "62vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -897,7 +897,7 @@ $(document.body).on('click', '.complete', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "450px",
+                        "scrollY": "62vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -1011,7 +1011,7 @@ $(document.body).on('click', '.appoint_revert', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "450px",
+                        "scrollY": "62vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -1107,7 +1107,7 @@ function appointments() {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "450px",
+                    "scrollY": "62vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1215,7 +1215,7 @@ $(document.body).on('click', '#book_appointment', function (e) {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "450px",
+                    "scrollY": "62vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1340,7 +1340,7 @@ function valupdate(val) {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "450px",
+                    "scrollY": "62vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1434,6 +1434,7 @@ $('.components li a').on('click', function () {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
+
 ////////////////////////////// load bookings page/////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1458,7 +1459,7 @@ function bookings() {
                     "paging": false,
                     "scrollX": true,
                     "searching": false,
-                    "scrollY": "450px",
+                    "scrollY": "66vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[7] == "1") {
@@ -1544,7 +1545,7 @@ $(document.body).on('click', '#time_consultant', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "450px",
+                    "scrollY": "62vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1655,7 +1656,7 @@ $(document.body).on('click', '#time_on_walk', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "450px",
+                    "scrollY": "62vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1765,7 +1766,7 @@ $(document.body).on('click', '#time_on_call', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "450px",
+                    "scrollY": "62vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1909,7 +1910,7 @@ $(document.body).on('click', '#delete_single_patient', function () {
                                 "info": false,
                                 "paging": false,
                                 "searching": false,
-                                "scrollY": "450px",
+                                "scrollY": "62vh",
                                 "scrollCollapse": true,
                                 "createdRow": function (row, data, dataIndex) {
                                     if (data[17] == "1") {
@@ -2946,7 +2947,7 @@ function consultant_booking(val) {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "450px",
+                    "scrollY": "62vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {

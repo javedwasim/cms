@@ -56,7 +56,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                     <tr>
                         <td><?php echo $i?></td>
                         <td class="hide"><?php echo $i?></td>
-                        <td style="width:150px;text-transform: capitalize;">
+                        <td style="text-transform: capitalize;">
                             <?php 
                                 if(isset($bkarray[$i]['full_name'])){
                                     echo $bkarray[$i]['full_name'];
@@ -195,7 +195,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 <td>
                                     <?php echo $details['order_number'];?>
                                 </td>
-                                <td style="width:150px; text-transform: capitalize;">
+                                <td style=" text-transform: capitalize;">
                                     <?php echo $details['full_name'] ?>
                                 </td>
                                 <td>
@@ -240,7 +240,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                     <button class="btn btn-block btn-info col-md-6" id="print_oncall">Print List</button>
                 </div>
                 <div class="card-body p-t-0">
-                    <table class="table table-bordered responsive booking_tables" cellspacing="0" width="100%" >
+                    <table class="table table-bordered nowrap responsive booking_tables" cellspacing="0" width="100%" >
                        <thead>
                         <tr>
                             <th>Sr No.</th>
@@ -264,7 +264,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 <td>
                                     <?php echo $details['order_number'];?>
                                 </td>
-                                <td style="width:150px; text-transform: capitalize;">
+                                <td style=" text-transform: capitalize;">
                                     <?php echo $details['full_name'] ?>
                                 </td>
                                 <td>
@@ -627,6 +627,7 @@ $(document).ready(function(){
                         "scrollX": true,
                         "scrollY": "450px",
                         "scrollCollapse": true,
+                        "searching":false,
                         "createdRow": function(row, data, dataIndex) {
                             if (data[7] == "1") {
                             $(row).addClass('round-green');

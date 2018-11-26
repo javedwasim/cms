@@ -2623,8 +2623,8 @@ $(document.body).on('click','.save_vitals',function(){
     var vital_inr = tr.find('.vital_inr').text();
     var vital_rr = tr.find('.vital_rr').text();
     var vital_volume = tr.find('.vital_volume option:selected').val();
-    var vital_height = tr.find('.vital_height').text();
-    var vital_weight = tr.find('.vital_weight').text();
+    var vital_height = tr.find('.vital_height').val();
+    var vital_weight = tr.find('.vital_weight').val();
     var vital_bmi = tr.find('.vital_bmi').text();
     var vital_bsa = tr.find('.vital_bsa').text();
     var patid = $('#patient_id').val();
@@ -2711,8 +2711,8 @@ $(document.body).on('click','.update_vital',function(){
     var vital_inr = tr.find('.vital_inr').text();
     var vital_rr = tr.find('.vital_rr').text();
     var vital_volume = tr.find('.vital_volume option:selected').val();
-    var vital_height = tr.find('.vital_height').text();
-    var vital_weight = tr.find('.vital_weight').text();
+    var vital_height = tr.find('.vital_height').val();
+    var vital_weight = tr.find('.vital_weight').val();
     var vital_bmi = tr.find('.vital_bmi').text();
     var vital_bsa = tr.find('.vital_bsa').text();
     var patid = $('#patientid').val();

@@ -5,7 +5,7 @@
             <th >Structure</th>
         </tr>
     </thead>
-    <tbody style="height: 620px;">
+    <tbody style="height: 72vh;">
     <?php foreach ($structures as $structure): ?>
         <tr class="table-row" id="<?php echo $structure['id']; ?>">
             <td style="width:50px;">

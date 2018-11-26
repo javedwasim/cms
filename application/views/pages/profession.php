@@ -88,7 +88,7 @@ $(document.body).on('click','#import_profession_btn', function(e){
                       </div>
                   </div>
                 </div>
-                <div class="card-body" style="overflow-y:auto; height:510px">
+                <div class="card-body">
                     <div id="profession_table">
                         
                     </div>

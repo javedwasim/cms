@@ -5,9 +5,9 @@
         <th style="width:40px" align="right">Action</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 45vh">
     <?php foreach ($med_dosages as $dosage): ?>
-        <tr class="table-row">
+        <tr class="table-row" id="<?php echo $dosage['id']; ?>" >
             <td  align="right" class="dosage_category" onClick="dosageEdit(this);">
                 <input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $dosage['name']; ?>" onchange="saveDosage(this,'cate_name','<?php echo $dosage['id']; ?>')" style="text-align: right;" />
             </td>
@@ -44,5 +44,25 @@
             }
         });
     }
-
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#dosage_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'dosage';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_dosage_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 </script>

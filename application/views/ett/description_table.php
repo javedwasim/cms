@@ -5,7 +5,7 @@
             <th>Description</th>
         </tr>
     </thead>
-    <tbody style="height: 320px;">
+    <tbody style="height: 43vh;">
         <?php foreach($descriptions as $key){?>
         <tr id="<?php echo $key['id']; ?>">
             <td style="width:50px;">

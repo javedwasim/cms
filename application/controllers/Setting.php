@@ -1450,6 +1450,20 @@ class Setting extends MY_Controller
        
     }
 
+    public function sort_dosage_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_dosage($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
 //////////////////////////////////////////////// import export moduls ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function export_professions(){
         $professions = $this->Setting_model->export_professions();
@@ -1733,7 +1747,7 @@ class Setting extends MY_Controller
                         'name' => $row['Names'],
                         'profile_history_id' => $id
                     );
-                    $this->Setting_model->insert_file_data($insert_data,$tabl);
+                    $this->Setting_model->insert_file_data($insert_data,$tbl);
                 }
             }else{
                 return false;

@@ -5,7 +5,7 @@
 			<th style="width: 33%">Date</th>
 			<th style="width: 31%">MaxAllowd</th>
 		</thead>
-		<tbody>
+		<tbody style="height: 40vh;">
 			<?php foreach($limiter_details as $row){?>
 				<tr>
 					<td style="width: 33%">

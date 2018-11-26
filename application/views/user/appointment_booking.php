@@ -24,7 +24,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="full_name">Patient Name</label>
-                                                <input type="text" id="full_name" name="pat_name" placeholder="Full Name" style="text-transform: capitalize;" class="form-control sug_pat" maxlength="60" autofocus required="required">
+                                                <input type="text" id="full_name" name="pat_name" placeholder="Full Name" style="text-transform: capitalize;" class="form-control sug_pat" maxlength="25" autofocus required="required">
 
                                             </div>
                                         </div>
@@ -49,7 +49,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="consultant_fee">Fee</label>
-                                                <input type="text" id="consultant_fee" name="consultant_fee" placeholder="Enter Fee" class="form-control" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" maxlength="4" autocomplete="off">
+                                                <input type="text" id="consultant_fee" name="consultant_fee" placeholder="Enter Fee" class="form-control" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" maxlength="5" autocomplete="off">
                                                 <input type="hidden" id="booking_flag" name="booking_flag" value="<?php echo $booking_flag; ?>"  />
                                             </div>
                                         </div>
@@ -57,7 +57,6 @@
                                             <div class="form-group">
                                                 <label>Fee Type</label>
                                                 <select class="form-control" id="booking_fee_type" >
-                                                    <option value="">Select Fee Type</option>
                                                     <option value="consultant">Consultant</option>
                                                     <option value="ett">ETT</option>
                                                     <option value="echo">ECHO</option>
@@ -89,7 +88,7 @@
         <?php }else{?>
         <div id="content" <?php echo in_array("appointments-can_add-0", $permissions)?"style='width:100%;'":''; ?>>
         <?php  }?>
-            <div id="status_row" class="sticky-bar">
+            <div id="status_row">
 
             </div>
             <div class="card m-r-20">
@@ -160,7 +159,7 @@
                             "info": false,
                             "paging": false,
                             "searching": false,
-                            "scrollY": "450px",
+                            "scrollY": "62vh",
                             "scrollCollapse": true,
                             "createdRow": function (row, data, dataIndex) {
                                 if (data[17] == "1") {

@@ -5,7 +5,7 @@
         $user_info = ($this->session->userdata('user_data_logged_in'));
     ?>
 <div class="content-wrapper" style="margin:0 .5%">
-	<div class="row page-titles" style="margin: 0px;">
+	<div class="row page-titles" style="margin: 0px; padding: 3px 0px;">
         <div class="col-xs-12 col-md-4 col-sm-12" style="display: inline-flex;">
             <div class="row">
                 <div class="col-md-2">
@@ -103,7 +103,7 @@
                         "info": false,
                         "paging": false,
                         "scrollX": true,
-                        "scrollY": "450px",
+                        "scrollY": "66vh",
                         "scrollCollapse": true,
                         "searching": false,
                         'aoColumnDefs': [{

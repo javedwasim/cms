@@ -99,6 +99,7 @@ class Profile_model extends CI_Model
         $result = $this->db->select('*')
             ->from('diary')
             ->where('username', $name)
+            ->order_by('id','DESC')
             ->get();
         if ($result) {
             return $result->result_array();
@@ -750,7 +751,8 @@ class Profile_model extends CI_Model
 
     public function get_echo_detail($patient_id)
     {
-        $result = $this->db->select('*')->from('profile_echo_detail')->where('patient_id', $patient_id)->get();
+        $result = $this->db->select('*')->from('profile_echo_detail')->where('patient_id', $patient_id)
+                        ->order_by('id','DESC')->get();
         if ($result) {
             return $result->result_array();
         } else {
@@ -814,7 +816,8 @@ class Profile_model extends CI_Model
 
     public function get_lab_test_detail($patient_id)
     {
-        $result = $this->db->select('*')->from('patient_lab_test_info')->where('patient_id', $patient_id)->get();
+        $result = $this->db->select('*')->from('patient_lab_test_info')
+                        ->order_by('id','DESC')->where('patient_id', $patient_id)->get();
         if ($result) {
             return $result->result_array();
         } else {
@@ -911,7 +914,8 @@ class Profile_model extends CI_Model
 
     public function get_ett_detail($patient_id)
     {
-        $result = $this->db->select('*')->from('patient_ett_test')->where('patient_id', $patient_id)->get();
+        $result = $this->db->select('*')->from('patient_ett_test')
+                        ->order_by('id','DESC')->where('patient_id', $patient_id)->get();
         if ($result) {
             return $result->result_array();
         } else {
@@ -997,7 +1001,7 @@ class Profile_model extends CI_Model
 
     public function get_examination_detail($patient_id)
     {
-        $result = $this->db->select('*')->from('profile_examination_detail')->where('patient_id', $patient_id)->get();
+        $result = $this->db->select('*')->from('profile_examination_detail')->where('patient_id', $patient_id)->order_by('id','DESC')->get();
         if ($result) {
             return $result->result_array();
         } else {
