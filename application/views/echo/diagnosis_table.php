@@ -48,12 +48,12 @@
 
     $(document.body).on('click', '#structure_diagnosis', function(){
         //remove background and color on all elements and remove color
-        $(".structure_table td").css("background-color", "#FFF");
-        $(".structure_table td").css("color", "#1b1a1a");
+        // $(".structure_table td").css("background-color", "#FFF");
+        // $(".structure_table td").css("color", "#1b1a1a");
 
         var structure_id = $('#structure_id').val();
-        $('#'+structure_id).css("background", "#3300FF");
-        $('#'+structure_id).css("color", "#FFF");
+        // $('#'+structure_id).css("background", "#3300FF");
+        // $('#'+structure_id).css("color", "#FFF");
         return false;
     });
 

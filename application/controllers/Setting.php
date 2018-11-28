@@ -1465,11 +1465,12 @@ class Setting extends MY_Controller
        
     }
 
-//////////////////////////////////////////////// import export moduls ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////// import export moduls ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function export_professions(){
-        $professions = $this->Setting_model->export_professions();
-        if ($professions) {
-           $result = $this->export_profession_file($professions);
+        $result_data = $this->Setting_model->export_professions();
+        $filename = 'professions.txt';
+        if ($result_data) {
+           $result = $this->export_file($result_data,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -1480,8 +1481,7 @@ class Setting extends MY_Controller
         }
     }
 
-    public function export_profession_file($professions){
-       $filename = 'professions.txt'; 
+    public function export_file($result_data,$filename){
        header("Content-Description: File Transfer");
        header('Content-Encoding: UTF-8'); 
        header("Content-Disposition: attachment; filename=$filename"); 
@@ -1490,8 +1490,9 @@ class Setting extends MY_Controller
        $file = fopen('php://output', 'w');
        $header = array('Names'); 
        fputcsv($file, $header);
-       foreach ($professions as $key=>$line){ 
-         fputcsv($file,$line); 
+       foreach ($result_data as $key=>$line){ 
+        fwrite($file,"\r\n");
+        fputcsv($file,$line); 
        }
        fclose($file); 
        exit;
@@ -1564,34 +1565,17 @@ class Setting extends MY_Controller
     }
 
     public function export_district(){
-        $districts = $this->Setting_model->export_district();
-        if ($districts) {
-           $result = $this->export_district_csv($districts);
+        $result_data = $this->Setting_model->export_district();
+        $filename = 'districts.txt';
+        if ($result_data) {
+           $result = $this->export_file($result_data,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
         }
-        
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_district_csv($districts){
-       $filename = 'districts.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($districts as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
      public function import_district(){
@@ -1661,9 +1645,11 @@ class Setting extends MY_Controller
     }
 
     public function export_history_items($category_id){
-        $history_items = $this->Setting_model->export_history_items($category_id);
-        if ($history_items) {
-            $this->export_history_items_csv($history_items);
+        $result_data = $this->Setting_model->export_history_items($category_id);
+        // file name
+        $filename = 'history_items.txt';
+        if ($result_data) {
+            $this->export_file($result_data,$filename);
         } else {
             $json['error'] = true;
             $json['message'] = 'No item found.';
@@ -1672,25 +1658,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_history_items_csv($history_items)
-    {
-        // file name
-        $filename = 'history_items.txt';
-        header("Content-Description: File Transfer");
-        header('Content-Encoding: UTF-8'); 
-        header("Content-Disposition: attachment; filename=$filename"); 
-        header("Content-Type: application/txt;charset=UTF-8");
-        // file creation
-        $file = fopen('php://output', 'w');
-        $header = array('Names');
-        fputcsv($file, $header);
-        foreach ($history_items as $key => $line) {
-            fputcsv($file, $line);
-        }
-        fclose($file);
-        exit;
     }
 
     public function import_history_items($id)
@@ -1763,9 +1730,10 @@ class Setting extends MY_Controller
 
     public function export_examination_items($id)
     {
-        $examination_items = $this->Setting_model->export_examination_items($id);
-        if ($examination_items) {
-            $this->export_examination_items_file($examination_items);
+        $result_data = $this->Setting_model->export_examination_items($id);
+        $filename = 'examintaion_items.txt';
+        if ($result_data) {
+            $this->export_file($result_data,$filename);
         } else {
             $json['error'] = true;
             $json['message'] = 'No item found.';
@@ -1774,24 +1742,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_examination_items_file($examination_items)
-    {
-        $filename = 'examintaion_items.txt';
-        header("Content-Description: File Transfer");
-        header('Content-Encoding: UTF-8'); 
-        header("Content-Disposition: attachment; filename=$filename"); 
-        header("Content-Type: application/txt;charset=UTF-8");
-        // file creation
-        $file = fopen('php://output', 'w');
-        $header = array('Names');
-        fputcsv($file, $header);
-        foreach ($examination_items as $key => $line) {
-            fputcsv($file, $line);
-        }
-        fclose($file);
-        exit;
     }
 
     public function import_examination_items($id)
@@ -1865,8 +1815,9 @@ class Setting extends MY_Controller
     public function export_investigation_items($id)
     {
         $investigation_items = $this->Setting_model->export_investigation_items($id);
+        $filename = 'investigation_items.txt';
         if ($investigation_items) {
-            $this->export_investigation_items_file($investigation_items);
+            $this->export_file($investigation_items,$filename);
         } else {
             $json['error'] = true;
             $json['message'] = 'No item found.';
@@ -1875,24 +1826,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_investigation_items_file($investigation_items)
-    {
-        $filename = 'investigation_items.txt';
-        header("Content-Description: File Transfer");
-        header('Content-Encoding: UTF-8'); 
-        header("Content-Disposition: attachment; filename=$filename"); 
-        header("Content-Type: application/txt;charset=UTF-8");
-        // file creation
-        $file = fopen('php://output', 'w');
-        $header = array('Names');
-        fputcsv($file, $header);
-        foreach ($investigation_items as $key => $line) {
-            fputcsv($file, $line);
-        }
-        fclose($file);
-        exit;
     }
 
     public function import_investigation_items($id)
@@ -1965,8 +1898,9 @@ class Setting extends MY_Controller
 
     public function export_angio(){
         $recommendations = $this->Setting_model->export_angio();
+        $filename = 'recommendations.txt';
         if ($recommendations) {
-           $result = $this->export_angio_csv($recommendations);
+           $this->export_file($recommendations,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -1975,23 +1909,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_angio_csv($recommendations){
-        $filename = 'recommendations.txt'; 
-        header("Content-Description: File Transfer");
-        header('Content-Encoding: UTF-8'); 
-        header("Content-Disposition: attachment; filename=$filename"); 
-        header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($recommendations as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_angio(){
@@ -2063,8 +1980,9 @@ class Setting extends MY_Controller
     public function export_instruction_items($id)
     {
         $instruction_items = $this->Setting_model->export_instruction_items($id);
+        $filename = 'instruction_items.txt';
         if ($instruction_items) {
-            $this->export_instruction_items_file($instruction_items);
+            $this->export_file($instruction_items,$filename);
         } else {
             $json['error'] = true;
             $json['message'] = 'No item found.';
@@ -2073,24 +1991,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_instruction_items_file($instruction_items)
-    {
-        $filename = 'instruction_items.txt';
-        header("Content-Description: File Transfer");
-        header('Content-Encoding: UTF-8'); 
-        header("Content-Disposition: attachment; filename=$filename"); 
-        header("Content-Type: application/txt;charset=UTF-8");
-        // file creation
-        $file = fopen('php://output', 'w');
-        $header = array('Names');
-        fputcsv($file, $header);
-        foreach ($instruction_items as $key => $line) {
-            fputcsv($file, $line);
-        }
-        fclose($file);
-        exit;
     }
 
     public function import_instruction_items($id,$pid)
@@ -2164,8 +2064,9 @@ class Setting extends MY_Controller
 
     public function export_medicine_items($id){
         $medicine_items = $this->Setting_model->export_medicine_items($id);
+        $filename = 'medicine_items.txt';
         if ($medicine_items) {
-           $this->export_medicine_items_csv($medicine_items);
+           $this->export_file($medicine_items,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -2174,23 +2075,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_medicine_items_csv($medicine_items){
-        $filename = 'medicine_items.txt'; 
-        header("Content-Description: File Transfer");
-        header('Content-Encoding: UTF-8'); 
-        header("Content-Disposition: attachment; filename=$filename"); 
-        header("Content-Type: application/txt;charset=UTF-8");
-        // file creation 
-        $file = fopen('php://output', 'w');
-        $header = array('Names'); 
-        fputcsv($file, $header);
-        foreach ($medicine_items as $key=>$line){ 
-            fputcsv($file,$line); 
-        }
-        fclose($file); 
-        exit;
     }
 
     public function import_medicine_items($id){
@@ -2259,8 +2143,9 @@ class Setting extends MY_Controller
 
     public function export_dosage(){
         $dosages = $this->Setting_model->export_dosage();
+        $filename = 'dosages.txt'; 
         if ($dosages) {
-           $result = $this->export_dosage_file($dosages);
+           $this->export_file($dosages,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -2269,23 +2154,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_dosage_file($dosages){
-       $filename = 'dosages.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($dosages as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
      public function import_dosage(){
@@ -2356,8 +2224,9 @@ class Setting extends MY_Controller
 
     public function export_advice_items($id){
         $advice_items = $this->Setting_model->export_advice_items($id);
+        $filename = 'advice_items.txt'; 
         if ($advice_items) {
-           $this->export_advice_items_csv($advice_items);
+           $this->export_file($advice_items,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -2366,23 +2235,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_advice_items_csv($advice_items){
-       $filename = 'advice_items.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($advice_items as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_advice_items($id){
@@ -2453,8 +2305,9 @@ class Setting extends MY_Controller
 
     public function export_test_reasons(){
         $professions = $this->Setting_model->export_test_reasons();
+        $filename = 'test_reason.txt';
         if ($professions) {
-           $result = $this->export_test_reasons_file($professions);
+           $this->export_file($professions,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -2463,23 +2316,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_test_reasons_file($professions){
-       $filename = 'test_reason.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($professions as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_test_reasons(){
@@ -2549,9 +2385,10 @@ class Setting extends MY_Controller
     }
 
     public function export_ending_reasons(){
-        $professions = $this->Setting_model->export_ending_reasons();
-        if ($professions) {
-           $result = $this->export_ending_reasons_file($professions);
+        $ending_reasons = $this->Setting_model->export_ending_reasons();
+        $filename = 'test_ending_reason.txt';
+        if ($ending_reasons) {
+           $this->export_file($ending_reasons,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -2560,23 +2397,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_ending_reasons_file($professions){
-       $filename = 'test_ending_reason.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($professions as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_ending_reasons(){
@@ -2646,9 +2466,10 @@ class Setting extends MY_Controller
     }
 
     public function export_ett_descriptions(){
-        $professions = $this->Setting_model->export_ett_descriptions();
-        if ($professions) {
-           $result = $this->export_ett_description_file($professions);
+        $descriptions = $this->Setting_model->export_ett_descriptions();
+        $filename = 'ett_description.txt'; 
+        if ($descriptions) {
+           $this->export_file($descriptions,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -2657,23 +2478,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_ett_description_file($professions){
-       $filename = 'ett_description.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($professions as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_ett_descriptions(){
@@ -2742,37 +2546,11 @@ class Setting extends MY_Controller
         }
     }
 
-    // function read_dosage_file($fname, $date_f) {
-    //     $fname = $this->config->item('file_upload_path') . $fname;
-    //     $count=0;
-    //     $fp = fopen($fname,'r') or die("can't open file");
-    //     while($csv_line = fgets($fp,1024))
-    //     {
-    //         $count++;
-    //         if($count == 1)
-    //         {
-    //             continue;
-    //         }//keep this if condition if you want to remove the first row
-    //         for($i = 0, $j = count($csv_line); $i < $j; $i++)
-    //         {
-    //             echo $csv_line[0];//remove if you want to have primary key,
-
-    //         }
-    //         $i++;
-    //     }
-    //         fclose($fp) or die("can't close file");
-    //         die();
-    //     // }
-                
-    //     // }else{
-    //     //     return false;
-    //     // }
-    // }
-
     public function export_ett_conclusions(){
-        $professions = $this->Setting_model->export_ett_conclusions();
-        if ($professions) {
-           $result = $this->export_ett_conclusion_file($professions);
+        $conclusions = $this->Setting_model->export_ett_conclusions();
+        $filename = 'ett_conclusion.txt';
+        if ($conclusions) {
+           $this->export_file($conclusions,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -2781,23 +2559,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_ett_conclusion_file($professions){
-       $filename = 'ett_conclusion.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($professions as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_ett_conclusions(){
@@ -2868,8 +2629,9 @@ class Setting extends MY_Controller
 
     public function export_diseases(){
         $diseases = $this->Setting_model->export_diseases();
+        $filename = 'disease.txt'; 
         if ($diseases) {
-           $result = $this->export_disease_file($diseases);
+           $result = $this->export_file($diseases,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -2878,23 +2640,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_disease_file($diseases){
-       $filename = 'disease.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($diseases as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_diseases(){
@@ -2965,8 +2710,9 @@ class Setting extends MY_Controller
 
     public function export_structure(){
         $structures = $this->Setting_model->export_structure();
+        $filename = 'structure.txt';
         if ($structures) {
-           $result = $this->export_structure_file($structures);
+           $result = $this->export_file($structures,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -2975,23 +2721,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_structure_file($structures){
-       $filename = 'structure.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($structures as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_structure(){
@@ -3062,8 +2791,9 @@ class Setting extends MY_Controller
 
     public function export_findings($id){
         $findings = $this->Setting_model->export_structure_findings_by_id($id);
+        $filename = 'findings.txt';
         if ($findings) {
-           $result = $this->export_findings_file($findings);
+           $this->export_file($findings,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -3072,23 +2802,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_findings_file($findings){
-       $filename = 'findings.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($findings as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_finding($id){
@@ -3159,8 +2872,9 @@ class Setting extends MY_Controller
 
     public function export_diagnosis($id){
         $diagnosis = $this->Setting_model->export_structure_diagnosis_by_id($id);
+        $filename = 'diagnosis.txt'; 
         if ($diagnosis) {
-           $result = $this->export_diagnosis_file($diagnosis);
+           $result = $this->export_file($diagnosis,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -3169,23 +2883,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_diagnosis_file($diagnosis){
-       $filename = 'diagnosis.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($diagnosis as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_diagnosis($id){
@@ -3256,8 +2953,9 @@ class Setting extends MY_Controller
 
     public function export_lab_cat(){
         $lab_cat = $this->Setting_model->export_lab_cat();
+        $filename = 'laboratory_category.txt';
         if ($lab_cat) {
-           $result = $this->export_lab_cat_file($lab_cat);
+           $this->export_file($lab_cat,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -3266,23 +2964,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_lab_cat_file($lab_cat){
-       $filename = 'laboratory_category.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($lab_cat as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_lab_cat(){
@@ -3351,8 +3032,9 @@ class Setting extends MY_Controller
 
     public function export_lab_items($id){
         $lab_items = $this->Setting_model->export_lab_tests_by_category($id);
+        $filename = 'laboratory_test.txt';
         if ($lab_items) {
-           $result = $this->export_lab_items_file($lab_items);
+           $this->export_file($lab_items,$filename);
         }else{
             $json['error']= true;
             $json['message'] = 'No item found.';
@@ -3361,23 +3043,6 @@ class Setting extends MY_Controller
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
-    }
-
-    public function export_lab_items_file($lab_items){
-       $filename = 'laboratory_test.txt'; 
-       header("Content-Description: File Transfer");
-       header('Content-Encoding: UTF-8'); 
-       header("Content-Disposition: attachment; filename=$filename"); 
-       header("Content-Type: application/txt;charset=UTF-8");
-       // file creation 
-       $file = fopen('php://output', 'w');
-       $header = array('Names'); 
-       fputcsv($file, $header);
-       foreach ($lab_items as $key=>$line){ 
-         fputcsv($file,$line); 
-       }
-       fclose($file); 
-       exit;
     }
 
     public function import_lab_test($id){

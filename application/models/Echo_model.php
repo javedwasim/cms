@@ -455,6 +455,26 @@
             }
 
         }
+
+        public function unassign_finding($did,$sid,$fid){
+            $result = $this->db->set('disease_id','0')->where('structure_id',$sid)
+                        ->where('id',$fid)->where('disease_id',$did)->update('structure_finding');
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function unassign_diagnosis($did,$sid,$diag_id){
+            $result = $this->db->set('disease_id','0')->where('structure_id',$sid)
+                        ->where('id',$diag_id)->where('disease_id',$did)->update('diagnosis');
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
 	}
 
 ?>

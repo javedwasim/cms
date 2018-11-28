@@ -737,7 +737,7 @@ class User extends MY_Controller {
         $valToUpdate = $this->input->post('valToUpdate');
         $whereToupdate = $this->input->post('whereToupdate');
         $bookingFlag = $this->input->post('flag');
-        $tabledate = $this->input->post('tabledate');
+        $tabledate = date('Y-m-d',strtotime($this->input->post('tabledate')));
         $statusid = $this->input->post('statusid');
         $date = date('Y-m-d', strtotime($tabledate));
         $result = $this->User_model->update_value($value, $valToUpdate, $whereToupdate,$statusid);
@@ -856,7 +856,7 @@ class User extends MY_Controller {
         if ($searchdate >= $current_date) {
             $check_order_exist = $this->User_model->order_exist($orderno, $searchdate);
             if ($check_order_exist) {
-                $result = $this->User_model->update_consultant($value, $wheretoinsert, $orderno);
+                $result = $this->User_model->update_consultant($value, $wheretoinsert, $orderno,$appdate);
                 if ($result) {
                     $data['booking_flag'] = $flag;
                     $json['message'] = 'Inserted successfully';

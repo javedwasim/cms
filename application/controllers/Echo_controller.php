@@ -346,7 +346,8 @@ class Echo_controller extends MY_Controller
             }else{
                 $result = $this->Echo_model->add_structure_finding($data);
                 $message = "Finding saved successfully.";
-                $this->get_structure_finding_by_id($data['structure_id'],$result,$message);
+                $disease_id = '';
+                $this->get_structure_finding_by_id($data['structure_id'],$result,$message,$disease_id);
             }
         }
     }
@@ -809,6 +810,45 @@ class Echo_controller extends MY_Controller
         $dname = $this->input->post('dName');
         $data['diagnosis'] = $this->Echo_model->save_st_diagnosis($sId,$dId,$dname);
         $json['result_html'] = $this->load->view('profile/profile_diagnosis_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function deselect_finding(){
+        $did = $this->input->post('disease_id');
+        $sid = $this->input->post('structure_id');
+        $fid = $this->input->post('finding_id');
+        $result = $this->Echo_model->unassign_finding($did,$sid,$fid);
+        if ($result) {
+            $data['findings'] = $this->Echo_model->get_structure_findings_by_id($sid);
+            // print_r($data['findings']);die();
+            $json['dfinding_html'] = $this->load->view('echo/default_finding_table', $data, true);
+            $json['success'] = true;
+            $json['message'] = 'Finding unassigned.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function deselect_diagnosis(){
+        $did = $this->input->post('disease_id');
+        $sid = $this->input->post('structure_id');
+        $diag_id = $this->input->post('diagnosis_id');
+        $result = $this->Echo_model->unassign_diagnosis($did,$sid,$diag_id);
+        if ($result) {
+            $data['diagnosis'] = $this->Echo_model->get_structure_diagnosis_by_id($sid);
+            $json['ddiagnose_html'] = $this->load->view('echo/default_diagnosis_table', $data, true);
+            $json['success'] = true;
+            $json['message'] = 'Diagnosis unassigned.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

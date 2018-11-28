@@ -625,7 +625,7 @@ $(document).ready(function(){
                         "info": false,
                         "paging": false,
                         "scrollX": true,
-                        "scrollY": "450px",
+                        "scrollY": "66vh",
                         "scrollCollapse": true,
                         "searching":false,
                         "createdRow": function(row, data, dataIndex) {

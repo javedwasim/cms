@@ -150,6 +150,7 @@
 </div>
 <script>
     function editInstructionCategory(editableObj, id) {
+        $('#save_profile_instruction').attr('disabled',false);
         $('td.p_category').css('background', '#FFF');
         $('td.p_category').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");

@@ -534,10 +534,19 @@ class Profile extends MY_Controller
     public function patient_special_instruction()
     {
         $data = $this->input->post();
+        $pid = $data['patient_id'];
         $result = $this->Profile_model->save_special_instructions($data);
         if ($result) {
-            $data['sp_info'] = $this->Profile_model->get_sp_info($data['patient_id']);
+            $data['category'] = 'special';
+            $data['patient_info'] = $this->Profile_model->patient_info_by_id($pid);
+            $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($pid);
+            $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
+            $data['sp_info'] = $this->Profile_model->get_sp_info($pid);
             $json['sp_table'] = $this->load->view('profile/sp_inst_table', $data, true);
+            $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
+            $json['result_html'] = $this->load->view('pages/pat_sp_instructions', $data, true);
+            // $data['sp_info'] = $this->Profile_model->get_sp_info($data['patient_id']);
+            // $json['sp_table'] = $this->load->view('profile/sp_inst_table', $data, true);
             $json['success'] = true;
             $json['message'] = "Information save successfully!";
         } else {

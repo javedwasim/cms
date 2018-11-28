@@ -214,7 +214,7 @@ $(document.body).on('click', '.feepaid', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "62vh",
+                        "scrollY": "67vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -328,7 +328,7 @@ $(document.body).on('click', '.wecg', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "62vh",
+                        "scrollY": "67vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -443,7 +443,7 @@ $(document.body).on('click', '.wett', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "62vh",
+                        "scrollY": "67vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -556,7 +556,7 @@ $(document.body).on('click', '.wecho', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "62vh",
+                        "scrollY": "67vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -670,7 +670,7 @@ $(document.body).on('click', '.investigation', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "62vh",
+                        "scrollY": "67vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -783,7 +783,7 @@ $(document.body).on('click', '.checkup', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "62vh",
+                        "scrollY": "67vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -897,7 +897,7 @@ $(document.body).on('click', '.complete', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "62vh",
+                        "scrollY": "67vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -1011,7 +1011,7 @@ $(document.body).on('click', '.appoint_revert', function () {
                         "info": false,
                         "paging": false,
                         "searching": false,
-                        "scrollY": "62vh",
+                        "scrollY": "67vh",
                         "scrollCollapse": true,
                         "createdRow": function (row, data, dataIndex) {
                             if (data[17] == "1") {
@@ -1107,7 +1107,7 @@ function appointments() {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "62vh",
+                    "scrollY": "67vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1215,7 +1215,7 @@ $(document.body).on('click', '#book_appointment', function (e) {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "62vh",
+                    "scrollY": "67vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1342,7 +1342,7 @@ function valupdate(val) {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "62vh",
+                    "scrollY": "67vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1547,7 +1547,7 @@ $(document.body).on('click', '#time_consultant', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "62vh",
+                    "scrollY": "67vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1658,7 +1658,7 @@ $(document.body).on('click', '#time_on_walk', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "62vh",
+                    "scrollY": "67vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -1768,7 +1768,7 @@ $(document.body).on('click', '#time_on_call', function () {
                     "info": false,
                     "paging": false,
                     "searching": false,
-                    "scrollY": "62vh",
+                    "scrollY": "67vh",
                     "scrollCollapse": true,
                     "createdRow": function (row, data, dataIndex) {
                         if (data[17] == "1") {
@@ -2830,6 +2830,7 @@ $(document.body).on('click', '.exa-pat-spInstructions', function () {
                     $('#sp-ins-table tbody tr.row_selected').removeClass('row_selected');
                     $(this).addClass('row_selected');
                 });
+                
             }
         }
     });
@@ -3932,8 +3933,8 @@ $(document.body).on('click', '#save_diary', function (){
             if(response.success == true){
                 toastr["success"](response.message);
                 $('#diary_conent').text('');
-                $('.diary_sidebar').remove();
-                $('#diary_sidebar').append(response.diary_sidebar);
+                // $('.diary_sidebar').remove();
+                // $('#diary_sidebar').append(response.diary_sidebar);
                 $("#diray_table tbody tr").click(function (e) {
                     $('#diray_table tbody tr.row_selected').removeClass('row_selected');
                     $(this).addClass('row_selected');

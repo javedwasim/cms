@@ -1,4 +1,4 @@
-<table class="table table-bordered nowrap responsive default_diagnosis_table tbl_header_fix_350" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered nowrap responsive default_diagnosis_table tbl_header_fix_350" cellspacing="0" id="default_diagnosis_tbl" width="100%" >
     <thead>
     <tr>
         <th style="width: 80px;">Action</th>
@@ -22,3 +22,9 @@
     <?php endforeach; ?>
     </tbody>
 </table>
+<script type="text/javascript">
+    $("#default_diagnosis_tbl tbody tr td:nth-child(2)").click(function (e) {
+      $('#default_diagnosis_tbl tbody tr td:nth-child(2).row_selected').removeClass('row_selected');
+      $(this).addClass('row_selected');
+  });
+</script>

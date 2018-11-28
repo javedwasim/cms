@@ -1520,11 +1520,11 @@ $(document.body).on('click', '.delete-diagnosis', function(){
                         $('.structure_diagnosis_container').append(response.result_html);
 
                         //select parent structure
-                        $(".structure_table td").css("background-color", "#FFF");
-                        $(".structure_table td").css("color", "#1b1a1a");
+                        // $(".structure_table td").css("background-color", "#FFF");
+                        // $(".structure_table td").css("color", "#1b1a1a");
                         var structure_id = $('#structure_id').val();
-                        $('#'+structure_id).css("background", "#1e88e5");
-                        $('#'+structure_id).css("color", "#FFF");
+                        // $('#'+structure_id).css("background", "#1e88e5");
+                        // $('#'+structure_id).css("color", "#FFF");
                         toastr["error"]('Finding deleted successfully!');
                     }
                 });
@@ -1974,6 +1974,7 @@ $(document.body).on('click', '#save_inst_description', function(){
 });
 
 $(document.body).on('click', '#save_profile_instruction', function(){
+    $(this).attr('disabled',true);
     var patient_id = $('#label_patient_id').text();
     var sd = $('#patient_id').val(patient_id);
     var  sp_inst_id = $('#sp-ins-table tbody tr.row_selected').find('.pat_sp_id').text();
@@ -1986,6 +1987,8 @@ $(document.body).on('click', '#save_profile_instruction', function(){
         success: function(response) {
             $('#special_instruction').val('');
             if (response.success) {
+                $('.patient_info').remove();
+                $('#pat_sp_information').append(response.patient_information);
                 $('.sp_data_table').remove();
                 $('#sp_data_table').append(response.sp_table);
                 $("#sp-ins-table tbody tr").click(function (e) {
@@ -4042,3 +4045,55 @@ $(document.body).on('click','#vitals_to_profile',function(){
     });
     
 });
+$(document.body).on('click','#default_finding_tbl tbody tr td:nth-child(2).row_selected',function(){
+    var tr = $(this).closest('tr');
+    var disease_id = $('#assign_disease_id').val();
+    var finding_id = tr.find('.finding_radio').attr('data-finding-id');
+    var structure_id = tr.find('.finding_radio').attr('data-structure-id');
+    $.ajax({
+      url:window.location.origin+window.location.pathname+'echo_controller/deselect_finding',
+      type: 'post',
+      data:{
+        disease_id:disease_id,
+        finding_id:finding_id,
+        structure_id:structure_id
+      },
+      cache:false,
+      success:function(response){
+        if (response.success == true) {
+            $('#default_finding_container').empty();
+            $('#default_finding_container').append(response.dfinding_html);
+            toastr["success"](response.message);
+        }else{
+            toastr["error"](response.message);
+        }
+      }
+    });
+  });
+
+  $(document.body).on('click','#default_diagnosis_tbl tbody tr td:nth-child(2).row_selected',function(){
+    var tr = $(this).closest('tr');
+    var disease_id = $('#assign_disease_id').val();
+    var diagnosis_id = tr.find('.diagnose_radio').attr('data-diagnose-id');
+    var structure_id = tr.find('.diagnose_radio').attr('data-structure-id');
+    $.ajax({
+      url:window.location.origin+window.location.pathname+'echo_controller/deselect_diagnosis',
+      type: 'post',
+      data:{
+        disease_id:disease_id,
+        diagnosis_id:diagnosis_id,
+        structure_id:structure_id
+      },
+      cache:false,
+      success:function(response){
+        if (response.success == true) {
+            $('.default_diagnosis_container').empty();
+            $('.default_diagnosis_container').append(response.ddiagnose_html);
+            toastr["success"](response.message);
+        }else{
+            toastr["error"](response.message);
+        }
+      }
+    });
+  });
+

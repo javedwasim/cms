@@ -72,13 +72,17 @@
                             echo "";
                         }?>"
                     >
-                        <input type="text" name="full_name" style="text-transform: capitalize;width:100px;" id="patient-name" onchange="consultant_booking(this)" maxlength="25" autocomplete="off" class="dt-input" value="<?php 
-                        if(isset($bkarray[$i]['full_name']) && $user_info['is_admin']==1){
-                            echo $bkarray[$i]['full_name'];
-                        }else{
-                            echo "";
-                        }?>"
-                        <?php  echo ($user_info['is_admin']!=1)&&($booking_flag == 'vip')?'readonly':''; ?>
+                        <input type="text" name="full_name" autocomplete="off" class="dt-input"
+                            style="text-transform: capitalize;width:100px;" 
+                            id="patient-name" onchange="consultant_booking(this)" maxlength="25"  
+                            <?php 
+                            if(isset($bkarray[$i]['full_name'])){
+                                echo (in_array("appointments-can_edit-0", $permissions)) || (($bkarray[$i]['full_name'] != '')&&($user_info['is_admin']!=1))?'readonly':''; 
+                            ?>
+                            value="<?php echo $bkarray[$i]['full_name']; ?>"   
+                            <?php }else{ ?>
+                                 value="<?php echo ""; ?>"
+                            <?php }?>
                         >
                     </td>
                     <td
@@ -90,16 +94,16 @@
                             echo "";
                         }?>"
                     >
-                       <input type="text" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" maxlength="11" style="width: 100px;"
-                            name="contact_number" onchange="consultant_booking(this)" autocomplete="off" 
-                            class="dt-input" value="<?php 
-                        if(isset($bkarray[$i]['contact_number'])){
-                            echo $bkarray[$i]['contact_number'];
-                        }else{
-                            echo "";
-                        }?>"
-                        <?php  echo ($user_info['is_admin']!=1)&&($booking_flag == 'vip')?'readonly':''; ?>
-                        >
+                       <input type="text" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" 
+                            maxlength="11"  style="width: 100px;" name="contact_number" onchange="consultant_booking(this)" autocomplete="off" class="dt-input"
+                            <?php 
+                            if(isset($bkarray[$i]['contact_number'])){
+                                echo (in_array("appointments-can_edit-0", $permissions)) || (($bkarray[$i]['contact_number'] != '')&&($user_info['is_admin']!=1))?'readonly':''; 
+                            ?>
+                            value="<?php echo $bkarray[$i]['contact_number']; ?>"   
+                            <?php }else{ ?>
+                                 value="<?php echo ""; ?>"
+                            <?php }?> >
                     </td>
                     <td class="center">
                         <?php
@@ -122,30 +126,35 @@
                         }else{
                             echo "";
                         }?>">
-                        <input type="text" name="consultant_fee" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)" autocomplete="off" class="dt-input" maxlength="5" value="<?php 
-                        if(isset($bkarray[$i]['consultant_fee'])){
-                            echo $bkarray[$i]['consultant_fee'];
-                        }else{
-                            echo "";
-                        }?>"
-                        <?php  echo (in_array("appointments-can_edit-0", $permissions))?'readonly':''; ?>>
+                        <input type="text" name="consultant_fee" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)" autocomplete="off" class="dt-input" maxlength="5" 
+                        <?php 
+                            if(isset($bkarray[$i]['consultant_fee'])){
+                                echo (in_array("appointments-can_edit-0", $permissions)) || (($bkarray[$i]['consultant_fee'] > 0)&&($user_info['is_admin']!=1))?'readonly':''; 
+                        ?>
+                            value="<?php echo $bkarray[$i]['consultant_fee']; ?>"   
+                        <?php }else{ ?>
+                             value="<?php echo ""; ?>"
+                        <?php }?>>
                     </td>
                     <td
-                            data-toggle="tooltip" data-placement="top"
-                            title="<?php
-                            if(isset($bkarray[$i]['ett_fee_collected_by']) && $user_info['is_admin']==1){
-                                echo $bkarray[$i]['ett_fee_collected_by'];
-                            }else{
-                                echo "";
-                            }?>"
-                    >
-                        <input type="text" name="ett_fee" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"  autocomplete="off" class="dt-input" maxlength="5" value="<?php
-                        if(isset($bkarray[$i]['ett_fee'])){
-                            echo $bkarray[$i]['ett_fee'];
+                        data-toggle="tooltip" data-placement="top"
+                        title="<?php
+                        if(isset($bkarray[$i]['ett_fee_collected_by']) && $user_info['is_admin']==1){
+                            echo $bkarray[$i]['ett_fee_collected_by'];
                         }else{
                             echo "";
                         }?>"
-                        <?php  echo (in_array("appointments-can_edit-0", $permissions))?'readonly':''; ?>>
+                    >
+                        <input type="text" name="ett_fee" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)"
+                            autocomplete="off" class="dt-input" maxlength="5" 
+                        <?php 
+                            if(isset($bkarray[$i]['ett_fee'])){
+                                echo (in_array("appointments-can_edit-0", $permissions)) || (($bkarray[$i]['ett_fee'] > 0)&&($user_info['is_admin']!=1))?'readonly':''; 
+                        ?>
+                            value="<?php echo $bkarray[$i]['ett_fee']; ?>"   
+                        <?php }else{ ?>
+                             value="<?php echo ""; ?>"
+                        <?php }?>>
                     </td>
                     <td
                         data-toggle="tooltip" data-placement="top"
@@ -156,13 +165,16 @@
                             echo "";
                         }?>"
                     >
-                        <input type="text" name="echo_fee" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)" autocomplete="off" class="dt-input" maxlength="5" value="<?php
-                        if(isset($bkarray[$i]['echo_fee'])){
-                            echo $bkarray[$i]['echo_fee'];
-                        }else{
-                            echo "";
-                        }?>"
-                        <?php  echo (in_array("appointments-can_edit-0", $permissions))?'readonly':''; ?>>
+                        <input type="text" name="echo_fee" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="consultant_booking(this)" 
+                            autocomplete="off" class="dt-input" maxlength="5"
+                            <?php 
+                                if(isset($bkarray[$i]['echo_fee'])){
+                                    echo (in_array("appointments-can_edit-0", $permissions)) || (($bkarray[$i]['echo_fee'] > 0)&&($user_info['is_admin']!=1))?'readonly':''; 
+                            ?>
+                                value="<?php echo $bkarray[$i]['echo_fee']; ?>"   
+                            <?php }else{ ?>
+                                 value="<?php echo ""; ?>"
+                            <?php }?>>
                     </td>
                     <td>
                         <?php
@@ -274,7 +286,9 @@
                             echo "";
                         }?>"
                     >
-                        <input type="text" name="full_name" style="text-transform: capitalize;width:100px;" id="input-name" onchange="valupdate(this)" maxlength="25" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>" <?php  echo ($user_info['is_admin']!=1)&&($booking_flag == 'vip')?'readonly':''; ?>>
+                        <input type="text" name="full_name" style="text-transform: capitalize;width:100px;" id="input-name" onchange="valupdate(this)" maxlength="25" 
+                            autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>" 
+                            <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['full_name'] != '')&&($user_info['is_admin']!=1))?'readonly':''; ?>>
                     </td>
                     <td data-toggle="tooltip" data-placement="top" data-trigger="hover" 
                         title="<?php 
@@ -292,7 +306,7 @@
                         }else{
                             echo "";
                         }?>"
-                        <?php  echo ($user_info['is_admin']!=1)&&($booking_flag == 'vip')?'readonly':''; ?>
+                        <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['contact_number'] != '')&&($user_info['is_admin']!=1))?'readonly':''; ?>
                         >
                     </td>
                     <?php $datetime = date(' d-m-Y h:i a', strtotime($details['creation_time'])); ?>
@@ -308,8 +322,8 @@
                             echo "";
                         }?>"
                         >
-                        <input type="text" name="consultant_fee" maxlength="5" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" 
-                            name="contact_number" <?php  echo (in_array("appointments-can_edit-0", $permissions))&&($details['consultant_fee']>0)?'readonly':''; ?>
+                        <input type="text" name="consultant_fee" maxlength="5" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" 
+                            <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['consultant_fee']>0)&&($user_info['is_admin']!=1))?'readonly':''; ?>
                             onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['consultant_fee'] ?>">
                     </td>
                     <td
@@ -321,8 +335,8 @@
                             echo "";
                         }?>"
                         >
-                        <input type="text" name="ett_fee" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" maxlength="5" onchange="valupdate(this)" 
-                        <?php  echo (in_array("appointments-can_edit-0", $permissions))&&($details['ett_fee']>0)?'readonly':''; ?>
+                        <input type="text" name="ett_fee" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" maxlength="5" onchange="valupdate(this)"
+                            <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['ett_fee']>0)&&($user_info['is_admin']!=1))?'readonly':''; ?>
                                autocomplete="off" class="dt-input" value="<?php echo $details['ett_fee'] ?>">
                     </td>
                     <td
@@ -335,7 +349,7 @@
                         }?>"
                         >
                         <input type="text" name="echo_fee" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number"  maxlength="5" onchange="valupdate(this)" 
-                        <?php  echo (in_array("appointments-can_edit-0", $permissions))&&($details['echo_fee']>0)?'readonly':''; ?>
+                            <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['echo_fee']>0)&&($user_info['is_admin']!=1))?'readonly':''; ?>
                                autocomplete="off" class="dt-input" value="<?php echo $details['echo_fee'] ?>">
                     </td>
                     <td>
@@ -410,7 +424,8 @@
                         }else{
                             echo "";
                         }?>">
-                        <input type="text" name="full_name" style="text-transform: capitalize;width:100px;" id="input-name" onchange="valupdate(this)" maxlength="25" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>">
+                        <input type="text" name="full_name" style="text-transform: capitalize;width:100px;" id="input-name" onchange="valupdate(this)" maxlength="25" autocomplete="off" class="dt-input" value="<?php echo $details['full_name'] ?>"
+                        <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['full_name'] != '')&&($user_info['is_admin']!=1))?'readonly':''; ?>>
                     </td>
                     <td data-toggle="tooltip" data-placement="top" data-trigger="hover" 
                         title="<?php 
@@ -423,12 +438,12 @@
                             name="contact_number" onchange="valupdate(this)"
                             autocomplete="off" maxlength="11" style="width: 100px;"
                             class="dt-input" value="<?php 
-                        if(isset($details['contact_number'])){
-                            echo $details['contact_number'];
-                        }else{
-                            echo "";
-                        }?>"
-                        <?php  echo ($user_info['is_admin']!=1)&&($booking_flag == 'vip')?'readonly':''; ?>
+                            if(isset($details['contact_number'])){
+                                echo $details['contact_number'];
+                            }else{
+                                echo "";
+                            }?>"
+                            <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['contact_number'] != '')&&($user_info['is_admin']!=1))?'readonly':''; ?>
                         >
                     </td>
                     <?php $datetime = date(' d-m-Y h:i a', strtotime($details['creation_time'])); ?>
@@ -445,10 +460,8 @@
                     }?>"
                     >
                         <input type="text" name="consultant_fee" maxlength="5" 
-                            onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="valupdate(this)"  
-                            <?php  echo (in_array("appointments-can_edit-0", $permissions))&&($details['consultant_fee']>0)?'readonly':''; ?>
-                               autocomplete="off" class="dt-input" 
-                               value="<?php echo $details['consultant_fee'] ?>">
+                            onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" onchange="valupdate(this)" autocomplete="off" class="dt-input" value="<?php echo $details['consultant_fee'] ?>"
+                            <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['consultant_fee'] > 0)&&($user_info['is_admin']!=1))?'readonly':''; ?>>
                     </td>
                     <td data-toggle="tooltip" data-placement="top" data-trigger="hover"
                         title="<?php
@@ -457,9 +470,9 @@
                         }else{
                             echo "";
                         }?>">
-                        <input type="text" name="ett_fee" maxlength="5" 
-                                onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="valupdate(this)" <?php  echo (in_array("appointments-can_edit-0", $permissions))&&($details['ett_fee']>0)?'readonly':''; ?>
-                               autocomplete="off" class="dt-input" value="<?php echo $details['ett_fee'] ?>">
+                        <input type="text" name="ett_fee" maxlength="5" class="dt-input"
+                            onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" onchange="valupdate(this)" autocomplete="off" value="<?php echo $details['ett_fee'] ?>"
+                        <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['ett_fee'] > 0)&&($user_info['is_admin']!=1))?'readonly':''; ?>>
                     </td>
                     <td
                         data-toggle="tooltip" data-placement="top" data-trigger="hover"
@@ -470,9 +483,9 @@
                             echo "";
                         }?>"
                     >
-                        <input type="text" name="echo_fee" maxlength="5" 
-                                onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" name="contact_number" onchange="valupdate(this)" <?php  echo (in_array("appointments-can_edit-0", $permissions))&&($details['echo_fee']>0)?'readonly':''; ?>
-                               autocomplete="off" class="dt-input" value="<?php echo $details['echo_fee'] ?>">
+                        <input type="text" name="echo_fee" maxlength="5" onchange="valupdate(this)"
+                                onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" autocomplete="off" class="dt-input" value="<?php echo $details['echo_fee'] ?>"
+                        <?php  echo (in_array("appointments-can_edit-0", $permissions)) || (($details['echo_fee'] > 0)&&($user_info['is_admin']!=1))?'readonly':''; ?>>
                     </td>
                     <td>
                         <?php

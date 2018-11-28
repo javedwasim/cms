@@ -1,20 +1,13 @@
-<table class="table table-bordered nowrap responsive structure_table tbl_header_fix_350" cellspacing="0" style="width: 100%">
+<table class="table table-bordered nowrap responsive structure_table tbl_header_fix_350" id="default_structure_tbl" cellspacing="0" style="width: 100%">
     <thead>
     <tr>
-        <th style="width:50px;">Action</th>
         <th >Name</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($structures as $structure): ?>
         <tr class="table-row">
-            <td style="width:50px;">
-                <a class="btn btn-danger btn-xs">
-                    <i class="fa fa-trash" title="Delete"></i>
-                </a>
-            </td>
-            <td class="default_structure_cate" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"
-                onBlur="defaultsaveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
+            <td onBlur="defaultsaveStructure(this,'cate_name','<?php echo $structure['id']; ?>')"
                 onClick="defaultstructureEdit(this,'<?php echo $structure['id']; ?>');"
                 id="<?php echo $structure['id']; ?>">
                 <?php echo $structure['name']; ?>
@@ -23,14 +16,10 @@
     <?php endforeach; ?>
     </tbody>
 </table>
-
 <input type="hidden" name="structure_id" id="structure_id">
 <script>
+
     function defaultstructureEdit(editableObj,id) {
-        $(".default_structure_cate").css("background-color", "");
-        $(".default_structure_cate").css("color", "black");
-        $(editableObj).css("background-color", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
         $('#assign_structure_id').val(id);
         var disease_id = $('#assign_disease_id').val();
         //load structure findings
@@ -67,15 +56,16 @@
             }
         });
     }
-
+    $("#default_structure_tbl tbody tr").click(function (e) {
+        $('#default_structure_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
     $(document.body).on('click', '#structure_finding', function(){
         //remove background and color on all elements and remove color
-        $(".structure_table td").css("background-color", "#FFF");
-        $(".structure_table td").css("color", "#1b1a1a");
+        $(".structure_table td").removeClass('row_selected');
 
         var structure_id = $('#structure_id').val();
-        $('#'+structure_id).css("background", "#1e88e5");
-        $('#'+structure_id).css("color", "#FFF");
+        $('#'+structure_id).addClass('row_selected');
         return false;
     });
 

@@ -5,7 +5,7 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="card">
                         <div class="card-header">Disease</div>
-                        <div class="card-body" >
+                        <div class="card-body disease_category_container" >
                             <?php $this->load->view('echo/default_disease_table'); ?>
                             <input type="hidden" id="assign_disease_id" value="" />
                         </div>
@@ -23,7 +23,7 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="card">
                         <div class="card-header">Finding</div>
-                        <div class="card-body default_finding_container" >
+                        <div class="card-body default_finding_container" id="default_finding_container">
                             <?php $this->load->view('echo/default_finding_table'); ?>
                         </div>
                     </div>

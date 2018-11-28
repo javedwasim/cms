@@ -159,7 +159,7 @@
                             "info": false,
                             "paging": false,
                             "searching": false,
-                            "scrollY": "62vh",
+                            "scrollY": "67vh",
                             "scrollCollapse": true,
                             "createdRow": function (row, data, dataIndex) {
                                 if (data[17] == "1") {
