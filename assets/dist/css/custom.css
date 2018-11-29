@@ -1,16 +1,11 @@
 /* Main tabs */
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
 body {
-    font-family: 'Roboto Condensed', san-serif;
+    font-family: 'Roboto Condensed', san-serif, Mehr;
     background: #1e88e5;
 }
 
-@-moz-document domain(plus.google.com) {
-  div[dir="rtl"], span[dir="rtl"].zj {
-    font-family: 'Jameel Noori Nastaleeq','Alvi Nastaleeq','Pak Nastaleeq','Nafees Web Naskh','Urdu Naskh Asiatype',Tahoma,'Lucida Grande',Verdana,Arial,Sans-Serif;
-    font-size: 130%;
-  }
-}
+
 .board {
     width: 100%;
     height: auto;

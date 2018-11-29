@@ -6,8 +6,8 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="form-group">
                             <label>New Category</label> 
-                            <input type="text" class="form-control" name="instruction_name" id="instruction_name"  maxlength="50" required>
-                            <input type="hidden" name="instruction_category" id="instruction_category" maxlength="50"
+                            <input type="text" class="form-control" name="instruction_name" id="instruction_name"  required>
+                            <input type="hidden" name="instruction_category" id="instruction_category"
                                required value="<?php echo isset($category)?$category:'' ?>">   
                         </div>
                     </div>

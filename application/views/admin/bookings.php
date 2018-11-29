@@ -23,7 +23,13 @@
             <div class="row">
                 <div class="col-md-5 offset-1 p-r-0" style="display:inline-flex;">
                     <label class="m-t-10 m-r-5">Search</label>
-                    <input type="text" name="" value="<?php echo date('d-M-Y') ?>" class="form-control m-t-5" id="search-all-cat" style="height:35px;">        
+                    <input type="text" name="" value="<?php
+                    if(isset($searchdate)){
+                        echo date('d-M-Y',strtotime($searchdate));
+                    }else{
+                        echo date('d-M-Y');
+                    }
+                     ?>" class="form-control m-t-5" id="search-all-cat" style="height:35px;">        
                 </div>
                 <div class="col-md-3 <?php echo in_array("view_wallet-0", $permissions)?"op-hide":''; ?>">
                     <div class="round round-sm align-self-center green m-b-10" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">

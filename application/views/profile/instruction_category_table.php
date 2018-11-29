@@ -8,21 +8,21 @@
     <?php foreach ($instructions as $category): ?>
         <tr class="table-row">
             <td class="inst_cate"
-                onClick="editInstructionCategory(this,'<?php echo $category['id']; ?>');">
+                onClick="editInstructionCategory(this,'<?php echo $category['id']; ?>','<?php echo $category['name']; ?>');">
                 <?php echo $category['name']; ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <script>
-    function editInstructionCategory(editableObj,id) {
+    function editInstructionCategory(editableObj,id,name) {
         $('td.inst_cate').css('background', '#FFF');
         $('td.inst_cate').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
 
         $.ajax({
-            url: '/cms/profile/get_instruction_item/'+id,
+            url: '/cms/profile/get_instruction_item/'+id+'/'+name,
             type: 'get',
             cache: false,
             success: function (response) {

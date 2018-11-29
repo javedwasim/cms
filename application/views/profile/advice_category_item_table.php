@@ -14,7 +14,7 @@
                 </td> -->
                 <td class="advice_item"
                     onClick="addAdviceItem(this,'<?php echo $item['name']; ?>','<?php echo trim($name); ?>');">
-                    <?php echo $item['name']; ?> <?php echo trim($name); ?></td>
+                    <?php echo $item['name']; ?></td>
 
             </tr>
         <?php endforeach; ?>
@@ -29,16 +29,13 @@
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
         if(rowarray.includes(name) === false){
+            $('#advice_item').append('\n'+name+': \n');
              rowarray.push(name);
-            $('#investigation_item').append(name+'\n');
         }
         if(rowarray.includes(text) === false){
             rowarray.push(text);
-            alert(text);
             $('#advice_item').append(text+',  '); 
         }
-         
-        
     }
 
 </script>

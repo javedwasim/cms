@@ -37,8 +37,7 @@ class Dashboard_model extends CI_Model
         }
     }
 
-    public function get_total_appointments(){
-        $date = date('Y-m-d'); 
+    public function get_total_appointments($date){
         $result = $this->db
                 ->where('DATE(appointment_date)',$date)
                 ->count_all_results('appointment_booking');

@@ -1,0 +1,19 @@
+{
+  "name": "mehr",
+  "version": "1.0.2",
+  "description": "Mehr Nastaliq Web Font",
+  "main": "mehr-font.css",
+  "keywords": [
+    "Mehr",
+    "Nastaliq",
+    "Urdu",
+    "Web",
+    "Font"
+  ],
+  "author": "Abbas Siddiqi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abbassiddiqi/mehr.git"
+  },
+  "license": "MIT"
+}

@@ -1408,6 +1408,10 @@ function valupdate(val) {
                     format: 'd-M-yyyy',
                     autoclose: true
                 });
+                $('.pat_search').datepicker({
+                    format: 'd-M-yyyy',
+                    autoclose: true
+                });
                 toastr["success"]('Status Update');
             }
 
@@ -4150,6 +4154,8 @@ $(document.body).on('click', '#profiletable tbody tr.row_selected', function(){
             $('#echo_detail_container').empty();
             $('#echo_detail_container').append(response.details);
             $("#prescription_details").prop("checked", true);
+            $('#files_content').empty();
+            $('#files_content').append(response.image_html);
 
         }
     });
@@ -4540,3 +4546,91 @@ $(document.body).on('click','#export_diagnosis',function(){
         toastr['warning']('Please select structure.');
     }
 });
+
+function searchpatient(d){
+    var searchDate = d.value;
+    var bookingflag = $('#booking_flag').val();
+    $.ajax({
+        type: "post",
+        url: '/cms/user/search_patient',
+        data: {
+            searchdate: searchDate,
+            bookingflag: bookingflag
+        }, success: function (response) {
+            if (response.booking_table != '') {
+                $('.table-responsive').remove();
+                $('#table-booking').append(response.booking_table);
+                $('.wallet-modal-box').remove();
+                $('#wallet-modal-box').append(response.wallet_count);
+                $("#full_name").focus();
+                //////////////// datatable initilization//////////////
+                var oTable = $('#editable-datatable').DataTable({
+                    "info": false,
+                    "paging": false,
+                    "searching": false,
+                    "scrollY": "67vh",
+                    "scrollCollapse": true,
+                    "createdRow": function (row, data, dataIndex) {
+                        if (data[17] == "1") {
+                            $(row).addClass('round-green');
+                        }
+                        if (data[17] == "2") {
+                            $(row).addClass('round-blue');
+                        }
+                        if (data[17] == "3") {
+                            $(row).addClass('round-red');
+                        }
+                        if (data[17] == "4") {
+                            $(row).addClass('round-yellow');
+                        }
+                        if (data[17] == "5") {
+                            $(row).addClass('round-orange');
+                        }
+                        if (data[17] == "6") {
+                            $(row).addClass('round-lightGray');
+                        }
+                        if (data[17] == "7") {
+                            $(row).addClass('round-white');
+                        }
+                    },
+                    select: {
+                        style: 'single'
+                    },
+                    "scrollX": true,
+                    columnDefs: [
+                        {"type": "html-input", "targets": [3, 6, 7, 8]},
+                        {"targets": 1, "orderable": false}
+                    ],
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                            {
+                                $('td:eq(1)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                            }
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 1 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
+                });
+                $("#full_name").focus();
+                $("#editable-datatable tbody tr").click(function (e) {
+                    if ($(this).hasClass('row_selected')) {
+                        $(this).removeClass('row_selected');
+                    } else {
+                        oTable.$('tr.row_selected').removeClass('row_selected');
+                        $(this).addClass('row_selected');
+                    }
+                });
+
+                $('.app_date').datepicker({
+                    format: 'd-M-yyyy',
+                    autoclose: true
+                });
+            }
+        }
+    });
+}

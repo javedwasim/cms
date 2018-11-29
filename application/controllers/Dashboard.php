@@ -21,7 +21,7 @@ class Dashboard extends MY_Controller {
 	     } else{
         $data['total_attended'] = $this->User_model->count_total_attendent($date);
         $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
-        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments();
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments($date);
         $data['remaining_patient'] = $this->Dashboard_model->get_total_checked();
         $data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
         $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
@@ -86,9 +86,9 @@ class Dashboard extends MY_Controller {
         $oncall = 'on_call';
         $onwalk = 'on_walk';
         $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
-        $data['booking_vip'] = $this->User_model->get_bookings_vip($vip);
-        $data['booking_onwalk'] = $this->User_model->get_bookings_on_walk($onwalk);
-        $data['booking_oncall'] = $this->User_model->get_bookings_on_call($oncall);
+        $data['booking_vip'] = $this->User_model->get_bookings_vip($vip,$date);
+        $data['booking_onwalk'] = $this->User_model->get_bookings_on_walk($onwalk,$date);
+        $data['booking_oncall'] = $this->User_model->get_bookings_on_call($oncall,$date);
         $data['fee_paid'] = $this->User_model->count_fee_paid();
         $data['ecg_count'] = $this->User_model->count_ecg_waiting();
         $data['ett_count'] = $this->User_model->count_ett_waiting();
@@ -166,6 +166,8 @@ class Dashboard extends MY_Controller {
     {
         $transferflag = $this->input->post('transferto');
         $transferid = $this->input->post('transferid');
+        $date = $this->input->post('searchdate');
+        $searchdate = date('Y-m-d',strtotime($date));
         $date = date('Y-m-d');
         if (!empty($transferflag) && !empty($transferid)) {
           $result = $this->Dashboard_model->transfer_patient($transferflag, $transferid);
@@ -183,11 +185,12 @@ class Dashboard extends MY_Controller {
         $vip = 'vip';
         $oncall = 'on_call';
         $onwalk = 'on_walk';
+        $data['searchdate'] = $date;
         $data['rights'] = $this->session->userdata('other_rights');
-        $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
-        $data['booking_vip'] = $this->User_model->get_bookings_vip($vip);
-        $data['booking_onwalk'] = $this->User_model->get_bookings_on_walk($onwalk);
-        $data['booking_oncall'] = $this->User_model->get_bookings_on_call($oncall);
+        $data['consultant_booking'] = $this->User_model->get_first_five_rows($searchdate);
+        $data['booking_vip'] = $this->User_model->get_bookings_vip($vip,$searchdate);
+        $data['booking_onwalk'] = $this->User_model->get_bookings_on_walk($onwalk,$searchdate);
+        $data['booking_oncall'] = $this->User_model->get_bookings_on_call($oncall,$searchdate);
         $json['booking_cate'] = $this->load->view('admin/booking_categories', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

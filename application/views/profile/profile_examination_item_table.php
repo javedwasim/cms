@@ -15,7 +15,7 @@
                         <i class="far fa-question-circle"></i></a>
                 </td>
                 <td class="exam_item"
-                    onClick="addExaminationItem(this,'<?php echo $item['name']; ?>');">
+                    onClick="addExaminationItem(this,'<?php echo $item['name']; ?>','<?php echo $name; ?>');">
                     <?php echo $item['name']; ?>
                 </td>
         </tr>
@@ -46,12 +46,16 @@
 </div>
 <script>
     var textarray = [];
-    function addExaminationItem(editableObj,text) {
+    function addExaminationItem(editableObj,text,name) {
         var patient_id = $('#label_patient_id').text();
         $('td.exam_item').css('background', '#FFF');
         $('td.exam_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+        if(textarray.includes(name) === false){
+            $('#examination_item').append('\n'+name+': \n');
+            textarray.push(name);
+        }
         if(textarray.includes(text) === false){
             textarray.push(text);
             $('#examination_item').append(text+',  '); 

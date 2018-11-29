@@ -17,8 +17,9 @@
         }
         body {
             margin: 0;
-            font-family: Calibri;
+            font-family: Mehr,Arial, San sarif;
             font-size: 20px;
+            color:#000 !important;
         }
         .sheet {
             margin: 0;
@@ -152,7 +153,7 @@
         }
         .footer-top{
             position: fixed;
-            bottom: 100px;
+            bottom: 170px;
         }
 </style>
 <style type="text/css" media="print">
@@ -178,7 +179,7 @@
         float: left;
     }
     .offset-1 {
-        margin-left: 8.333333%;
+        margin-left: 7%;
     }
     .col-md-2 {
         max-width: 16.666667%;
@@ -225,12 +226,12 @@
     }
     .footer-bottom{
         position: fixed;
-        bottom: 40px;
+        bottom: 120px;
         right: 35px;
     }
     .footer-top{
         position: fixed;
-        bottom: 100px;
+        bottom: 150px;
     }
     .mb-10{
         margin-bottom: 20px;
@@ -240,50 +241,42 @@
 <body class="A4 " >
     <div class="row sheet">
         <div class="col-md-10 offset-1">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="row border-dark" style="width: 95%; border-bottom:3px solid #000;">
-                <div class="col-md-6">
-                    <strong>Ref.ID</strong>
+            <div class="row border-dark" style="width: 96%; border-bottom:3px solid #000; margin-top:350px; ">
+                <div class="col-md-6" style="font-size: 22px;">
+                    <strong>Ref.ID:</strong>
                     <i><?php echo $patient_info->id ?></i>
-                    <strong style="margin-left: 10px"><?php echo $patient_info->pat_name ?></strong>
+                    <strong style="margin-left: 15px;font-weight: bold;"><?php echo $patient_info->pat_name ?></strong>
                 </div>
-                <div class="col-md-4">
-                    <strong>
+                <div class="col-md-3">
+                    <strong style="font-weight: bold; margin-right: 7px;">
                         <?php $age = preg_split('#(?<=\d)(?=[a-z])#i', $patient_info->pat_age); echo $age[0]; 
                             echo " ";
                         ?>
                     </strong>
                     <label><?php echo $age[1]; ?></label>
-                    <label style="margin-right: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
+                    <label style="margin-left: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
                 </div>
-                <div class="col-md-2">
-                    <label><?php echo date('d-M-Y');?></label>
+                <div class="col-md-3">
+                    <label><?php echo date('l, F Y');?></label>
                 </div>
             </div>
             <br>
             <div class="row" style="width: 95%;">
                 <div class="col-md-7">
                     <div class="row">
-                        <div class="col-md-5" style="padding-left: 0px;">
+                        <div class="col-md-5" style="padding-left: 0px; font-weight: 500; font-size: 25px; font-family: Arial;">
                             <?php foreach($medicine_details as $med){?>
                                 <div class="mb-10"><?php echo $med['medicine_value']?></div>
                             <?php }?>
                         </div>
-                        <div class="col-md-6" style="padding-right: 0px;direction:rtl; text-align: right;">
+                        <div class="col-md-6" style="padding-right: 0px; font-weight: 500; direction:rtl; font-size: 25px; text-align: right;">
                             <?php foreach($dosage_details as $dos){?>
                                 <div class="mb-10"><?php echo $dos['dosage_value']?></div>
                             <?php }?>
                         </div>  
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5" style="font-size: 20px;font-family: Arial;">
                     <?php foreach($history_details as $history){?>
                         <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $history['history_value']; ?></div>
                     <?php }?>
@@ -309,15 +302,17 @@
         
                 }
             ?>
-            <div class="mb-10 footer-top" style="word-break: break-all; text-align: right; width: 85%;">
+            <div class="mb-10 footer-top" style="word-break: break-all; font-weight: 500; font-size: 22px; text-align: right; width: 86%;">
                 <?php foreach ($instructions as $value) {
                     echo '<div style="text-align:left; display:inline-block; ">'.$value.'</div> <br>';
                 }?>
             </div>
-            <div class="row footer-bottom" style="width: 85%;">
+            <div class="row footer-bottom" style="width: 92%;">
                 <div class="col-md-12">
                     <br> 
-                    <p style="text-align: right; font-size: 16px; direction:rtl; font-weight: bold;">پھر مورخہ <?php foreach($visit_date as $visit){echo " ";echo date('Y-m-d',strtotime($visit['next_visit_date']));echo " ";}?>کو چیک کرایں۔ چیک نہ ہونے کی صورت میں ادوایات جاری رکہیں۔ آنے سے ایک روز ‍قبل فون پر نام لیں۔</p>
+                    <p style="text-align: right; font-size: 26px; font-weight: 500; direction: rtl; word-spacing: 3px;width: 95%;">
+                        پھر مورخہ       <?php foreach($visit_date as $visit){echo " ";echo date('Y, F d',strtotime($visit['next_visit_date']));echo " ";}?>            کو چیک کرایں۔ چیک نہ ہونے کی صورت میں ادویات جاری رکھیں۔ آنے سے قبل فون پر ٹائم لیں۔
+                    </p>
                 </div>
             </div>
         </div>

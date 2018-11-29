@@ -1,43 +1,23 @@
 Names
-
 Aorta
-
 "Aortic Valve"
-
 Clot
-
 Concordance
-
 Diagnosis
-
 "Diastolic Dysfunction"
-
 History
-
 LA
-
 LV
-
 "Mitral Valve"
-
 Pericardium
-
 Procedure
-
 "Pulmonary Artery"
-
 "Pulmonic Valve"
-
 RA
-
 RV
-
 Shunt
-
 Situs
-
 SWMA
-
 "Tricuspid Valve"
-
 Vessels
+test

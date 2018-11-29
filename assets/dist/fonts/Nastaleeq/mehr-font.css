@@ -1,0 +1,7 @@
+/*
+ * Mehr Nastaliq Web Font
+ */
+@font-face {
+  font-family: 'Mehr';
+  src: url(//unpkg.com/mehr/mehr.ttf) format('truetype');
+}

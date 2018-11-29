@@ -1976,6 +1976,7 @@ $(document.body).on('click', '#save_inst_description', function(){
 
 $(document.body).on('click', '#save_profile_instruction', function(e){
     e.preventDefault();
+    var val = '';
    $(this).attr("disabled",true);
     var patient_id = $('#label_patient_id').text();
     var sd = $('#patient_id').val(patient_id);
@@ -1993,6 +1994,9 @@ $(document.body).on('click', '#save_profile_instruction', function(e){
                 $('.sp_data_table').remove();
                 $('#sp_data_table').append(response.sp_table);
                 toastr["success"](response.message);
+                setTimeout(function(){
+                   printsp(val,response.testid,patient_id);
+                },2000);
             } else {
                 toastr["error"](response.message);
             }
@@ -2076,6 +2080,7 @@ $(document.body).on('click','#profile_ett_conc_table tbody tr.row_selected',func
 $(document.body).on('click', '#save_ett_test', function(e){
     e.preventDefault();
     var patientid = $('#label_patient_id').text();
+    var val = '';
     $('#ett_pat_id').val(patientid);
     $.ajax({
         url: '/cms/profile/save_ett_test',
@@ -2126,6 +2131,9 @@ $(document.body).on('click', '#save_ett_test', function(e){
             });
             if (response.success == true) {
                 toastr['success']('Saved Successfully.');
+                setTimeout(function(){
+                    printEtt(val,response.testid,patientid);
+                },2000);
             }else{
                 toastr['error']('Seems and error.');
             }
@@ -2234,6 +2242,7 @@ $(document.body).on('click', '#echo_profile_form_btn', function () {
 $(document.body).on('click', '#save_patient_echo_info', function(){
     var patient_id = $('#label_patient_id').text();
     var sd = $('.patient_id').val(patient_id);
+    var val = '';
     $.ajax({
         url: window.location.origin+window.location.pathname+'profile/save_profile_echo_info',
         type: 'post',
@@ -2286,6 +2295,9 @@ $(document.body).on('click', '#save_patient_echo_info', function(){
                 });
                 $('#research_modal').modal('hide');
                 toastr["success"](response.message);
+                setTimeout(function(){
+                    printechotest(val,response.testid,patient_id);
+                },2000);
             } else {
                 toastr["error"](response.message);
             }
@@ -2484,6 +2496,9 @@ $(document.body).on('click', '#save_patient_examination_info', function(){
                 $("#prescription_details").prop("checked", true);
                 toastr["success"](response.message);
                 $('#save_patient_examination_info').attr("disabled", false);
+                setTimeout(function(){
+                    printexamination(response.testid,patient_id);
+                },2000);
             } else {
                 $('#save_patient_examination_info').attr("disabled", false);
                 toastr["error"](response.message);
@@ -2939,7 +2954,7 @@ function deleteExaminationDetail(editableObj,test_id,patient_id){
     return false;
 }
 
-function printexamination(editableObj,test_id,patient_id) {
+function printexamination(test_id,patient_id) {
     var win = window.open('/cms/print_profiles/print_examination/?testid=' + test_id +'&patid='+patient_id, '_blank');
     if (win) {
         console.log("new tab opened")
@@ -2969,6 +2984,9 @@ $(document.body).on('click', '#examination_details_table tbody tr td:nth-child(4
 });
 
 function showEditexaminationDetail(editableObj,test_id,patient_id) {
+    if(editableObj == 'javascript:void(0)'){
+        editableObj = '';
+    }
     $.ajax({
         url: '/cms/profile/patient_examination_edit_detail',
         type: 'post',
@@ -3348,7 +3366,7 @@ $(document.body).on('click','#upload_profile_files', function(e){
        processData:false,
        success:function(response)
        {
-            document.getElementById("profile_upload").value = "";
+            $('#profile_upload').val('');
             $('.file_upload_category').prop('selectedIndex',0);
             $('#files_content').empty();
             $('#files_content').append(response.image_html);

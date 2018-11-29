@@ -402,8 +402,8 @@ class User_model extends CI_Model {
     }
 
 
-    public function get_bookings_vip($flag) {
-        $date = date('Y-m-d');
+    public function get_bookings_vip($flag,$date) {
+        // $date = date('Y-m-d');
         $result = $this->db->select('*')
                 ->from('appointment_booking')
                 ->where('DATE(appointment_date)',$date)
@@ -417,8 +417,8 @@ class User_model extends CI_Model {
         }
     }
     
-    public function get_bookings_on_call($flag) {
-        $date = date('Y-m-d');
+    public function get_bookings_on_call($flag,$date) {
+        // $date = date('Y-m-d');
         $result = $this->db->select('*')
                 ->from('appointment_booking')
                 ->where('DATE(appointment_date)',$date)
@@ -431,8 +431,8 @@ class User_model extends CI_Model {
         }
     }
 
-    public function get_bookings_on_walk($flag) {
-        $date = date('Y-m-d');
+    public function get_bookings_on_walk($flag,$date) {
+        // $date = date('Y-m-d');
         $result = $this->db->select('*')
                 ->from('appointment_booking')
                 ->where('DATE(appointment_date)',$date)

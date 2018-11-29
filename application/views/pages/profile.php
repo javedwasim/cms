@@ -191,19 +191,6 @@ if(isset($rights[0]['user_rights']))
                                     </div>
                                     <div class="col-md-12">
                                         <div class="card">
-                                            <div class="card-header" style="padding-top: 5px; padding-bottom: 5px;">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <a href="javascript:void(0)" class="btn btn-info btn-xs" id="profiles_image_files">Images</a>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <a href="javascript:void(0)" class="btn btn-default btn-xs" id="profile_pdf_files">Pdf</a>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" id="profiel_text_files">Text</a>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="card-body" id="files_content" style="height:300px; overflow-y: scroll;">
                                                 
                                             </div>

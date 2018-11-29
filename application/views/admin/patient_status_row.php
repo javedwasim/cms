@@ -146,7 +146,13 @@
                             </div>
                             <div class='row'>
                                 <div class="col-md-8">
-                                    <input type='text' placeholder="View Patient" class="form-control pat_search" value="<?php echo date('d-M-Y') ?>" />
+                                    <input type='text' placeholder="View Patient" onchange="searchpatient(this)" class="form-control pat_search" value="<?php
+                                        if(isset($search_date)){
+                                            echo date('d-M-Y',strtotime($search_date));
+                                        }else{
+                                            echo date('d-M-Y') ;
+                                        }
+                                    ?>" >
                                 </div>
                             </div>
                         </div>
@@ -157,3 +163,11 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.pat_search').datepicker({
+            format: 'd-M-yyyy',
+            autoclose: true
+        });
+    });
+</script>

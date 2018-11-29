@@ -248,15 +248,20 @@ class Profile_model extends CI_Model
                 'description' => $data['description']
             );
             $result = $this->db->insert('patient_special_instruction', $data_array);
+            if ($result) {
+                return $this->db->insert_id();
+            } else {
+                return false;
+            }
         } else {
             $result = $this->db->set('description', $data['description'])
                 ->where('id', $spid)
                 ->update('patient_special_instruction');
-        }
-        if ($result) {
-            return true;
-        } else {
-            return false;
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }
@@ -710,7 +715,7 @@ class Profile_model extends CI_Model
         $this->db->truncate('patient_echo_measurment_mmod');
         $this->db->truncate('patient_echo_color_doppler');
         $this->db->truncate('patient_echo');
-        return $patient_echo_id;
+        return $echo_deatil_id;
     }
 
 
@@ -899,7 +904,7 @@ class Profile_model extends CI_Model
         // }
         
         if ($result) {
-            return true;
+            return $examination_detail_id;
         }else{
             return false;
         }
@@ -1396,7 +1401,7 @@ class Profile_model extends CI_Model
         }
     }
 
-    public function get_image_files($id){
+    public function get_files($id){
         $result = $this->db->select('*')->where('patient_id',$id)->get('patient_files');
         if ($result) {
             return $result->result_array();

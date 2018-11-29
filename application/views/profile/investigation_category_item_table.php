@@ -58,15 +58,24 @@
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
         if(name == 'Echo'){
-            var date = '\n'+'Echo[<?php echo date("d-M-Y")?>]';
-            if(rowarray.includes(date) === false){
-                 rowarray.push(date);
-                $('#investigation_item').append('\n'+date+'\n'); 
+            if(rowarray.length === 0){
+                var date = 'Echo[<?php echo date("d-M-Y")?>]';
+            }else{
+                var date = '\n'+'Echo[<?php echo date("d-M-Y")?>]';
+            }
+            var echo = date.replace(/\n|\r/g, '');
+            if(rowarray.includes(echo) === false){
+                 rowarray.push(echo);
+                $('#investigation_item').append(date+'\n'); 
             }
         }else{
             if(rowarray.includes(name) === false){
-                 rowarray.push(name);
-                $('#investigation_item').append('\n'+name+'\n'); 
+                rowarray.push(name);
+                if(rowarray.length === 0){
+                    $('#investigation_item').append(name+': \n'); 
+                }else{
+                    $('#investigation_item').append('\n'+name+': \n'); 
+                }
             }
         }
         if(rowarray.includes(text) === false){

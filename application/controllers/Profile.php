@@ -343,6 +343,7 @@ class Profile extends MY_Controller
             if ($insertedid) {
                 $result = $this->Profile_model->insert_ett_protocols($data, $insertedid);
                 if ($result) {
+                    $json['testid'] = $insertedid;
                     $json['success'] = true;
                 } else {
                     $json['error'] = true;
@@ -543,6 +544,7 @@ class Profile extends MY_Controller
             if ($result) {
                 $data['sp_info'] = $this->Profile_model->get_sp_info($data['patient_id']);
                 $json['sp_table'] = $this->load->view('profile/sp_inst_table', $data, true);
+                $json['testid'] = $result;
                 $json['success'] = true;
                 $json['message'] = "Information save successfully!";
             } else {
@@ -575,6 +577,8 @@ class Profile extends MY_Controller
         $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
         $data['details'] = $this->Profile_model->get_examination_detail($id);
         $data['rights'] = $this->session->userdata('other_rights');
+        $data['files'] = $this->Profile_model->get_files($id);
+        $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
         $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -724,9 +728,16 @@ class Profile extends MY_Controller
         $data = $this->input->post();
         $patient_echo_id = $data['patient_id'];
         if (isset($data['disease_finding_id']) && isset($data['disease_diagnosis_id'])) {
-            $this->Profile_model->save_profile_echo_info($data);
-            $json['success'] = true;
-            $json['message'] = 'Information save successfully!';
+            $result = $this->Profile_model->save_profile_echo_info($data);
+            if($result){
+                $json['testid'] = $result;
+                $json['success'] = true;
+                $json['message'] = 'Information save successfully!';
+            }else{
+                $json['error'] = true;
+                $json['message'] = 'Seems an error.';
+            }
+            
         }else{
             $json['error'] = true;
             $json['message'] = 'Please provide complete information.';
@@ -874,7 +885,8 @@ class Profile extends MY_Controller
         }
     }
 
-    public function get_examination_category_item($examination_id){
+    public function get_examination_category_item($examination_id,$name){
+        $data['name'] = str_replace('%20', ' ', $name);
         $data['items'] = $this->Examination_model->get_examination_items_by_category($examination_id);
         $json['history_html'] = $this->load->view('profile/profile_history_item_table', $data, true);
         $json['result_html'] = $this->load->view('profile/profile_examination_item_table', $data, true);
@@ -893,7 +905,7 @@ class Profile extends MY_Controller
     }
 
     public function get_investigation_item($cat_id,$cat_name){
-        $data['name'] = $cat_name;
+        $data['name'] = str_replace('%20', ' ', $cat_name);
         $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
         $json['result_html'] = $this->load->view('profile/investigation_category_item_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -912,10 +924,10 @@ class Profile extends MY_Controller
 
     }
 
-    public function get_instruction_item($cat_id){
+    public function get_instruction_item($cat_id,$name){
         $data['instruction_id']=$cat_id;
         $data['category']='clinical';
-
+        $data['name'] = str_replace('%20', ' ', $name);
         $data['items'] = $this->Instruction_model->get_inst_items_by_category($data);
         $json['result_html'] = $this->load->view('profile/instruction_category_item_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -1016,6 +1028,7 @@ class Profile extends MY_Controller
                 $result = $this->Profile_model->save_profile_examination_info($data);
                 if ($result) {
                     $json['success'] = true;
+                    $json['testid'] = $result;
                     $json['message'] = 'Saved successfully!';
                 }else{
                     $json['error'] = true;
@@ -1176,7 +1189,7 @@ class Profile extends MY_Controller
                 if ($result) {
                     $json['success'] = true;
                     $json['message'] = 'Successfully Uploaded.';
-                    $data['files'] = $this->Profile_model->get_image_files($patid);
+                    $data['files'] = $this->Profile_model->get_files($patid);
                 } else {
                     $json['error'] = false;
                     $json['message'] = 'Upload correct file.';
@@ -1190,13 +1203,7 @@ class Profile extends MY_Controller
             $json['error'] = false;
             $json['message'] = "Please Select the file.";
         }
-        if ($ext == 'jpg' || $ext == 'JPG' || $ext == 'png' || $ext == 'PNG') {
-            $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
-        }else if($ext == 'txt' || $ext == 'TXT'){
-            $json['image_html'] = $this->load->view('profile/profile_txt_show_file',$data,true);
-        }else{
-            $json['image_html'] = $this->load->view('profile/profile_txt_show_file',$data,true);
-        }
+        $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -1225,7 +1232,7 @@ class Profile extends MY_Controller
 
     public function get_image_files(){
         $id = $this->input->post('patid');
-        $data['files'] = $this->Profile_model->get_image_files($id);
+        $data['files'] = $this->Profile_model->get_files($id);
         $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1234,7 +1241,7 @@ class Profile extends MY_Controller
 
     public function get_pdf_files(){
         $id = $this->input->post('patid');
-        $data['files'] = $this->Profile_model->get_image_files($id);
+        $data['files'] = $this->Profile_model->get_files($id);
         $json['image_html'] = $this->load->view('profile/profile_pdf',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1243,7 +1250,7 @@ class Profile extends MY_Controller
 
     public function get_text_files(){
         $id = $this->input->post('patid');
-        $data['files'] = $this->Profile_model->get_image_files($id);
+        $data['files'] = $this->Profile_model->get_files($id);
         $json['image_html'] = $this->load->view('profile/profile_txt_show_file',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

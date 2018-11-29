@@ -546,7 +546,7 @@ if(isset($rights[0]['user_rights']))
                                   <input type="hidden" name="patient_id" class="patient_id"/>
                                     <div class="form-group show-inline m-t-10">
                                         <label>Next Visit Date: </label>
-                                        <input type="text" name="next_date_visit_form" id="next_date_visit_form" class="app_date form-control col-md-7" value="<?php if(isset($visit_date)){
+                                        <input type="text" name="next_date_visit_form" id="next_date_visit_form" class="app_date form-control col-md-7" value="<?php if(isset($visit_date) && !empty($visit_date)){
 	                                        	foreach($visit_date as $date){
 	                                        		echo date('d-M-Y',strtotime($date['next_visit_date']));
 	                                        	}

@@ -14,7 +14,7 @@
                 </a>
             </td>
             <td class="profile_history_info"
-                onClick="loadExaminationItem(this,'<?php echo $category['id']; ?>');">
+                onClick="loadExaminationItem(this,'<?php echo $category['id']; ?>','<?php echo $category['name']; ?>');">
                 <?php echo $category['name']; ?></td>
         </tr>
     <?php endforeach; ?>
@@ -49,13 +49,13 @@
     </div>
 </div>
 <script>
-    function loadExaminationItem(editableObj, id) {
+    function loadExaminationItem(editableObj, id,name) {
         $('td.profile_history_info').css('background', '#FFF');
         $('td.profile_history_info').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
         $.ajax({
-            url: '/cms/profile/get_examination_category_item/'+id,
+            url: '/cms/profile/get_examination_category_item/'+id+'/'+name,
             type: 'get',
             cache: false,
             success: function (response) {

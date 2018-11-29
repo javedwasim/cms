@@ -26,7 +26,9 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/select.dataTables.min.css">
   <link href="<?php echo base_url(); ?>assets/plugins/css-chart/css-chart.css" rel="stylesheet">
   <!-- Font nastalik -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/fonts/Nastaleeq/font.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/fonts/Nastaleeq/mehr-font.css">
+  <!-- Just add the following stylesheet link to your html file: -->
+  <link rel="stylesheet" href="https://unpkg.com/mehr/mehr-font.css">
   <!-- jquery-ui -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css">
   <!-- Select2 -->

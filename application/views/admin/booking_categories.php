@@ -607,13 +607,14 @@ $(document).ready(function(){
        $(".transfer_patient").change(function(){
           var transferTo = $(this).val();
           var transferId = $.trim($(this).closest('tr').find('.vip_trans').text());
-          // alert(transferTo);
+          var searchdate = $('#search-all-cat').val();
           $.ajax({
             url: '/cms/dashboard/transfer',
             type: 'post',
             data: {
                 transferto: transferTo,
-                transferid: transferId
+                transferid: transferId,
+                searchdate: searchdate
             },
             cache: false,
             success: function(response){
@@ -675,13 +676,5 @@ $(document).ready(function(){
           });
         });
     });
-    // $(window).scroll(function() {    // this will work when your window scrolled.
-    //     var height = $(window).scrollTop();  //getting the scrolling height of window
-    //     if(height  > 140) {
-    //         $('.card-header').addClass('sticky');
-    //     } else{
-    //         $('.card-header').removeClass('sticky');
-    //     }
-    // });
 
 </script>
