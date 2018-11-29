@@ -7,7 +7,7 @@
             </tr>
         </thead>
         <form id="professions_form">
-            <tbody>
+            <tbody style="height: 63vh">
                 <?php
                     foreach ($professions as $key) {
                 ?>

@@ -253,7 +253,7 @@
                             <?php foreach ($items as $item): ?>
                                 <tr>
                                     <td><?php echo $item['name']; ?></td>
-                                    <td><strong style="text-decoration-line: underline; text-decoration-style: dotted;"><?php echo $item['item_value']; ?></strong>&nbsp;&nbsp;<?php echo $item['item_units']; ?></td>
+                                    <td><strong ><?php echo $item['item_value']; ?></strong>&nbsp;&nbsp;<?php echo $item['item_units']; ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

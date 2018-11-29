@@ -23,7 +23,7 @@
         $(editableObj).css("color", "#FFF");
         if(rowarray.includes(text) === false){
             rowarray.push(text);
-            $('#instruction_item').append(text+','); 
+            $('#instruction_item').append(text+',  '); 
         } 
         
     }

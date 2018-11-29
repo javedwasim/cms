@@ -14,13 +14,15 @@
     <!-- End Bread crumb -->
     <!-- ============================================================== -->
     <div class="row p-t-10 m-0">
-    	<div class="card" style="margin-bottom:0px !important; ">
-    		<div class="card-body">
-    			<div class="row">
-                    <div class="col-md-12 col-lg-12 pt-info" id="pat_sp_information"></div>
-    			</div>
-    		</div>
-    	</div>
+        <div class="col-md-12 p-r-0 p-l-0">
+            <div class="card" style="margin-bottom:0px !important; ">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pt-info" id="pat_sp_information"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     	<div class="col-md-4 p-r-0 p-l-0">
     		<div class="card">
     			<div class="card-body" style="height: 71vh;">
@@ -34,7 +36,7 @@
                                     <th>Category</th>
                                 </tr>
                                 </thead>
-                                <tbody style="height: 500px;">
+                                <tbody style="height: 63vh;">
                                 <?php foreach ($categories as $category): ?>
                                     <tr>
                                         <td style="width:50px;" data-toggle="modal" data-target="#history-modal">
@@ -51,15 +53,13 @@
                             </table>
 		    			</div>
 		    			<div class="col-md-6 p-l-0 laboratory-test-content">
-		    				<table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
+		    				<table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
 		                       <thead>
 		                        <tr>
 		                            <th style="width: 10%">Action</th>
 		                            <th>Test Name</th>
 		                        </tr>
 			                    </thead>
-
-			                    <tbody style="height: 230px;">
 			                    <tbody>
 
                                   <!--   <tr>
@@ -98,15 +98,7 @@
                                 <th> Noramal Value</th>
                             </tr>
                             </thead>
-                            <tbody style="height: 430px;">
-                              <!--   <tr>
-                                    <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr> -->
-
-                            </tbody>
+                            <tbody style="height: 54vh;"></tbody>
                         </table>
                     </div>
                 </div>

@@ -344,11 +344,15 @@ class Profile_model extends CI_Model
                     ));
 
             }
-            $this->db->insert('patient_lab_test_info',
+            $result = $this->db->insert('patient_lab_test_info',
                 array('patient_id' => $data['patient_id'],
                     'info_key' => $key,
                     'test_date' => date('Y-m-d', strtotime($data['test_date']))));
-            return true;
+            if($result){
+                return $this->db->insert_id();
+            }else{
+                return false;
+            }
         } else {
             return false;
         }
@@ -372,7 +376,6 @@ class Profile_model extends CI_Model
             return array();
         }
     }
-
 
     public function get_lab_test_unit($key)
     {
@@ -881,19 +884,19 @@ class Profile_model extends CI_Model
                     'patient_id' => $patient_id,'advice_value'=>$advice_item));
         }
 
-        if (isset($data['examination_info_pulse'])||isset($data['examination_info_volume'])||isset($data['examination_info_volume'])||isset($data['examination_info_bpa'])||isset($data['examination_info_bpb'])||isset($data['examination_resp_rate'])||isset($data['examination_info_temp'])) {
-            $data_array = array(
-            'examination_detail_id' => $examination_detail_id, 
-            'patient_id' => $patient_id, 
-            'pulse' => $data['examination_info_pulse'], 
-            'volume' => $data['examination_info_volume'], 
-            'bp_a' => $data['examination_info_bpa'], 
-            'bp_b' => $data['examination_info_bpb'], 
-            'rr' => $data['examination_resp_rate'], 
-            'temprature' => $data['examination_info_temp']
-            );
-            $result = $this->db->insert('profile_examination_measurements',$data_array);
-        }
+        // if (isset($data['examination_info_pulse'])||isset($data['examination_info_volume'])||isset($data['examination_info_volume'])||isset($data['examination_info_bpa'])||isset($data['examination_info_bpb'])||isset($data['examination_resp_rate'])||isset($data['examination_info_temp'])) {
+        //     $data_array = array(
+        //     'examination_detail_id' => $examination_detail_id, 
+        //     'patient_id' => $patient_id, 
+        //     'pulse' => $data['examination_info_pulse'], 
+        //     'volume' => $data['examination_info_volume'], 
+        //     'bp_a' => $data['examination_info_bpa'], 
+        //     'bp_b' => $data['examination_info_bpb'], 
+        //     'rr' => $data['examination_resp_rate'], 
+        //     'temprature' => $data['examination_info_temp']
+        //     );
+        //     $result = $this->db->insert('profile_examination_measurements',$data_array);
+        // }
         
         if ($result) {
             return true;
@@ -1105,32 +1108,32 @@ class Profile_model extends CI_Model
                     'patient_id' => $patient_id,'advice_value'=>$advice_item));
         }
 
-        if (isset($data['exem_measurement_id']) && $data['exem_measurement_id']!="") {
-            $data_array = array(
-            'examination_detail_id' => $testid, 
-            'patient_id' => $patient_id, 
-            'pulse' => $data['examination_info_pulse'], 
-            'volume' => $data['examination_info_volume'], 
-            'bp_a' => $data['examination_info_bpa'], 
-            'bp_b' => $data['examination_info_bpb'], 
-            'rr' => $data['examination_resp_rate'], 
-            'temprature' => $data['examination_info_temp']
-            );
-            $result = $this->db->where('id',$data['exem_measurement_id'])
-                                ->update('profile_examination_measurements',$data_array);
-        }else{
-            $data_array = array(
-            'examination_detail_id' => $testid, 
-            'patient_id' => $patient_id, 
-            'pulse' => $data['examination_info_pulse'], 
-            'volume' => $data['examination_info_volume'], 
-            'bp_a' => $data['examination_info_bpa'], 
-            'bp_b' => $data['examination_info_bpb'], 
-            'rr' => $data['examination_resp_rate'], 
-            'temprature' => $data['examination_info_temp']
-            );
-            $result = $this->db->insert('profile_examination_measurements',$data_array);
-        }
+        // if (isset($data['exem_measurement_id']) && $data['exem_measurement_id']!="") {
+        //     $data_array = array(
+        //     'examination_detail_id' => $testid, 
+        //     'patient_id' => $patient_id, 
+        //     'pulse' => $data['examination_info_pulse'], 
+        //     'volume' => $data['examination_info_volume'], 
+        //     'bp_a' => $data['examination_info_bpa'], 
+        //     'bp_b' => $data['examination_info_bpb'], 
+        //     'rr' => $data['examination_resp_rate'], 
+        //     'temprature' => $data['examination_info_temp']
+        //     );
+        //     $result = $this->db->where('id',$data['exem_measurement_id'])
+        //                         ->update('profile_examination_measurements',$data_array);
+        // }else{
+        //     $data_array = array(
+        //     'examination_detail_id' => $testid, 
+        //     'patient_id' => $patient_id, 
+        //     'pulse' => $data['examination_info_pulse'], 
+        //     'volume' => $data['examination_info_volume'], 
+        //     'bp_a' => $data['examination_info_bpa'], 
+        //     'bp_b' => $data['examination_info_bpb'], 
+        //     'rr' => $data['examination_resp_rate'], 
+        //     'temprature' => $data['examination_info_temp']
+        //     );
+        //     $result = $this->db->insert('profile_examination_measurements',$data_array);
+        // }
         
         if ($result) {
             return true;
@@ -1440,6 +1443,15 @@ class Profile_model extends CI_Model
             return $result->row();            
         }else{
             return array();
+        }
+    }
+
+    public function get_info_key($id){
+        $result = $this->db->select('info_key')->from('patient_lab_test_info')->where('id',$id)->get();
+        if ($result) {
+            return $result->row()->info_key;
+        }else{
+            return false;
         }
     }
 

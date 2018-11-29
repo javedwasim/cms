@@ -18,6 +18,7 @@ if(isset($patient_vitals)){
     <td contenteditable="true" class="vital_bp" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_bp']; ?></td>
     <td contenteditable="true" class="vital_pulse" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_pulse']; ?></td>
     <td contenteditable="true" class="vital_temp" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_temp']; ?></td>
+    <td contenteditable="true" class="vital_pt" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_pt']; ?></td>
     <td contenteditable="true" class="vital_inr" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_inr']; ?></td>
     <td contenteditable="true" class="vital_rr" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_rr']; ?></td>
     <td class="vital_volume" >
@@ -59,6 +60,7 @@ if(isset($patient_vitals)){
     <td contenteditable="true" class="vital_bp" style="white-space: nowrap; word-break: break-all;"></td>
     <td contenteditable="true" class="vital_pulse" style="white-space: nowrap; word-break: break-all;"></td>
     <td contenteditable="true" class="vital_temp" style="white-space: nowrap; word-break: break-all;"></td>
+    <td contenteditable="true" class="vital_pt" style="white-space: nowrap; word-break: break-all;"></td>
     <td contenteditable="true" class="vital_inr" style="white-space: nowrap; word-break: break-all;"></td>
     <td contenteditable="true" class="vital_rr" style="white-space: nowrap; word-break: break-all;"></td>
     <td class="">

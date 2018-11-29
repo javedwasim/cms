@@ -2730,54 +2730,56 @@ $(document.body).on('click', '.delete-protocol', function () {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#pat-exemination', function () {
+    var cval = $('#examination_clone_val').val();
+    var testid = $('#examination_details_table tbody tr td:nth-child(4).row_selected').siblings('.testid').text();
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     if (patid=='') {
          toastr["warning"]('Please select a patient first.');
     }else{
-        $.ajax({
-            url: '/cms/setting/patient_exemination/'+patid,
-            cache: false,
-            success: function (response) {
-                if (response.result_html != '') {
-                    $('.content-wrapper').remove();
-                    $('#content-wrapper').append(response.result_html);
-                    // $('.datatables').DataTable({
-                    //     "info": true,
-                    //     "paging": false,
-                    //     "searching": false
-                    // });
-                    ///////////////// initilize datatable //////////////
-                    $('#permissions-table').DataTable({
-                        "scrollX": true
-                    });
-                    $('.app_date').datepicker({
-                        format: 'd-M-yyyy',
-                        autoclose: true
-                    });
+        if(cval != ''){
+            showEditexaminationDetail(cval,testid,patid);
+        }else{
+            $.ajax({
+                url: '/cms/setting/patient_exemination/'+patid,
+                cache: false,
+                success: function (response) {
+                    if (response.result_html != '') {
+                        $('.content-wrapper').remove();
+                        $('#content-wrapper').append(response.result_html);
+                        $('#permissions-table').DataTable({
+                            "scrollX": true
+                        });
+                        $('.app_date').datepicker({
+                            format: 'd-M-yyyy',
+                            autoclose: true
+                        });
 
-                    $('#profile_examination_container').empty();
-                    $('#profile_examination_container').append(response.examination_table);
+                        $('#profile_examination_container').empty();
+                        $('#profile_examination_container').append(response.examination_table);
 
-                    $('#profile_history_container').empty();
-                    $('#profile_history_container').append(response.history_table);
+                        $('#profile_history_container').empty();
+                        $('#profile_history_container').append(response.history_table);
 
-                    $('#investigation_category_container').empty();
-                    $('#investigation_category_container').append(response.investigation_html);
+                        $('#investigation_category_container').empty();
+                        $('#investigation_category_container').append(response.investigation_html);
 
-                    $('#advice_category_container').empty();
-                    $('#advice_category_container').append(response.advice_html);
+                        $('#advice_category_container').empty();
+                        $('#advice_category_container').append(response.advice_html);
 
-                    $('#instruction_category_container').empty();
-                    $('#instruction_category_container').append(response.instruction_html);
+                        $('#instruction_category_container').empty();
+                        $('#instruction_category_container').append(response.instruction_html);
 
-                    $('#medicine_category_container').empty();
-                    $('#medicine_category_container').append(response.medicine_html);
+                        $('#medicine_category_container').empty();
+                        $('#medicine_category_container').append(response.medicine_html);
 
-                    $('#pat_ett_information').empty();
-                    $('#pat_ett_information').append(response.patient_information);
+                        $('#pat_ett_information').empty();
+                        $('#pat_ett_information').append(response.patient_information);
+
+                        $('#clone_val_examination').val(cval);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 });
 

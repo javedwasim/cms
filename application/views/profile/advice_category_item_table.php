@@ -13,24 +13,31 @@
                     &nbsp;
                 </td> -->
                 <td class="advice_item"
-                    onClick="addAdviceItem(this,'<?php echo $item['name']; ?>');">
-                    <?php echo $item['name']; ?></td>
+                    onClick="addAdviceItem(this,'<?php echo $item['name']; ?>','<?php echo trim($name); ?>');">
+                    <?php echo $item['name']; ?> <?php echo trim($name); ?></td>
+
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <script>
     var rowarray = [];
-    function addAdviceItem(editableObj,text) {
+    function addAdviceItem(editableObj,text,name) {
         var patient_id = $('#label_patient_id').text();
         $('td.advice_item').css('background', '#FFF');
         $('td.advice_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+        if(rowarray.includes(name) === false){
+             rowarray.push(name);
+            $('#investigation_item').append(name+'\n');
+        }
         if(rowarray.includes(text) === false){
             rowarray.push(text);
-            $('#advice_item').append(text+','); 
-        } 
+            alert(text);
+            $('#advice_item').append(text+',  '); 
+        }
+         
         
     }
 

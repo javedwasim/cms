@@ -1006,6 +1006,7 @@ class User extends MY_Controller {
         $temp = $this->input->post('temp');
         $inr = $this->input->post('inr');
         $rr = $this->input->post('rr');
+        $pt = $this->input->post('pt');
         $volume = $this->input->post('volume');
         $height = $this->input->post('height');
         $weight = $this->input->post('weight');
@@ -1019,6 +1020,7 @@ class User extends MY_Controller {
             'vital_temp' => $temp,
             'vital_inr' => $inr,
             'vital_rr' => $rr,
+            'vital_pt' => $pt,
             'vital_volume' => $volume,
             'vital_height' => $height,
             'vital_weight' => $weight,
@@ -1077,6 +1079,7 @@ class User extends MY_Controller {
         $temp = $this->input->post('temp');
         $inr = $this->input->post('inr');
         $rr = $this->input->post('rr');
+        $pt = $this->input->post('pt');
         $volume = $this->input->post('volume');
         $height = $this->input->post('height');
         $weight = $this->input->post('weight');
@@ -1090,6 +1093,7 @@ class User extends MY_Controller {
             'vital_temp' => $temp,
             'vital_inr' => $inr,
             'vital_rr' => $rr,
+            'vital_pt' => $pt,
             'vital_volume' => $volume,
             'vital_height' => $height,
             'vital_weight' => $weight,

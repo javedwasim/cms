@@ -1,24 +1,25 @@
 <?php if(isset($rights[0]['user_rights'])){ $appointment_rights = explode(',',$rights[0]['user_rights']); $loggedin_user = $this->session->userdata('userdata');}?>
-<table class="table table-bordered nowrap responsive datatables tbl_header_fix_history" cellspacing="0" id="" width="100%" >
+<table class="table table-bordered responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
     <thead>
     <tr>
-        <th class="table-header" style="width:1px !important;">Action</th>
-        <th class="table-header">Item Name</th>
+        <th  style="width:55px">Action</th>
+        <th >Item Name</th>
     </tr>
     </thead>
-    <tbody style="height: 500px;">
+    <tbody style="height: 63vh;">
     <?php foreach ($items as $item): ?>
         <tr class="table-row">
-            <td>
+            <td style="width: 50px;">
                 <a class="edit-inst-item-btn btn btn-info btn-xs"
                    href="javascript:void(0)"
                    data-inst-item-id="<?php echo $item['id']; ?>"><i
                    class="far fa-question-circle"></i></a>
             </td>
-            <td contenteditable="true" class="p_item"
-                onClick="showEdit(this, <?php echo $item['id']; ?>, <?php echo $item['instruction_id']; ?>, '<?php echo $item['name']; ?>');">
-                <?php echo $item['name']; ?></td>
-
+            <td class="p_item" style="cursor: pointer;"
+                onClick="spAddval(this, <?php echo $item['id']; ?>, <?php echo $item['instruction_id']; ?>, '<?php echo $item['name']; ?>');">
+                <?php echo $item['name']; ?>
+                    
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -51,35 +52,3 @@
         </form>
     </div>
 </div>
-<script>
-    var sparray = [];
-    function showEdit(editableObj ,item_id, inst_id, description) {
-        $('td.p_item').css('background', '#FFF');
-        $('td.p_item').css('color', '#212529');
-        $(editableObj).css("background", "#1e88e5");
-        $(editableObj).css("color", "#FFF");
-        
-        if(sparray.includes(description) === false){
-            sparray.push(description);
-            $('#special_instruction').append(description+",");
-        }
-        $('#instruction_id').val(inst_id);
-        $('#item_id').val(item_id);
-//        $.ajax({
-//            url: '/cms/profile/patient_special_instruction',
-//            type: 'post',
-//            data: {patient_id:1,item_id:item_id,instruction_id:inst_id,description:description},
-//            cache: false,
-//            success: function(response) {
-//                if (response.success) {
-//                    $('#special_instruction').append(description+"\n");
-//                    toastr["success"](response.message);
-//                }
-//            }
-//        });
-//        return false;
-    }
-
-
-
-</script>

@@ -153,7 +153,6 @@
         .footer-top{
             position: fixed;
             bottom: 100px;
-            left: 90%;
         }
 </style>
 <style type="text/css" media="print">
@@ -232,7 +231,6 @@
     .footer-top{
         position: fixed;
         bottom: 100px;
-        left: 40%;
     }
     .mb-10{
         margin-bottom: 20px;
@@ -250,7 +248,7 @@
             <br>
             <br>
             <br>
-            <div class="row border-dark" style="width: 100%; border-bottom:3px solid #000;">
+            <div class="row border-dark" style="width: 95%; border-bottom:3px solid #000;">
                 <div class="col-md-6">
                     <strong>Ref.ID</strong>
                     <i><?php echo $patient_info->id ?></i>
@@ -270,7 +268,7 @@
                 </div>
             </div>
             <br>
-            <div class="row">
+            <div class="row" style="width: 95%;">
                 <div class="col-md-7">
                     <div class="row">
                         <div class="col-md-5" style="padding-left: 0px;">
@@ -306,16 +304,17 @@
                 </div>
             </div>
             <br>
-            <?php foreach($instruction_details as $instruction){?>
-                <div class="mb-10 row footer-top" style="word-break: break-all; text-align: right;">
-                    <?php $instructions = explode(",",$instruction['instruction_value']); 
-                        foreach ($instructions as $value) {
-                            echo $value; echo '<br />';
-                        }
-                    ?>
-                </div>
-            <?php }?>
-            <div class="row footer-bottom">
+            <?php foreach($instruction_details as $instruction){
+                    $instructions = explode(",",$instruction['instruction_value']); 
+        
+                }
+            ?>
+            <div class="mb-10 footer-top" style="word-break: break-all; text-align: right; width: 85%;">
+                <?php foreach ($instructions as $value) {
+                    echo '<div style="text-align:left; display:inline-block; ">'.$value.'</div> <br>';
+                }?>
+            </div>
+            <div class="row footer-bottom" style="width: 85%;">
                 <div class="col-md-12">
                     <br> 
                     <p style="text-align: right; font-size: 16px; direction:rtl; font-weight: bold;">پھر مورخہ <?php foreach($visit_date as $visit){echo " ";echo date('Y-m-d',strtotime($visit['next_visit_date']));echo " ";}?>کو چیک کرایں۔ چیک نہ ہونے کی صورت میں ادوایات جاری رکہیں۔ آنے سے ایک روز ‍قبل فون پر نام لیں۔</p>

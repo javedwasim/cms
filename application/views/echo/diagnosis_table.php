@@ -7,7 +7,7 @@
     </thead>
     <tbody style="height: 250px;">
     <?php foreach ($diagnosis as $diagnose): ?>
-        <tr class="table-row">
+        <tr class="table-row" id="<?php echo $diagnose['id']; ?>">
             <td style="width: 50px;">
                 <a class="delete-diagnosis btn btn-danger btn-xs" href="javascript:void(0)" title="delete"
                        data-href="<?php echo site_url('Echo_controller/delete_structure_diagnosis/') . $diagnose['id'] ?>">
@@ -56,5 +56,27 @@
         // $('#'+structure_id).css("color", "#FFF");
         return false;
     });
+
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#diagnosis_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'diagnosis';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_echo_diagnosis_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 
 </script>

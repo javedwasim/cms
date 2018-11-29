@@ -43,6 +43,9 @@
                                     <th style="width: 5%">
                                         Temperature
                                     </th>
+                                    <th>
+                                        PT(Patient/Control)
+                                    </th>
                                     <th style="width: 5%">
                                         INR
                                     </th>

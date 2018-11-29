@@ -535,24 +535,22 @@ class Profile extends MY_Controller
     {
         $data = $this->input->post();
         $pid = $data['patient_id'];
-        $result = $this->Profile_model->save_special_instructions($data);
-        if ($result) {
-            $data['category'] = 'special';
-            $data['patient_info'] = $this->Profile_model->patient_info_by_id($pid);
-            $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($pid);
-            $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
-            $data['sp_info'] = $this->Profile_model->get_sp_info($pid);
-            $json['sp_table'] = $this->load->view('profile/sp_inst_table', $data, true);
-            $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
-            $json['result_html'] = $this->load->view('pages/pat_sp_instructions', $data, true);
-            // $data['sp_info'] = $this->Profile_model->get_sp_info($data['patient_id']);
-            // $json['sp_table'] = $this->load->view('profile/sp_inst_table', $data, true);
-            $json['success'] = true;
-            $json['message'] = "Information save successfully!";
-        } else {
+        if(empty($data['description'])){
             $json['error'] = true;
-            $json['message'] = "seem to be an error.";
+            $json['message'] = "Could not save empty.";
+        }else{
+            $result = $this->Profile_model->save_special_instructions($data);
+            if ($result) {
+                $data['sp_info'] = $this->Profile_model->get_sp_info($data['patient_id']);
+                $json['sp_table'] = $this->load->view('profile/sp_inst_table', $data, true);
+                $json['success'] = true;
+                $json['message'] = "Information save successfully!";
+            } else {
+                $json['error'] = true;
+                $json['message'] = "seem to be an error.";
+            }    
         }
+        
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -609,8 +607,7 @@ class Profile extends MY_Controller
     }
 
 
-    public function save_patient_lab_test()
-    {
+    public function save_patient_lab_test(){
         $this->load->library('form_validation');
         $this->load->helper('security');
         $this->form_validation->set_rules('test_date', 'Test Date', 'required|xss_clean');
@@ -622,13 +619,15 @@ class Profile extends MY_Controller
         } else {
             $result = $this->Profile_model->save_patient_lab_test($data);
             if ($result) {
+                $json['info_key'] = $this->Profile_model->get_info_key($result);
+                $json['patid'] = $data['patient_id'];
                 $data['tests'] = $this->Profile_model->get_lab_test_info($data['patient_id']);
                 $json['sp_table'] = $this->load->view('profile/lab_test_detail_table', $data, true);
                 $json['success'] = true;
                 $json['message'] = "Information save successfully!";
             } else {
                 $json['error'] = true;
-                $json['message'] = "seem to be an error.";
+                $json['message'] = "Could not save empty.";
             }
         }
         if ($this->input->is_ajax_request()) {
@@ -893,7 +892,8 @@ class Profile extends MY_Controller
 
     }
 
-    public function get_investigation_item($cat_id){
+    public function get_investigation_item($cat_id,$cat_name){
+        $data['name'] = $cat_name;
         $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
         $json['result_html'] = $this->load->view('profile/investigation_category_item_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -902,7 +902,8 @@ class Profile extends MY_Controller
 
     }
 
-    public function get_advice_item($cat_id){
+    public function get_advice_item($cat_id,$name){
+        $data['name'] = str_replace('%20', ' ', $name);
         $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
         $json['result_html'] = $this->load->view('profile/advice_category_item_table', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -998,7 +999,7 @@ class Profile extends MY_Controller
         $patient_id = $data['patient_id'];
         $current_date = date('Y-m-d');
         $next_visit_date = date('Y-m-d',strtotime($data['next_date_visit_form']));
-        if (isset($data['examination_testid'])&& $data['examination_testid'] != '') {
+        if (isset($data['examination_testid'])&& $data['examination_testid'] != '' && $data['clone_val_examination'] == '') {
             $result = $this->Profile_model->update_profile_examination_info($data);
             if ($result) {
                 $json['success'] = true;
@@ -1098,6 +1099,10 @@ class Profile extends MY_Controller
     public function patient_examination_edit_detail(){
         $testid = $this->input->post('detail_id');
         $patid = $this->input->post('patid');
+        $cid = $this->input->post('cid');
+        if($cid == ''){
+            $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);
+        }
         $instruction_category['category'] = 'clinical';
         $data['examination_category'] = $this->Examination_model->get_examination_categories();
         $data['items'] = $this->Examination_model->get_examination_items();
@@ -1118,8 +1123,8 @@ class Profile extends MY_Controller
         $data['measurement_details'] = $this->Print_model->get_measurement_detail_by_ids($patid,$testid);
         $data['medicine_details'] = $this->Print_model->get_medicine_detail_by_ids($patid,$testid);
         $data['examination_details'] = $this->Print_model->get_examination_detail_by_ids($patid,$testid);
-        $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
+        $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($patid);
         $data['rights'] = $this->session->userdata('other_rights');
         $json['medicine_html'] = $this->load->view('profile/medicine_category_table', $data, true);
         $json['instruction_html'] = $this->load->view('profile/instruction_category_table', $data, true);

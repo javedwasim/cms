@@ -21,6 +21,15 @@ if(isset($rights[0]['user_rights']))
     <!-- End Bread crumb -->
     <!-- ============================================================== -->
     <div class="row p-t-10 m-0">
+    	<div class="col-md-12">
+    		<div class="card" style="margin-bottom: 0px !important;">
+	            <div class="card-body">
+	                <div class="row m-0" id="pat_ett_information">
+
+	                </div>
+	            </div>
+	        </div>
+    	</div>
     	<div class="col-md-6 col-lg-6 p-r-0">
     		<div class="card">
                 <div class="card-body">
@@ -115,73 +124,6 @@ if(isset($rights[0]['user_rights']))
                         	<div class="row m-0">
                         		<div class="col-md-12 p-0">
 	                        		<div class="card">
-	                        			<div class="card-header">
-	                        				<div class="row">
-						    					<div class="col-lg-2 col-md-4" >
-						    						<div class="form-group">
-							    						<label>Pluse:</label>
-								    					<input type="text" onchange="exeminationpulse(this)" class="form-control" value="0" name="" >
-							    					</div>
-							    				</div>
-							    				<div class=" col-lg-3 col-md-4" >
-						    						<div class="form-group">
-							    						<label>Normal Volume:</label>
-								    					<select class="form-control" onchange="exeminationvolume(this)">
-								    						<option value="">Select</option>
-								    						<option value="Normal Volume">Normal Volume</option>
-								    						<option value="Low Volume">Low Volume</option>
-								    						<option value="High Volume">High Volume</option>
-								    						<option value="Irregularly Volume">Irregularly Volume</option>
-								    						<option value="With pauses">With pauses</option>
-							    						</select>
-							    					</div>
-							    				</div>
-							    				<div class="col-lg-3 col-md-4 p-0">
-							    					<label>BP:</label>
-								    				<div class="form-group" style="display: inline-flex;">
-								    					<input type="text" class="form-control" onchange="exeminationbpa(this)" value="0" name="" >
-								    					<label>/</label>
-								    					<input type="text" onchange="exeminationbpb(this)" class="form-control" value="0" name="" >
-													</div>
-						    					</div>
-						    					<div class="col-lg-3 col-md-3">
-						    						<div class="form-group">
-						    							<label>Resp. Rate:</label>
-						    							<input type="text" class="form-control" onchange="exeminationresp(this)" value="0" name="" >
-							    					</div>
-						    					</div>
-						    					<div class="col-lg-2 col-md-3 ">
-						    						<div class="form-group">
-						    							<label>Temprature:</label>
-						    							<input type="text" class="form-control" onchange="exeminationtemp(this)" value="0" name="" >
-							    					</div>
-						    					</div>
-						    					<div class="col-lg-2 col-md-3 ">
-						    						<div class="form-group">
-						    							<label>height:</label>
-						    							<input type="text" class="form-control pat_profile_height" onchange="calculateBmiBsa(this)" value="<?php echo $patient_info->pat_height ?>" name="" >
-							    					</div>
-						    					</div>
-						    					<div class="col-lg-2 col-md-3 ">
-						    						<div class="form-group">
-						    							<label>Weight:</label>
-						    							<input type="text" class="form-control pat_profile_weight" onchange="calculateBsaBmi(this)" value="<?php echo $patient_info->pat_weight ?>" name="" >
-							    					</div>
-						    					</div>
-						    					<div class="col-lg-2 col-md-3 ">
-						    						<div class="form-group">
-						    							<label>BMI:</label>
-						    							<input type="text" class="form-control pat_profile_bmi" value="<?php echo $patient_info->pat_bmi ?>" name="" readonly="readonly">
-							    					</div>
-						    					</div>
-						    					<div class="col-lg-2 col-md-3 ">
-						    						<div class="form-group">
-						    							<label>BSA:</label>
-						    							<input type="text" class="form-control pat_profile_bsa" value="<?php echo $patient_info->pat_bsa ?>" name="" readonly="readonly">
-							    					</div>
-						    					</div>
-					    					</div>
-	                        			</div>
 						    			<div class="card-body">
 						    				<div class="row">
 						    					<div class="col-lg-3 col-md-4" id="profile_examination_container">
@@ -242,10 +184,6 @@ if(isset($rights[0]['user_rights']))
 								                        </tr>
 									                    </thead>
 									                    <tbody>
-								                           <!-- <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>&nbsp;</td>
-								                            </tr> -->
 									                    </tbody>
 									                </table>
 								    			</div>
@@ -433,18 +371,10 @@ if(isset($rights[0]['user_rights']))
     	<div class="col-md-6 col-lg-6 p-l-0">
     		<div class="row">
                 <div class="col-md-12">
-                    <div class="card" style="margin-bottom: 0px !important;">
-                        <div class="card-header">Patient Information</div>
-                        <div class="card-body">
-                            <div class="row m-0" id="pat_ett_information">
-
-                            </div>
-                        </div>
-                    </div>
                     <div class="card">
                         <div class="card-body" >
                             <div class="row">
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-lg-4 col-md-4 p-r-0">
                                     <form id="history_profile_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
@@ -453,6 +383,7 @@ if(isset($rights[0]['user_rights']))
                                         <input type="hidden" name="exe_history_id" value="<?php if(isset($history_details)){foreach($history_details as $key){echo $key['id'];}}?>"  />
                                         <input type="hidden" name="patient_id" class="patient_id"/>
                                         <input type="hidden" name="examination_testid" value="<?php if(isset($visit_date)){foreach($visit_date as $key){echo $key['id'];}}?>">
+                                        <input type="hidden" name="clone_val_examination" id="clone_val_examination" value="">
                                         <div class="card">
                                             <div class="card-body">
                                                 <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
@@ -469,28 +400,7 @@ if(isset($rights[0]['user_rights']))
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <form id="exem_measurement_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
-                                          enctype="multipart/form-data">
-                                          <input type="hidden" name="patient_id" class="patient_id"/>
-                                        <input type="hidden" name="exem_measurement_id" value="<?php if(isset($measurement_details)){foreach($measurement_details as $key){echo $key['id'];}}?>" id="exem_measurement_id"/>
-                                        <div class="card">
-                                            <div class="card-body">
-                                            	<p style="margin-bottom: 5px;">Pulse:<input type="text" name="examination_info_pulse" id="examination_info_pulse" value="<?php if(isset($measurement_details)){foreach($measurement_details as $key){echo $key['pulse'];}}?>" style="border:none;"></p>
-                                                <p style="margin-bottom: 5px;"><input type="text" name="examination_info_volume" id="examination_info_volume" value="<?php if(isset($measurement_details)){foreach($measurement_details as $key){echo $key['volume'];}}?>" style="border:none;"></p>
-                                                <p style="margin-bottom: 5px;">
-                                                	<span>BP:<input type="text" name="examination_info_bpa" id="examination_info_bpa" value="<?php if(isset($measurement_details)){foreach($measurement_details as $key){echo $key['bp_a'];}}?>" style="border:none;width: 10%;">/<input type="text" name="examination_info_bpb" id="examination_info_bpb" value="<?php if(isset($measurement_details)){foreach($measurement_details as $key){echo $key['bp_b'];}}?>" style="border:none;width: 20%;"></span>
-                                                </p>
-                                                <p>
-                                                	<span>Res. Rate: <input type="text" name="examination_resp_rate" value="<?php if(isset($measurement_details)){foreach($measurement_details as $key){echo $key['rr'];}}?>" style="border:none; width: 50%;" id="examination_resp_rate"></span>
-                                                	<span>Temp:<input type="text" name="examination_info_temp" value="<?php if(isset($measurement_details)){foreach($measurement_details as $key){echo $key['temprature'];}}?>" id="examination_info_temp" style="border:none;"></span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-lg-4 col-md-4 ">
+                                <div class="col-lg-4 col-md-4 p-l-0 p-r-0">
                                     <form id="examination_profile_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
@@ -512,52 +422,7 @@ if(isset($rights[0]['user_rights']))
                                         </div>
                                     </form>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 ">
-                                    <form id="medicine_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
-                                          enctype="multipart/form-data">
-                                        <input type="hidden" name="patient_id" class="patient_id"/>
-                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
-                                                    <thead><tr><th>Medicine</th></tr></thead>
-                                                    <tbody id="medicine_item" style="height: 20vh">
-	                                                    	<?php if(isset($medicine_details)){ foreach($medicine_details as $med){?>
-	                                                    	<tr><td><input class="form-control" type="text" name="medicine_value[]" value="<?php echo $med['medicine_value']; ?>" ></td></tr>
-	                                                    <?php } }?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-lg-6 col-md-6 ">
-                                    <form id="dosage_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
-                                          enctype="multipart/form-data">
-                                          <input type="hidden" name="patient_id" class="patient_id"/>
-                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive  tbl_header_fix_history" cellspacing="0" id="" width="100%" >
-                                                    <thead><tr><th>Dosage</th></tr></thead>
-                                                    <tbody id="dosage_item" style="height: 20vh">
-                                                    	<?php if(isset($dosage_details)){ foreach($dosage_details as $dos){?>
-	                                                    	<tr><td><input class="form-control" type="text" name="dosage_value[]" value="<?php echo $dos['dosage_value']; ?>" ></td></tr>
-	                                                    <?php } }?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 ">
+                                <div class="col-lg-4 col-md-4 p-l-0">
                                     <form id="investigation_profile_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
@@ -579,7 +444,52 @@ if(isset($rights[0]['user_rights']))
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-lg-6 col-md-6 ">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6  p-r-0">
+                                    <form id="medicine_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
+                                          enctype="multipart/form-data">
+                                        <input type="hidden" name="patient_id" class="patient_id"/>
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
+                                                    <thead><tr><th>Medicine</th></tr></thead>
+                                                    <tbody id="medicine_item" style="height: 20vh">
+	                                                    	<?php if(isset($medicine_details)){ foreach($medicine_details as $med){?>
+	                                                    	<tr><td><input class="form-control" type="text" name="medicine_value[]" value="<?php echo $med['medicine_value']; ?>" ></td></tr>
+	                                                    <?php } }?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-lg-6 col-md-6 p-l-0 ">
+                                    <form id="dosage_profile_form" method="post" role="form"
+                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
+                                          enctype="multipart/form-data">
+                                          <input type="hidden" name="patient_id" class="patient_id"/>
+                                        <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table table-bordered nowrap responsive  tbl_header_fix_history" cellspacing="0" id="" width="100%" >
+                                                    <thead><tr><th>Dosage</th></tr></thead>
+                                                    <tbody id="dosage_item" style="height: 20vh">
+                                                    	<?php if(isset($dosage_details)){ foreach($dosage_details as $dos){?>
+	                                                    	<tr><td><input class="form-control" type="text" name="dosage_value[]" value="<?php echo $dos['dosage_value']; ?>" ></td></tr>
+	                                                    <?php } }?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6  p-r-0">
                                     <form id="advice_profile_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
@@ -601,30 +511,28 @@ if(isset($rights[0]['user_rights']))
                                         </div>
                                     </form>
                                 </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-md-12">
-                            		<form id="instruction_profile_form" method="post" role="form"
-                                          data-action="<?php echo site_url('profile/set_examination_data') ?>"
-                                          enctype="multipart/form-data">
-                                          <input type="hidden" name="patient_id" class="patient_id"/>
-                                        <input type="hidden" name="instruction_id" value="<?php if(isset($instruction_details)){foreach($instruction_details as $key){echo $key['id'];}}?>" id="measurement_cate_id"/>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
-                                                    <thead><tr><th>Instruction</th></tr></thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td style="padding: 0px">
-                                                            <textarea class="form-control" rows="5" name="instruction_item" id="instruction_item"><?php if(isset($instruction_details)){foreach($instruction_details as $key){echo $key['instruction_value'];}}?></textarea>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </form>
-                            	</div>
+                                <div class="col-md-6 p-l-0">
+	                        		<form id="instruction_profile_form" method="post" role="form"
+	                                      data-action="<?php echo site_url('profile/set_examination_data') ?>"
+	                                      enctype="multipart/form-data">
+	                                      <input type="hidden" name="patient_id" class="patient_id"/>
+	                                    <input type="hidden" name="instruction_id" value="<?php if(isset($instruction_details)){foreach($instruction_details as $key){echo $key['id'];}}?>" id="measurement_cate_id"/>
+	                                    <div class="card">
+	                                        <div class="card-body">
+	                                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+	                                                <thead><tr><th>Instruction</th></tr></thead>
+	                                                <tbody>
+	                                                <tr>
+	                                                    <td style="padding: 0px">
+	                                                        <textarea class="form-control" rows="5" name="instruction_item" id="instruction_item"><?php if(isset($instruction_details)){foreach($instruction_details as $key){echo $key['instruction_value'];}}?></textarea>
+	                                                    </td>
+	                                                </tr>
+	                                                </tbody>
+	                                            </table>
+	                                        </div>
+	                                    </div>
+	                                </form>
+	                        	</div>
                             </div>
                         </div>
                     </div>
@@ -637,7 +545,7 @@ if(isset($rights[0]['user_rights']))
                                   enctype="multipart/form-data">
                                   <input type="hidden" name="patient_id" class="patient_id"/>
                                     <div class="form-group show-inline m-t-10">
-                                        <label>Next Visit Date:</label>
+                                        <label>Next Visit Date: </label>
                                         <input type="text" name="next_date_visit_form" id="next_date_visit_form" class="app_date form-control col-md-7" value="<?php if(isset($visit_date)){
 	                                        	foreach($visit_date as $date){
 	                                        		echo date('d-M-Y',strtotime($date['next_visit_date']));

@@ -1,3 +1,4 @@
+<input type="hidden" id="examination_clone_val" value="1" />
 <div class="row m-0">
     <div class="col-md-12">
         <div class="row border border-dark">

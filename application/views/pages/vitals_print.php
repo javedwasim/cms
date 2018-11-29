@@ -11,8 +11,26 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <style type="text/css">
     .tg  {border-collapse:collapse;border-spacing:0;width:100%;}
-    .tg td{font-family:Arial, sans-serif;font-size:12px;padding:10px 15px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-    .tg th{font-size:12px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+    .tg td {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        padding: 10px 10px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+        border-color: black;
+    }
+    .tg th {
+        font-size: 12px;
+        font-weight: bold;
+        padding: 10px 5px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+        border-color: black;
+    }
     .tg .tg-baqh{text-align:center;vertical-align:top}
     .tg .tg-yw4l{vertical-align:top; text-align: center; width: 2%;}
       @page {
@@ -223,19 +241,20 @@
     </div>
         <table class="tg" style="display: -webkit-box;margin: 0 auto;">
             <thead>
-                 <tr style="color: #fff; background: #000;">
-                   <th class="tg-yw4l dark">Order</th>
-                   <th class="tg-yw4l dark" >Date & Time</th>
-                   <th class="tg-yw4l dark">B.P</th>
-                   <th class="tg-yw4l dark">Pulse</th>
-                   <th class="tg-yw4l dark">Temperature</th>
-                   <th class="tg-yw4l dark">INR</th>
-                   <th class="tg-yw4l dark">Resperatory Rate</th>
-                   <th class="tg-yw4l dark">Volume</th>
-                   <th class="tg-yw4l dark">Height</th>
-                   <th class="tg-yw4l dark">Weight</th>
-                   <th class="tg-yw4l dark">BMI</th>
-                   <th class="tg-yw4l dark">BSA</th>
+                 <tr>
+                   <th class="tg-yw4l">Order</th>
+                   <th class="tg-yw4l" >Date & Time</th>
+                   <th class="tg-yw4l">B.P</th>
+                   <th class="tg-yw4l">Pulse</th>
+                   <th class="tg-yw4l">Temperature</th>
+                   <th class="tg-yw4l">PT (Patient/Control)</th>
+                   <th class="tg-yw4l">INR</th>
+                   <th class="tg-yw4l">Resperatory Rate</th>
+                   <th class="tg-yw4l">Volume</th>
+                   <th class="tg-yw4l">Height</th>
+                   <th class="tg-yw4l">Weight</th>
+                   <th class="tg-yw4l">BMI</th>
+                   <th class="tg-yw4l">BSA</th>
                  </tr>
              </thead>
              <tbody>
@@ -249,6 +268,7 @@
                    <td class="tg-yw4l"><?php echo $key['vital_bp']; ?></td>
                    <td class="tg-yw4l"><?php echo $key['vital_pulse']; ?></td>
                    <td class="tg-yw4l"><?php echo $key['vital_temp']; ?></td>
+                   <td class="tg-yw4l"><?php echo $key['vital_pt']; ?></td>
                    <td class="tg-yw4l"><?php echo $key['vital_inr']; ?></td>
                    <td class="tg-yw4l"><?php echo $key['vital_rr']; ?></td>
                    <td class="tg-yw4l"><?php echo $key['vital_volume']; ?></td>

@@ -53,7 +53,7 @@
         $(editableObj).css("color", "#FFF");
         if(textarray.includes(text) === false){
             textarray.push(text);
-            $('#history_item').append(text+','); 
+            $('#history_item').append(text+',  '); 
         } 
         
     }

@@ -54,7 +54,7 @@
         $(editableObj).css("color", "#FFF");
         if(textarray.includes(text) === false){
             textarray.push(text);
-            $('#examination_item').append(text+','); 
+            $('#examination_item').append(text+',  '); 
         } 
     }
 

@@ -1465,6 +1465,34 @@ class Setting extends MY_Controller
        
     }
 
+    public function sort_echo_finding_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_echo_finding_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
+    public function sort_echo_diagnosis_tbl($tablename,$id){
+        $data = $this->input->post();
+        $result = $this->Setting_model->sort_echo_diagnosis_tbl($data,$tablename,$id);
+        if ($result) {
+            $json['success'] = true;
+        }else{
+            $json['error'] = true;
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+       
+    }
+
 //////////////////////////////////////////////// import export moduls ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function export_professions(){
         $result_data = $this->Setting_model->export_professions();

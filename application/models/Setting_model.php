@@ -1026,6 +1026,35 @@
             }
         }
         
+        public function sort_echo_finding_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['finding_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['finding_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function sort_echo_diagnosis_tbl($data,$tablename,$id){
+            $c= 0;
+            for($i=0;$i<count($data['diagnosis_tbl']);$i++){
+                $c += 1;
+                $result = $this->db->set('sort_order',$c)
+                            ->where($id,$data['diagnosis_tbl'][$i])
+                            ->update($tablename);
+            }
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }
 
 ///////////////////////////////////// file import export module /////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////

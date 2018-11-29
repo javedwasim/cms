@@ -1,3 +1,10 @@
+<script>
+    $(document).ready(function(){
+        $(".saveBtnPro").click(function(){
+           // $(this).attr("disabled",true);
+        });
+    });
+</script>
 <div class="content-wrapper" style="margin: 0% 0.5%;">
     <div class="row page-titles" style="padding-bottom: 0px;">
         <div class="col-md-5">
@@ -6,7 +13,7 @@
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb pull-right">
                 <li class="breadcrumb-item"><a href="javascript:void(0)" id="sp_to_profile">profile</a></li>
-                <li class="breadcrumb-item active">lab test</li>
+                <li class="breadcrumb-item active">special instructions</li>
             </ol>
         </div>
     </div>
@@ -14,11 +21,13 @@
     <!-- End Bread crumb -->
     <!-- ============================================================== -->
     <div class="row p-t-10 m-0">
-        <div class="card" style="margin-bottom:0px !important; ">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 pt-info" id="pat_sp_information">
+        <div class="col-md-12 p-l-0 p-r-0">
+            <div class="card" style="margin-bottom:0px !important; ">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 pt-info" id="pat_sp_information">
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,7 +45,7 @@
                                     <th>Category</th>
                                 </tr>
                                 </thead>
-                                <tbody style="height: 500px;">
+                                <tbody style="height: 67vh;">
                                 <?php foreach ($categories as $category): ?>
                                     <tr>
                                         <td style="width: 50px;" data-toggle="modal" data-target="#history-modal">
@@ -64,8 +73,8 @@
                       enctype="multipart/form-data">
                     <input type="hidden" name="patient_id" id="patient_id" value="1">
                     <input type="hidden" name="sp_inst_id" id="sp_inst_id" value="">
-                    <div class="col-md-12">
-                        <div class="card" style="height:71vh;">
+                    <div class="col-md-12 p-r-0">
+                        <div class="card" style="height:74.4vh;">
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-9">
@@ -73,8 +82,8 @@
                                         <label>To whom it may concern</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <button id="save_profile_instruction"
-                                                class="btn btn-primary btn-sm">Save
+                                        <button id="save_profile_instruction" 
+                                                class="btn btn-primary btn-sm saveBtnPro">Save
                                         </button>
                                     </div>
                                 </div>
@@ -95,8 +104,8 @@
         </div>
         <div class="col-md-5 col-lg-5 p-0">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card" style="height:71vh;">
+                <div class="col-md-12 p-l-0">
+                    <div class="card" style="height:74.4vh;">
                         <div class="card-header">
                             Previous Instructions<br/>
                             Print size:<label class="radio-inline"><input type="radio" value="a4" name="print_sp_size"
@@ -150,7 +159,6 @@
 </div>
 <script>
     function editInstructionCategory(editableObj, id) {
-        $('#save_profile_instruction').attr('disabled',false);
         $('td.p_category').css('background', '#FFF');
         $('td.p_category').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");

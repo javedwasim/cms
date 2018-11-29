@@ -7,7 +7,7 @@
     </thead>
     <tbody style="height: 25vh;">
     <?php foreach ($findings as $finding): ?>
-        <tr class="table-row">
+        <tr class="table-row" id="<?php echo $finding['id']; ?>">
             <td style="width: 50px;">
                 <a class="delete-finding btn btn-danger btn-xs" href="javascript:void(0)" title="delete"
                        data-href="<?php echo site_url('Echo_controller/delete_structure_finding/') . $finding['id'] ?>">
@@ -46,5 +46,27 @@
             }
         });
     }
+
+$(document).ready(function () {
+    // Sortable rows
+    table = $("#finding_tbl");
+    table.tableDnD({
+        onDrop: function(table, row) {
+            var rows = table.tBodies[0].rows;
+            var tabledata = $.tableDnD.serialize();
+            var tblname = 'structure_finding';
+            var tblid = 'id';
+           $.ajax({
+                url: window.location.origin+window.location.pathname+"setting/sort_echo_finding_tbl/"+tblname+"/"+tblid,
+                type: 'post',
+                data: tabledata,
+                cache: false,
+                success: function(response){
+                   
+                }
+           });
+        }
+    });
+});
 
 </script>

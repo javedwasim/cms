@@ -70,14 +70,7 @@
     });
 
     $(document.body).on('click', '#structure_finding', function(){
-        //remove background and color on all elements and remove color
-        // $(".structure_table td").css("background-color", "#FFF");
-        // $(".structure_table td").css("color", "#000");
-
         var structure_id = $('#structure_id').val();
-        // $('#'+structure_id).css("background", "#3300FF");
-        // $('#'+structure_id).css("color", "#FFF");
-        // return false;
     });
 $(document).ready(function () {
     // Sortable rows

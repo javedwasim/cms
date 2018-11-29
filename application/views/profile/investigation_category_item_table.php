@@ -15,8 +15,9 @@
                     <i class="far fa-question-circle"></i></a>
             </td>
             <td class="investigation_item"
-                onClick="addInvestigationItem(this,'<?php echo $item['name']; ?>');">
-                <?php echo $item['name']; ?></td>
+                onClick="addInvestigationItem(this,'<?php echo $item['name']; ?>','<?php echo $name;  ?>');">
+                <?php echo $item['name']; ?>     
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
@@ -51,16 +52,26 @@
 </div>
 <script>
     var rowarray = [];
-    function addInvestigationItem(editableObj,text) {
+    function addInvestigationItem(editableObj,text,name) {
         $('td.investigation_item').css('background', '#FFF');
         $('td.investigation_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+        if(name == 'Echo'){
+            var date = '\n'+'Echo[<?php echo date("d-M-Y")?>]';
+            if(rowarray.includes(date) === false){
+                 rowarray.push(date);
+                $('#investigation_item').append('\n'+date+'\n'); 
+            }
+        }else{
+            if(rowarray.includes(name) === false){
+                 rowarray.push(name);
+                $('#investigation_item').append('\n'+name+'\n'); 
+            }
+        }
         if(rowarray.includes(text) === false){
             rowarray.push(text);
-            $('#investigation_item').append(text+','); 
+            $('#investigation_item').append(text+',  '); 
         } 
-        
     }
-
 </script>

@@ -382,6 +382,7 @@ $(document.body).on('click', '#save_lab_test_description', function(){
             $('#lab_test_modal').modal('hide');
             if (response.success) {
                 toastr["success"](response.message);
+                
             } else {
                 toastr["error"](response.message);
             }
@@ -1973,8 +1974,9 @@ $(document.body).on('click', '#save_inst_description', function(){
     return false;
 });
 
-$(document.body).on('click', '#save_profile_instruction', function(){
-    $(this).attr('disabled',true);
+$(document.body).on('click', '#save_profile_instruction', function(e){
+    e.preventDefault();
+   $(this).attr("disabled",true);
     var patient_id = $('#label_patient_id').text();
     var sd = $('#patient_id').val(patient_id);
     var  sp_inst_id = $('#sp-ins-table tbody tr.row_selected').find('.pat_sp_id').text();
@@ -1986,15 +1988,10 @@ $(document.body).on('click', '#save_profile_instruction', function(){
         cache: false,
         success: function(response) {
             $('#special_instruction').val('');
+            $('#save_profile_instruction').attr("disabled",false);
             if (response.success) {
-                $('.patient_info').remove();
-                $('#pat_sp_information').append(response.patient_information);
                 $('.sp_data_table').remove();
                 $('#sp_data_table').append(response.sp_table);
-                $("#sp-ins-table tbody tr").click(function (e) {
-                    $('#sp-ins-table tbody tr.row_selected').removeClass('row_selected');
-                    $(this).addClass('row_selected');
-                });
                 toastr["success"](response.message);
             } else {
                 toastr["error"](response.message);
@@ -2137,6 +2134,7 @@ $(document.body).on('click', '#save_ett_test', function(e){
 });
 
 $(document.body).on('click', '#save_lab_test', function(){
+    var val = '';
     $.ajax({
         url: $('#lab_test_form_modal').attr('data-action'),
         type: 'post',
@@ -2146,7 +2144,12 @@ $(document.body).on('click', '#save_lab_test', function(){
             if (response.success) {
                 $('#lab_test_data_table').empty();
                 $('#lab_test_data_table').append(response.sp_table);
+                $('.laboratory-test-item-content').empty();
+                $('.laboratory-test-content').empty();
                 toastr["success"](response.message);
+                setTimeout(function(){
+                    printlabtest(val,response.info_key,response.patid);
+                },2000);
             } else {
                 toastr["error"](response.message);
             }
@@ -2454,9 +2457,6 @@ $(document.body).on('click', '#save_patient_examination_info', function(){
                     "scrollCollapse": true,
                     "scrollX": true,
                     "pageLength": 250,
-                    // "initComplete": function (settings, json) {
-                    //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                    // }
                 });
                 $("#toggleresize1").click(function () {
                     var icon = $('#toggleresize1 > .arro');
@@ -2627,6 +2627,7 @@ $(document.body).on('click','.save_vitals',function(){
     var temp = tr.find('.vital_temp').text();
     var vital_inr = tr.find('.vital_inr').text();
     var vital_rr = tr.find('.vital_rr').text();
+    var vital_pt = tr.find('.vital_pt').text();
     var vital_volume = tr.find('.vital_volume option:selected').val();
     var vital_height = tr.find('.vital_height').val();
     var vital_weight = tr.find('.vital_weight').val();
@@ -2644,6 +2645,7 @@ $(document.body).on('click','.save_vitals',function(){
             temp:temp,
             inr:vital_inr,
             rr:vital_rr,
+            pt:vital_pt,
             volume: vital_volume,
             height:vital_height,
             weight: vital_weight,
@@ -2715,6 +2717,7 @@ $(document.body).on('click','.update_vital',function(){
     var temp = tr.find('.vital_temp').text();
     var vital_inr = tr.find('.vital_inr').text();
     var vital_rr = tr.find('.vital_rr').text();
+    var vital_pt = tr.find('.vital_pt').text();
     var vital_volume = tr.find('.vital_volume option:selected').val();
     var vital_height = tr.find('.vital_height').val();
     var vital_weight = tr.find('.vital_weight').val();
@@ -2733,6 +2736,7 @@ $(document.body).on('click','.update_vital',function(){
             temp:temp,
             inr:vital_inr,
             rr:vital_rr,
+            pt:vital_pt,
             volume: vital_volume,
             height:vital_height,
             weight: vital_weight,
@@ -2968,7 +2972,7 @@ function showEditexaminationDetail(editableObj,test_id,patient_id) {
     $.ajax({
         url: '/cms/profile/patient_examination_edit_detail',
         type: 'post',
-        data: {detail_id:test_id,patid:patient_id},
+        data: {detail_id:test_id,patid:patient_id,cid:editableObj},
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3002,6 +3006,7 @@ function showEditexaminationDetail(editableObj,test_id,patient_id) {
 
                 $('#pat_ett_information').empty();
                 $('#pat_ett_information').append(response.patient_information);
+                $('#clone_val_examination').val(editableObj);
             }
         }
     });
@@ -4096,4 +4101,23 @@ $(document.body).on('click','#default_finding_tbl tbody tr td:nth-child(2).row_s
       }
     });
   });
+
+var sparray = [];
+function spAddval(editableObj ,item_id, inst_id, description) {
+    $('td.p_item').css('background', '#FFF');
+    $('td.p_item').css('color', '#212529');
+    $(editableObj).css("background", "#1e88e5");
+    $(editableObj).css("color", "#FFF");
+    if(sparray.includes(description) === false){
+        sparray.push(description);
+        setTimeout(function(){
+            var spVal = $('#special_instruction').val();
+            var setSpVal = spVal+', '+description;
+            $('#special_instruction').val(setSpVal.replace(/^,|,$/g,''));
+        },500);
+    }
+    $('#instruction_id').val(inst_id);
+    $('#item_id').val(item_id);
+}
+
 

@@ -13,7 +13,7 @@
                 &nbsp;
             </td> -->
             <td class="advice_cate"
-                onClick="loadAdviceCategory(this,'<?php echo $advice['id']; ?>');">
+                onClick="loadAdviceCategory(this,'<?php echo $advice['id']; ?>','<?php echo $advice['name']; ?>');">
                 <?php echo $advice['name']; ?></td>
         </tr>
     <?php endforeach; ?>
@@ -21,14 +21,14 @@
 </table>
 
 <script>
-    function loadAdviceCategory(editableObj,id) {
+    function loadAdviceCategory(editableObj,id,name) {
         $('td.advice_cate').css('background', '#FFF');
         $('td.advice_cate').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
 
         $.ajax({
-            url: '/cms/profile/get_advice_item/'+id,
+            url: '/cms/profile/get_advice_item/'+id+'/'+name,
             type: 'get',
             cache: false,
             success: function (response) {
