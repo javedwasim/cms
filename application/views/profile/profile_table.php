@@ -7,13 +7,13 @@
     $user_info = ($this->session->userdata('user_data_logged_in'));
 ?>
 <div class="profile-table">
-    <table class="table table-bordered profiletable" cellspacing="0" id="profiletable" width="100%" >
+    <table class="table table-bordered profiletable nowrap" cellspacing="0" id="profiletable" width="100%" >
        <thead>
             <tr>
                 <th style="width: 20px" class="<?php echo in_array("profile-delete_profile-0", $permissions)?"op-hide":''; ?>">Delete</th>
                 <th style="width: 20px" class="<?php echo in_array("profile-edit_profile-0", $permissions)?"op-hide":''; ?>">Edit</th>
-                <th>Patient ID</th>
-                <th>Patient Name</th>
+                <th>ID</th>
+                <th>Name</th>
                 <th>Father/Husband Name</th>
                 <th>Contact</th>
                 <th>Profession</th>

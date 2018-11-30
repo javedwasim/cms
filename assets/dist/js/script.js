@@ -2102,13 +2102,10 @@ $(document.body).on('click', '#save_ett_test', function(e){
                 "info": false,
                 "searching": false,
                 "bLengthChange": false,
-                "scrollY": "400px",
+                "scrollY": "56vh",
                 "scrollCollapse": true,
                 "scrollX": true,
-                "pageLength": 250,
-                // "initComplete": function (settings, json) {
-                //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                // }
+                "pageLength": 250
             });
             $("#toggleresize1").click(function () {
                 var icon = $('#toggleresize1 > .arro');
@@ -2266,13 +2263,10 @@ $(document.body).on('click', '#save_patient_echo_info', function(){
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
-                    "scrollY": "400px",
+                    "scrollY": "56vh",
                     "scrollCollapse": true,
                     "scrollX": true,
-                    "pageLength": 250,
-                    // "initComplete": function (settings, json) {
-                    //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                    // }
+                    "pageLength": 250
                 });
                 $("#toggleresize1").click(function () {
                     var icon = $('#toggleresize1 > .arro');
@@ -2465,7 +2459,7 @@ $(document.body).on('click', '#save_patient_examination_info', function(){
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
-                    "scrollY": "400px",
+                    "scrollY": "56vh",
                     "scrollCollapse": true,
                     "scrollX": true,
                     "pageLength": 250,
@@ -3343,12 +3337,17 @@ function medicine_filter(val){
 
 $(document.body).on('click', '#btn-print-vital', function () {
     var patid = $('#patientid').val();
-    var win = window.open('/cms/user/print_vitals/?patid=' + patid, '_blank');
-    if (win) {
-        console.log("new tab opened")
-        win.focus();
-    } else {
-        alert('Please allow popups for this website');
+    // alert(patid);
+    if(patid == null){
+         toastr["error"]('No values found');
+    }else{
+        var win = window.open('/cms/user/print_vitals/?patid=' + patid, '_blank');
+        if (win) {
+            console.log("new tab opened")
+            win.focus();
+        } else {
+            alert('Please allow popups for this website');
+        }
     }
 });
 
@@ -3433,13 +3432,10 @@ function last_visit_filter(val){
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
-                    "scrollY": "400px",
+                    "scrollY": "56vh",
                     "scrollCollapse": true,
                     "scrollX": true,
-                    "pageLength": 250,
-                    // "initComplete": function (settings, json) {
-                    //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                    // }
+                    "pageLength": 250
                 });
                 $('#profiletable tbody tr:first').addClass('row_selected');
                 $("#profiletable tbody tr").click(function (e) {
@@ -3467,13 +3463,10 @@ function profile_search_in(val){
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
-                    "scrollY": "400px",
+                    "scrollY": "56vh",
                     "scrollCollapse": true,
                     "scrollX": true,
-                    "pageLength": 250,
-                    // "initComplete": function (settings, json) {
-                    //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                    // }
+                    "pageLength": 250
                 });
                 $('#profiletable tbody tr:first').addClass('row_selected');
                 $("#profiletable tbody tr").click(function (e) {
@@ -3532,39 +3525,6 @@ $(document.body).on('click','#profiel_text_files',function(){
         }
     });
 });
-
-$(function() {
-     
-        $.contextMenu({
-            selector: '.context-menu-one', 
-            callback: function(key, options) {
-               var val = $(this).text();
-               var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
-               $.ajax({
-                    url:window.location.origin+window.location.pathname+"profile/delete_text",
-                    type: 'post',
-                    data: {
-                        val:val,
-                        patid:patid
-                    },
-                    cache:false,
-                    success:function(response){
-                        $('#files_content').empty();
-                        $('#files_content').append(response.image_html);
-                        if (response.success==true) {
-                          toastr["success"](response.message);
-                        }else{
-                          toastr["error"](response.message);
-                        }
-                    }
-               });
-                 
-            },
-            items: {
-                "delete": {name: "Delete", icon: "delete"}
-            }
-        });
-    });
 
 $(function() {
         $.contextMenu({
@@ -3661,13 +3621,10 @@ $(document.body).on('click','#sp_to_profile',function(){
                 "info": false,
                 "searching": false,
                 "bLengthChange": false,
-                "scrollY": "400px",
+                "scrollY": "56vh",
                 "scrollCollapse": true,
                 "scrollX": true,
-                "pageLength": 250,
-                // "initComplete": function (settings, json) {
-                //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                // }
+                "pageLength": 250
             });
             $("#toggleresize1").click(function () {
                 var icon = $('#toggleresize1 > .arro');
@@ -3719,13 +3676,10 @@ $(document.body).on('click','#lab_to_profile',function(){
                 "info": false,
                 "searching": false,
                 "bLengthChange": false,
-                "scrollY": "400px",
+                "scrollY": "56vh",
                 "scrollCollapse": true,
                 "scrollX": true,
-                "pageLength": 250,
-                // "initComplete": function (settings, json) {
-                //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                // }
+                "pageLength": 250
             });
             $("#toggleresize1").click(function () {
                 var icon = $('#toggleresize1 > .arro');
@@ -3864,13 +3818,10 @@ $(document.body).on('click','#examination_to_profile',function(){
                 "info": false,
                 "searching": false,
                 "bLengthChange": false,
-                "scrollY": "400px",
+                "scrollY": "56vh",
                 "scrollCollapse": true,
                 "scrollX": true,
-                "pageLength": 250,
-                // "initComplete": function (settings, json) {
-                //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                // }
+                "pageLength": 250
             });
             $("#toggleresize1").click(function () {
                 var icon = $('#toggleresize1 > .arro');
@@ -3922,13 +3873,10 @@ $(document.body).on('click','#echo_to_profile',function(){
                 "info": false,
                 "searching": false,
                 "bLengthChange": false,
-                "scrollY": "400px",
+                "scrollY": "56vh",
                 "scrollCollapse": true,
                 "scrollX": true,
-                "pageLength": 250,
-                // "initComplete": function (settings, json) {
-                //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                // }
+                "pageLength": 250
             });
             $("#toggleresize1").click(function () {
                 var icon = $('#toggleresize1 > .arro');
@@ -3980,13 +3928,10 @@ $(document.body).on('click','#ett_to_profile',function(){
                 "info": false,
                 "searching": false,
                 "bLengthChange": false,
-                "scrollY": "400px",
+                "scrollY": "56vh",
                 "scrollCollapse": true,
                 "scrollX": true,
-                "pageLength": 250,
-                // "initComplete": function (settings, json) {
-                //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                // }
+                "pageLength": 250
             });
             $("#toggleresize1").click(function () {
                 var icon = $('#toggleresize1 > .arro');
@@ -4037,13 +3982,10 @@ $(document.body).on('click','#vitals_to_profile',function(){
                 "info": false,
                 "searching": false,
                 "bLengthChange": false,
-                "scrollY": "400px",
+                "scrollY": "56vh",
                 "scrollCollapse": true,
                 "scrollX": true,
-                "pageLength": 250,
-                // "initComplete": function (settings, json) {
-                //     $(".profiletable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-                // }
+                "pageLength": 250
             });
             $("#toggleresize1").click(function () {
                 var icon = $('#toggleresize1 > .arro');
@@ -4138,4 +4080,131 @@ function spAddval(editableObj ,item_id, inst_id, description) {
     $('#item_id').val(item_id);
 }
 
+// $(document.body).on('click','.med_dosage_val',function(){
+//     $(this).removeAttr('readonly');
+//     alert('abc');
+// });
+// $(document).ready(function(){
+//     var input = $('.med_cat_val');
+//     input.on('keydown', function() {
+//         var key = event.keyCode || event.charCode;
+//         var tr = $(this).closest('tr');
+//         if(key == 46 ){
+//             tr.remove();
+//         }
+//     });
+//     var input = $('.med_dosage_val');
+//     input.on('keydown', function() {
+//         var key = event.keyCode || event.charCode;
+//         var tr = $(this).closest('tr');
+//         if(key == 46 ){
+//             tr.remove();
+//         }
+//     });
+// });
 
+function showimg(patid){
+    var win = window.open('/cms/profile/get_image_files/?patid=' + patid, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
+}
+function showpdf(patid){
+    var win = window.open('/cms/profile/get_pdf_files/?patid=' + patid, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
+}
+
+function showtxt(patid){
+    var win = window.open('/cms/profile/get_text_files/?patid=' + patid, '_blank');
+    if (win) {
+        console.log("new tab opened")
+        win.focus();
+    } else {
+        alert('Please allow popups for this website');
+    }
+}
+
+function deletepdf(id,patid){
+    $.ajax({
+        url:window.location.origin+window.location.pathname+"profile/delete_pdf",
+        type: 'post',
+        data: {
+            val:id,
+            patid:patid
+        },
+        cache:false,
+        success:function(response){
+            $('#files_content').empty();
+            $('#files_content').append(response.image_html);
+            if (response.success==true) {
+              toastr["error"](response.message);
+            }else{
+              toastr["error"](response.message);
+            }
+        }
+    });  
+}
+
+function deletetxt(id,patid){
+    $.ajax({
+        url:window.location.origin+window.location.pathname+"profile/delete_text",
+        type: 'post',
+        data: {
+            val:id,
+            patid:patid
+        },
+        cache:false,
+        success:function(response){
+            $('#files_content').empty();
+            $('#files_content').append(response.image_html);
+            if (response.success==true) {
+              toastr["error"](response.message);
+            }else{
+              toastr["error"](response.message);
+            }
+        }
+    });  
+}
+
+function deleteimage(id,patid){
+    $.ajax({
+        url:window.location.origin+window.location.pathname+"profile/delete_image",
+        type: 'post',
+        data: {
+            val:id,
+            patid:patid
+        },
+        cache:false,
+        success:function(response){
+            $('#files_content').empty();
+            $('#files_content').append(response.image_html);
+            if (response.success==true) {
+              toastr["error"](response.message);
+            }else{
+              toastr["error"](response.message);
+            }
+        }
+    });  
+}
+
+function clearecho(d){
+    if(d == '1'){
+        $('#main_category_items').empty();
+    }else if(d == '2'){
+        $('#mmode_content').empty();
+    }else if(d == '3'){
+        $('#dooplers_content').empty();
+    }else if(d == '4'){
+        $('#color-doppler-table').empty();
+    }
+}
+
+$($.fn.dataTable.tables(true)).DataTable().columns.adjust();

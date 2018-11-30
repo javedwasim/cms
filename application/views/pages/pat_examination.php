@@ -455,11 +455,11 @@ if(isset($rights[0]['user_rights']))
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="med_tbl" width="100%" >
                                                     <thead><tr><th>Medicine</th></tr></thead>
                                                     <tbody id="medicine_item" style="height: 20vh">
 	                                                    	<?php if(isset($medicine_details)){ foreach($medicine_details as $med){?>
-	                                                    	<tr><td><input class="form-control" type="text" name="medicine_value[]" value="<?php echo $med['medicine_value']; ?>" ></td></tr>
+	                                                    	<tr><td><input class="form-control bg-transparent border-0 shadow-none med_cat_val" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" type="text" name="medicine_value[]" value="<?php echo $med['medicine_value']; ?>" ></td></tr>
 	                                                    <?php } }?>
                                                     </tbody>
                                                 </table>
@@ -475,11 +475,11 @@ if(isset($rights[0]['user_rights']))
                                         <input type="hidden" name="measurement_cate_id" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive  tbl_header_fix_history" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive  tbl_header_fix_history" cellspacing="0" id="dosage_val_tbl" width="100%" >
                                                     <thead><tr><th>Dosage</th></tr></thead>
                                                     <tbody id="dosage_item" style="height: 20vh">
                                                     	<?php if(isset($dosage_details)){ foreach($dosage_details as $dos){?>
-	                                                    	<tr><td><input class="form-control" type="text" name="dosage_value[]" value="<?php echo $dos['dosage_value']; ?>" ></td></tr>
+	                                                    	<tr><td><input class="form-control bg-transparent border-0 shadow-none med_dosage_val" type="text" name="dosage_value[]" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $dos['dosage_value']; ?>" ></td></tr>
 	                                                    <?php } }?>
                                                     </tbody>
                                                 </table>
@@ -569,3 +569,32 @@ if(isset($rights[0]['user_rights']))
     	</div>
     </div>
 </div>
+<script type="text/javascript">
+	$("#dosage_val_tbl tbody tr").click(function (e) {
+        $('#dosage_val_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+    $("#med_tbl tbody tr").click(function (e) {
+        $('#med_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+
+    $(document).ready(function(){
+    	var input = $('.med_cat_val');
+        input.on('keydown', function() {
+	        var key = event.keyCode || event.charCode;
+	        var tr = $(this).closest('tr');
+	        if(key == 46 ){
+	            tr.remove();
+	        }
+        });
+        var input = $('.med_dosage_val');
+	    input.on('keydown', function() {
+	        var key = event.keyCode || event.charCode;
+	        var tr = $(this).closest('tr');
+	        if(key == 46 ){
+	            tr.remove();
+	        }
+	    });
+    });
+</script>

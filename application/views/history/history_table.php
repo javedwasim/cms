@@ -5,7 +5,7 @@
         <th class="table-header">Category Name</th>
     </tr>
     </thead>
-    <tbody style="height: 53vh;">
+    <tbody style="height: 60vh;">
     <?php foreach ($categories as $category): ?>
         <tr class="table-row" id ="<?php echo $category['id']; ?>" data-table="profile_history">
             <td style="width:100px;">

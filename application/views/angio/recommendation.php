@@ -84,7 +84,7 @@
                                   </div>
                                   <div  class="col-md-4">
                                     <div class="form-group m-t-25">
-                                        <input type="submit" name="import_csv_angio" class="btn btn-sm btn-info" id="import_csv_angio_btn" value="Add Multiple">
+                                        <input type="submit" name="import_csv_angio" class="btn btn-sm btn-primary" id="import_csv_angio_btn" value="Add Multiple">
                                     </div>
                                   </div>
                                 </div>

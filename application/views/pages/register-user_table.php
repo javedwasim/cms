@@ -1,7 +1,7 @@
 <div class="user_table_content" >
   <table class="table-bordered" cellspacing="0" id="permissions-table"  >
     <thead>
-    <tr style="height: 200px;">
+    <tr style="height: 34vh;">
         <th class="verticalTableHeader"><p>Action</p></th>
         <th class="verticalTableHeader"><p>Edit</p></th>
         <th class="verticalTableHeader"><p>Name</p></th>

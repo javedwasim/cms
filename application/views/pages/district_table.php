@@ -6,7 +6,7 @@
                 <th>Districts</th>
             </tr>
         </thead>
-        <tbody style="height: 63vh;">
+        <tbody style="height: 69vh;">
             <?php 
                 foreach ($districts as $key) {
             ?>

@@ -95,7 +95,7 @@
                                             <th class="table-header">Category Name</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="height: 57vh;">
                                         <?php foreach ($advices as $advice): ?>
                                             <tr class="table-row" id="<?php echo $advice['id']; ?>">
                                                 <td style="width:50px;">
@@ -151,14 +151,14 @@
                                         <div class="col-md-6">
                                             <form id="import_csv_advice" enctype="multipart/form-data">
                                                 <div class="row">
-                                                  <div class="col-md-6">
+                                                  <div class="col-md-7">
                                                     <div class="form-group m-t-30">
                                                       <input type="file" name="csv_advice_file" id="csv_advice_file" required accept=".csv" />
                                                     </div>
                                                   </div>
-                                                  <div  class="col-md-4">
+                                                  <div  class="col-md-5">
                                                     <div class="form-group m-t-25">
-                                                        <input type="submit" name="import_csv_advice" class="btn btn-sm btn-info" id="import_csv_advice_btn" value="Add Multiple">
+                                                        <input type="submit" name="import_csv_advice" class="btn btn-sm btn-primary" id="import_csv_advice_btn" value="Add Multiple">
                                                     </div>
                                                   </div>
                                                 </div>
@@ -181,7 +181,7 @@
                                         </div>
                                         <div class="col-lg-2 col-md-3">
                                             <div class="form-group m-t-25">
-                                                <a class="btn btn-sm btn-info" href="javascript:void(0)" id="export_advice_items" >Export items</a>    
+                                                <a class="btn btn-sm btn-primary" href="javascript:void(0)" id="export_advice_items" >Export items</a>    
                                             </div>
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@
                                             <th class="table-header">Item Name</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="height: 58vh;">
                                             <?php foreach ($items as $item): ?>
                                                 <tr class="table-row" id="<?php echo $item['id']; ?>">
                                                     <td style="width: 50px;">

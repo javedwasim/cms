@@ -22,7 +22,7 @@
                 <?php echo $item['name']; ?>
                 <input type="hidden" name="item_id[]" value="<?php echo $item['id']; ?>">
             </td>
-            <td><input type="text" class="form-control border-0 bg-transparent shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" name="item_value[]" value="" style="width: 100%;"></td>
+            <td><input type="text" class="form-control border-0 bg-transparent shadow-none" tabindex="<?php echo $item['id']; ?>"  name="item_value[]" value="" style="width: 100%;" autocomplete="off" ></td>
             <td>
                 <?php echo $item['units']; ?>
                 <input type="hidden" name="item_units[]" value="<?php echo $item['units']; ?>">
@@ -44,6 +44,7 @@
             success: function(response) {
                 if (response.success) {
                     $('#test_item_description').val(response.description);
+                    $('#lab_test_item_name').append(response.category);
                     $('#lab_test_item_modal').modal('show');
                 } else {
                     toastr["error"](response.message);
@@ -70,7 +71,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Risk Factor and Cardiac Problems</label>
+                        <label id="lab_test_item_name"></label>
                         <textarea class="form-control" rows="3" name="description" id="test_item_description"></textarea>
                     </div>
                 </div>

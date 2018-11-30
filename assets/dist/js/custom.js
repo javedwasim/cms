@@ -2018,7 +2018,7 @@ $(document.body).on('click', '#pat_profile', function () {
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
-                    "scrollY": "400px",
+                    "scrollY": "56vh",
                     "scrollX": true,
                     "scrollCollapse": true,
                     "pageLength": 250,
@@ -2067,7 +2067,7 @@ function profile_filter(){
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
-                    "scrollY": "400px",
+                    "scrollY": "56vh",
                     "scrollCollapse": true,
                     "pageLength": 250,
                     // "initComplete": function (settings, json) {
@@ -2358,7 +2358,7 @@ $(document.body).on('click', '#pat_delete', function () {
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,
-                    "scrollY": "350px",
+                    "scrollY": "50vh",
                     "scrollCollapse": true,
                     paging: false,
                     info: false
@@ -2388,7 +2388,7 @@ $(document.body).on('click', '#lab_test', function () {
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,
-                    "scrollY": "350px",
+                    "scrollY": "50vh",
                     "scrollCollapse": true,
                 });
             }
@@ -3142,7 +3142,7 @@ $(document.body).on('click', '#save_new_profile', function () {
                         "info": false,
                         "searching": false,
                         "bLengthChange": false,
-                        "scrollY": "400px",
+                        "scrollY": "56vh",
                         "scrollCollapse": true,
                         "pageLength": 250,
                         // "initComplete": function (settings, json) {
@@ -3251,7 +3251,7 @@ $(document.body).on('click', '#delete_profile', function () {
                                 "info": false,
                                 "searching": false,
                                 "bLengthChange": false,
-                                "scrollY": "400px",
+                                "scrollY": "56vh",
                                 "scrollCollapse": true,
                                 "scrollX": true,
                                 "pageLength": 250,
@@ -3351,7 +3351,7 @@ $(document.body).on('click', '#update_profile', function () {
                         "info": false,
                         "searching": false,
                         "bLengthChange": false,
-                        "scrollY": "400px",
+                        "scrollY": "56vh",
                         "scrollCollapse": true,
                         "scrollX": true,
                         "pageLength": 250,
@@ -3602,7 +3602,7 @@ function get_delete_patients(func_call) {
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX" : true,
-                    "scrollY" : '350px',
+                    "scrollY" : '50vh',
                     scrollCollapse: true,
                     paging: false,
                     info: false
@@ -3830,7 +3830,7 @@ function get_manage_reasearch(func_call) {
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,
-                    "scrollY": "350px",
+                    "scrollY": "50vh",
                     "scrollCollapse": true,
                     "paging": false,
                     "info": false,
@@ -3863,7 +3863,7 @@ $(document.body).on('click', '.delete_research_profile', function () {
                             ///////////////// initilize datatable //////////////
                             $('#research-table').DataTable({
                                 "scrollX": true,
-                                "scrollY": "350px",
+                                "scrollY": "50vh",
                                 "scrollCollapse": true,
                                 "paging": false,
                                 "info": false,
@@ -4052,7 +4052,7 @@ function research_filters(){
                 $('#manage_research_table').append(response.profile_table);
                 $('#research-table').DataTable({
                     "scrollX": true,
-                    "scrollY": "350px",
+                    "scrollY": "50vh",
                     "scrollCollapse": true,
                     "paging": false,
                     "info": false,
@@ -4078,7 +4078,7 @@ $(document.body).on('click', '#reset_research', function () {
                 $('#manage_research_table').append(response.profile_table);
                 $('#research-table').DataTable({
                     "scrollX": true,
-                    "scrollY": "350px",
+                    "scrollY": "50vh",
                     "scrollCollapse": true,
                     "paging": false,
                     "info": false,
@@ -4175,7 +4175,7 @@ $(document.body).on('click', '#reset_profile_filter', function () {
                     "info": false,
                     "searching": false,
                     "bLengthChange": false,
-                    "scrollY": "400px",
+                    "scrollY": "56vh",
                     "scrollCollapse": true,
                     "scrollX": true,
                     "pageLength": 250,

@@ -5,7 +5,7 @@
             <th>Conclusion</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 57vh;">
         <?php foreach($conclusions as $key){?>
         <tr id="<?php echo $key['id']; ?>">
             <td style="width:50px;">

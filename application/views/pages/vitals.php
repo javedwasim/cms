@@ -24,40 +24,40 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-12" >
-                        <table class="table table-bordered">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered" id="vitaltabl" width="100%">
                             <thead>
                                 <tr role="row">
-                                    <th style="width: 4%">
+                                    <th >
                                         Vital ID
                                     </th>
-                                    <th style="width: 25%">
+                                    <th >
                                         Date &amp; Time
                                     </th>
-                                    <th style="width: 7%">
+                                    <th >
                                         B.P 120/80
                                     </th>
-                                    <th style="width: 5%">
+                                    <th >
                                         Pulse
                                     </th>
-                                    <th style="width: 5%">
+                                    <th >
                                         Temperature
                                     </th>
                                     <th>
                                         PT(Patient/Control)
                                     </th>
-                                    <th style="width: 5%">
+                                    <th >
                                         INR
                                     </th>
-                                    <th style="width: 5%">
+                                    <th >
                                         Resp. Rate
                                     </th>
-                                    <th style="width: 20%">Volume</th>
-                                    <th style="width: 10%">Height</th>
-                                    <th style="width: 10%">Weight</th>
-                                    <th style="width: 10%">BMI</th>
-                                    <th style="width: 10%">BSA</th>
-                                    <th style="width: 20%">
+                                    <th >Volume</th>
+                                    <th >Height</th>
+                                    <th >Weight</th>
+                                    <th >BMI</th>
+                                    <th >BSA</th>
+                                    <th >
                                         Vitals Actions
                                     </th>
                                 </tr>
@@ -74,3 +74,17 @@
     <!-- /.content -->
 </div>
 
+<script type="text/javascript">
+    $('#vitaltabl').DataTable({
+        "info": false,
+        "paging": false,
+        "searching": false,
+        "scrollY": "67vh",
+        "scrollCollapse": true,
+        "scrollX":true,
+        "ordering": false,
+        "initComplete": function (settings, json) {
+            $("#vitaltabl").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+        },
+    });
+</script>

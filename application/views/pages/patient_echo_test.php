@@ -66,7 +66,7 @@
                                             </table>
                                         </div>
                                         <div>
-                                            <button class="btn btn-primary btn-sm">Clear Values</button>
+                                            <a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="clearecho('1')">Clear Values</a>
                                             <button type="submit" class="btn btn-default pull-right btn-sm" id="echo_profile_form_btn">Get Values</button>
                                         </div>
                                     </form>
@@ -119,7 +119,7 @@
                                     </form>
 
 					                <div>
-					                	<button class="btn btn-primary btn-sm pull-right">Reset MMode Measurements</button>	
+					                	<a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" onclick="clearecho('2')">Reset MMode Measurements</a>	
 					                </div>
 		    					</div>
 		    					<div class="col-md-5 p-l-0 p-r-0">
@@ -161,7 +161,7 @@
                                         </div>
                                     </form>
 					                <div>
-					                	<button class="btn btn-primary btn-sm pull-right">Reset Doppler Measurements</button>	
+					                	<a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" onclick="clearecho('3')">Reset Doppler Measurements</a>	
 					                </div>
 		    					</div>
 		    					<div class="col-md-2 p-l-0">
@@ -201,7 +201,7 @@
 		    							</div>
 		    						</div>
 		    						<div>
-		    							<button class="btn btn-default btn-xs pull-right">Reset Color Doppler Flow</button>
+		    							<a class="btn btn-default btn-xs pull-right" href="javascript:void(0)" onclick="clearecho('4')">Reset Color Doppler Flow</a>
 		    						</div>
 		    					</div>
 		    				</div>
@@ -311,20 +311,39 @@
     				</div>
     			</div>
     		</div>
-    		<div class="col-lg-4 col-md-6 pull-right" style="display: inline-flex;">
-    			<label class="checkbox-inline m-r-10 m-t-15"><input type="checkbox" value="" id="echosig">Change Signature ?</label>
-                <form id="echo_sig_form" style="width:200px;">
-                    <select class="form-control col-md-6 m-t-10" name="sig-echo" id="sig-echo" disabled="disabled">
-                        <?php if(isset($doc_sig->doc_sig)){?>
-                            <option value="<?php  echo  $doc_sig->doc_sig; ?>"><?php  echo  $doc_sig->doc_sig ?></option>
-                        <?php } ?>
-                        <?php foreach ($users as $user) { ?>
-                            <option value="<?php echo $user['username']; ?>"><?php echo $user['username']; ?></option>
-                        <?php } ?>
-                    </select>
-                </form>
-    			<button class="btn btn-primary" id="save_patient_echo_info">Save</button>
-    		</div>
-    	</div>   	
+    	</div>
+        <div class="col-md-12 p-l-0 p-r-0">
+            <div class="card">
+                <div class="cord-body">
+                    <div class="col-lg-6 col-md-6 pull-right p-t-10 p-b-10" >
+                        <div class="row">
+                            <div class="col-md-3 p-0 m-t-5" style="display: inline-flex;">
+                                <input type="checkbox" class="m-t-5" value="" id="echosig">
+                                <label class="checkbox-inline m-l-5 p-l-0">Change Signature ?</label>
+                            </div>
+                            <div class="col-md-4 p-r-0">
+                                <form id="echo_sig_form">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <select class="form-control" name="sig-echo" id="sig-echo" disabled="disabled">
+                                                <?php if(isset($doc_sig->doc_sig)){?>
+                                                    <option value="<?php  echo  $doc_sig->doc_sig; ?>"><?php  echo  $doc_sig->doc_sig ?></option>
+                                                <?php } ?>
+                                                <?php foreach ($users as $user) { ?>
+                                                    <option value="<?php echo $user['username']; ?>"><?php echo $user['username']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-3 p-l0">
+                                <button class="btn btn-primary m-t-0 btn-sm" id="save_patient_echo_info">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>	
     </div>
 </div>

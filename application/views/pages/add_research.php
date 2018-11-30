@@ -25,7 +25,7 @@
                                 <th>Research Name</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="height: 70vh;">
                             <?php foreach ($researches as $research): ?>
                                 <tr>
                                     <td style="width:100px;" data-toggle="modal" data-target="#history-modal">

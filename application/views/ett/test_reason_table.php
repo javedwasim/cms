@@ -5,7 +5,7 @@
         <th>Reason</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 58vh;">
         <?php foreach($test_reasons as $reason){?>
         <tr id="<?php echo $reason['id']; ?>">
             <td style="width:50px;">

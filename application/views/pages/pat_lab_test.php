@@ -6,7 +6,7 @@
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb pull-right">
                 <li class="breadcrumb-item"><a href="javascript:void(0)" id="lab_to_profile">profile</a></li>
-                <li class="breadcrumb-item active">special instructions</li>
+                <li class="breadcrumb-item active">lab test</li>
             </ol>
         </div>
     </div>
@@ -61,12 +61,6 @@
 		                        </tr>
 			                    </thead>
 			                    <tbody>
-
-                                  <!--   <tr>
-                                        <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-                                        <td></td>
-                                    </tr> -->
-			                    </tbody>
 			                </table>
 		    			</div>
 		    		</div>	

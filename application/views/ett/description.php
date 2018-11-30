@@ -76,7 +76,7 @@ $(document.body).on('click','#import_ett_description_btn', function(e){
                             </div>
                             <div  class="col-md-4">
                               <div class="form-group m-t-25">
-                                  <input type="submit" name="import_csv" class="btn btn-sm btn-info" id="import_ett_description_btn" value="Add Multiple">
+                                  <input type="submit" name="import_csv" class="btn btn-sm btn-primary" id="import_ett_description_btn" value="Add Multiple">
                               </div>
                             </div>
                         </div>

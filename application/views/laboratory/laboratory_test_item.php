@@ -64,7 +64,7 @@
                     <th>Units</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="height: 50vh;">
                     <?php foreach ($items as $item): ?>
                         <tr id="<?php echo $item['id']; ?>">
                             <td style="width:95px; word-break: break-all;" data-toggle="modal" data-target="#history-modal">

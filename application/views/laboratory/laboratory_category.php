@@ -27,7 +27,7 @@
                             </div>
                             <div  class="col-md-4">
                             <div class="form-group m-t-25">
-                                <button type="submit" name="import_csv" class="btn btn-sm btn-info" id="import_lab_cat_btn">Import Category</button>
+                                <button type="submit" name="import_csv" class="btn btn-sm btn-primary" id="import_lab_cat_btn">Import</button>
                             </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                     <th>Category Name</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="height: 57vh;">
                 <?php foreach ($categories as $category): ?>
                     <tr>
                         <td style="width:95px;" data-toggle="modal" data-target="#history-modal">

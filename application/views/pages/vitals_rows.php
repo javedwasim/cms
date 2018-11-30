@@ -13,7 +13,7 @@ if(isset($patient_vitals)){
         <input type="hidden" name="pat_id" id="patientid" value="<?php echo $key['patient_id']; ?>">
     </td>
     <td style="white-space: nowrap; word-break: break-all;">
-        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd-MM-yyyy HH:ii p"  value="<?php echo date('d-F-Y h:i a',strtotime($key['vaital_datetime'])); ?>" readonly style="border: transparent; width:100%;">
+        <input size="16" type="text" class="vital_date_time vaital_datetime form-control bg-transparent border-0 shadow-none" data-date-format="dd-MM-yyyy HH:ii p"  value="<?php echo date('d-F-Y h:i a',strtotime($key['vaital_datetime'])); ?>" readonly style="font-size: 13px; width: 200px;">
     </td style="white-space: nowrap; word-break: break-all;">
     <td contenteditable="true" class="vital_bp" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_bp']; ?></td>
     <td contenteditable="true" class="vital_pulse" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_pulse']; ?></td>
@@ -22,7 +22,7 @@ if(isset($patient_vitals)){
     <td contenteditable="true" class="vital_inr" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_inr']; ?></td>
     <td contenteditable="true" class="vital_rr" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_rr']; ?></td>
     <td class="vital_volume" >
-        <select class="form-control">
+        <select class="form-control" style="font-size: 13px;">
             <option value="<?php echo $key['vital_volume']; ?>"><?php echo $key['vital_volume']; ?></option>
             <option value="Normal Volume">Normal Volume</option>
             <option value="Low Volume">Low Volume</option>
@@ -32,10 +32,10 @@ if(isset($patient_vitals)){
         </select>
     </td>
     <td style="white-space: nowrap; word-break: break-all;">
-        <input type="text" class="shadow-none border-0 vital_height" onchange="vitalBmiBsa(this)" value="<?php echo $key['vital_height']; ?>">
+        <input type="text" class="shadow-none border-0 vital_height" onchange="vitalBmiBsa(this)" value="<?php echo $key['vital_height']; ?>" style="width: 100px;" >
     </td>
     <td style="white-space: nowrap; word-break: break-all;">
-        <input type="text" class="shadow-none border-0 vital_weight" onchange="vitalBsaBmi(this)" value="<?php echo $key['vital_weight']; ?>">
+        <input type="text" class="shadow-none border-0 vital_weight" onchange="vitalBsaBmi(this)" value="<?php echo $key['vital_weight']; ?>" style="width: 100px;" >
     </td>
     <td  class="vital_bmi" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_bmi']; ?></td>
     <td  class="vital_bsa" style="white-space: nowrap; word-break: break-all;"><?php echo $key['vital_bsa']; ?></td>
@@ -54,7 +54,7 @@ if(isset($patient_vitals)){
 <tr >
     <td class="vital_id" style="white-space: nowrap; word-break: break-all;"></td>
     <td style="white-space: nowrap; word-break: break-all;">
-        <input size="16" type="text" class="vital_date_time vaital_datetime" data-date-format="dd MM yyyy HH:ii p" value="<?php echo date('d-F-Y h:i a'); ?>" readonly style="border: transparent; width:100%;">
+        <input size="16" type="text" class="vital_date_time vaital_datetime form-control bg-transparent shadow-none border-0" data-date-format="dd MM yyyy HH:ii p" value="<?php echo date('d-F-Y h:i a'); ?>" readonly style="font-size: 13px; width: 200px;">
         <input type="hidden" name="pat_id" id="patient_id" value="<?php if(isset($patient_id)){ echo $patient_id; }?>">
     </td>
     <td contenteditable="true" class="vital_bp" style="white-space: nowrap; word-break: break-all;"></td>
@@ -64,7 +64,7 @@ if(isset($patient_vitals)){
     <td contenteditable="true" class="vital_inr" style="white-space: nowrap; word-break: break-all;"></td>
     <td contenteditable="true" class="vital_rr" style="white-space: nowrap; word-break: break-all;"></td>
     <td class="">
-        <select class="form-control vital_volume">
+        <select class="form-control vital_volume" style="font-size: 13px;">
             <option value="">Select</option>
             <option value="Normal Volume">Normal Volume</option>
             <option value="Low Volume">Low Volume</option>
@@ -74,10 +74,10 @@ if(isset($patient_vitals)){
         </select>
     </td>
     <td style="white-space: nowrap; word-break: break-all;">
-        <input type="text" class="shadow-none border-0 vital_height" onchange="vitalBmiBsa(this)" value="0">
+        <input type="text" class="shadow-none border-0 vital_height" onchange="vitalBmiBsa(this)" value="0" style="width: 100px;" >
     </td>
     <td style="white-space: nowrap; word-break: break-all;">
-        <input type="text" class="shadow-none border-0 vital_weight" onchange="vitalBsaBmi(this)" value="0">
+        <input type="text" class="shadow-none border-0 vital_weight" onchange="vitalBsaBmi(this)" value="0" style="width: 100px;" >
     </td>
     <td class="vital_bmi" style="white-space: nowrap; word-break: break-all;">0</td>
     <td class="vital_bsa" style="white-space: nowrap; word-break: break-all;">0</td>

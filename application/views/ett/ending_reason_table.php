@@ -5,7 +5,7 @@
             <th>Reason</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 57vh;">
         <?php foreach($ending_reasons as $key){?>
         <tr id="<?php echo $key['id']; ?>">
             <td style="width:50px;">

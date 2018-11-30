@@ -5,7 +5,7 @@
         <th>Category</th>
     </tr>
     </thead>
-    <tbody style="height: 36vh">
+    <tbody style="height: 49vh">
     <?php foreach ($main_categories as $category): ?>
         <tr class="table-row">
             <td style="width:50px;">

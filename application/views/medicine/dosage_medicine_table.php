@@ -5,7 +5,7 @@
         <th style="width: 50px; ">Action</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 58vh;">
 
     <?php foreach ($dosages as $dosage): ?>
         <tr>

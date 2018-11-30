@@ -38,7 +38,7 @@
         		<div class="card">
         			<div class="card-body">
         				<div class="row">
-        					<div class="col-md-3 p-r-0">
+        					<div class="col-md-2 p-r-0">
         						<div class="form-group">
         							<label>Reason for Test</label>
         							<select class="form-control" name="test_reason" id="ett_test_reason">
@@ -246,7 +246,7 @@
         							</div>
         						</div>
         					</div>
-        					<div class="col-md-6 p-l-0">
+        					<div class="col-md-7 p-l-0">
         						<div class="card">
         							<div class="card-header" style="display: inline-flex;">
         								<label class="m-t-10">Select Protocol:</label>
@@ -258,7 +258,7 @@
                                         </select>
         							</div>
         							<div class="card-body" style="height: 60vh;">
-        								<table class="table table-bordered responsive" id="ett_protocol_tbl">
+        								<table class="table table-bordered responsive nowrap" id="ett_protocol_tbl">
         									<thead>
         										<tr>
         											<th>Stage Name</th>

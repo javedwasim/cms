@@ -219,7 +219,7 @@
                         ?>
                     </strong>
                     <label><?php echo $age[1]; ?></label>
-                    <label style="margin-right: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
+                    <label style="margin-left: 15px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
                 </div>
                 <div class="col-md-2">
                     <label><?php echo date('d-M-Y');?></label>

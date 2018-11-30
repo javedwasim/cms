@@ -5,7 +5,7 @@
             <th>Protocol</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 58vh;">
         <?php foreach($protocols as $key){?>
         <tr id="<?php echo $key['id']; ?>">
             <td style="width:50px;">

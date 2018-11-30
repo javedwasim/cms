@@ -85,14 +85,14 @@
                 <div class="col-md-6">
                     <form id="import_lab_test" enctype="multipart/form-data">
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-7">
                             <div class="form-group m-t-30">
                               <input type="file" name="csv_file" id="csv_lab_test_file" required />
                             </div>
                           </div>
-                          <div  class="col-md-4">
+                          <div  class="col-md-5">
                             <div class="form-group m-t-25">
-                                <input type="submit" class="btn btn-sm btn-info" id="import_lab_test_btn" value="Import Tests">
+                                <input type="submit" class="btn btn-sm btn-primary" id="import_lab_test_btn" value="Import Tests">
                             </div>
                           </div>
                         </div>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="col-lg-2 col-md-3">
                     <div class="form-group m-t-25">
-                        <a class="btn btn-sm btn-info" href="#" id="export_lab_items" >Export items</a>
+                        <a class="btn btn-sm btn-primary" href="#" id="export_lab_items" >Export items</a>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                     <th>Item Name</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="height: 50vh;">
                 <?php foreach ($tests as $test): ?>
                     <tr id="<?php echo $test['id']; ?>">
                         <td style="width:95px; word-break: break-all;" data-toggle="modal" data-target="#history-modal">

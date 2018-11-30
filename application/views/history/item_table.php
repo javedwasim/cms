@@ -5,7 +5,7 @@
         <th class="table-header">Item Name</th>
     </tr>
     </thead>
-    <tbody style="height: 39vh;">
+    <tbody style="height: 48vh;">
     <?php foreach ($items as $item): ?>
         <tr class="table-row" id="<?php echo $item['id']; ?>" >
             <td style="width: 100px;">

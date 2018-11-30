@@ -21,6 +21,7 @@
                        
                         </div>
                         <!-- Column -->
+                        <?php  if($user_info['is_admin'] == 1): ?>
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" class="appoint_revert">
                                 <div class="round round-sm round-appointment align-self-center m-b-10"><i class="fa fa-user"></i>
@@ -33,6 +34,7 @@
                                 </a>
                             </div>      
                         </div>
+                        <?php endif; ?>
                         <!-- Column -->
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" class="feepaid">

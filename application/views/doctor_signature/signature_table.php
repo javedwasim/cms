@@ -9,7 +9,7 @@
             <th style="width:20%;">Institute</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="height: 69vh;">
             <?php foreach($sig_details as $details){ ?>
             <tr>
                 <td style="width: 5%">

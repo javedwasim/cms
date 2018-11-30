@@ -23,11 +23,30 @@
         $(editableObj).css("color", "#FFF");
         if(textarray.includes(name) === false){
             textarray.push(name);
-            var newRowContent = '<tr><td><input class="form-control" type="text" name="dosage_value[]" value="'+name+'" ></td></tr>';
+            var newRowContent = '<tr><td><input class="form-control med_dosage_val bg-transparent border-0 shadow-none" type="text" name="dosage_value[]" value="'+name+'" ></td></tr>';
             $("#dosage_item").append(newRowContent);
         } 
-        
+        $('.med_dosage_val').attr('readonly', true);
+        $(document).ready(function(){
+            $( ".med_dosage_val" ).dblclick(function() {
+                $(this).removeAttr('readonly');
+            });
+            $( ".med_dosage_val" ).on( "focusout", function(){
+                $('.med_dosage_val').attr('readonly', true);
+            } );
 
+            var input = $('.med_dosage_val');
+              input.on('keydown', function() {
+                var key = event.keyCode || event.charCode;
+                var tr = $(this).closest('tr');
+                if(key == 46 ){
+                    tr.remove();
+                }
+              });
+        });
+        $("#dosage_val_tbl tbody tr").click(function (e) {
+            $('#dosage_val_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     }
-
 </script>

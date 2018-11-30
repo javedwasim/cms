@@ -13,7 +13,7 @@ if(isset($rights[0]['user_rights']))
         <th >Category Name</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 58vh;">
     <?php foreach ($categories as $category): ?>
         <tr class="table-row" id="<?php echo $category['id']; ?>" >
             <td style="width:100px;">

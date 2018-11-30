@@ -4,7 +4,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                © 2018 TechSol v2.6
+                © 2018 TechSol v2.7
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -72,6 +72,8 @@
     <script src="<?php echo base_url(); ?>assets/plugins/gridstack/lodash.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/gridstack/gridstack.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/gridstack/gridstack.jQueryUI.js"></script>
+     <!-- Draggable-portlet -->
+     <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-lightbox/bootstrap-lightbox.js"></script>
     <!-- ============================================================== -->
     <!-- Bootstrap mbforms -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/mbbootstrap/js/popper.min.js"></script>

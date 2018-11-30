@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-lg-3 p-0">
+        <div class="col-md-3 col-lg-3 p-l-0">
             <div class="row">
                 <form id="profile_inst_form_modal" method="post" role="form"
                       data-action="<?php echo site_url('profile/patient_special_instruction') ?>"
@@ -102,7 +102,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-md-5 col-lg-5 p-0">
+        <div class="col-md-5 col-lg-5">
             <div class="row">
                 <div class="col-md-12 p-l-0">
                     <div class="card" style="height:74.4vh;">

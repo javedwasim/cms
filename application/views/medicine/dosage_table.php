@@ -5,7 +5,7 @@
         <th style="width:40px" align="right">Action</th>
     </tr>
     </thead>
-    <tbody style="height: 45vh">
+    <tbody style="height: 57vh">
     <?php foreach ($med_dosages as $dosage): ?>
         <tr class="table-row" id="<?php echo $dosage['id']; ?>" >
             <td  align="right" class="dosage_category" onClick="dosageEdit(this);">

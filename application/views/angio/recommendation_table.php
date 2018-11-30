@@ -5,7 +5,7 @@
         <th>Recommendations</th>
     </tr>
     </thead>
-    <tbody style="height: 53vh">
+    <tbody style="height: 64vh">
     <?php foreach ($recommendations as $recommendation): ?>
         <tr class="table-row">
             <td style="width:50px;">

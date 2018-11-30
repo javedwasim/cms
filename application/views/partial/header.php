@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/fonts/Nastaleeq/mehr-font.css">
   <!-- Just add the following stylesheet link to your html file: -->
   <link rel="stylesheet" href="https://unpkg.com/mehr/mehr-font.css">
+  <!-- bootstrap light box -->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/plugins/bootstrap-lightbox/bootstrap-lightbox.css">
   <!-- jquery-ui -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css">
   <!-- Select2 -->
@@ -75,7 +77,6 @@
   background: #fff !important;
 }
 </style>
-    
 </head>
 <body class="fix-header fix-sidebar card-no-border logo-center">
     <!-- ============================================================== -->

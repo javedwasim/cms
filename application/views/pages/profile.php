@@ -179,7 +179,7 @@ if(isset($rights[0]['user_rights']))
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body" style="height:520px;">
+                        <div class="card-body" style="height:59vh;">
                             <div class="row">
                                 <div id="re1">
                                     <div class="col-md-12 p-r-0" style="height: 150px; overflow-y: scroll;">
@@ -260,13 +260,13 @@ if(isset($rights[0]['user_rights']))
                     		<div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Name</label>
-		                            <input type="text" name="patient_name" class="form-control required" id="pat_profile_name" placeholder="Enter Name"  style="text-transform: capitalize;" minlength="3" maxlength="40" required />
+		                            <input type="text" name="patient_name" class="form-control required" id="pat_profile_name" placeholder="Enter Name"  style="text-transform: capitalize;" minlength="3" maxlength="25" required />
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">
 		                        <div class="form-group">
 		                            <label for="recipient-name" class="control-label">Father/Wife Name:</label>
-		                            <input type="text" name="pat_profile_relative_name" class="form-control required" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" style="text-transform: capitalize;" maxlength="40" required>
+		                            <input type="text" name="pat_profile_relative_name" class="form-control required" id="pat_profile_relative_name" placeholder="Enter Name" autocomplete="off" style="text-transform: capitalize;" maxlength="25" required>
 		                        </div>
 	                        </div>
 	                        <div class="col-md-4">

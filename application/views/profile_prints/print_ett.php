@@ -255,13 +255,13 @@
                     <strong style="margin-left: 10px"><?php echo $patient_info->pat_name ?></strong>
                 </div>
                 <div class="col-md-4">
-                    <strong>
+                    <strong style="margin-right:5px;">
                         <?php $age = preg_split('#(?<=\d)(?=[a-z])#i', $patient_info->pat_age); echo $age[0]; 
                             echo " ";
                         ?>
                     </strong>
                     <label><?php echo $age[1]; ?></label>
-                    <label style="margin-right: 20px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
+                    <label style="margin-left: 15px; text-transform: capitalize;"><?php echo $patient_info->pat_sex ?></label>
                 </div>
                 <div class="col-md-2">
                     <label><?php echo date('d-M-Y');?></label>
@@ -376,15 +376,15 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Stage Name</th>
-                                <th>Speed(mph)</th>
-                                <th>Grade</th>
-                                <th>Stage Time</th>
-                                <th>Mets</th>
-                                <th>HR</th>
-                                <th>SBP/DBP</th>
-                                <th>HR x BP</th>
-                                <th>Condition</th>
+                                <th style="font-size: 12px;">Stage Name</th>
+                                <th style="font-size: 12px;">Speed(mph)</th>
+                                <th style="font-size: 12px;">Grade</th>
+                                <th style="font-size: 12px;">Stage Time</th>
+                                <th style="font-size: 12px;">Mets</th>
+                                <th style="font-size: 12px;">HR</th>
+                                <th style="font-size: 12px;">SBP/DBP</th>
+                                <th style="font-size: 12px;">HR x BP</th>
+                                <th style="font-size: 12px;">Condition</th>
                             </tr>
                         </thead>
                         <tbody>

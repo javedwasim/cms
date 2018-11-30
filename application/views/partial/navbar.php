@@ -42,12 +42,23 @@
             <!-- Profile -->
             <!-- ============================================================== -->
             <li class="dropdown">
-                <a class="dropdown-toggle waves-effect waves-dark" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>assets/dist/images/dr_shahadat.jpg" alt="user" class="profile-pic" /></a>
+                <a class="dropdown-toggle waves-effect waves-dark" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?php if($user_info['is_admin'] ==1 ){?>
+                        <img src="<?php echo base_url(); ?>assets/dist/images/dr_shahadat.jpg" alt="admin" class="profile-pic" />
+                    <?php }else{?>
+                        <img src="<?php echo base_url(); ?>/assets/dist/images/avatar.png" alt="user" class="profile-pic">
+                    <?php }?>
+                </a>
                 <div class="dropdown-menu dropdown-menu-right scale-up">
                     <ul class="dropdown-user">
                         <li>
                             <div class="dw-user-box">
-                                <div class="u-img"><img src="<?php echo base_url(); ?>/assets/dist/images/dr_shahadat.jpg" alt="user"></div>
+                                <div class="u-img">
+                                    <?php if($user_info['is_admin'] ==1 ){?>
+                                    <img src="<?php echo base_url(); ?>/assets/dist/images/dr_shahadat.jpg" alt="admin">
+                                    <?php }else{?>
+                                    <img src="<?php echo base_url(); ?>/assets/dist/images/avatar.png" alt="user"><?php }?>
+                                </div>
                                 <div class="u-text">
                                     <h4><?php echo $this->session->userdata('username')?></h4>
                                     <p class="text-muted"><?php echo $this->session->userdata('username')?>@gmail.com

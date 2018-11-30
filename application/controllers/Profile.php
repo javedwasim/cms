@@ -1231,30 +1231,21 @@ class Profile extends MY_Controller
     }
 
     public function get_image_files(){
-        $id = $this->input->post('patid');
+        $id = $this->input->get('patid');
         $data['files'] = $this->Profile_model->get_files($id);
-        $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
+        $this->load->view('profile/show_img',$data);
     }
 
     public function get_pdf_files(){
-        $id = $this->input->post('patid');
+        $id = $this->input->get('patid');
         $data['files'] = $this->Profile_model->get_files($id);
-        $json['image_html'] = $this->load->view('profile/profile_pdf',$data,true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
+        $this->load->view('profile/profile_pdf',$data);
     }
 
     public function get_text_files(){
-        $id = $this->input->post('patid');
+        $id = $this->input->get('patid');
         $data['files'] = $this->Profile_model->get_files($id);
-        $json['image_html'] = $this->load->view('profile/profile_txt_show_file',$data,true);
-        if ($this->input->is_ajax_request()) {
-            set_content_type($json);
-        }
+        $this->load->view('profile/profile_txt_show_file',$data);
     }
 
     public function delete_text(){
@@ -1268,8 +1259,8 @@ class Profile extends MY_Controller
             $json['error'] = true;
             $json['message'] = 'Seems an error.';
         }
-        $data['files'] = $this->Profile_model->get_image_files($patid);
-        $json['image_html'] = $this->load->view('profile/profile_txt_show_file',$data,true);
+        $data['files'] = $this->Profile_model->get_files($patid);
+        $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }
@@ -1286,7 +1277,7 @@ class Profile extends MY_Controller
             $json['error'] = true;
             $json['message'] = 'Seems an error.';
         }
-        $data['files'] = $this->Profile_model->get_image_files($patid);
+        $data['files'] = $this->Profile_model->get_files($patid);
         $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -1304,8 +1295,8 @@ class Profile extends MY_Controller
             $json['error'] = true;
             $json['message'] = 'Seems an error.';
         }
-        $data['files'] = $this->Profile_model->get_image_files($patid);
-        $json['image_html'] = $this->load->view('profile/profile_pdf',$data,true);
+        $data['files'] = $this->Profile_model->get_files($patid);
+        $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

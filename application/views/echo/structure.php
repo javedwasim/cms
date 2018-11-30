@@ -214,12 +214,12 @@
                 <div class="col-md-4">
                     <form id="structure_form" enctype="multipart/form-data">
                         <div class="row">
-                            <div class="col-lg-8 col-md-6 p-r-0">
+                            <div class="col-lg-9 col-md-6 p-r-0">
                                 <div class="form-group m-t-5">
                                     <input type="file" style="width: 235px;" name="csv_file" id="structure_csv_file" required="required" />
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 p-l-0">
+                            <div class="col-lg-3 col-md-6 p-l-0">
                                 <button type="submit" name="import_csv" id="import_structure_btn" class="btn btn-sm btn-primary">Import</button>
                             </div>  
                         </div>
@@ -228,12 +228,12 @@
                 <div class="col-md-4">
                     <form id="finding_form" enctype="multipart/form-data">
                         <div class="row">
-                            <div class="col-lg-8 col-md-6 p-r-0">
+                            <div class="col-lg-9 col-md-6 p-r-0">
                                 <div class="form-group m-t-5">
                                     <input type="file" style="width: 235px;" name="csv_file" id="finding_csv_file" required="required" />
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 p-l-0">
+                            <div class="col-lg-3 col-md-6 p-l-0">
                                 <button type="submit" name="import_csv" id="import_finding_btn" class="btn btn-sm btn-primary">Import</button>
                             </div>  
                         </div>
@@ -242,12 +242,12 @@
                 <div class="col-md-4">
                     <form id="diagnosis_form" enctype="multipart/form-data">
                         <div class="row">
-                            <div class="col-lg-8 col-md-6 p-r-0">
+                            <div class="col-lg-9 col-md-6 p-r-0">
                                 <div class="form-group m-t-5">
                                     <input type="file" style="width: 235px;" name="csv_file" id="diagnosis_csv_file" required="required" />
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 p-l-0">
+                            <div class="col-lg-3 col-md-6 p-l-0">
                                 <button type="submit" name="import_csv" id="import_diagnosis_btn" class="btn btn-sm btn-primary">Import</button>
                             </div>  
                         </div>

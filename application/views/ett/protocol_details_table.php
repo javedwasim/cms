@@ -8,7 +8,7 @@
             <th style="width: 19%">Mets</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="height: 61vh;">
         <?php foreach($protocol_details as $key){?>
         <tr>
             <td style="width: 20%" class="exam_cate word_break">
@@ -19,21 +19,21 @@
             <td style="width: 20%"  class="exam_cate word_break">
                 <input type="text" readonly="true" ondblclick="this.readOnly='';" 
                     onfocusout="this.readOnly='readonly';" onClick="showExamination(this);" 
-                    value="<?php echo $key['speed_mph']; ?>" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" 
+                    value="<?php echo $key['speed_mph']; ?>"
                     onchange="saveToDatabase(this,'speed_mph','<?php echo $key['id']; ?>')" 
                     class="form-control border-0 shadow-none bg-transparent">        
             </td>
             <td style="width: 20%" class="exam_cate word_break" >
-                <input type="text" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" onchange="saveToDatabase(this,'grade','<?php echo $key['id']; ?>')" onClick="showExamination(this);" value="<?php echo $key['grade']; ?>"
+                <input type="text" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';"  onchange="saveToDatabase(this,'grade','<?php echo $key['id']; ?>')" onClick="showExamination(this);" value="<?php echo $key['grade']; ?>"
                     class="form-control border-0 shadow-none bg-transparent">        
             </td>
             <td style="width: 20%" class="exam_cate word_break">
-                <input type="text" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo date('h:i', strtotime($key['stage_time'])) ?>" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" class="form-control border-0 shadow-none bg-transparent"
+                <input type="text" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo date('h:i', strtotime($key['stage_time'])) ?>" class="form-control border-0 shadow-none bg-transparent"
                 onchange="saveToDatabase(this,'stage_time','<?php echo $key['id']; ?>')"
                 onClick="showExamination(this);">    
             </td>
             <td style="width: 20%" class="exam_cate word_break">
-                <input type="text" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" onkeypress="return /\d/.test(String.fromCharCode(((event || window.event).which || (event || window.event).which)));" value="<?php echo $key['mets']; ?>"
+                <input type="text" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $key['mets']; ?>"
                 onchange="saveToDatabase(this,'mets','<?php echo $key['id']; ?>')"
                 onClick="showExamination(this);" class="form-control border-0 shadow-none bg-transparent">        
             </td>

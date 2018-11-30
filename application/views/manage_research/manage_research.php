@@ -1,4 +1,4 @@
-<div class="dashboard-content">
+<div class="dashboard-content" style="margin-right:8%;">
     <div class="row p-t-10 m-0">
         <div class="col-md-12">
             <div class="card">

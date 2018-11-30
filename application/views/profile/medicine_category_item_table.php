@@ -59,9 +59,30 @@
         $(editableObj).css("color", "#FFF");
         if(rowarray.includes(name) === false){
             rowarray.push(name);
-            var newRowContent = '<tr><td><input class="form-control" type="text" name="medicine_value[]" value="'+name+'" ></td></tr>';
+            var newRowContent = '<tr><td><input class="form-control med_cat_val bg-transparent border-0 shadow-none" type="text" name="medicine_value[]" value="'+name+'" ></td></tr>';
             $("#medicine_item").append(newRowContent); 
-        } 
+        }
+        $('.med_cat_val').attr('readonly', true);
+        $(document).ready(function(){
+            $( ".med_cat_val" ).dblclick(function() {
+                $(this).removeAttr('readonly');
+            });
+            $( ".med_cat_val" ).on( "focusout", function(){
+                $('.med_cat_val').attr('readonly', true);
+            } );
+            $("#med_tbl tbody tr").click(function (e) {
+                $('#med_tbl tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+            var input = $('.med_cat_val');
+                input.on('keydown', function() {
+                var key = event.keyCode || event.charCode;
+                var tr = $(this).closest('tr');
+                if(key == 46 ){
+                    tr.remove();
+                }
+          });
+        });
 
         $.ajax({
             url: '/cms/profile/get_medicine_dosage/'+id,
