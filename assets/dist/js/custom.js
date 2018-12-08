@@ -50,6 +50,15 @@ $(document).ready(function () {
     $('.dataTables_filter input[type="search"]').css(
             {'width': '100px !important', 'display': 'inline-block'}
     );
+
+    $(".booking_tables tbody tr").click(function (e) {
+        if ($(this).hasClass('row_selected')) {
+            $(this).removeClass('row_selected');
+        } else {
+            $('.booking_tables tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        }
+    });
     /////////////////// toastr alert settings //////////////
     toastr.options = {
         "closeButton": true,
@@ -1077,6 +1086,124 @@ $(document.body).on('click', '.appoint_revert', function () {
     }
 });
 
+/////////////////////////////////////////// Status change for all categories //////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ function change_patient_status(val) {
+    var tr = $('.booking_tables tbody tr.row_selected');
+    var odata = $.trim(tr.find('.vip_trans').text());
+    var status_id = $.trim(tr.find('.pat_status').text());
+    var status_class = $(val).attr('class');
+    var fee_status =  '';
+    if(status_class == 'pat_appoint_revert'){
+        fee_status = '0';
+    }else if(status_class == 'pat_feepaid'){
+        fee_status = '1';
+    }else if(status_class == 'pat_wecg'){
+        fee_status = '2';
+    }else if(status_class == 'pat_wett'){
+        fee_status = '3';
+    }else if(status_class == 'pat_wecho'){
+        fee_status = '4';
+    }else if(status_class == 'pat_investigation'){
+        fee_status = '5';
+    }else if(status_class == 'pat_checkup'){
+        fee_status = '6';
+    }else if(status_class == 'pat_complete'){
+        fee_status = '7';
+    }
+    if (odata != "") {
+        var bookingflag = "";
+        var tabledate = $('#search-all-cat').val();
+        $.ajax({
+            url: '/cms/user/update_fee',
+            type: 'post',
+            data: {
+                bkId: odata,
+                fee_status: fee_status,
+                flag: bookingflag,
+                tabledate: tabledate,
+                statusId: status_id
+            },
+            cache: false,
+            success: function (response) {
+                if (response.status_row != '') {
+                    $('.booking_category_tables').remove();
+                    $('#booking_category_tables').append(response.booking_cate);
+                    $('.all_status_row').remove();
+                    $('#all_status_row').append(response.status_row);
+                    $('.wallet-modal-box').remove();
+                    $('#wallet-modal-box').append(response.wallet_count);   
+                    $(".booking_tables tbody tr").click(function (e) {
+                        if ($(this).hasClass('row_selected')) {
+                            $(this).removeClass('row_selected');
+                        } else {
+                            $('.booking_tables tbody tr.row_selected').removeClass('row_selected');
+                            $(this).addClass('row_selected');
+                        }
+                    });
+                    ///////////// reinitilizing the datatable///////////
+                    $('.booking_tables').DataTable({
+                        "info": false,
+                        "paging": false,
+                        "scrollX": true,
+                        "scrollY": "66vh",
+                        "scrollCollapse": true,
+                        "searching": false,
+                        'aoColumnDefs': [{
+                           'bSortable': false,
+                           'aTargets': 0
+                        }],
+                        "createdRow": function(row, data, dataIndex) {
+                            if (data[7] == "1") {
+                                $(row).addClass('round-green');
+                            }if(data[7] == "2"){
+                                $(row).addClass('round-blue');
+                            }
+                            if (data[7] == "3") {
+                                $(row).addClass('round-red');
+                            }if(data[7] == "4"){
+                                $(row).addClass('round-yellow');
+                            }
+                            if (data[7] == "5") {
+                                $(row).addClass('round-orange');
+                            }if(data[7] == "6"){
+                                $(row).addClass('round-lightGray');
+                            }if (data[7 ] == "7") {
+                                $(row).addClass('round-white');
+                            }
+                        },
+                        "fnDrawCallback": function ( oSettings ) {
+                            /* Need to redo the counters if filtered or sorted */
+                            if ( oSettings.bSorted || oSettings.bFiltered )
+                            {
+                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                                {
+                                    $('td:eq(0)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                                }
+                            }
+                        },
+                        "aoColumnDefs": [
+                            { "bSortable": false, "aTargets": [ 0 ] }
+                        ],
+                        "aaSorting": [[ 1, 'asc' ]]
+                    });
+                    if (response.success == true) {
+                        toastr["success"](response.message);    
+                    }else{
+                        toastr["error"](response.message);    
+                    }
+
+                } else {
+                    console.log('not working');
+                }
+            }
+        });
+    } else {
+        toastr["warning"]('Please select the row.');
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// call appointment booking view ///////////////////////
 function appointments() {
@@ -1457,6 +1584,8 @@ function bookings() {
                 $('#content-wrapper').append(response.result_html);
                 $('.booking_category_tables').remove();
                 $('#booking_category_tables').append(response.booking_cate);
+                $('.all_status_row').remove();
+                $('#all_status_row').append(response.status_row);
                 $('.wallet-modal-box').remove();
                 $('#wallet-modal-box').append(response.wallet_count);
                 ///////////// reinitilizing the datatable///////////
@@ -1504,6 +1633,14 @@ function bookings() {
                         { "bSortable": false, "aTargets": [ 0 ] }
                     ],
                     "aaSorting": [[ 1, 'asc' ]]
+                });
+                $(".booking_tables tbody tr").click(function (e) {
+                    if ($(this).hasClass('row_selected')) {
+                        $(this).removeClass('row_selected');
+                    } else {
+                        $('.booking_tables tbody tr.row_selected').removeClass('row_selected');
+                        $(this).addClass('row_selected');
+                    }
                 });
                 $('.app_date').datepicker({
                     format: 'd-M-yyyy',
@@ -3668,9 +3805,15 @@ function get_patient_vitals(patid,func_call) {
                 $('#content-wrapper').append(response.result_html);
                 $('#vital_rows').empty();
                 $('#vital_rows').append(response.vital_rows);
-                $('.datatable').DataTable({
-                    paging: false,
-                    info: false
+                $('#vitaltabl').DataTable({
+                    "info": false,
+                    "paging": false,
+                    "searching": false,
+                    "scrollY": "67vh",
+                    "scrollCollapse": true,
+                    "scrollX":true,
+                    "ordering": false
+
                 });
             }
         }

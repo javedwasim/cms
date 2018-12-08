@@ -105,7 +105,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 }
                             ?>
                         </td>
-                        <td class="hide">
+                        <td class="hide pat_status">
                             <?php 
                                 if(isset($bkarray[$i]['fee_paid_status'])){
                                     echo $bkarray[$i]['fee_paid_status'];
@@ -154,7 +154,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 <td class="hide vip_trans">
                                     <?php echo $details['appointment_booking_id']?>
                                 </td>
-                                <td class="hide">
+                                <td class="hide pat_status">
                                     <?php echo $details['fee_paid_status']?>
                                 </td>
                             </tr>
@@ -223,7 +223,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 <td class="hide vip_trans">
                                     <?php echo $details['appointment_booking_id']?>
                                 </td>
-                                <td class="hide">
+                                <td class="hide pat_status">
                                     <?php echo $details['fee_paid_status']?>
                                 </td>
                             </tr>
@@ -292,7 +292,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 <td class="hide vip_trans">
                                     <?php echo $details['appointment_booking_id']?>
                                 </td>
-                                <td class="hide">
+                                <td class="hide pat_status">
                                     <?php echo $details['fee_paid_status']?>
                                 </td>
                             </tr>
@@ -404,7 +404,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                                 }
                                                 ?>
                                             </td>
-                                            <td class="hide">
+                                            <td class="hide pat_status">
                                                 <?php
                                                 if (isset($bkarray[$i]['fee_paid_status'])) {
                                                     echo $bkarray[$i]['fee_paid_status'];
@@ -453,7 +453,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                             <td class="hide vip_trans">
                                                 <?php echo $details['appointment_booking_id'] ?>
                                             </td>
-                                            <td class="hide">
+                                            <td class="hide pat_status">
                                                 <?php echo $details['fee_paid_status'] ?>
                                             </td>
                                         </tr>
@@ -521,7 +521,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 <td class="hide vip_trans">
                                     <?php echo $details['appointment_booking_id']?>
                                 </td>
-                                <td class="hide">
+                                <td class="hide pat_status">
                                     <?php echo $details['fee_paid_status']?>
                                 </td>
                             </tr>
@@ -589,7 +589,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 <td class="hide vip_trans">
                                     <?php echo $details['appointment_booking_id']?>
                                 </td>
-                                <td class="hide">
+                                <td class="hide pat_status">
                                     <?php echo $details['fee_paid_status']?>
                                 </td>
                             </tr>

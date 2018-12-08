@@ -106,8 +106,10 @@ class Dashboard extends MY_Controller {
         $data['refund_count'] = $this->User_model->count_refund_rows($date);
         $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
         $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
+        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments($date);
         $data['rights'] = $this->session->userdata('other_rights');
         $json['wallet_count'] = $this->load->view('admin/wallet_modal', $data, true);
+        $json['status_row'] = $this->load->view('admin/all_patient_status_row', $data, true);
         $json['booking_cate'] = $this->load->view('admin/booking_categories', $data, true);
         $json['result_html'] = $this->load->view('admin/bookings', $data, true);
         if ($this->input->is_ajax_request()) {

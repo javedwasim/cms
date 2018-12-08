@@ -23,7 +23,11 @@
         $(editableObj).css("color", "#FFF");
         if(rowarray.includes(text) === false){
             rowarray.push(text);
-            $('#instruction_item').append(text+',  '); 
+            setTimeout(function(){
+                var hisVal = $('#instruction_item').val();
+                var setHisVal = hisVal+text+', ';
+                $('#instruction_item').val(setHisVal.replace(/^,|,$/g,''));
+            },500);
         } 
         
     }

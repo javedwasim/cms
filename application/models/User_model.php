@@ -188,49 +188,49 @@ class User_model extends CI_Model {
             if ($statusid == 7) {
                 $data = array(
                     'echo_fee' => $value,
-                    'fee_collected_by' => $collectedby,
-                    'fee_paid_at' => $date
+                    'echo_fee_collected_by' => $collectedby,
+                    'echo_fee_paid_at' => $date
                 );
             }else{
                 if($value > 0 && $echoFee == 0){
                     $data = array(
                         'echo_fee' => $value,
-                        'fee_collected_by' => $collectedby,
-                        'fee_paid_at' => $date,
+                        'echo_fee_collected_by' => $collectedby,
+                        'echo_fee_paid_at' => $date,
                         'fee_paid_status' => '4'
                     );
                 }else if($value > 0 && $echoFee > 0){
                     $data = array(
-                        'ett_fee' => $value,
-                        'ett_fee_collected_by' => $collectedby,
-                        'ett_fee_paid_at' => $date
+                        'echo_fee' => $value,
+                        'echo_fee_collected_by' => $collectedby,
+                        'echo_fee_paid_at' => $date
                     );
                 }else if($consFee == 0 && $ettFee == 0 && $value == 0){
                     $data = array(
                         'echo_fee' => $value,
-                        'fee_collected_by' => $collectedby,
-                        'fee_paid_at' => $date,
+                        'echo_fee_collected_by' => $collectedby,
+                        'echo_fee_paid_at' => $date,
                         'fee_paid_status' => '0'
                     );
                 }else if($consFee == 0 && $value == 0 && $ettFee > 0 ){
                     $data = array(
                         'echo_fee' => $value,
-                        'fee_collected_by' => $collectedby,
-                        'fee_paid_at' => $date,
+                        'echo_fee_collected_by' => $collectedby,
+                        'echo_fee_paid_at' => $date,
                         'fee_paid_status' => '3'
                     );
                 }else if($consFee > 0 && $value == 0 && $ettFee == 0 ){
                     $data = array(
                         'echo_fee' => $value,
-                        'fee_collected_by' => $collectedby,
-                        'fee_paid_at' => $date,
+                        'echo_fee_collected_by' => $collectedby,
+                        'echo_fee_paid_at' => $date,
                         'fee_paid_status' => '1'
                     );
                 }else if($consFee > 0 && $value == 0 && $ettFee > 0 ){
                     $data = array(
                         'echo_fee' => $value,
-                        'fee_collected_by' => $collectedby,
-                        'fee_paid_at' => $date,
+                        'echo_fee_collected_by' => $collectedby,
+                        'echo_fee_paid_at' => $date,
                         'fee_paid_status' => '3'
                     );
                 }

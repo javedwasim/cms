@@ -28,7 +28,7 @@
                         <table class="table table-bordered" id="vitaltabl" width="100%">
                             <thead>
                                 <tr role="row">
-                                    <th >
+                                    <th class="hide">
                                         Vital ID
                                     </th>
                                     <th >
@@ -40,23 +40,23 @@
                                     <th >
                                         Pulse
                                     </th>
+                                    <th >Volume</th>
                                     <th >
                                         Temperature
                                     </th>
+                                    <th >
+                                        Resp. Rate
+                                    </th>
+                                    <th >Height</th>
+                                    <th >Weight</th>
+                                    <th >BMI</th>
+                                    <th >BSA</th>
                                     <th>
                                         PT(Patient/Control)
                                     </th>
                                     <th >
                                         INR
                                     </th>
-                                    <th >
-                                        Resp. Rate
-                                    </th>
-                                    <th >Volume</th>
-                                    <th >Height</th>
-                                    <th >Weight</th>
-                                    <th >BMI</th>
-                                    <th >BSA</th>
                                     <th >
                                         Vitals Actions
                                     </th>
@@ -74,17 +74,3 @@
     <!-- /.content -->
 </div>
 
-<script type="text/javascript">
-    $('#vitaltabl').DataTable({
-        "info": false,
-        "paging": false,
-        "searching": false,
-        "scrollY": "67vh",
-        "scrollCollapse": true,
-        "scrollX":true,
-        "ordering": false,
-        "initComplete": function (settings, json) {
-            $("#vitaltabl").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
-        },
-    });
-</script>

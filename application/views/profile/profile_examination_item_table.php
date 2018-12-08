@@ -52,14 +52,30 @@
         $('td.exam_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+        var val = $('#examination_item').val();
+        if(textarray.length>0 && val == ''){
+            textarray.length = 0;
+        }
         if(textarray.includes(name) === false){
-            $('#examination_item').append('\n'+name+': \n');
+            var hisVal = $('#examination_item').val();
+            if(hisVal == ''){
+               var setHisVal = hisVal+name+': \n';
+            }else{
+                var setHisVal = hisVal+'\n'+name+': \n';
+            }
+            setTimeout(function(){
+                $('#examination_item').val(setHisVal.replace(/^,|,$/g,''));
+            },500);
             textarray.push(name);
         }
         if(textarray.includes(text) === false){
             textarray.push(text);
-            $('#examination_item').append(text+',  '); 
-        } 
+            setTimeout(function(){
+                var hisVal = $('#examination_item').val();
+                var setHisVal = hisVal+text+', ';
+                $('#examination_item').val(setHisVal.replace(/^,|,$/g,''));
+            },500);
+        }
     }
 
 </script>

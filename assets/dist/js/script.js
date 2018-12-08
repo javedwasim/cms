@@ -2701,6 +2701,7 @@ $(document.body).on('click', '.delete_vital', function () {
                     success: function (response) {
                         $('#vital_rows').empty();
                         $('#vital_rows').append(response.vital_rows);
+                        
                         if (response.success == true) {
                             toastr["error"](response.message);
                         } else {
@@ -4208,3 +4209,24 @@ function clearecho(d){
 }
 
 $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+
+$(document).ready(function(){
+    $( ".med_cat_val" ).dblclick(function() {
+        $(this).removeAttr('readonly');
+    });
+    $( ".med_cat_val" ).on( "focusout", function(){
+        $('.med_cat_val').attr('readonly', true);
+    } );
+    $("#med_tbl tbody tr").click(function (e) {
+        $('#med_tbl tbody tr.row_selected').removeClass('row_selected');
+        $(this).addClass('row_selected');
+    });
+    var input = $('.med_cat_val');
+        input.on('keydown', function() {
+        var key = event.keyCode || event.charCode;
+        var tr = $(this).closest('tr');
+        if(key == 46 ){
+            tr.remove();
+        }
+  });
+});

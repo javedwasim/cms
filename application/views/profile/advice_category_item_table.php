@@ -21,20 +21,37 @@
     </tbody>
 </table>
 <script>
-    var rowarray = [];
+    var textarray = [];
     function addAdviceItem(editableObj,text,name) {
         var patient_id = $('#label_patient_id').text();
         $('td.advice_item').css('background', '#FFF');
         $('td.advice_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-        if(rowarray.includes(name) === false){
-            $('#advice_item').append('\n'+name+': \n');
-             rowarray.push(name);
+        
+        var val = $('#advice_item').val();
+        if(textarray.length>0 && val == ''){
+            textarray.length = 0;
         }
-        if(rowarray.includes(text) === false){
-            rowarray.push(text);
-            $('#advice_item').append(text+',  '); 
+        if(textarray.includes(name) === false){
+            var hisVal = $('#advice_item').val();
+            if(hisVal == ''){
+               var setHisVal = hisVal+name+': \n';
+            }else{
+                var setHisVal = hisVal+'\n'+name+': \n';
+            }
+            setTimeout(function(){
+                $('#advice_item').val(setHisVal.replace(/^,|,$/g,''));
+            },500);
+            textarray.push(name);
+        }
+        if(textarray.includes(text) === false){
+            textarray.push(text);
+            setTimeout(function(){
+                var hisVal = $('#advice_item').val();
+                var setHisVal = hisVal+text+', ';
+                $('#advice_item').val(setHisVal.replace(/^,|,$/g,''));
+            },500);
         }
     }
 

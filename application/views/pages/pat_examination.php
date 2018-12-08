@@ -459,8 +459,17 @@ if(isset($rights[0]['user_rights']))
                                                     <thead><tr><th>Medicine</th></tr></thead>
                                                     <tbody id="medicine_item" style="height: 20vh">
 	                                                    	<?php if(isset($medicine_details)){ foreach($medicine_details as $med){?>
-	                                                    	<tr><td><input class="form-control bg-transparent border-0 shadow-none med_cat_val" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" type="text" name="medicine_value[]" value="<?php echo $med['medicine_value']; ?>" ></td></tr>
+	                                                    	<tr>
+	                                                    		<td>
+	                                                    			<input class="form-control bg-transparent border-0 shadow-none med_cat_val" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" type="text" name="medicine_value[]" value="<?php echo $med['medicine_value']; ?>" >
+	                                                    		</td>
+	                                                    	</tr>
 	                                                    <?php } }?>
+	                                                    <tr class="med_row">
+	                                                    	<td>
+	                                                    		<input class="form-control med_cat_val bg-transparent border-0 shadow-none" readonly="true" ondblclick="this.readOnly='';" onchange="medrow(this);" onfocusout="this.readOnly='readonly';" type="text" name="medicine_value[]" value="" >
+	                                                    	</td>
+	                                                    </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -481,6 +490,11 @@ if(isset($rights[0]['user_rights']))
                                                     	<?php if(isset($dosage_details)){ foreach($dosage_details as $dos){?>
 	                                                    	<tr><td><input class="form-control bg-transparent border-0 shadow-none med_dosage_val" type="text" name="dosage_value[]" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" value="<?php echo $dos['dosage_value']; ?>" ></td></tr>
 	                                                    <?php } }?>
+	                                                    <tr class="dos_row">
+	                                                    	<td>
+	                                                    		<input class="form-control med_dosage_val bg-transparent border-0 shadow-none" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" onchange="dosagerow(this)" type="text" name="dosage_value[]" value="" >
+	                                                    	</td>
+	                                                    </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -596,5 +610,64 @@ if(isset($rights[0]['user_rights']))
 	            tr.remove();
 	        }
 	    });
+
+	    $( ".med_cat_val" ).dblclick(function() {
+            $(this).removeAttr('readonly');
+        });
+        $( ".med_cat_val" ).on( "focusout", function(){
+            $('.med_cat_val').attr('readonly', true);
+        } );
+        $("#med_tbl tbody tr").click(function (e) {
+            $('#med_tbl tbody tr.row_selected').removeClass('row_selected');
+            $(this).addClass('row_selected');
+        });
     });
+
+    function medrow(obj){
+    	var val = obj.value;
+    	var ev = "medrow(this)";
+		var newRowContent = '<tr class="med_row"><td><input class="form-control med_cat_val bg-transparent border-0 shadow-none" type="text" onchange='+ev+' name="medicine_value[]" ></td></tr>';
+    	$('#medicine_item').append(newRowContent);
+    	var tbl = $(obj).closest('table');
+    	var tr = tbl.find('tr:last');
+    	var input = tr.prev().find('td input');
+    	input.removeAttr('onchange');
+    	tbl.find('tr:nth-last-child(2)').removeClass('med_row');
+    	$(document).ready(function(){
+		    $( ".med_cat_val" ).dblclick(function() {
+	            $(this).removeAttr('readonly');
+	        });
+	        $( ".med_cat_val" ).on( "focusout", function(){
+	            $('.med_cat_val').attr('readonly', true);
+	        } );
+	        $("#med_tbl tbody tr").click(function (e) {
+	            $('#med_tbl tbody tr.row_selected').removeClass('row_selected');
+	            $(this).addClass('row_selected');
+	        });
+	    });
+    }
+
+    function dosagerow(obj){
+    	var val = obj.value;
+    	var ev = "dosagerow(this)";
+		var newRowContent = '<tr class="dos_row"><td><input class="form-control med_dosage_val bg-transparent border-0 shadow-none" type="text" onchange='+ev+' name="dosage_value[]" ></td></tr>';
+    	$('#dosage_item').append(newRowContent);
+    	var tbl = $(obj).closest('table');
+    	var tr = tbl.find('tr:last');
+    	var input = tr.prev().find('td input');
+    	input.removeAttr('onchange');
+    	tbl.find('tr:nth-last-child(2)').removeClass('dos_row');
+    	$(document).ready(function(){
+		     $( ".med_dosage_val" ).dblclick(function() {
+                $(this).removeAttr('readonly');
+            });
+            $( ".med_dosage_val" ).on( "focusout", function(){
+                $('.med_dosage_val').attr('readonly', true);
+            } );
+	        $("#dosage_val_tbl tbody tr").click(function (e) {
+	            $('#dosage_val_tbl tbody tr.row_selected').removeClass('row_selected');
+	            $(this).addClass('row_selected');
+	        });
+	    });
+    }
 </script>

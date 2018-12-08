@@ -6,37 +6,8 @@
     ?>
 <div class="content-wrapper" style="margin:0 .5%">
 	<div class="row page-titles" style="margin: 0px; padding: 3px 0px;">
-        <div class="col-xs-12 col-md-4 col-sm-12" style="display: inline-flex;">
-            <div class="row">
-                <div class="col-md-2">
-                    <a class="btn btn-info" href="javascript:void(0)" onclick="bookings();" aria-expanded="false"> Refresh</a>
-                </div>
-                <div class="col-md-5 offset-1 p-r-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
-                    <input type="text" name="" value="<?php echo date('d-M-Y') ?>" class="print_date form-control m-t-5" style="height:35px;" id="print_all">        
-                </div>
-                <div class="col-md-4 p-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
-                    <button class="btn btn-default" id="print_all_list">Print all</button> 
-                </div>    
-            </div>
-        </div>
-        <div class="col-md-5 col-xs-12 col-sm-12">
-            <div class="row">
-                <div class="col-md-5 offset-1 p-r-0" style="display:inline-flex;">
-                    <label class="m-t-10 m-r-5">Search</label>
-                    <input type="text" name="" value="<?php
-                    if(isset($searchdate)){
-                        echo date('d-M-Y',strtotime($searchdate));
-                    }else{
-                        echo date('d-M-Y');
-                    }
-                     ?>" class="form-control m-t-5" id="search-all-cat" style="height:35px;">        
-                </div>
-                <div class="col-md-3 <?php echo in_array("view_wallet-0", $permissions)?"op-hide":''; ?>">
-                    <div class="round round-sm align-self-center green m-b-10" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
-                        <i class="fa fa-wallet"></i>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-9 col-sm-12" style="display: inline-flex;">
+            
         </div>
         <div class="col-md-3 col-sm-12 col-xs-12 ">
             <ol class="breadcrumb pull-right m-l-10">
@@ -50,7 +21,9 @@
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
-
+    <div id="all_status_row">
+        
+    </div>
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
@@ -77,81 +50,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('.print_date').datepicker({
-            format: 'd-M-yyyy',
-            autoclose: true
-        });
-        $('#search-all-cat').datepicker({
-            format: 'd-M-yyyy',
-            autoclose: true
-        });
-    });
-    //////////////////////////////////////////////// search all categories ///////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-    $('#search-all-cat').on("change",function(){
-        var searchDate = $('#search-all-cat').val();
-        $.ajax({
-            type: "post",
-            url: '/cms/user/search_all_categories',
-            data: {
-                searchdate: searchDate
-            }, success: function (response) {
-                if (response.result_html != '') {
-                    $('.booking_category_tables').remove();
-                    $('#booking_category_tables').append(response.result_html);
-                    $('.wallet-modal-box').remove();
-                    $('#wallet-modal-box').append(response.wallet_count);
-                    ///////////// reinitilizing the datatable///////////
-                    $('.booking_tables').DataTable({
-                        "info": false,
-                        "paging": false,
-                        "scrollX": true,
-                        "scrollY": "66vh",
-                        "scrollCollapse": true,
-                        "searching": false,
-                        'aoColumnDefs': [{
-                           'bSortable': false,
-                           'aTargets': 0
-                        }],
-                        "createdRow": function(row, data, dataIndex) {
-                            if (data[7] == "1") {
-                                $(row).addClass('round-green');
-                            }if(data[7] == "2"){
-                                $(row).addClass('round-blue');
-                            }
-                            if (data[7] == "3") {
-                                $(row).addClass('round-red');
-                            }if(data[7] == "4"){
-                                $(row).addClass('round-yellow');
-                            }
-                            if (data[7] == "5") {
-                                $(row).addClass('round-orange');
-                            }if(data[7] == "6"){
-                                $(row).addClass('round-lightGray');
-                            }if (data[7 ] == "7") {
-                                $(row).addClass('round-white');
-                            }
-                        },
-                        "fnDrawCallback": function ( oSettings ) {
-                            /* Need to redo the counters if filtered or sorted */
-                            if ( oSettings.bSorted || oSettings.bFiltered )
-                            {
-                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
-                                {
-                                    $('td:eq(0)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
-                                }
-                            }
-                        },
-                        "aoColumnDefs": [
-                            { "bSortable": false, "aTargets": [ 0 ] }
-                        ],
-                        "aaSorting": [[ 1, 'asc' ]]
-                    });
-                }
-            }
-        });
-    });
-</script>

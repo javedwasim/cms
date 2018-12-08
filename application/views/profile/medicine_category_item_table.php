@@ -59,8 +59,10 @@
         $(editableObj).css("color", "#FFF");
         if(rowarray.includes(name) === false){
             rowarray.push(name);
+
             var newRowContent = '<tr><td><input class="form-control med_cat_val bg-transparent border-0 shadow-none" type="text" name="medicine_value[]" value="'+name+'" ></td></tr>';
-            $("#medicine_item").append(newRowContent); 
+            $(newRowContent).insertBefore('.med_row');
+            // $("#medicine_item").append(newRowContent); 
         }
         $('.med_cat_val').attr('readonly', true);
         $(document).ready(function(){

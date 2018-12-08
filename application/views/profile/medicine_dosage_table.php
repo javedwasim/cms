@@ -24,7 +24,8 @@
         if(textarray.includes(name) === false){
             textarray.push(name);
             var newRowContent = '<tr><td><input class="form-control med_dosage_val bg-transparent border-0 shadow-none" type="text" name="dosage_value[]" value="'+name+'" ></td></tr>';
-            $("#dosage_item").append(newRowContent);
+            $(newRowContent).insertBefore('.dos_row');
+            // $("#dosage_item").append(newRowContent);
         } 
         $('.med_dosage_val').attr('readonly', true);
         $(document).ready(function(){

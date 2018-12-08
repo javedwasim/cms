@@ -51,10 +51,18 @@
         $('td.history_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
+        var val = $('#history_item').val();
+        if(textarray.length>0 && val == ''){
+            textarray.length = 0;
+        }
         if(textarray.includes(text) === false){
             textarray.push(text);
-            $('#history_item').append(text+',  '); 
-        } 
+            setTimeout(function(){
+                var hisVal = $('#history_item').val();
+                var setHisVal = hisVal+text+', ';
+                $('#history_item').val(setHisVal.replace(/^,|,$/g,''));
+            },500);
+        }
         
     }
 

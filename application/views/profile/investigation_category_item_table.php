@@ -59,28 +59,44 @@
         $(editableObj).css("color", "#FFF");
         if(name == 'Echo'){
             if(rowarray.length === 0){
-                var date = 'Echo[<?php echo date("d-M-Y")?>]';
+                var date = 'Echo[<?php echo date("d-M-Y")?>]:';
             }else{
-                var date = '\n'+'Echo[<?php echo date("d-M-Y")?>]';
+                var date = '\n'+'Echo[<?php echo date("d-M-Y")?>]:';
             }
             var echo = date.replace(/\n|\r/g, '');
             if(rowarray.includes(echo) === false){
                  rowarray.push(echo);
-                $('#investigation_item').append(date+'\n'); 
+                setTimeout(function(){
+                    var hisVal = $('#investigation_item').val();
+                    var setHisVal = hisVal+date+'\n';
+                    $('#investigation_item').val(setHisVal.replace(/^,|,$/g,''));
+                },500);
             }
         }else{
             if(rowarray.includes(name) === false){
                 rowarray.push(name);
                 if(rowarray.length === 0){
-                    $('#investigation_item').append(name+': \n'); 
+                    setTimeout(function(){
+                        var hisVal = $('#investigation_item').val();
+                        var setHisVal = hisVal+name+': \n';
+                        $('#investigation_item').val(setHisVal.replace(/^,|,$/g,''));
+                    },500);
                 }else{
-                    $('#investigation_item').append('\n'+name+': \n'); 
+                    setTimeout(function(){
+                        var hisVal = $('#investigation_item').val();
+                        var setHisVal = hisVal+'\n'+name+': \n';
+                        $('#investigation_item').val(setHisVal.replace(/^,|,$/g,''));
+                    },500);
                 }
             }
         }
         if(rowarray.includes(text) === false){
             rowarray.push(text);
-            $('#investigation_item').append(text+',  '); 
+            setTimeout(function(){
+                var hisVal = $('#investigation_item').val();
+                var setHisVal = hisVal+text+',  ';
+                $('#investigation_item').val(setHisVal.replace(/^,|,$/g,''));
+            },500);
         } 
     }
 </script>
