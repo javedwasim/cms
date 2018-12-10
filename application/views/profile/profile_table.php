@@ -38,7 +38,7 @@
                 <td class="profile_id">
                     <?php echo $key['id']; ?>
                 </td>
-                <td style="text-transform: capitalize;"><?php echo $key['pat_name']; ?></td>
+                <td style="text-transform: capitalize;" class="patient-name"><?php echo $key['pat_name']; ?></td>
                 <td style="text-transform: capitalize;"><?php echo $key['pat_relative']; ?></td>
                 <td><?php echo $key['pat_contact']; ?></td>
                 <td style="text-transform: capitalize;"><?php echo $key['pat_profession']; ?></td>

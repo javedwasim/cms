@@ -1296,6 +1296,24 @@
         }
     }
 
+    public function save_report_setting($data){
+        $result  = $this->db->where('id','1')->update('report_setting',$data);
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function get_report_setting(){
+        $result = $this->db->select('*')->from('report_setting')->limit(1)->get();
+        if ($result) {
+            return $result->row();
+        }else{
+            return row();
+        }
+    }
+
 }
 
 ?>

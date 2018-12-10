@@ -14,7 +14,7 @@ class MY_Controller extends CI_Controller {
             $path = 'application/config/self_config.php';
             if(file_exists($path)){
              $tracker_time = file_get_contents($path, FALSE, NULL);
-             $expiry_time  = strtotime('2018-12-10 17:00:00');
+             $expiry_time  = strtotime('2019-01-10 17:00:00');
              //date('Y-m-d H:i:s',$expiry_time);
             $sys_time = strtotime(date('Y-m-d H:i:s'));
             if($sys_time<$tracker_time){

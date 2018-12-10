@@ -8,7 +8,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>CMS</title>
+  <title id="site-title">Appointment</title>
   <!-- Favicon icon -->
   <!-- <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url(); ?>/assets/images/favicon.png"> -->
   <!-- bootstrap -->
@@ -22,15 +22,10 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/fontawesome-free-5.1.1/css/all.css" >
    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/buttons.dataTables.min.css">
-  <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/fixedHeader.dataTables.min.css"> -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/select.dataTables.min.css">
   <link href="<?php echo base_url(); ?>assets/plugins/css-chart/css-chart.css" rel="stylesheet">
   <!-- Font nastalik -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/fonts/Nastaleeq/mehr-font.css">
-  <!-- Just add the following stylesheet link to your html file: -->
-  <link rel="stylesheet" href="https://unpkg.com/mehr/mehr-font.css">
-  <!-- bootstrap light box -->
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/plugins/bootstrap-lightbox/bootstrap-lightbox.css">
   <!-- jquery-ui -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css">
   <!-- Select2 -->

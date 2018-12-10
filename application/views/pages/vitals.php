@@ -31,33 +31,33 @@
                                     <th class="hide">
                                         Vital ID
                                     </th>
-                                    <th >
+                                    <th>
                                         Date &amp; Time
                                     </th>
-                                    <th >
+                                    <th>
                                         B.P 120/80
                                     </th>
-                                    <th >
+                                    <th>
                                         Pulse
                                     </th>
-                                    <th >Volume</th>
-                                    <th >
+                                    <th>Volume</th>
+                                    <th>
                                         Temperature
                                     </th>
-                                    <th >
+                                    <th>
                                         Resp. Rate
                                     </th>
-                                    <th >Height</th>
-                                    <th >Weight</th>
-                                    <th >BMI</th>
-                                    <th >BSA</th>
+                                    <th>Height (cm)</th>
+                                    <th>Weight (Kg)</th>
+                                    <th>BMI (kg/m<sup>2</sup>)</th>
+                                    <th>BSA (m<sup>2</sup>)</th>
                                     <th>
                                         PT(Patient/Control)
                                     </th>
-                                    <th >
+                                    <th>
                                         INR
                                     </th>
-                                    <th >
+                                    <th>
                                         Vitals Actions
                                     </th>
                                 </tr>

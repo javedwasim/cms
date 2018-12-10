@@ -137,6 +137,18 @@
 	    	}
 	    }
 
+	    public function get_instructions_by_ids($patid,$testid){
+	    	$result = $this->db->select('instruction_value')
+	    					->where('examination_detail_id',$testid)
+	    					->where('patient_id',$patid)
+	    					->get('profile_examination_instruction');
+	    	if ($result) {
+	    		return $result->result_array();
+	    	}else{
+	    		return false;
+	    	}
+	    }
+
 	    public function get_investigation_detail_by_ids($patid,$testid){
 	    	$result = $this->db->select('*')
 	    					->where('examination_detail_id',$testid)

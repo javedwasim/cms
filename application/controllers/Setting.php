@@ -1493,7 +1493,7 @@ class Setting extends MY_Controller
        
     }
 
-//////////////////////////////////////////////// import export moduls ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////// import export moduls /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function export_professions(){
         $result_data = $this->Setting_model->export_professions();
         $filename = 'professions.txt';
@@ -3134,6 +3134,39 @@ class Setting extends MY_Controller
                 
         }else{
             return false;
+        }
+    }
+
+///////////////////////////////////////// report settings ///////////////////////////////////////////////////
+    public function report_setting(){
+        $data['report'] = $this->Setting_model->get_report_setting();
+        $json['report_setting'] = $this->load->view('pages/report_setting',$data,true);
+        if($this->input->is_ajax_request()){
+            set_content_type($json);
+        }
+    }
+
+    public function save_rep_setting(){
+        $data = $this->input->post();
+        $data_array = array(
+            'doc_name' => $data['doc-name'],
+            'phone' => $data['phone'],
+            'degree' => $data['degree'],
+            'address' => $data['address'],
+            'report_heading' => $data['report_heading']
+        );
+        $result = $this->Setting_model->save_report_setting($data_array);
+        if($result){
+            $json['success'] = true;
+            $json['message'] = 'Successfully Updated';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error';
+        }
+        $data['report'] = $this->Setting_model->get_report_setting();
+        $json['report_setting'] = $this->load->view('pages/report_setting',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
         }
     }
 

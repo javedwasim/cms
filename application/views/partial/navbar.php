@@ -18,10 +18,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active_nav <?php echo in_array("setting-menu-0", $permissions)?"op-hide":''; ?>">
-                    <a class="nav-link" href="<?php echo base_url(); ?>" ><i class="mdi mdi-gauge"></i> Settings</a>
-                </li>
-                <li class="nav-item <?php echo in_array("appointments-parent-0", $permissions)?"op-hide":''; ?>">
+                <li class="nav-item active_nav <?php echo in_array("appointments-parent-0", $permissions)?"op-hide":''; ?>">
                     <a class="nav-link" href="javascript:void(0)" onclick="bookings();" aria-expanded="false"><i class="mdi mdi-bullseye"></i> Appointment</a>
                 </li>
                 <li class="nav-item <?php echo in_array("profile-parent-0", $permissions)?"op-hide":''; ?>">
@@ -29,6 +26,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo in_array("diary-can_view-0", $permissions)?"op-hide":''; ?>" href="javascript:void(0)" id="diary" aria-expanded="false"><i class="ti-book"></i> Diary</a>
+                </li>
+                <li class="nav-item <?php echo in_array("setting-menu-0", $permissions)?"op-hide":''; ?>">
+                    <a class="nav-link" href="javascript:void(0)" onclick="settings();" ><i class="mdi mdi-gauge"></i> Settings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#aboutmodal"  aria-expanded="false"><i class="ti-info-alt"></i> About us</a>

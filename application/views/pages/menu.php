@@ -93,36 +93,8 @@
        get_items_signature($(this).attr('data-func-call'));
    });
 
-   $('#list_itmes_batches').click(function(){
-       get_batches($(this).attr('data-func-call'));
-   });
-
-   $('#list_itmes_subjects').click(function(){
-       get_subjects($(this).attr('data-func-call'));
-   });
-
-   $('#list_itmes_Calendar').click(function(){
-       get_calendar($(this).attr('data-func-call'));
-   });
-
-   $('#list_itmes_events').click(function(){
-       get_events($(this).attr('data-func-call'));
-   });
-
-   $('#list_itmes_sms').click(function(){
-       get_sms($(this).attr('data-func-call'));
-   });
-
-   $('#list_itmes_fee_management').click(function(){
-       get_fee_management($(this).attr('data-func-call'));
-   });
-
-   $('#list_itmes_income_expanse').click(function(){
-       get_income_expanse($(this).attr('data-func-call'));
-   });
-
-   $('#list_itmes_vital').click(function(){
-       get_vitals($(this).attr('data-func-call'));
+   $('#list_itmes_report_setting').click(function(){
+       get_report_setting($(this).attr('data-func-call'));
    });
 
    $(document).ready(function(){

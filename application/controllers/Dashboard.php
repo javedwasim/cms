@@ -15,29 +15,58 @@ class Dashboard extends MY_Controller {
 
 	public function index()
 	{
-    $date = date('Y-m-d'); 
+        $date = date('Y-m-d'); 
 		 if(!$this->session->userdata('is_logged_in')){
        		$this->load->view('login');
 	     } else{
-        $data['total_attended'] = $this->User_model->count_total_attendent($date);
-        $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
-        $data['total_appointment'] = $this->Dashboard_model->get_total_appointments($date);
-        $data['remaining_patient'] = $this->Dashboard_model->get_total_checked();
-        $data['limiter_details'] = $this->Dashboard_model->get_limiter_details();
-        $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
-        $data['ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
-        $data['echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
-        $data['refund_count'] = $this->User_model->count_refund_rows($date);
-        $data['investigation_count'] = $this->User_model->count_investigation_waiting();
-        $data['checkup_count'] = $this->User_model->count_checkup_waiting();
-        $data['count_complete'] = $this->User_model->count_complete();
-        $data['rights'] = $this->session->userdata('other_rights');
-        $this->load->view('partial/header',$data);
-        $this->load->view('partial/navbar',$data);
-        $this->load->view('admin/dashboard',$data);
-        $this->load->view('partial/footer',$data);
+            $date = date('Y-m-d');
+            $vip = 'vip';
+            $oncall = 'on_call';
+            $onwalk = 'on_walk';
+            $data['consultant_booking'] = $this->User_model->get_first_five_rows($date);
+            $data['booking_vip'] = $this->User_model->get_bookings_vip($vip,$date);
+            $data['booking_onwalk'] = $this->User_model->get_bookings_on_walk($onwalk,$date);
+            $data['booking_oncall'] = $this->User_model->get_bookings_on_call($oncall,$date);
+            $data['fee_paid'] = $this->User_model->count_fee_paid();
+            $data['ecg_count'] = $this->User_model->count_ecg_waiting();
+            $data['ett_count'] = $this->User_model->count_ett_waiting();
+            $data['echo_count'] = $this->User_model->count_echo_waiting();
+            $data['investigation_count'] = $this->User_model->count_investigation_waiting();
+            $data['checkup_count'] = $this->User_model->count_checkup_waiting();
+            $data['count_complete'] = $this->User_model->count_complete();
+            $data['wallet_consultant'] = $this->User_model->get_todays_fee_paid($date);
+            $data['wallet_ett'] = $this->User_model->get_todays_ett_fee_paid($date);
+            $data['wallet_echo'] = $this->User_model->get_todays_echo_fee_paid($date);
+            $data['wallet_refund'] = $this->User_model->get_todays_total_refund($date);
+            $data['total_attended'] = $this->User_model->count_total_attendent($date);
+            $data['total_not_attended'] = $this->User_model->count_not_attendent($date);
+            $data['fee_paid_count'] = $this->User_model->count_consultant_fee_paid_rows($date);
+            $data['refund_count'] = $this->User_model->count_refund_rows($date);
+            $data['wallet_ett_count'] = $this->User_model->count_ett_fee_paid_rows($date);
+            $data['wallet_echo_count'] = $this->User_model->count_echo_fee_paid_rows($date);
+            $data['total_appointment'] = $this->Dashboard_model->get_total_appointments($date);
+            $data['rights'] = $this->session->userdata('other_rights');
+            $this->load->view('partial/header',$data);
+            $this->load->view('partial/navbar',$data);
+            $this->load->view('admin/bookings', $data);
+            $this->load->view('partial/footer',$data);
 	    }
 	}
+
+    public function settings(){
+        $data['rights'] = $this->session->userdata('other_rights');
+        $this->load->model('model_menu');
+        $menus_array = $this->model_menu->fetch_menu();
+        $this->load->helper('menu');
+        $data['rights'] = $this->session->userdata('other_rights');
+        $data['menu_result'] = print_menu(0, $menus_array);
+        $data['user_data'] = $this->session->userdata('userdata');
+        $json['menu'] = $this->load->view('pages/menu', $data, true);
+        $json['settings_html'] = $this->load->view('admin/dashboard',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
 
     public function login()
     {

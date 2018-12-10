@@ -8,6 +8,7 @@ class Print_profiles extends MY_Controller {
 			parent::__construct();
 			$this->load->model('Print_model');
 			$this->load->model('ETT_model');
+			$this->load->model('User_model');
 			$this->load->model('Profile_model');
 			$this->load->helper('content-type');
 		}
@@ -29,20 +30,12 @@ class Print_profiles extends MY_Controller {
 		$this->load->view('profile_prints/print_ett',$data);
 	}
 
-	// public function print_echo(){
-	// 	$this->load->view('profile_prints/print_echo');
-	// }
-
 	public function print_lab_test(){
 		$key = $this->input->get('key');
 		$patid = $this->input->get('patid');
 		$data['items'] = $this->Profile_model->get_lab_test_unit($key);
 		$data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
 		$this->load->view('profile_prints/print_lab_test',$data);
-	}
-
-	public function print_prescription(){
-		$this->load->view('profile_prints/print_prescription');
 	}
 
 	public function print_special_inst(){
@@ -170,9 +163,10 @@ class Print_profiles extends MY_Controller {
         $data['advice_details'] = $this->Print_model->get_advice_detail_by_ids($patid,$testid);
         $data['dosage_details'] = $this->Print_model->get_dosage_detail_by_ids($patid,$testid);
         $data['history_details'] = $this->Print_model->get_history_detail_by_ids($patid,$testid);
-        $data['instruction_details'] = $this->Print_model->get_instruction_detail_by_ids($patid,$testid);
+        $data['instruction_details'] = $this->Print_model->get_instructions_by_ids($patid,$testid);
         $data['investigation_details'] = $this->Print_model->get_investigation_detail_by_ids($patid,$testid);
         $data['measurement_details'] = $this->Print_model->get_measurement_detail_by_ids($patid,$testid);
+        $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
         $data['medicine_details'] = $this->Print_model->get_medicine_detail_by_ids($patid,$testid);
         $data['examination_details'] = $this->Print_model->get_examination_detail_by_ids($patid,$testid);
         $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);
@@ -189,6 +183,7 @@ class Print_profiles extends MY_Controller {
         $data['instruction_details'] = $this->Print_model->get_instruction_detail_by_ids($patid,$testid);
         $data['investigation_details'] = $this->Print_model->get_investigation_detail_by_ids($patid,$testid);
         $data['measurement_details'] = $this->Print_model->get_measurement_detail_by_ids($patid,$testid);
+        $data['patient_vitals'] = $this->User_model->get_patient_vitals($patid);
         $data['medicine_details'] = $this->Print_model->get_medicine_detail_by_ids($patid,$testid);
         $data['examination_details'] = $this->Print_model->get_examination_detail_by_ids($patid,$testid);
         $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);

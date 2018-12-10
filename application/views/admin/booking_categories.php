@@ -167,7 +167,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
         <div class="col-lg-4 p-0">
             <div class="card p-0">
                 <div class="card-header myHeader" style="display: inline-flex;">
-                    <button class="btn btn-block btn-info col-md-6" id="time_on_walk">Time on walk in</button>
+                    <button class="btn btn-block btn-default col-md-6" id="time_on_walk">Time on walk in</button>
                     <button class="btn btn-block btn-info col-md-6" id="print_onwalk">Print List</button>
                 </div>
                 <div class="card-body p-t-0">
@@ -604,77 +604,85 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
     <?php }?>
 <script type="text/javascript">
 $(document).ready(function(){
-       $(".transfer_patient").change(function(){
-          var transferTo = $(this).val();
-          var transferId = $.trim($(this).closest('tr').find('.vip_trans').text());
-          var searchdate = $('#search-all-cat').val();
-          $.ajax({
-            url: '/cms/dashboard/transfer',
-            type: 'post',
-            data: {
-                transferto: transferTo,
-                transferid: transferId,
-                searchdate: searchdate
-            },
-            cache: false,
-            success: function(response){
-                if(response.booking_cate != ''){
-                    $('.booking_category_tables').remove();
-                    $('#booking_category_tables').append(response.booking_cate);
-                    ///////////// reinitilizing the datatable///////////
-                    $('.booking_tables').DataTable({
-                        "info": false,
-                        "paging": false,
-                        "scrollX": true,
-                        "scrollY": "66vh",
-                        "scrollCollapse": true,
-                        "searching":false,
-                        "createdRow": function(row, data, dataIndex) {
-                            if (data[7] == "1") {
-                            $(row).addClass('round-green');
-                            }if(data[7] == "2"){
-                            $(row).addClass('round-blue');
-                            }
-                            if (data[7] == "3") {
-                            $(row).addClass('round-red');
-                            }if(data[7] == "4"){
-                            $(row).addClass('round-yellow');
-                            }
-                            if (data[7] == "5") {
-                            $(row).addClass('round-orange');
-                            }if(data[7] == "6"){
-                            $(row).addClass('round-lightGray');
-                            }if (data[7 ] == "7") {
-                            $(row).addClass('round-white');
-                            }
-                        },
-                        "fnDrawCallback": function ( oSettings ) {
-                            /* Need to redo the counters if filtered or sorted */
-                            if ( oSettings.bSorted || oSettings.bFiltered )
+   $(".transfer_patient").change(function(){
+      var transferTo = $(this).val();
+      var transferId = $.trim($(this).closest('tr').find('.vip_trans').text());
+      var searchdate = $('#search-all-cat').val();
+      $.ajax({
+        url: '/cms/dashboard/transfer',
+        type: 'post',
+        data: {
+            transferto: transferTo,
+            transferid: transferId,
+            searchdate: searchdate
+        },
+        cache: false,
+        success: function(response){
+            if(response.booking_cate != ''){
+                $('.booking_category_tables').remove();
+                $('#booking_category_tables').append(response.booking_cate);
+                ///////////// reinitilizing the datatable///////////
+                $('.booking_tables').DataTable({
+                    "info": false,
+                    "paging": false,
+                    "scrollX": true,
+                    "scrollY": "66vh",
+                    "scrollCollapse": true,
+                    "searching":false,
+                    "createdRow": function(row, data, dataIndex) {
+                        if (data[7] == "1") {
+                        $(row).addClass('round-green');
+                        }if(data[7] == "2"){
+                        $(row).addClass('round-blue');
+                        }
+                        if (data[7] == "3") {
+                        $(row).addClass('round-red');
+                        }if(data[7] == "4"){
+                        $(row).addClass('round-yellow');
+                        }
+                        if (data[7] == "5") {
+                        $(row).addClass('round-orange');
+                        }if(data[7] == "6"){
+                        $(row).addClass('round-lightGray');
+                        }if (data[7 ] == "7") {
+                        $(row).addClass('round-white');
+                        }
+                    },
+                    "fnDrawCallback": function ( oSettings ) {
+                        /* Need to redo the counters if filtered or sorted */
+                        if ( oSettings.bSorted || oSettings.bFiltered )
+                        {
+                            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
                             {
-                                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
-                                {
-                                    $('td:eq(0)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
-                                }
+                                $('td:eq(0)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
                             }
-                        },
-                        "aoColumnDefs": [
-                            { "bSortable": false, "aTargets": [ 0 ] }
-                        ],
-                        "aaSorting": [[ 1, 'asc' ]]
-                    });
-                    if (response.success==true) {
-                        toastr["success"](response.message);
-                    }else{
-                        toastr["error"](response.message);
+                        }
+                    },
+                    "aoColumnDefs": [
+                        { "bSortable": false, "aTargets": [ 0 ] }
+                    ],
+                    "aaSorting": [[ 1, 'asc' ]]
+                });
+                $(".booking_tables tbody tr").click(function (e) {
+                    if ($(this).hasClass('row_selected')) {
+                        $(this).removeClass('row_selected');
+                    } else {
+                        $('.booking_tables tbody tr.row_selected').removeClass('row_selected');
+                        $(this).addClass('row_selected');
                     }
-                    
+                });
+                if (response.success==true) {
+                    toastr["success"](response.message);
                 }else{
-                    toastr["warning"](response.message);
+                    toastr["error"](response.message);
                 }
-            } 
-          });
-        });
+                
+            }else{
+                toastr["warning"](response.message);
+            }
+        } 
+      });
     });
+});
 
 </script>

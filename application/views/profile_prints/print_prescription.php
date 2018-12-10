@@ -262,10 +262,15 @@
             </div>
             <br>
             <div class="row" style="width: 95%;">
-                <div class="col-md-7">
+                <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-5" style="padding-left: 0px; font-weight: 500; font-size: 25px; font-family: Arial;">
-                            <?php foreach($medicine_details as $med){?>
+                            <?php 
+                            foreach($instruction_details as $instruction){
+                                $instructions = explode(",",$instruction['instruction_value']); 
+                    
+                            }
+                            foreach($medicine_details as $med){?>
                                 <div class="mb-10"><?php echo $med['medicine_value']?></div>
                             <?php }?>
                         </div>
@@ -276,14 +281,15 @@
                         </div>  
                     </div>
                 </div>
-                <div class="col-md-5" style="font-size: 20px;font-family: Arial;">
+                <div class="col-md-4" style="font-size: 20px;font-family: Arial;">
                     <?php foreach($history_details as $history){?>
                         <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $history['history_value']; ?></div>
                     <?php }?>
-                    <?php foreach($measurement_details as $measurment){?>
-                        <div style="width: 100%; word-break: break-all;">Pulse:<?php echo $measurment['pulse']; ?>&nbsp;<?php echo $measurment['volume']; ?></div>
-                        <div style="width: 100%; word-break: break-all;">BP.<?php echo $measurment['bp_a']; ?>/<?php echo $measurment['bp_b']; ?></div>
-                        <div style="width: 100%; word-break: break-all;">Resp. Rate:<?php echo $measurment['rr']; ?>&nbsp;&nbsp;&nbsp;Temprature:<?php echo $measurment['temprature']; ?></div>
+                    <?php 
+                    foreach($patient_vitals as $vitals){?>
+                        <div style="width: 100%; word-break: break-all;">Pulse:<?php echo $vitals['vital_pulse']; ?>&nbsp;<?php echo $vitals['vital_volume']; ?></div>
+                        <div style="width: 100%; word-break: break-all;">BP.<?php echo $vitals['vital_bp']; ?></div>
+                        <div style="width: 100%; word-break: break-all;">Resp. Rate:<?php echo $vitals['vital_rr']; ?>&nbsp;&nbsp;&nbsp;Temprature:<?php echo $vitals['vital_temp']; ?></div>
                     <?php }?>
                     <?php foreach($examination_details as $examination){?>
                         <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $examination['examination_value']; ?></div>
@@ -297,11 +303,6 @@
                 </div>
             </div>
             <br>
-            <?php foreach($instruction_details as $instruction){
-                    $instructions = explode(",",$instruction['instruction_value']); 
-        
-                }
-            ?>
             <div class="mb-10 footer-top" style="word-break: break-all; font-weight: 500; font-size: 22px; text-align: right; width: 86%;">
                 <?php foreach ($instructions as $value) {
                     echo '<div style="text-align:left; display:inline-block; ">'.$value.'</div> <br>';

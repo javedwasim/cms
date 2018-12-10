@@ -22,7 +22,7 @@ if(isset($rights[0]['user_rights']))
 		</div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb pull-right">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
                 <li class="breadcrumb-item active">profile</li>
             </ol>
         </div>
@@ -375,7 +375,6 @@ if(isset($rights[0]['user_rights']))
     </div>
 </div>
 <script type="text/javascript">
-    
 	$(document).ready(function() {
         $( function() {
             $("#pat_profile_name").autocomplete({  
@@ -384,7 +383,6 @@ if(isset($rights[0]['user_rights']))
                     $(this).val(ui.value);
                 }
             });
-            // $( "#pat_profile_name" ).autocomplete( "option", "appendTo", "#profile_form" );
         } );
     //////////////////////////////initilize datepicker///////////////////////
 	    $('.profile_filter').datepicker({
@@ -392,11 +390,12 @@ if(isset($rights[0]['user_rights']))
 	    });
         $('#list_itmes_vital').click(function(){
             var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+            var patname = $.trim($('#profiletable tbody tr.row_selected').find('.patient-name').text());
             if (patid=='') {
                  toastr["warning"]('Please select a patient first.');
             }else{
                 var fun_call = $(this).attr('data-func-call');
-                get_patient_vitals(patid,fun_call);
+                get_patient_vitals(patid,fun_call,patname);
             }
         });
         $('.resize1').resizable({

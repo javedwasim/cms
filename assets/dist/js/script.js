@@ -2024,6 +2024,8 @@ $(document.body).on('click', '#sp-ins-table tbody tr.row_selected', function(){
 
 $(document.body).on('click', '#pat-ett-test', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    var patname = $.trim($('#profiletable tbody tr.row_selected').find('.patient-name').text());
+    var sitetitle = 'ETT-'+patname;
     if (patid=='') {
          toastr["warning"]('Please select a patient first.');
     }else{
@@ -2038,6 +2040,7 @@ $(document.body).on('click', '#pat-ett-test', function () {
                     $('#content-wrapper').append(response.result_html);
                     $('.patient_info').remove();
                     $('#pat_ett_information').append(response.patient_information);
+                    $('#site-title').html(sitetitle);
                     $("#profile_ett_desc_table tbody tr:first").addClass('row_selected')
                     $("#profile_ett_desc_table tbody tr").click(function (e) {
                         $('#profile_ett_desc_table tbody tr.row_selected').removeClass('row_selected');
@@ -2182,6 +2185,8 @@ function filter_advice_item_category(advice_id) {
 
 $(document.body).on('click', '#pat-echo-test', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    var patname = $.trim($('#profiletable tbody tr.row_selected').find('.patient-name').text());
+    var sitetitle = 'Echo-'+patname;
     if (patid=='') {
          toastr["warning"]('Please select a patient first.');
     }else{
@@ -2196,11 +2201,9 @@ $(document.body).on('click', '#pat-echo-test', function () {
                     $('#content-wrapper').append(response.result_html);
                     $('.patient_info').remove();
                     $('#pats_ett_information').append(response.patient_information);
-
                     $('#main_category_list').empty();
                     $('#main_category_list').append(response.main_category_table);
-
-
+                    $('#site-title').html(sitetitle);
                     $('.lab-date').datepicker({
                         format: 'd-M-yyyy'
                     });
@@ -2365,29 +2368,6 @@ $(document.body).on('click', '#lab_test_detail', function () {
 
 });
 
-
-// function showEditLabDetail(editableObj,echo_id,patient_id) {
-//     $('.echo_detail_id').val(echo_id);
-//     $.ajax({
-//         url: '/cms/profile/patient_echo_lab_edit_detail',
-//         type: 'post',
-//         data: {detail_id:echo_id,patid:patient_id},
-//         cache: false,
-//         success: function (response) {
-//             if (response.result_html != '') {
-//                 $('.content-wrapper').remove();
-//                 $('#content-wrapper').append(response.result_html);
-//                 $('.patient_info').remove();
-//                 $('#pat_sp_information').append(response.patient_information);
-//                 $('.lab-date').datepicker({
-//                     format: 'd-M-yyyy'
-//                 });
-//                 $('#lab_test_data_table').empty();
-//                 $('#lab_test_data_table').append(response.test_table);
-//             }
-//         }
-//     });
-// }
 $(document.body).on('click', '#ett_details', function () {
     var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
@@ -2673,21 +2653,6 @@ $(document.body).on('click','.save_vitals',function(){
         }
     });
 });
-// $(document.body).on('change','#pat_info',function(){
-//     var patid = $(this).val();
-//     $.ajax({
-//         url: window.location.origin+window.location.pathname+'user/get_patient_vitals',
-//         type: 'post',
-//         data: {
-//             patid:patid
-//         },
-//         cache: false,
-//         success: function(response){
-//             $('#vital_rows').empty();
-//             $('#vital_rows').append(response.vital_rows);
-//         }
-//     });
-// });
 $(document.body).on('click', '.delete_vital', function () {
     var action_url = $(this).attr('data-href');
     $.confirm({
@@ -3617,6 +3582,7 @@ $(document.body).on('click','#sp_to_profile',function(){
             $('#echo_detail_container').empty();
             $('#echo_detail_container').append(response.sp_inst_details);
             $("#sp_inst_details").prop("checked", true);
+            $('#site-title').html('Profile');
             ///////////////// initilize datatable //////////////
             $('#profiletable').DataTable({
                 "info": false,
@@ -3672,6 +3638,7 @@ $(document.body).on('click','#lab_to_profile',function(){
             $('#echo_detail_container').empty();
             $('#echo_detail_container').append(response.lab_detail);
             $("#lab_test_detail").prop("checked", true);
+            $('#site-title').html('Profile');
             ///////////////// initilize datatable //////////////
             $('#profiletable').DataTable({
                 "info": false,
@@ -3813,6 +3780,7 @@ $(document.body).on('click','#examination_to_profile',function(){
             $('#patient_info').append(response.patient_information);
             $('#echo_detail_container').empty();
             $('#echo_detail_container').append(response.details);
+            $('#site-title').html('Profile');
             $("#prescription_details").prop("checked", true);
             ///////////////// initilize datatable //////////////
             $('#profiletable').DataTable({
@@ -3869,6 +3837,7 @@ $(document.body).on('click','#echo_to_profile',function(){
             $('#echo_detail_container').empty();
             $('#echo_detail_container').append(response.echo_detail);
             $("#echo_detail").prop("checked", true);
+            $('#site-title').html('Profile');
             ///////////////// initilize datatable //////////////
             $('#profiletable').DataTable({
                 "info": false,
@@ -3924,6 +3893,7 @@ $(document.body).on('click','#ett_to_profile',function(){
             $('#echo_detail_container').empty();
             $('#echo_detail_container').append(response.ett_detail);
             $("#ett_details").prop("checked", true);
+            $('#site-title').html('Profile');
             ///////////////// initilize datatable //////////////
             $('#profiletable').DataTable({
                 "info": false,
@@ -3978,6 +3948,7 @@ $(document.body).on('click','#vitals_to_profile',function(){
             $('.patient_info').remove();
             $('#patient_info').append(response.patient_information);
             $('#echo_detail_container').empty();
+            $('#site-title').html('Profile');
             ///////////////// initilize datatable //////////////
             $('#profiletable').DataTable({
                 "info": false,
@@ -4080,30 +4051,6 @@ function spAddval(editableObj ,item_id, inst_id, description) {
     $('#instruction_id').val(inst_id);
     $('#item_id').val(item_id);
 }
-
-// $(document.body).on('click','.med_dosage_val',function(){
-//     $(this).removeAttr('readonly');
-//     alert('abc');
-// });
-// $(document).ready(function(){
-//     var input = $('.med_cat_val');
-//     input.on('keydown', function() {
-//         var key = event.keyCode || event.charCode;
-//         var tr = $(this).closest('tr');
-//         if(key == 46 ){
-//             tr.remove();
-//         }
-//     });
-//     var input = $('.med_dosage_val');
-//     input.on('keydown', function() {
-//         var key = event.keyCode || event.charCode;
-//         var tr = $(this).closest('tr');
-//         if(key == 46 ){
-//             tr.remove();
-//         }
-//     });
-// });
-
 function showimg(patid){
     var win = window.open('/cms/profile/get_image_files/?patid=' + patid, '_blank');
     if (win) {
@@ -4229,4 +4176,51 @@ $(document).ready(function(){
             tr.remove();
         }
   });
+});
+
+function settings(){
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'dashboard/settings',
+        cache:false,
+        success:function(response){
+            $('.content-wrapper').remove();
+            $('#content-wrapper').append(response.settings_html);
+            $('.sidebar-menu').empty();
+            $('.sidebar-menu').append(response.menu);
+            $('#site-title').html('Settings');
+        }
+    });
+}
+
+function get_report_setting(func_call){
+    $.ajax({
+        url:window.location.origin+window.location.pathname+'setting/'+func_call,
+        cache:false,
+        success:function(response){
+            $('.dashboard-content').remove();
+            $('#dashboard-content').append(response.report_setting);
+            $('#site-title').html('Report Setting');
+        }
+    });
+}
+
+$(document.body).on('click','#rep-setting-btn',function(e){
+    e.preventDefault();
+    var validater = $('#report-setting-form').validate();
+    if(validater.form()){
+        $.ajax({
+            url:window.location.origin+window.location.pathname+'setting/save_rep_setting',
+            type: 'post',
+            data:$('#report-setting-form').serialize(),
+            cache:false,
+            success:function(response){
+                if (response.success == true) {
+                    toastr["success"](response.message);
+                }else{
+                    toastr["error"](response.message);
+                }
+            }
+        });
+    }
+    return false;
 });

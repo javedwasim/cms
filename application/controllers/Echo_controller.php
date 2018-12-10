@@ -13,7 +13,6 @@ class Echo_controller extends MY_Controller
 
     }
 
-
     public function echo_index()
     {
         $category = 0;
@@ -24,7 +23,6 @@ class Echo_controller extends MY_Controller
         $data['main_categories'] = $this->Echo_model->get_main_category_by_filter($category);
         $data['main_cate'] = $this->Echo_model->get_echo_main_categories();
         $data['measurements'] = $this->Echo_model->get_measurement_by_filter($category);
-        // $data['measurements'] = $this->Echo_model->get_category_measurement();
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('echo/echo', $data, true);
         if ($this->input->is_ajax_request()) {
@@ -415,8 +413,6 @@ class Echo_controller extends MY_Controller
         $data = $this->input->post();
         $id = $data['id'];
         $disease_id = $data['disease_id'];
-        // echo $id; 
-        // echo '-'.$disease_id;die();
         $result = true;
         $message = '';
         $this->get_structure_finding_by_id($id,$result,$message,$disease_id);

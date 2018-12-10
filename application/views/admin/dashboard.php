@@ -25,7 +25,7 @@
             <!-- Sidebar  -->
             <nav id="dashboar-sidebar" class="<?php echo in_array("menu-0", $permissions)?"op-hide":''; ?>">
                 <ul class="nav nav-pills nav-sidebar sidebar-menu list" data-widget="treeview" role="menu" data-accordion="false">
-
+                    
                 </ul>
             </nav>
             <!-- Page Content  -->

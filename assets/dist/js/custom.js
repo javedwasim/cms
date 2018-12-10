@@ -17,34 +17,46 @@ $(document).ready(function () {
         format: 'd-M-yyyy'
     });
 ////////////////////////////// initilize categories datatables //////////////////////
-    var btable = $('.booking_tables').DataTable({
+    $('.booking_tables').DataTable({
+        "info": false,
+        "paging": false,
         "scrollX": true,
-        "scrollY": "200px",
+        "scrollY": "66vh",
         "scrollCollapse": true,
-        "createdRow": function (row, data, dataIndex) {
+        "searching":false,
+        "createdRow": function(row, data, dataIndex) {
             if (data[7] == "1") {
-                $(row).addClass('round-green');
-            }
-            if (data[7] == "2") {
-                $(row).addClass('round-blue');
+            $(row).addClass('round-green');
+            }if(data[7] == "2"){
+            $(row).addClass('round-blue');
             }
             if (data[7] == "3") {
-                $(row).addClass('round-red');
-            }
-            if (data[7] == "4") {
-                $(row).addClass('round-yellow');
+            $(row).addClass('round-red');
+            }if(data[7] == "4"){
+            $(row).addClass('round-yellow');
             }
             if (data[7] == "5") {
-                $(row).addClass('round-orange');
-            }
-            if (data[7] == "6") {
-                $(row).addClass('round-lightGray');
-            }
-            if (data[7] == "7") {
-                $(row).addClass('round-white');
+            $(row).addClass('round-orange');
+            }if(data[7] == "6"){
+            $(row).addClass('round-lightGray');
+            }if (data[7 ] == "7") {
+            $(row).addClass('round-white');
             }
         },
-
+        "fnDrawCallback": function ( oSettings ) {
+            /* Need to redo the counters if filtered or sorted */
+            if ( oSettings.bSorted || oSettings.bFiltered )
+            {
+                for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
+                {
+                    $('td:eq(0)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
+                }
+            }
+        },
+        "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 0 ] }
+        ],
+        "aaSorting": [[ 1, 'asc' ]]
     });
 
     $('.dataTables_filter input[type="search"]').css(
@@ -1304,7 +1316,7 @@ function appointments() {
     });
 }
 
-////////////////// Save appointment booking scritp//////////////////////////////////
+////////////////// Save appointment booking script //////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#book_appointment', function (e) {
@@ -1588,6 +1600,7 @@ function bookings() {
                 $('#all_status_row').append(response.status_row);
                 $('.wallet-modal-box').remove();
                 $('#wallet-modal-box').append(response.wallet_count);
+                $('#site-title').html('Appointment');
                 ///////////// reinitilizing the datatable///////////
                 $('.booking_tables').DataTable({
                     "info": false,
@@ -2150,6 +2163,7 @@ $(document.body).on('click', '#pat_profile', function () {
                 $('#content-wrapper').append(response.result_html);
                 $('.profile-table').remove();
                 $('#profile_table').append(response.profile_table);
+                $('#site-title').html('Profile');
                 ///////////////// initilize datatable //////////////
                 $('#profiletable').DataTable({
                     "info": false,
@@ -2252,149 +2266,6 @@ $(document.body).on('click', '#add_history_category', function () {
         }
     });
 });
-
-
-
-/////////////////////////////////// load examination page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#pat_examination', function () {
-    $.ajax({
-        url: '/cms/examination/examination',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-            }
-        }
-    });
-});
-
-
-
-
-
-/////////////////////////////////// load investigation page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#pat_investigation', function () {
-    $.ajax({
-        url: '/cms/investigation/investigation',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-            }
-        }
-    });
-});
-
-/////////////////////////////////// load recommendation page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#angio_recommendation', function () {
-    $.ajax({
-        url: '/cms/angio_recommendation/angio_recommendation',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-            }
-        }
-    });
-});
-
-/////////////////////////////////// load instruction page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#pat_instruction', function () {
-    $.ajax({
-        url: '/cms/Instruction/instruction',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-            }
-        }
-    });
-});
-
-/////////////////////////////////// load medicine page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#pat_medicine', function () {
-    $.ajax({
-        url: '/cms/medicine/medicine',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-            }
-        }
-    });
-});
-
-/////////////////////////////////// load advice page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#pat_advice', function () {
-    $.ajax({
-        url: '/cms/setting/advice',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-            }
-        }
-    });
-});
-
-/////////////////////////////////// load add research page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#pat_research', function () {
-    $.ajax({
-        url: '/cms/setting/research',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-            }
-        }
-    });
-});
-
-/////////////////////////////////// load register user page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-// $(document.body).on('click', '#register-user', function () {
-//     $.ajax({
-//         url: '/cms/setting/register_user',
-//         cache: false,
-//         success: function (response) {
-//             if (response.result_html != '') {
-//                 $('.dashboard-content').remove();
-//                 $('#dashboard-content').append(response.result_html);
-//                 ///////////////// initilize datatable //////////////
-//                 $('#research-table').DataTable({
-//                     "scrollX": true,
-//                     "scrollY": '50vh',
-//                     "scrollCollapse": true,
-//                     "paging": false,
-//                     "info": false
-//                 });
-//             }
-//         }
-//     });
-// });
-
 /////////////////////////////////// load profession page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2480,118 +2351,8 @@ $(document.body).on('click', '#add_district', function () {
         }
     });
 });
-
-/////////////////////////////////// load delete page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#pat_delete', function () {
-    $.ajax({
-        url: '/cms/setting/pat_delete',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    "scrollY": "50vh",
-                    "scrollCollapse": true,
-                    paging: false,
-                    info: false
-                });
-                $('.pat_search_to').datepicker({
-                    format: 'd-M-yyyy'
-                });
-                $('.pat_search_from').datepicker({
-                    format: 'd-M-yyyy'
-                });
-            }
-        }
-    });
-});
-
-/////////////////////////////////// load laboratory test page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#lab_test', function () {
-    $.ajax({
-        url: '/cms/setting/laboratory_test',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true,
-                    "scrollY": "50vh",
-                    "scrollCollapse": true,
-                });
-            }
-        }
-    });
-});
-
-
-/////////////////////////////////// load change permissions page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#permissions', function () {
-    $.ajax({
-        url: '/cms/setting/change_permissions',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#permissions-table').DataTable({
-                    "scrollX": true
-                });
-            }
-        }
-    });
-});
-
-
-/////////////////////////////////// load echo setting page ///////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#echo-setting', function () {
-    $.ajax({
-        url: '/cms/echo_controller/disease',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-                ///////////////// initilize datatable //////////////
-                $('#permissions-table').DataTable({
-                    "scrollX": true
-                });
-            }
-        }
-    });
-});
-
 ///////////////////////////////////////////////////////ett setting page ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-$(document.body).on('click', '#ett-setting', function () {
-    $.ajax({
-        url: '/cms/ett/ett_setting',
-        cache: false,
-        success: function (response) {
-            if (response.result_html != '') {
-                $('.dashboard-content').remove();
-                $('#dashboard-content').append(response.result_html);
-            }
-        }
-    });
-});
-
-
 $(document.body).on('click', '#add_ett_test_reason', function () {
     var validatetest = $('#test_reason_form').validate();
     if(validatetest.form()){
@@ -2874,6 +2635,9 @@ $(document.body).on('click', '#pat-exemination', function () {
     var cval = $('#examination_clone_val').val();
     var testid = $('#examination_details_table tbody tr td:nth-child(4).row_selected').siblings('.testid').text();
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    var patname = $.trim($('#profiletable tbody tr.row_selected').find('.patient-name').text());
+    var sitetitle = 'Examination-'+patname;
+    $('#site-title').html(sitetitle);
     if (patid=='') {
          toastr["warning"]('Please select a patient first.');
     }else{
@@ -2928,6 +2692,8 @@ $(document.body).on('click', '#pat-exemination', function () {
 ////////////////////////////////////////////////////////////////////////////////////////////
 $(document.body).on('click', '.pat-spInstructions', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    var patname = $.trim($('#profiletable tbody tr.row_selected').find('.patient-name').text());
+    var sitetitle = 'Sp Instruction-'+patname;
     if (patid=='') {
          toastr["warning"]('Please select a patient first.');
     }else{
@@ -2940,6 +2706,7 @@ $(document.body).on('click', '.pat-spInstructions', function () {
                 if (response.result_html != '') {
                     $('.content-wrapper').remove();
                     $('#content-wrapper').append(response.result_html);
+                    $('#site-title').html(sitetitle);
                     $('.patient_info').remove();
                     $('#pat_sp_information').append(response.patient_information);
                     $('.sp_data_table').remove();
@@ -2984,6 +2751,8 @@ $(document.body).on('click', '.exa-pat-spInstructions', function () {
 
 $(document.body).on('click', '.pat-labtest', function () {
     var patid = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
+    var patname = $.trim($('#profiletable tbody tr.row_selected').find('.patient-name').text());
+    var sitetitle = 'Lab Test-'+patname;
     if (patid=='') {
          toastr["warning"]('Please select a patient first.');
     }else{
@@ -2996,6 +2765,7 @@ $(document.body).on('click', '.pat-labtest', function () {
                 if (response.result_html != '') {
                     $('.content-wrapper').remove();
                     $('#content-wrapper').append(response.result_html);
+                    $('#site-title').html(sitetitle);
                     $('.patient_info').remove();
                     $('#pat_sp_information').append(response.patient_information);
                     $('.lab-date').datepicker({
@@ -3031,14 +2801,6 @@ $(document.body).on('click', '.exa-pat-labtest', function () {
         }
     });
 });
-
-/////////////////////////////////// load patient echo test page ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 /////////////////////////////////// load patient ett test page ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3051,6 +2813,7 @@ $(document.body).on('click', '#diary', function () {
                 $('.content-wrapper').remove();
                 $('.dashboard-content').remove();
                 $('#content-wrapper').append(response.result_html);
+                $('#site-title').html('Diary');
                 $('.lab-date').datepicker({
                     format: 'd-M-yyyy'
                 });
@@ -3534,6 +3297,7 @@ function get_professions(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.profession_table').remove();
                 $('#profession_table').append(response.profession_table);
+                $('#site-title').html('Profession');
             }
         }
     });
@@ -3548,6 +3312,7 @@ function get_districts(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.district_content').remove();
                 $('#district_content').append(response.district_table);
+                $('#site-title').html('District');
             }
         }
     });
@@ -3561,6 +3326,7 @@ function get_history(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('History');
             }
         }
     });
@@ -3574,6 +3340,7 @@ function get_examinations(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Examination');
             }
         }
     });
@@ -3587,6 +3354,7 @@ function get_investigations(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Investigation');
             }
         }
     });
@@ -3602,6 +3370,7 @@ function get_recommendations(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Angio');
             }
         }
     });
@@ -3616,6 +3385,7 @@ function get_instructions(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Instruction');
             }
         }
     });
@@ -3629,6 +3399,7 @@ function get_medicine(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Medicine');
             }
         }
     });
@@ -3643,6 +3414,7 @@ function get_echo(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Echo');
                 ///////////////// initilize datatable //////////////
                 $('#permissions-table').DataTable({
                     "scrollX": true
@@ -3661,6 +3433,7 @@ function get_ett(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('ETT');
             }
         }
     });
@@ -3675,6 +3448,7 @@ function get_advice(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Advice');
             }
         }
     });
@@ -3689,6 +3463,7 @@ function get_research(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Research');
             }
         }
     });
@@ -3705,6 +3480,7 @@ function get_register_user(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.user_table_content').remove();
                 $('#user_table_content').append(response.user_html);
+                $('#site-title').html('Register User');
             }
         }
     });
@@ -3719,6 +3495,7 @@ function get_list_permission(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Permissions');
                 ///////////////// initilize datatable //////////////
                 $('#permissions-table').DataTable({
                     "scrollX": true
@@ -3736,6 +3513,7 @@ function get_delete_patients(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Delete Patients');
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX" : true,
@@ -3765,6 +3543,7 @@ function get_item_limiter(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.limiter_table').remove();
                 $('#limiter_table').append(response.limiter_table);
+                $('#site-title').html('Limiter');
                 $('#limiter_date').datepicker({
                     format: 'd-M-yyyy',
                     startDate: 'date',
@@ -3776,24 +3555,8 @@ function get_item_limiter(func_call) {
     });
 }
 
-// function get_vitals(func_call) {
-//     $.ajax({
-//         url: '/cms/user/'+func_call,
-//         cache: false,
-//         success: function (response) {
-//             if (response.result_html != '') {
-//                 $('.dashboard-content').remove();
-//                 $('#dashboard-content').append(response.result_html);
-//                 $('.datatable').DataTable({
-//                     paging: false,
-//                     info: false
-//                 });
-//             }
-//         }
-//     });
-// }
-
-function get_patient_vitals(patid,func_call) {
+function get_patient_vitals(patid,func_call,patname) {
+    var sitetitle = 'Vitals-'+patname;
     $.ajax({
         url: '/cms/user/'+func_call,
         type: 'post',
@@ -3805,6 +3568,8 @@ function get_patient_vitals(patid,func_call) {
                 $('#content-wrapper').append(response.result_html);
                 $('#vital_rows').empty();
                 $('#vital_rows').append(response.vital_rows);
+                $('#site-title').html()
+                $('#site-title').html(sitetitle);
                 $('#vitaltabl').DataTable({
                     "info": false,
                     "paging": false,
@@ -3829,6 +3594,7 @@ function get_laboratory_test(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Laboratory Test');
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true
@@ -3846,6 +3612,7 @@ function grade_special_instruction(func_call) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
+                $('#site-title').html('Special Instruction');
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,
@@ -3871,6 +3638,7 @@ function get_items_signature(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.signature_table').remove();
                 $('#signature_table').append(response.signature_table);
+                $('#site-title').html('Doctor Signature');
             }
         }
     });
@@ -3970,6 +3738,7 @@ function get_manage_reasearch(func_call) {
                 $('#dashboard-content').append(response.result_html);
                 $('.manage_research_table').remove();
                 $('#manage_research_table').append(response.profile_table);
+                $('#site-title').html('Manage Research');
                 ///////////////// initilize datatable //////////////
                 $('#research-table').DataTable({
                     "scrollX": true,

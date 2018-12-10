@@ -35,10 +35,11 @@
                 <?php foreach($history_details as $history){?>
                     <div class=" report-font" style="width: 100%; word-break: break-all;"><?php echo $history['history_value']; ?></div>
                 <?php }?>
-                <?php foreach($measurement_details as $measurment){?>
-                    <div class=" report-font" style="width: 100%; word-break: break-all;">Pulse:<?php echo $measurment['pulse']; ?>&nbsp;<?php echo $measurment['volume']; ?></div>
-                    <div class=" report-font" style="width: 100%; word-break: break-all;">BP.<?php echo $measurment['bp_a']; ?>/<?php echo $measurment['bp_b']; ?></div>
-                    <div class=" report-font" style="width: 100%; word-break: break-all;">Resp. Rate:<?php echo $measurment['rr']; ?>&nbsp;&nbsp;&nbsp;Temprature:<?php echo $measurment['temprature']; ?></div>
+                <?php 
+                foreach($patient_vitals as $vitals){?>
+                    <div style="width: 100%; word-break: break-all;">Pulse:<?php echo $vitals['vital_pulse']; ?>&nbsp;<?php echo $vitals['vital_volume']; ?></div>
+                    <div style="width: 100%; word-break: break-all;">BP.<?php echo $vitals['vital_bp']; ?></div>
+                    <div style="width: 100%; word-break: break-all;">Resp. Rate:<?php echo $vitals['vital_rr']; ?>&nbsp;&nbsp;&nbsp;Temprature:<?php echo $vitals['vital_temp']; ?></div>
                 <?php }?>
                 <?php foreach($examination_details as $examination){?>
                     <div class=" report-font" style="width: 100%; word-break: break-all;"><?php echo $examination['examination_value']; ?></div>

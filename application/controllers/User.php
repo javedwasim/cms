@@ -1090,16 +1090,7 @@ class User extends MY_Controller {
             set_content_type($json);
         }
     }
-
-    // public function get_patient_vitals(){
-    //     $id = $this->input->post('patid');
-    //     $data['patient_vitals'] = $this->User_model->get_patient_vitals($id);
-    //     $json['vital_rows'] = $this->load->view('pages/vitals_rows',$data,true);
-    //     if ($this->input->is_ajax_request()) {
-    //         set_content_type($json);
-    //     }
-    // }
-
+    
     public function delete_vitals($vitalid,$patid){
         $result = $this->User_model->delete_vials($vitalid);
         if ($result) {

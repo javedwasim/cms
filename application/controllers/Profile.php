@@ -765,8 +765,6 @@ class Profile extends MY_Controller
         $result_st = $this->Profile_model->get_disease_findings_diagnosis($disease_id);
         $data_find['findings'] = $result_st['findings'];
         $data_dia['diagnosis'] = $result_st['diagnosis'];
-        // print_r($data_find['findings']);
-        // print_r($data_dia['diagnosis']);die();
         if ($data_find['findings']=="") {
             $data_array_1 = array();
         }else{
@@ -836,7 +834,6 @@ class Profile extends MY_Controller
         $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id, $detail_id);
         $data['color_doppler'] = $this->Profile_model->get_patient_echo_color_doopler($patient_id, $detail_id);
         $data['doc_sig'] = $this->Profile_model->get_echo_doc_sig($patient_id, $detail_id);
-        // print_r($data['doc_sig']); die();
         $data['users'] = $this->Dashboard_model->get_all_user();
         $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
         $json['main_category_table'] = $this->load->view('profile/main_category_table', $data, true);
@@ -961,7 +958,6 @@ class Profile extends MY_Controller
     public function get_ett_detail(){
         $patient_id = $this->input->post('patient_id');
         $data['details'] = $this->Profile_model->get_ett_detail($patient_id);
-        //print_r($data['details']);
         if ($data) {
             $data['rights'] = $this->session->userdata('other_rights');
             $json['success'] = true;
@@ -1058,7 +1054,6 @@ class Profile extends MY_Controller
     public function get_sp_inst_details(){
         $patient_id = $this->input->post('patient_id');
         $data['details'] = $this->Profile_model->get_sp_inst_detail($patient_id);
-        //print_r($data['details']);
         if ($data) {
             $data['rights'] = $this->session->userdata('other_rights');
             $json['success'] = true;

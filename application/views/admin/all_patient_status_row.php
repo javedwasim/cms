@@ -1,20 +1,17 @@
-<div class="all_status_row">
 <?php
-    if(isset($rights[0]['user_rights']))://print_r($rights[0]['rights']);
+    if(isset($rights[0]['user_rights'])):
         $permissions = explode(',',$rights[0]['user_rights']);
     endif;
     $user_info = ($this->session->userdata('user_data_logged_in'));
 ?>
+<div class="all_status_row">
     <div class="row" style="margin-right: 0px;">
         <div class="col-md-12 p-r-0" id="operations_panel">
-            <div class="card p-t-20" style="box-shadow: none; margin-bottom: 0px !important;">
+            <div class="card p-t-10" style="box-shadow: none; margin-bottom: 0px !important;">
                 <div class="card-body p-b-0">
                     <div class="row">
-                        <div class="col-lg-1">
-                            <button type="button" id="sidebarCollapse" class=" round round-sm round-theme m-b-5">
-                                <i class="fas fa-arrow-left arro"></i>
-                            </button>
-                            <div class="round round-sm align-self-center green m-b-10 <?php echo in_array("appointments-view_wallet-0", $permissions)?"op-hide":''; ?>" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
+                        <div class="col-lg-1 col-md-3 ">
+                            <div class="round round-sm align-self-center green <?php echo in_array("appointments-view_wallet-0", $permissions)?"op-hide":''; ?>" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
                                 <i class="fa fa-wallet"></i>
                             </div>
                         </div>
@@ -22,7 +19,7 @@
                         <?php  if($user_info['is_admin'] == 1): ?>
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_appoint_revert">
-                                <div class="round round-sm round-appointment align-self-center m-b-10"><i class="fa fa-user"></i>
+                                <div class="round round-sm round-appointment align-self-center"><i class="fa fa-user"></i>
                                 </div>
                             </a>
                             <div class="m-l-10 align-self-center">
@@ -36,7 +33,7 @@
                         <!-- Column -->
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_feepaid">
-                                <div class="round round-sm align-self-center green m-b-10"><i class="ti-money"></i>
+                                <div class="round round-sm align-self-center green"><i class="ti-money"></i>
                                 </div>
                             </a>
                             <div class="m-l-10 align-self-center">
@@ -49,7 +46,7 @@
                         <!-- Column -->
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_wecg">
-                                <div class="round round-sm align-self-center round-blue m-b-10"><i class="ti-pulse"></i>
+                                <div class="round round-sm align-self-center round-blue"><i class="ti-pulse"></i>
                                 </div>
                             </a>
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_wecg">
@@ -62,7 +59,7 @@
                         <!-- Column -->
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_wett">
-                                <div class="round round-sm align-self-center round-red m-b-10"><i class="mdi mdi-bullseye"></i>
+                                <div class="round round-sm align-self-center round-red"><i class="mdi mdi-bullseye"></i>
                                 </div>
                             </a>
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_wett">
@@ -75,7 +72,7 @@
                         <!-- Column -->
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_wecho">
-                                <div class="round round-sm align-self-center round-yellow m-b-10"><i class="ti-heart-broken"></i></div>
+                                <div class="round round-sm align-self-center round-yellow"><i class="ti-heart-broken"></i></div>
                             </a>
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_wecho">
                                 <div class="m-l-10 align-self-center">
@@ -87,7 +84,7 @@
                         <!-- Column -->
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="    max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_investigation">
-                                <div class="round round-sm align-self-center round-orange m-b-10"><i class="ti-alarm-clock"></i></div>
+                                <div class="round round-sm align-self-center round-orange"><i class="ti-alarm-clock"></i></div>
                             </a>
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_investigation">
                                 <div class="m-l-10 align-self-center">
@@ -99,20 +96,20 @@
                         <!-- Column -->
                         <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_checkup">
-                                <div class="round round-sm align-self-center round-lightGray m-b-10"><i class="ti-timer"></i></div>
+                                <div class="round round-sm align-self-center round-lightGray"><i class="ti-timer"></i></div>
                             </a>
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_checkup">
                                 <div class="m-l-10 align-self-center">
                                     <b class="font-lgiht m-b-5">CheckUp</b>
                                     <p class="m-b-0 text-muted ">Waiting(<?php echo $checkup_count; ?>)</p>
                                 </div>
-                            </a>      
+                            </a>
                         </div>
                         <!-- Column -->
                         <?php  if(!in_array("appointments-can_complete-0", $permissions)): ?>
                             <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
                                 <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_complete">
-                                    <div class="round round-sm align-self-center m-b-10" style="border:1px solid #006400; background: none;"><i class="ti-thumb-up" style="color: #006400;"></i></div>
+                                    <div class="round round-sm align-self-center" style="border:1px solid #006400; background: none;"><i class="ti-thumb-up" style="color: #006400;"></i></div>
                                 </a>
                                 <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_complete">
                                     <div class="m-l-10 align-self-center">
@@ -165,7 +162,7 @@
             autoclose: true
         });
     });
-    //////////////////////////////////////////////// search all categories ///////////////////////////////////////////
+//////////////////////////////////////////////// search all categories ///////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
     $('#search-all-cat').on("change",function(){
@@ -226,6 +223,14 @@
                             { "bSortable": false, "aTargets": [ 0 ] }
                         ],
                         "aaSorting": [[ 1, 'asc' ]]
+                    });
+                    $(".booking_tables tbody tr").click(function (e) {
+                        if ($(this).hasClass('row_selected')) {
+                            $(this).removeClass('row_selected');
+                        } else {
+                            $('.booking_tables tbody tr.row_selected').removeClass('row_selected');
+                            $(this).addClass('row_selected');
+                        }
                     });
                 }
             }
