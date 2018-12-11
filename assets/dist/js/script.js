@@ -4206,21 +4206,44 @@ function get_report_setting(func_call){
 
 $(document.body).on('click','#rep-setting-btn',function(e){
     e.preventDefault();
-    var validater = $('#report-setting-form').validate();
-    if(validater.form()){
-        $.ajax({
-            url:window.location.origin+window.location.pathname+'setting/save_rep_setting',
-            type: 'post',
-            data:$('#report-setting-form').serialize(),
-            cache:false,
-            success:function(response){
-                if (response.success == true) {
-                    toastr["success"](response.message);
-                }else{
-                    toastr["error"](response.message);
-                }
+    
+    var formData =$("#report-setting-form").submit(function(e){
+        return ;
+    });
+    var formData = new FormData(formData[0]);
+    $.ajax({
+        url:window.location.origin+window.location.pathname+'setting/save_rep_setting',
+        type: 'post',
+        data:formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(response){
+            if (response.success == true) {
+                toastr["success"](response.message);
+            }else{
+                toastr["error"](response.message);
             }
-        });
-    }
-    return false;
+        }
+    });
+ 
+});
+
+$(document.body).on('click','.custom_report',function(){
+    var custom_report = $("input[type='radio'][name='optradio']:checked").val();
+    $.ajax({
+        url:window.location.origin+window.location.pathname+'setting/report_temp_status',
+        type:'post',
+        data:{
+            custom_report:custom_report
+        },
+        cache:false,
+        success:function(response){
+            if (response.success == true) {
+                toastr["success"](response.message);
+            }else{
+                toastr["error"](response.message);
+            }
+        }
+    });
 });

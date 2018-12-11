@@ -3148,23 +3148,67 @@ class Setting extends MY_Controller
 
     public function save_rep_setting(){
         $data = $this->input->post();
-        $data_array = array(
-            'doc_name' => $data['doc-name'],
-            'phone' => $data['phone'],
-            'degree' => $data['degree'],
-            'address' => $data['address'],
-            'report_heading' => $data['report_heading']
-        );
-        $result = $this->Setting_model->save_report_setting($data_array);
+        if (isset($_FILES['report_logo']['name']) && !empty($_FILES['report_logo']['name'])) {
+            $uploads = $_FILES['report_logo'];
+            $fname = $uploads['name'];
+            $exp = explode(".", $fname);
+            $ext = end($exp);
+            if ($ext == 'jpg' || $ext == 'JPG' || $ext == 'png' || $ext == 'PNG' ) {
+                move_uploaded_file($_FILES['report_logo']['tmp_name'], $this->config->item('file_upload_path') . $uploads['name']);
+                $data_array = array(
+                    'doc_name' => $data['doc-name'],
+                    'phone' => $data['phone'],
+                    'degree' => $data['degree'],
+                    'address' => $data['address'],
+                    'report_heading' => $data['report_heading'],
+                    'logo_path' => $fname
+                );
+                $result = $this->Setting_model->save_report_setting($data_array);
+                if($result){
+                    $json['success'] = true;
+                    $json['message'] = 'Successfully Updated';
+                }else{
+                    $json['error'] = true;
+                    $json['message'] = 'Seems an error';
+                }
+            } else {
+                $json['error'] = false;
+                $json['message'] = "File Format is wrong.";
+            }
+        } else {
+            $data_array = array(
+                'doc_name' => $data['doc-name'],
+                'phone' => $data['phone'],
+                'degree' => $data['degree'],
+                'address' => $data['address'],
+                'report_heading' => $data['report_heading']
+            );
+            $result = $this->Setting_model->save_report_setting($data_array);
+            if($result){
+                $json['success'] = true;
+                $json['message'] = 'Successfully Updated';
+            }else{
+                $json['error'] = true;
+                $json['message'] = 'Seems an error';
+            }
+        }
+        $data['report'] = $this->Setting_model->get_report_setting();
+        $json['report_setting'] = $this->load->view('pages/report_setting',$data,true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function report_temp_status(){
+        $status = $this->input->post('custom_report');
+        $result = $this->Setting_model->rep_status($status);
         if($result){
             $json['success'] = true;
-            $json['message'] = 'Successfully Updated';
+            $json['message'] = 'Updated Successfully!';
         }else{
             $json['error'] = true;
             $json['message'] = 'Seems an error';
         }
-        $data['report'] = $this->Setting_model->get_report_setting();
-        $json['report_setting'] = $this->load->view('pages/report_setting',$data,true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);   
         }

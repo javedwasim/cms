@@ -10,6 +10,7 @@ class Print_profiles extends MY_Controller {
 			$this->load->model('ETT_model');
 			$this->load->model('User_model');
 			$this->load->model('Profile_model');
+			$this->load->model('Setting_model');
 			$this->load->helper('content-type');
 		}
 
@@ -27,7 +28,15 @@ class Print_profiles extends MY_Controller {
         $data['endingtestreason'] = $this->Print_model->get_endingtestreason_name_by_id($endingtestreasonid);
 		$data['protocol_details'] = $this->Profile_model->get_update_protocol_details_by_id($protocolid,$testid);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
-		$this->load->view('profile_prints/print_ett',$data);
+        $data['report_header'] = $this->Setting_model->get_report_setting();
+        $var = $data['report_header']->custom_template;
+        if($var == '1'){
+        	$this->load->view('profile_prints/report_header',$data);
+        	$this->load->view('profile_prints/ett_content',$data);
+        	$this->load->view('profile_prints/report_footer',$data);
+        }else{
+        	$this->load->view('profile_prints/print_ett',$data);
+        }
 	}
 
 	public function print_lab_test(){
@@ -35,7 +44,15 @@ class Print_profiles extends MY_Controller {
 		$patid = $this->input->get('patid');
 		$data['items'] = $this->Profile_model->get_lab_test_unit($key);
 		$data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
-		$this->load->view('profile_prints/print_lab_test',$data);
+		$data['report_header'] = $this->Setting_model->get_report_setting();
+		 $var = $data['report_header']->custom_template;
+		if($var == '1'){
+        	$this->load->view('profile_prints/report_header',$data);
+        	$this->load->view('profile_prints/lab_test_content',$data);
+        	$this->load->view('profile_prints/report_footer',$data);
+        }else{
+        	$this->load->view('profile_prints/print_lab_test',$data);
+        }
 	}
 
 	public function print_special_inst(){
@@ -68,10 +85,18 @@ class Print_profiles extends MY_Controller {
 		$size = $this->input->get('size');
 		$data['test_details'] = $this->Print_model->get_sp_inst_detail_by_ids($patid,$testid);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
+        $data['report_header'] = $this->Setting_model->get_report_setting();
+        $var = $data['report_header']->custom_template;
 		if ($size=='a5') {
 			$this->load->view('profile_prints/print_sp_a5',$data);
 		}else{
-			$this->load->view('profile_prints/print_special_inst',$data);
+			if($var == '1'){
+	        	$this->load->view('profile_prints/report_header',$data);
+	        	$this->load->view('profile_prints/sp_inst_content',$data);
+	        	$this->load->view('profile_prints/report_footer',$data);
+	        }else{
+	        	$this->load->view('profile_prints/print_special_inst',$data);
+	        }
 		}
 	}
 
@@ -171,7 +196,15 @@ class Print_profiles extends MY_Controller {
         $data['examination_details'] = $this->Print_model->get_examination_detail_by_ids($patid,$testid);
         $data['visit_date'] = $this->Print_model->get_visit_date_by_ids($patid,$testid);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patid);
-		$this->load->view('profile_prints/print_prescription',$data);
+        $data['report_header'] = $this->Setting_model->get_report_setting();
+        $var = $data['report_header']->custom_template;
+        if($var == '1'){
+        	$this->load->view('profile_prints/report_header',$data);
+        	$this->load->view('profile_prints/prescription_content',$data);
+        	$this->load->view('profile_prints/report_footer',$data);
+        }else{
+        	$this->load->view('profile_prints/print_prescription',$data);
+        }
 	}
 
 	public function get_examination_details(){
@@ -202,7 +235,15 @@ class Print_profiles extends MY_Controller {
         $data['diagnosis'] = $this->Profile_model->get_patient_echo_diagnosis($patient_id, $detail_id);
         $data['color_doppler'] = $this->Profile_model->get_patient_echo_color_doopler($patient_id, $detail_id);
         $data['patient_info'] = $this->Profile_model->patient_info_by_id($patient_id);
-        $this->load->view('profile_prints/print_echo',$data);
+        $data['report_header'] = $this->Setting_model->get_report_setting();
+        $var = $data['report_header']->custom_template;
+        if($var == '1'){
+        	$this->load->view('profile_prints/report_header',$data);
+        	$this->load->view('profile_prints/echo_content',$data);
+        	$this->load->view('profile_prints/report_footer',$data);
+        }else{
+        	$this->load->view('profile_prints/print_echo',$data);
+        }
 	}
 
 	public function get_echo_details(){

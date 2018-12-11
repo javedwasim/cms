@@ -1313,6 +1313,14 @@
             return row();
         }
     }
+    public function rep_status($status){
+        $result = $this->db->set('custom_template',$status)->where('id','1')->update('report_setting');
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }
 

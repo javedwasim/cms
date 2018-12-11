@@ -136,10 +136,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 offset-2 p-r-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
+                                <div class="col-md-6 offset-1 p-r-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
                                     <input type="text" name="" value="<?php echo date('d-M-Y') ?>" class="print_date form-control m-t-5" style="height:35px;" id="print_all">        
                                 </div>
-                                <div class="col-md-3 p-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
+                                <div class="col-md-4 p-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
                                     <button class="btn btn-default btn-sm" id="print_all_list">Print all</button> 
                                 </div>    
                             </div>
