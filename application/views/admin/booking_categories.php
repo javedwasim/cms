@@ -74,7 +74,15 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 }
                             ?>
                         </td>
-                        <td>
+                        <td
+                            data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                            title="<?php 
+                            if(isset($bkarray[$i]['fee_collected_by']) && $user_info['is_admin']==1){
+                                echo $bkarray[$i]['fee_collected_by'];
+                            }else{
+                                echo "";
+                            }?>"
+                        >
                             <?php
                                 if(isset($bkarray[$i]['fee_paid_at'])){
                                         if ($bkarray[$i]['fee_paid_at'] == '0000-00-00 00:00:00') {
@@ -133,7 +141,15 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                     <?php echo $details['contact_number'] ?>
                                 </td>
                                 <?php $datetime = date(' d-m-Y h:i a', strtotime($details['fee_paid_at'])); ?>
-                                <td class="center">
+                                <td class="center" 
+                                    data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                                    title="<?php 
+                                    if(isset($details['fee_collected_by']) && $user_info['is_admin']==1){
+                                        echo $details['fee_collected_by'];
+                                    }else{
+                                        echo "";
+                                    }?>"
+                                >
                                     <?php 
                                         if ($details['fee_paid_at'] == '0000-00-00 00:00:00') {
                                             echo "";
@@ -202,7 +218,15 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                     <?php echo $details['contact_number'] ?>
                                 </td>
                                 <?php $datetime = date(' d-m-Y h:i a', strtotime($details['fee_paid_at'])); ?>
-                                <td class="center">
+                                <td class="center"
+                                    data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                                    title="<?php 
+                                    if(isset($details['fee_collected_by']) && $user_info['is_admin']==1){
+                                        echo $details['fee_collected_by'];
+                                    }else{
+                                        echo "";
+                                    }?>"
+                                >
                                     <?php 
                                         if ($details['fee_paid_at'] == '0000-00-00 00:00:00') {
                                             echo "";
@@ -271,7 +295,15 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                     <?php echo $details['contact_number'] ?>
                                 </td>
                                 <?php $datetime = date(' d-m-Y h:i a', strtotime($details['fee_paid_at'])); ?>
-                                <td class="center">
+                                <td class="center"
+                                    data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                                    title="<?php 
+                                    if(isset($details['fee_collected_by']) && $user_info['is_admin']==1){
+                                        echo $details['fee_collected_by'];
+                                    }else{
+                                        echo "";
+                                    }?>"
+                                >
                                     <?php 
                                         if ($details['fee_paid_at'] == '0000-00-00 00:00:00') {
                                             echo "";

@@ -64,13 +64,13 @@ if(isset($rights[0]['user_rights']))
                 <div class="col-md-6">
                     <form id="examination_item_form" method="post" role="form" data-action="<?php echo site_url('examination/add_examination_item') ?>" enctype="multipart/form-data">
                         <div class="row">
-                            <div class="col-lg-5 col-md-5">
+                            <div class="col-lg-5 col-md-5 col-sm-12 col-12">
                                 <div class="form-group">
                                     <label>Item Name:</label>
                                     <input type="text" class="form-control" name="name" required>
                                 </div>
                             </div>
-                            <div class=" col-lg-5 col-md-5">
+                            <div class=" col-lg-5 col-md-5  col-sm-8 col-8">
                                 <div class="form-group">
                                     <label>Category:</label>
                                     <select class="form-control" name="examination_id" id="prof_id" required>
@@ -83,7 +83,7 @@ if(isset($rights[0]['user_rights']))
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 p-0">
+                            <div class="col-lg-2 col-md-2  col-sm-4 col-4 p-0">
                                 <div class="form-group m-t-25" style="display: inline-flex;">
                                     <?php if($loggedin_user['is_admin']==1){ ?>
                                         <button type= "submit" class="btn btn-sm btn-primary" id="examination_item_btn">Add</button>
@@ -116,7 +116,7 @@ if(isset($rights[0]['user_rights']))
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-3 col-md-4  col-sm-8 col-8">
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control" name="filter_examination_category" onchange="filter_examination_item_category(this.value)">
@@ -129,9 +129,9 @@ if(isset($rights[0]['user_rights']))
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3  col-sm-4 col-4">
                     <div class="form-group m-t-25">
-                        <a class="btn btn-sm btn-primary" href="javascript:void(0)" id="export_examination_items" >Export items</a>    
+                        <a class="btn btn-sm btn-primary" href="javascript:void(0)" id="export_examination_items" >Export</a>    
                     </div>
                 </div>
             </div>

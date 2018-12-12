@@ -11,8 +11,8 @@
     </div>
     <div class="row p-t-10 m-0">
         <div class="col-md-12">
-            <button class="btn btn-primary" id="add_new_user_btn">Add new user</button>  
-            <div class="card">
+            <div class="card card-top-margin">
+                <button class="btn btn-primary" id="add_new_user_btn">Add new user</button>
                 <div class="card-header">
                     User Permissions  
                 </div>

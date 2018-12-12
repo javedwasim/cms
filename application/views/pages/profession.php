@@ -53,10 +53,10 @@ $(document.body).on('click','#import_profession_btn', function(e){
 <div class="dashboard-content">
     <div class="row p-t-10 m-0">
         <div class="col-lg-12 col-md-12">
-            <div class="card">
+            <div class="card card-top-margin">
                 <div class="card-header">
                   <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-sm-8 col-8">
                           <form id="profession_form">
                               <div class="form-group">
                                   <label>New Profession</label>
@@ -64,7 +64,7 @@ $(document.body).on('click','#import_profession_btn', function(e){
                               </div>
                           </form>
                       </div>
-                      <div class="col-md-1 p-l-0" style="margin-top: 25px;">
+                      <div class="col-md-1 p-l-0 col-sm-4 col-4" style="margin-top: 25px;">
                           <button class="btn btn-primary btn-sm" id="profes_add">Add</button>
                       </div>
                       <div class="col-md-2 p-l-0" style="margin-top: 25px;">

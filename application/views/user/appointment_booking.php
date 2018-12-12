@@ -10,7 +10,7 @@
         <?php }else{?>
         <nav id="sidebar" class="<?php echo in_array("appointments-can_add-0", $permissions)?"op-hide":''; ?>" >
         <?php  }?>
-            <div class="row m-l-5 ">
+            <div class="row m-l-5" style="margin-right: 0px;">
                 <div class="col-md-12" id="appointment_sidebar">
                     <div class="card p-t-20">
                         <div class="card-header">

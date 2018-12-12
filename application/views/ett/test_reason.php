@@ -1,4 +1,4 @@
-<script type="text/javascript">
+ <script type="text/javascript">
 $(document.body).on('click','#import_test_reason_btn', function(e){
         event.preventDefault();
         var itemfile = new FormData($('#import_csv_test_reason')[0]);
@@ -54,14 +54,14 @@ $(document.body).on('click','#import_test_reason_btn', function(e){
     <div class="card">
 		<div class="card-header">
 			<div class="row">
-				<div class="col-md-6 col-lg-4">
+				<div class="col-md-6 col-lg-4  col-sm-9 col-9">
 					<form id="test_reason_form">
 						<label>New Reason</label>
 						<input type="text" class="form-control" name="ett_test_reason" id="ett_test_reason" required="required">
 					</form>
 				</div>
-				<div class="col-md-1 p-l-0" style="margin-top: 25px;">
-                    <button class="btn btn-primary btn-sm" id="add_ett_test_reason">Add</button>
+				<div class="col-md-1 p-l-0  col-sm-3 col-3" style="margin-top: 25px;">
+          <button class="btn btn-primary btn-sm" id="add_ett_test_reason">Add</button>
 				</div>
 				<div class="col-md-2 p-l-0" style="margin-top: 25px;">
                     <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_test_reasons">Export</a>

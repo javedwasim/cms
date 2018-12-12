@@ -4,20 +4,20 @@
     endif;
     $user_info = ($this->session->userdata('user_data_logged_in'));
 ?>
-<div class="all_status_row">
+<div class="all_status_row" >
     <div class="row" style="margin-right: 0px;">
         <div class="col-md-12 p-r-0" id="operations_panel">
             <div class="card p-t-10" style="box-shadow: none; margin-bottom: 0px !important;">
-                <div class="card-body p-b-0">
+                <div class="card-body p-b-0 status-row-body">
                     <div class="row">
-                        <div class="col-lg-1 col-md-3 ">
+                        <div class="col-lg-1 col-md-3  col-sm-4 col-4">
                             <div class="round round-sm align-self-center green <?php echo in_array("appointments-view_wallet-0", $permissions)?"op-hide":''; ?>" data-toggle="modal" data-target="#wallet-modal" style="cursor: pointer;">
                                 <i class="fa fa-wallet"></i>
                             </div>
                         </div>
                         <!-- Column -->
                         <?php  if($user_info['is_admin'] == 1): ?>
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_appoint_revert">
                                 <div class="round round-sm round-appointment align-self-center"><i class="fa fa-user"></i>
                                 </div>
@@ -31,7 +31,7 @@
                         </div>
                         <?php endif; ?>
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_feepaid">
                                 <div class="round round-sm align-self-center green"><i class="ti-money"></i>
                                 </div>
@@ -44,7 +44,7 @@
                             </div>      
                         </div>
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_wecg">
                                 <div class="round round-sm align-self-center round-blue"><i class="ti-pulse"></i>
                                 </div>
@@ -57,7 +57,7 @@
                             </a>     
                         </div>
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_wett">
                                 <div class="round round-sm align-self-center round-red"><i class="mdi mdi-bullseye"></i>
                                 </div>
@@ -70,7 +70,7 @@
                             </a>     
                         </div>
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_wecho">
                                 <div class="round round-sm align-self-center round-yellow"><i class="ti-heart-broken"></i></div>
                             </a>
@@ -82,7 +82,7 @@
                             </a>      
                         </div>
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="    max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="    max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_investigation">
                                 <div class="round round-sm align-self-center round-orange"><i class="ti-alarm-clock"></i></div>
                             </a>
@@ -94,7 +94,7 @@
                             </a>       
                         </div>
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_checkup">
                                 <div class="round round-sm align-self-center round-lightGray"><i class="ti-timer"></i></div>
                             </a>
@@ -107,7 +107,7 @@
                         </div>
                         <!-- Column -->
                         <?php  if(!in_array("appointments-can_complete-0", $permissions)): ?>
-                            <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                            <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                                 <a href="javascript:void(0)" onclick="change_patient_status(this)" class="pat_complete">
                                     <div class="round round-sm align-self-center" style="border:1px solid #006400; background: none;"><i class="ti-thumb-up" style="color: #006400;"></i></div>
                                 </a>
@@ -121,7 +121,7 @@
                         <?php endif; ?>
                         <div class="col-lg-3 col-md-5">
                             <div class="row">
-                                <div class="col-md-8 p-r-0" style="display:inline-flex;">
+                                <div class="col-md-8 p-r-0 col-sm-8 col-8" style="display:inline-flex;">
                                     <label class="m-t-10 m-r-5">Search</label>
                                     <input type="text" name="" value="<?php
                                     if(isset($searchdate)){
@@ -131,15 +131,15 @@
                                     }
                                      ?>" class="form-control m-t-5" id="search-all-cat" style="height:35px;">        
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-4 col-4">
                                     <a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="bookings();" aria-expanded="false"> Refresh</a>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 offset-1 p-r-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
+                                <div class="col-md-7 col-sm-7 col-7 offset-1 p-r-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
                                     <input type="text" name="" value="<?php echo date('d-M-Y') ?>" class="print_date form-control m-t-5" style="height:35px;" id="print_all">        
                                 </div>
-                                <div class="col-md-4 p-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
+                                <div class="col-md-3 col-sm-3 col-3 p-0 <?php echo in_array("appointments-print-0", $permissions)?"op-hide":''; ?>">
                                     <button class="btn btn-default btn-sm" id="print_all_list">Print all</button> 
                                 </div>    
                             </div>

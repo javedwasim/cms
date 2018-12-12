@@ -1,7 +1,7 @@
 <div class="dashboard-content">
     <div class="row p-t-10 m-0">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card card-top-margin">
                 <div class="card-header">
                     Laboratory Test Settings
                 </div>
@@ -11,17 +11,17 @@
                         <li class="nav-item">
                             <a class="nav-link <?php echo isset($active_tab) && ($active_tab == 'category') ? 'active' : ''; ?>"
                                data-toggle="tab" href="#category" role="tab">
-                                <span class="hidden-sm-up"><i class="ti-home"></i></span>
+                                <span class="hidden-sm-up">Category</span>
                                 <span class="hidden-xs-down">Category</span></a></li>
                         <li class="nav-item">
                             <a class="nav-link <?php echo isset($active_tab) && ($active_tab == 'tests') ? 'active' : ''; ?>"
                                data-toggle="tab" href="#tests" role="tab">
-                                <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                                <span class="hidden-sm-up">Tests</span>
                                 <span class="hidden-xs-down">Tests</span></a></li>
                         <li class="nav-item" id="reset_lab_item_page">
                             <a class="nav-link <?php echo isset($active_tab) && ($active_tab == 'items') ? 'active' : ''; ?>"
                                data-toggle="tab" href="#tests-items" role="tab">
-                                <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                                <span class="hidden-sm-up">Test Items</span>
                                 <span class="hidden-xs-down">Test Items</span></a></li>
                     </ul>
                     <!-- Tab panes -->

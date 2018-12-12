@@ -3,7 +3,7 @@
         <div class="card-header">
             <form id="inst_category_form">
                 <div class="row">
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6 col-lg-4  col-sm-8 col-8">
                         <div class="form-group">
                             <label>New Category</label> 
                             <input type="text" class="form-control" name="instruction_name" id="instruction_name"  required>
@@ -11,7 +11,7 @@
                                required value="<?php echo isset($category)?$category:'' ?>">   
                         </div>
                     </div>
-                    <div class="col-md-2 col-lg-1 m-t-25">
+                    <div class="col-md-2 col-lg-1 m-t-25  col-sm-4 col-4">
                         <button class="btn btn-primary btn-sm add-instruction-category">Add</button>
                     </div>
                 </div>

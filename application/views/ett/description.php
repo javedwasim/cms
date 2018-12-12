@@ -54,13 +54,13 @@ $(document.body).on('click','#import_ett_description_btn', function(e){
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4  col-sm-9 col-9">
                     <form id="ett_discription_form">
                         <label>New Description</label>
                         <textarea class="form-control" name="ett_discription" id="ett_discription" required="required"></textarea>
                     </form>
                 </div>
-                <div class="col-md-1 p-l-0" style="margin-top: 25px;">
+                <div class="col-md-1 p-l-0  col-sm-3 col-3" style="margin-top: 25px;">
                     <button class="btn btn-sm btn-primary" id="add_ett_discription">Add</button>
                 </div>
                 <div class="col-md-2 p-l-0" style="margin-top: 25px;">

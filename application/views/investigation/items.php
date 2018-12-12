@@ -62,7 +62,7 @@
                                     <input type="text" class="form-control" name="name" maxlength="50" required>
                                 </div>
                             </div>
-                            <div class=" col-lg-5 col-md-5">
+                            <div class=" col-lg-5 col-md-5  col-sm-8 col-8">
                                 <div class="form-group">
                                     <label>Category:</label>
                                     <select class="form-control" name="investigation_id" id="investigation_id" required>
@@ -75,7 +75,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 p-0">
+                            <div class="col-lg-2  col-sm-4 col-4 col-md-2 p-0">
                                 <div class="form-group m-t-25">
                                     <button type= "submit" class="btn btn-sm btn-primary" id="investigation_item_btn">Add</button>
                                 </div>
@@ -101,7 +101,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-3 col-md-4  col-sm-6 col-8">
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control" name="filter_investigation_category" onchange="filter_investigation_item_category(this.value)">
@@ -114,9 +114,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3  col-sm-4 col-4">
                     <div class="form-group m-t-25">
-                        <a class="btn btn-sm btn-primary" href="javascript:void(0)" id="export_investigation_items" >Export items</a>    
+                        <a class="btn btn-sm btn-primary" href="javascript:void(0)" id="export_investigation_items" >Export</a>    
                     </div>
                 </div>
             </div>

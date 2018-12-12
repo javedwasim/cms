@@ -18,7 +18,7 @@
                             <input type="text" class="form-control" name="units">
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-md-4">
+                    <div class=" col-lg-3 col-md-4 col-sm-9 col-9">
                         <div class="form-group">
                             <label>Test:</label>
                             <select class="form-control" name="lab_test_id">
@@ -31,7 +31,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-4 p-0">
+                    <div class="col-lg-2 col-md-4 p-0 col-sm-3 col-3">
                         <div class="form-group m-t-25" style="display: inline-flex;">
                             <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item_btn">Add</button>
                         </div>

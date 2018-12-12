@@ -10,12 +10,12 @@
     <div class="row p-t-10 m-0">
     	<div class="col-md-12 p-l-0 p-r-0">
     		<div class="card" style="margin-bottom:0px !important; ">
-	    		<div class="card-body">
+	    		<div class="card-body diary-body">
 	    			<div class="row">
 	    				<div class="col-md-12 col-lg-12 pt-info">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#old" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">View Old Notes</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#new" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Write New Note</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#old" role="tab"><span class="hidden-sm-up">View old notes</span> <span class="hidden-xs-down">View Old Notes</span></a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#new" role="tab"><span class="hidden-sm-up">Write new notes</span> <span class="hidden-xs-down">Write New Note</span></a> </li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content tabcontent-border">

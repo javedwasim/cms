@@ -11,13 +11,13 @@ if(isset($rights[0]['user_rights']))
         <div class="card-header">
             <form id="exam_category_form">
                 <div class="row">
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6 col-lg-4 col-sm-8 col-8">
                         <div class="form-group">
                             <label>New Category</label>
                             <input type="text" class="form-control"  name="instruction_name" id="instruction_name" maxlength="50" required>
                         </div>
                     </div>
-                    <div class="col-md-2 col-lg-1 m-t-25">
+                    <div class="col-md-2 col-lg-1 m-t-25 col-sm-4 col-4">
                         <button class="btn btn-primary btn-sm add-examination-category">Add</button>
                     </div>
                 </div>

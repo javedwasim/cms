@@ -52,7 +52,7 @@
 <div class="dashboard-content">
     <div class="row p-t-10 m-0">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card card-top-margin">
                 <div class="card-header">
                     Advice Settings
                 </div>
@@ -61,11 +61,11 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link <?php echo  isset($active_tab)&&($active_tab=='advice')?'active':''; ?>" data-toggle="tab" href="#category" role="tab">
-                                <span class="hidden-sm-up"><i class="ti-home"></i></span>
+                                <span class="hidden-sm-up">Category</span>
                                 <span class="hidden-xs-down">Category</span></a></li>
                         <li class="nav-item">
                             <a class="nav-link <?php echo  isset($active_tab)&&($active_tab=='advice_item')?'active':''; ?>" data-toggle="tab" href="#items" role="tab">
-                                <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                                <span class="hidden-sm-up">Items</span>
                                 <span class="hidden-xs-down">Items</span></a></li>
                     </ul>
                     <!-- Tab panes -->
@@ -75,13 +75,13 @@
                                 <div class="card-header">
                                     <form id="advice_category_form">
                                         <div class="row">
-                                            <div class="col-md-6 col-lg-4">
+                                            <div class="col-md-6 col-lg-4  col-sm-9 col-9">
                                                 <div class="form-group">
                                                     <label>New Category</label>
                                                     <input type="text" class="form-control" name="" id="advice_name" maxlength="50" required>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2 col-lg-1 m-t-25">
+                                            <div class="col-md-2 col-lg-1 m-t-25  col-sm-3 col-3">
                                                 <button class="btn btn-primary btn-sm add-advice">Add</button>
                                             </div>
                                         </div>
@@ -123,13 +123,13 @@
                                         <div class="col-md-6">
                                             <form id="advice_item_form" method="post" role="form" data-action="<?php echo site_url('setting/add_advice_item') ?>" enctype="multipart/form-data">
                                                 <div class="row">
-                                                    <div class="col-lg-5 col-md-5">
+                                                    <div class="col-lg-5 col-md-5  col-sm-12 col-12">
                                                         <div class="form-group">
                                                             <label>Item Name:</label>
                                                             <input type="text" class="form-control" name="name" maxlength="50" required>
                                                         </div>
                                                     </div>
-                                                    <div class=" col-lg-5 col-md-5">
+                                                    <div class=" col-lg-5 col-md-5  col-sm-9 col-9">
                                                         <div class="form-group">
                                                             <label>Category:</label>
                                                             <select class="form-control" name="advice_id" id="advice_id" required>
@@ -140,7 +140,7 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-2 col-md-2 p-0">
+                                                    <div class="col-lg-2 col-md-2 p-0 col-sm-3 col-3">
                                                         <div class="form-group m-t-25" style="display: inline-flex;">
                                                             <button type= "submit" class="btn btn-sm btn-primary" id="advice_item_btn">Add</button>
                                                         </div>
@@ -167,7 +167,7 @@
                                     </div>
                                     
                                     <div class="row">
-                                        <div class="col-lg-3 col-md-4">
+                                        <div class="col-lg-3 col-md-4 col-sm-9 col-9">
                                             <div class="form-group ">
                                                 <label>Select Category:</label>
                                                 <select class="form-control" name="filter_advice_category" onchange="filter_advice_item_category(this.value)">
@@ -179,7 +179,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2 col-md-3">
+                                        <div class="col-lg-2 col-md-3 col-sm-3 col-3">
                                             <div class="form-group m-t-25">
                                                 <a class="btn btn-sm btn-primary" href="javascript:void(0)" id="export_advice_items" >Export items</a>    
                                             </div>

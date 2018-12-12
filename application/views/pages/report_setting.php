@@ -1,7 +1,7 @@
 <div class="dashboard-content">
     <div class="row p-t-10 m-0">
         <div class="col-lg-5 col-md-5">
-            <div class="card">
+            <div class="card card-top-margin">
             	<div class="card-body">
             		<form id="report-setting-form" enctype="multipart/form-data">
             			<div class="row">

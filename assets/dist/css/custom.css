@@ -459,6 +459,7 @@ a[data-toggle="collapse"] {
     color: #fff;
     transition: all 0.3s;
 }
+
 #dashboar-sidebar li a.active{
     background:#26c6da;
     color: #fff;
@@ -678,7 +679,7 @@ table.table th {
     margin-left: 5px;
 }
 .sidebar-menu {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 li#list_itmes_ {
     border-bottom: 1px solid #26c6da;
@@ -698,6 +699,21 @@ li#list_itmes_vital {
     left: 50%;
     background: transparent;
     z-index: 99999;
+}
+.sidebar-btn{
+    position: fixed;
+    top: 70px;
+    color: #1e88e5;
+    margin: 5px;
+    z-index: 9999;
+    display: none;
+}
+.sidebar-btn button{
+    background: #1e88e5;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border-color: #fff;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES
@@ -1007,6 +1023,41 @@ li#list_itmes_vital {
     }
     
 }
+
+@media (max-width: 767px){
+    .topbar {
+        position: fixed;
+        width: 100%;
+    }
+    .status-row-body{
+        margin-top: 60px;
+    }
+    #sidebar{
+        padding-top: 12%;
+    }
+    .diary-body{
+        padding-top:16%; 
+    }
+    #dashboar-sidebar{
+        margin-top: 18%;
+        position: relative;
+        left: -180px;
+        max-width:0px !important;
+        min-width:0px !important;
+    }
+    #dashboar-sidebar.sidebar_active{
+        left: 0px;
+        max-width:150px !important;
+        min-width:150px !important;
+    }
+    .card-top-margin{
+        margin-top: 20%;
+    }
+    .sidebar-btn{
+        display: block;
+    }
+}
+
 
 
 

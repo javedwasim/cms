@@ -1162,6 +1162,37 @@ class User extends MY_Controller {
         $this->load->view('pages/vitals_print',$data);
     }
 
+    public function delete_all_patient(){
+        $result = $this->User_model->delete_all_patients();
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+    }
+
+    public function delete_patient_by_ids(){
+        $fromId = $this->input->post('fromid');
+        $toId = $this->input->post('toid');
+        $result = $this->User_model->delete_patient_profiles($fromId,$toId);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted!';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);
+        }
+
+    }
+
 }
 ?>
 

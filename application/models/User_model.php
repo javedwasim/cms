@@ -1040,6 +1040,26 @@ class User_model extends CI_Model {
         }
     }
 
+    public function delete_all_patients(){
+        $result = $this->db->truncate('appointment_booking');
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function delete_patient_profiles($fromId,$toId){
+        $result = $this->db->where('id >=',$fromId)->where('id <=',$toId)->delete('patient_profile');
+        if ($result) {
+            $result = $this->db->where('profile_id >=',$fromId)->where('profile_id <=',$toId)->delete('manage_research');
+            $result = $this->db->where('patient_id >=',$fromId)->where('patient_id <=',$toId)->delete(array('patient_files','profile_examination_detail','profile_examination_info','profile_examination_advice','profile_examination_dosage','profile_examination_history','profile_examination_instruction','profile_examination_investigation','profile_examination_measurements','profile_examination_medicine','profile_echo_detail','profile_echo_measurement','profile_echo_findings','profile_echo_diagnosis','profile_echo_color_doopler','patient_ett_test','patient_ett_test_protocol','patient_special_instruction','patient_lab_test_info','patient_lab_test','patient_vitals'));
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }
 

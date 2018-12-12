@@ -54,7 +54,7 @@ $(document.body).on('click','#import_disease_btn', function(e){
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4  col-sm-8 col-8">
                     <form id="disease_category_form">
                         <div class="form-group">
                           <label>New Disease</label>
@@ -62,7 +62,7 @@ $(document.body).on('click','#import_disease_btn', function(e){
                         </div>
                     </form>
                 </div>
-                <div class="col-md-1 p-l-0" style="margin-top: 25px;">
+                <div class="col-md-1 p-l-0  col-sm-3 col-3" style="margin-top: 25px;">
                     <button class="btn btn-sm btn-primary add-disease-category">Add</button>
                 </div>
                 <div class="col-md-2 p-l-0" style="margin-top: 25px;">

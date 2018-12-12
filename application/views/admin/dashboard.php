@@ -23,6 +23,11 @@
         <!-- ============================================================== -->
         <div class="dashboard-wrapper">
             <!-- Sidebar  -->
+            <div class="sidebar-btn">
+                <button  type="button" id="sidbar-toggle">
+                    <span class="fas fa-angle-right" style="color: #fff;"></span>
+                </button>
+            </div>
             <nav id="dashboar-sidebar" class="<?php echo in_array("menu-0", $permissions)?"op-hide":''; ?>">
                 <ul class="nav nav-pills nav-sidebar sidebar-menu list" data-widget="treeview" role="menu" data-accordion="false">
                     

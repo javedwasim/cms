@@ -4247,3 +4247,21 @@ $(document.body).on('click','.custom_report',function(){
         }
     });
 });
+
+$(document.body).on('click','#card-1',function(){
+    $('.delete-card-1').removeClass('hide');
+    $('.delete-card-2').addClass('hide');
+    $('.delete-card-3').addClass('hide');
+});
+
+$(document.body).on('click','#card-2',function(){
+    $('.delete-card-2').removeClass('hide');
+    $('.delete-card-1').addClass('hide');
+    $('.delete-card-3').addClass('hide');
+});
+
+$(document.body).on('click','#card-3',function(){
+    $('.delete-card-3').removeClass('hide');
+    $('.delete-card-1').addClass('hide');
+    $('.delete-card-2').addClass('hide');
+});

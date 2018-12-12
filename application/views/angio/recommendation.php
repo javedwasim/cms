@@ -55,10 +55,10 @@
 <div class="dashboard-content">
     <div class="row p-t-10 m-0">
         <div class="col-lg-12 col-md-12">
-            <div class="card">
+            <div class="card card-top-margin">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3  col-sm-9 col-9">
                             <form id="angio_form">
                                 <div class="form-group">
                                     <label>Recommendation</label>
@@ -66,7 +66,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-1 p-l-0" style="margin-top: 25px;">
+                        <div class="col-md-1  col-sm-3 col-3 p-l-0" style="margin-top: 25px;">
                             <button class="btn btn-sm btn-primary" id="add_recommendation">Add</button>
                         </div>
                         <div class="col-md-3 p-l-0" style="margin-top: 25px;">

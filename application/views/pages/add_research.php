@@ -1,17 +1,17 @@
 <div class="dashboard-content">
     <div class="row p-t-10 m-0">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card card-top-margin">
             	<div class="card-header">
                     <form id="research_category_form">
                 		<div class="row">
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-4 col-sm-9 col-9">
                                 <div class="form-group">
                                     <label>Research Name</label>
                                     <input type="text" class="form-control" name="name" id="research_name" required maxlength="50">
                                 </div>
                             </div>
-                            <div class="col-md-2 col-lg-1 m-t-25">
+                            <div class="col-md-2 col-lg-1 m-t-25 col-sm-3 col-3">
                                 <button class="btn btn-primary btn-sm add-research">Add</button>
                             </div>
         				</div>

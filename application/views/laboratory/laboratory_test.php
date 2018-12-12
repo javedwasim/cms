@@ -54,7 +54,7 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12 col-12">
                     <form id="lab_test_form" method="post" role="form" data-action="<?php echo site_url('setting/add_lab_test') ?>" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-5 col-md-5">
@@ -63,7 +63,7 @@
                                     <input type="text" class="form-control" name="name" required>
                                 </div>
                             </div>
-                            <div class=" col-lg-5 col-md-5">
+                            <div class=" col-lg-5 col-md-5 col-sm-9 col-9">
                                 <div class="form-group">
                                     <label>Category:</label>
                                     <select class="form-control" id="lab_test_category_id" name="lab_category_id">
@@ -74,7 +74,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 p-0">
+                            <div class="col-lg-2 col-md-2 col-sm-3 col-3 p-0">
                                 <div class="form-group m-t-25" style="display: inline-flex;">
                                     <button type= "submit" class="btn btn-sm btn-primary" id="lab_test_item">Add</button>
                                 </div>
@@ -100,7 +100,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-3 col-md-4 col-sm-9 col-9">
                     <div class="form-group ">
                         <label>Select Category:</label>
                         <select class="form-control " name="filter_category_id" onchange="filter_tests(this.value)">
@@ -113,9 +113,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-3 col-3">
                     <div class="form-group m-t-25">
-                        <a class="btn btn-sm btn-primary" href="#" id="export_lab_items" >Export items</a>
+                        <a class="btn btn-sm btn-primary" href="#" id="export_lab_items" >items</a>
                     </div>
                 </div>
             </div>

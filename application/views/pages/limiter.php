@@ -1,7 +1,7 @@
 <div class="dashboard-content">
     <div class="row p-t-10 m-0">
         <div class="col-lg-4 col-md-6">
-            <div class="card">
+            <div class="card card-top-margin">
                 <div class="card-header">
                     Limiter
                 </div>

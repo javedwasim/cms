@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <label>New Category</label>
-                    <input type="text" class="form-control col-md-6" name="profile_history" id="profile_history">
+                    <input type="text" class="form-control col-md-6 col-sm-8 col-8" name="profile_history" id="profile_history">
                     <button class="btn btn-primary btn-sm add-profile-history">Add</button>
                 </div>
             </div>

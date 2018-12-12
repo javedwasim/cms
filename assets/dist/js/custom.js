@@ -16,6 +16,9 @@ $(document).ready(function () {
     $('.pat_search').datepicker({
         format: 'd-M-yyyy'
     });
+    $('.navbar-collapse a').click(function (e) {
+        $('.navbar-collapse').collapse('toggle');
+    });
 ////////////////////////////// initilize categories datatables //////////////////////
     $('.booking_tables').DataTable({
         "info": false,
@@ -4546,3 +4549,17 @@ function searchpatient(d){
         }
     });
 }
+$(document.body).on('click','#sidbar-toggle',function(e){
+    e.preventDefault();
+    // $('#dashboar-sidebar').toggle('sidebar_active');
+    if ($('#dashboar-sidebar').hasClass('sidebar_active')) {
+        $('#dashboar-sidebar').removeClass('sidebar_active');
+        $('.sidebar-menu').removeClass('sidebar_toggle_menu');
+    } else {
+        $('#dashboar-sidebar').addClass('sidebar_active');
+        $('.sidebar-menu').addClass('sidebar_toggle_menu');
+    }
+});
+$(document.body).on('click','.sidebar_toggle_menu ul li ul li',function(){
+    $('#dashboar-sidebar').removeClass('sidebar_active');
+});

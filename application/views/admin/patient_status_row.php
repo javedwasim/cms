@@ -5,12 +5,12 @@
     endif;
     $user_info = ($this->session->userdata('user_data_logged_in'));
 ?>
-    <div class="row m-r-5">
+    <div class="row m-r-5" style="margin-left: 0px;">
         <div class="col-md-12" id="operations_panel">
             <div class="card p-t-20" style="box-shadow: none; margin-bottom: 0px !important;">
                 <div class="card-body p-b-0">
                     <div class="row">
-                        <div class="col-lg-1">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4">
                             <button type="button" id="sidebarCollapse" class=" round round-sm round-theme m-b-5">
                                 <i class="fas fa-arrow-left arro"></i>
                             </button>
@@ -22,7 +22,7 @@
                         </div>
                         <!-- Column -->
                         <?php  if($user_info['is_admin'] == 1): ?>
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" class="appoint_revert">
                                 <div class="round round-sm round-appointment align-self-center m-b-10"><i class="fa fa-user"></i>
                                 </div>
@@ -36,7 +36,7 @@
                         </div>
                         <?php endif; ?>
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" class="feepaid">
                                 <div class="round round-sm align-self-center green m-b-10"><i class="ti-money"></i>
                                 </div>
@@ -50,7 +50,7 @@
                         </div>
                         <!-- Column -->
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" class="wecg">
                                 <div class="round round-sm align-self-center round-blue m-b-10"><i class="ti-pulse"></i>
                                 </div>
@@ -64,7 +64,7 @@
                         </div>
                         <!-- Column -->
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" class="wett">
                                 <div class="round round-sm align-self-center round-red m-b-10"><i class="mdi mdi-bullseye"></i>
                                 </div>
@@ -78,7 +78,7 @@
                         </div>
                         <!-- Column -->
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" class="wecho">
                                 <div class="round round-sm align-self-center round-yellow m-b-10"><i class="ti-heart-broken"></i></div>
                             </a>
@@ -91,7 +91,7 @@
                         </div>
                         <!-- Column -->
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="    max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="    max-width: 100%;">
                             <a href="javascript:void(0)" class="investigation">
                                 <div class="round round-sm align-self-center round-orange m-b-10"><i class="ti-alarm-clock"></i></div>
                             </a>
@@ -104,7 +104,7 @@
                         </div>
                         <!-- Column -->
                         <!-- Column -->
-                        <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                        <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                             <a href="javascript:void(0)" class="checkup">
                                 <div class="round round-sm align-self-center round-lightGray m-b-10"><i class="ti-timer"></i></div>
                             </a>
@@ -119,7 +119,7 @@
                         <!-- Column -->
 
                         <?php  if(!in_array("appointments-can_complete-0", $permissions)): ?>
-                            <div class="col-lg-1 col-md-3 text-center m-b-5 p-0" style="max-width: 100%;">
+                            <div class="col-lg-1 col-md-3 col-sm-4 col-4 text-center m-b-5 p-0" style="max-width: 100%;">
                                 <a href="javascript:void(0)" class="complete">
                                     <div class="round round-sm align-self-center m-b-10" style="border:1px solid #006400; background: none;"><i class="ti-thumb-up" style="color: #006400;"></i></div>
                                 </a>

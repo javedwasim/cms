@@ -60,13 +60,13 @@
                   data-action="<?php echo site_url('Profile_history/add_history_item') ?>"
                   enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-lg-5 col-md-5">
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-12">
                         <div class="form-group">
                             <label>Item Name:</label>
                             <input type="text" class="form-control" id="history_items_name" name="name">
                         </div>
                     </div>
-                    <div class=" col-lg-5 col-md-5">
+                    <div class=" col-lg-5 col-md-5 col-sm-8 col-8">
                         <div class="form-group">
                             <label>Category:</label>
                             <select class="form-control prof_his_id" id="profile_history_id" name="profile_history_id" >
@@ -78,7 +78,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-2 p-0">
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-4 p-0">
                         <button class="btn btn-sm btn-primary m-t-30" id="history_item_btn">Add</button>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4 col-sm-8 col-8">
                 <div class="form-group ">
                     <label>Select Category:</label>
                     <select class="form-control" name="filter_history_category" onchange="filter_history_item_category(this.value)" id="history_items" required>
@@ -116,9 +116,9 @@
                     </select>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-3">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-4">
                 <div class="form-group m-t-25">
-                    <a class="btn btn-sm btn-primary" href="javascript:void(0)" id="export_history_items" >Export items</a>    
+                    <a class="btn btn-sm btn-primary" href="javascript:void(0)" id="export_history_items" >Export</a>    
                 </div>
             </div>
           </div>
