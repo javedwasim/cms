@@ -1,0 +1,62 @@
+Names
+Neck of Femor
+Neck of Humerus
+Abnormal Behavior
+Alopecia
+Amputation of Leg
+Amputation Toe
+Amurosis Fugus
+Anxiety Neurosis
+Arthtrits
+Arthtrits on steroid
+Brain Tumor
+Carotid endartrectomy
+Cervical Injury
+Cervical Rib
+Cervical Spondilosis
+Craniotomy
+CVA
+CVA-Recurrent
+Death in family
+Death Phobia
+Dementia
+Depression
+Disc Prolapse
+Down syndrome
+Epilepsy
+H/O CVA
+H/O Cerebral Heamotoma and Surgical Evacaution
+H/O Fall
+H/O GB syndrome
+H/O Nerve palsy
+H/O Sub Daural Heamotoma and Surgical Evacaution
+H/O Sub Arachnoid Heamorrhage 
+Hallucination
+Insan Person
+Intolerance
+Lamenectomy
+Left below Knee Amputation
+Migrain
+Muscular Dystrophy
+Neiling of left leg
+Neiling of right leg
+Osteoporosis
+Paraplegia
+Parkinsonism
+Proximal Myopathy
+RA
+Right above Knee Amputation
+Rt Hip Replacement
+Schizophrenia 
+Sciatica
+SPinal Stenosis
+Subarachnoid Heamorrhage
+Surgery for Carpel Tunnel Syndrom
+TB of Lower Leg
+TBM with Hydrocephalus
+Thoracic Spondilosis
+TIA
+Trigeminal Neuralgia
+VP Shunt
+Vertibrobasilar Insufficiency
+Weakness

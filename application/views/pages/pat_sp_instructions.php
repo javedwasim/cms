@@ -149,7 +149,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label></label>
+                        <label id="instruction_cate_name" ></label>
                         <textarea class="form-control" rows="3" name="description" id="inst_description"></textarea>
                     </div>
                 </div>
@@ -189,6 +189,8 @@
             success: function (response) {
                 if (response.success) {
                     $('#inst_description').val(response.description);
+                    $('#instruction_cate_name').empty();
+                    $('#instruction_cate_name').append(response.category);
                     $('#inst_modal').modal('show');
                 } else {
                     toastr["error"](response.message);

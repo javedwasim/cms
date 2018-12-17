@@ -20,15 +20,15 @@
       <strong>District:</strong>
       <label><?php echo $patient_info->pat_district ?></label>
       <br>
-      <strong>HT:</strong>
-      <label><?php echo $patient_info->pat_height ?></label>
-      <strong>WT:</strong>
-      <label><?php echo $patient_info->pat_weight ?></label>
-      <strong>BMI:</strong>
-      <label><?php echo $patient_info->pat_bmi ?></label>
-      <strong>BSA:</strong>
-      <label><?php echo $patient_info->pat_bsa ?></label>
       <?php if(isset($patient_vitals)){?>
+      <strong>HT:</strong>
+      <label><?php echo $patient_vitals->vital_height ?></label>
+      <strong>WT:</strong>
+      <label><?php echo $patient_vitals->vital_weight ?></label>
+      <strong>BMI:</strong>
+      <label><?php echo $patient_vitals->vital_bmi ?></label>
+      <strong>BSA:</strong>
+      <label><?php echo $patient_vitals->vital_bsa ?></label>
       <strong>BP:</strong>
       <label><?php echo $patient_vitals->vital_bp ?></label>
       <strong>Pulse:</strong>

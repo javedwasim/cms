@@ -14,7 +14,7 @@
 	    			<div class="row">
 	    				<div class="col-md-12 col-lg-12 pt-info">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#old" role="tab"><span class="hidden-sm-up">View old notes</span> <span class="hidden-xs-down">View Old Notes</span></a> </li>
+                                <li class="nav-item" id="old-notes"> <a class="nav-link active" data-toggle="tab" href="#old" role="tab"><span class="hidden-sm-up">View old notes</span> <span class="hidden-xs-down">View Old Notes</span></a> </li>
                                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#new" role="tab"><span class="hidden-sm-up">Write new notes</span> <span class="hidden-xs-down">Write New Note</span></a> </li>
                             </ul>
                             <!-- Tab panes -->

@@ -1,0 +1,122 @@
+Names
+Abdominal Hernia
+Abdominal Aneurysm
+Addison Disease
+Amenorrhea
+Anal Fissure
+APD
+Appendicitis
+Apendicectomy
+AV Fistula and on Heamodialysis
+Bilat. Hydronephrosis
+BPH
+H/o C-Section
+C Cirrohsis
+Cirrohsis of Liver
+Ca Bladder
+CA Breast
+CA endometrium
+CA Kidney
+Ca Overy
+Ca Prostate
+Ca Salivery Gland
+Ca Stomach
+CA Testes with Mets
+CA Rectum
+Cervical Polyp
+Cholilthiasis
+Ch. Pancreatitis
+Cholecystectomy
+Colostomy
+ColoRectal Mass
+CRF
+Crohn Disease
+Dysphagia
+Fistulectomy
+Goiter
+H/o Abortion
+H/O Chemotherapy for CA Breast
+H/o Hemodialysis
+H/O Hepatitis
+H/O Interferon for Hep C
+H/O oral contraceptive
+H/o Peylonephritis
+H/O Radiotherapy For CA Brest
+Haitus Hernia
+Hernioraphy
+HBs Positive
+Heamorrhoid
+Heamorrhoidectomy
+Hepatitis B
+Hepatitis C
+Hepatitis C Inj Coarse Completed
+Hepatoma
+H pylori +ve
+Hydronephrosis
+Hyperthyroidism
+Hypothyroidism
+Hystrectomy
+Impotense
+Ingiunal Hernia
+Keloid Formation
+Kyphosis
+Laprotomy
+Left Renal Lithiasis
+Lipoma
+Loss of Wt
+Liposuction
+Lumpectomy
+Lymphadenopathy
+Lymphoma
+Mastectomy
+MDA
+Membrance GN
+Menorrhagia
+Menstraul Irregularities
+Mesenteric Ischemia
+Mets
+Multinodular Goiter
+Myomectomy
+Myoma
+Nephrectomy
+Nephrolithiasis
+Obstructed Hernia
+Obstructive Uropathy
+On ATT
+On Chemotherapy
+On dialysis
+On Immunosuppressive Therapy
+On Steroid Therapy
+Oopherectomy 
+Operated for Anal Fissure
+Orchectomy
+Ovarian Cyst
+Para-Umblical Hernia
+Perianal Fistula
+Perimenopausal
+Perimenopausal Syndrome
+Peylolithotomy
+Peylonephritis
+Poly Cystic Kidney
+Postmenupausal
+Pregnancy
+Premenopausal
+Prostectomy
+Protienurea
+Radical Mastectomy and chemotherapy completed
+Renal Transplant
+Thyroidectomy
+Tubal Ligation
+Toxic Nodular Goiter
+Shrunken Kidney
+SLE
+Stricture UretheraSurgery for Uterovesical Fistula
+Vasectomy
+Vesical Growth
+Vesical Stone
+Vesicolithotomy
+Ulcerative Colitis
+Ureterolithiasis
+UTI
+Uterine Prolapse
+Fibroid Utrus

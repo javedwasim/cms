@@ -573,14 +573,16 @@ class Profile extends MY_Controller
     public function patient_info()
     {
         $id = $this->input->post('patid');
-        $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
-        $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
-        $data['details'] = $this->Profile_model->get_examination_detail($id);
-        $data['rights'] = $this->session->userdata('other_rights');
-        $data['files'] = $this->Profile_model->get_files($id);
-        $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
-        $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
-        $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
+        if (!empty($id)) {
+            $data['patient_info'] = $this->Profile_model->patient_info_by_id($id);
+            $data['patient_vitals'] = $this->Profile_model->paitnet_vitals_by_id($id);
+            $data['details'] = $this->Profile_model->get_examination_detail($id);
+            $data['rights'] = $this->session->userdata('other_rights');
+            $data['files'] = $this->Profile_model->get_files($id);
+            $json['image_html'] = $this->load->view('profile/profile_imag_slider',$data,true);
+            $json['details'] = $this->load->view('profile/examination-details_table', $data, true);
+            $json['patient_information'] = $this->load->view('profile/patient_information', $data, true);
+        }
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
         }

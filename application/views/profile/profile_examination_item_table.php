@@ -52,30 +52,47 @@
         $('td.exam_item').css('color', '#212529');
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
-        var val = $('#examination_item').val();
-        if(textarray.length>0 && val == ''){
-            textarray.length = 0;
-        }
         if(textarray.includes(name) === false){
-            var hisVal = $('#examination_item').val();
-            if(hisVal == ''){
-               var setHisVal = hisVal+name+': \n';
-            }else{
-                var setHisVal = hisVal+'\n'+name+': \n';
-            }
-            setTimeout(function(){
-                $('#examination_item').val(setHisVal.replace(/^,|,$/g,''));
-            },500);
+            var setHisVal = name+':';
+            var newrow = '<tr><td><input class="form-control bg-transparent border-0 shadow-none exami_item_val" id="examination_item" readonly="true" type="text" name="examination_item[]" value="'+setHisVal+'" ></td></tr>';
+            $('#examination_item_tb').append(newrow);
             textarray.push(name);
         }
         if(textarray.includes(text) === false){
             textarray.push(text);
-            setTimeout(function(){
-                var hisVal = $('#examination_item').val();
-                var setHisVal = hisVal+text+', ';
-                $('#examination_item').val(setHisVal.replace(/^,|,$/g,''));
-            },500);
+            var newrow = '<tr><td><input class="form-control bg-transparent border-0 shadow-none exami_item_val" id="examination_item" readonly="true" type="text" name="examination_item[]" value="'+text+'" ></td></tr>';
+            $('#examination_item_tb').append(newrow);
         }
+
+        $(document).ready(function(){
+            $( ".exami_item_val" ).dblclick(function() {
+                $(this).removeAttr('readonly');
+            });
+            $( ".exami_item_val" ).on( "focusout", function(){
+                $('.exami_item_val').attr('readonly', true);
+            } );
+            $("#examination-tb tbody tr").click(function (e) {
+                $('#examination-tb tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+            var input = $('.exami_item_val');
+            var coderun = false;
+            input.on('keydown', function() {
+                var item = $(this).val();
+                var key = event.keyCode || event.charCode;
+                var tr = $(this).closest('tr');
+                if (key == 46 || key == 8) {
+                    if (coderun != true) {
+                        textarray.splice($.inArray(item, textarray), 1);
+                        coderun = true;
+                    }
+
+                }
+                if(key == 46 ){
+                    tr.remove();
+                }
+            });
+        });
     }
 
 </script>

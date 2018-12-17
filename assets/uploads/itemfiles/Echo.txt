@@ -1,0 +1,74 @@
+Names
+A/S MI
+Antero-septal Hypokinesia
+Aneurysm
+Aortic and Mitral Valve Degenerative changes
+Aortic Valve Degenerative changes
+Apical Hypokinesia
+ASD
+ASD with Left to right shunt
+Asymmetrical septal hypertrophy
+Asymmetrical septal Hypertrophy
+Bi-atrial Enlargement
+Clot in LA.
+Clot in LV apex
+Constrictiv Pericarditis
+Cor-Pulmonale
+DCMP
+Diastolic Dysfunction I
+Diastolic Dysfunction II
+Dilate RA & RV
+Dilated All Chambers
+Dilated Aortic Root
+Dilated LA
+Dilated LV
+Dilated LV & LA
+Ebstein Enomaly
+Echo Contrast in LV
+Hypertrophic  Non-Obstructive Cardiomyopathy
+Hypertrophic  Obstructive Cardiomyopathy
+nf Wall Hypokinesia
+nf. MI
+nfero-Lateral Hypokinesia
+nfero-Posterior Hypokinesia
+schemic DCMP
+LA echo Contrast
+LVH
+Mass in LA
+Mild AR
+Mild AS
+Mild MR
+Mild MS
+Mild Pericardial Effusion
+Mild Sytolic Dysfunction
+Mitral  Valve Degenerative changes
+Mixed Aortic Valve Disease
+Mixed Mitral Valve disease
+Moderate AR
+Moderate AS
+Moderate MR
+Moderate MS
+Moderate Pericardial Effusion
+Moderate Sytolic Dysfunction
+MVP
+Myxoma
+Normal Echo
+PDA withn Rt to left shunt
+Pul HTN
+Pul Stenosis
+Pul. HTN
+RVH
+Sever AR
+Sever MR
+Sever Sytolic Dysfunction
+Small VSD
+Spontaneous Echo Contrast in LV
+Spontaneous Echo Contrast in LA
+Thrombus in LV apex
+Tight AS
+Tight MS
+Tight pliable MS
+Tight PS
+TOF
+Vegetation
+VSD

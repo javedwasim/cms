@@ -108,11 +108,6 @@ if(isset($rights[0]['user_rights']))
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                           <!-- <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>&nbsp;</td>
-						                            </tr> -->
-
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -150,10 +145,6 @@ if(isset($rights[0]['user_rights']))
 								                        </tr>
 									                    </thead>
 									                    <tbody>
-								                          <!-- <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>&nbsp;</td>
-								                            </tr> -->
 									                    </tbody>
 									                </table>
 							    				</div>
@@ -200,11 +191,6 @@ if(isset($rights[0]['user_rights']))
 								                        </tr>
 									                    </thead>
 									                    <tbody>
-								                           <!-- <tr>
-								                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-								                                <td>CVS</td>
-								                            </tr> -->
-
 									                    </tbody>
 									                </table>
 			                        			</div>
@@ -247,10 +233,6 @@ if(isset($rights[0]['user_rights']))
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                           <!-- <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>CVS</td>
-						                            </tr> -->
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -266,9 +248,6 @@ if(isset($rights[0]['user_rights']))
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                            <!-- <tr>
-						                                <td>CVS</td>
-						                            </tr> -->
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -289,10 +268,6 @@ if(isset($rights[0]['user_rights']))
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                           <!-- <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>&nbsp;</td>
-						                            </tr> -->
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -309,10 +284,6 @@ if(isset($rights[0]['user_rights']))
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                           <!-- <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>&nbsp;</td>
-						                            </tr> -->
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -333,10 +304,6 @@ if(isset($rights[0]['user_rights']))
 						                        </tr>
 							                    </thead>
 							                    <tbody>
-						                           <!-- <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>&nbsp;</td>
-						                            </tr> -->
 							                    </tbody>
 							                </table>
 						    			</div>
@@ -352,11 +319,7 @@ if(isset($rights[0]['user_rights']))
 						                            <th>Items</th>
 						                        </tr>
 							                    </thead>
-							                    <tbody>
-						                            <!-- <tr>
-						                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-						                                <td>&nbsp;</td>
-						                            </tr> -->
+							                    <tbody> 
 							                    </tbody>
 							                </table>
 	                        			</div>
@@ -378,7 +341,6 @@ if(isset($rights[0]['user_rights']))
                                     <form id="history_profile_form" method="post" role="form"
                                           data-action="<?php echo site_url('profile/set_examination_data') ?>"
                                           enctype="multipart/form-data">
-                                         <!--  <?php print_r($history_details);?> -->
                                         <input type="hidden" name="history_id"  id="history_id"/>
                                         <input type="hidden" name="exe_history_id" value="<?php if(isset($history_details)){foreach($history_details as $key){echo $key['id'];}}?>"  />
                                         <input type="hidden" name="patient_id" class="patient_id"/>
@@ -386,14 +348,16 @@ if(isset($rights[0]['user_rights']))
                                         <input type="hidden" name="clone_val_examination" id="clone_val_examination" value="">
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="pat_history_tbl" width="100%" >
                                                    <thead><tr><th>History</th></tr></thead>
-                                                    <tbody>
+                                                    <tbody id="history_tb_body" style="height: 20vh;">
+                                                    	<?php if(isset($history_details)){foreach($history_details as $key){ ?>
                                                         <tr>
                                                             <td style="padding: 0px">
-                                                                <textarea class="form-control" rows="5" name="history_item" id="history_item"><?php if(isset($history_details)){foreach($history_details as $key){echo $key['history_value'];}}?></textarea>
+                                                                <input class="form-control bg-transparent border-0 shadow-none history_item_val" id="history_item" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" type="text" name="history_item[]" value="<?php echo $key['history_value']; ?>" >
                                                             </td>
                                                         </tr>
+                                                       <?php }}?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -408,14 +372,16 @@ if(isset($rights[0]['user_rights']))
                                         <input type="hidden" name="examination_id" value="<?php if(isset($examination_details)){foreach($examination_details as $key){echo $key['id'];}}?>" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="examination-tb" width="100%" >
                                                     <thead><tr><th>Examination</th></tr></thead>
-                                                    <tbody>
+                                                    <tbody style="height: 20vh;" id="examination_item_tb">
+                                                    <?php if(isset($examination_details)){foreach($examination_details as $key){?>
                                                     <tr>
                                                         <td style="padding: 0px">
-                                                            <textarea class="form-control" rows="5" name="examination_item" id="examination_item"><?php if(isset($examination_details)){foreach($examination_details as $key){echo $key['examination_value'];}}?></textarea>
+                                                            <input class="form-control bg-transparent border-0 shadow-none exami_item_val" id="examination_item" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" type="text" name="examination_item[]" value="<?php echo $key['examination_value']; ?>" >
                                                         </td>
                                                     </tr>
+                                                    <?php }}?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -430,14 +396,16 @@ if(isset($rights[0]['user_rights']))
                                         <input type="hidden" name="investigation_id" value="<?php if(isset($investigation_details)){foreach($investigation_details as $key){echo $key['id'];}}?>" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="investi_item_tb" width="100%" >
                                                     <thead><tr><th>Investigation</th></tr></thead>
-                                                    <tbody>
+                                                    <tbody style="height: 20vh;" id="investigation_item_tb">
+                                                    <?php if(isset($investigation_details)){foreach($investigation_details as $key){ ?>
                                                     <tr>
                                                         <td style="padding: 0px">
-                                                            <textarea class="form-control" rows="5" name="investigation_item" id="investigation_item"><?php if(isset($investigation_details)){foreach($investigation_details as $key){echo $key['investigation_value'];}}?></textarea>
+                                                            <input class="form-control bg-transparent border-0 shadow-none investi_item_val" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" type="text" name="investigation_item[]" value="<?php echo $key['investigation_value']; ?>" >
                                                         </td>
                                                     </tr>
+                                                    <?php }}?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -511,14 +479,16 @@ if(isset($rights[0]['user_rights']))
                                         <input type="hidden" name="advice_id" value="<?php if(isset($advice_details)){foreach($advice_details as $key){echo $key['id'];}}?>" id="measurement_cate_id"/>
                                         <div class="card">
                                             <div class="card-body">
-                                                <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+                                                <table class="table table-bordered nowrap responsive tbl_header_fix_history" cellspacing="0" id="advice_item_tb" width="100%" >
                                                     <thead><tr><th>Test Advice</th></tr></thead>
-                                                    <tbody>
+                                                    <tbody style="height: 20vh" id="advice_tb">
+                                                    <?php if(isset($advice_details)){foreach($advice_details as $key){ ?>
                                                     <tr>
                                                         <td style="padding: 0px">
-                                                            <textarea class="form-control" rows="5" name="advice_item" id="advice_item"><?php if(isset($advice_details)){foreach($advice_details as $key){echo $key['advice_value'];}}?></textarea>
+                                                            <input class="form-control bg-transparent border-0 shadow-none advice_val" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" type="text" name="advice_item[]" value="<?php echo $key['advice_value']; ?>" >
                                                         </td>
                                                     </tr>
+                                                    <?php }} ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -533,14 +503,16 @@ if(isset($rights[0]['user_rights']))
 	                                    <input type="hidden" name="instruction_id" value="<?php if(isset($instruction_details)){foreach($instruction_details as $key){echo $key['id'];}}?>" id="measurement_cate_id"/>
 	                                    <div class="card">
 	                                        <div class="card-body">
-	                                            <table class="table table-bordered nowrap responsive" cellspacing="0" id="" width="100%" >
+	                                            <table class="table table-bordered responsive tbl_header_fix_history" cellspacing="0" id="instruction_item_tb" width="100%" >
 	                                                <thead><tr><th>Instruction</th></tr></thead>
-	                                                <tbody>
+	                                                <tbody style="height: 20vh" id="instruction_tb">
+	                                                <?php if(isset($instruction_details)){foreach($instruction_details as $key){ ?>
 	                                                <tr>
 	                                                    <td style="padding: 0px">
-	                                                        <textarea class="form-control" rows="5" name="instruction_item" id="instruction_item"><?php if(isset($instruction_details)){foreach($instruction_details as $key){echo $key['instruction_value'];}}?></textarea>
+	                                                        <input class="form-control bg-transparent border-0 shadow-none instr_val" readonly="true" ondblclick="this.readOnly='';" onfocusout="this.readOnly='readonly';" type="text" name="instruction_item[]" value="<?php echo $key['instruction_value']; ?>" >
 	                                                    </td>
 	                                                </tr>
+	                                                <?php }} ?>
 	                                                </tbody>
 	                                            </table>
 	                                        </div>

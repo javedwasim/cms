@@ -3430,7 +3430,7 @@ function get_echo(func_call) {
 
 function get_ett(func_call) {
     $.ajax({
-        url: '/cms/ett/'+func_call,
+        url: '/cms/ETT/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3445,7 +3445,7 @@ function get_ett(func_call) {
 
 function get_advice(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: window.location.origin+window.location.pathname+'Setting/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3460,7 +3460,7 @@ function get_advice(func_call) {
 
 function get_research(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: window.location.origin+window.location.pathname+'Setting/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3475,7 +3475,7 @@ function get_research(func_call) {
 
 function get_register_user(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: window.location.origin+window.location.pathname+'Setting/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3492,7 +3492,7 @@ function get_register_user(func_call) {
 
 function get_list_permission(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: window.location.origin+window.location.pathname+'Setting/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3510,7 +3510,7 @@ function get_list_permission(func_call) {
 
 function get_delete_patients(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: window.location.origin+window.location.pathname+'Setting/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3538,7 +3538,7 @@ function get_delete_patients(func_call) {
 
 function get_item_limiter(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: window.location.origin+window.location.pathname+'Setting/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3561,7 +3561,7 @@ function get_item_limiter(func_call) {
 function get_patient_vitals(patid,func_call,patname) {
     var sitetitle = 'Vitals-'+patname;
     $.ajax({
-        url: '/cms/user/'+func_call,
+        url: window.location.origin+window.location.pathname+'User/'+func_call,
         type: 'post',
         data:{patid:patid},
         cache: false,
@@ -3591,7 +3591,7 @@ function get_patient_vitals(patid,func_call,patname) {
 
 function get_laboratory_test(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: window.location.origin+window.location.pathname+'Setting/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3609,7 +3609,7 @@ function get_laboratory_test(func_call) {
 
 function grade_special_instruction(func_call) {
     $.ajax({
-        url: '/cms/instruction/'+func_call,
+        url: window.location.origin+window.location.pathname+'instruction/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3633,7 +3633,7 @@ function grade_special_instruction(func_call) {
 
 function get_items_signature(func_call) {
     $.ajax({
-        url: '/cms/doctor_signature/'+func_call,
+        url: window.location.origin+window.location.pathname+'Doctor_signature/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3656,7 +3656,7 @@ $(document.body).on('click', '#save_signature',function(e){
         var docDesi = $('#doc_sig_desi').val();
         var docInst = $('#doc_sig_institution').val();
         $.ajax({
-            url:'/cms/doctor_signature/save_doc_signature',
+            url:window.location.origin+window.location.pathname+'Doctor_signature/save_doc_signature',
             type: 'post',
             data: {
                 docName: docName,
@@ -3683,7 +3683,7 @@ $(document.body).on('click', '#save_signature',function(e){
 
 function updateSignature(editableObj, column, id) {
     $.ajax({
-        url: "/cms/doctor_signature/update_signature_details",
+        url: window.location.origin+window.location.pathname+"Doctor_signature/update_signature_details",
         type: "POST",
         data: 'column=' + column + '&editval=' + editableObj.innerHTML + '&id=' + id,
         success: function (response) {
@@ -3733,7 +3733,7 @@ $(document.body).on('click', '.delete-signature', function () {
 
 function get_manage_reasearch(func_call) {
     $.ajax({
-        url: '/cms/manage_research/'+func_call,
+        url: window.location.origin+window.location.pathname+'Manage_research/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3820,7 +3820,7 @@ $(document.body).on('click','#assign_research',function(e){
         var researchid = $('#research_option option:selected').val();
         var profileid = $('#research-table tbody tr.row_selected').find('.prof_id').text();
         $.ajax({
-            url: '/cms/manage_research/assign_research',
+            url: window.location.origin+window.location.pathname+'Manage_research/assign_research',
             type: 'post',
             data: {
                 rid:researchid,
@@ -3843,7 +3843,7 @@ $(document.body).on('click', '#save_diary', function (){
     var user = $('#diary_user option:selected').text();
     var note = $.trim($('#diary_conent').text());
     $.ajax({
-        url: '/cms/profile/save_note',
+        url: window.location.origin+window.location.pathname+'Profile/save_note',
         type: 'post',
         data: {
             username: user,
@@ -3886,6 +3886,7 @@ $(document.body).on('click', '.delete-notes', function () {
                         });
                         if(response.success == true){
                             toastr["error"](response.message);
+                            $('#note_update').text('');
                         }else{
                             toastr["error"](response.error);
                         }
@@ -3899,11 +3900,27 @@ $(document.body).on('click', '.delete-notes', function () {
     });
     return false;
 });
-
+$(document.body).on('click','#old-notes',function(){
+    var username = $('#diary_user_note').val();
+    $.ajax({
+        url: window.location.origin+window.location.pathname+'Profile/get_notes_record',
+        type: 'post',
+        data: {username:username},
+        cache: false,
+        success: function(response){
+            $('.diary_sidebar').remove();
+            $('#diary_sidebar').append(response.diary_sidebar);
+            $("#diray_table tbody tr").click(function (e) {
+                $('#diray_table tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+        }
+    });
+});
 $(document.body).on('change', '#diary_user_note', function(){
     var username = $(this).val();
     $.ajax({
-        url: '/cms/profile/get_notes_record',
+        url: window.location.origin+window.location.pathname+'Profile/get_notes_record',
         type: 'post',
         data: {username:username},
         cache: false,
@@ -3921,7 +3938,7 @@ $(document.body).on('change', '#diary_user_note', function(){
 $(document.body).on('click', '#diray_table tbody tr.row_selected', function(){
     var note_id = $(this).find('.note_id').text();
     $.ajax({
-        url: '/cms/profile/get_selected_note',
+        url: window.location.origin+window.location.pathname+'Profile/get_selected_note',
         type: 'post',
         data: {id:note_id},
         cache: false,
@@ -3938,7 +3955,7 @@ $(document.body).on('click', '#update_note', function(){
     var note_id = $('#diray_table tbody tr.row_selected').find('.note_id').text();
     var notevalue = $.trim($('#note_update').text());
     $.ajax({ 
-        url: '/cms/profile/update_note',
+        url: window.location.origin+window.location.pathname+'Profile/update_note',
         type: 'post',
         data: {
             id: note_id,
@@ -3957,7 +3974,7 @@ $(document.body).on('click', '#update_note', function(){
 /////////////////////// filter research managment ///////////////////////////////////////
 function research_filters(){
     $.ajax({
-        url: '/cms/manage_research/research_filters',
+        url: window.location.origin+window.location.pathname+'Manage_research/research_filters',
         data: $('#research_filter').serialize(),
         type: 'post',
         cache: false,
@@ -3984,7 +4001,7 @@ function research_filters(){
 }
 $(document.body).on('click', '#reset_research', function () {
     $.ajax({
-        url: '/cms/manage_research/reset_research_table',
+        url: window.location.origin+window.location.pathname+'Manage_research/reset_research_table',
         cache: false,
         success: function (response) {
             if(response.profile_table != ''){
@@ -4024,7 +4041,7 @@ $(document.body).on('change', '#research_option', function (){
 $(document.body).on('click', '#research_modal', function (){
     var researchid = $('#research_option option:selected').val();
     $.ajax({
-        url: '/cms/manage_research/research_description',
+        url: window.location.origin+window.location.pathname+'Manage_research/research_description',
         type: 'post',
         data: {id:researchid},
         cache: false,
@@ -4059,7 +4076,7 @@ $(document.body).on('click', '#update_research_desccription', function(){
 $(document.body).on('click', '#profiletable tbody tr.row_selected', function(){
     var patid = $.trim($(this).find('.profile_id').text());
     $.ajax({
-        url: '/cms/profile/patient_info',
+        url: window.location.origin+window.location.pathname+'Profile/patient_info',
         type: 'post',
         data: {patid:patid},
         cache: false,
@@ -4078,7 +4095,7 @@ $(document.body).on('click', '#profiletable tbody tr.row_selected', function(){
 
 $(document.body).on('click', '#reset_profile_filter', function () {
     $.ajax({
-        url: '/cms/profile/reset_profile_table',
+        url: window.location.origin+window.location.pathname+'Profile/reset_profile_table',
         cache: false,
         success: function (response) {
             if(response.profile_table != ''){
@@ -4113,7 +4130,7 @@ $(document.body).on('click', '#reset_profile_filter', function () {
 function profile_protocol_details(protocol_id){
     var detailid = $('#ett_pat_detail_id').val();
     $.ajax({
-        url: '/cms/profile/get_profile_protocol_details/'+protocol_id,
+        url: window.location.origin+window.location.pathname+'Profile/get_profile_protocol_details/'+protocol_id,
         type: 'post',
         data: {detailid:detailid},
         cache: false,
@@ -4249,8 +4266,8 @@ function printresearchData()
 }
 
 function printEtt(editableObj,ett_id,patient_id) {
-
-    var win = window.open('/cms/print_profiles/print_ett/?testid=' + ett_id +'&patid='+patient_id, '_blank');
+    url = window.location.origin+window.location.pathname;
+    var win = window.open(url+'Print_profiles/print_ett/?testid=' + ett_id +'&patid='+patient_id, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -4261,7 +4278,7 @@ function printEtt(editableObj,ett_id,patient_id) {
 
 function printlabtest(editableObj,key,patient_id) {
 
-    var win = window.open('/cms/print_profiles/print_lab_test/?key=' + key +'&patid='+patient_id, '_blank');
+    var win = window.open(url+'Print_profiles/print_lab_test/?key=' + key +'&patid='+patient_id, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -4290,8 +4307,8 @@ $(document.body).on('click', '#prescription_details', function () {
 });
 
 function print_prescription(editableObj,test_id,patient_id) {
-
-    var win = window.open('/cms/print_profiles/print_prescription/?testid=' + test_id +'&patid='+patient_id, '_blank');
+    url = window.location.origin+window.location.pathname;
+    var win = window.open(url+'Print_profiles/print_prescription/?testid=' + test_id +'&patid='+patient_id, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -4302,7 +4319,7 @@ function print_prescription(editableObj,test_id,patient_id) {
 $(document.body).on('click', '#sp_inst_details', function () {
     var patient_id = $.trim($('#profiletable tbody tr.row_selected').find('.profile_id').text());
     $.ajax({
-        url: window.location.origin+window.location.pathname+'profile/get_sp_inst_details',
+        url: window.location.origin+window.location.pathname+'Profile/get_sp_inst_details',
         type: 'post',
         data:  {patient_id:patient_id},
         cache: false,
@@ -4320,7 +4337,8 @@ $(document.body).on('click', '#sp_inst_details', function () {
 
 function printsp(editableObj,test_id,patient_id) {
     var printsize = $('input[name=print_sp_size]:checked').val();
-    var win = window.open('/cms/print_profiles/print_sp_inst/?testid=' + test_id +'&patid='+patient_id+'&size='+printsize, '_blank');
+    url = window.location.origin+window.location.pathname;
+    var win = window.open(url+'Print_profiles/print_sp_inst/?testid=' + test_id +'&patid='+patient_id+'&size='+printsize, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -4336,7 +4354,7 @@ function deleteEttDetail(editableObj,test_id,patient_id){
         buttons: {
             confirm: function () {
                 $.ajax({
-                    url: '/cms/print_profiles/delete_ett_test_details',
+                    url: window.location.origin+window.location.pathname+'Print_profiles/delete_ett_test_details',
                     type: 'post',
                     data: {detail_id:test_id,patid:patient_id},
                     cache: false,
@@ -4370,7 +4388,7 @@ function deletespinstDetail(editableObj,test_id,patient_id){
         buttons: {
             confirm: function () {
                 $.ajax({
-                    url: '/cms/print_profiles/delete_sp_isnt_test_details',
+                    url: window.location.origin+window.location.pathname+'Print_profiles/delete_sp_isnt_test_details',
                     type: 'post',
                     data: {detail_id:test_id,patid:patient_id},
                     cache: false,
@@ -4404,7 +4422,7 @@ function deletelabtestDetail(editableObj,key,patient_id){
         buttons: {
             confirm: function () {
                 $.ajax({
-                    url: '/cms/print_profiles/delete_lab_test_test_details',
+                    url: window.location.origin+window.location.pathname+'print_profiles/delete_lab_test_test_details',
                     type: 'post',
                     data: {key:key,patid:patient_id},
                     cache: false,
@@ -4467,7 +4485,7 @@ function searchpatient(d){
     var bookingflag = $('#booking_flag').val();
     $.ajax({
         type: "post",
-        url: '/cms/user/search_patient',
+        url: window.location.origin+window.location.pathname+'user/search_patient',
         data: {
             searchdate: searchDate,
             bookingflag: bookingflag

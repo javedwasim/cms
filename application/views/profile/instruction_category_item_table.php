@@ -23,12 +23,40 @@
         $(editableObj).css("color", "#FFF");
         if(rowarray.includes(text) === false){
             rowarray.push(text);
-            setTimeout(function(){
-                var hisVal = $('#instruction_item').val();
-                var setHisVal = hisVal+text+', ';
-                $('#instruction_item').val(setHisVal.replace(/^,|,$/g,''));
-            },500);
-        } 
+            var newrow = '<tr><td><input class="form-control bg-transparent border-0 shadow-none instr_val" readonly="true" type="text" name="instruction_item[]" value="'+text+'" ></td></tr>';
+            $('#instruction_tb').append(newrow);
+        }
+
+        $(document).ready(function(){
+            $( ".instr_val" ).dblclick(function() {
+                $(this).removeAttr('readonly');
+            });
+            $( ".instr_val" ).on( "focusout", function(){
+                $('.instr_val').attr('readonly', true);
+            } );
+            $("#instruction_item_tb tbody tr").click(function (e) {
+                $('#instruction_item_tb tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+            var input = $('.instr_val');
+            var coderun = false;
+                input.on('keydown', function() {
+                var item = $(this).val();
+                var key = event.keyCode || event.charCode;
+                var tr = $(this).closest('tr');
+                if (key == 46 || key == 8) {
+                    if (coderun != true) {
+                        rowarray.splice($.inArray(item, rowarray), 1);
+                        coderun = true;
+                    }
+
+                }
+                if(key == 46 ){
+                    tr.remove();
+                }
+            });
+                
+        });
         
     }
 

@@ -1,0 +1,126 @@
+Names
+Ablation for WPW synd
+AF
+Alcoholic
+Aortic Root Replacement
+AR
+AS
+ASD
+ASD Closer
+ASD with Eisenmengers syndrome
+AV Block
+AV Canal Defect
+A-V Fistula
+AVR
+Bera Addict
+Biventricular Failure
+CABG
+CABG postpond due to Factor V Def.
+Carotid endartrectomy
+Carotid Sinus Syndrome
+Cyanotic Heart Disease
+Ch. Smoker
+Chares Addict
+Cholesterol Embolism
+D. Foot
+D. Nephropathy
+D. Neuropathy
+D.Dermopathy
+D.Retinopathy
+DCMP
+Dextrocardia
+DM
+DVT
+Eisenmengers syndrome
+Ex. Ch. Smoker
+F/H Athma
+F/H DM
+F/H DM-HTN
+F/H HTN
+F/H IHD
+F/H Rh. Heart Disease
+Factor V Deficiency
+H/O A. Fib
+H/O AV Block
+H/O AV Block
+H/o Broad complex Tachycardia
+H/o DVT
+H/o DVT
+H/O PCI
+H/O Pericardial Effusion
+H/O Pulmonary Embolism
+H/o Recurrent VT
+H/o Rh. Fever
+H/O SBE
+H/o SVT
+H/O Venous Thrombosis in upper Limb
+H/O Vent Arrhythmia
+H/o VT
+H/o  non-sustain VT
+H/O PPM
+H/o Pericardectomy
+HTN
+Hyperlipidemia
+Hypertrophic Nonobstructive Cardiomyopathy
+Hypertrophic Obstructive Cardiomyopathy
+Hyperurecemia
+IHD
+Infective Endocarditis
+Left Heart hypoplastic Synd
+LGL Synd 
+Limb Ischemia
+Takasubo Cardiomyopathy
+Mitral comissrotmy
+Mixed Aortic valve disease
+Mixed Mitral valve disease
+Mixed Tricuspid Valve Disease
+Morphin addict
+MR
+MS
+Multivessel PCI
+MVP
+MVR
+Myxoma
+Myxoma of RA and RV
+Naswar Addict
+Obesity
+On DDDR PPM
+On ICD
+On VVI PPM
+Opened Valvotomy
+Opium Addict
+Paroxysmal AF
+PA banding
+Paan addict
+Paan with Tobacco
+Pericardectomy
+PCI
+PCI to Circ
+PCI to Graft Vessel
+PCI to LAD
+PCI to LAD & Circ
+PCI to LAD & RCA
+PCI to LAD and Ramus
+PCI to RCA
+PCI to RCA & Circ
+PDA
+PDA Closer
+Pericardectomy
+Perimenopausal
+Perimenopausal Syndrome
+Peripartum Cardiomyopathy
+Postmenopausal
+Premenopausal
+PS
+PTMC
+Primary Pulmonary HTN
+Pul Embolism
+Pulmonary HTN
+RA
+Rh. Fever
+Raynaud Disease
+Rh. Heart Disease
+SBE
+Sick sinus Synd
+Single LV with Double
+TOF

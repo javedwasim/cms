@@ -77,9 +77,18 @@
                 $(this).addClass('row_selected');
             });
             var input = $('.med_cat_val');
+                var coderun = false;
                 input.on('keydown', function() {
+                var item = $(this).val();
                 var key = event.keyCode || event.charCode;
                 var tr = $(this).closest('tr');
+                if (key == 46 || key == 8) {
+                    if (coderun != true) {
+                        rowarray.splice($.inArray(item, rowarray), 1);
+                        coderun = true;
+                    }
+
+                }
                 if(key == 46 ){
                     tr.remove();
                 }

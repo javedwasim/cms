@@ -231,7 +231,7 @@
     }
     .footer-top{
         position: fixed;
-        bottom: 150px;
+        bottom: 170px;
     }
     .mb-10{
         margin-bottom: 20px;
@@ -266,9 +266,18 @@
                     <div class="row">
                         <div class="col-md-5" style="padding-left: 0px; font-weight: 500; font-size: 25px; font-family: Arial;">
                             <?php 
-                            foreach($instruction_details as $instruction){
-                                $instructions = explode(",",$instruction['instruction_value']); 
-                    
+                            
+                            foreach ($history_details as $value) {
+                                $history[] = $value['history_value'];
+                            }
+                            foreach($examination_details as $examination){
+                                $examinations[] = $examination['examination_value'];
+                            }
+                            foreach($investigation_details as $investigation){
+                                $investigations[] = $investigation['investigation_value'];
+                            }
+                            foreach($advice_details as $advice){
+                                $advices[] = $advice['advice_value'];
                             }
                             foreach($medicine_details as $med){?>
                                 <div class="mb-10"><?php echo $med['medicine_value']?></div>
@@ -282,30 +291,22 @@
                     </div>
                 </div>
                 <div class="col-md-4" style="font-size: 20px;font-family: Arial;">
-                    <?php foreach($history_details as $history){?>
-                        <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $history['history_value']; ?></div>
-                    <?php }?>
+                    <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo implode(',',$history); ?></div>
                     <?php 
                     foreach($patient_vitals as $vitals){?>
                         <div style="width: 100%; word-break: break-all;">Pulse:<?php echo $vitals['vital_pulse']; ?>&nbsp;<?php echo $vitals['vital_volume']; ?></div>
                         <div style="width: 100%; word-break: break-all;">BP.<?php echo $vitals['vital_bp']; ?></div>
                         <div style="width: 100%; word-break: break-all;">Resp. Rate:<?php echo $vitals['vital_rr']; ?>&nbsp;&nbsp;&nbsp;Temprature:<?php echo $vitals['vital_temp']; ?></div>
                     <?php }?>
-                    <?php foreach($examination_details as $examination){?>
-                        <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $examination['examination_value']; ?></div>
-                    <?php }?>
-                    <?php foreach($investigation_details as $investigation){?>
-                        <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $investigation['investigation_value']; ?></div>
-                    <?php }?>
-                    <?php foreach($advice_details as $advice){?>
-                        <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo $advice['advice_value']; ?></div>
-                    <?php }?>
+                    <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo implode(',',$examinations); ?></div>
+                    <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo implode(',',$investigations); ?></div>
+                    <div class="mb-10" style="width: 100%; word-break: break-all;"><?php echo implode(',', $advices) ; ?></div>
                 </div>
             </div>
             <br>
             <div class="mb-10 footer-top" style="word-break: break-all; font-weight: 500; font-size: 22px; text-align: right; width: 86%;">
-                <?php foreach ($instructions as $value) {
-                    echo '<div style="text-align:left; display:inline-block; ">'.$value.'</div> <br>';
+                <?php foreach ($instruction_details as $value) {
+                    echo '<div style="text-align:left; display:inline-block; ">'.$value['instruction_value'].'</div> <br>';
                 }?>
             </div>
             <div class="row footer-bottom" style="width: 92%;">

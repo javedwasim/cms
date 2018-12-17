@@ -1911,7 +1911,7 @@ class Setting extends MY_Controller
                         'name' => $row['Names'],
                         'investigation_id' => $id
                     );
-                    $this->Setting_model->insert_file_data($insert_data);
+                    $this->Setting_model->insert_file_data($insert_data,$tbl);
                 }
                 return true;
             }else{

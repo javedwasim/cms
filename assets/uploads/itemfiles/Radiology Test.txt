@@ -1,0 +1,12 @@
+Names
+Cardiac MRI
+Carotid Doppler Study
+CT Brain
+CT Brain with Contrast
+CT Chest and Neck
+CT Coronary Angio
+CXR-PA Veiw
+MRI Brain
+USG of abdomen
+X Ray Cervical Spine -AP and Lateral Veiw
+X-Rays Lambosacral AP & Lateral

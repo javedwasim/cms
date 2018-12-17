@@ -29,30 +29,48 @@
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
         
-        var val = $('#advice_item').val();
-        if(textarray.length>0 && val == ''){
-            textarray.length = 0;
-        }
+       
         if(textarray.includes(name) === false){
-            var hisVal = $('#advice_item').val();
-            if(hisVal == ''){
-               var setHisVal = hisVal+name+': \n';
-            }else{
-                var setHisVal = hisVal+'\n'+name+': \n';
-            }
-            setTimeout(function(){
-                $('#advice_item').val(setHisVal.replace(/^,|,$/g,''));
-            },500);
+            var setHisVal = name+':';
+            var newrow = '<tr><td><input class="form-control advice_val bg-transparent border-0 shadow-none" readonly="true" type="text" name="advice_item[]" value="'+setHisVal+'" ></td></tr>';
+            $('#advice_tb').append(newrow);
             textarray.push(name);
         }
         if(textarray.includes(text) === false){
+            var newrow = '<tr><td><input class="form-control advice_val bg-transparent border-0 shadow-none" readonly="true" type="text" name="advice_item[]" value="'+text+'" ></td></tr>';
+            $('#advice_tb').append(newrow);
             textarray.push(text);
-            setTimeout(function(){
-                var hisVal = $('#advice_item').val();
-                var setHisVal = hisVal+text+', ';
-                $('#advice_item').val(setHisVal.replace(/^,|,$/g,''));
-            },500);
         }
+
+        $(document).ready(function(){
+            $( ".advice_val" ).dblclick(function() {
+                $(this).removeAttr('readonly');
+            });
+            $( ".advice_val" ).on( "focusout", function(){
+                $('.advice_val').attr('readonly', true);
+            } );
+            $("#advice_item_tb tbody tr").click(function (e) {
+                $('#advice_item_tb tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+            var input = $('.advice_val');
+                var coderun = false;
+                input.on('keydown', function() {
+                var item = $(this).val();
+                var key = event.keyCode || event.charCode;
+                var tr = $(this).closest('tr');
+                if (key == 46 || key == 8) {
+                    if (coderun != true) {
+                        rowarray.splice($.inArray(item, rowarray), 1);
+                        coderun = true;
+                    }
+
+                }
+                if(key == 46 ){
+                    tr.remove();
+                }
+            });
+        });
     }
 
 </script>

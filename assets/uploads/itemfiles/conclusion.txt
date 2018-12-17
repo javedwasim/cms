@@ -1,0 +1,6 @@
+Names
+Test is normal for Exercise induced ischemia at Maximum Cardiac Work load.
+Test is normal for Exercise induced ischemia at Low Cardiac Work load.
+Test is normal for Exercise induced ischemia at Moderate Cardiac Work load.
+Test is abnormal for Exercise induced ischemia at Low Cardiac Work load.
+Test is abnormal for Exercise induced ischemia at Moderate Cardiac Work load.

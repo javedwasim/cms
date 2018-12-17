@@ -1944,7 +1944,7 @@ $(document.body).on('click', '.edit-inst-btn', function(){
         success: function(response) {
             if (response.success) {
                 $('#instruction_cate_name').empty();
-                $('#instruction_cate_name').append(response.category)
+                $('#instruction_cate_name').append(response.category);
                 $('#inst_description').val(response.description);
                 $('#inst_modal').modal('show');
             } else {

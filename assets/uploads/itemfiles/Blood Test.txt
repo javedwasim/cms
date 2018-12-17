@@ -1,0 +1,37 @@
+Names
+24 Hour Urinary VMA
+24 Hour Urinary Protein and Creatinine
+aPTT
+Bleeding Time
+Bone Marrow Examination
+Cardiac Enzyme
+CBC
+CBC with ESR
+CBC with Peripheral Morphology
+Clotting time
+GTT
+HbA1c
+PT - INR
+Ruotine Investigation
+S. Albumin
+S. ALT
+S. Anti HCV abd
+S. CPK
+S. Electrolyte
+S. Hbs Ag
+S. LFT
+S. Lipid Profile-F
+S. Mg++
+S. Sugar -F
+S. Sugar -R
+S. Sugar-F
+S. Urea and Creatinin
+S. Uric Acid
+S.Total protein
+Stool Examination
+Trop T
+Trop I
+S.TSH
+Tyroid Function Test
+Urine C/E
+Stool for Occult Blood

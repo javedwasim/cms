@@ -57,12 +57,39 @@
         }
         if(textarray.includes(text) === false){
             textarray.push(text);
-            setTimeout(function(){
-                var hisVal = $('#history_item').val();
-                var setHisVal = hisVal+text+', ';
-                $('#history_item').val(setHisVal.replace(/^,|,$/g,''));
-            },500);
+            var newrow = '<tr><td><input class="form-control bg-transparent border-0 shadow-none history_item_val" id="history_item" readonly="true" type="text" name="history_item[]" value="'+text+'" ></td></tr>';
+            $('#history_tb_body').append(newrow);
         }
+
+        $(document).ready(function(){
+            $( ".history_item_val" ).dblclick(function() {
+                $(this).removeAttr('readonly');
+            });
+            $( ".history_item_val" ).on( "focusout", function(){
+                $('.history_item_val').attr('readonly', true);
+            } );
+            $("#pat_history_tbl tbody tr").click(function (e) {
+                $('#pat_history_tbl tbody tr.row_selected').removeClass('row_selected');
+                $(this).addClass('row_selected');
+            });
+            var input = $('.history_item_val');
+            var coderun = false;
+            input.on('keydown', function() {
+                var item = $(this).val();
+                var key = event.keyCode || event.charCode;
+                var tr = $(this).closest('tr');
+                if (key == 46 || key == 8) {
+                    if (coderun != true) {
+                        textarray.splice($.inArray(item, textarray), 1);
+                        coderun = true;
+                    }
+
+                }
+                if(key == 46 ){
+                    tr.remove();
+                }
+          });
+        });
         
     }
 

@@ -1,0 +1,94 @@
+Names
+Ac. Ant. MI
+Ac. Inf. MI
+APCs
+At. Fib
+At. Fib with occasional aberrant Conduction
+At. Fib with Rapid Vent Response
+At. Bigeminy
+Bifasicular Block
+Bifocal PVCs
+Biatrial Enlargement
+Bigeminy
+Bradycardia
+Bradycardia with Junctional Escape beat
+Broad Complex tachycardia
+Complete AV block with Junctional Escape Rhythm
+Complete AV block with Vent. Escape Rhythm
+Coupletes
+Dextrocardia- Normal ECG
+Dig effect
+Dig Toxicity
+Deep T wave Inversion
+Giant T wave Inversion
+Early Repolarization
+Electrical Alternance
+Extrem LAD
+First degree Block
+High Voltage ECG
+Incomplete LBBB
+Incomplete RBBB
+Intermittent LBBB
+Intermittant Mobit`s Type II
+Normal ECGwith Intermitant Pre-excitation
+Intrventricular Conduction delay
+Junctional Escape Rhytm
+Junctional Escape Rhytm with Retrograde P wave
+LAD
+LAH
+LAHB
+LBBB
+LGL Synd.
+Low Voltage ECG
+LVH
+Mobits Type I
+Mobits Type II
+Multifocal PACs
+Multifocal PVCs
+New ST_T changes
+Non sustain run  of VT
+Non-Specific ST-T Changes
+Old Ant. & Inf. MI
+Old Ant. MI
+Old Anterolateral MI
+Old inf. MI
+Old inferoposterior. MI
+Old Lateral Wall MI
+P Mitral
+P Pulmonale
+Pace maker Rhythm
+Poor Progression of R Wave
+PPM Rhythm
+Probable New onset LBBB
+Prolonged QT
+Prominant U wave
+PVCs
+Quadrigemny
+R in V1
+RAD
+RAH
+RBBB
+Retrograde P wave
+RVH
+Sinus Arrest
+Sinus Pauses
+Sick Sinus Syndrom
+Sinus Exit Block
+Sinus Rhythm
+ST Elevation in Ant. Leads
+ST Elevation in Inf. Leads
+ST_T changes
+SVT
+SVT with Abberrent Conduction
+Tachy-Bradycardia
+Sinus Tachycardia
+Third Degree AV block
+Tall tented T wave
+Trigeminy
+Trifasicular Block
+Tripplet
+Ventricular Escape Rhythm
+Within Normal Limit
+Wenchebach
+WPW Syndrom
+Intraventricular Conduction Abnormality

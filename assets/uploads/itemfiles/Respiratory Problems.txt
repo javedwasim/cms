@@ -1,0 +1,24 @@
+Names
+Allergic rhinitis 
+Bronchitis
+Broncheactasis
+Br. Asthma
+Chest Infection
+COAD
+Cor Pulmonale
+H/o Pl. Effusoin
+H/O Pulmonary Kocks ATT completed
+Intertitial Fibrosis
+Intertitial Lung disease
+Lower Resp Tract Infection
+Nasal Polyp
+Pulmonary Kocks
+Pulmonary Kocks on ATT
+Pneumonia
+CA Lungs with Metastasis
+CA Larynx
+Permanent Tracheostomy
+Obstructed Sleep Apnea 
+TB Spine
+Chest Deformity
+H/O Recurrent Chest infection

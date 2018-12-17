@@ -842,21 +842,29 @@ class Profile_model extends CI_Model
 
         if (isset($data['history_item'])) {
             $history_item = $data['history_item'];
-            $result = $this->db->insert('profile_examination_history', array('examination_detail_id' => $examination_detail_id, 'patient_id' => $patient_id, 'history_value' => $history_item));
+            foreach ($history_item as $value) {
+                $result = $this->db->insert('profile_examination_history', array('examination_detail_id' => $examination_detail_id, 'patient_id' => $patient_id, 'history_value' => $value));
+            }
+            
         }
 
         if (isset($data['examination_item'])) {
             $examination_item = $data['examination_item'];
-            $result = $this->db->insert('profile_examination_info',
+            foreach ($examination_item as $value) {
+                $result = $this->db->insert('profile_examination_info',
                 array('examination_detail_id' => $examination_detail_id,
-                    'patient_id' => $patient_id, 'examination_value' => $examination_item));
+                    'patient_id' => $patient_id, 'examination_value' => $value));
+            }
+            
         }
 
         if (isset($data['investigation_item'])) {
             $investigation_item = $data['investigation_item'];
-            $result = $this->db->insert('profile_examination_investigation',
+            foreach ($investigation_item as $value) {
+                $result = $this->db->insert('profile_examination_investigation',
                 array('examination_detail_id' => $examination_detail_id,
-                    'patient_id' => $patient_id, 'investigation_value' => $investigation_item));
+                    'patient_id' => $patient_id, 'investigation_value' => $value));
+            }
         }
 
         if (isset($data['medicine_value']) && !empty($data['medicine_value'])) {
@@ -876,19 +884,25 @@ class Profile_model extends CI_Model
             }
             
         }
-        if (isset($data['instruction_item'])) {
-            $instruction_item = $data['instruction_item'];
-            $result = $this->db->insert('profile_examination_instruction',
-                array('examination_detail_id'=>$examination_detail_id,
-                    'patient_id' => $patient_id,'instruction_value'=>$instruction_item));
-        }
+
         if (isset($data['advice_item'])) {
             $advice_item = $data['advice_item'];
-            $result = $this->db->insert('profile_examination_advice',
+            foreach ($advice_item as $value) {
+                $result = $this->db->insert('profile_examination_advice',
                 array('examination_detail_id'=>$examination_detail_id,
-                    'patient_id' => $patient_id,'advice_value'=>$advice_item));
+                    'patient_id' => $patient_id,'advice_value'=>$value));
+            }
+            
         }
 
+        if (isset($data['instruction_item'])) {
+            $instruction_item = $data['instruction_item'];
+            foreach ($instruction_item as $value) {
+                $result = $this->db->insert('profile_examination_instruction',
+                array('examination_detail_id'=>$examination_detail_id,
+                    'patient_id' => $patient_id,'instruction_value'=>$value));
+            }
+        }
         // if (isset($data['examination_info_pulse'])||isset($data['examination_info_volume'])||isset($data['examination_info_volume'])||isset($data['examination_info_bpa'])||isset($data['examination_info_bpb'])||isset($data['examination_resp_rate'])||isset($data['examination_info_temp'])) {
         //     $data_array = array(
         //     'examination_detail_id' => $examination_detail_id, 

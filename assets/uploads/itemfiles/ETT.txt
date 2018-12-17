@@ -1,0 +1,10 @@
+Names
+Stress Echo- Positive
+Stress Echo- Negative
+Negative at High Woarkload
+Positive at Moderate Woarkoad
+Boderline Line Positive
+Mibi Scan:Negative
+Mibi Scan:Positive
+Mibi Scan:Fixed Defect
+CT Angio- Normal Scan
