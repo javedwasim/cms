@@ -54,7 +54,7 @@ $(document.body).on('click','#import_disease_btn', function(e){
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-4  col-sm-8 col-8">
+                <div class="col-md-3  col-sm-8 col-8">
                     <form id="disease_category_form">
                         <div class="form-group">
                           <label>New Disease</label>
@@ -65,8 +65,8 @@ $(document.body).on('click','#import_disease_btn', function(e){
                 <div class="col-md-1 p-l-0  col-sm-3 col-3" style="margin-top: 25px;">
                     <button class="btn btn-sm btn-primary add-disease-category">Add</button>
                 </div>
-                <div class="col-md-2 p-l-0" style="margin-top: 25px;">
-                    <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_diseases" id="disease_export">Export diseases</a>
+                <div class="col-md-1 p-l-0" style="margin-top: 25px;">
+                    <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_diseases" id="disease_export">Export</a>
                 </div>
                 <div class="col-md-5">
                   <form id="import_csv_disease" enctype="multipart/form-data">
@@ -83,6 +83,9 @@ $(document.body).on('click','#import_disease_btn', function(e){
                         </div>
                       </div>
                   </form>
+                </div>
+                <div class="col-md-2 m-t-25">
+                  <button class="btn btn-sm btn-danger" id="delete_all_diseases">Delete All</button>
                 </div>
             </div>
         </div>

@@ -14,6 +14,9 @@
                     <div class="col-md-2 col-lg-1 m-t-25  col-sm-4 col-4">
                         <button class="btn btn-primary btn-sm add-instruction-category">Add</button>
                     </div>
+                    <div class="col-md-2 m-t-25">
+                      <button class="btn btn-danger btn-sm" id="delete_all_instructions" >Delete All</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -22,44 +25,3 @@
         </div>
     </div>
 </div>
-<style>
-    body {
-        width: 100%;
-    }
-
-    .current-row {
-        background-color: #B24926;
-        color: #FFF;
-    }
-
-    .current-col {
-        background-color: #1b1b1b;
-        color: #FFF;
-    }
-
-    .tbl-qa {
-        width: 100%;
-        font-size: 0.9em;
-        background-color: #f5f5f5;
-    }
-
-    .tbl-qa th.table-header {
-        padding: 5px;
-        text-align: left;
-        padding: 10px;
-    }
-
-    .tbl-qa .table-row td {
-        padding: 10px;
-        background-color: #FDFDFD;
-    }
-</style>
-<script>
-    $(document).ready(function () {
-        $('.datatables').DataTable({
-            "info": true,
-            "paging": false,
-            "searching": false
-        });
-    });
-</script>

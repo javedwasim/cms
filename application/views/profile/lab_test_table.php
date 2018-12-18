@@ -50,7 +50,7 @@
         var test_id = $(this).attr('data-lab-test-id');
         $('#lab_test_id').val($(this).attr('data-lab-test-id'));
         $.ajax({
-            url: '/cms/setting/get_lab_test_description',
+            url: window.location.origin+window.location.pathname+'Setting/get_lab_test_description',
             type: 'post',
             data: {id:test_id},
             cache: false,
@@ -76,7 +76,7 @@
         $('#category_id').val(category_id);
 
         $.ajax({
-            url: '/cms/profile/get_lab_item_by_test_id/'+test_id,
+            url: window.location.origin+window.location.pathname+'Profile/get_lab_item_by_test_id/'+test_id,
             type: 'post',
             data: {test_id: test_id, category_id:category_id},
             cache: false,

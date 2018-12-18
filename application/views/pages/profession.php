@@ -87,7 +87,7 @@ $(document.body).on('click','#import_profession_btn', function(e){
                           </form>
                       </div>
                       <div class="col-md-2 p-l-0 col-sm-4 col-4" style="margin-top: 25px;">
-                          <button class="btn btn-danger btn-sm" id="delete_all_profession">Delete all</button>
+                          <button class="btn btn-danger btn-sm" id="delete_professions">Delete all</button>
                       </div>
                   </div>
                 </div>

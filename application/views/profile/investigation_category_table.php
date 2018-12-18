@@ -55,7 +55,7 @@
         $(editableObj).css("background", "#1e88e5");
         $(editableObj).css("color", "#FFF");
         $.ajax({
-            url: '/cms/profile/get_investigation_item/'+id+'/'+name,
+            url: window.location.origin+window.location.pathname+'Profile/get_investigation_item/'+id+'/'+name,
             type: 'get',
             cache: false,
             success: function (response) {

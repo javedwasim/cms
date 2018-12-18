@@ -153,7 +153,6 @@ class Setting extends MY_Controller
         $cat_id = 0;
         $data['advices'] = $this->Setting_model->get_advices();
         $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
-        // $data['items'] = $this->Setting_model->get_advice_items();
         $data['active_tab'] = 'advice';
         $data['rights'] = $this->session->userdata('other_rights');
         $json['result_html'] = $this->load->view('pages/advice', $data, true);
@@ -3209,6 +3208,405 @@ class Setting extends MY_Controller
             $json['error'] = true;
             $json['message'] = 'Seems an error';
         }
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    ////////////////////////////////// Delete module /////////////////////////////////////////////////////////////
+
+    public function delete_all_professions(){
+        $tbl = 'profession_tbl';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['rights'] = $this->session->userdata('other_rights');
+        $data['professions'] = $this->Setting_model->get_professions();
+        $json['profession_table'] = $this->load->view('pages/profession_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_districts(){
+        $tbl = 'districts_tbl';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['rights'] = $this->session->userdata('other_rights');
+        $data['districts'] = $this->Setting_model->get_districts();
+        $json['district_table'] = $this->load->view('pages/district_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_history(){
+        $tbl = 'profile_history';
+        $itemTable = 'history_item';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $catid = 0;
+        $data['categories'] = $this->History_model->get_profile_history();
+        $data['items'] = $this->History_model->get_history_items_by_category($catid);
+        $json['result_html'] = $this->load->view('history/profile_history', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_examinations(){
+        $tbl = 'examination';
+        $itemTable = 'examination_item';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $cat_id = 0;
+        $data['categories'] = $this->Examination_model->get_examination_categories();
+        $data['items'] = $this->Examination_model->get_examination_items_by_category($cat_id);
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('examination/examination', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_investigations(){
+        $tbl = 'investigation';
+        $itemTable = 'investigation_item';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $cat_id = 0;
+        $data['categories'] = $this->Investigation_model->get_investigation_categories();
+        $data['items'] = $this->Investigation_model->get_investigation_items_by_category($cat_id);
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('investigation/investigation', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_angio(){
+        $tbl = 'recommendation';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['rights'] = $this->session->userdata('other_rights');
+        $data['recommendations'] = $this->Recommendation_model->get_recommendations();
+        $json['result_html'] = $this->load->view('angio/recommendation', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_instructions(){
+        $cat = $this->input->post('cat');
+        $tbl = 'instruction';
+        $itemTable = 'instruction_item';
+        $result = $this->Setting_model->delete_all_instructions($tbl,$itemTable,$cat);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        } 
+        $dataitem = 0;
+        $data['category'] = $cat;
+        $data['categories'] = $this->Instruction_model->get_instruction_categories($data);
+        $data['items'] = $this->Instruction_model->get_inst_items($dataitem);
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('instruction/instruction', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_dosage(){
+        $tbl = 'dosage';
+        $itemTable = 'medicine_dosage';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['med_dosages'] = $this->Medicine_model->get_dosage_categories();
+        $data['active_tab'] = 'dosage';
+        $json['result_html'] = $this->load->view('medicine/dosage_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_diseases(){
+        $tbl = 'disease';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $category = 0;
+        $data['categories'] = $this->Echo_model->get_disease_categories();
+        $data['structures'] = $this->Echo_model->get_structure_categories();
+        $data['findings'] = array();
+        $data['diagnosis'] = array();
+        $data['main_categories'] = $this->Echo_model->get_main_category_by_filter($category);
+        $data['main_cate'] = $this->Echo_model->get_echo_main_categories();
+        $data['measurements'] = $this->Echo_model->get_measurement_by_filter($category);
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('echo/echo', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_test_reason(){
+        $tbl = 'ett_test_reason';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['test_reasons'] = $this->ETT_model->get_test_reasons();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/test_reason_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_ending_reason(){
+        $tbl = 'ett_ending_reason';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['ending_reasons'] = $this->ETT_model->get_ending_reasons();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/ending_reason_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_discriptions(){
+        $tbl = 'ett_description';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['descriptions'] = $this->ETT_model->get_descriptions();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/description_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_conclusions(){
+        $tbl = 'ett_conclusion';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['conclusions'] = $this->ETT_model->get_conclusions();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('ett/conclusion_table', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_advices(){
+        $tbl = 'advice';
+        $itemTable = 'advice_item';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $cat_id = 0;
+        $data['advices'] = $this->Setting_model->get_advices();
+        $data['items'] = $this->Setting_model->get_advice_items_by_category($cat_id);
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('pages/advice', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_research(){
+        $tbl = 'research';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $data['researches'] = $this->Setting_model->get_researches();
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('pages/add_research', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_lab(){
+        $tbl = 'lab_category';
+        $itemTable = 'lab_test';
+        $testitem = 'lab_test_item';
+        $result = $this->Setting_model->delete_all_tb($tbl,$itemTable,$testitem);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        $cat_id = 0;
+        $test_id = 0;
+        $data['categories'] = $this->Setting_model->get_lab_categories();
+        $data['tests'] = $this->Setting_model->get_lab_tests_by_category($cat_id);
+        $data['labtests'] = $this->Setting_model->get_lab_tests();
+        $data['items'] = $this->Setting_model->get_lab_item_by_test_id($test_id);
+        $data['rights'] = $this->session->userdata('other_rights');
+        $json['result_html'] = $this->load->view('laboratory/laboratory', $data, true);
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_structure(){
+        $tbl = 'structure';
+        $itemTable = 'structure_finding';
+        $testitem = 'diagnosis';
+        $result = $this->Setting_model->delete_all_tb($tbl,$itemTable,$testitem);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_echo_cat(){
+        $tbl = 'echo_category';
+        $itemTable = 'category_measurement';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_protocol(){
+        $tbl = 'ett_protocols';
+        $itemTable = 'ett_protocol_details';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        
+        if ($this->input->is_ajax_request()) {
+            set_content_type($json);   
+        }
+    }
+
+    public function delete_all_doctor(){
+        $tbl = 'doctor_signature';
+        $itemTable = '';
+        $result = $this->Setting_model->delete_all($tbl,$itemTable);
+        if ($result) {
+            $json['success'] = true;
+            $json['message'] = 'Successfully Deleted.';
+        }else{
+            $json['error'] = true;
+            $json['message'] = 'Seems an error.';
+        }
+        
         if ($this->input->is_ajax_request()) {
             set_content_type($json);   
         }

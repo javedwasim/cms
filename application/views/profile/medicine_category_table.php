@@ -58,7 +58,7 @@
         $(editableObj).css("color", "#FFF");
 
         $.ajax({
-            url: '/cms/profile/get_medicine_item/'+id,
+            url: window.location.origin+window.location.pathname+'Profile/get_medicine_item/'+id,
             type: 'get',
             cache: false,
             success: function (response) {

@@ -77,7 +77,7 @@
                         confirm: function () {
                             $.ajax({
                                 type: "post",
-                                url: '/cms/user/delete_patient',
+                                url: window.location.origin+window.location.pathname+'User/delete_patient',
                                 data: {
                                     fromDate: datefrom,
                                     toDate: dateto
@@ -109,7 +109,7 @@
                 buttons: {
                     confirm: function () {
                         $.ajax({
-                            url: '/cms/user/delete_all_patient',
+                            url: window.location.origin+window.location.pathname+'User/delete_all_patient',
                             success: function (response) {
                                 if(response.success==true){
                                     toastr["error"](response.message);
@@ -138,7 +138,7 @@
                         confirm: function () {
                             $.ajax({
                                 type: "post",
-                                url: '/cms/user/delete_patient_by_ids',
+                                url: window.location.origin+window.location.pathname+'User/delete_patient_by_ids',
                                 data: {
                                     fromid: fromid,
                                     toid: toid

@@ -37,7 +37,7 @@
         var test_id = $(this).attr('data-lab-test-item-id');
         $('#lab_test_item_id').val($(this).attr('data-lab-test-item-id'));
         $.ajax({
-            url: '/cms/setting/get_lab_test_item_description',
+            url: window.location.origin+window.location.pathname+'Setting/get_lab_test_item_description',
             type: 'post',
             data: {id:test_id},
             cache: false,

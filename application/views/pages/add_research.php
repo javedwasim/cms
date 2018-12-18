@@ -3,19 +3,26 @@
         <div class="col-md-12">
             <div class="card card-top-margin">
             	<div class="card-header">
-                    <form id="research_category_form">
-                		<div class="row">
-                            <div class="col-md-6 col-lg-4 col-sm-9 col-9">
-                                <div class="form-group">
-                                    <label>Research Name</label>
-                                    <input type="text" class="form-control" name="name" id="research_name" required maxlength="50">
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-lg-1 m-t-25 col-sm-3 col-3">
-                                <button class="btn btn-primary btn-sm add-research">Add</button>
-                            </div>
-        				</div>
-                    </form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="research_category_form">
+                        		<div class="row">
+                                    <div class="col-md-8 col-sm-9 col-9">
+                                        <div class="form-group">
+                                            <label>Research Name</label>
+                                            <input type="text" class="form-control" name="name" id="research_name" required maxlength="50">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-lg-1 m-t-25 col-sm-3 col-3">
+                                        <button class="btn btn-primary btn-sm add-research">Add</button>
+                                    </div>
+                				</div>
+                            </form>
+                        </div>
+                        <div class="col-md-2 m-t-25 col-sm-3 col-3">
+                            <button class="btn btn-danger btn-sm" id="delete_all_research">Delete All</button>
+                        </div>
+                    </div>
             	</div>
                 <div class="card-body" id="advice_item_table_container">
                     <table class="table table-bordered nowrap responsive tbl-qa tbl_header_fix" id="research_tbl" cellspacing="0" width="100%" >

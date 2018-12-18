@@ -115,10 +115,6 @@
 		                        </tr>
 			                    </thead>
 			                    <tbody style="height: 450px;">
-		                         <!--    <tr>
-		                                <td >RFT</td>
-		                                <td>9/11/2018</td>
-		                            </tr> -->
 			                    </tbody>
 			                </table>
     					</div>
@@ -133,12 +129,6 @@
 		                        </tr>
 			                    </thead>
 			                    <tbody style="height:450px;">
-		                        <!--     <tr>
-		                                <td style="width: 10%" data-toggle="modal" data-target="#history-modal"><i class="far fa-question-circle"></i></td>
-		                                <td>Urea</td>
-		                                <td></td>
-		                                <td>mg/dl</td>
-		                            </tr> -->
 			                    </tbody>
 			                </table>
     					</div>
@@ -161,7 +151,7 @@
         $('#patient_id').val(patient_id);
 
         $.ajax({
-            url: '/cms/profile/get_lab_test',
+            url: window.location.origin+window.location.pathname+'Profile/get_lab_test',
             type: 'post',
             data: {lab_id: id, category: category},
             cache: false,
@@ -178,7 +168,7 @@
         var cat_id = $(this).attr('data-lab-category-id');
         $('#lab_category_id').val($(this).attr('data-lab-category-id'));
         $.ajax({
-            url: '/cms/setting/get_lab_category_description',
+            url: window.location.origin+window.location.pathname+'Setting/get_lab_category_description',
             type: 'post',
             data: {id:cat_id},
             cache: false,

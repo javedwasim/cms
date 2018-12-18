@@ -36,6 +36,7 @@
 						</div>
 					</div>
 				</form>
+				<button class="btn btn-danger btn-sm" id="delete_all_doctor">Delete All</button>
 			</div>
 			<div class="card-body" id="signature_table">
 				

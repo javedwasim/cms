@@ -457,7 +457,8 @@ $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array();
 $filepath = $_SERVER['DOCUMENT_ROOT'];
-$config['file_upload_path'] = "$filepath"."/cms/assets/uploads/itemfiles/";
+$rootFolder = str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$config['file_upload_path'] = "$filepath"."$rootFolder"."assets/uploads/itemfiles/";
 
 /*
 |--------------------------------------------------------------------------

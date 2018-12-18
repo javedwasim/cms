@@ -254,6 +254,11 @@
                     </form>
                 </div>
             </div>
+            <div class="row">
+              <div class="col-md-2 offset-md-10">
+                <button class="btn btn-danger btn-sm pull-right" id="delete_all_structure">Delete All</button>
+              </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="row">

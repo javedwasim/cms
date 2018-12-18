@@ -3,7 +3,7 @@ $(document.body).on('click', '.add-advice', function(){
     if (validate.form()) {
         var name = $('#advice_name').val();
         $.ajax({
-            url: '/cms/setting/add_advice',
+            url: window.location.origin+window.location.pathname+'Setting/add_advice',
             type: 'post',
             data: {name: name},
             cache: false,
@@ -110,7 +110,7 @@ $(document.body).on('click', '.add-research', function(){
     if (validate.form()) {
         var name = $('#research_name').val();
         $.ajax({
-            url: '/cms/setting/add_research',
+            url: window.location.origin+window.location.pathname+'Setting/add_research',
             type: 'post',
             data: {name: name},
             cache: false,
@@ -134,7 +134,7 @@ $(document.body).on('click', '.edit-research-btn', function(){
     var r_id = $(this).attr('data-research-id');
     $('#research_id').val($(this).attr('data-research-id'));
     $.ajax({
-        url: '/cms/setting/get_research_description',
+        url: window.location.origin+window.location.pathname+'Setting/get_research_description',
         type: 'post',
         data: {id:r_id},
         cache: false,
@@ -206,7 +206,7 @@ $(document.body).on('click', '.delete-research', function(){
 $(document.body).on('click', '.add-lab-category', function(){
     var name = $('#lab_category').val();
     $.ajax({
-        url: '/cms/setting/add_lab_category',
+        url: window.location.origin+window.location.pathname+'Setting/add_lab_category',
         type: 'post',
         data: {name:name},
         cache: false,
@@ -228,7 +228,7 @@ $(document.body).on('click', '.edit-lab-cat-btn', function(){
     var cat_id = $(this).attr('data-lab-category-id');
     $('#lab_category_id').val($(this).attr('data-lab-category-id'));
     $.ajax({
-        url: '/cms/setting/get_lab_category_description',
+        url: window.location.origin+window.location.pathname+'Setting/get_lab_category_description',
         type: 'post',
         data: {id:cat_id},
         cache: false,
@@ -352,7 +352,7 @@ $(document.body).on('click', '.edit-lab-test-btn', function(){
     var test_id = $(this).attr('data-lab-test-id');
     $('#lab_test_id').val($(this).attr('data-lab-test-id'));
     $.ajax({
-        url: '/cms/setting/get_lab_test_description',
+        url: window.location.origin+window.location.pathname+'Setting/get_lab_test_description',
         type: 'post',
         data: {id:test_id},
         cache: false,
@@ -396,7 +396,7 @@ function filter_tests(cat_id) {
     var nurl = window.location.origin+window.location.pathname+'setting/export_lab_items/'+cat_id;
     $("#export_lab_items").attr("href", nurl);
     $.ajax({
-        url: '/cms/setting/get_lab_test_by_category/'+cat_id,
+        url: window.location.origin+window.location.pathname+'Setting/get_lab_test_by_category/'+cat_id,
         type: 'get',
         cache: false,
         success: function(response) {
@@ -409,7 +409,7 @@ function filter_tests(cat_id) {
 
 function filter_tests_item(test_id) {
     $.ajax({
-        url: '/cms/setting/get_lab_item_by_test_id/'+test_id,
+        url: window.location.origin+window.location.pathname+'Setting/get_lab_item_by_test_id/'+test_id,
         type: 'get',
         cache: false,
         success: function(response) {
@@ -465,7 +465,7 @@ $(document.body).on('click', '.edit-lab-test-item-btn', function(){
     var test_id = $(this).attr('data-lab-test-item-id');
     $('#lab_test_item_id').val($(this).attr('data-lab-test-item-id'));
     $.ajax({
-        url: '/cms/setting/get_lab_test_item_description',
+        url: window.location.origin+window.location.pathname+'Setting/get_lab_test_item_description',
         type: 'post',
         data: {id:test_id},
         cache: false,
@@ -490,7 +490,7 @@ $(document.body).on('click', '.add-instruction-category', function(){
         var name = $('#instruction_name').val();
         var category = $('#instruction_category').val();
         $.ajax({
-            url: '/cms/instruction/add_instruction_category',
+            url: window.location.origin+window.location.pathname+'Instruction/add_instruction_category',
             type: 'post',
             data: {name: name, category: category},
             cache: false,
@@ -545,7 +545,7 @@ function filter_inst_item_category(instruction_id,category) {
     var nurl = window.location.origin+window.location.pathname+'setting/export_instruction_items/'+instruction_id;
     $("#export_instruction_items").attr("href", nurl);
     $.ajax({
-        url: '/cms/instruction/get_inst_item',
+        url: window.location.origin+window.location.pathname+'Instruction/get_inst_item',
         type: 'post',
         data: {instruction_id:instruction_id,category:category},
         cache: false,
@@ -587,7 +587,7 @@ $(document.body).on('click', '.edit-inst-item-btn', function(){
     var item_id = $(this).attr('data-inst-item-id');
     $('#inst_item_id').val($(this).attr('data-inst-item-id'));
     $.ajax({
-        url: '/cms/instruction/get_inst_item_description',
+        url: window.location.origin+window.location.pathname+'Instruction/get_inst_item_description',
         type: 'post',
         data: {id:item_id},
         cache: false,
@@ -663,7 +663,7 @@ $(document.body).on('click', '.add-examination-category', function(){
     if (validate.form()) {
         var name = $('#instruction_name').val();
         $.ajax({
-            url: '/cms/examination/add_examination_category',
+            url: window.location.origin+window.location.pathname+'Examination/add_examination_category',
             type: 'post',
             data: {name: name},
             cache: false,
@@ -766,7 +766,7 @@ function filter_examination_item_category(inst_id) {
     var nurl = window.location.origin+window.location.pathname+'/setting/export_examination_items/'+inst_id;
     $("#export_examination_items").attr("href", nurl);
     $.ajax({
-        url: '/cms/examination/get_examination_item/'+inst_id,
+        url: window.location.origin+window.location.pathname+'Examination/get_examination_item/'+inst_id,
         type: 'get',
         cache: false,
         success: function(response) {
@@ -783,7 +783,7 @@ $(document.body).on('click', '.edit-examination-item-btn', function(){
     var item_id = $(this).attr('data-examination-item-id');
     $('#examination_item_id').val($(this).attr('data-examination-item-id'));
     $.ajax({
-        url: '/cms/examination/get_examination_item_description',
+        url: window.location.origin+window.location.pathname+'Examination/get_examination_item_description',
         type: 'post',
         data: {id:item_id},
         cache: false,
@@ -826,7 +826,7 @@ $(document.body).on('click', '.add-investigation-category', function(){
     if (validate.form()) {
         var name = $('#instruction_name').val();
         $.ajax({
-            url: '/cms/investigation/add_investigation_category',
+            url: window.location.origin+window.location.pathname+'Investigation/add_investigation_category',
             type: 'post',
             data: {name: name},
             cache: false,
@@ -902,7 +902,7 @@ $(document.body).on('click', '.edit-investigation-item-btn', function(){
     var item_id = $(this).attr('data-investigation-item-id');
     $('#investigation_item_id').val($(this).attr('data-investigation-item-id'));
     $.ajax({
-        url: '/cms/investigation/get_investigation_item_description',
+        url: window.location.origin+window.location.pathname+'Investigation/get_investigation_item_description',
         type: 'post',
         data: {id:item_id},
         cache: false,
@@ -971,7 +971,7 @@ function filter_investigation_item_category(inst_id) {
     var nurl = window.location.origin+window.location.pathname+'/setting/export_investigation_items/'+inst_id;
     $("#export_investigation_items").attr("href", nurl);
     $.ajax({
-        url: '/cms/investigation/get_investigation_item/'+inst_id,
+        url: window.location.origin+window.location.pathname+'Investigation/get_investigation_item/'+inst_id,
         type: 'get',
         cache: false,
         success: function(response) {
@@ -987,7 +987,7 @@ $(document.body).on('click', '#add_recommendation', function(){
     if(validate.form()){
         var description = $('#add_description').val();
         $.ajax({
-            url: '/cms/angio_recommendation/add_recommendation',
+            url: window.location.origin+window.location.pathname+'Angio_recommendation/add_recommendation',
             type: 'post',
             data: {description:description},
             cache: false,
@@ -1040,7 +1040,7 @@ $(document.body).on('click', '.add-medicine-category', function(){
     if (validate.form()) {
         var name = $('#medicine_name').val();
         $.ajax({
-            url: '/cms/medicine/add_medicine_category',
+            url: window.location.origin+window.location.pathname+'Medicine/add_medicine_category',
             type: 'post',
             data: {name: name},
             cache: false,
@@ -1148,7 +1148,7 @@ $(document.body).on('click', '.edit-medicine-cat-btn', function(){
     var category_id = $(this).attr('data-medicine-cat-id');
     $('#medicine_cat_id').val($(this).attr('data-medicine-cat-id'));
     $.ajax({
-        url: '/cms/medicine/get_medicine_category_description',
+        url: window.location.origin+window.location.pathname+'Medicine/get_medicine_category_description',
         type: 'post',
         data: {id:category_id},
         cache: false,
@@ -1189,7 +1189,7 @@ $(document.body).on('click', '.edit-medicine-item-btn', function(){
     var item_id = $(this).attr('data-medicine-item-id');
     $('#medicine_item_id').val($(this).attr('data-medicine-item-id'));
     $.ajax({
-        url: '/cms/medicine/get_medicine_item_description',
+        url: window.location.origin+window.location.pathname+'Medicine/get_medicine_item_description',
         type: 'post',
         data: {id:item_id},
         cache: false,
@@ -1231,7 +1231,7 @@ $(document.body).on('click', '.add-dosage-category', function(){
     if (validate.form()) {
         var name = $('#dosage_name').val();
         $.ajax({
-            url: '/cms/medicine/add_dosage_category',
+            url: window.location.origin+window.location.pathname+'Medicine/add_dosage_category',
             type: 'post',
             data: {name: name},
             cache: false,
@@ -1283,7 +1283,7 @@ function filter_medicine_item_category(inst_id) {
     var nurl = window.location.origin+window.location.pathname+'/setting/export_medicine_items/'+inst_id;
     $("#export_medicine_items").attr("href", nurl);
     $.ajax({
-        url: '/cms/medicine/get_medicine_item/'+inst_id,
+        url: window.location.origin+window.location.pathname+'Medicine/get_medicine_item/'+inst_id,
         type: 'get',
         cache: false,
         success: function(response) {
@@ -1297,7 +1297,7 @@ function filter_medicine_item_category(inst_id) {
 function assign_medicine_category(medicine_category_id) {
     $('#medicine_category').val(medicine_category_id);
     $.ajax({
-        url: '/cms/medicine/get_dosage_medicine_category/'+medicine_category_id,
+        url: window.location.origin+window.location.pathname+'Medicine/get_dosage_medicine_category/'+medicine_category_id,
         type: 'get',
         cache: false,
         success: function(response) {
@@ -1519,13 +1519,7 @@ $(document.body).on('click', '.delete-diagnosis', function(){
                     success: function(response) {
                         $('.structure_diagnosis_container').empty();
                         $('.structure_diagnosis_container').append(response.result_html);
-
-                        //select parent structure
-                        // $(".structure_table td").css("background-color", "#FFF");
-                        // $(".structure_table td").css("color", "#1b1a1a");
                         var structure_id = $('#structure_id').val();
-                        // $('#'+structure_id).css("background", "#1e88e5");
-                        // $('#'+structure_id).css("color", "#FFF");
                         toastr["error"]('Finding deleted successfully!');
                     }
                 });
@@ -1937,7 +1931,7 @@ $(document.body).on('click', '.edit-inst-btn', function(){
     var item_id = $(this).attr('data-inst-id');
     $('#inst_id').val($(this).attr('data-inst-id'));
     $.ajax({
-        url: '/cms/instruction/get_inst_description',
+        url: window.location.origin+window.location.pathname+'Instruction/get_inst_description',
         type: 'post',
         data: {id:item_id},
         cache: false,
@@ -2008,7 +2002,7 @@ $(document.body).on('click', '#save_profile_instruction', function(e){
 $(document.body).on('click', '#sp-ins-table tbody tr.row_selected', function(){
     var spid = $(this).find('.pat_sp_id').text();
     $.ajax({
-        url: '/cms/profile/get_special_instructions',
+        url: window.location.origin+window.location.pathname+'Profile/get_special_instructions',
         type: 'post',
         data: {spid:spid},
         cache: false,
@@ -2030,7 +2024,7 @@ $(document.body).on('click', '#pat-ett-test', function () {
          toastr["warning"]('Please select a patient first.');
     }else{
         $.ajax({
-            url: '/cms/profile/patient_ett_test',
+            url: window.location.origin+window.location.pathname+'Profile/patient_ett_test',
             type: 'post',
             data: {patid:patid},
             cache: false,
@@ -2086,7 +2080,7 @@ $(document.body).on('click', '#save_ett_test', function(e){
     var val = '';
     $('#ett_pat_id').val(patientid);
     $.ajax({
-        url: '/cms/profile/save_ett_test',
+        url: window.location.origin+window.location.pathname+'Profile/save_ett_test',
         type: 'post',
         data:$('#ett_protocol_form').serialize(),
         cache: false,
@@ -2169,7 +2163,7 @@ $(document.body).on('click', '#save_lab_test', function(){
 
 function filter_advice_item_category(advice_id) {
     $.ajax({
-        url: '/cms/setting/get_advice_item/'+advice_id,
+        url: window.location.origin+window.location.pathname+'Setting/get_advice_item/'+advice_id,
         type: 'get',
         cache: false,
         success: function(response) {
@@ -2191,7 +2185,7 @@ $(document.body).on('click', '#pat-echo-test', function () {
          toastr["warning"]('Please select a patient first.');
     }else{
         $.ajax({
-            url: '/cms/profile/patient_echo_test',
+            url: window.location.origin+window.location.pathname+'Profile/patient_echo_test',
             type: 'post',
             data: {patid:patid},
             cache: false,
@@ -2325,7 +2319,7 @@ $(document.body).on('click', '#echo_detail', function () {
 function showEditEchoDetail(editableObj,echo_id,patient_id) {
     $('.echo_detail_id').val(echo_id);
     $.ajax({
-        url: '/cms/profile/patient_echo_edit_detail',
+        url: window.location.origin+window.location.pathname+'Profile/patient_echo_edit_detail',
         type: 'post',
         data: {detail_id:echo_id,patid:patient_id},
         cache: false,
@@ -2389,7 +2383,7 @@ $(document.body).on('click', '#ett_details', function () {
 
 function showEditEttDetail(editableObj,ett_id,patient_id) {
     $.ajax({
-        url: '/cms/profile/patient_ett_edit_detail',
+        url: window.location.origin+window.location.pathname+'Profile/patient_ett_edit_detail',
         type: 'post',
         data: {detail_id:ett_id,patid:patient_id},
         cache: false,
@@ -2807,7 +2801,7 @@ $(document.body).on('click', '#ett_details_table tbody tr td:nth-child(4)', func
     var etttestid = $('#ett_details_table tbody tr td:nth-child(4).row_selected').siblings('.etttestid').text();
     var patid = $('#ett_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
     $.ajax({
-        url: '/cms/print_profiles/get_ett_details',
+        url: window.location.origin+window.location.pathname+'Print_profiles/get_ett_details',
         type: 'post',
         data: {
             testid:etttestid,
@@ -2826,7 +2820,7 @@ $(document.body).on('click', '#sp_details_table tbody tr td:nth-child(4)', funct
     var sptestid = $('#sp_details_table tbody tr td:nth-child(4).row_selected').siblings('.sptestid').text();
     var patid = $('#sp_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
     $.ajax({
-        url: '/cms/print_profiles/get_sp_details',
+        url: window.location.origin+window.location.pathname+'Print_profiles/get_sp_details',
         type: 'post',
         data: {
             testid:sptestid,
@@ -2844,7 +2838,7 @@ $(document.body).on('click', '#lab_details_table tbody tr td:nth-child(4)', func
     var labtestid = $('#lab_details_table tbody tr td:nth-child(4).row_selected').siblings('.labtestid').text();
     var patid = $('#lab_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
     $.ajax({
-        url: '/cms/print_profiles/get_lab_details',
+        url: window.location.origin+window.location.pathname+'Print_profiles/get_lab_details',
         type: 'post',
         data: {
             testid:labtestid,
@@ -2915,7 +2909,8 @@ function deleteExaminationDetail(editableObj,test_id,patient_id){
 }
 
 function printexamination(test_id,patient_id) {
-    var win = window.open('/cms/print_profiles/print_examination/?testid=' + test_id +'&patid='+patient_id, '_blank');
+    var url = window.location.origin+window.location.pathname;
+    var win = window.open(url+'Print_profiles/print_examination/?testid=' + test_id +'&patid='+patient_id, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -2930,7 +2925,7 @@ $(document.body).on('click', '#examination_details_table tbody tr td:nth-child(4
     var testid = $('#examination_details_table tbody tr td:nth-child(4).row_selected').siblings('.testid').text();
     var patid = $('#examination_details_table tbody tr td:nth-child(4).row_selected').siblings('.patid').text();
     $.ajax({
-        url: '/cms/print_profiles/get_examination_details',
+        url: window.location.origin+window.location.pathname+'Print_profiles/get_examination_details',
         type: 'post',
         data: {
             testid:testid,
@@ -2948,7 +2943,7 @@ function showEditexaminationDetail(editableObj,test_id,patient_id) {
         editableObj = '';
     }
     $.ajax({
-        url: '/cms/profile/patient_examination_edit_detail',
+        url: window.location.origin+window.location.pathname+'Profile/patient_examination_edit_detail',
         type: 'post',
         data: {detail_id:test_id,patid:patient_id,cid:editableObj},
         cache: false,
@@ -3104,7 +3099,8 @@ $(document.body).on('click','#diagnosis_by_structure_table tbody tr',function(){
 });
 
 function printechotest(editableObj,test_id,patient_id) {
-    var win = window.open('/cms/print_profiles/print_echo/?testid=' + test_id +'&patid='+patient_id, '_blank');
+    var url = window.location.origin+window.location.pathname;
+    var win = window.open(url+'Print_profiles/print_echo/?testid=' + test_id +'&patid='+patient_id, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -3119,7 +3115,7 @@ $(document.body).on('click', '#echo_details_table tbody tr td:nth-child(4)', fun
     var testid = $('#echo_details_table tbody tr td:nth-child(4).row_selected').siblings('.echotestid').text();
     var patid = $('#echo_details_table tbody tr td:nth-child(4).row_selected').siblings('.echopatid').text();
     $.ajax({
-        url: '/cms/print_profiles/get_echo_details',
+        url: window.location.origin+window.location.pathname+'Print_profiles/get_echo_details',
         type: 'post',
         data: {
             testid:testid,
@@ -3302,12 +3298,12 @@ function medicine_filter(val){
 }
 
 $(document.body).on('click', '#btn-print-vital', function () {
+    var url = window.location.origin+window.location.pathname;
     var patid = $('#patientid').val();
-    // alert(patid);
     if(patid == null){
          toastr["error"]('No values found');
     }else{
-        var win = window.open('/cms/user/print_vitals/?patid=' + patid, '_blank');
+        var win = window.open(url+'User/print_vitals/?patid=' + patid, '_blank');
         if (win) {
             console.log("new tab opened")
             win.focus();
@@ -4052,7 +4048,8 @@ function spAddval(editableObj ,item_id, inst_id, description) {
     $('#item_id').val(item_id);
 }
 function showimg(patid){
-    var win = window.open('/cms/profile/get_image_files/?patid=' + patid, '_blank');
+    var url = window.location.origin+window.location.pathname;
+    var win = window.open(url+'Profile/get_image_files/?patid=' + patid, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -4061,7 +4058,8 @@ function showimg(patid){
     }
 }
 function showpdf(patid){
-    var win = window.open('/cms/profile/get_pdf_files/?patid=' + patid, '_blank');
+    var url = window.location.origin+window.location.pathname;
+    var win = window.open(url+'Profile/get_pdf_files/?patid=' + patid, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -4071,7 +4069,8 @@ function showpdf(patid){
 }
 
 function showtxt(patid){
-    var win = window.open('/cms/profile/get_text_files/?patid=' + patid, '_blank');
+    var url = window.location.origin+window.location.pathname;
+    var win = window.open(url+'Profile/get_text_files/?patid=' + patid, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -4264,4 +4263,574 @@ $(document.body).on('click','#card-3',function(){
     $('.delete-card-3').removeClass('hide');
     $('.delete-card-1').addClass('hide');
     $('.delete-card-2').addClass('hide');
+});
+
+$(document.body).on('click','#delete_professions', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_professions',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.profession_table').remove();
+                            $('#profession_table').append(response.profession_table);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_districts', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_districts',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.district_content').remove();
+                            $('#district_content').append(response.district_table);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_history', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_history',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_examinations', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_examinations',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_investigations', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_investigations',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_angio', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_angio',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_instructions', function(){
+    var cat = $('#instruction_category').val();
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_instructions',
+                    type: 'post',
+                    data:{
+                        cat:cat
+                    },
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_medicines', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_medicines',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_dosage', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_dosage',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dosage_category_container').empty();
+                            $('.dosage_category_container').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_diseases', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_diseases',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_test_reason', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_test_reason',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.ins_category_container').empty();
+                            $('.ins_category_container').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_ending_reason', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_ending_reason',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.ending_reason_table').empty();
+                            $('.ending_reason_table').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_discriptions', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_discriptions',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.discription-table').empty();
+                            $('.discription-table').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_conclusions', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_conclusions',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.conclusion_table_content').empty();
+                            $('.conclusion_table_content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_advices', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_advices',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_research', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_research',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_lab', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_lab',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.dashboard-content').remove();
+                            $('#dashboard-content').append(response.result_html);
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_structure', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_structure',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.structure_category_container').empty();
+                            $('.structure_finding_container').empty();
+                            $('.structure_diagnosis_container').empty();
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_echo_cat', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_echo_cat',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.main_category_container').empty();
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_protocol', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_protocol',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.protocol_table_content').empty();
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
+});
+
+$(document.body).on('click','#delete_all_doctor', function(){
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure you want to delete?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url:window.location.origin+window.location.pathname+'Setting/delete_all_doctor',
+                    cache:false,
+                    success:function(response){
+                        if (response.success == true) {
+                            $('.signature_table').empty();
+                            toastr["success"](response.message);
+                        }else{
+                            toastr["error"](response.message);
+                        }
+                    }
+                });
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            }
+        }
+    });
 });

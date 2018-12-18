@@ -22,8 +22,10 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                             <th>Patient Name</th>
                             <th>Contact No.</th>
                             <th>Fee Paid at</th>
-                            <th>Shift</th>
+                            <th>Ett Fee Paid at</th>
+                            <th>Echo Fee Paid at</th>
                             <th class="hide"></th>
+                            <th>Shift</th>
                             <th class="hide"></th>
                         </tr>
                     </thead>
@@ -95,6 +97,57 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 }
                             ?>
                         </td>
+                        <td
+                            data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                            title="<?php 
+                            if(isset($bkarray[$i]['ett_fee_collected_by']) && $user_info['is_admin']==1){
+                                echo $bkarray[$i]['ett_fee_collected_by'];
+                            }else{
+                                echo "";
+                            }?>"
+                        >
+                            <?php
+                                if(isset($bkarray[$i]['ett_fee_paid_at'])){
+                                        if ($bkarray[$i]['ett_fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        } else {
+                                            echo date(' d-m-Y h:i a', strtotime($bkarray[$i]['ett_fee_paid_at']));
+                                        }
+                                }else{
+                                    echo "";
+                                }
+                            ?>
+                        </td>
+                        <td
+                            data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                            title="<?php 
+                            if(isset($bkarray[$i]['echo_fee_collected_by']) && $user_info['is_admin']==1){
+                                echo $bkarray[$i]['echo_fee_collected_by'];
+                            }else{
+                                echo "";
+                            }?>"
+                        >
+                            <?php
+                                if(isset($bkarray[$i]['echo_fee_paid_at'])){
+                                        if ($bkarray[$i]['echo_fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        } else {
+                                            echo date(' d-m-Y h:i a', strtotime($bkarray[$i]['echo_fee_paid_at']));
+                                        }
+                                }else{
+                                    echo "";
+                                }
+                            ?>
+                        </td>
+                        <td class="hide pat_status">
+                            <?php 
+                                if(isset($bkarray[$i]['fee_paid_status'])){
+                                    echo $bkarray[$i]['fee_paid_status'];
+                                }else{
+                                    echo "";
+                                }
+                            ?>
+                        </td>
                         <td>
                             <div class="form-group" >
                                 <select class="form-control transfer_patient">
@@ -108,15 +161,6 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                             <?php 
                                 if(isset($bkarray[$i]['appointment_booking_id'])){
                                     echo $bkarray[$i]['appointment_booking_id'];
-                                }else{
-                                    echo "";
-                                }
-                            ?>
-                        </td>
-                        <td class="hide pat_status">
-                            <?php 
-                                if(isset($bkarray[$i]['fee_paid_status'])){
-                                    echo $bkarray[$i]['fee_paid_status'];
                                 }else{
                                     echo "";
                                 }
@@ -158,6 +202,43 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                         }
                                     ?>
                                 </td>
+                                <td class="center" 
+                                    data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                                    title="<?php 
+                                    if(isset($details['ett_fee_collected_by']) && $user_info['is_admin']==1){
+                                        echo $details['ett_fee_collected_by'];
+                                    }else{
+                                        echo "";
+                                    }?>"
+                                >
+                                    <?php 
+                                        if ($details['ett_fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
+                                </td>
+                                <td class="center" 
+                                    data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                                    title="<?php 
+                                    if(isset($details['echo_fee_collected_by']) && $user_info['is_admin']==1){
+                                        echo $details['echo_fee_collected_by'];
+                                    }else{
+                                        echo "";
+                                    }?>"
+                                >
+                                    <?php 
+                                        if ($details['echo_fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
+                                </td>
+                                <td class="hide pat_status">
+                                    <?php echo $details['fee_paid_status']?>
+                                </td>
                                 <td>
                                     <div class="form-group" >
                                         <select class="form-control transfer_patient">
@@ -169,9 +250,6 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 </td>
                                 <td class="hide vip_trans">
                                     <?php echo $details['appointment_booking_id']?>
-                                </td>
-                                <td class="hide pat_status">
-                                    <?php echo $details['fee_paid_status']?>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -195,8 +273,10 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                             <th>Patient Name</th>
                             <th>Contact No.</th>
                             <th>Fee Paid at</th>
-                            <th>Shift</th>
+                            <th>Ett Fee Paid at</th>
+                            <th>Echo Fee Paid at</th>
                             <th class="hide"></th>
+                            <th>Shift</th>
                             <th class="hide"></th>
                         </tr>
                     </thead>
@@ -235,6 +315,43 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                         }
                                     ?>
                                 </td>
+                                <td class="center"
+                                    data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                                    title="<?php 
+                                    if(isset($details['ett_fee_collected_by']) && $user_info['is_admin']==1){
+                                        echo $details['ett_fee_collected_by'];
+                                    }else{
+                                        echo "";
+                                    }?>"
+                                >
+                                    <?php 
+                                        if ($details['ett_fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
+                                </td>
+                                <td class="center"
+                                    data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                                    title="<?php 
+                                    if(isset($details['echo_fee_collected_by']) && $user_info['is_admin']==1){
+                                        echo $details['echo_fee_collected_by'];
+                                    }else{
+                                        echo "";
+                                    }?>"
+                                >
+                                    <?php 
+                                        if ($details['echo_fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
+                                </td>
+                                <td class="hide pat_status">
+                                    <?php echo $details['fee_paid_status']?>
+                                </td>
                                 <td>
                                     <div class="form-group" >
                                         <select class="form-control transfer_patient">
@@ -247,9 +364,7 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 <td class="hide vip_trans">
                                     <?php echo $details['appointment_booking_id']?>
                                 </td>
-                                <td class="hide pat_status">
-                                    <?php echo $details['fee_paid_status']?>
-                                </td>
+                                
                             </tr>
                             <?php } ?>
                             </tbody>
@@ -272,8 +387,10 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                             <th>Patient Name</th>
                             <th>Contact No.</th>
                             <th>Fee Paid at</th>
-                            <th>Shift</th>
+                            <th>Ett Fee Paid at</th>
+                            <th>Echo Fee Paid at</th>
                             <th class="hide"></th>
+                            <th>Shift</th>
                             <th class="hide"></th>
                         </tr>
                     </thead>
@@ -312,6 +429,43 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                         }
                                     ?>
                                 </td>
+                                <td class="center"
+                                    data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                                    title="<?php 
+                                    if(isset($details['ett_fee_collected_by']) && $user_info['is_admin']==1){
+                                        echo $details['ett_fee_collected_by'];
+                                    }else{
+                                        echo "";
+                                    }?>"
+                                >
+                                    <?php 
+                                        if ($details['ett_fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
+                                </td>
+                                <td class="center"
+                                    data-toggle="tooltip" data-placement="top" data-trigger="hover" 
+                                    title="<?php 
+                                    if(isset($details['echo_fee_collected_by']) && $user_info['is_admin']==1){
+                                        echo $details['echo_fee_collected_by'];
+                                    }else{
+                                        echo "";
+                                    }?>"
+                                >
+                                    <?php 
+                                        if ($details['echo_fee_paid_at'] == '0000-00-00 00:00:00') {
+                                            echo "";
+                                        }else{
+                                            echo $datetime;
+                                        }
+                                    ?>
+                                </td>
+                                <td class="hide pat_status">
+                                    <?php echo $details['fee_paid_status']?>
+                                </td>
                                 <td>
                                     <div class="form-group" >
                                         <select class="form-control transfer_patient">
@@ -323,9 +477,6 @@ $user_info = ($this->session->userdata('user_data_logged_in'));
                                 </td>
                                 <td class="hide vip_trans">
                                     <?php echo $details['appointment_booking_id']?>
-                                </td>
-                                <td class="hide pat_status">
-                                    <?php echo $details['fee_paid_status']?>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -641,7 +792,7 @@ $(document).ready(function(){
       var transferId = $.trim($(this).closest('tr').find('.vip_trans').text());
       var searchdate = $('#search-all-cat').val();
       $.ajax({
-        url: '/cms/dashboard/transfer',
+        url: window.location.origin+window.location.pathname+'Dashboard/transfer',
         type: 'post',
         data: {
             transferto: transferTo,

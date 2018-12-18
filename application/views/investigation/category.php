@@ -10,6 +10,9 @@
                     <div class="col-md-2 col-lg-1 m-t-25  col-sm-4 col-4">
                         <button class="btn btn-primary btn-sm add-investigation-category">Add</button>
                     </div>
+                    <div class="col-md-2 m-t-25">
+                        <button class="btn btn-danger btn-sm" id="delete_all_investigations" >Delete All</button>
+                    </div>
                 </div>
             </form>
         </div>

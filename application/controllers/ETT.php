@@ -70,7 +70,6 @@ class ETT extends MY_Controller
         $data['test_reasons'] = $this->ETT_model->get_test_reasons();
         $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/test_reason_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);
@@ -141,9 +140,7 @@ class ETT extends MY_Controller
             $json['message'] = "Seems to an error";
         }
         $data['ending_reasons'] = $this->ETT_model->get_ending_reasons();
-        $data['active_tab'] = 'category';
         $data['rights'] = $this->session->userdata('other_rights');
-        $json['result_html'] = $this->load->view('ett/ett_setting', $data, true);
         $json['result_html'] = $this->load->view('ett/ending_reason_table', $data, true);
         if ($this->input->is_ajax_request()) {
             set_content_type($json);

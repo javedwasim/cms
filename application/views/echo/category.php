@@ -32,12 +32,15 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="form-group ">
                         <label>Select Category:</label>
-                        <select class="form-control" name="main_category_filter" onchange="main_category_item_filter(this.value)">
+                        <select class="form-control" id="echo_category" name="main_category_filter" onchange="main_category_item_filter(this.value)">
                             <option value="0">Select</option>
                             <option value="dopplers">Doppler</option>
                             <option value="mmode">MMODE</option>
                         </select>
                     </div>
+                </div>
+                <div class="col-md-2 m-t-25">
+                    <button class="btn btn-danger btn-sm" id="delete_all_echo_cat">Delete All 2D Echo</button>
                 </div>
             </div>
         </div>

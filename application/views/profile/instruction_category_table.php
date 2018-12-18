@@ -22,7 +22,7 @@
         $(editableObj).css("color", "#FFF");
 
         $.ajax({
-            url: '/cms/profile/get_instruction_item/'+id+'/'+name,
+            url: window.location.origin+window.location.pathname+'Profile/get_instruction_item/'+id+'/'+name,
             type: 'get',
             cache: false,
             success: function (response) {

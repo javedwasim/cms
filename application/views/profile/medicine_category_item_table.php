@@ -96,7 +96,7 @@
         });
 
         $.ajax({
-            url: '/cms/profile/get_medicine_dosage/'+id,
+            url: window.location.origin+window.location.pathname+'Profile/get_medicine_dosage/'+id,
             type: 'get',
             cache: false,
             success: function (response) {

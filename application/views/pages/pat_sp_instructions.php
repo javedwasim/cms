@@ -165,7 +165,7 @@
         $(editableObj).css("color", "#FFF");
         var category = 'special';
         $.ajax({
-            url: '/cms/profile/get_inst_item',
+            url: window.location.origin+window.location.pathname+'Profile/get_inst_item',
             type: 'post',
             data: {instruction_id: id, category: category},
             cache: false,
@@ -182,7 +182,7 @@
         var item_id = $(this).attr('data-inst-id');
         $('#inst_id').val($(this).attr('data-inst-id'));
         $.ajax({
-            url: '/cms/instruction/get_inst_description',
+            url: window.location.origin+window.location.pathname+'Instruction/get_inst_description',
             type: 'post',
             data: {id: item_id},
             cache: false,

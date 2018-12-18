@@ -25,7 +25,7 @@
     });
     function loadLabtestUnit(editableObj, key) {
         $.ajax({
-            url: '/cms/profile/get_lab_test_unit/'+key,
+            url: window.location.origin+window.location.pathname+'Profile/get_lab_test_unit/'+key,
             type: 'get',
             cache: false,
             success: function (response) {

@@ -54,7 +54,7 @@ $(document.body).on('click','#import_ett_description_btn', function(e){
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-6 col-lg-4  col-sm-9 col-9">
+                <div class="col-md-3 col-sm-9 col-9">
                     <form id="ett_discription_form">
                         <label>New Description</label>
                         <textarea class="form-control" name="ett_discription" id="ett_discription" required="required"></textarea>
@@ -63,7 +63,7 @@ $(document.body).on('click','#import_ett_description_btn', function(e){
                 <div class="col-md-1 p-l-0  col-sm-3 col-3" style="margin-top: 25px;">
                     <button class="btn btn-sm btn-primary" id="add_ett_discription">Add</button>
                 </div>
-                <div class="col-md-2 p-l-0" style="margin-top: 25px;">
+                <div class="col-md-1 p-l-0" style="margin-top: 25px;">
                     <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_ett_descriptions">Export</a>
                 </div>
                 <div class="col-md-5">
@@ -82,6 +82,9 @@ $(document.body).on('click','#import_ett_description_btn', function(e){
                         </div>
                     </form>
                 </div>
+                <div class="col-md-2 m-t-25">
+                    <button class="btn btn-danger btn-sm" id="delete_all_discriptions">Delete All</button>
+                </div>  
             </div>
         </div>
         <div class="card-body discription-table">

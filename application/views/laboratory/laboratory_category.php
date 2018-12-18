@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-4 col-sm-9 col-9">
+                <div class="col-md-3 col-sm-9 col-9">
                     <form id="lab_cat_form">
                         <div class="form-group">
                             <label>New Category</label>
@@ -14,8 +14,8 @@
                 <div class="col-md-1 p-l-0 col-sm-3 col-3" style="margin-top: 25px;">
                     <button class="btn btn-primary btn-sm add-lab-category">Add</button>
                 </div>
-                <div class="col-md-2 p-l-0" style="margin-top: 25px;">
-                    <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_lab_cat" id="lab_cat_export">Export Category</a>
+                <div class="col-md-1 p-l-0" style="margin-top: 25px;">
+                    <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_lab_cat" id="lab_cat_export">Export</a>
                 </div>
                 <div class="col-md-5">
                     <form id="import_csv_lab_cat" enctype="multipart/form-data">
@@ -32,6 +32,9 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="col-md-2 m-t-25">
+                    <button class="btn btn-danger btn-sm" id="delete_all_lab">Delete All</button>
                 </div>
             </div>
         </div>

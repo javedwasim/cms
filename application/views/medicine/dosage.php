@@ -56,9 +56,12 @@ $(document.body).on('click','#import_dosage_btn', function(e){
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-2 p-l-0" style="margin-top: 25px;">
-                    <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_dosage" id="dosage_export">Export Dosage</a>
-                </div>
+              <div class="col-md-2 m-t-25">
+                <button class="btn btn-danger btn-sm" id="delete_all_dosage" >Delete All</button>
+              </div>
+              <div class="col-md-1 p-l-0" style="margin-top: 25px;">
+                  <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_dosage" id="dosage_export">Export</a>
+              </div>
                 <div class="col-md-5">
                     <form id="import_csv_dosage" enctype="multipart/form-data">
                         <div class="row">
@@ -75,7 +78,7 @@ $(document.body).on('click','#import_dosage_btn', function(e){
                         </div>
                     </form>
                 </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-3">
                     <form id="dosage_category_form">
                         <div class="form-group">
                             <label>New Dosage</label>
@@ -83,7 +86,7 @@ $(document.body).on('click','#import_dosage_btn', function(e){
                         </div>
                     </form>
                 </div>
-                <div class="col-md-2 col-lg-1 m-t-25">
+                <div class="col-md-1 m-t-25">
                     <button class="btn btn-primary btn-sm add-dosage-category">Add</button>
                 </div>
             </div>

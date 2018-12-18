@@ -361,7 +361,7 @@ class User extends MY_Controller {
                 $json['limit_error'] = true;
                 $json['message'] = "Limit reached for bookings.";
             }
-        } else {
+        }else {
             if ($bookingFlag == "vip") {
                 if (!empty($patName) && !empty($patCell) && !empty($appdate)){
                     $get_last_orderno = $this->User_model->get_last_booking($date);

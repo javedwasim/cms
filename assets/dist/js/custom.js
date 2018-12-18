@@ -198,7 +198,7 @@ $(document.body).on('click', '.feepaid', function () {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
         $.ajax({
-            url: '/cms/user/update_fee',
+            url: window.location.origin+window.location.pathname+'User/update_fee',
             type: 'post',
             data: {
                 bkId: odata,
@@ -312,7 +312,7 @@ $(document.body).on('click', '.wecg', function () {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
         $.ajax({
-            url: '/cms/user/update_fee',
+            url: window.location.origin+window.location.pathname+'User/update_fee',
             type: 'post',
             data: {
                 bkId: odata,
@@ -427,7 +427,7 @@ $(document.body).on('click', '.wett', function () {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
         $.ajax({
-            url: '/cms/user/update_fee',
+            url: window.location.origin+window.location.pathname+'User/update_fee',
             type: 'post',
             data: {
                 bkId: odata,
@@ -540,7 +540,7 @@ $(document.body).on('click', '.wecho', function () {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
         $.ajax({
-            url: '/cms/user/update_fee',
+            url: window.location.origin+window.location.pathname+'User/update_fee',
             type: 'post',
             data: {
                 bkId: odata,
@@ -654,7 +654,7 @@ $(document.body).on('click', '.investigation', function () {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
         $.ajax({
-            url: '/cms/user/update_fee',
+            url: window.location.origin+window.location.pathname+'User/update_fee',
             type: 'post',
             data: {
                 bkId: odata,
@@ -767,7 +767,7 @@ $(document.body).on('click', '.checkup', function () {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
         $.ajax({
-            url: '/cms/user/update_fee',
+            url: window.location.origin+window.location.pathname+'User/update_fee',
             type: 'post',
             data: {
                 bkId: odata,
@@ -881,7 +881,7 @@ $(document.body).on('click', '.complete', function () {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
         $.ajax({
-            url: '/cms/user/update_fee',
+            url: window.location.origin+window.location.pathname+'User/update_fee',
             type: 'post',
             data: {
                 bkId: odata,
@@ -995,7 +995,7 @@ $(document.body).on('click', '.appoint_revert', function () {
         var bookingflag = $('#booking_flag').val();
         var tabledate = $('.pat_search').val();
         $.ajax({
-            url: '/cms/user/update_fee',
+            url: window.location.origin+window.location.pathname+'User/update_fee',
             type: 'post',
             data: {
                 bkId: odata,
@@ -1131,7 +1131,7 @@ $(document.body).on('click', '.appoint_revert', function () {
         var bookingflag = "";
         var tabledate = $('#search-all-cat').val();
         $.ajax({
-            url: '/cms/user/update_fee',
+            url: window.location.origin+window.location.pathname+'User/update_fee',
             type: 'post',
             data: {
                 bkId: odata,
@@ -1223,7 +1223,7 @@ $(document.body).on('click', '.appoint_revert', function () {
 //////////////////////////////// call appointment booking view ///////////////////////
 function appointments() {
     $.ajax({
-        url: '/cms/user/',
+        url: window.location.origin+window.location.pathname+'User/',
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -1462,7 +1462,7 @@ function valupdate(val) {
     var tabledate = $('.pat_search').val();
     $.ajax({
         type: "post",
-        url: '/cms/user/update_appointment_values',
+        url: window.location.origin+window.location.pathname+'User/update_appointment_values',
         data: {
             appValue: apfee,
             valToUpdate: dataToupdate,
@@ -1590,7 +1590,7 @@ $(function () {
 
 function bookings() {
     $.ajax({
-        url: '/cms/dashboard/bookings',
+        url: window.location.origin+window.location.pathname+'Dashboard/bookings',
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -1672,7 +1672,7 @@ function bookings() {
 
 $(document.body).on('click', '#time_consultant', function () {
     $.ajax({
-        url: '/cms/user/',
+        url: window.location.origin+window.location.pathname+'User/',
         type: 'post',
         data: {
             flag: 'vip'
@@ -1784,7 +1784,7 @@ $(document.body).on('click', '#time_consultant', function () {
 
 $(document.body).on('click', '#time_on_walk', function () {
     $.ajax({
-        url: '/cms/user/',
+        url: window.location.origin+window.location.pathname+'User/',
         type: 'post',
         data: {
             flag: 'on_walk'
@@ -1894,7 +1894,7 @@ $(document.body).on('click', '#time_on_walk', function () {
 
 $(document.body).on('click', '#time_on_call', function () {
     $.ajax({
-        url: '/cms/user/',
+        url: window.location.origin+window.location.pathname+'User/',
         type: 'post',
         data: {
             flag: 'on_call'
@@ -2009,7 +2009,7 @@ $(document.body).on('click', '#save_limiter', function () {
         var limiterdate = $('#limiter_date').val();
         var clinictime = $('#example-time-input').val();
         $.ajax({
-            url: '/cms/dashboard/insert_limiter',
+            url: window.location.origin+window.location.pathname+'Dashboard/insert_limiter',
             type: 'post',
             data: {
                 limiter: limiter,
@@ -2052,7 +2052,7 @@ $(document.body).on('click', '#delete_single_patient', function () {
         buttons: {
             confirm: function () {
                $.ajax({
-                    url: '/cms/dashboard/delete_single_patient',
+                    url: window.location.origin+window.location.pathname+'Dashboard/delete_single_patient',
                     type: 'post',
                     data: {
                         bkId: bookingid,
@@ -2156,7 +2156,7 @@ $(document.body).on('click', '#delete_single_patient', function () {
 
 $(document.body).on('click', '#pat_profile', function () {
     $.ajax({
-        url: '/cms/profile/',
+        url: window.location.origin+window.location.pathname+'Profile/',
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -2208,7 +2208,7 @@ $(document.body).on('click', '#pat_profile', function () {
 
 function profile_filter(){
     $.ajax({
-        url: '/cms/profile/profile_filters',
+        url: window.location.origin+window.location.pathname+'Profile/profile_filters',
         data: $('#profile_filter').serialize(),
         type: 'post',
         cache: false,
@@ -2243,7 +2243,7 @@ function profile_filter(){
 
 $(document.body).on('click', '#pat_history', function () {
     $.ajax({
-        url: '/cms/Profile_history/history',
+        url: window.location.origin+window.location.pathname+'Profile_history/history',
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -2257,7 +2257,7 @@ $(document.body).on('click', '#pat_history', function () {
 $(document.body).on('click', '#add_history_category', function () {
     var category = $('#history_category').val();
     $.ajax({
-        url: '/cms/setting/add_history_category',
+        url: window.location.origin+window.location.pathname+'Setting/add_history_category',
         type: 'post',
         data: {category: category},
         cache: false,
@@ -2278,7 +2278,7 @@ $(document.body).on('click', '#profes_add', function (e) {
     if (professionvalidate.form()) {
         var profession = $('#profession_add').val();
         $.ajax({
-            url: '/cms/setting/insert_profession',
+            url: window.location.origin+window.location.pathname+'Setting/insert_profession',
             type: 'post',
             data: {profession: profession},
             cache: false,
@@ -2336,7 +2336,7 @@ $(document.body).on('click', '.delete_profession', function () {
 $(document.body).on('click', '#add_district', function () {
     var district = $('#district_add').val();
     $.ajax({
-        url: '/cms/setting/insert_district',
+        url: window.location.origin+window.location.pathname+'Setting/insert_district',
         type: 'post',
         data: {district: district},
         cache: false,
@@ -2361,7 +2361,7 @@ $(document.body).on('click', '#add_ett_test_reason', function () {
     if(validatetest.form()){
         var testreason = $('#ett_test_reason').val();
         $.ajax({
-            url: '/cms/ett/add_ett_testreason',
+            url: window.location.origin+window.location.pathname+'ETT/add_ett_testreason',
             type: 'post',
             data: {testreason: testreason},
             cache: false,
@@ -2415,7 +2415,7 @@ $(document.body).on('click', '#add_ending_reason', function () {
     if (validate.form()) {
         var endingreason = $('#ending_reason').val();
         $.ajax({
-            url: '/cms/ett/add_ett_endingreason',
+            url: window.location.origin+window.location.pathname+'ETT/add_ett_endingreason',
             type: 'post',
             data: {endingreason: endingreason},
             cache: false,
@@ -2469,7 +2469,7 @@ $(document.body).on('click', '#add_ett_discription', function () {
     if (validate.form()) {
         var description = $('#ett_discription').val();
         $.ajax({
-            url: '/cms/ett/add_ett_discription',
+            url: window.location.origin+window.location.pathname+'ETT/add_ett_discription',
             type: 'post',
             data: {description: description},
             cache: false,
@@ -2522,7 +2522,7 @@ $(document.body).on('click', '#add_conclusion', function () {
     if(validate.form()){
         var conclusion = $('#ett_conclusion').val();
         $.ajax({
-            url: '/cms/ett/add_conclusion',
+            url: window.location.origin+window.location.pathname+'ETT/add_conclusion',
             type: 'post',
             data: {conclusion: conclusion},
             cache: false,
@@ -2577,7 +2577,7 @@ $(document.body).on('click', '#add_protocol', function () {
         var stages = $('#protocol_stages').val();
         var recovery = $('#protocol_recovery').val();
         $.ajax({
-            url: '/cms/ett/protocol',
+            url: window.location.origin+window.location.pathname+'ETT/protocol',
             type: 'post',
             data: {
                 protocol: protocol,
@@ -2648,7 +2648,7 @@ $(document.body).on('click', '#pat-exemination', function () {
             showEditexaminationDetail(cval,testid,patid);
         }else{
             $.ajax({
-                url: '/cms/setting/patient_exemination/'+patid,
+                url: window.location.origin+window.location.pathname+'Setting/patient_exemination/'+patid,
                 cache: false,
                 success: function (response) {
                     if (response.result_html != '') {
@@ -2701,7 +2701,7 @@ $(document.body).on('click', '.pat-spInstructions', function () {
          toastr["warning"]('Please select a patient first.');
     }else{
         $.ajax({
-            url: '/cms/profile/patient_special_instructions',
+            url: window.location.origin+window.location.pathname+'Profile/patient_special_instructions',
             type: 'post',
             data: {patid:patid},
             cache: false,
@@ -2727,7 +2727,7 @@ $(document.body).on('click', '.pat-spInstructions', function () {
 $(document.body).on('click', '.exa-pat-spInstructions', function () {
     var patid = $('#label_patient_id').text();
     $.ajax({
-        url: '/cms/profile/patient_special_instructions',
+        url: window.location.origin+window.location.pathname+'Profile/patient_special_instructions',
         type: 'post',
         data: {patid:patid},
         cache: false,
@@ -2760,7 +2760,7 @@ $(document.body).on('click', '.pat-labtest', function () {
          toastr["warning"]('Please select a patient first.');
     }else{
         $.ajax({
-            url: '/cms/profile/patient_lab_test',
+            url: window.location.origin+window.location.pathname+'Profile/patient_lab_test',
             type: 'post',
             data: {patid:patid},
             cache: false,
@@ -2785,7 +2785,7 @@ $(document.body).on('click', '.pat-labtest', function () {
 $(document.body).on('click', '.exa-pat-labtest', function () {
    var patid = $('#label_patient_id').text();
     $.ajax({
-        url: '/cms/profile/patient_lab_test',
+        url: window.location.origin+window.location.pathname+'Profile/patient_lab_test',
         type: 'post',
         data: {patid:patid},
         cache: false,
@@ -2809,7 +2809,7 @@ $(document.body).on('click', '.exa-pat-labtest', function () {
 
 $(document.body).on('click', '#diary', function () {
     $.ajax({
-        url: '/cms/dashboard/diary',
+        url: window.location.origin+window.location.pathname+'Dashboard/diary',
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -2839,7 +2839,7 @@ function consultant_booking(val) {
     var tabledate = $('.pat_search').val();
     $.ajax({
         type: "post",
-        url: '/cms/user/consultant_bookings',
+        url: window.location.origin+window.location.pathname+'User/consultant_bookings',
         data: {
             appValue: valuetoinsert,
             valToUpdate: dataToupdate,
@@ -2934,8 +2934,9 @@ function consultant_booking(val) {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#print_vip', function () {
+    var url = window.location.origin+window.location.pathname;
     var flag = 'vip';
-    var win = window.open('/cms/user/print_vip_list/?flag=' + flag, '_blank');
+    var win = window.open(url+'User/print_vip_list/?flag=' + flag, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -2948,8 +2949,9 @@ $(document.body).on('click', '#print_vip', function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#print_onwalk', function () {
+    var url = window.location.origin+window.location.pathname;
     var flag = 'on_walk';
-    var win = window.open('/cms/user/print_onwalk_list/?flag=' + flag, '_blank');
+    var win = window.open(url+'User/print_onwalk_list/?flag=' + flag, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -2962,8 +2964,9 @@ $(document.body).on('click', '#print_onwalk', function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#print_oncall', function () {
+    var url = window.location.origin+window.location.pathname;
     var flag = 'on_call';
-    var win = window.open('/cms/user/print_oncall_list/?flag=' + flag, '_blank');
+    var win = window.open(url+'User/print_oncall_list/?flag=' + flag, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -2976,8 +2979,9 @@ $(document.body).on('click', '#print_oncall', function () {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 $(document.body).on('click', '#print_all_list', function () {
+    var url = window.location.origin+window.location.pathname;
     var printdate = $('#print_all').val();
-    var win = window.open('/cms/user/print_all_list/?date=' + printdate, '_blank');
+    var win = window.open(url+'User/print_all_list/?date=' + printdate, '_blank');
     if (win) {
         console.log("new tab opened")
         win.focus();
@@ -3017,7 +3021,7 @@ $(document.body).on('click', '#save_new_profile', function () {
         var profiledistrict = $('#pat_profile_district option:selected').text();
         var profileaddress = $('#pat_profile_address').val();
         $.ajax({
-            url: '/cms/profile/add_profile',
+            url: window.location.origin+window.location.pathname+'Profile/add_profile',
             type: 'post',
             data: {
                 name: profilename,
@@ -3139,7 +3143,7 @@ $(document.body).on('click', '#delete_profile', function () {
         buttons: {
             confirm: function () {
                 $.ajax({
-                    url: '/cms/profile/delete_profile',
+                    url: window.location.origin+window.location.pathname+'Profile/delete_profile',
                     type: 'post',
                     data: {
                         id: profileid
@@ -3191,7 +3195,7 @@ $(document.body).on('click', '#profile_modal_edit', function () {
     var tr = $(this).closest('tr');
     var profileid = $.trim(tr.find('.profile_id').text());
     $.ajax({
-        url: '/cms/profile/update_modal',
+        url: window.location.origin+window.location.pathname+'Profile/update_modal',
         type: 'post',
         data: {
             id: profileid
@@ -3225,7 +3229,7 @@ $(document.body).on('click', '#update_profile', function () {
         var profiledistrict = $('#updat_pat_profile_district option:selected').text();
         var profileaddress = $('#updat_pat_profile_address').val();
         $.ajax({
-            url: '/cms/profile/update_profile_data',
+            url: window.location.origin+window.location.pathname+'Profile/update_profile_data',
             type: 'post',
             data: {
                 id: profileid,
@@ -3279,7 +3283,7 @@ $(document.body).on('click', '#update_profile', function () {
 $(document.body).on('click', '#wallet_search', function () {
         var walletsearch = $('#wallet_date').val();
         $.ajax({
-            url: '/cms/user/search_wallet_status',
+            url: window.location.origin+window.location.pathname+'User/search_wallet_status',
             type: 'post',
             data: {
                 walletsearch:walletsearch
@@ -3292,7 +3296,7 @@ $(document.body).on('click', '#wallet_search', function () {
 
 function get_professions(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: window.location.origin+window.location.pathname+'Setting/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3307,7 +3311,7 @@ function get_professions(func_call) {
 }
 function get_districts(func_call) {
     $.ajax({
-        url: '/cms/setting/'+func_call,
+        url: window.location.origin+window.location.pathname+'Setting/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3323,7 +3327,7 @@ function get_districts(func_call) {
 
 function get_history(func_call) {
     $.ajax({
-        url: '/cms/Profile_history/'+func_call,
+        url: window.location.origin+window.location.pathname+'Profile_history/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3337,7 +3341,7 @@ function get_history(func_call) {
 
 function get_examinations(func_call) {
     $.ajax({
-        url: '/cms/Examination/'+func_call,
+        url: window.location.origin+window.location.pathname+'Examination/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3351,7 +3355,7 @@ function get_examinations(func_call) {
 
 function get_investigations(func_call) {
     $.ajax({
-        url: '/cms/investigation/'+func_call,
+        url: window.location.origin+window.location.pathname+'Investigation/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3367,7 +3371,7 @@ function get_investigations(func_call) {
 
 function get_recommendations(func_call) {
     $.ajax({
-        url: '/cms/angio_recommendation/'+func_call,
+        url: window.location.origin+window.location.pathname+'Angio_recommendation/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3382,7 +3386,7 @@ function get_recommendations(func_call) {
 
 function get_instructions(func_call) {
     $.ajax({
-        url: '/cms/Instruction/'+func_call,
+        url: window.location.origin+window.location.pathname+'Instruction/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3396,7 +3400,7 @@ function get_instructions(func_call) {
 
 function get_medicine(func_call) {
     $.ajax({
-        url: '/cms/Medicine/'+func_call,
+        url: window.location.origin+window.location.pathname+'Medicine/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3411,17 +3415,13 @@ function get_medicine(func_call) {
 
 function get_echo(func_call) {
     $.ajax({
-        url: '/cms/Echo_controller/'+func_call,
+        url: window.location.origin+window.location.pathname+'Echo_controller/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
                 $('#site-title').html('Echo');
-                ///////////////// initilize datatable //////////////
-                $('#permissions-table').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });
@@ -3430,7 +3430,7 @@ function get_echo(func_call) {
 
 function get_ett(func_call) {
     $.ajax({
-        url: '/cms/ETT/'+func_call,
+        url: window.location.origin+window.location.pathname+'ETT/'+func_call,
         cache: false,
         success: function (response) {
             if (response.result_html != '') {
@@ -3598,10 +3598,6 @@ function get_laboratory_test(func_call) {
                 $('.dashboard-content').remove();
                 $('#dashboard-content').append(response.result_html);
                 $('#site-title').html('Laboratory Test');
-                ///////////////// initilize datatable //////////////
-                $('#research-table').DataTable({
-                    "scrollX": true
-                });
             }
         }
     });

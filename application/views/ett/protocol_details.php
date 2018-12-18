@@ -19,7 +19,7 @@
 <script type="text/javascript">
     function filter_protocol_details(protocol_id){
         $.ajax({
-            url: '/cms/ett/get_protocol_details/'+protocol_id,
+            url: window.location.origin+window.location.pathname+'ETT/get_protocol_details/'+protocol_id,
             type: 'get',
             cache: false,
             success: function(response) {

@@ -18,6 +18,9 @@
                     <div class="col-md-2 col-lg-1 m-t-25">
                         <button class="btn btn-sm btn-primary" id="add_protocol">Add</button>
                     </div>
+                    <div class="col-md-2 m-t-25">
+                        <button class="btn btn-sm btn-danger" id="delete_all_protocol">Delete All</button>
+                    </div>
                 </div>
             </form>
         </div>

@@ -169,7 +169,7 @@
         var searchDate = $('#search-all-cat').val();
         $.ajax({
             type: "post",
-            url: '/cms/user/search_all_categories',
+            url: window.location.origin+window.location.pathname+'User/search_all_categories',
             data: {
                 searchdate: searchDate
             }, success: function (response) {

@@ -60,7 +60,7 @@
         $('#history_id').val(id);
 
         $.ajax({
-            url: '/cms/profile/get_history_category_item/'+id,
+            url: window.location.origin+window.location.pathname+'Profile/get_history_category_item/'+id,
             type: 'get',
             cache: false,
             success: function (response) {

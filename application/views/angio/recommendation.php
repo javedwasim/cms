@@ -59,36 +59,39 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-3  col-sm-9 col-9">
-                            <form id="angio_form">
-                                <div class="form-group">
-                                    <label>Recommendation</label>
-                                    <textarea class="form-control" id="add_description"  name="description" rows="3" required></textarea>
-                                </div>
-                            </form>
+                          <form id="angio_form">
+                              <div class="form-group">
+                                  <label>Recommendation</label>
+                                  <textarea class="form-control" id="add_description"  name="description" rows="3" required></textarea>
+                              </div>
+                          </form>
                         </div>
                         <div class="col-md-1  col-sm-3 col-3 p-l-0" style="margin-top: 25px;">
-                            <button class="btn btn-sm btn-primary" id="add_recommendation">Add</button>
+                          <button class="btn btn-sm btn-primary" id="add_recommendation">Add</button>
                         </div>
-                        <div class="col-md-3 p-l-0" style="margin-top: 25px;">
-                            <div class="form-group">
-                                <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_angio" id="angio_export">Export Recommendations</a>
-                            </div>
+                        <div class="col-md-1 p-l-0" style="margin-top: 25px;">
+                          <div class="form-group">
+                              <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>setting/export_angio" id="angio_export">Export</a>
+                          </div>
                         </div>
                         <div class="col-md-5">
-                            <form id="import_csv_angio" enctype="multipart/form-data">
-                                <div class="row">
-                                  <div class="col-md-8">
-                                    <div class="form-group m-t-30">
-                                      <input type="file" name="csv_file" id="csv_angio_file" required accept=".csv" />
-                                    </div>
-                                  </div>
-                                  <div  class="col-md-4">
-                                    <div class="form-group m-t-25">
-                                        <input type="submit" name="import_csv_angio" class="btn btn-sm btn-primary" id="import_csv_angio_btn" value="Add Multiple">
-                                    </div>
+                          <form id="import_csv_angio" enctype="multipart/form-data">
+                              <div class="row">
+                                <div class="col-md-8">
+                                  <div class="form-group m-t-30">
+                                    <input type="file" name="csv_file" id="csv_angio_file" required accept=".csv" />
                                   </div>
                                 </div>
-                            </form>
+                                <div  class="col-md-4">
+                                  <div class="form-group m-t-25">
+                                      <input type="submit" name="import_csv_angio" class="btn btn-sm btn-primary" id="import_csv_angio_btn" value="Add Multiple">
+                                  </div>
+                                </div>
+                              </div>
+                          </form>
+                        </div>
+                        <div class="col-md-2 m-t-25">
+                          <button class="btn btn-danger btn-sm" id="delete_all_angio" >Delete All</button>
                         </div>
                     </div>
                 </div>

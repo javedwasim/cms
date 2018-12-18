@@ -1322,6 +1322,68 @@
         }
     }
 
+    public function delete_all($tbl,$itbl){
+        if (empty($itbl)) {
+            $result = $this->db->truncate($tbl);
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            $result = $this->db->truncate($tbl);
+            if ($result) {
+                $result = $this->db->truncate($itbl);
+                if ($result) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+    }
+
+    public function delete_all_instructions($tbl,$itbl,$cat){
+        $result = $this->db->where('category',$cat)->delete('instruction');
+        if ($result) {
+            $result = $this->db->where('category',$cat)->delete('instruction_item');
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    public function delete_all_tb($tbl,$itemTable,$testitem){
+        $result = $this->db->truncate($tbl);
+        $result = $this->db->truncate($itemTable);
+        $result = $this->db->truncate($testitem);
+        if ($result) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function delete_all_echo_cat($tbl,$itbl,$cat){
+        $result = $this->db->where('category',$cat)->delete('instruction');
+        if ($result) {
+            $result = $this->db->where('category',$cat)->delete('instruction_item');
+            if ($result) {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
 }
 
 ?>
